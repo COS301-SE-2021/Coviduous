@@ -4,7 +4,7 @@
 
 ---
 
-## Notification Team Members
+## Team Members
 
 | **Team Member** | **Profiles** | **Skills/Interest**
 | :-----: | :-----: | :-----: |
