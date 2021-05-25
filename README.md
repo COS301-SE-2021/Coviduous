@@ -14,7 +14,7 @@
 
 ## Documentation
 
-- :open_book: [Overleaf SRS](https://www.overleaf.com/9867828575btwpbjyyfktj)
+- :open_book: [Overleaf SRS](https://www.overleaf.com/read/zzggfsgzmsdf)
 
 ## Demo Videos
 
