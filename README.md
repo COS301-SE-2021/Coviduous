@@ -4,7 +4,7 @@
 
 ---
 
-## Team Members
+## CAPSlock Team Members
 
 | **Team Member** | **Profiles** | **Skills/Interest**
 | :-----: | :-----: | :-----: |
