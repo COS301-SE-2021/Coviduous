@@ -39,3 +39,18 @@ class Authentication with ChangeNotifier
             'returnSecureToken' : true,
           }
       ));
+    ));
+  final responseData = json.decode(response.body);
+  if(responseData['error'] != null)
+    {
+    throw HttpException(responseData['error']['message']);
+    }
+// //      print(responseData);
+
+    } catch(error)
+    {
+    throw error;
+    }
+
+  }
+}
