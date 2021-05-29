@@ -37,3 +37,23 @@ class _LoginScreenState extends State<LoginScreen>{
         )
     );
   }
+  Future<void> _submit() async
+  {
+    if(!_formKey.currentState.validate())
+    {
+      return;
+    }
+    _formKey.currentState.save();
+    try
+    {
+      await Provider.of<Authentication>(context, listen: false).Login(
+          _authData['email'],
+          _authData['password']
+      );
+    } catch (error)
+    {
+      var errorMessage = 'Authentication failed.';
+      _showErrorDialog(errorMessage);
+    }
+
+  }
