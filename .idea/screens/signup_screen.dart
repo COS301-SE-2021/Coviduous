@@ -17,3 +17,21 @@ class _RegisterState extends State<Register>{
     'email' : '',
     'password' : ''
   };
+  void _showErrorDialog(String msg)
+  {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('An Error Occured'),
+          content: Text(msg),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Okay'),
+              onPressed: (){
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        )
+    );
+  }
