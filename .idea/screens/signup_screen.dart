@@ -35,3 +35,25 @@ class _RegisterState extends State<Register>{
         )
     );
   }
+  Future<void > _submit() async
+  {
+    if(!_formKey.currentState.validate())
+    {
+      return;
+    }
+    _formKey.currentState.save();
+
+    try{
+      await Provider.of<Authentication>(context, listen: false).signUp(
+          _authData['email'],
+          _authData['password']
+      );
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+
+    } catch(error)
+    {
+      var errorMessage = 'Authentication Failed. Please try again later.';
+      _showErrorDialog(errorMessage);
+    }
+
+  }
