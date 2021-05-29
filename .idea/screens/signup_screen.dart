@@ -9,3 +9,11 @@ class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
 }
+class _RegisterState extends State<Register>{
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  TextEditingController _passwordController = new TextEditingController();
+
+  Map<String, String> _authData ={
+    'email' : '',
+    'password' : ''
+  };
