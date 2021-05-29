@@ -9,7 +9,7 @@
 | **Team Member** | **Profiles** | **Skills/Interest**
 | :-----: | :-----: | :-----: |
 | ![Rudolf van Graan](https://i.imgur.com/yuRr14K.jpeg "Rudolf van Graan") <br/> Rudolf van Graan <br/> u16040865 | [GitHub](https://github.com/u16040865) <br/> [Profile Page](https://u16040865.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/rudolf-van-graan-48a7471a9/) <br/> | Java<br/>SQL<br/>Postgres<br/>Drawing |
-
+| ![Clementine Mashile](https://i.postimg.cc/XqF75p0f/Me.jpg "Clementine Mashile") <br/> Clementine Mashile <br/> u18139508 |  [GitHub](https://github.com/Clementine-Mashile) <br/> [Profile Page](https://Clementine-Mashile.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/clementime-mashile-b61013210/) <br/> | Java<br/>SQL<br/>HTML<br/>Design |
 ---
 
 ## Documentation
