@@ -27,3 +27,15 @@ class Authentication with ChangeNotifier
       throw error;
     }
   }
+  Future<void> Login(String email,String password) async
+  {
+    var url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAYf69-rLqgS4ryuJc1bYCJObTogVuglpo';
+
+    try{
+      final response = await http.post(url, body: json.encode(
+          {
+            'email' : email,
+            'password' : password,
+            'returnSecureToken' : true,
+          }
+      ));
