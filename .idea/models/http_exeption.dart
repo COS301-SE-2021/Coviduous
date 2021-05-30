@@ -4,9 +4,9 @@ class HttpException implements Exception
 
   HttpException(this.message);
 
+  // TODO: implement toString
   @override
   String toString() {
-    // TODO: implement toString
     return message;
   }
 }
