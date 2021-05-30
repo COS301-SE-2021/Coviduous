@@ -15,7 +15,7 @@ class _RegisterState extends State<Register>{
   final GlobalKey<FormState> _formKey = GlobalKey();
   TextEditingController _passwordController = new TextEditingController();
 
-  Map<String, String> _authData ={
+  Map<String, String> _authData = {
     'email' : '',
     'password' : ''
   };
@@ -25,7 +25,7 @@ class _RegisterState extends State<Register>{
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('An Error Occured'),
+          title: Text('An Error Occurred'),
           content: Text(msg),
           actions: <Widget>[
             FlatButton(
@@ -39,12 +39,13 @@ class _RegisterState extends State<Register>{
     );
   }
 
-  Future<void > _submit() async
+  Future<void> _submit() async
   {
     if(!_formKey.currentState.validate())
     {
       return;
     }
+
     _formKey.currentState.save();
 
     try{
@@ -52,8 +53,8 @@ class _RegisterState extends State<Register>{
           _authData['email'],
           _authData['password']
       );
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
 
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } catch(error)
     {
       var errorMessage = 'Authentication Failed. Please try again later.';
@@ -61,7 +62,7 @@ class _RegisterState extends State<Register>{
     }
 
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +115,7 @@ class _RegisterState extends State<Register>{
                             keyboardType: TextInputType.emailAddress,
                             validator: (value)
                             {
-                              if(value.isEmpty|| !value.contains('@'))
+                              if(value.isEmpty || !value.contains('@'))
                               {
                                 return 'invalid email';
                               }
@@ -145,7 +146,7 @@ class _RegisterState extends State<Register>{
 
                             },
                           ),
-                          //confirm Password
+                          //confirm password
                           TextFormField(
                             decoration: InputDecoration(labelText:'Confirm Password'),
                             obscureText: true,
