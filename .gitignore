@@ -9,4 +9,5 @@
 # App specific
 login_app/.packages
 login_app/.flutter-plugins-dependencies
-login_app/.dart_tool/package_config.json
+login_app/.dart_tool/
+.idea/workspace.xml
