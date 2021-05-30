@@ -12,9 +12,9 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Welcome to my home screensc', style: TextStyle(
+          'Welcome to my home screen', style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 10,
+          fontSize: 20,
         ),
         ),
       ),
