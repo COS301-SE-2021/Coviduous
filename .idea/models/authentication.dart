@@ -5,7 +5,6 @@ import 'http_exeption.dart';
 
 class Authentication with ChangeNotifier
 {
-
   Future<void> signUp(String email, String password) async
   {
     const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAYf69-rLqgS4ryuJc1bYCJObTogVuglpo';
