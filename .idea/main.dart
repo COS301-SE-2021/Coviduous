@@ -1,12 +1,13 @@
+// necessary imports
 import 'screens/signup_screen.dart';
 import 'models/authentication.dart';
 
+// pass a class as param in runApp
 void main() => runApp(MyApp());
 
+// classes
 class MyApp extends StatelessWidget{
-
-
-
+  // every widget has a build
   @override
   Widget build(BuildContext context){
     return MultiProvider(
