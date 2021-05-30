@@ -11,7 +11,7 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register>{
+class _RegisterState extends State<Register> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   TextEditingController _passwordController = new TextEditingController();
 
