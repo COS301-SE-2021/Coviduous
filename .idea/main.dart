@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget{
           ),
           home: LoginScreen(),
           routes: {
-
             Register.routeName: (ctx)=> Register(),
             LoginScreen.routeName: (ctx)=> LoginScreen(),
             HomeScreen.routeName: (ctx)=> HomeScreen(),
