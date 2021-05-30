@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/authentication.dart';
 import 'package:provider/provider.dart';
+
+import '../models/authentication.dart';
 import 'home_screen.dart';
 import 'login.screen.dart';
 
@@ -9,6 +10,7 @@ class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
 }
+
 class _RegisterState extends State<Register>{
   final GlobalKey<FormState> _formKey = GlobalKey();
   TextEditingController _passwordController = new TextEditingController();
@@ -17,6 +19,7 @@ class _RegisterState extends State<Register>{
     'email' : '',
     'password' : ''
   };
+
   void _showErrorDialog(String msg)
   {
     showDialog(
@@ -35,6 +38,7 @@ class _RegisterState extends State<Register>{
         )
     );
   }
+
   Future<void > _submit() async
   {
     if(!_formKey.currentState.validate())
@@ -57,6 +61,7 @@ class _RegisterState extends State<Register>{
     }
 
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
