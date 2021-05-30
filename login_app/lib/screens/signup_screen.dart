@@ -63,129 +63,132 @@ class _RegisterState extends State<Register>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-        actions: <Widget>[
-          FlatButton(
-            child: Row(
-              children: <Widget>[
-                Text('Login'),
-                Icon(Icons.person)
-              ],
-            ),
-            textColor: Colors.white,
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-            },
-          )
-        ],
-      ),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [
-                      Colors.limeAccent,
-                      Colors.redAccent,
-                    ]
-                )
-            ),
-          ),
-          Center(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+    return WillPopScope(
+      onWillPop: () async => false, //Prevent the back button from working
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Register'),
+          actions: <Widget>[
+            FlatButton(
+              child: Row(
+                children: <Widget>[
+                  Text('Login'),
+                  Icon(Icons.person)
+                ],
               ),
-              child: Container(
-                height: 300,
-                width: 300,
-                padding: EdgeInsets.all(16),
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          //email
-                          TextFormField(
-                            decoration: InputDecoration(labelText: 'Email'),
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (value)
-                            {
-                              if(value.isEmpty|| !value.contains('@'))
+              textColor: Colors.white,
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+              },
+            )
+          ],
+        ),
+        body: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [
+                        Colors.limeAccent,
+                        Colors.redAccent,
+                      ]
+                  )
+              ),
+            ),
+            Center(
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Container(
+                  height: 300,
+                  width: 300,
+                  padding: EdgeInsets.all(16),
+                  child: Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            //email
+                            TextFormField(
+                              decoration: InputDecoration(labelText: 'Email'),
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value)
                               {
-                                return 'invalid email';
-                              }
-                              return null;
-                            },
-                            onSaved: (value)
-                            {
-                              _authData['email'] = value;
-
-                            },
-                          ),
-                          //password
-                          TextFormField(
-                            decoration: InputDecoration(labelText:'Password'),
-                            obscureText: true,
-                            controller: _passwordController,
-                            validator: (value)
-                            {
-                              if(value.isEmpty || value.length<=5)
+                                if(value.isEmpty|| !value.contains('@'))
+                                {
+                                  return 'invalid email';
+                                }
+                                return null;
+                              },
+                              onSaved: (value)
                               {
-                                return 'invalid password';
-                              }
-                              return null;
-                            },
-                            onSaved: (value)
-                            {
-                              _authData['password'] = value;
+                                _authData['email'] = value;
 
-                            },
-                          ),
-                          //confirm Password
-                          TextFormField(
-                            decoration: InputDecoration(labelText:'Confirm Password'),
-                            obscureText: true,
-                            validator: (value)
-                            {
-                              if(value.isEmpty || value != _passwordController.text )
-                              {
-                                return 'invalid password';
-                              }
-                              return null;
-                            },
-                            onSaved: (value)
-                            {
-
-                            },
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          RaisedButton(
-                            child: Text(
-                                'Submit'
+                              },
                             ),
-                            onPressed: ()
-                            {
-                              _submit();
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+                            //password
+                            TextFormField(
+                              decoration: InputDecoration(labelText:'Password'),
+                              obscureText: true,
+                              controller: _passwordController,
+                              validator: (value)
+                              {
+                                if(value.isEmpty || value.length<=5)
+                                {
+                                  return 'invalid password';
+                                }
+                                return null;
+                              },
+                              onSaved: (value)
+                              {
+                                _authData['password'] = value;
+
+                              },
                             ),
-                            color: Colors.blue,
-                            textColor: Colors.white,
-                          )
-                        ],
-                      )
+                            //confirm Password
+                            TextFormField(
+                              decoration: InputDecoration(labelText:'Confirm Password'),
+                              obscureText: true,
+                              validator: (value)
+                              {
+                                if(value.isEmpty || value != _passwordController.text )
+                                {
+                                  return 'invalid password';
+                                }
+                                return null;
+                              },
+                              onSaved: (value)
+                              {
+
+                              },
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            RaisedButton(
+                              child: Text(
+                                  'Submit'
+                              ),
+                              onPressed: ()
+                              {
+                                _submit();
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              color: Colors.blue,
+                              textColor: Colors.white,
+                            )
+                          ],
+                        )
+                    ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

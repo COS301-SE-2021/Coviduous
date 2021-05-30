@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen>{
 @override
   Widget build(BuildContext context) {
     return new WillPopScope(
-      onWillPop: () async => false, //Prevent the back button from showing up
+      onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
         appBar: AppBar(
           title: Text('Login'),
