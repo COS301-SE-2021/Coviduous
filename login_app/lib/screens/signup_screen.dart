@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/authentication.dart';
 import 'package:provider/provider.dart';
 import 'home_screen.dart';
-import 'login.screen.dart';
+import 'login_screen.dart';
 
 class Register extends StatefulWidget {
   static const routeName = "/register";
@@ -24,7 +24,7 @@ class _RegisterState extends State<Register>{
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('An Error Occured'),
+          title: Text('An Error Occurred'),
           content: Text(msg),
           actions: <Widget>[
             FlatButton(
