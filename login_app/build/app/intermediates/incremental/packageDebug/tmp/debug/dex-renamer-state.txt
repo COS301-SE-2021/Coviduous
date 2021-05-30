@@ -1,4 +1,0 @@
-#Sun May 30 20:35:33 CAT 2021
-base.0=C\:\\Users\\Rudi\\Documents\\GitHub\\Coviduous\\login_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
