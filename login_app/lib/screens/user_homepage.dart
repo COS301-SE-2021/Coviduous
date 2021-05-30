@@ -58,7 +58,7 @@ class _UserHomepageState extends State<UserHomepage> {
                         ),
                         child: Row (
                           children: <Widget>[
-                            Text('View office spaces'),
+                            Expanded(child: Text('View office spaces')),
                             Icon(Icons.library_books)
                           ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -88,7 +88,7 @@ class _UserHomepageState extends State<UserHomepage> {
                           ),
                           child: Row (
                               children: <Widget>[
-                                Text('Book office space'),
+                                Expanded(child: Text('Book office space')),
                                 Icon(Icons.book)
                               ],
                               mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -118,7 +118,7 @@ class _UserHomepageState extends State<UserHomepage> {
                           ),
                           child: Row (
                               children: <Widget>[
-                                Text('View current bookings'),
+                                Expanded(child: Text('View current bookings')),
                                 Icon(Icons.access_alarm)
                               ],
                               mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
