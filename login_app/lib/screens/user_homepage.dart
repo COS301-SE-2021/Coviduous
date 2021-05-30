@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_app/screens/login_screen.dart';
+import 'package:login_app/screens/user_book_office_space.dart';
 
 class UserHomepage extends StatefulWidget {
   static const routeName = "/user";
@@ -95,11 +96,16 @@ class _UserHomepageState extends State<UserHomepage> {
                               crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                           ),
                           onPressed: () {
-                            showDialog(
+                            if (true) { //Check if the office space exists
+                                Navigator.of(context).pushReplacementNamed(UserBookOfficeSpace.routeName);
+                              }
+                            else {
+                              /*
+                                showDialog(
                                 context: context,
                                 builder: (ctx) => AlertDialog(
-                                  title: Text('Placeholder'),
-                                  content: Text('Book office space'),
+                                  title: Text('Error'),
+                                  content: Text('No offices have been registered for your company yet.'),
                                   actions: <Widget>[
                                     TextButton(
                                       child: Text('Okay'),
@@ -109,7 +115,9 @@ class _UserHomepageState extends State<UserHomepage> {
                                     )
                                   ],
                                 )
-                            );
+                              );
+                               */
+                            }
                           }
                       ),
                       ElevatedButton (

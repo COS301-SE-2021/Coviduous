@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/screens/user_book_office_space.dart';
 import 'package:login_app/screens/user_homepage.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget{
           LoginScreen.routeName: (ctx)=> LoginScreen(),
           HomeScreen.routeName: (ctx)=> HomeScreen(),
           UserHomepage.routeName: (ctx)=> UserHomepage(),
+          UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         },
     ));
   }

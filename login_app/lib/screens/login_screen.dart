@@ -112,10 +112,12 @@ class _LoginScreenState extends State<LoginScreen>{
                             keyboardType: TextInputType.emailAddress,
                             validator: (value)
                             {
-                              if(value.isEmpty || value.contains('@'))
+                              /*
+                              if(value.isEmpty || !value.contains('@'))
                               {
                                 return 'invalid email';
                               }
+                               */
                               return null;
                             },
                             onSaved: (value){
