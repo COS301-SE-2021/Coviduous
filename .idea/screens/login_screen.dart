@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-
 import 'package:provider/provider.dart';
 
 import 'signup_screen.dart';
@@ -19,12 +17,13 @@ class _LoginScreenState extends State<LoginScreen>{
     'email' : '',
     'password' : ''
   };
+
   void _showErrorDialog(String msg)
   {
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('An Error Occured'),
+          title: Text('An Error Occurred'),
           content: Text(msg),
           actions: <Widget>[
             FlatButton(
@@ -37,13 +36,16 @@ class _LoginScreenState extends State<LoginScreen>{
         )
     );
   }
+
   Future<void> _submit() async
   {
     if(!_formKey.currentState.validate())
     {
       return;
     }
+
     _formKey.currentState.save();
+
     try
     {
       await Provider.of<Authentication>(context, listen: false).Login(
@@ -57,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen>{
     }
 
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
