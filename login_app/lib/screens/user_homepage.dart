@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_app/screens/login_screen.dart';
-import 'package:provider/provider.dart';
 
 class UserHomepage extends StatefulWidget {
   static const routeName = "/user";
@@ -12,10 +11,10 @@ class _UserHomepageState extends State<UserHomepage> {
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
-      onWillPop: () async => false, //Prevent the back button from showing up
+      onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xffD74C73),
           title: Text('Welcome user')
         ),
         body: Stack (
@@ -24,8 +23,8 @@ class _UserHomepageState extends State<UserHomepage> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Colors.indigoAccent,
-                    Colors.deepPurpleAccent,
+                    Color(0xff0B0C20),
+                    Color(0xff193A59),
                   ]
                 )
               )
@@ -36,6 +35,7 @@ class _UserHomepageState extends State<UserHomepage> {
               child: Image(
                 alignment: Alignment.bottomCenter,
                 image: NetworkImage('https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png'),
+                color: Colors.white,
                 width: double.maxFinite,
                 height: 180,
               ),
@@ -54,11 +54,11 @@ class _UserHomepageState extends State<UserHomepage> {
                     children: <Widget>[
                       ElevatedButton (
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.indigo, //Button color
+                          primary: Color(0xffD74C73), //Button color
                         ),
                         child: Row (
                           children: <Widget>[
-                            Text('View office space'),
+                            Text('View office spaces'),
                             Icon(Icons.library_books)
                           ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -84,7 +84,7 @@ class _UserHomepageState extends State<UserHomepage> {
                       ),
                       ElevatedButton (
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.indigo, //Button color
+                            primary: Color(0xff78375F), //Button color
                           ),
                           child: Row (
                               children: <Widget>[
@@ -114,7 +114,7 @@ class _UserHomepageState extends State<UserHomepage> {
                       ),
                       ElevatedButton (
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.indigo, //Button color
+                            primary: Color(0xff318D9C), //Button color
                           ),
                           child: Row (
                               children: <Widget>[
@@ -156,11 +156,11 @@ class _UserHomepageState extends State<UserHomepage> {
                 ),
                 child: Container (
                   height: 50,
-                  width: double.maxFinite,
+                  width: 100,
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.indigo, //Button color
+                      primary: Color(0xffD3343A), //Button color
                     ),
                     child: Text('Log out'),
                     onPressed: (){
