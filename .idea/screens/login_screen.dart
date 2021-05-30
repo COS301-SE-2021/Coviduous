@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen>{
           actions: <Widget>[
             FlatButton(
               child: Text('Okay'),
-              onPressed: (){
+              onPresed: (){
                 Navigator.of(ctx).pop();
               },
             )
