@@ -27,7 +27,7 @@ class _RegisterState extends State<Register>{
           title: Text('An Error Occurred'),
           content: Text(msg),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Okay'),
               onPressed: (){
                 Navigator.of(ctx).pop();
@@ -63,20 +63,25 @@ class _RegisterState extends State<Register>{
 
   @override
   Widget build(BuildContext context) {
+    String userType = "User";
+
     return WillPopScope(
       onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
         appBar: AppBar(
           title: Text('Register'),
+          backgroundColor: Colors.redAccent,
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Row(
                 children: <Widget>[
                   Text('Login'),
                   Icon(Icons.person)
                 ],
               ),
-              textColor: Colors.white,
+              style: TextButton.styleFrom(
+                primary: Colors.white,
+              ),
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
               },
@@ -89,10 +94,21 @@ class _RegisterState extends State<Register>{
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [
-                        Colors.limeAccent,
-                        Colors.redAccent,
+                        Color(0xff220000),
+                        Color(0xff4C1616)
                       ]
                   )
+              ),
+            ),
+            Container (
+              alignment: Alignment.topCenter,
+              margin: EdgeInsets.all(20.0),
+              child: Image(
+                alignment: Alignment.bottomCenter,
+                image: NetworkImage('https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png'),
+                color: Colors.white,
+                width: double.maxFinite,
+                height: 120,
               ),
             ),
             Center(
@@ -166,7 +182,26 @@ class _RegisterState extends State<Register>{
                             SizedBox(
                               height: 30,
                             ),
-                            RaisedButton(
+                            Text ('Select user type'),
+                            DropdownButtonFormField<String>(
+                              value: userType,
+                              icon: const Icon(Icons.arrow_downward),
+                              iconSize: 24,
+                              dropdownColor: Colors.lime,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  userType = newValue;
+                                });
+                              },
+                              items: <String>['Admin', 'User']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                            ElevatedButton(
                               child: Text(
                                   'Submit'
                               ),
@@ -174,11 +209,12 @@ class _RegisterState extends State<Register>{
                               {
                                 _submit();
                               },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                primary: Colors.redAccent
                               ),
-                              color: Colors.blue,
-                              textColor: Colors.white,
                             )
                           ],
                         )
