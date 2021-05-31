@@ -48,9 +48,9 @@ class _UserHomepageState extends State<UserHomepage> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Container (
-                  height: 164,
+                  height: 176,
                   width: 300,
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(16),
                   child: Column (
                     children: <Widget>[
                       ElevatedButton (
