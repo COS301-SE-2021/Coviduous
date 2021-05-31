@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_app/screens/login_screen.dart';
 import 'package:login_app/screens/user_book_office_space.dart';
+import 'package:login_app/screens/user_view_current_bookings.dart';
+import 'package:login_app/screens/user_view_office_spaces.dart';
 
 class UserHomepage extends StatefulWidget {
   static const routeName = "/user";
@@ -66,6 +68,8 @@ class _UserHomepageState extends State<UserHomepage> {
                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                         ),
                         onPressed: () {
+                          Navigator.of(context).pushReplacementNamed(UserViewOfficeSpaces.routeName);
+                          /*
                           showDialog(
                               context: context,
                               builder: (ctx) => AlertDialog(
@@ -81,6 +85,7 @@ class _UserHomepageState extends State<UserHomepage> {
                                 ],
                               )
                           );
+                           */
                         }
                       ),
                       ElevatedButton (
@@ -133,6 +138,8 @@ class _UserHomepageState extends State<UserHomepage> {
                               crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
                           ),
                           onPressed: () {
+                            Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                            /*
                             showDialog(
                                 context: context,
                                 builder: (ctx) => AlertDialog(
@@ -148,6 +155,7 @@ class _UserHomepageState extends State<UserHomepage> {
                                   ],
                                 )
                             );
+                             */
                           }
                       ),
                     ]
