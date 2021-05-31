@@ -51,14 +51,13 @@ class _RegisterState extends State<Register>{
           _authData['email'],
           _authData['password']
       );
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
 
     } catch(error)
     {
       var errorMessage = 'Authentication Failed. Please try again later.';
       _showErrorDialog(errorMessage);
     }
-
   }
 
   @override

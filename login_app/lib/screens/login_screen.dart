@@ -40,27 +40,23 @@ class _LoginScreenState extends State<LoginScreen>{
   }
   Future<void> _submit() async
   {
-    /*
-    if(!_formKey.currentState.validate())
-    {
+    if(!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
-    try
-    {
+    try {
       await Provider.of<Authentication>(context, listen: false).Login(
           _authData['email'],
           _authData['password']
       );
-    } catch (error)
-    {
+      Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+    } catch (error) {
         var errorMessage = 'Authentication failed.';
         _showErrorDialog(errorMessage);
         return;
     }
-     */
-    Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
   }
+
 @override
   Widget build(BuildContext context) {
     return new WillPopScope(
@@ -131,12 +127,10 @@ class _LoginScreenState extends State<LoginScreen>{
                             keyboardType: TextInputType.emailAddress,
                             validator: (value)
                             {
-                              /*
                               if(value.isEmpty || !value.contains('@'))
                               {
                                 return 'invalid email';
                               }
-                               */
                               return null;
                             },
                             onSaved: (value){
@@ -148,11 +142,11 @@ class _LoginScreenState extends State<LoginScreen>{
                             decoration: InputDecoration(labelText:'Password'),
                             obscureText: true,
                             validator: (value)
-                                {
+                              {
                               if(value.isEmpty || value.length<=5)
-                                {
-                                  return 'invalid password';
-                                }
+                              {
+                                return 'invalid password';
+                              }
                               return null;
                             },
                             onSaved: (value)
