@@ -183,7 +183,7 @@ class _UserHomepageState extends State<UserHomepage> {
                       showDialog(
                           context: context,
                           builder: (ctx) => AlertDialog(
-                        title: Text('Placeholder'),
+                        title: Text('Warning'),
                         content: Text('Are you sure you want to log out?'),
                         actions: <Widget>[
                           TextButton(
