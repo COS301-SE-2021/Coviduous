@@ -14,8 +14,9 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
+          title: Text('Book an office space'),
           backgroundColor: Color(0xffD74C73),
-          title: Text('Book an office space')
+          automaticallyImplyLeading: false, //Back button will not show up in app bar
       ),
       body: Stack (
         children: <Widget>[
