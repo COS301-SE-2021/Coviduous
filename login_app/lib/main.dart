@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/user_book_office_space.dart';
-import 'package:login_app/screens/user_homepage.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
+import 'screens/user_book_office_space.dart';
+import 'screens/user_homepage.dart';
+import 'screens/user_view_office_spaces.dart';
+import 'screens/user_view_current_bookings.dart';
 import 'models/authentication.dart';
 
 void main() => runApp(MyApp());
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget{
           HomeScreen.routeName: (ctx)=> HomeScreen(),
           UserHomepage.routeName: (ctx)=> UserHomepage(),
           UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
+          UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),
+          UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings()
         },
     ));
   }
