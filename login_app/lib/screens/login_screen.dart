@@ -170,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen>{
                               recognizer: new TapGestureRecognizer()
                               ..onTap = () {
                                 launch(
-                                    'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
+                                    'https://www.google.com');
                               },
                             )
                           ),
