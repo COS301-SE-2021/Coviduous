@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/user_homepage.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
+
+import 'user_homepage.dart';
 import 'signup_screen.dart';
 import '../models/authentication.dart';
 
@@ -156,6 +159,20 @@ class _LoginScreenState extends State<LoginScreen>{
                             {
                               _authData['password'] = value;
                             },
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              text: 'Forgot password?',
+                              style: new TextStyle(color: Colors.blue),
+                              recognizer: new TapGestureRecognizer()
+                              ..onTap = () {
+                                launch(
+                                    'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
+                              },
+                            )
                           ),
                           SizedBox(
                             height: 30,
