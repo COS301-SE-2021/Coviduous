@@ -187,7 +187,7 @@ class _RegisterState extends State<Register>{
                               value: userType,
                               icon: const Icon(Icons.arrow_downward),
                               iconSize: 24,
-                              dropdownColor: Colors.lime,
+                              dropdownColor: Color(0xffFF6666),
                               onChanged: (String newValue) {
                                 setState(() {
                                   userType = newValue;
