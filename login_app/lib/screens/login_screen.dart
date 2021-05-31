@@ -65,6 +65,7 @@ class _LoginScreenState extends State<LoginScreen>{
         appBar: AppBar(
           title: Text('Login'),
           backgroundColor: Colors.blue,
+          automaticallyImplyLeading: false, //Back button will not show up in app bar
           actions: <Widget>[
           TextButton(
             child: Row(
