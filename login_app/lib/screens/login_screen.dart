@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen>{
           title: Text('An Error Occurred'),
           content: Text(msg),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Okay'),
               onPressed: (){
                 Navigator.of(ctx).pop();
@@ -65,19 +65,22 @@ class _LoginScreenState extends State<LoginScreen>{
       child: Scaffold(
         appBar: AppBar(
           title: Text('Login'),
+          backgroundColor: Colors.blue,
           actions: <Widget>[
-          FlatButton(
-              child: Row(
+          TextButton(
+            child: Row(
                 children: <Widget>[
                   Text('Register'),
                   Icon(Icons.person_add)
                 ],
               ),
-            textColor: Colors.white,
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(Register.routeName);
-            },
-          )
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(Register.routeName);
+              },
+              style: TextButton.styleFrom(
+                primary: Colors.white,
+              ),
+            ),
           ],
         ),
         body: Stack(
@@ -86,18 +89,31 @@ class _LoginScreenState extends State<LoginScreen>{
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Colors.lightGreenAccent,
-                    Colors.blue,
+                    Color(0xff0B0C20),
+                    Color(0xff193A59),
                   ]
                 )
               ),
             ),
+            Container (
+              alignment: Alignment.topCenter,
+              margin: EdgeInsets.all(20.0),
+              child: Image(
+                alignment: Alignment.bottomCenter,
+                image: NetworkImage('https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png'),
+                color: Colors.white,
+                width: double.maxFinite,
+                height: 140,
+              ),
+            ),
             Center(
               child: Card(
+                color: Colors.black,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Container(
+                  color: Colors.white,
                   height: 260,
                   width: 300,
                   padding: EdgeInsets.all(16),
@@ -144,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen>{
                           SizedBox(
                             height: 30,
                           ),
-                          RaisedButton(
+                          ElevatedButton(
                             child: Text(
                               'Submit'
                             ),
@@ -152,11 +168,12 @@ class _LoginScreenState extends State<LoginScreen>{
                             {
                                 _submit();
                             },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              primary: Colors.blue,
                             ),
-                            color: Colors.blue,
-                            textColor: Colors.white,
                           )
                         ],
                       )
