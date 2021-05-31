@@ -70,6 +70,7 @@ class _RegisterState extends State<Register>{
         appBar: AppBar(
           title: Text('Register'),
           backgroundColor: Colors.redAccent,
+          automaticallyImplyLeading: false, //Back button will not show up in app bar
           actions: <Widget>[
             TextButton(
               child: Row(
