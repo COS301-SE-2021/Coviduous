@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_app/models/floor.dart';
 import 'user_homepage.dart';
+import '../models/globals.dart' as globals;
 
 class UserViewOfficeSpaces extends StatefulWidget {
   static const routeName = "/viewspaces";
@@ -9,27 +10,40 @@ class UserViewOfficeSpaces extends StatefulWidget {
 }
 
 class _UserViewOfficeSpacesState extends State<UserViewOfficeSpaces> {
-int numberOfFloors = 4; //Number of floors
 List<Floor> floors = []; //List of floors
 
   @override
   Widget build(BuildContext context) {
-    for (var i = 0; i <= numberOfFloors; i++) {
+    for (var i = 0; i <= globals.numberOfFloors; i++) {
       floors.add(new Floor(i,3,10,0));
     }
 
     Widget getList() {
-      if (numberOfFloors == 0) { //If the number of floors = 0, don't display a list
-        return Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          padding: const EdgeInsets.all(8),
-          child: Text('No floors have been registered for your company.')
+      if (globals.numberOfFloors == 0) { //If the number of floors = 0, don't display a list
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                  color: Theme.of(context).primaryColor,
+                  child: Text('No floor plans found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+              ),
+              Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                  color: Colors.white,
+                  padding: EdgeInsets.all(12),
+                  child: Text('No floors have been registered for your company.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+              )
+            ]
         );
       } else { //Else create and return a list
         return ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: numberOfFloors,
+            itemCount: globals.numberOfFloors,
             itemBuilder: (context, index) { //Display a list tile FOR EACH floor in floors[]
               return ListTile(
                 title: Column(
@@ -38,7 +52,7 @@ List<Floor> floors = []; //List of floors
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
-                        color: Colors.blue,
+                        color: Theme.of(context).primaryColor,
                         child: Text(floors[index].floorNumberHeading, style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
@@ -74,7 +88,6 @@ List<Floor> floors = []; //List of floors
     return new Scaffold(
       appBar: AppBar(
         title: Text('View office spaces'),
-        backgroundColor: Colors.blue,
         leading: BackButton( //Specify back button
           onPressed: (){
             Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
@@ -83,16 +96,6 @@ List<Floor> floors = []; //List of floors
       ),
       body: Stack(
         children: <Widget>[
-          Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        Color(0xff0B0C20),
-                        Color(0xff193A59),
-                      ]
-                  )
-              )
-          ),
           Center(
             child: getList()
           ),
