@@ -66,7 +66,6 @@ class _LoginScreenState extends State<LoginScreen>{
       child: Scaffold(
         appBar: AppBar(
           title: Text('Login'),
-          backgroundColor: Colors.blue,
           automaticallyImplyLeading: false, //Back button will not show up in app bar
           actions: <Widget>[
           TextButton(
@@ -87,16 +86,6 @@ class _LoginScreenState extends State<LoginScreen>{
         ),
         body: Stack(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff0B0C20),
-                    Color(0xff193A59),
-                  ]
-                )
-              ),
-            ),
             SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
               child: Center(
                 child: Column(
@@ -169,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen>{
                               RichText(
                                 text: TextSpan(
                                   text: 'Forgot password?',
-                                  style: new TextStyle(color: Colors.blue),
+                                  style: new TextStyle(color: Color(0xff056676)),
                                   recognizer: new TapGestureRecognizer()
                                   ..onTap = () {
                                     launch(
@@ -193,7 +182,6 @@ class _LoginScreenState extends State<LoginScreen>{
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
-                                  primary: Colors.blue,
                                 ),
                               )
                             ],

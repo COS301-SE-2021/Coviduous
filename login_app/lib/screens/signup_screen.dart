@@ -69,7 +69,6 @@ class _RegisterState extends State<Register>{
       child: Scaffold(
         appBar: AppBar(
           title: Text('Register'),
-          backgroundColor: Colors.blue,
           automaticallyImplyLeading: false, //Back button will not show up in app bar
           actions: <Widget>[
             TextButton(
@@ -90,16 +89,6 @@ class _RegisterState extends State<Register>{
         ),
         body: Stack(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        Color(0xff0B0C20),
-                        Color(0xff193A59),
-                      ]
-                  )
-              ),
-            ),
             SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
               child: Center(
                 child: Column(
@@ -195,7 +184,7 @@ class _RegisterState extends State<Register>{
                                 DropdownButtonFormField<String>(
                                   style: const TextStyle(color: Colors.black),
                                   value: userType,
-                                  icon: const Icon(Icons.arrow_downward),
+                                  icon: const Icon(Icons.arrow_downward, color: Color(0xff056676)),
                                   iconSize: 24,
                                   dropdownColor: Colors.white,
                                   onChanged: (String newValue) {
@@ -227,7 +216,6 @@ class _RegisterState extends State<Register>{
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                     ),
-                                    primary: Colors.blue
                                   ),
                                 )
                               ],

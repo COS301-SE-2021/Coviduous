@@ -21,21 +21,10 @@ class _UserHomepageState extends State<UserHomepage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Welcome ' + globals.email),
-          backgroundColor: Colors.blue,
           automaticallyImplyLeading: false, //Back button will not show up in app bar
         ),
         body: Stack (
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff0B0C20),
-                    Color(0xff193A59),
-                  ]
-                )
-              )
-            ),
             SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
               child: Center(
                 child: Column(
@@ -63,9 +52,6 @@ class _UserHomepageState extends State<UserHomepage> {
                       child: Column (
                         children: <Widget>[
                           ElevatedButton (
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.blue, //Button color
-                            ),
                             child: Row (
                               children: <Widget>[
                                 Expanded(child: Text('View office spaces')),
@@ -76,23 +62,6 @@ class _UserHomepageState extends State<UserHomepage> {
                             ),
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(UserViewOfficeSpaces.routeName);
-                              /*
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('View office space'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
-                               */
                             }
                           ),
                           SizedBox (
@@ -100,9 +69,6 @@ class _UserHomepageState extends State<UserHomepage> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           ElevatedButton (
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.blue, //Button color
-                              ),
                               child: Row (
                                   children: <Widget>[
                                     Expanded(child: Text('Book office space')),
@@ -112,28 +78,7 @@ class _UserHomepageState extends State<UserHomepage> {
                                   crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                               ),
                               onPressed: () {
-                                if (true) { //Check if the office space exists
-                                    Navigator.of(context).pushReplacementNamed(UserBookOfficeSpace.routeName);
-                                  }
-                                else {
-                                  /*
-                                    showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Error'),
-                                      content: Text('No offices have been registered for your company yet.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                  );
-                                   */
-                                }
+                                Navigator.of(context).pushReplacementNamed(UserBookOfficeSpace.routeName);
                               }
                           ),
                           SizedBox (
@@ -141,9 +86,6 @@ class _UserHomepageState extends State<UserHomepage> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           ElevatedButton (
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.blue, //Button color
-                              ),
                               child: Row (
                                   children: <Widget>[
                                     Expanded(child: Text('View current bookings')),
@@ -154,23 +96,6 @@ class _UserHomepageState extends State<UserHomepage> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
-                                /*
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Placeholder'),
-                                      content: Text('View current bookings'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                );
-                                 */
                               }
                           ),
                         ]
@@ -187,33 +112,30 @@ class _UserHomepageState extends State<UserHomepage> {
                 width: 100,
                 padding: EdgeInsets.all(10),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue, //Button color
-                  ),
                   child: Text('Log out'),
                   onPressed: (){
                     showDialog(
                         context: context,
                         builder: (ctx) => AlertDialog(
-                      title: Text('Warning'),
-                      content: Text('Are you sure you want to log out?'),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text('Yes'),
-                          onPressed: (){
-                            globals.email = ''; //Clear currently signed in email
-                            Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                          },
-                        ),
-                        TextButton(
-                          child: Text('No'),
-                          onPressed: (){
-                            Navigator.of(ctx).pop();
-                          },
-                        )
-                      ],
-                    ));
-                  },
+                          title: Text('Warning'),
+                          content: Text('Are you sure you want to log out?'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('Yes'),
+                              onPressed: (){
+                                globals.email = ''; //Clear currently signed in email
+                                Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                              },
+                            ),
+                            TextButton(
+                              child: Text('No'),
+                              onPressed: (){
+                                Navigator.of(ctx).pop();
+                              },
+                            )
+                          ],
+                        ));
+                    },
                 )
               ),
             )
