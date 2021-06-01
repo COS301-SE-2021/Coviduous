@@ -9,18 +9,22 @@ class MainPage extends StatefulWidget
     return MainPageState();
   }
 }
+
 class User
 {
   String id;
   String name;
   User(this.id, this.name);
 }
+
 class MainPageState extends State<MainPage>
 {
   //List<User> users = [];
   String response = "";
-  Future<void> refreshUsers()async{
+
+  Future<void> refreshUsers() async {
     var result = await http_get('users');
+    
     if(result.ok)
     {
       setState(() {
@@ -28,6 +32,7 @@ class MainPageState extends State<MainPage>
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
