@@ -129,6 +129,7 @@ class _LoginScreenState extends State<LoginScreen>{
                             children: <Widget>[
                               //email
                               TextFormField(
+                                textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(labelText: 'Email'),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value)
@@ -145,6 +146,7 @@ class _LoginScreenState extends State<LoginScreen>{
                               ),
                               //password
                               TextFormField(
+                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
                                 decoration: InputDecoration(labelText:'Password'),
                                 obscureText: true,
                                 validator: (value)

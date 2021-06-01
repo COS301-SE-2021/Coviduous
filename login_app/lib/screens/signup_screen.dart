@@ -132,6 +132,7 @@ class _RegisterState extends State<Register>{
                               children: <Widget>[
                                 //email
                                 TextFormField(
+                                  textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                   decoration: InputDecoration(labelText: 'Email'),
                                   keyboardType: TextInputType.emailAddress,
                                   validator: (value)
@@ -150,6 +151,7 @@ class _RegisterState extends State<Register>{
                                 ),
                                 //password
                                 TextFormField(
+                                  textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                   decoration: InputDecoration(labelText:'Password'),
                                   obscureText: true,
                                   controller: _passwordController,
@@ -169,6 +171,7 @@ class _RegisterState extends State<Register>{
                                 ),
                                 //confirm Password
                                 TextFormField(
+                                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
                                   decoration: InputDecoration(labelText:'Confirm Password'),
                                   obscureText: true,
                                   validator: (value)
