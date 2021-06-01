@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:test_node_flutter/pages/main_page.dart';
 
+void main(){
+  runApp(App());
+}
+
 class App extends StatelessWidget
 {
   @override
@@ -10,7 +14,4 @@ class App extends StatelessWidget
       home: MainPage(),
     );
   }
-}
-void main(){
-  runApp(App());
 }
