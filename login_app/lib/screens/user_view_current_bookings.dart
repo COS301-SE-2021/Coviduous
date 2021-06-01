@@ -13,7 +13,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
     return new Scaffold(
       appBar: AppBar(
         title: Text('View current bookings'),
-        backgroundColor: Color(0xffD74C73),
+        backgroundColor: Colors.blue,
         leading: BackButton( //Specify back button
           onPressed: (){
             Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);

@@ -8,14 +8,15 @@ class UserBookOfficeSpace extends StatefulWidget {
 }
 
 class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
-  String dropdownValue = '1';
+  String dropdownFloorValue = '1';
+  String dropdownFloorInfo = 'Information about the floor, including its rooms.';
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
           title: Text('Book an office space'),
-          backgroundColor: Color(0xffD74C73),
+          backgroundColor: Colors.blue,
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
@@ -35,87 +36,77 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
               )
           ),
           Center (
-            child: Card(
-              color: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Container (
-                height: 130,
-                width: 300,
-                padding: EdgeInsets.all(10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Card(
-                        color: Color(0xffD74C73),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Row (
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly, //Align text and dropdown evenly
-                          crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically,
-                          children: <Widget>[
-                            Text('Select floor', style: TextStyle(color: Colors.white)),
-                            DropdownButton<String>(
-                              value: dropdownValue,
-                              icon: const Icon(Icons.arrow_downward, color: Colors.white),
-                              iconSize: 24,
-                              style: const TextStyle(color: Colors.white),
-                              dropdownColor: Colors.black,
-                              underline: Container(
-                                height: 2,
-                                color: Colors.white,
-                              ),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  dropdownValue = newValue;
-                                });
-                              },
-                              items: <String>['1', '2', '3', '4']
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            )
-                          ]
-                        ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color(0xff78375F), //Button color
-                          minimumSize: Size(100.0,40.0),
-                        ),
-                        child: Text('Proceed'),
-                        onPressed: () {
-                          if (true) { //Check if floor has space
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Placeholder'),
-                                  content: Text('Proceeding to next step.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Okay'),
-                                      onPressed: (){
-                                        Navigator.of(ctx).pop();
-                                      },
-                                    )
-                                  ],
-                                )
+            child: Container (
+              height: MediaQuery.of(context).size.height/4,
+              width: MediaQuery.of(context).size.width/2,
+              color: Colors.white,
+              padding: EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row (
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically,
+                      children: <Widget>[
+                        Text('Select floor', style: TextStyle(color: Colors.black)),
+                        DropdownButton<String>(
+                          value: dropdownFloorValue,
+                          icon: const Icon(Icons.arrow_downward, color: Colors.black),
+                          iconSize: 24,
+                          style: const TextStyle(color: Colors.black),
+                          dropdownColor: Colors.white,
+                          underline: Container(
+                            height: 2,
+                            color: Colors.white,
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownFloorValue = newValue;
+                            });
+                          },
+                          items: <String>['1', '2', '3', '4']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
                             );
-                          }
-                          else {
-                            //Not allowed; try again
-                          }
+                          }).toList(),
+                        )
+                      ]
+                    ),
+                    Text(dropdownFloorInfo),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue, //Button color
+                        minimumSize: Size(100.0,40.0),
+                      ),
+                      child: Text('Proceed'),
+                      onPressed: () {
+                        if (true) { //Check if floor has space
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Placeholder'),
+                                content: Text('Proceeding to next step.'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('Okay'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  )
+                                ],
+                              )
+                          );
                         }
-                      )
-                    ],
-                  )
-                ),
-            )
+                        else {
+                          //Not allowed; try again
+                        }
+                      }
+                    )
+                  ],
+                )
+              )
             ),
         ]
       )

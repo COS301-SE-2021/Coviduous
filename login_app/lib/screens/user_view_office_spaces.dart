@@ -37,7 +37,8 @@ List<Floor> floors = []; //List of floors
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        color: Color(0xff318D9C),
+                        height: MediaQuery.of(context).size.height/24,
+                        color: Colors.blue,
                         child: Text(floors[index].floorNumberHeading, style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
@@ -46,18 +47,18 @@ List<Floor> floors = []; //List of floors
                           children: <Widget>[
                             Container(
                               height: 50,
-                              color: Color(0xff205D66),
-                              child: Text(floors[index].numberOfRoomsHeading, style: TextStyle(color: Colors.white)),
+                              color: Colors.white,
+                              child: Text(floors[index].numberOfRoomsHeading, style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
-                              color: Color(0xff205D66),
-                              child: Text(floors[index].maximumCapacityHeading, style: TextStyle(color: Colors.white)),
+                              color: Colors.white,
+                              child: Text(floors[index].maximumCapacityHeading, style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
-                              color: Color(0xff205D66),
-                              child: Text(floors[index].currentCapacityHeading, style: TextStyle(color: Colors.white)),
+                              color: Colors.white,
+                              child: Text(floors[index].currentCapacityHeading, style: TextStyle(color: Colors.black)),
                             ),
                           ]
                       )
@@ -73,7 +74,7 @@ List<Floor> floors = []; //List of floors
     return new Scaffold(
       appBar: AppBar(
         title: Text('View office spaces'),
-        backgroundColor: Color(0xffD74C73),
+        backgroundColor: Colors.blue,
         leading: BackButton( //Specify back button
           onPressed: (){
             Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
@@ -93,10 +94,7 @@ List<Floor> floors = []; //List of floors
               )
           ),
           Center(
-            child: Card(
-              color: Colors.black,
-              child: getList(),
-            )
+            child: getList()
           ),
         ]
       )

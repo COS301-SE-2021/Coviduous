@@ -69,7 +69,7 @@ class _RegisterState extends State<Register>{
       child: Scaffold(
         appBar: AppBar(
           title: Text('Register'),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.blue,
           automaticallyImplyLeading: false, //Back button will not show up in app bar
           actions: <Widget>[
             TextButton(
@@ -94,133 +94,144 @@ class _RegisterState extends State<Register>{
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [
-                        Color(0xff220000),
-                        Color(0xff4C1616)
+                        Color(0xff0B0C20),
+                        Color(0xff193A59),
                       ]
                   )
               ),
             ),
-            Container (
-              alignment: Alignment.topCenter,
-              margin: EdgeInsets.all(20.0),
-              child: Image(
-                alignment: Alignment.bottomCenter,
-                image: AssetImage('assets/placeholder.com-logo1.png'),
-                color: Colors.white,
-                width: double.maxFinite,
-                height: 120,
-              ),
-            ),
             Center(
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  height: 300,
-                  width: 300,
-                  padding: EdgeInsets.all(16),
-                  child: Form(
-                    key: _formKey,
-                    child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            //email
-                            TextFormField(
-                              decoration: InputDecoration(labelText: 'Email'),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value)
-                              {
-                                if(value.isEmpty|| !value.contains('@'))
-                                {
-                                  return 'invalid email';
-                                }
-                                return null;
-                              },
-                              onSaved: (value)
-                              {
-                                _authData['email'] = value;
-
-                              },
-                            ),
-                            //password
-                            TextFormField(
-                              decoration: InputDecoration(labelText:'Password'),
-                              obscureText: true,
-                              controller: _passwordController,
-                              validator: (value)
-                              {
-                                if(value.isEmpty || value.length<=5)
-                                {
-                                  return 'invalid password';
-                                }
-                                return null;
-                              },
-                              onSaved: (value)
-                              {
-                                _authData['password'] = value;
-
-                              },
-                            ),
-                            //confirm Password
-                            TextFormField(
-                              decoration: InputDecoration(labelText:'Confirm Password'),
-                              obscureText: true,
-                              validator: (value)
-                              {
-                                if(value.isEmpty || value != _passwordController.text )
-                                {
-                                  return 'invalid password';
-                                }
-                                return null;
-                              },
-                              onSaved: (value)
-                              {
-
-                              },
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Text ('Select user type'),
-                            DropdownButtonFormField<String>(
-                              value: userType,
-                              icon: const Icon(Icons.arrow_downward),
-                              iconSize: 24,
-                              dropdownColor: Color(0xffFF6666),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  userType = newValue;
-                                });
-                              },
-                              items: <String>['Admin', 'User']
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                            ElevatedButton(
-                              child: Text(
-                                  'Submit'
-                              ),
-                              onPressed: ()
-                              {
-                                _submit();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                primary: Colors.redAccent
-                              ),
-                            )
-                          ],
-                        )
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container (
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(20.0),
+                    child: Image(
+                      alignment: Alignment.center,
+                      image: AssetImage('assets/placeholder.com-logo1.png'),
+                      color: Colors.white,
+                      width: double.maxFinite,
+                      height: MediaQuery.of(context).size.height/8,
                     ),
                   ),
-                ),
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  Container(
+                    color: Colors.white,
+                    height: MediaQuery.of(context).size.height/2.8,
+                    width: MediaQuery.of(context).size.width/2,
+                    padding: EdgeInsets.all(16),
+                    child: Form(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              //email
+                              TextFormField(
+                                decoration: InputDecoration(labelText: 'Email'),
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value)
+                                {
+                                  if(value.isEmpty|| !value.contains('@'))
+                                  {
+                                    return 'invalid email';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value)
+                                {
+                                  _authData['email'] = value;
+
+                                },
+                              ),
+                              //password
+                              TextFormField(
+                                decoration: InputDecoration(labelText:'Password'),
+                                obscureText: true,
+                                controller: _passwordController,
+                                validator: (value)
+                                {
+                                  if(value.isEmpty || value.length<=5)
+                                  {
+                                    return 'invalid password';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value)
+                                {
+                                  _authData['password'] = value;
+
+                                },
+                              ),
+                              //confirm Password
+                              TextFormField(
+                                decoration: InputDecoration(labelText:'Confirm Password'),
+                                obscureText: true,
+                                validator: (value)
+                                {
+                                  if(value.isEmpty || value != _passwordController.text )
+                                  {
+                                    return 'invalid password';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value)
+                                {
+
+                                },
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/48,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              Text ('Select user type'),
+                              DropdownButtonFormField<String>(
+                                style: const TextStyle(color: Colors.black),
+                                value: userType,
+                                icon: const Icon(Icons.arrow_downward),
+                                iconSize: 24,
+                                dropdownColor: Colors.white,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    userType = newValue;
+                                  });
+                                },
+                                items: <String>['Admin', 'User']
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/48,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              ElevatedButton(
+                                child: Text(
+                                    'Submit'
+                                ),
+                                onPressed: ()
+                                {
+                                  _submit();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  primary: Colors.blue
+                                ),
+                              )
+                            ],
+                          )
+                      ),
+                    ),
+                  ),
+                ],
               ),
             )
           ],
