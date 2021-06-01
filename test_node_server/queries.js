@@ -4,7 +4,7 @@ var user = 'postgres';
 var database = 'test';
 var pass = 'postgres';
 var host = 'localhost';
-var port = 5432
+var port = 5432;
 
 const pool = new Pool({
 	user: user,
@@ -36,6 +36,7 @@ const createUser = (req, res) => {
 	});
 };
 
+//exports
 module.exports = {
   getUsers,
   createUser,
