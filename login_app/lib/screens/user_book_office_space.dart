@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:login_app/screens/user_homepage.dart';
+import '../models/globals.dart' as globals;
 
 class UserBookOfficeSpace extends StatefulWidget {
   static const routeName = "/bookspace";
@@ -37,8 +39,8 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
           ),
           Center (
             child: Container (
-              height: MediaQuery.of(context).size.height/4,
-              width: MediaQuery.of(context).size.width/2,
+              height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
               color: Colors.white,
               padding: EdgeInsets.all(20),
                 child: Column(

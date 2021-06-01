@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen>{
           TextButton(
             child: Row(
                 children: <Widget>[
-                  Text('Register'),
+                  Text('Register '),
                   Icon(Icons.person_add)
                 ],
               ),
@@ -97,108 +97,110 @@ class _LoginScreenState extends State<LoginScreen>{
                 )
               ),
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container (
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(20.0),
-                    child: Image(
+            SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container (
                       alignment: Alignment.center,
-                      image: AssetImage('assets/placeholder.com-logo1.png'),
-                      color: Colors.white,
-                      width: double.maxFinite,
-                      height: MediaQuery.of(context).size.height/8,
-                    ),
-                  ),
-                  SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: MediaQuery.of(context).size.height/4,
-                    width: MediaQuery.of(context).size.width/2,
-                    padding: EdgeInsets.all(16),
-                    child: Form(
-                      key: _formKey,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            //email
-                            TextFormField(
-                              decoration: InputDecoration(labelText: 'Email'),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value)
-                              {
-                                if(value.isEmpty || !value.contains('@'))
-                                {
-                                  return 'invalid email';
-                                }
-                                return null;
-                              },
-                              onSaved: (value){
-                                _authData['email'] = value;
-                              },
-                            ),
-                            //password
-                            TextFormField(
-                              decoration: InputDecoration(labelText:'Password'),
-                              obscureText: true,
-                              validator: (value)
-                                {
-                                if(value.isEmpty || value.length<=5)
-                                {
-                                  return 'invalid password';
-                                }
-                                return null;
-                              },
-                              onSaved: (value)
-                              {
-                                _authData['password'] = value;
-                              },
-                            ),
-                            SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                text: 'Forgot password?',
-                                style: new TextStyle(color: Colors.blue),
-                                recognizer: new TapGestureRecognizer()
-                                ..onTap = () {
-                                  launch(
-                                      'https://www.google.com');
-                                },
-                              )
-                            ),
-                            SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            ElevatedButton(
-                              child: Text(
-                                'Submit'
-                              ),
-                              onPressed: ()
-                              {
-                                  _submit();
-                              },
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                primary: Colors.blue,
-                              ),
-                            )
-                          ],
-                        )
+                      margin: EdgeInsets.all(20.0),
+                      child: Image(
+                        alignment: Alignment.center,
+                        image: AssetImage('assets/placeholder.com-logo1.png'),
+                        color: Colors.white,
+                        width: double.maxFinite,
+                        height: MediaQuery.of(context).size.height/8,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox (
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    Container(
+                      color: Colors.white,
+                      height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      padding: EdgeInsets.all(16),
+                      child: Form(
+                        key: _formKey,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              //email
+                              TextFormField(
+                                decoration: InputDecoration(labelText: 'Email'),
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value)
+                                {
+                                  if(value.isEmpty || !value.contains('@'))
+                                  {
+                                    return 'invalid email';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value){
+                                  _authData['email'] = value;
+                                },
+                              ),
+                              //password
+                              TextFormField(
+                                decoration: InputDecoration(labelText:'Password'),
+                                obscureText: true,
+                                validator: (value)
+                                  {
+                                  if(value.isEmpty || value.length<=5)
+                                  {
+                                    return 'invalid password';
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value)
+                                {
+                                  _authData['password'] = value;
+                                },
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/48,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Forgot password?',
+                                  style: new TextStyle(color: Colors.blue),
+                                  recognizer: new TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launch(
+                                        'https://www.google.com');
+                                  },
+                                )
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/48,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              ElevatedButton(
+                                child: Text(
+                                  'Submit'
+                                ),
+                                onPressed: ()
+                                {
+                                    _submit();
+                                },
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  primary: Colors.blue,
+                                ),
+                              )
+                            ],
+                          )
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],

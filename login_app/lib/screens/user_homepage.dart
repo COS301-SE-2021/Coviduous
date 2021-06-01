@@ -36,129 +36,52 @@ class _UserHomepageState extends State<UserHomepage> {
                 )
               )
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container (
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(20.0),
-                    child: Image(
+            SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container (
                       alignment: Alignment.center,
-                      image: AssetImage('assets/placeholder.com-logo1.png'),
-                      color: Colors.white,
-                      width: double.maxFinite,
-                      height: MediaQuery.of(context).size.height/8,
+                      margin: EdgeInsets.all(20.0),
+                      child: Image(
+                        alignment: Alignment.center,
+                        image: AssetImage('assets/placeholder.com-logo1.png'),
+                        color: Colors.white,
+                        width: double.maxFinite,
+                        height: MediaQuery.of(context).size.height/8,
+                      ),
                     ),
-                  ),
-                  SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  Container (
-                    height: MediaQuery.of(context).size.height/4,
-                    width: MediaQuery.of(context).size.width/2,
-                    padding: EdgeInsets.all(16),
-                    child: Column (
-                      children: <Widget>[
-                        ElevatedButton (
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blue, //Button color
-                          ),
-                          child: Row (
-                            children: <Widget>[
-                              Expanded(child: Text('View office spaces')),
-                              Icon(Icons.library_books)
-                            ],
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pushReplacementNamed(UserViewOfficeSpaces.routeName);
-                            /*
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Placeholder'),
-                                  content: Text('View office space'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Okay'),
-                                      onPressed: (){
-                                        Navigator.of(ctx).pop();
-                                      },
-                                    )
-                                  ],
-                                )
-                            );
-                             */
-                          }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
+                    SizedBox (
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    Container (
+                      height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      padding: EdgeInsets.all(16),
+                      child: Column (
+                        children: <Widget>[
+                          ElevatedButton (
                             style: ElevatedButton.styleFrom(
                               primary: Colors.blue, //Button color
                             ),
                             child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Book office space')),
-                                  Icon(Icons.book)
-                                ],
+                              children: <Widget>[
+                                Expanded(child: Text('View office spaces')),
+                                Icon(Icons.library_books)
+                              ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              if (true) { //Check if the office space exists
-                                  Navigator.of(context).pushReplacementNamed(UserBookOfficeSpace.routeName);
-                                }
-                              else {
-                                /*
-                                  showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Error'),
-                                    content: Text('No offices have been registered for your company yet.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                                );
-                                 */
-                              }
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.blue, //Button color
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View current bookings')),
-                                  Icon(Icons.access_alarm)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                              Navigator.of(context).pushReplacementNamed(UserViewOfficeSpaces.routeName);
                               /*
                               showDialog(
                                   context: context,
                                   builder: (ctx) => AlertDialog(
                                     title: Text('Placeholder'),
-                                    content: Text('View current bookings'),
+                                    content: Text('View office space'),
                                     actions: <Widget>[
                                       TextButton(
                                         child: Text('Okay'),
@@ -171,12 +94,91 @@ class _UserHomepageState extends State<UserHomepage> {
                               );
                                */
                             }
-                        ),
-                      ]
-                    )
-                  ),
-                ],
-              )
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.blue, //Button color
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Book office space')),
+                                    Icon(Icons.book)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                if (true) { //Check if the office space exists
+                                    Navigator.of(context).pushReplacementNamed(UserBookOfficeSpace.routeName);
+                                  }
+                                else {
+                                  /*
+                                    showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Error'),
+                                      content: Text('No offices have been registered for your company yet.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: (){
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                  );
+                                   */
+                                }
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.blue, //Button color
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('View current bookings')),
+                                    Icon(Icons.access_alarm)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                                /*
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Placeholder'),
+                                      content: Text('View current bookings'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: (){
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                );
+                                 */
+                              }
+                          ),
+                        ]
+                      )
+                    ),
+                  ],
+                )
+              ),
             ),
             Container (
               alignment: Alignment.bottomRight,
