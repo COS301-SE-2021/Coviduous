@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen>{
               margin: EdgeInsets.all(20.0),
               child: Image(
                 alignment: Alignment.bottomCenter,
-                image: NetworkImage('https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png'),
+                image: AssetImage('assets/placeholder.com-logo1.png'),
                 color: Colors.white,
                 width: double.maxFinite,
                 height: 140,
