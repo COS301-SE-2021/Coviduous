@@ -8,6 +8,7 @@ class AddUserPage extends StatefulWidget
     return AddUserPageState();
   }
 }
+
 class AddUserPageState extends State<AddUserPage>
 {
   TextEditingController nameController = TextEditingController();
@@ -17,6 +18,7 @@ class AddUserPageState extends State<AddUserPage>
     var result = await http_post("create-user", {
       "name": nameController.text,
     });
+
     if(result.ok)
     {
       setState(() {
@@ -24,6 +26,7 @@ class AddUserPageState extends State<AddUserPage>
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +45,7 @@ class AddUserPageState extends State<AddUserPage>
             child: Text("Create"),
             onPressed: createUser,
           ),
-          Text(response),
+          Text(response), // data received from http_post resp
         ],
       ),
     );
