@@ -199,6 +199,7 @@ class _UserHomepageState extends State<UserHomepage> {
                         TextButton(
                           child: Text('Yes'),
                           onPressed: (){
+                            globals.email = ''; //Clear currently signed in email
                             Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                           },
                         ),
