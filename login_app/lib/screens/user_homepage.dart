@@ -17,8 +17,9 @@ class _UserHomepageState extends State<UserHomepage> {
       onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
         appBar: AppBar(
+          title: Text('Welcome user'),
           backgroundColor: Color(0xffD74C73),
-          title: Text('Welcome user')
+          automaticallyImplyLeading: false, //Back button will not show up in app bar
         ),
         body: Stack (
           children: <Widget>[

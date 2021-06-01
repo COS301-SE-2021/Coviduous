@@ -12,8 +12,9 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
+          title: Text('View current bookings'),
           backgroundColor: Color(0xffD74C73),
-          title: Text('View current bookings')
+          automaticallyImplyLeading: false, //Back button will not show up in app bar
       ),
       body: Stack(
         children: <Widget>[

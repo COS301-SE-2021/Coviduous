@@ -13,3 +13,4 @@ login_app/.flutter-plugins
 login_app/.dart_tool/
 .idea/workspace.xml
 login_app/build/
+.idea/vcs.xml

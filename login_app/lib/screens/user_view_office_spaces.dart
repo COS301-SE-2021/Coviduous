@@ -72,8 +72,9 @@ List<Floor> floors = []; //List of floors
 
     return new Scaffold(
       appBar: AppBar(
-      backgroundColor: Color(0xffD74C73),
-      title: Text('View office spaces')
+        title: Text('View office spaces'),
+        backgroundColor: Color(0xffD74C73),
+        automaticallyImplyLeading: false, //Back button will not show up in app bar
       ),
       body: Stack(
         children: <Widget>[
