@@ -12,9 +12,13 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-          title: Text('View current bookings'),
-          backgroundColor: Color(0xffD74C73),
-          automaticallyImplyLeading: false, //Back button will not show up in app bar
+        title: Text('View current bookings'),
+        backgroundColor: Color(0xffD74C73),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+          },
+        ),
       ),
       body: Stack(
         children: <Widget>[
@@ -36,29 +40,6 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
               ),
             )
           ),
-          Container (
-            alignment: Alignment.bottomLeft,
-            child: Card (
-              color: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Container (
-                height: 50,
-                width: 100,
-                padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xffD3343A), //Button color
-                  ),
-                  child: Text('Back'),
-                  onPressed: (){
-                    Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
-                  },
-                )
-              ),
-            ),
-          )
         ]
       )
     );

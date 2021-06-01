@@ -28,7 +28,7 @@ List<Floor> floors = []; //List of floors
         );
       } else { //Else create and return a list
         return ListView.builder(
-            padding: const EdgeInsets.fromLTRB(8, 8, 8, 58),
+            padding: const EdgeInsets.all(8),
             itemCount: numberOfFloors,
             itemBuilder: (context, index) { //Display a list tile FOR EACH floor in floors[]
               return ListTile(
@@ -74,7 +74,11 @@ List<Floor> floors = []; //List of floors
       appBar: AppBar(
         title: Text('View office spaces'),
         backgroundColor: Color(0xffD74C73),
-        automaticallyImplyLeading: false, //Back button will not show up in app bar
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+          },
+        ),
       ),
       body: Stack(
         children: <Widget>[
@@ -94,29 +98,6 @@ List<Floor> floors = []; //List of floors
               child: getList(),
             )
           ),
-          Container (
-            alignment: Alignment.bottomLeft,
-            child: Card (
-              color: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Container (
-                height: 50,
-                width: 100,
-                padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xffD3343A), //Button color
-                  ),
-                  child: Text('Back'),
-                  onPressed: (){
-                    Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
-                  },
-                )
-              ),
-            ),
-          )
         ]
       )
     );
