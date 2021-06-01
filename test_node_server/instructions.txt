@@ -1,5 +1,7 @@
-NB from the command line, cd into this directory and install required modules with:
+NB: from the command line / terminal, cd into this directory and install required modules with:
 
 npm install express
 npm install body-parser
 npm install pg
+
+**requires nodejs to be installed
