@@ -99,3 +99,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
     )
         ),
     ),
+    ),
+    Container (
+    alignment: Alignment.bottomRight,
+    child: Container (
+    height: 50,
+    width: 100,
+    padding: EdgeInsets.all(10),
+    child: ElevatedButton(
+    child: Text('Log out'),
+    onPressed: (){
+    showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+    title: Text('Warning'),
+    content: Text('Are you sure you want to log out?'),
+    actions: <Widget>[
+    TextButton(
+    child: Text('Yes'),
+    onPressed: (){
+    globals.email = ''; //Clear currently signed in email
+    Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    },
+    ),
