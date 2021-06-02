@@ -46,7 +46,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
   Widget _buildRooms(){
     return TextFormField(
-      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
       decoration: InputDecoration(
           labelText: 'Enter number of rooms'
       ),
@@ -67,7 +67,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
   Widget _buildMaxCapacity(){
     return TextFormField(
-      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
       decoration: InputDecoration(
           labelText: 'Set Maximum Capacity'
       ),
