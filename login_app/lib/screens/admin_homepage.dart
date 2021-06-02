@@ -57,3 +57,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
     onPressed: () {
     Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
     }
+    ),
+    SizedBox (
+    height: MediaQuery.of(context).size.height/48,
+    width: MediaQuery.of(context).size.width,
+    ),
+    ElevatedButton (
+    child: Row (
+    children: <Widget>[
+    Expanded(child: Text('Update Floor-plan')),
+    Icon(Icons.update_rounded)
+    ],
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+    ),
+    onPressed: () {
+    Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+    }
+    ),
