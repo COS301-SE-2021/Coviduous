@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-//import 'package:mypages/screens/selectfloors.dart';
-//import 'package:mypages/screens/calc_floorplan.dart';
+
+import 'admin_homepage.dart';
+import 'calc_floorplan.dart';
+//import 'screens/selectfloors.dart';
 
 class AddFloorPlan extends StatefulWidget {
+  static const routeName = "/addfloorplan";
+
   @override
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
+
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
 
-  Widget _buildAge(){
+  Widget _buildFloors(){
     return TextFormField(
       decoration: InputDecoration(
           labelText: 'Enter number of floors'
@@ -20,8 +25,9 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
         int num = int.tryParse(value);
         if(num == null || num <= 0){
-          return 'floor number must be greater than zero';
+          return 'Number of floors must be greater than zero';
         }
+        return null;
       },
       onSaved: (String value){
         _numFloor = value;
@@ -39,8 +45,9 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
         int rooms = int.tryParse(value);
         if(rooms == null || rooms <= 0){
-          return 'Age must be greater then 0';
+          return 'Number of rooms must be greater than zero';
         }
+        return null;
       },
       onSaved: (String value){
         _numRooms = value;
@@ -53,7 +60,12 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Add Floor-plan")
+        title: Text("Add floor plan"),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -63,25 +75,22 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _buildAge(),
+                _buildFloors(),
                 _buildRooms(),
 
                 SizedBox(height: 50),
 
-                RaisedButton(
-                    child: Text('Proceed',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 16
-                      ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(100.0,40.0),
                     ),
-
+                    child: Text('Proceed'),
                     onPressed: () {
                       if(!_formKey.currentState.validate()) {
                         return;
                       }
                       _formKey.currentState.save();
-                     // Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
+                      Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
                     }
                 )
 

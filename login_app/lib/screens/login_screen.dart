@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen>{
   void _changeUserType(UserType value) {
     setState(() {
       _userType = value;
-      print(_userType);
+      //print(_userType);
     });
   }
 

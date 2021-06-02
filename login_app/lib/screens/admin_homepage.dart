@@ -18,7 +18,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
       onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Admin Profile'),
+            title: Text('Admin dashboard'),
             automaticallyImplyLeading: false, //Back button will not show up in app bar
           ),
           body: Stack (
@@ -34,7 +34,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             child: Image(
                               alignment: Alignment.center,
                               image: AssetImage('assets/placeholder.com-logo1.png'),
-                              color: Colors.indigo,
+                              color: Colors.white,
                               width: double.maxFinite,
                               height: MediaQuery.of(context).size.height/8,
                             ),
@@ -52,14 +52,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     ElevatedButton (
                                         child: Row (
                                             children: <Widget>[
-                                              Expanded(child: Text('Add a Floor-plan')),
+                                              Expanded(child: Text('Add a floor plan')),
                                               Icon(Icons.add_circle_rounded)
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                         ),
                                         onPressed: () {
-                                         //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                         Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
                                         }
                                     ),
                                     SizedBox (
@@ -69,7 +69,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     ElevatedButton (
                                         child: Row (
                                             children: <Widget>[
-                                              Expanded(child: Text('Update Floor-plan')),
+                                              Expanded(child: Text('Update floor plan')),
                                               Icon(Icons.update_rounded)
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -86,7 +86,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     ElevatedButton (
                                         child: Row (
                                             children: <Widget>[
-                                              Expanded(child: Text('Delete Floor-plan')),
+                                              Expanded(child: Text('Delete floor plan')),
                                               Icon(Icons.delete_forever_rounded)
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
