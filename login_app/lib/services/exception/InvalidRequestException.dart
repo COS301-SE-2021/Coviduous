@@ -1,5 +1,3 @@
-class invalidRequestException extends Exception{
-  InvalidRequestException(String message){
-    super(message);
-  }
+class invalidRequestException implements Exception {
+  String errMsg() => 'Invalid Request';
 }
