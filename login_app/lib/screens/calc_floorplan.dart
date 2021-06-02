@@ -112,7 +112,6 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
             width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
             color: Colors.white,
             margin: EdgeInsets.all(20),
@@ -161,7 +160,11 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
                           print('Length: ' + _length);
                           print('Width: ' + _width);
                         }
-                    )
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
                   ],
                 ),
               ),
