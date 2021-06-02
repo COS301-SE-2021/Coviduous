@@ -15,7 +15,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
 
-  Widget _buildAge(){
+  Widget _buildFloors(){
     return TextFormField(
       decoration: InputDecoration(
           labelText: 'Enter number of floors'
@@ -75,7 +75,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _buildAge(),
+                _buildFloors(),
                 _buildRooms(),
 
                 SizedBox(height: 50),
