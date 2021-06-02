@@ -30,3 +30,24 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
     );
   }
 
+  Widget _buildDesks(){
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'Number of desks:'
+      ),
+      keyboardType: TextInputType.number,
+      validator: (String value) {
+        int desk = int.tryParse(value);
+        if(desk == null || desk <= 0){
+          return 'Number of desks is required';
+        }
+      },
+      onSaved: (String value){
+        _numdesks = value;
+      },
+    );
+  }
+
+
+
+
