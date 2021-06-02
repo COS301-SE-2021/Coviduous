@@ -87,5 +87,59 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
   }
 
 
+  final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text("Calculate floor-plan")
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+
+                _buildDimensions(),
+                _buildDesks(),
+                _buildLength(),
+                _buildWidth(),
+
+                SizedBox(height: 50),
+
+                RaisedButton(
+                    child: Text('Save',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 16
+                      ),
+                    ),
+
+                    onPressed: () {
+                      if(!_formKey.currentState.validate()) {
+                        return;
+                      }
+
+                      _formKey.currentState.save();
+
+                      print(_dimensions);
+                      print(_numdesks);
+                      print(_length);
+                      print(_width);
+                    }
+                )
+
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 
