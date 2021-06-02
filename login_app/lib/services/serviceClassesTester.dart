@@ -40,7 +40,9 @@ void main() {
   viewOfficeSpaceResponse holder2 =
       service.viewOfficeSpace(new viewOfficeSpaceRequest("Thabo"));
 
-  if (holder2.getResponse()) {
-    holder2.getBooking().displayBooking();
+  if (holder2 != null) {
+    if (holder2.getResponse()) {
+      holder2.getBooking().displayBooking();
+    }
   }
 }
