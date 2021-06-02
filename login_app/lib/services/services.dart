@@ -19,8 +19,8 @@ class services {
 
   services() {}
   createFloorPlanResponse createFloorPlan(createFloorPlanRequest req) {
-    //var holder = new floor(req.getAdmin(), req.getFloorNumber(), req.getTotalRooms());
-    var holder = new floor(req.getFloorNumber());
+    var holder =
+        new floor(req.getAdmin(), req.getFloorNumber(), req.getTotalRooms());
     globals.globalFloors.add(holder);
     createFloorPlanResponse resp = new createFloorPlanResponse();
     resp.setResponse(true);
