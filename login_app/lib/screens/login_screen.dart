@@ -125,9 +125,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     ),
                     Container(
                       color: Colors.white,
-                      //height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(3.5*globals.getWidgetScaling()), //Temporary change, so that the radio button fits in the box
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
                       padding: EdgeInsets.all(16),
                       child: Form(
                         key: _formKey,
@@ -176,27 +174,25 @@ class _LoginScreenState extends State<LoginScreen>{
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width/7,
-                                    child: ListTile (
-                                      title: Text('Admin'),
-                                      leading: Radio (
-                                        value: UserType.admin,
-                                        groupValue: _userType,
-                                        onChanged: _changeUserType
+                                  Row (
+                                    children: [
+                                      Text('Admin'),
+                                      Radio (
+                                          value: UserType.admin,
+                                          groupValue: _userType,
+                                          onChanged: _changeUserType
                                       )
-                                    ),
+                                    ],
                                   ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width/7,
-                                    child: ListTile (
-                                        title: Text('User'),
-                                        leading: Radio (
-                                            value: UserType.user,
-                                            groupValue: _userType,
-                                            onChanged: _changeUserType
-                                        )
-                                    ),
+                                  Row (
+                                    children: [
+                                      Text('User'),
+                                      Radio (
+                                          value: UserType.user,
+                                          groupValue: _userType,
+                                          onChanged: _changeUserType
+                                      )
+                                    ],
                                   ),
                                   RichText(
                                     text: TextSpan(
@@ -225,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                 },
                                 style: ElevatedButton.styleFrom (
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
                               )
