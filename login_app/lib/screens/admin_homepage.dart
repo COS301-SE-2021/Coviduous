@@ -75,3 +75,27 @@ class _AdminHomePageState extends State<AdminHomePage> {
     Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
     }
     ),
+      SizedBox (
+        height: MediaQuery.of(context).size.height/48,
+        width: MediaQuery.of(context).size.width,
+      ),
+      ElevatedButton (
+          child: Row (
+              children: <Widget>[
+                Expanded(child: Text('Delete Floor-plan')),
+                Icon(Icons.delete_forever_rounded)
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
+          ),
+          onPressed: () {
+            // Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+          }
+      ),
+    ]
+    )
+    ),
+    ],
+    )
+        ),
+    ),
