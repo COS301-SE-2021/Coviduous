@@ -53,9 +53,44 @@ class floor {
       }
     }
   }
-  //bookDesk()
-  //viewFloorDetails()
+  Boolean bookDesk()
+  {
 
+    for(int i=0;i<totalNumRooms;i++)
+    {
+      if(rooms[i]!=null)
+      {
+        if((rooms[i].roomNum).equals(roomNum)) //checks if the room number in rooms array is the same as the room number the user specified
+            {
+          if(rooms[i].bookDesk())
+          {
+            System.out.println("Successfully Booked.");
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+
+
+  }
+  void  viewFloorDetails()
+  {
+    System.out.println("***************************************************************************************");
+    System.out.println("Displaying floor Infromation");
+    System.out.println("Total Number Of Rooms : "+totalNumRooms);
+    System.out.println("MaxCapacity : "+maxCapacity);
+    System.out.println("Current Capacity Occupied: "+currentCapacity);
+    System.out.println("***************************************************************************************");
+    for(int i=0;i<totalNumRooms;i++)
+    {
+      if(rooms[i]!=null)
+      {
+        rooms[i].displayCapacity();
+      }
+    }
+
+  }
   int getFloorNumber() {
     return floorNum;
   }
