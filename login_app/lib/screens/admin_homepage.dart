@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/login_screen.dart';
-//import 'package:mypages/screens/add_floor_plan.dart';
+//import 'package:login_app/screens/login_screen.dart';
+import 'package:login_app/screens/add_floor_plan.dart';
 
 import '../models/globals.dart' as globals;
 
@@ -59,7 +59,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                         ),
                                         onPressed: () {
-                                         // Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                         Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
                                         }
                                     ),
                                     SizedBox (
