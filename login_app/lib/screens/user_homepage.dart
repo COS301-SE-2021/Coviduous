@@ -52,6 +52,11 @@ class _UserHomepageState extends State<UserHomepage> {
                       child: Column (
                         children: <Widget>[
                           ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                             child: Row (
                               children: <Widget>[
                                 Expanded(child: Text('View office spaces')),
@@ -69,6 +74,11 @@ class _UserHomepageState extends State<UserHomepage> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                               child: Row (
                                   children: <Widget>[
                                     Expanded(child: Text('Book office space')),
@@ -86,6 +96,11 @@ class _UserHomepageState extends State<UserHomepage> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                               child: Row (
                                   children: <Widget>[
                                     Expanded(child: Text('View current bookings')),
@@ -112,6 +127,11 @@ class _UserHomepageState extends State<UserHomepage> {
                 width: 100,
                 padding: EdgeInsets.all(10),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   child: Text('Log out'),
                   onPressed: (){
                     showDialog(

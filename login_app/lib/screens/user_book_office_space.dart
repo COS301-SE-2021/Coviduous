@@ -80,8 +80,10 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
               ),
               Text(dropdownFloorInfo),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(100.0,40.0),
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   child: Text('Proceed'),
                   onPressed: () {

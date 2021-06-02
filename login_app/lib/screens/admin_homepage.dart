@@ -50,6 +50,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               child: Column (
                                   children: <Widget>[
                                     ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
                                         child: Row (
                                             children: <Widget>[
                                               Expanded(child: Text('Add a floor plan')),
@@ -67,6 +72,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       width: MediaQuery.of(context).size.width,
                                     ),
                                     ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
                                         child: Row (
                                             children: <Widget>[
                                               Expanded(child: Text('Update floor plan')),
@@ -77,6 +87,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         onPressed: () {
                                           //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('Update floor plan'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
                                         }
                                     ),
                                     SizedBox (
@@ -84,6 +109,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       width: MediaQuery.of(context).size.width,
                                     ),
                                     ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
                                         child: Row (
                                             children: <Widget>[
                                               Expanded(child: Text('Delete floor plan')),
@@ -94,6 +124,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         onPressed: () {
                                           // Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('Delete floor plan'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
                                         }
                                     ),
                                   ]
@@ -110,6 +155,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       width: 100,
                       padding: EdgeInsets.all(10),
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                         child: Text('Log out'),
                         onPressed: (){
                           showDialog(

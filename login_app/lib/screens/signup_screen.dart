@@ -214,7 +214,7 @@ class _RegisterState extends State<Register>{
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
                                   ),
                                 )
