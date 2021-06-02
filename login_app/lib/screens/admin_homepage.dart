@@ -17,3 +17,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
         title: Text('Admin Profile '),
     automaticallyImplyLeading: false, //Back button will not show up in app bar
     ),
+    body: Stack (
+    children: <Widget>[
+    SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+    child: Center(
+    child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    Container (
+    alignment: Alignment.center,
+    margin: EdgeInsets.all(20.0),
+    child: Image(
+    alignment: Alignment.center,
+    image: AssetImage('assets/placeholder.com-logo1.png'),
+    color: Colors.indigo,
+    width: double.maxFinite,
+    height: MediaQuery.of(context).size.height/8,
+    ),
+    ),
