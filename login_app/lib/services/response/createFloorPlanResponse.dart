@@ -1,5 +1,5 @@
 class createFloorPlanResponse {
-  bool successful;
+  bool successful = false;
 
   createFloorplanResponse(bool success) {
     this.successful = success;
