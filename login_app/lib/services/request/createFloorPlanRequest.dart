@@ -1,10 +1,10 @@
 class createFloorPlanRequest {
   //add code for request object
   String admin = "";
-  int floorNumber = 0;
+  String floorNumber = "";
   int totalRooms = 0;
 
-  createFloorPlanRequest(String admin, int floorNumber, int totalRooms) {
+  createFloorPlanRequest(String admin, String floorNumber, int totalRooms) {
     this.admin = admin;
     this.floorNumber = floorNumber;
     this.totalRooms = totalRooms;
@@ -14,7 +14,7 @@ class createFloorPlanRequest {
     return admin;
   }
 
-  int getFloorNumber() {
+  String getFloorNumber() {
     return floorNumber;
   }
 
