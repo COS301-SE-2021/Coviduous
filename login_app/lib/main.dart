@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
+import 'screens/admin_homepage.dart';
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
 import 'screens/user_view_office_spaces.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget{
 
           Register.routeName: (ctx)=> Register(),
           LoginScreen.routeName: (ctx)=> LoginScreen(),
+          AdminHomePage.routeName: (ctx)=> AdminHomePage(),
           UserHomepage.routeName: (ctx)=> UserHomepage(),
           UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
           UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),

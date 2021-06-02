@@ -1,7 +1,8 @@
 class createFloorPlanRequest {
-  String admin;
-  int floorNumber;
-  int totalRooms;
+  //add code for request object
+  String admin = "";
+  int floorNumber = 0;
+  int totalRooms = 0;
 
   createFloorPlanRequest(String admin, int floorNumber, int totalRooms) {
     this.admin = admin;

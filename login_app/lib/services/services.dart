@@ -1,9 +1,8 @@
-import 'package:login_app/services/request/createFloorPlanRequest.dart';
+import 'request/createFloorPlanRequest.dart';
 import '../services/globalVariables.dart' as globals;
 import 'floorplan/floor.dart';
 import 'office/booking.dart';
 import 'response/createFloorPlanResponse.dart';
-import 'request/createFloorPlanRequest.dart';
 
 class services {
 //This class provides an interface to all the service contracts of the system. It provides a bridge between the front end screens and backend functionality.
