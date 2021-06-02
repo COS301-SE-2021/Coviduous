@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'admin_homepage.dart';
 import 'calc_floorplan.dart';
 //import 'screens/selectfloors.dart';
+import '../models/globals.dart' as globals;
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/addfloorplan";
@@ -17,6 +18,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
   Widget _buildFloors(){
     return TextFormField(
+      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
       decoration: InputDecoration(
           labelText: 'Enter number of floors'
       ),
@@ -37,6 +39,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
   Widget _buildRooms(){
     return TextFormField(
+      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
       decoration: InputDecoration(
           labelText: 'Enter number of rooms'
       ),
@@ -67,34 +70,53 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildFloors(),
-                _buildRooms(),
-
-                SizedBox(height: 50),
-
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(100.0,40.0),
+      body: Center(
+        child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+          child: Container(
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+            color: Colors.white,
+            margin: EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildFloors()
                     ),
-                    child: Text('Proceed'),
-                    onPressed: () {
-                      if(!_formKey.currentState.validate()) {
-                        return;
-                      }
-                      _formKey.currentState.save();
-                      Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
-                    }
-                )
-
-              ],
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildRooms()
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Proceed'),
+                        onPressed: () {
+                          if(!_formKey.currentState.validate()) {
+                            return;
+                          }
+                          _formKey.currentState.save();
+                          Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
+                        }
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
