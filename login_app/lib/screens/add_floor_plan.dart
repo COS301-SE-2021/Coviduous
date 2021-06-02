@@ -109,7 +109,11 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                           _formKey.currentState.save();
                           Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
                         }
-                    )
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
                   ],
                 ),
               ),
