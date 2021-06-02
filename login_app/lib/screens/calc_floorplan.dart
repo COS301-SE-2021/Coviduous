@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/add_floor_plan.dart';
+
+import 'add_floor_plan.dart';
+import '../models/globals.dart' as globals;
 
 class CalcFloorPlan extends StatefulWidget {
   static const routeName = "/calcfloorplan";
@@ -13,17 +15,20 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
   String _length;
   String _width;
 
+  final dimensionFormat = RegExp(r'^\d\*\d$');
+
   Widget _buildDimensions(){
     return TextFormField(
       maxLength: 15,
-      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: 'Desk dimensions',
       ),
       validator: (String value) {
-        int dimension = int.tryParse(value);
-        if(dimension == null || dimension <= 0){
-          return 'Dimensions are required in order to proceed';
+        //int dimension = int.tryParse(value);
+        if(value == null){
+          return 'Dimensions are required';
+        } else if (!dimensionFormat.hasMatch(value)) {
+          return 'Value must be in the form x*y';
         }
         return null;
       },
@@ -92,7 +97,6 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
     );
   }
 
-
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -105,43 +109,62 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-
-                _buildDimensions(),
-                _buildDesks(),
-                _buildLength(),
-                _buildWidth(),
-
-                SizedBox(height: 50),
-
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(100.0,40.0),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+            color: Colors.white,
+            margin: EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildDimensions()
                     ),
-                    child: Text('Save'),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildDesks(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: _buildLength(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: _buildWidth(),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Save'),
+                        onPressed: () {
+                          if(!_formKey.currentState.validate()) {
+                            return;
+                          }
 
-                    onPressed: () {
-                      if(!_formKey.currentState.validate()) {
-                        return;
-                      }
+                          _formKey.currentState.save();
 
-                      _formKey.currentState.save();
-
-                      print(_dimensions);
-                      print(_numdesks);
-                      print(_length);
-                      print(_width);
-                    }
-                )
-
-              ],
+                          print('Dimensions: ' + _dimensions);
+                          print('Number of desks: ' + _numdesks);
+                          print('Length: ' + _length);
+                          print('Width: ' + _width);
+                        }
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         ),
