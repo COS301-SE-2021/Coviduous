@@ -1,8 +1,7 @@
 class floor {
   int floorNum = 0;
   //add all the attributes in the floor class
-  //public Room[] rooms;
-
+   room[] rooms;
    String floorNum;
    String admin;
    int numOfRooms;
