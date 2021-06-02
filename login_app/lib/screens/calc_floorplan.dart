@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/screens/add_floor_plan.dart';
 
 class CalcFloorPlan extends StatefulWidget {
-  static const routeName = "/calc";
+  static const routeName = "/calcfloorplan";
+
   @override
   _CalcFloorPlanState createState() => _CalcFloorPlanState();
 }
@@ -16,13 +18,14 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
       maxLength: 15,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        labelText: 'Desk Dimensions',
+        labelText: 'Desk dimensions',
       ),
       validator: (String value) {
         int dimension = int.tryParse(value);
         if(dimension == null || dimension <= 0){
           return 'Dimensions are required in order to proceed';
         }
+        return null;
       },
       onSaved: (String value){
         _dimensions = value;
@@ -33,7 +36,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
   Widget _buildDesks(){
     return TextFormField(
       decoration: InputDecoration(
-          labelText: 'Number of desks:'
+          labelText: 'Number of desks'
       ),
       keyboardType: TextInputType.number,
       validator: (String value) {
@@ -41,6 +44,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
         if(desk == null || desk <= 0){
           return 'Number of desks is required';
         }
+        return null;
       },
       onSaved: (String value){
         _numdesks = value;
@@ -58,8 +62,9 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
 
         int length = int.tryParse(value);
         if(length == null || length <= 0){
-          return 'Width must be greater then 0';
+          return 'Width must be greater than zero';
         }
+        return null;
       },
       onSaved: (String value){
         _length = value;
@@ -77,8 +82,9 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
 
         int _wid = int.tryParse(value);
         if(_wid == null || _wid <= 0){
-          return 'length must be greater then 0';
+          return 'Length must be greater than zero';
         }
+        return null;
       },
       onSaved: (String value){
         _width = value;
@@ -92,7 +98,12 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Calculate floor-plan")
+        title: Text("Calculate floor plan"),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -110,13 +121,11 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
 
                 SizedBox(height: 50),
 
-                RaisedButton(
-                    child: Text('Save',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 16
-                      ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(100.0,40.0),
                     ),
+                    child: Text('Save'),
 
                     onPressed: () {
                       if(!_formKey.currentState.validate()) {
