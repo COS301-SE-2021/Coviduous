@@ -67,6 +67,25 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
     );
   }
 
+  Widget _buildWidth(){
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'Width'
+      ),
+      keyboardType: TextInputType.number,
+      validator: (String value) {
+
+        int _wid = int.tryParse(value);
+        if(_wid == null || _wid <= 0){
+          return 'length must be greater then 0';
+        }
+      },
+      onSaved: (String value){
+        _width = value;
+      },
+    );
+  }
+
 
 
 
