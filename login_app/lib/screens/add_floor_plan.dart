@@ -28,3 +28,22 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
+
+  Widget _buildRooms(){
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: 'Enter number of rooms'
+      ),
+      keyboardType: TextInputType.number,
+      validator: (String value) {
+
+        int rooms = int.tryParse(value);
+        if(rooms == null || rooms <= 0){
+          return 'Age must be greater then 0';
+        }
+      },
+      onSaved: (String value){
+        _numRooms = value;
+      },
+    );
+  }
