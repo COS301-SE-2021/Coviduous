@@ -1,31 +1,27 @@
 class booking {
   //add attributes
 
-   LocalDate date;
-   LocalTime time;
-   int floorNum;
-   String roomNum;
-   int deskNum;
+  DateTime dateTime;
+  int floorNum = 0;
+  String roomNum = "";
+  int deskNum = 0;
 
-  Booking(int floornum,String roomNum,int deskNum)
-  {
-    this.date= LocalDate.now();
-    this.time=LocalTime.now();
-    this.floorNum=floornum;
-    this.roomNum=roomNum;
-    this.deskNum=deskNum;
+  Booking(int floornum, String roomNum, int deskNum) {
+    this.dateTime = DateTime.now();
+    this.floorNum = floornum;
+    this.roomNum = roomNum;
+    this.deskNum = deskNum;
   }
 
-  void displayBooking()
-  {
-    System.out.println("***************************************************************************************");
-    System.out.println("Displaying Booking Information");
-    System.out.println("Date : "+this.date);
-    System.out.println("Time : "+this.time);
-    System.out.println("Floor Number : "+this.floorNum);
-    System.out.println("Room Number : "+this.roomNum);
-    System.out.println("Desk Number : "+this.deskNum);
-    System.out.println("***************************************************************************************");
+  void displayBooking() {
+    print(
+        "***************************************************************************************");
+    print("Displaying Booking Information");
+    print("Date : " + this.dateTime.toString());
+    print("Floor Number : " + this.floorNum.toString());
+    print("Room Number : " + this.roomNum.toString());
+    print("Desk Number : " + this.deskNum.toString());
+    print(
+        "***************************************************************************************");
   }
-
 }
