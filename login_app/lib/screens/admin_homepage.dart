@@ -122,3 +122,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
     Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     },
     ),
+    TextButton(
+    child: Text('No'),
+    onPressed: (){
+    Navigator.of(ctx).pop();
+    },
+    )
+    ],
+    ));
+    },
+    )
+    ),
+    )
+    ]
+    )
+    ),
+    );
+  }
+}
