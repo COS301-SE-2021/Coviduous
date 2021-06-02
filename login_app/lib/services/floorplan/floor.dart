@@ -30,7 +30,7 @@ class floor {
 
   void viewRoomDetails(String roomNum) {
     for (int i = 0; i < totalNumRooms; i++) {
-      if (rooms.isNotEmpty) {
+      if (rooms.length != 0) {
         if ((rooms[i].roomNum) ==
             roomNum) //checks if the room number in rooms array is the same as the room number the user specified
         {
@@ -42,7 +42,7 @@ class floor {
 
   bool bookDesk(String roomNum) {
     for (int i = 0; i < totalNumRooms; i++) {
-      if (rooms.isNotEmpty) {
+      if (rooms.length != 0) {
         if ((rooms[i].roomNum) ==
             roomNum) //checks if the room number in rooms array is the same as the room number the user specified
         {
