@@ -1,7 +1,7 @@
 class floor {
   int floorNum = 0;
   //add all the attributes in the floor class
-   room[] rooms;
+   room rooms;
    String floorNum;
    String admin;
    int numOfRooms;
@@ -14,21 +14,45 @@ class floor {
   }
 
   floor(String admin, String floorNum, int totalNumOfRoomsInTheFloor) {
+    this.floorNum = floorNum;
+    this.numOfRooms = 0; //reprents the rooms that have their capacity determined at this point there are zero rooms that have been initialized within this floor.
+    this.rooms=null;
     this.admin=admin;
-    this.floorNum=floorNum;
     this.totalNumRooms=totalNumOfRoomsInTheFloor;
-
+    this.maxCapacity=0;
+    this.currentCapacity=0;
+    this.rooms=new List(totalNumOfRoomsInTheFloor);
+    for(int i=0;i<totalNumRooms;i++)
+    {
+      rooms[i]=null;
+    }
   }
 
   Boolean addRoom(int counter, String roomNum,double dimentions,double percentage,int numDesks,double deskLength,double deskWidth){
 
-
-
-
-
+    if(rooms[counter-1]==null)
+    {
+      rooms[counter-1]=new Room(roomNum,dimentions,percentage,numDesks,deskLength,deskWidth);
+      this.maxCapacity=this.maxCapacity+(rooms[counter-1].capacityOfPeopleForSixFtGrid);
+      return true;
+    }
+    numOfRooms++;
+    return false;
   }
 
-  //viewRoomDetails()
+  void viewRoomDetails()
+  {
+    for(int i=0;i<totalNumRooms;i++)
+    {
+      if(rooms[i]!=null)
+      {
+        if((rooms[i].roomNum).equals(roomNum)) //checks if the room number in rooms array is the same as the room number the user specified
+            {
+          rooms[i].displayCapacity();
+        }
+      }
+    }
+  }
   //bookDesk()
   //viewFloorDetails()
 
