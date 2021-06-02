@@ -80,7 +80,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                       if(!_formKey.currentState.validate()) {
                         return;
                       }
-
                       _formKey.currentState.save();
                      // Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
                     }
