@@ -35,3 +35,25 @@ class _AdminHomePageState extends State<AdminHomePage> {
     height: MediaQuery.of(context).size.height/8,
     ),
     ),
+    SizedBox (
+    height: MediaQuery.of(context).size.height/48,
+    width: MediaQuery.of(context).size.width,
+    ),
+    Container (
+    height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+    padding: EdgeInsets.all(16),
+    child: Column (
+    children: <Widget>[
+    ElevatedButton (
+    child: Row (
+    children: <Widget>[
+    Expanded(child: Text('Add a Floor-plan')),
+    Icon(Icons.add_circle_rounded)
+    ],
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+    ),
+    onPressed: () {
+    Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+    }
