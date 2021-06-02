@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
+import 'admin_homepage.dart';
 import 'user_homepage.dart';
 import 'signup_screen.dart';
 import '../models/authentication.dart';
@@ -14,12 +15,18 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+enum UserType {
+  admin, user
+}
+
 class _LoginScreenState extends State<LoginScreen>{
   final GlobalKey<FormState> _formKey = GlobalKey();
   Map<String, String> _authData = {
     'email' : '',
     'password' : ''
   };
+  UserType _userType = UserType.user;
+
   void _showErrorDialog(String msg)
   {
     showDialog(
@@ -50,12 +57,23 @@ class _LoginScreenState extends State<LoginScreen>{
           _authData['password']
       );
       globals.email = _authData['email']; //Set global email variable so that it appears on the user homepage
-      Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+      if (_userType == UserType.user) {
+        Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+      } else if (_userType == UserType.admin) {
+        Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+      }
     } catch (error) {
         var errorMessage = 'Authentication failed.';
         _showErrorDialog(errorMessage);
         return;
     }
+  }
+
+  void _changeUserType(UserType value) {
+    setState(() {
+      _userType = value;
+      print(_userType);
+    });
   }
 
 @override
@@ -107,7 +125,8 @@ class _LoginScreenState extends State<LoginScreen>{
                     ),
                     Container(
                       color: Colors.white,
-                      height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+                      //height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(3.5*globals.getWidgetScaling()), //Temporary change, so that the radio button fits in the box
                       width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                       padding: EdgeInsets.all(16),
                       child: Form(
@@ -154,16 +173,43 @@ class _LoginScreenState extends State<LoginScreen>{
                                 height: MediaQuery.of(context).size.height/48,
                                 width: MediaQuery.of(context).size.width,
                               ),
-                              RichText(
-                                text: TextSpan(
-                                  text: 'Forgot password?',
-                                  style: new TextStyle(color: Color(0xff056676)),
-                                  recognizer: new TapGestureRecognizer()
-                                  ..onTap = () {
-                                    launch(
-                                        'https://www.google.com');
-                                  },
-                                )
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width/7,
+                                    child: ListTile (
+                                      title: Text('Admin'),
+                                      leading: Radio (
+                                        value: UserType.admin,
+                                        groupValue: _userType,
+                                        onChanged: _changeUserType
+                                      )
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width/7,
+                                    child: ListTile (
+                                        title: Text('User'),
+                                        leading: Radio (
+                                            value: UserType.user,
+                                            groupValue: _userType,
+                                            onChanged: _changeUserType
+                                        )
+                                    ),
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      text: 'Forgot password?',
+                                      style: new TextStyle(color: Color(0xff056676)),
+                                      recognizer: new TapGestureRecognizer()
+                                      ..onTap = () {
+                                        launch(
+                                            'https://www.google.com');
+                                      },
+                                    )
+                                  ),
+                                ],
                               ),
                               SizedBox (
                                 height: MediaQuery.of(context).size.height/48,
