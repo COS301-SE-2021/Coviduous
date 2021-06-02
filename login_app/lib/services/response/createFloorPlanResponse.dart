@@ -1,4 +1,5 @@
 class createFloorPlanResponse {
+  //add code for response object
   bool successful = false;
 
   createFloorplanResponse(bool success) {
