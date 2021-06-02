@@ -119,25 +119,25 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                             showDialog(
                                 context: context,
                                 builder: (ctx) => AlertDialog(
-                                  title: Text('Booking successful'),
+                                  title: Text('Creation successful'),
                                   content: Text('Proceeding to next step.'),
                                   actions: <Widget>[
                                     TextButton(
                                       child: Text('Okay'),
                                       onPressed: (){
                                         Navigator.of(ctx).pop();
+                                        Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
                                       },
                                     )
                                   ],
                                 )
                             );
-                            Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
                           } else {
                             showDialog(
                                 context: context,
                                 builder: (ctx) => AlertDialog(
-                                  title: Text('Booking unsuccessful'),
-                                  content: Text('Please check your details or contact an administrator.'),
+                                  title: Text('Creation unsuccessful'),
+                                  content: Text('Please check your details.'),
                                   actions: <Widget>[
                                     TextButton(
                                       child: Text('Okay'),
