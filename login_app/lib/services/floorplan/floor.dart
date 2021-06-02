@@ -1,5 +1,5 @@
 class floor {
-  int floorNum;
+  int floorNum = 0;
 
   floor(int floornum) {
     this.floorNum = floornum;
