@@ -1,24 +1,24 @@
 class bookOfficeSpaceRequest {
   //add code for request object
-  int floorNum = 0;
-  int roomNum = 0;
-  int deskNum = 0;
+  String floorNum = "";
+  String roomNum = "";
+  String user = "";
 
-  bookOfficeSpaceRequest(int floorNum, int roomNum, int deskNum) {
+  bookOfficeSpaceRequest(String user, String floorNum, String roomNum) {
     this.floorNum = floorNum;
     this.roomNum = roomNum;
-    this.deskNum = deskNum;
+    this.user = user;
   }
 
-  int getFloorNumber() {
+  String getFloorNumber() {
     return floorNum;
   }
 
-  int getRoomNumber() {
+  String getRoomNumber() {
     return roomNum;
   }
 
-  int getDeskNumber() {
-    return deskNum;
+  String getUser() {
+    return user;
   }
 }

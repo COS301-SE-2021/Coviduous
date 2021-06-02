@@ -1,28 +1,20 @@
+import 'package:login_app/services/office/booking.dart';
+
 class viewOfficeSpaceResponse {
   //add code for response object
-  int totalNumRooms;
-  double maxCapacity;
-  int currentCapacity;
+  bool successful = false;
+  booking myBooking = null;
 
-   viewOfficeSpaceResponse(int totalNumRooms, double maxCapacity, int currentCapacity)
-  {
-    this.totalNumRooms = totalNumRooms;
-    this.maxCapacity = maxCapacity;
-    this.currentCapacity = currentCapacity;
+  viewOfficeSpaceResponse(bool success, booking book) {
+    this.successful = success;
+    this.myBooking = book;
   }
 
-   int getTotalRooms()
-  {
-    return totalNumRooms;
+  bool getResponse() {
+    return successful;
   }
 
-   double getMaxCapacity()
-  {
-    return maxCapacity;
-  }
-
-   int getCurrentCapacity()
-  {
-    return currentCapacity;
+  booking getBooking() {
+    return myBooking;
   }
 }

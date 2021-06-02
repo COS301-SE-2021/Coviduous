@@ -2,13 +2,15 @@ class booking {
   //add attributes
 
   DateTime dateTime;
-  int floorNum = 0;
+  String floorNum = "";
   String roomNum = "";
+  String user = "";
   int deskNum = 0;
 
-  Booking(int floornum, String roomNum, int deskNum) {
+  booking(String user, String floornum, String roomNum, int deskNum) {
     this.dateTime = DateTime.now();
     this.floorNum = floornum;
+    this.user = user;
     this.roomNum = roomNum;
     this.deskNum = deskNum;
   }
@@ -17,6 +19,7 @@ class booking {
     print(
         "***************************************************************************************");
     print("Displaying Booking Information");
+    print("User : " + this.user);
     print("Date : " + this.dateTime.toString());
     print("Floor Number : " + this.floorNum.toString());
     print("Room Number : " + this.roomNum.toString());

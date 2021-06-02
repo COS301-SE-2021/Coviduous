@@ -1,25 +1,12 @@
-import 'package:login_app/services/floorplan/floor.dart';
-
 class viewOfficeSpaceRequest {
   //add code for request object
-  String floorNumber;
-  List<floor> floors = [];
+  String user;
 
-  viewOfficeSpaceRequest(List<floor> f, String floorNumber) {
-    this.floors = f;
-    this.floorNumber = floorNumber;
+  viewOfficeSpaceRequest(String user) {
+    this.user = user;
   }
 
-  String getFloorNumber() {
-    return floorNumber;
-  }
-
-  floor getFloor(String floorNum) {
-    for (int i = 0; i < floors.length; i++) {
-      if (floors[i].getFloorNumber() == floorNum) {
-        return floors[i];
-      }
-    }
-    return null;
+  String getUser() {
+    return user;
   }
 }
