@@ -50,12 +50,17 @@ int numberOfFloors = globals.globalNumFloors;
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Floor ' + floors[index].floorNum, style: TextStyle(color: Colors.white)),
+                        child: Text('Office space', style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                           children: <Widget>[
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text('Floors: ' + floors[index].floorNum.toString(), style: TextStyle(color: Colors.black)),
+                            ),
                             Container(
                               height: 50,
                               color: Colors.white,
