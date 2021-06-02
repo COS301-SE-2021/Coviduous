@@ -30,30 +30,32 @@ class floor {
   }
 
   void viewRoomDetails(String roomNum) {
-    for (int i = 0; i < totalNumRooms; i++) {
-      if (rooms.length != 0) {
-        if ((rooms[i].roomNum) ==
-            roomNum) //checks if the room number in rooms array is the same as the room number the user specified
-        {
-          rooms[i].displayCapacity();
+    if (rooms.length != 0) {
+      for (int i = 0; i < totalNumRooms; i++) {
+        if (rooms.asMap().containsKey(i)) {
+          if (rooms[i].roomNum == roomNum) { //checks if the room number in rooms array is the same as the room number the user specified
+            rooms[i].displayCapacity();
+          }
         }
       }
     }
   }
 
   bool bookDesk(String roomNum) {
-    for (int i = 0; i < totalNumRooms; i++) {
-      if (rooms.length != 0) {
-        if ((rooms[i].roomNum) ==
-            roomNum) //checks if the room number in rooms array is the same as the room number the user specified
-        {
-          if (rooms[i].bookDesk()) {
-            print("Successfully Booked.");
-            return true;
+    if (rooms.length != 0) {
+      for (int i = 0; i < totalNumRooms; i++) {
+          if (rooms.asMap().containsKey(i)) {
+            if ((rooms[i].roomNum) ==
+                roomNum) //checks if the room number in rooms array is the same as the room number the user specified
+                {
+              if (rooms[i].bookDesk()) {
+                print("Successfully Booked.");
+                return true;
+              }
+            }
           }
         }
       }
-    }
     return false;
   }
 
