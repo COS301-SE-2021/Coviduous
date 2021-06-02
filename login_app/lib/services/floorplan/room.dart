@@ -30,9 +30,29 @@ room(String roomNum,double dimentions,double percentage,int numDesks,double desk
 
 }
 
-  //displayCapacity()
+   void displayCapacity()
+   {
+     System.out.println("***************************************************************************************");
+     System.out.println("Displaying Room Information");
+     System.out.println("Room No.: "+roomNum);
+     System.out.println("Alert Level Percentage : "+percentage);
+     System.out.println("Occupied Capacity : "+occupiedDesks);
+     System.out.println("Space Left : "+(this.capacityOfPeopleForSixFtGrid-this.occupiedDesks));
+     System.out.println("                  ");
+   }
 
-
-  //bookDesk()
+   Boolean bookDesk()
+   {
+     if(occupiedDesks<numDesks)
+     {
+       occupiedDesks++;
+       return true;
+     }
+     else
+     {
+       System.out.println("All tables in this room have been occupied");
+       return false;
+     }
+   }
 
 }
