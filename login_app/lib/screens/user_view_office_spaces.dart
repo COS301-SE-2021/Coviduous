@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/models/floor.dart';
 import 'user_homepage.dart';
-import '../models/globals.dart' as globals;
+import '../services/floorplan/floor.dart';
+import '../services/globalVariables.dart' as globals;
 
 class UserViewOfficeSpaces extends StatefulWidget {
   static const routeName = "/viewspaces";
@@ -10,16 +10,13 @@ class UserViewOfficeSpaces extends StatefulWidget {
 }
 
 class _UserViewOfficeSpacesState extends State<UserViewOfficeSpaces> {
-List<Floor> floors = []; //List of floors
+List<floor> floors = globals.globalFloors; //List of floors
+int numberOfFloors = globals.globalNumFloors;
 
   @override
   Widget build(BuildContext context) {
-    for (var i = 0; i <= globals.numberOfFloors; i++) {
-      floors.add(new Floor(i,3,10,0));
-    }
-
     Widget getList() {
-      if (globals.numberOfFloors == 0) { //If the number of floors = 0, don't display a list
+      if (numberOfFloors == 0) { //If the number of floors = 0, don't display a list
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -43,7 +40,7 @@ List<Floor> floors = []; //List of floors
       } else { //Else create and return a list
         return ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: globals.numberOfFloors,
+            itemCount: numberOfFloors,
             itemBuilder: (context, index) { //Display a list tile FOR EACH floor in floors[]
               return ListTile(
                 title: Column(
@@ -53,7 +50,7 @@ List<Floor> floors = []; //List of floors
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(floors[index].floorNumberHeading, style: TextStyle(color: Colors.white)),
+                        child: Text('Floor ' + floors[index].floorNum, style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -62,17 +59,17 @@ List<Floor> floors = []; //List of floors
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(floors[index].numberOfRoomsHeading, style: TextStyle(color: Colors.black)),
+                              child: Text('Number of rooms: ' + floors[index].totalNumRooms.toString(), style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(floors[index].maximumCapacityHeading, style: TextStyle(color: Colors.black)),
+                              child: Text('Maximum capacity: ' + floors[index].maxCapacity.toString(), style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(floors[index].currentCapacityHeading, style: TextStyle(color: Colors.black)),
+                              child: Text('Current capacity: ' + floors[index].currentCapacity.toString(), style: TextStyle(color: Colors.black)),
                             ),
                           ]
                       )

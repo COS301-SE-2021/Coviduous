@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_app/screens/login_screen.dart';
 import 'package:login_app/screens/add_floor_plan.dart';
 
-import '../models/globals.dart' as globals;
+import '../services/globalVariables.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
   static const routeName = "/admin";

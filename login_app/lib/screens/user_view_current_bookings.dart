@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-import 'package:login_app/models/booking.dart';
-import 'package:login_app/screens/user_homepage.dart';
-import '../models/globals.dart' as globals;
+import 'user_homepage.dart';
+import '../services/office/booking.dart';
+import '../services/globalVariables.dart' as globals;
 
 class UserViewCurrentBookings extends StatefulWidget {
   static const routeName = "/viewbookings";
@@ -12,15 +12,11 @@ class UserViewCurrentBookings extends StatefulWidget {
 }
 
 class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
-  int numberOfBookings = 0; //Number of bookings
-  List<Booking> bookings = []; //List of bookings
+  int numberOfBookings = globals.globalBookings.length; //Number of bookings
+  List<booking> bookings = globals.globalBookings;
 
   @override
   Widget build(BuildContext context) {
-    Random random = new Random();
-    for (var i = 0; i <= numberOfBookings; i++) {
-      bookings.add(new Booking.startDuration(random.nextInt(4), random.nextInt(101), DateTime.now(), Duration(hours: random.nextInt(3))));
-    }
 
     Widget getList() {
       if (numberOfBookings == 0) { //If the number of bookings = 0, don't display a list
@@ -66,22 +62,27 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(bookings[index].floorNumberHeading, style: TextStyle(color: Colors.black)),
+                              child: Text('User: ' + bookings[index].user, style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(bookings[index].roomNumberHeading, style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + bookings[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(bookings[index].timeStartHeading, style: TextStyle(color: Colors.black)),
+                              child: Text('Floor: ' + bookings[index].floorNum, style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(bookings[index].timeEndHeading, style: TextStyle(color: Colors.black)),
+                              child: Text('Room: ' + bookings[index].roomNum, style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text('Desk: ' + bookings[index].deskNum.toString(), style: TextStyle(color: Colors.black)),
                             ),
                           ]
                       )

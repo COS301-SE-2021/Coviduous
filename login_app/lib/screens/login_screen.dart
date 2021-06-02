@@ -7,7 +7,7 @@ import 'admin_homepage.dart';
 import 'user_homepage.dart';
 import 'signup_screen.dart';
 import '../models/authentication.dart';
-import '../models/globals.dart' as globals;
+import '../services/globalVariables.dart' as globals;
 
 class LoginScreen extends StatefulWidget {
   static const routeName = "/login";

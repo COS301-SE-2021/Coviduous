@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:login_app/screens/user_homepage.dart';
-import '../models/globals.dart' as globals;
+import 'user_homepage.dart';
+import '../services/floorplan/floor.dart';
+import '../services/globalVariables.dart' as globals;
 
 class UserBookOfficeSpace extends StatefulWidget {
   static const routeName = "/bookspace";
@@ -12,13 +13,15 @@ class UserBookOfficeSpace extends StatefulWidget {
 class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   String dropdownFloorValue = '1';
   String dropdownFloorInfo = 'Information about the floor, including its rooms.';
-  List<String> listOfFloors = new List<String>.generate(
-    globals.numberOfFloors,
-    (int index) => (index+1).toString(),
-  );
+  List<floor> listOfFloors = globals.globalFloors;
+  List<String> floorNumbers;
+  int numberOfFloors = globals.globalNumFloors;
 
   Widget getList() {
-    if (globals.numberOfFloors == 0) {
+    for (int i = 0; i < listOfFloors.length; i++) {
+        floorNumbers.add(listOfFloors[i].floorNum);
+    }
+    if (numberOfFloors == 0) {
       return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -68,8 +71,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                           dropdownFloorValue = newValue;
                         });
                       },
-                      items: listOfFloors
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: floorNumbers.map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),

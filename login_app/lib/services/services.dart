@@ -7,7 +7,6 @@ import 'package:login_app/services/response/viewOfficeSpaceResponse.dart';
 import 'request/createFloorPlanRequest.dart';
 import '../services/globalVariables.dart' as globals;
 import 'floorplan/floor.dart';
-//import 'office/booking.dart';
 import 'response/createFloorPlanResponse.dart';
 
 class services {

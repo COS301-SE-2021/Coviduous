@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'admin_homepage.dart';
 import 'calc_floorplan.dart';
 //import 'screens/selectfloors.dart';
-import '../models/globals.dart' as globals;
+import '../services/globalVariables.dart' as globals;
+import '../services/services.dart';
+import '../services/request/createFloorPlanRequest.dart';
+import '../services/response/createFloorPlanResponse.dart';
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/addfloorplan";
@@ -15,6 +18,8 @@ class AddFloorPlan extends StatefulWidget {
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
+
+  services service = new services();
 
   Widget _buildFloors(){
     return TextFormField(
@@ -107,7 +112,43 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                             return;
                           }
                           _formKey.currentState.save();
-                          Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
+
+                          createFloorPlanResponse response = service.createFloorPlan(createFloorPlanRequest(globals.email, _numFloor, int.parse(_numRooms)));
+
+                          if (response.getResponse()) {
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: Text('Booking successful'),
+                                  content: Text('Proceeding to next step.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Okay'),
+                                      onPressed: (){
+                                        Navigator.of(ctx).pop();
+                                      },
+                                    )
+                                  ],
+                                )
+                            );
+                            Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: Text('Booking unsuccessful'),
+                                  content: Text('Please check your details or contact an administrator.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Okay'),
+                                      onPressed: (){
+                                        Navigator.of(ctx).pop();
+                                      },
+                                    )
+                                  ],
+                                )
+                            );
+                          }
                         }
                     ),
                     SizedBox(
