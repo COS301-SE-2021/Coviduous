@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:login_app/screens/login_screen.dart';
+import 'package:login_app/screens/login_screen.dart';
 import 'package:login_app/screens/add_floor_plan.dart';
 
 import '../models/globals.dart' as globals;
@@ -18,7 +18,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
       onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Admin Profile '),
+            title: Text('Admin Profile'),
             automaticallyImplyLeading: false, //Back button will not show up in app bar
           ),
           body: Stack (
@@ -122,7 +122,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     child: Text('Yes'),
                                     onPressed: (){
                                       globals.email = ''; //Clear currently signed in email
-                                     // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+                                      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                                     },
                                   ),
                                   TextButton(
