@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/services/request/bookOfficeSpaceRequest.dart';
 
 import 'user_homepage.dart';
 import '../services/floorplan/floor.dart';
 import '../services/globalVariables.dart' as globals;
+import '../services/services.dart';
 
 class UserBookOfficeSpace extends StatefulWidget {
   static const routeName = "/bookspace";
@@ -12,14 +14,16 @@ class UserBookOfficeSpace extends StatefulWidget {
 
 class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   String dropdownFloorValue = '1';
-  String dropdownFloorInfo = 'Information about the floor, including its rooms.';
+  String dropdownFloorInfo = ' ';
   List<floor> listOfFloors = globals.globalFloors;
-  List<String> floorNumbers;
+  List<String> floorNumbers = [];
   int numberOfFloors = globals.globalNumFloors;
 
+  services service = new services();
+
   Widget getList() {
-    for (int i = 0; i < listOfFloors.length; i++) {
-        floorNumbers.add(listOfFloors[i].floorNum);
+    for (int i = 0; i <= numberOfFloors; i++) {
+        floorNumbers.add((i+1).toString());
     }
     if (numberOfFloors == 0) {
       return Column(
@@ -53,7 +57,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
             children: [
               Row (
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically,
+                  crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
                   children: <Widget>[
                     Text('Select floor', style: TextStyle(color: Colors.black)),
                     DropdownButton<String>(
@@ -69,6 +73,12 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                       onChanged: (String newValue) {
                         setState(() {
                           dropdownFloorValue = newValue;
+                          print(dropdownFloorValue);
+                          /*
+                          dropdownFloorInfo = 'Number of rooms: ' + listOfFloors[int.parse(dropdownFloorValue)].numOfRooms.toString() +
+                                              '\nMaximum capacity: ' + listOfFloors[int.parse(dropdownFloorValue)].maxCapacity.toString() +
+                                              '\nCurrent capacity: ' + listOfFloors[int.parse(dropdownFloorValue)].currentCapacity.toString();
+                           */
                         });
                       },
                       items: floorNumbers.map<DropdownMenuItem<String>>((String value) {
@@ -89,12 +99,15 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                   ),
                   child: Text('Proceed'),
                   onPressed: () {
-                    if (true) { //Check if floor has space
+                    if (listOfFloors[int.parse(dropdownFloorValue)].currentCapacity < listOfFloors[int.parse(dropdownFloorValue)].maxCapacity) { //Check if floor has space
+
+                    }
+                    else {
                       showDialog(
                           context: context,
                           builder: (ctx) => AlertDialog(
-                            title: Text('Placeholder'),
-                            content: Text('Proceeding to next step.'),
+                            title: Text('No space'),
+                            content: Text('Floor has no more space available. Try a different floor or contact your administrator.'),
                             actions: <Widget>[
                               TextButton(
                                 child: Text('Okay'),
@@ -105,9 +118,6 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                             ],
                           )
                       );
-                    }
-                    else {
-                      //Not allowed; try again
                     }
                   }
               )
