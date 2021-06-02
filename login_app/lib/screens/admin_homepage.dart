@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/screens/login_screen.dart';
+//import 'package:mypages/screens/add_floor_plan.dart';
 
-import 'package:mypages/screens/home_screen.dart';
-import 'package:mypages/screens/add_floor_plan.dart';
-//import 'package:login_app/screens/user_book_office_space.dart';
-//import 'package:login_app/screens/user_view_current_bookings.dart';
-//import 'package:login_app/screens/user_view_office_spaces.dart';
 import '../models/globals.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
@@ -62,7 +59,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                         ),
                                         onPressed: () {
-                                          Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                         // Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
                                         }
                                     ),
                                     SizedBox (
@@ -79,7 +76,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                         ),
                                         onPressed: () {
-                                          Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                          //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
                                         }
                                     ),
                                     SizedBox (
@@ -125,7 +122,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     child: Text('Yes'),
                                     onPressed: (){
                                       globals.email = ''; //Clear currently signed in email
-                                      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+                                     // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
                                     },
                                   ),
                                   TextButton(
