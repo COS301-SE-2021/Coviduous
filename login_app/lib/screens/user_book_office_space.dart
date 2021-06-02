@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/services/request/bookOfficeSpaceRequest.dart';
 
 import 'user_homepage.dart';
 import '../services/floorplan/floor.dart';
@@ -16,15 +15,18 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   String dropdownFloorValue = '1';
   String dropdownFloorInfo = ' ';
   List<floor> listOfFloors = globals.globalFloors;
-  List<String> floorNumbers = [];
-  int numberOfFloors = globals.globalNumFloors;
+  List<String> floorNumbers = ['1', '2'];
+  //int numberOfFloors = globals.globalNumFloors;
+  int numberOfFloors = 2;
 
   services service = new services();
 
   Widget getList() {
+    /*
     for (int i = 0; i <= numberOfFloors; i++) {
         floorNumbers.add((i+1).toString());
     }
+     */
     if (numberOfFloors == 0) {
       return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +75,6 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                       onChanged: (String newValue) {
                         setState(() {
                           dropdownFloorValue = newValue;
-                          print(dropdownFloorValue);
                           /*
                           dropdownFloorInfo = 'Number of rooms: ' + listOfFloors[int.parse(dropdownFloorValue)].numOfRooms.toString() +
                                               '\nMaximum capacity: ' + listOfFloors[int.parse(dropdownFloorValue)].maxCapacity.toString() +
@@ -81,7 +82,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                            */
                         });
                       },
-                      items: floorNumbers.map<DropdownMenuItem<String>>((String value) {
+                      items: <String>['1', '2'].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -99,6 +100,23 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                   ),
                   child: Text('Proceed'),
                   onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: Text('Placeholder'),
+                          content: Text('Placeholder'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('Okay'),
+                              onPressed: (){
+                                Navigator.of(ctx).pop();
+                              },
+                            )
+                          ],
+                        )
+                    );
+                  }
+                    /*
                     if (listOfFloors[int.parse(dropdownFloorValue)].currentCapacity < listOfFloors[int.parse(dropdownFloorValue)].maxCapacity) { //Check if floor has space
 
                     }
@@ -119,7 +137,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                           )
                       );
                     }
-                  }
+                  } */
               )
             ],
           )
