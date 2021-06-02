@@ -24,6 +24,7 @@ class floor {
       int numDesks, double deskLength, double deskWidth) {
     room holder = new room(
         roomNum, dimentions, percentage, numDesks, deskLength, deskWidth);
+    rooms.add(holder);
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
   }
