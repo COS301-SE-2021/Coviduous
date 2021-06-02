@@ -69,7 +69,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
     return TextFormField(
       textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
       decoration: InputDecoration(
-          labelText: 'Enter Maximum Capacity'
+          labelText: 'Set Maximum Capacity'
       ),
       keyboardType: TextInputType.number,
       validator: (String value) {
@@ -91,7 +91,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
     return TextFormField(
       textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
       decoration: InputDecoration(
-          labelText: 'Enter Current Capacity'
+          labelText: 'Set Current Capacity'
       ),
       keyboardType: TextInputType.number,
       validator: (String value) {
