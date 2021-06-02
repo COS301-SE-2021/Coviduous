@@ -18,6 +18,8 @@ class AddFloorPlan extends StatefulWidget {
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
+  String _MaxCapacity;
+  String _currCapacity;
 
   services service = new services();
 
@@ -63,6 +65,49 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
     );
   }
 
+  Widget _buildMaxCapacity(){
+    return TextFormField(
+      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+      decoration: InputDecoration(
+          labelText: 'Set Maximum Capacity'
+      ),
+      keyboardType: TextInputType.number,
+      validator: (String value) {
+
+        int rooms = int.tryParse(value);
+        if(rooms == null || rooms <= 0){
+          return 'Number of rooms must be greater than zero';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        _MaxCapacity = value;
+      },
+    );
+  }
+
+
+  Widget _buildCurrentCapacity(){
+    return TextFormField(
+      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+      decoration: InputDecoration(
+          labelText: 'Set Current Capacity'
+      ),
+      keyboardType: TextInputType.number,
+      validator: (String value) {
+
+        int rooms = int.tryParse(value);
+        if(rooms == null || rooms <= 0){
+          return 'Number of rooms must be greater than zero';
+        }
+        return null;
+      },
+      onSaved: (String value){
+        _currCapacity = value;
+      },
+    );
+  }
+
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -95,6 +140,14 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                     Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: _buildRooms()
+                    ),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildMaxCapacity()
+                    ),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildCurrentCapacity()
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height/48,
