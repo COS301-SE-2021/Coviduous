@@ -4,7 +4,7 @@ class bookOfficeSpaceRequest {
   String roomNum = "";
   String user = "";
 //bookofficespaceRequest
-
+//initialize floor number
   bookOfficeSpaceRequest(String user, String floorNum, String roomNum) {
     this.floorNum = floorNum;
     this.roomNum = roomNum;
