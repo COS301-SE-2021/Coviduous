@@ -10,7 +10,7 @@ class floor {
   double maxCapacity = 0.0;
   int currentCapacity = 0;
 //constructor
-//initialize admin, floor number, total number of rooms
+//initialize admin, floor number, total number of rooms, capacity
   floor(String admin, String floorNum, int totalNumOfRoomsInTheFloor) {
     this.floorNum = floorNum;
     this.numOfRooms =
