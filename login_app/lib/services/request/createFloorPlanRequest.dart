@@ -6,6 +6,7 @@ class createFloorPlanRequest {
 
 //create floor plan request
 //initialize admin
+//initialize number of floors
   createFloorPlanRequest(String admin, String floorNumber, int totalRooms) {
     this.admin = admin;
     this.floorNumber = floorNumber;
