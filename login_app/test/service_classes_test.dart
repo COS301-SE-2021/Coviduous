@@ -1,18 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:login_app/services/request/bookOfficeSpaceRequest.dart';
-import 'package:login_app/services/request/viewOfficeSpaceRequest.dart';
-import 'package:login_app/services/response/bookOfficeSpaceResponse.dart';
-import 'package:login_app/services/response/viewOfficeSpaceResponse.dart';
-import 'package:login_app/services/request/createFloorPlanRequest.dart';
-import 'package:login_app/services/response/createFloorPlanResponse.dart';
+import 'package:login_app/services/request/book_office_space_request.dart';
+import 'package:login_app/services/request/view_office_space_request.dart';
+import 'package:login_app/services/response/book_office_space_response.dart';
+import 'package:login_app/services/response/view_office_space_response.dart';
+import 'package:login_app/services/request/create_floor_plan_request.dart';
+import 'package:login_app/services/response/create_floor_plan_response.dart';
 import 'package:login_app/services/services.dart';
 
 void main() {
-  createFloorPlanRequest req = createFloorPlanRequest("Njabulo Skosana", "1", 5);
-  createFloorPlanRequest req2 = createFloorPlanRequest("Njabulo Skosana", "2", 5);
-  services service = new services();
-  createFloorPlanResponse resp = service.createFloorPlan(req);
+  CreateFloorPlanRequest req = CreateFloorPlanRequest("Njabulo Skosana", "1", 5);
+  CreateFloorPlanRequest req2 = CreateFloorPlanRequest("Njabulo Skosana", "2", 5);
+  Services service = new Services();
+  CreateFloorPlanResponse resp = service.createFloorPlan(req);
   resp = service.createFloorPlan(req2);
 
   test('Add a floor', () {
@@ -20,20 +20,18 @@ void main() {
   });
 
   test('Add a room', () {
-    service.addRoom("2", "c-1", 900, 50, 8, 6, 6);
-
-    expect(service.getNumberOfFloors(), 2);
+    expect(service.addRoom("2", "c-1", 900, 50, 8, 6, 6), true);
   });
 
   test('Book a room', () {
-    bookOfficeSpaceRequest holder = new bookOfficeSpaceRequest("Thabo", "2", "c-1");
-    bookOfficeSpaceResponse resp2 = service.bookOfficeSpace(holder);
+    BookOfficeSpaceRequest holder = new BookOfficeSpaceRequest("Thabo", "2", "c-1");
+    BookOfficeSpaceResponse resp2 = service.bookOfficeSpace(holder);
 
     expect(resp2.getResponse(), true);
   });
 
   test('View booking', () {
-    viewOfficeSpaceResponse holder2 = service.viewOfficeSpace(new viewOfficeSpaceRequest("Thabo"));
+    ViewOfficeSpaceResponse holder2 = service.viewOfficeSpace(new ViewOfficeSpaceRequest("Thabo"));
 
     expect(holder2.getResponse(), true);
   });

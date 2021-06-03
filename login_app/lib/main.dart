@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/calc_floorplan.dart';
+import 'package:login_app/screens/admin_calc_floor_plan.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/admin_homepage.dart';
-import 'screens/add_floor_plan.dart';
+import 'screens/admin_add_floor_plan.dart';
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
 import 'screens/user_view_office_spaces.dart';
 import 'screens/user_view_current_bookings.dart';
 import 'models/authentication.dart';
-import 'services/globalVariables.dart' as globals;
+import 'services/globals.dart' as globals;
 
 void main() => runApp(MyApp());
 

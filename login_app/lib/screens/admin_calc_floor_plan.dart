@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'add_floor_plan.dart';
-import '../services/globalVariables.dart' as globals;
+import 'admin_add_floor_plan.dart';
+import '../services/globals.dart' as globals;
 
 class CalcFloorPlan extends StatefulWidget {
   static const routeName = "/calcfloorplan";

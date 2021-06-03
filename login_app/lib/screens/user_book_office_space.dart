@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'user_homepage.dart';
 import '../services/floorplan/floor.dart';
-import '../services/globalVariables.dart' as globals;
+import '../services/globals.dart' as globals;
 import '../services/services.dart';
 
 class UserBookOfficeSpace extends StatefulWidget {
@@ -14,12 +14,12 @@ class UserBookOfficeSpace extends StatefulWidget {
 class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   String dropdownFloorValue = '1';
   String dropdownFloorInfo = ' ';
-  List<floor> listOfFloors = globals.globalFloors;
+  List<Floor> listOfFloors = globals.globalFloors;
   List<String> floorNumbers = ['1', '2'];
   //int numberOfFloors = globals.globalNumFloors;
   int numberOfFloors = 2;
 
-  services service = new services();
+  Services service = new Services();
 
   Widget getList() {
     /*

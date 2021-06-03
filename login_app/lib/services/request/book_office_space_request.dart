@@ -1,10 +1,9 @@
-class bookOfficeSpaceRequest {
-  //add code for request object
+class BookOfficeSpaceRequest {
   String floorNum = "";
   String roomNum = "";
   String user = "";
 
-  bookOfficeSpaceRequest(String user, String floorNum, String roomNum) {
+  BookOfficeSpaceRequest(String user, String floorNum, String roomNum) {
     this.floorNum = floorNum;
     this.roomNum = roomNum;
     this.user = user;

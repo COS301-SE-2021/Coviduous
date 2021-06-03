@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 
 import 'floorplan/floor.dart';
 import 'office/booking.dart';
-//This is where all our global variables will be
+//Global variables used throughout the program
+//=============================================
 
 //Backend global variables
 //==========================
 
-List<floor> globalFloors = [];
-List<booking> globalBookings = [];
+List<Floor> globalFloors = [];
+List<Booking> globalBookings = [];
 int globalNumFloors = 0;
 
 //Frontend global variables

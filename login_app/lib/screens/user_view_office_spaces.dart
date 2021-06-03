@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'user_homepage.dart';
 import '../services/floorplan/floor.dart';
-import '../services/globalVariables.dart' as globals;
+import '../services/globals.dart' as globals;
 
 class UserViewOfficeSpaces extends StatefulWidget {
   static const routeName = "/viewspaces";
@@ -10,7 +10,7 @@ class UserViewOfficeSpaces extends StatefulWidget {
 }
 
 class _UserViewOfficeSpacesState extends State<UserViewOfficeSpaces> {
-List<floor> floors = globals.globalFloors; //List of floors
+List<Floor> floors = globals.globalFloors; //List of floors
 int numberOfFloors = globals.globalNumFloors;
 
   @override

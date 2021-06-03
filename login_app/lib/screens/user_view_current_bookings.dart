@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'user_homepage.dart';
 import '../services/office/booking.dart';
-import '../services/globalVariables.dart' as globals;
+import '../services/globals.dart' as globals;
 
 class UserViewCurrentBookings extends StatefulWidget {
   static const routeName = "/viewbookings";
@@ -13,7 +13,7 @@ class UserViewCurrentBookings extends StatefulWidget {
 
 class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
   int numberOfBookings = globals.globalBookings.length; //Number of bookings
-  List<booking> bookings = globals.globalBookings;
+  List<Booking> bookings = globals.globalBookings;
 
   @override
   Widget build(BuildContext context) {
