@@ -6,6 +6,7 @@ class bookOfficeSpaceRequest {
 //bookofficespaceRequest
 //initialize floor number
 //initialize room number
+// initialize user
   bookOfficeSpaceRequest(String user, String floorNum, String roomNum) {
     this.floorNum = floorNum;
     this.roomNum = roomNum;
