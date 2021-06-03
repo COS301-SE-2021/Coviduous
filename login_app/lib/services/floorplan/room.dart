@@ -20,6 +20,7 @@ class room {
       capacityOfPeopleForEightFtCircle; //number of people allowed in the room for 8ft distance to be maintained
   double occupiedDesks;
 //constructor room class
+//receives room number, dimensions, percentage, number of desks, desk length, desk width
   room(String roomNum, double dimentions, double percentage, int numDesks,
       double deskLength, double deskWidth) {
     this.roomNum = roomNum;
