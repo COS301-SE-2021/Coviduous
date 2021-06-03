@@ -11,6 +11,7 @@ login_app/.packages
 login_app/.flutter-plugins-dependencies
 login_app/.flutter-plugins
 login_app/.dart_tool/
+login_app/lib/generated_plugin_registrant.dart
 .idea/workspace.xml
 login_app/build/
 .idea/vcs.xml
