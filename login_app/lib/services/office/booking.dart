@@ -6,6 +6,7 @@ class booking {
   String roomNum = "";
   String user = "";
   int deskNum = 0;
+//Booking constructor
 
   booking(String user, String floornum, String roomNum, int deskNum) {
     this.dateTime = DateTime.now();
