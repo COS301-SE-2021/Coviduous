@@ -22,7 +22,7 @@ class floor {
   }
 //function add a room
 // returns a boolean
-// receives room number, dimensions, percentage
+// receives room number, dimensions, percentage, number of desks, desk length and desk width
   bool addRoom(String roomNum, double dimentions, double percentage,
       int numDesks, double deskLength, double deskWidth) {
     room holder = new room(
