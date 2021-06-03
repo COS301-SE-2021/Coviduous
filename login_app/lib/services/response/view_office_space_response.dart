@@ -2,7 +2,7 @@ import 'package:login_app/services/office/booking.dart';
 
 class ViewOfficeSpaceResponse {
   bool successful = false;
-  Booking myBooking = null;
+  Booking myBooking;
 
   ViewOfficeSpaceResponse(bool success, Booking book) {
     this.successful = success;
