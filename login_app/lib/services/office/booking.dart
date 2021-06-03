@@ -14,6 +14,7 @@ class Booking {
     this.deskNum = deskNum;
   }
 //function display booking
+ // displays booking details..
   void displayBooking() {
     print(
         "***************************************************************************************");
