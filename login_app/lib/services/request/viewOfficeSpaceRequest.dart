@@ -7,7 +7,8 @@ class viewOfficeSpaceRequest {
   viewOfficeSpaceRequest(String user) {
     this.user = user;
   }
-
+//get user
+//returns user
   String getUser() {
     return user;
   }
