@@ -48,4 +48,20 @@ void main() {
 
     expect(resp.getResponse(), false);
   });
+
+  test('Correct create floor plan construction', () {
+    createFloorPlanRequest req = new createFloorPlanRequest(
+        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    createFloorPlanResponse resp = service.createFloorPlan(req);
+
+    expect(resp.getResponse(), true);
+    expect(service.getNumberOfFloors(), 1);
+  });
+
+  test('Correct add a room construction', () {
+    bool value = service.addRoom(
+        expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 6);
+
+    expect(value, true);
+  });
 }
