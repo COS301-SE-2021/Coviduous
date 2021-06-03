@@ -14,6 +14,7 @@ class createFloorPlanRequest {
     this.totalRooms = totalRooms;
   }
 // get admin function
+//return admin
   String getAdmin() {
     return admin;
   }
