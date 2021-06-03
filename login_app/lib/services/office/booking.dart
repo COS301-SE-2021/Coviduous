@@ -6,7 +6,8 @@ class booking {
   String roomNum = "";
   String user = "";
   int deskNum = 0;
-
+//Booking constructor
+//initialize floor number, user, number of desks, dateTime (current date)
   booking(String user, String floornum, String roomNum, int deskNum) {
     this.dateTime = DateTime.now();
     this.floorNum = floornum;
@@ -14,7 +15,8 @@ class booking {
     this.roomNum = roomNum;
     this.deskNum = deskNum;
   }
-
+//function display booking
+ // displays booking details..
   void displayBooking() {
     print(
         "***************************************************************************************");

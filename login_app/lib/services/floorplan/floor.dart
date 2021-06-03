@@ -9,7 +9,8 @@ class floor {
   int totalNumRooms = 0;
   double maxCapacity = 0.0;
   int currentCapacity = 0;
-
+//constructor
+//initialize admin, floor number, total number of rooms, capacity
   floor(String admin, String floorNum, int totalNumOfRoomsInTheFloor) {
     this.floorNum = floorNum;
     this.numOfRooms =
@@ -19,7 +20,9 @@ class floor {
     this.maxCapacity = 0;
     this.currentCapacity = 0;
   }
-
+//function add a room
+// returns a boolean
+// receives room number, dimensions, percentage, number of desks, desk length and desk width
   bool addRoom(String roomNum, double dimentions, double percentage,
       int numDesks, double deskLength, double deskWidth) {
     room holder = new room(
@@ -28,7 +31,7 @@ class floor {
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
   }
-
+//display room details
   void viewRoomDetails(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
@@ -40,7 +43,7 @@ class floor {
       }
     }
   }
-
+// book a desk
   bool bookDesk(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
@@ -58,7 +61,7 @@ class floor {
       }
     return false;
   }
-
+//view floor details
   void viewFloorDetails() {
     print(
         "***************************************************************************************");
@@ -74,7 +77,7 @@ class floor {
       }
     }
   }
-
+//get number of floors
   String getFloorNumber() {
     return floorNum;
   }
