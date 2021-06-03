@@ -14,7 +14,7 @@ class BookOfficeSpaceRequest {
   String getFloorNumber() {
     return floorNum;
   }
-
+//get number of rooms
   String getRoomNumber() {
     return roomNum;
   }
