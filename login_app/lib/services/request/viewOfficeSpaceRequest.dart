@@ -3,6 +3,7 @@ class viewOfficeSpaceRequest {
   String user;
 //view office space
 //receives string
+//initialize user..
   viewOfficeSpaceRequest(String user) {
     this.user = user;
   }
