@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'floorplan/floor.dart';
 import 'office/booking.dart';
 //This is where all our global variables will be
-
 //Backend global variables
 //==========================
 

@@ -9,7 +9,8 @@ class bookOfficeSpaceRequest {
     this.roomNum = roomNum;
     this.user = user;
   }
-
+//getFloorNumber
+  //returns number of floors
   String getFloorNumber() {
     return floorNum;
   }
