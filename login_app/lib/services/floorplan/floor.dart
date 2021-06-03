@@ -20,7 +20,8 @@ class floor {
     this.maxCapacity = 0;
     this.currentCapacity = 0;
   }
-
+//function add a room
+//
   bool addRoom(String roomNum, double dimentions, double percentage,
       int numDesks, double deskLength, double deskWidth) {
     room holder = new room(
