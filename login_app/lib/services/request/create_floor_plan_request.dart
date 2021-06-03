@@ -17,7 +17,7 @@ class CreateFloorPlanRequest {
   String getFloorNumber() {
     return floorNumber;
   }
-
+//get total number of rooms
   int getTotalRooms() {
     return totalRooms;
   }
