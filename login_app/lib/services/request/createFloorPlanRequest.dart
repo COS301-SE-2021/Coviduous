@@ -19,7 +19,7 @@ class createFloorPlanRequest {
     return admin;
   }
 // get number of floor
-//return admin
+//return floor number
   String getFloorNumber() {
     return floorNumber;
   }
