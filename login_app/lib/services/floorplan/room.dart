@@ -44,7 +44,7 @@ class Room {
     this.occupiedDesks = 0;
   }
 //display capacity
-
+//displays information about the room..
   void displayCapacity() {
     print(
         "***************************************************************************************");
