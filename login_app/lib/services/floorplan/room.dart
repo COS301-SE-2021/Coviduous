@@ -45,6 +45,7 @@ class room {
             64);
     this.occupiedDesks = 0;
   }
+//display capacity
 
   void displayCapacity() {
     print(
