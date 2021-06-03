@@ -9,32 +9,43 @@ import 'package:login_app/services/response/createFloorPlanResponse.dart';
 import 'package:login_app/services/services.dart';
 
 void main() {
-  createFloorPlanRequest req = createFloorPlanRequest("Njabulo Skosana", "1", 5);
-  createFloorPlanRequest req2 = createFloorPlanRequest("Njabulo Skosana", "2", 5);
   services service = new services();
-  createFloorPlanResponse resp = service.createFloorPlan(req);
-  resp = service.createFloorPlan(req2);
+  String expectedAdmin;
+  String expectedUser;
+  String expectedFloorNumber;
+  String expectedRoomNumber;
+  int expectedTotalRooms;
+  bool expectedBoolean;
 
-  test('Add a floor', () {
-    expect(service.getNumberOfFloors(), 2);
+  setUp(() {
+    expectedAdmin = "Admin-1";
+    expectedUser = "User-1";
+    expectedFloorNumber = "1";
+    expectedRoomNumber = "2";
+    expectedTotalRooms = 5;
+    expectedBoolean = false;
   });
 
-  test('Add a room', () {
-    service.addRoom("2", "c-1", 900, 50, 8, 6, 6);
+  tearDown(() => null);
 
-    expect(service.getNumberOfFloors(), 2);
+  //====================UNIT TESTS======================
+
+  //-----------CreateFloorplan UC1------------//
+  test('Correct CreateFloorPlanRequest construction', () {
+    createFloorPlanRequest req = new createFloorPlanRequest(
+        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+
+    expect(req, isNot(null));
+    expect(req.getAdmin(), expectedAdmin);
+    expect(req.getFloorNumber(), expectedFloorNumber);
+    expect(req.getTotalRooms(), expectedTotalRooms);
   });
 
-  test('Book a room', () {
-    bookOfficeSpaceRequest holder = new bookOfficeSpaceRequest("Thabo", "2", "c-1");
-    bookOfficeSpaceResponse resp2 = service.bookOfficeSpace(holder);
+  test('Correct CreateFloorPlanResponse construction', () {
+    createFloorPlanResponse resp = new createFloorPlanResponse();
 
-    expect(resp2.getResponse(), true);
-  });
+    resp.setResponse(expectedBoolean);
 
-  test('View booking', () {
-    viewOfficeSpaceResponse holder2 = service.viewOfficeSpace(new viewOfficeSpaceRequest("Thabo"));
-
-    expect(holder2.getResponse(), true);
+    expect(resp.getResponse(), false);
   });
 }
