@@ -18,6 +18,7 @@ class CreateFloorPlanRequest {
     return floorNumber;
   }
 //get total number of rooms
+  // return total rooms
   int getTotalRooms() {
     return totalRooms;
   }
