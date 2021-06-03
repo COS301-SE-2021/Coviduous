@@ -21,7 +21,8 @@ class floor {
     this.currentCapacity = 0;
   }
 //function add a room
-//
+// returns a boolean
+// receives room number, dimensions, percentage
   bool addRoom(String roomNum, double dimentions, double percentage,
       int numDesks, double deskLength, double deskWidth) {
     room holder = new room(
