@@ -12,7 +12,7 @@ import 'response/create_floor_plan_response.dart';
 class Services {
 //This class provides an interface to all the service contracts of the system. It provides a bridge between the front end screens and backend functionality.
 
-  Services() {}
+  Services();
   CreateFloorPlanResponse createFloorPlan(CreateFloorPlanRequest req) {
     var holder =
         new Floor(req.getAdmin(), req.getFloorNumber(), req.getTotalRooms());

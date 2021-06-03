@@ -1,5 +1,7 @@
 # CAPSlock - Coviduous - Project Description
 
+![Flutter App CI](https://github.com/COS301-SE-2021/Coviduous/actions/workflows/flutter.yml/badge.svg)
+
 **Coviduous** is a program that will be used to arrange and optimize office floor plans according to COVID-19 regulations in South Africa. This project aims to solve the issue of hand managing office capacity based on the country's alert level by making use of floor diagrams, desks and office space, ensuring the appropriate distance is maintained between workers who wish to return to the office. The application will allow booking and assignment of desks and office spaces for capacity management.
 
 ---
@@ -22,7 +24,7 @@
 
 ## Demo Videos
 
-- :tv: [Demo 1](https://)
+- :tv: [Demo 1](https://drive.google.com/file/d/1-HOCL1wZZynbaPYpgCzQ1dZxWsur90yV/view?usp=sharing)
 - :tv: [Demo 2](https://)
 - :tv: [Demo 3](https://)
 - :tv: [Demo 4](https://)
@@ -31,3 +33,7 @@
 
 - :open_book: [GitHub](https://github.com/COS301-SE-2021/Coviduous/projects)
 - :open_book: [Notion](https://www.notion.so/COS301-CAPSTONE-PROJECT-d8479771dc5841e592fb4a3685e19a1a)
+
+## References
+
+- Flutter GitHub Actions [template](https://medium.com/mobile-development-group/github-actions-for-flutter-cf02923d7b5d) created by Ayush Agarwal.

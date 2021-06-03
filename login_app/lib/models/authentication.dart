@@ -26,7 +26,7 @@ class Authentication with ChangeNotifier
       throw error;
     }
  }
- Future<void> Login(String email,String password) async
+ Future<void> login(String email,String password) async
  {
     var url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAYf69-rLqgS4ryuJc1bYCJObTogVuglpo';
 

@@ -17,6 +17,7 @@ void main() {
 
   test('Add a floor', () {
     expect(service.getNumberOfFloors(), 2);
+    expect(resp.successful, true);
   });
 
   test('Add a room', () {

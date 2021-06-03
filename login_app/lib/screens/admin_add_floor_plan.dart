@@ -18,8 +18,8 @@ class AddFloorPlan extends StatefulWidget {
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
-  String _MaxCapacity;
-  String _currCapacity;
+  //String _maxCapacity;
+  //String _currCapacity;
 
   Services service = new Services();
 
@@ -81,7 +81,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
         return null;
       },
       onSaved: (String value){
-        _MaxCapacity = value;
+        //_maxCapacity = value;
       },
     );
   }
@@ -103,7 +103,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
         return null;
       },
       onSaved: (String value){
-        _currCapacity = value;
+        //_currCapacity = value;
       },
     );
   }
