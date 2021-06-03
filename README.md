@@ -33,3 +33,7 @@
 
 - :open_book: [GitHub](https://github.com/COS301-SE-2021/Coviduous/projects)
 - :open_book: [Notion](https://www.notion.so/COS301-CAPSTONE-PROJECT-d8479771dc5841e592fb4a3685e19a1a)
+
+## References
+
+- Flutter GitHub Actions [template](https://medium.com/mobile-development-group/github-actions-for-flutter-cf02923d7b5d) created by Ayush Agarwal.
