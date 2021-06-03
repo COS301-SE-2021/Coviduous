@@ -27,7 +27,7 @@ class Floor {
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
   }
-//display room details
+//display room details..
   void viewRoomDetails(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
