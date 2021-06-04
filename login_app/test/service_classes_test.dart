@@ -64,4 +64,22 @@ void main() {
 
     expect(value, true);
   });
+
+  //-----------bookOfficeSpace UC2------------//
+  test('Correct bookOfficeSpaceRequest construction', () {
+    bookOfficeSpaceRequest bookReq = new bookOfficeSpaceRequest(
+        expectedUser, expectedFloorNumber, expectedRoomNumber);
+
+    expect(bookReq, isNot(null));
+    expect(bookReq.getUser(), expectedUser);
+    expect(bookReq.getFloorNumber(), expectedFloorNumber);
+    expect(bookReq.getRoomNumber(), expectedRoomNumber);
+  });
+
+  test('Correct bookOfficeSpaceResponse construction', () {
+    bookOfficeSpaceResponse bookResp =
+        new bookOfficeSpaceResponse(expectedBoolean);
+
+    expect(bookResp.getResponse(), false);
+  });
 }
