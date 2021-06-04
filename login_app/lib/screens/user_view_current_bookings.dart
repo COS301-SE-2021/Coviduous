@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'user_homepage.dart';
 import '../services/office/booking.dart';
 import '../services/globals.dart' as globals;
-import '../services/services.dart';
+//import '../services/services.dart';
 
 class UserViewCurrentBookings extends StatefulWidget {
   static const routeName = "/viewbookings";
@@ -25,7 +25,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
       numberOfBookings = globals.globalBookings.length;
       bookings = globals.globalBookings;
       //================================================================
-      
+
       if (numberOfBookings == 0) { //If the number of bookings = 0, don't display a list
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
