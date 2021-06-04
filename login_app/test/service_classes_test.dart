@@ -82,4 +82,13 @@ void main() {
 
     expect(bookResp.getResponse(), false);
   });
+
+  test('Correct book office space construction', () {
+    bookOfficeSpaceRequest bookReq = new bookOfficeSpaceRequest(
+        expectedUser, expectedFloorNumber, expectedRoomNumber);
+    bookOfficeSpaceResponse bookResp = service.bookOfficeSpace(bookReq);
+
+    expect(bookResp.getResponse(), true);
+    //expect(service.getBookings().length, 1);
+  });
 }
