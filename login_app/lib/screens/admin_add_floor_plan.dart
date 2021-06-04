@@ -86,7 +86,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
     );
   }
 
-
+//build for current capacity
   Widget _buildCurrentCapacity(){
     return TextFormField(
       textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
