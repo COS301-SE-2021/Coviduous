@@ -14,7 +14,7 @@ class AddFloorPlan extends StatefulWidget {
   @override
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
-
+//add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
