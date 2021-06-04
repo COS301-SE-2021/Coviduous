@@ -58,7 +58,7 @@ class room {
         (this.capacityOfPeopleForSixFtGrid - this.occupiedDesks).toString());
     print("                  ");
   }
-
+//desk booking
   bool bookDesk() {
     if (occupiedDesks < numDesks) {
       occupiedDesks++;
