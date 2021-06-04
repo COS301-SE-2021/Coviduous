@@ -107,7 +107,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-
+//global key _formkey.
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
