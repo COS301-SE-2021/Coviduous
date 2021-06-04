@@ -106,4 +106,11 @@ void main() {
 
     expect(bookResp.getResponse(), false);
   });
+
+  test('Correct view office space construction', () {
+    viewOfficeSpaceRequest viewReq = new viewOfficeSpaceRequest(expectedUser);
+    viewOfficeSpaceResponse viewResp = service.viewOfficeSpace(viewReq);
+
+    expect(viewResp.getResponse(), true);
+  });
 }
