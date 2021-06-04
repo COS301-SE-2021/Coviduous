@@ -59,6 +59,7 @@ class room {
     print("                  ");
   }
 //desk booking
+//returns boolean
   bool bookDesk() {
     if (occupiedDesks < numDesks) {
       occupiedDesks++;
