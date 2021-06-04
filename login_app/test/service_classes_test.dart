@@ -91,4 +91,19 @@ void main() {
     expect(bookResp.getResponse(), true);
     //expect(service.getBookings().length, 1);
   });
+
+  //-----------viewOfficeSpace UC3------------//
+  test('Correct viewOfficeSpaceRequest construction', () {
+    viewOfficeSpaceRequest viewReq = new viewOfficeSpaceRequest(expectedUser);
+
+    expect(viewReq, isNot(null));
+    expect(viewReq.getUser(), expectedUser);
+  });
+
+  test('Correct viewOfficeSpaceResponse construction', () {
+    viewOfficeSpaceResponse bookResp =
+        new viewOfficeSpaceResponse(expectedBoolean, null);
+
+    expect(bookResp.getResponse(), false);
+  });
 }
