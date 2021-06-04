@@ -64,7 +64,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-
+//build for add max capacity
   Widget _buildMaxCapacity(){
     return TextFormField(
       textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
