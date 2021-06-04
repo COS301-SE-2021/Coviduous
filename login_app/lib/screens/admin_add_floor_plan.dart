@@ -43,7 +43,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-
+//build for rooms
   Widget _buildRooms(){
     return TextFormField(
       textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
