@@ -32,8 +32,7 @@ void main() {
 
   //-----------CreateFloorplan UC1------------//
   test('Correct CreateFloorPlanRequest construction', () {
-    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
-        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(expectedAdmin, expectedFloorNumber, expectedTotalRooms);
 
     expect(req, isNot(null));
     expect(req.getAdmin(), expectedAdmin);
@@ -50,12 +49,11 @@ void main() {
   });
 
   test('Correct create floor plan construction', () {
-    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
-        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(expectedAdmin, expectedFloorNumber, expectedTotalRooms);
     CreateFloorPlanResponse resp = service.createFloorPlan(req);
 
     expect(resp.getResponse(), true);
-    expect(service.getNumberOfFloors(), 1);
+    expect(service.getNumberOfFloors(), isNot(0));
   });
 
   test('Correct add a room construction', () {
@@ -67,8 +65,7 @@ void main() {
 
   //-----------bookOfficeSpace UC2------------//
   test('Correct bookOfficeSpaceRequest construction', () {
-    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(
-        expectedUser, expectedFloorNumber, expectedRoomNumber);
+    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(expectedUser, expectedFloorNumber, expectedRoomNumber);
 
     expect(bookReq, isNot(null));
     expect(bookReq.getUser(), expectedUser);
@@ -84,8 +81,7 @@ void main() {
   });
 
   test('Correct book office space construction', () {
-    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(
-        expectedUser, expectedFloorNumber, expectedRoomNumber);
+    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(expectedUser, expectedFloorNumber, expectedRoomNumber);
     BookOfficeSpaceResponse bookResp = service.bookOfficeSpace(bookReq);
 
     expect(bookResp.getResponse(), true);
@@ -101,8 +97,7 @@ void main() {
   });
 
   test('Correct viewOfficeSpaceResponse construction', () {
-    ViewOfficeSpaceResponse bookResp =
-    new ViewOfficeSpaceResponse(expectedBoolean, null);
+    ViewOfficeSpaceResponse bookResp = new ViewOfficeSpaceResponse(expectedBoolean, null);
 
     expect(bookResp.getResponse(), false);
   });
