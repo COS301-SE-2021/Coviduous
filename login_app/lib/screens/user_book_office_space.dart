@@ -104,7 +104,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                         context: context,
                         builder: (ctx) => AlertDialog(
                           title: Text('Placeholder'),
-                          content: Text('Placeholder'),
+                          content: Text('Booking successfully created.'),
                           actions: <Widget>[
                             TextButton(
                               child: Text('Okay'),
