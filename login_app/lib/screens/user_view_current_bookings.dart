@@ -1,9 +1,9 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'user_homepage.dart';
 import '../services/office/booking.dart';
 import '../services/globals.dart' as globals;
+//import '../services/services.dart';
 
 class UserViewCurrentBookings extends StatefulWidget {
   static const routeName = "/viewbookings";
@@ -19,6 +19,13 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
   Widget build(BuildContext context) {
 
     Widget getList() {
+      //For demo 1
+      //================================================================
+      globals.globalBookings.add(new Booking("test user", "2", "3", 6));
+      numberOfBookings = globals.globalBookings.length;
+      bookings = globals.globalBookings;
+      //================================================================
+
       if (numberOfBookings == 0) { //If the number of bookings = 0, don't display a list
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,

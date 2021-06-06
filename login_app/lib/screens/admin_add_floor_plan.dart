@@ -14,12 +14,12 @@ class AddFloorPlan extends StatefulWidget {
   @override
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
-
+//add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
-  String _MaxCapacity;
-  String _currCapacity;
+  //String _maxCapacity;
+  //String _currCapacity;
 
   Services service = new Services();
 
@@ -43,7 +43,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-
+//build for rooms
   Widget _buildRooms(){
     return TextFormField(
       textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
@@ -64,7 +64,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-
+//build for add max capacity
   Widget _buildMaxCapacity(){
     return TextFormField(
       textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
@@ -81,12 +81,12 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
         return null;
       },
       onSaved: (String value){
-        _MaxCapacity = value;
+        //_maxCapacity = value;
       },
     );
   }
 
-
+//build for current capacity
   Widget _buildCurrentCapacity(){
     return TextFormField(
       textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
@@ -103,11 +103,11 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
         return null;
       },
       onSaved: (String value){
-        _currCapacity = value;
+        //_currCapacity = value;
       },
     );
   }
-
+//global key _formkey.
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

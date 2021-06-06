@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen>{
     }
     _formKey.currentState.save();
     try {
-      await Provider.of<Authentication>(context, listen: false).Login(
+      await Provider.of<Authentication>(context, listen: false).login(
           _authData['email'],
           _authData['password']
       );

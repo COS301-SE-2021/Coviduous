@@ -9,30 +9,102 @@ import 'package:login_app/services/response/create_floor_plan_response.dart';
 import 'package:login_app/services/services.dart';
 
 void main() {
-  CreateFloorPlanRequest req = CreateFloorPlanRequest("Njabulo Skosana", "1", 5);
-  CreateFloorPlanRequest req2 = CreateFloorPlanRequest("Njabulo Skosana", "2", 5);
   Services service = new Services();
-  CreateFloorPlanResponse resp = service.createFloorPlan(req);
-  resp = service.createFloorPlan(req2);
+  String expectedAdmin;
+  String expectedUser;
+  String expectedFloorNumber;
+  String expectedRoomNumber;
+  int expectedTotalRooms;
+  bool expectedBoolean;
 
-  test('Add a floor', () {
-    expect(service.getNumberOfFloors(), 2);
+  setUp(() {
+    expectedAdmin = "Admin-1";
+    expectedUser = "User-1";
+    expectedFloorNumber = "1";
+    expectedRoomNumber = "2";
+    expectedTotalRooms = 5;
+    expectedBoolean = false;
   });
 
-  test('Add a room', () {
-    expect(service.addRoom("2", "c-1", 900, 50, 8, 6, 6), true);
+  tearDown(() => null);
+
+  //====================UNIT TESTS======================
+
+  //-----------CreateFloorplan UC1------------//
+  test('Correct CreateFloorPlanRequest construction', () {
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+
+    expect(req, isNot(null));
+    expect(req.getAdmin(), expectedAdmin);
+    expect(req.getFloorNumber(), expectedFloorNumber);
+    expect(req.getTotalRooms(), expectedTotalRooms);
   });
 
-  test('Book a room', () {
-    BookOfficeSpaceRequest holder = new BookOfficeSpaceRequest("Thabo", "2", "c-1");
-    BookOfficeSpaceResponse resp2 = service.bookOfficeSpace(holder);
+  test('Correct CreateFloorPlanResponse construction', () {
+    CreateFloorPlanResponse resp = new CreateFloorPlanResponse();
 
-    expect(resp2.getResponse(), true);
+    resp.setResponse(expectedBoolean);
+
+    expect(resp.getResponse(), false);
   });
 
-  test('View booking', () {
-    ViewOfficeSpaceResponse holder2 = service.viewOfficeSpace(new ViewOfficeSpaceRequest("Thabo"));
+  test('Correct create floor plan construction', () {
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    CreateFloorPlanResponse resp = service.createFloorPlan(req);
 
-    expect(holder2.getResponse(), true);
+    expect(resp.getResponse(), true);
+    expect(service.getNumberOfFloors(), isNot(0));
+  });
+
+  test('Correct add a room construction', () {
+    bool value = service.addRoom(expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 6);
+
+    expect(value, true);
+  });
+
+  //-----------bookOfficeSpace UC2------------//
+  test('Correct bookOfficeSpaceRequest construction', () {
+    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(expectedUser, expectedFloorNumber, expectedRoomNumber);
+
+    expect(bookReq, isNot(null));
+    expect(bookReq.getUser(), expectedUser);
+    expect(bookReq.getFloorNumber(), expectedFloorNumber);
+    expect(bookReq.getRoomNumber(), expectedRoomNumber);
+  });
+
+  test('Correct bookOfficeSpaceResponse construction', () {
+    BookOfficeSpaceResponse bookResp =
+    new BookOfficeSpaceResponse(expectedBoolean);
+
+    expect(bookResp.getResponse(), false);
+  });
+
+  test('Correct book office space construction', () {
+    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(expectedUser, expectedFloorNumber, expectedRoomNumber);
+    BookOfficeSpaceResponse bookResp = service.bookOfficeSpace(bookReq);
+
+    expect(bookResp.getResponse(), true);
+    //expect(service.getBookings().length, 1);
+  });
+
+  //-----------viewOfficeSpace UC3------------//
+  test('Correct viewOfficeSpaceRequest construction', () {
+    ViewOfficeSpaceRequest viewReq = new ViewOfficeSpaceRequest(expectedUser);
+
+    expect(viewReq, isNot(null));
+    expect(viewReq.getUser(), expectedUser);
+  });
+
+  test('Correct viewOfficeSpaceResponse construction', () {
+    ViewOfficeSpaceResponse bookResp = new ViewOfficeSpaceResponse(expectedBoolean, null);
+
+    expect(bookResp.getResponse(), false);
+  });
+
+  test('Correct view office space construction', () {
+    ViewOfficeSpaceRequest viewReq = new ViewOfficeSpaceRequest(expectedUser);
+    ViewOfficeSpaceResponse viewResp = service.viewOfficeSpace(viewReq);
+
+    expect(viewResp.getResponse(), true);
   });
 }
