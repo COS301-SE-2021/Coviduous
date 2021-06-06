@@ -27,7 +27,7 @@ class Floor {
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
   }
-//display room details..
+
   void viewRoomDetails(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
@@ -39,7 +39,7 @@ class Floor {
       }
     }
   }
-// book a desk
+
   bool bookDesk(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
@@ -57,7 +57,7 @@ class Floor {
       }
     return false;
   }
-//view floor details
+
   void viewFloorDetails() {
     print(
         "***************************************************************************************");
@@ -73,7 +73,7 @@ class Floor {
       }
     }
   }
-//get number of floors
+
   String getFloorNumber() {
     return floorNum;
   }

@@ -43,8 +43,7 @@ class Room {
             64);
     this.occupiedDesks = 0;
   }
-//display capacity
-//displays information about the room..
+
   void displayCapacity() {
     print(
         "***************************************************************************************");
@@ -56,8 +55,7 @@ class Room {
         (this.capacityOfPeopleForSixFtGrid - this.occupiedDesks).toString());
     print("                  ");
   }
-//desk booking
-//returns boolean
+
   bool bookDesk() {
     if (occupiedDesks < numDesks) {
       occupiedDesks++;
