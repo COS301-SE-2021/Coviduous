@@ -1,11 +1,10 @@
 import 'package:login_app/services/office/booking.dart';
 
-class viewOfficeSpaceResponse {
-  //add code for response object
+class ViewOfficeSpaceResponse {
   bool successful = false;
-  booking myBooking = null;
+  Booking myBooking;
 
-  viewOfficeSpaceResponse(bool success, booking book) {
+  ViewOfficeSpaceResponse(bool success, Booking book) {
     this.successful = success;
     this.myBooking = book;
   }
@@ -14,7 +13,7 @@ class viewOfficeSpaceResponse {
     return successful;
   }
 
-  booking getBooking() {
+  Booking getBooking() {
     return myBooking;
   }
 }

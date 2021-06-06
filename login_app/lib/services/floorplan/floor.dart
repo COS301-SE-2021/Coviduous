@@ -1,55 +1,51 @@
 import 'package:login_app/services/floorplan/room.dart';
 
-class floor {
-  //add all the attributes in the floor class
-  List<room> rooms = [];
+class Floor {
+  List<Room> rooms = [];
   String floorNum = "";
   String admin = "";
   int numOfRooms = 0;
   int totalNumRooms = 0;
   double maxCapacity = 0.0;
   int currentCapacity = 0;
-//constructor
-//initialize admin, floor number, total number of rooms, capacity
-  floor(String admin, String floorNum, int totalNumOfRoomsInTheFloor) {
+
+  Floor(String admin, String floorNum, int totalNumOfRoomsInTheFloor) {
     this.floorNum = floorNum;
     this.numOfRooms =
-        0; //reprents the rooms that have their capacity determined at this point there are zero rooms that have been initialized within this floor.
+        0; //Represents the rooms that have their capacity determined at this point there are zero rooms that have been initialized within this floor.
     this.admin = admin;
     this.totalNumRooms = totalNumOfRoomsInTheFloor;
     this.maxCapacity = 0;
     this.currentCapacity = 0;
   }
-//function add a room
-// returns a boolean
-// receives room number, dimensions, percentage, number of desks, desk length and desk width
-  bool addRoom(String roomNum, double dimentions, double percentage,
+
+  bool addRoom(String roomNum, double dimensions, double percentage,
       int numDesks, double deskLength, double deskWidth) {
-    room holder = new room(
-        roomNum, dimentions, percentage, numDesks, deskLength, deskWidth);
+    Room holder = new Room(
+        roomNum, dimensions, percentage, numDesks, deskLength, deskWidth);
     rooms.add(holder);
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
   }
-//display room details..
+
   void viewRoomDetails(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
         if (rooms.asMap().containsKey(i)) {
-          if (rooms[i].roomNum == roomNum) { //checks if the room number in rooms array is the same as the room number the user specified
+          if (rooms[i].roomNum == roomNum) { //Checks if the room number in rooms array is the same as the room number the user specified
             rooms[i].displayCapacity();
           }
         }
       }
     }
   }
-// book a desk
+
   bool bookDesk(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
           if (rooms.asMap().containsKey(i)) {
             if ((rooms[i].roomNum) ==
-                roomNum) //checks if the room number in rooms array is the same as the room number the user specified
+                roomNum) //Checks if the room number in rooms array is the same as the room number the user specified
                 {
               if (rooms[i].bookDesk()) {
                 print("Successfully Booked.");
@@ -61,7 +57,7 @@ class floor {
       }
     return false;
   }
-//view floor details
+
   void viewFloorDetails() {
     print(
         "***************************************************************************************");
@@ -77,7 +73,7 @@ class floor {
       }
     }
   }
-//get number of floors
+
   String getFloorNumber() {
     return floorNum;
   }

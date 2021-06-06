@@ -1,22 +1,18 @@
-class booking {
-  //add attributes
-
+class Booking {
   DateTime dateTime;
   String floorNum = "";
   String roomNum = "";
   String user = "";
   int deskNum = 0;
-//Booking constructor
-//initialize floor number, user, number of desks, dateTime (current date)
-  booking(String user, String floornum, String roomNum, int deskNum) {
+
+  Booking(String user, String floorNum, String roomNum, int deskNum) {
     this.dateTime = DateTime.now();
-    this.floorNum = floornum;
+    this.floorNum = floorNum;
     this.user = user;
     this.roomNum = roomNum;
     this.deskNum = deskNum;
   }
-//function display booking
- // displays booking details..
+
   void displayBooking() {
     print(
         "***************************************************************************************");

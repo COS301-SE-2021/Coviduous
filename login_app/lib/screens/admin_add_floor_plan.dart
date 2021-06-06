@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'admin_homepage.dart';
-import 'calc_floorplan.dart';
+import 'admin_calc_floor_plan.dart';
 //import 'screens/selectfloors.dart';
-import '../services/globalVariables.dart' as globals;
+import '../services/globals.dart' as globals;
 import '../services/services.dart';
-import '../services/request/createFloorPlanRequest.dart';
-import '../services/response/createFloorPlanResponse.dart';
+import '../services/request/create_floor_plan_request.dart';
+import '../services/response/create_floor_plan_response.dart';
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/addfloorplan";
@@ -14,14 +14,14 @@ class AddFloorPlan extends StatefulWidget {
   @override
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
-
+//add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String _numRooms;
-  String _MaxCapacity;
-  String _currCapacity;
+  //String _maxCapacity;
+  //String _currCapacity;
 
-  services service = new services();
+  Services service = new Services();
 
   Widget _buildFloors(){
     return TextFormField(
@@ -43,7 +43,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-
+//build for rooms
   Widget _buildRooms(){
     return TextFormField(
       textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
@@ -64,50 +64,50 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-
+//build for add max capacity
   Widget _buildMaxCapacity(){
     return TextFormField(
       textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
       decoration: InputDecoration(
-          labelText: 'Set Maximum Capacity'
+          labelText: 'Set maximum capacity'
       ),
       keyboardType: TextInputType.number,
       validator: (String value) {
 
         int rooms = int.tryParse(value);
         if(rooms == null || rooms <= 0){
-          return 'Number of rooms must be greater than zero';
+          return 'Maximum capacity must be greater than zero';
         }
         return null;
       },
       onSaved: (String value){
-        _MaxCapacity = value;
+        //_maxCapacity = value;
       },
     );
   }
 
-
+//build for current capacity
   Widget _buildCurrentCapacity(){
     return TextFormField(
       textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
       decoration: InputDecoration(
-          labelText: 'Set Current Capacity'
+          labelText: 'Set current capacity'
       ),
       keyboardType: TextInputType.number,
       validator: (String value) {
 
         int rooms = int.tryParse(value);
         if(rooms == null || rooms <= 0){
-          return 'Number of rooms must be greater than zero';
+          return 'Current capacity must be greater than zero';
         }
         return null;
       },
       onSaved: (String value){
-        _currCapacity = value;
+        //_currCapacity = value;
       },
     );
   }
-
+//global key _formkey.
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                           }
                           _formKey.currentState.save();
 
-                          createFloorPlanResponse response = service.createFloorPlan(createFloorPlanRequest(globals.email, _numFloor, int.parse(_numRooms)));
+                          CreateFloorPlanResponse response = service.createFloorPlan(CreateFloorPlanRequest(globals.email, _numFloor, int.parse(_numRooms)));
 
                           if (response.getResponse()) {
                             showDialog(

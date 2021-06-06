@@ -7,7 +7,7 @@ import 'admin_homepage.dart';
 import 'user_homepage.dart';
 import 'signup_screen.dart';
 import '../models/authentication.dart';
-import '../services/globalVariables.dart' as globals;
+import '../services/globals.dart' as globals;
 
 class LoginScreen extends StatefulWidget {
   static const routeName = "/login";
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen>{
     }
     _formKey.currentState.save();
     try {
-      await Provider.of<Authentication>(context, listen: false).Login(
+      await Provider.of<Authentication>(context, listen: false).login(
           _authData['email'],
           _authData['password']
       );

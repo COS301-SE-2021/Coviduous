@@ -1,52 +1,49 @@
-class room {
-  //add all the room attributes
+class Room {
   String roomNum; //Room identifier
   double
-      dimentions; // The dimentions of a room are deterimend by the square ft of the room which the admin can calculate or fetch from the buildings architectual documentation.
+      dimensions; //The dimensions of a room are determined by the square ft of the room which the admin can calculate or fetch from the buildings architectural documentation.
   double
-      percentage; //The percentage is detetermined by the alert level of the country
-  int numDesks; // number of desks inside the room it is also assumed at this stage that desks only have a shape of rectange or square and all desks inside a room have the same length and width.
-  double deskLength; //length of desk
-  double deskWidth; //width of desk
+      percentage; //The percentage is determined by the alert level of the country
+  int numDesks; //Number of desks inside the room it is also assumed at this stage that desks only have a shape of rectangle or square and all desks inside a room have the same length and width.
+  double deskLength; //Length of desk
+  double deskWidth; //Width of desk
   double
-      capacityOfPeopleForTwelveFtGrid; //number of people allowed in the room for 12ft distance to be maintained
+      capacityOfPeopleForTwelveFtGrid; //Number of people allowed in the room for 12ft distance to be maintained
   double
-      capacityOfPeopleForSixFtGrid; //number of people allowed in the room for 6ft distance to be maintained
+      capacityOfPeopleForSixFtGrid; //Number of people allowed in the room for 6ft distance to be maintained
   double
-      capacityOfPeopleForSixFtCircle; //number of people allowed in the room for 6ft distance to be maintained
+      capacityOfPeopleForSixFtCircle; //Number of people allowed in the room for 6ft distance to be maintained
   double
-      capacityOfPeopleForEightFtGrid; //number of people allowed in the room for 8ft distance to be maintained
+      capacityOfPeopleForEightFtGrid; //Number of people allowed in the room for 8ft distance to be maintained
   double
-      capacityOfPeopleForEightFtCircle; //number of people allowed in the room for 8ft distance to be maintained
+      capacityOfPeopleForEightFtCircle; //Number of people allowed in the room for 8ft distance to be maintained
   double occupiedDesks;
-//constructor room class
-//receives room number, dimensions, percentage, number of desks, desk length, desk width
-  room(String roomNum, double dimentions, double percentage, int numDesks,
+
+  Room(String roomNum, double dimensions, double percentage, int numDesks,
       double deskLength, double deskWidth) {
     this.roomNum = roomNum;
-    this.dimentions = dimentions;
+    this.dimensions = dimensions;
     this.percentage = percentage;
     this.numDesks = numDesks;
     this.deskLength = deskLength;
     this.deskWidth = deskWidth;
     this.capacityOfPeopleForTwelveFtGrid =
-        (((dimentions) - ((deskLength * deskWidth) * numDesks)) / 144);
+        (((dimensions) - ((deskLength * deskWidth) * numDesks)) / 144);
     this.capacityOfPeopleForSixFtGrid =
-        ((((dimentions) - ((deskLength * deskWidth) * numDesks)) *
+        ((((dimensions) - ((deskLength * deskWidth) * numDesks)) *
                 (percentage / 100.0)) /
             36);
     this.capacityOfPeopleForSixFtCircle =
-        ((((dimentions) - ((deskLength * deskWidth) * numDesks)) *
+        ((((dimensions) - ((deskLength * deskWidth) * numDesks)) *
                 (percentage / 100.0)) /
             28);
     this.capacityOfPeopleForEightFtGrid =
-        ((((dimentions) - ((deskLength * deskWidth) * numDesks)) *
+        ((((dimensions) - ((deskLength * deskWidth) * numDesks)) *
                 (percentage / 100.0)) /
             64);
     this.occupiedDesks = 0;
   }
-//display capacity
-//displays information about the room..
+
   void displayCapacity() {
     print(
         "***************************************************************************************");
@@ -58,8 +55,7 @@ class room {
         (this.capacityOfPeopleForSixFtGrid - this.occupiedDesks).toString());
     print("                  ");
   }
-//desk booking
-//returns boolean
+
   bool bookDesk() {
     if (occupiedDesks < numDesks) {
       occupiedDesks++;
