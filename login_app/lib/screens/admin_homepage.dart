@@ -71,6 +71,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
+
                                     ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
@@ -108,6 +109,45 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
+
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Make Announcement')),
+                                              Icon(Icons.update_rounded)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('Make Announcement'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+
                                     ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
@@ -141,6 +181,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           );
                                         }
                                     ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+
                                   ]
                               )
                           ),
@@ -148,6 +193,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       )
                   ),
                 ),
+
                 Container (
                   alignment: Alignment.bottomRight,
                   child: Container (
