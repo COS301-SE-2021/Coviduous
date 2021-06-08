@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/screens/admin_delete_announcement.dart';
 import 'package:login_app/screens/login_screen.dart';
 import 'package:login_app/screens/admin_add_floor_plan.dart';
 
@@ -71,7 +72,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
-
                                     ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
@@ -109,45 +109,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
-
-                                    ElevatedButton (
-                                        style: ElevatedButton.styleFrom (
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        child: Row (
-                                            children: <Widget>[
-                                              Expanded(child: Text('Make Announcement')),
-                                              Icon(Icons.update_rounded)
-                                            ],
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                        ),
-                                        onPressed: () {
-                                          //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
-                                          showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                title: Text('Placeholder'),
-                                                content: Text('Make Announcement'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: Text('Okay'),
-                                                    onPressed: (){
-                                                      Navigator.of(ctx).pop();
-                                                    },
-                                                  )
-                                                ],
-                                              )
-                                          );
-                                        }
-                                    ),
-                                    SizedBox (
-                                      height: MediaQuery.of(context).size.height/48,
-                                      width: MediaQuery.of(context).size.width,
-                                    ),
-
                                     ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
@@ -185,7 +146,42 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
-
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('View announcements')),
+                                              Icon(Icons.add_circle_rounded)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName); //Temporarily go straight to delete announcement page until view announcements page is implemented.
+                                          // Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                                          /*
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('View announcements'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                          */
+                                        }
+                                    ),
                                   ]
                               )
                           ),
@@ -193,7 +189,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       )
                   ),
                 ),
-
                 Container (
                   alignment: Alignment.bottomRight,
                   child: Container (
