@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/screens/login_screen.dart';
 import 'package:login_app/screens/user_book_office_space.dart';
+import 'package:login_app/screens/user_view_announcements.dart';
 import 'package:login_app/screens/user_view_current_bookings.dart';
 import 'package:login_app/screens/user_view_office_spaces.dart';
 import '../services/globals.dart' as globals;
@@ -111,6 +112,28 @@ class _UserHomepageState extends State<UserHomepage> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('View announcements')),
+                                    Icon(Icons.add_alert)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
                               }
                           ),
                         ]
