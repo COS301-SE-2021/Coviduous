@@ -29,6 +29,7 @@ void main() {
   tearDown(() => null);
 
   //====================UNIT TESTS======================
+  /**TODO: add more parameters to response objects, not just a boolean param*/
 
   //-----------CreateFloorplan UC1------------//
   test('Correct CreateFloorPlanRequest construction', () {
