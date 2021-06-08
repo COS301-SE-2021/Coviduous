@@ -31,13 +31,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         children: [
                           Container (
                             alignment: Alignment.center,
-                            margin: EdgeInsets.all(20.0),
+                            margin: EdgeInsets.all(10.0),
                             child: Image(
                               alignment: Alignment.center,
                               image: AssetImage('assets/placeholder.com-logo1.png'),
                               color: Colors.white,
                               width: double.maxFinite,
-                              height: MediaQuery.of(context).size.height/8,
+                              height: MediaQuery.of(context).size.height/4,
                             ),
                           ),
                           SizedBox (
@@ -47,7 +47,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           Container (
                               height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
                               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.all(20),
                               child: Column (
                                   children: <Widget>[
                                     ElevatedButton (
