@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/screens/admin_delete_announcement.dart';
 import 'package:login_app/screens/login_screen.dart';
 import 'package:login_app/screens/admin_add_floor_plan.dart';
 
@@ -160,7 +161,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                         ),
                                         onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName); //Temporarily go straight to delete announcement page until view announcements page is implemented.
                                           // Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                                          /*
                                           showDialog(
                                               context: context,
                                               builder: (ctx) => AlertDialog(
@@ -176,6 +179,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                                 ],
                                               )
                                           );
+                                          */
                                         }
                                     ),
                                   ]
