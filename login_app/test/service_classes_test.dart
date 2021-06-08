@@ -30,6 +30,7 @@ void main() {
 
   //====================UNIT TESTS======================
   /**TODO: add more parameters to response objects, not just a boolean param*/
+  /**TODO: mock out used storage structures, don't use actual DB in testing*/
 
   //-----------CreateFloorplan UC1------------//
   test('Correct CreateFloorPlanRequest construction', () {
