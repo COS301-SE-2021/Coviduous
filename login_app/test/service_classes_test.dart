@@ -101,7 +101,7 @@ void main() {
     BookOfficeSpaceResponse bookResp = service.bookOfficeSpace(bookReq);
 
     expect(bookResp.getResponse(), true);
-    //expect(service.getBookings().length, 1);
+    //expect(service.getBookings().length, 1); // create mock bookings array object / mock bookings repo
   });
 
   //-----------viewOfficeSpace UC3------------//
