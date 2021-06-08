@@ -47,13 +47,6 @@ void main() {
     expect(req.getTotalRooms(), expectedTotalRooms);
   });
 
-  test('Correct CreateFloorPlanResponse construction', () {
-    CreateFloorPlanResponse resp = new CreateFloorPlanResponse();
-
-    resp.setResponse(expectedBoolean); // resp needs more params
-
-    expect(resp.getResponse(), false);
-  });
 
   // test('When createFloorPlanRequest is null', () {
   //   req = null;
