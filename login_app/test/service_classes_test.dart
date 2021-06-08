@@ -50,7 +50,7 @@ void main() {
   test('Correct CreateFloorPlanResponse construction', () {
     CreateFloorPlanResponse resp = new CreateFloorPlanResponse();
 
-    resp.setResponse(expectedBoolean);
+    resp.setResponse(expectedBoolean); // resp needs more params
 
     expect(resp.getResponse(), false);
   });
@@ -93,10 +93,10 @@ void main() {
   });
 
   test('Correct bookOfficeSpaceResponse construction', () {
-    //BookOfficeSpaceResponse bookResp =
-    //new BookOfficeSpaceResponse(expectedBoolean);
+    BookOfficeSpaceResponse bookResp =
+    new BookOfficeSpaceResponse(expectedBoolean); // resp needs more params
 
-    //expect(bookResp.getResponse(), false);
+    expect(bookResp.getResponse(), false);
   });
 
   test('Correct book office space construction', () {
