@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/admin_calc_floor_plan.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/admin_homepage.dart';
 import 'screens/admin_add_floor_plan.dart';
+import 'screens/admin_calc_floor_plan.dart';
+import 'screens/admin_delete_announcement.dart';
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
 import 'screens/user_view_office_spaces.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget{
           Register.routeName: (ctx)=> Register(),
           LoginScreen.routeName: (ctx)=> LoginScreen(),
           AdminHomePage.routeName: (ctx)=> AdminHomePage(),
+          AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
           AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
           CalcFloorPlan.routeName: (ctx)=> CalcFloorPlan(),
           UserHomepage.routeName: (ctx)=> UserHomepage(),
