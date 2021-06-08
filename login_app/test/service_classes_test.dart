@@ -19,6 +19,8 @@ void main() {
 
   //add mock DB repos + storage structures (arrays, etc.) to use
 
+
+  // automated object instantiation - used throughout life of tests
   setUp(() {
     expectedAdmin = "Admin-1";
     expectedUser = "User-1";
