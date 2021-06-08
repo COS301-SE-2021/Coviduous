@@ -10,6 +10,7 @@ import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
 import 'screens/user_view_office_spaces.dart';
 import 'screens/user_view_current_bookings.dart';
+import 'screens/user_view_announcements.dart';
 import 'models/authentication.dart';
 import 'services/globals.dart' as globals;
 
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget{
           UserHomepage.routeName: (ctx)=> UserHomepage(),
           UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
           UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),
-          UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings()
+          UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
+          UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements()
         },
     ));
   }
