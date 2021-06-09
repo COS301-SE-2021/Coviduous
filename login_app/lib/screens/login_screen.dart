@@ -99,6 +99,13 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       //Set global email variable so that it appears on the user homepage
       globals.email = _authData['email'];
+
+      //Retrieve user type from database response
+      String _userTypeString = "admin";
+
+      //Convert string to enum value
+      _userType = UserType.values.firstWhere((e) => e.toString() == _userTypeString);
+
       if (_userType == UserType.user) {
         Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
       } else if (_userType == UserType.admin) {
@@ -233,41 +240,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: MediaQuery.of(context).size.height/48,
                                 width: MediaQuery.of(context).size.width,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Row (
-                                    children: [
-                                      Text('Admin'),
-                                      Radio (
-                                          value: UserType.admin,
-                                          groupValue: _userType,
-                                          onChanged: _changeUserType
-                                      )
-                                    ],
-                                  ),
-                                  Row (
-                                    children: [
-                                      Text('User'),
-                                      Radio (
-                                          value: UserType.user,
-                                          groupValue: _userType,
-                                          onChanged: _changeUserType
-                                      )
-                                    ],
-                                  ),
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Forgot password?',
-                                      style: new TextStyle(color: Color(0xff056676)),
-                                      recognizer: new TapGestureRecognizer()
-                                      ..onTap = () {
-                                        launch(
-                                            'https://www.google.com');
-                                      },
-                                    )
-                                  ),
-                                ],
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Forgot password?',
+                                  style: new TextStyle(color: Color(0xff056676)),
+                                  recognizer: new TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launch(
+                                        'https://www.google.com');
+                                  },
+                                )
                               ),
                               SizedBox (
                                 height: MediaQuery.of(context).size.height/48,
