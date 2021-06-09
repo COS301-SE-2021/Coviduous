@@ -55,7 +55,23 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
         );
       } else {
         return ListView.builder(
-
+          padding: const EdgeInsets.all(8),
+          itemCount: numberOfAnnouncements,
+          itemBuilder: (context, index){
+            return ListTile(
+              title: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height/24,
+                    color: Theme.of(context).primaryColor,
+                    child: Text('Announcement ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                  ),
+                ]
+              ),
+            );
+          }
         );
       }
     }
