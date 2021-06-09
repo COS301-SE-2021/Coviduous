@@ -4,7 +4,7 @@ import 'admin_homepage.dart';
 import '../services/globals.dart' as globals;
 
 class AdminViewAnnouncements extends StatefulWidget {
-  static const routeName = "/adminannouncements";
+  static const routeName = "/admin_announcements";
 
   @override
   _AdminViewAnnouncementsState createState() => _AdminViewAnnouncementsState();
@@ -41,8 +41,8 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
               ),
               Container(
                   alignment: Alignment.center,
-                  // width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  // height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
                   color: Colors.white,
                   padding: EdgeInsets.all(12),
                   child: Text('You have no announcements.',
@@ -105,5 +105,23 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
         );
       }
     }
+
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Announcements'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+            },
+          ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+            ]
+        )
+    );
   }
 }
