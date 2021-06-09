@@ -9,6 +9,19 @@ class DropDown extends StatefulWidget {
   @override
   DropDownState createState() => DropDownState();
 }
+class Announcement {
+  int id;
+  String name;
+
+  Announcement(this.id, this.name);
+
+  static List<Announcement> getAnnouncementType() {
+    return <Announcement>[
+      Announcement(1, 'General'),
+      Announcement(2, 'Emergency'),
+    ];
+  }
+}
 
 class DropDownState extends State<DropDown>{
   @override
