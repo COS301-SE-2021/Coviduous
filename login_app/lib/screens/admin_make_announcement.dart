@@ -30,6 +30,24 @@ class DropDownState extends State<DropDown>{
   Announcement _selectedType;
 
   @override
+  void initState() {
+    _dropdownMenuItems = buildDropdownMenuItems(_announceType);
+    _selectedType = _dropdownMenuItems[0].value;
+    super.initState();
+  }
+
+  List<DropdownMenuItem<Announcement>> buildDropdownMenuItems(List TypeofAnnounc) {
+    List<DropdownMenuItem<Announcement>> items = List();
+    for (Announcement _type in TypeofAnnounc) {
+      items.add(
+        DropdownMenuItem(
+          value: _type,
+          child: Text(_type.name),
+        ),
+      );
+    }
+    return items;
+  }
 
   Widget build(BuildContext context){
     return new MaterialApp();
