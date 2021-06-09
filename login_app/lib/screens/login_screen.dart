@@ -1,3 +1,14 @@
+/*
+  File name: login_screen.dart
+  Purpose: The login screen of the app. This is the entry point of Coviduous, for both admins and users.
+  Collaborators:
+    - Rudolf van Graan
+    - Clementine Mashile
+  Classes and enums:
+    - class LoginScreen extends StatefulWidget
+    - enum UserType
+    - class _LoginScreenState extends State<LoginScreen>
+ */
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,17 +20,30 @@ import 'signup_screen.dart';
 import '../models/authentication.dart';
 import '../services/globals.dart' as globals;
 
+/*
+  Class name: LoginScreen
+  Purpose: This class defines the route name of the login screen, so it can be
+    accessed from any other location in the app. It also defines a function for creating this screen.
+ */
 class LoginScreen extends StatefulWidget {
   static const routeName = "/login";
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+/*
+  Enum name: userType
+  Purpose: Defines a user type.
+ */
 enum UserType {
   admin, user
 }
 
-class _LoginScreenState extends State<LoginScreen>{
+/*
+  Class name: _LoginScreenState
+  Purpose: This class defines the layout of the page.
+ */
+class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   Map<String, String> _authData = {
     'email' : '',
@@ -27,6 +51,14 @@ class _LoginScreenState extends State<LoginScreen>{
   };
   UserType _userType = UserType.user;
 
+  /*
+    Function name: _showErrorDialog
+    Purpose: Displays an error message.
+    Parameters:
+    - String msg: an error message to show
+    Output:
+    - An error message that will be displayed as a dialog box.
+   */
   void _showErrorDialog(String msg)
   {
     showDialog(
@@ -45,6 +77,15 @@ class _LoginScreenState extends State<LoginScreen>{
         )
     );
   }
+
+  /*
+    Function name: _submit
+    Purpose: Submits a login query.
+    Parameters:
+    - None
+    Output:
+    - After a successful login, the user is taken to their relevant homepage.
+   */
   Future<void> _submit() async
   {
     if(!_formKey.currentState.validate()) {
@@ -69,6 +110,14 @@ class _LoginScreenState extends State<LoginScreen>{
     }
   }
 
+  /*
+    Function name: _changeUserType
+    Purpose: Changes the user type enum.
+    Parameters:
+      - UserType value: The value to set the user type to. Can be either "admin" or "user"
+    Output:
+      - None
+   */
   void _changeUserType(UserType value) {
     setState(() {
       _userType = value;
@@ -76,6 +125,14 @@ class _LoginScreenState extends State<LoginScreen>{
     });
   }
 
+  /*
+    Function name: build
+    Purpose: Visually displays the login screen.
+    Parameters:
+      - BuildContext context
+    Output:
+      - The app's screen is displayed as a Widget.
+   */
 @override
   Widget build(BuildContext context) {
     return new WillPopScope(
