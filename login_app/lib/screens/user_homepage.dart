@@ -47,7 +47,7 @@ class _UserHomepageState extends State<UserHomepage> {
                       width: MediaQuery.of(context).size.width,
                     ),
                     Container (
-                      height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
                       width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                       padding: EdgeInsets.all(16),
                       child: Column (
