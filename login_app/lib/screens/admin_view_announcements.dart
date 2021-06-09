@@ -90,6 +90,12 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                         //child: Text('Message: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
                         child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
                       ),
+                      Container(
+                        height: 50,
+                        color: Colors.white,
+                        //child: Text('Message: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
+                        child: Text('Announcement ID: A1', style: TextStyle(color: Colors.black)),
+                      ),
                     ],
                   )
                 ]
