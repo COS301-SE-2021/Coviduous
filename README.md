@@ -21,12 +21,9 @@
 
 ---
 
-## SRS Documentation
+## Documentation
 
-- :open_book: [Demo 1](https://drive.google.com/file/d/1ZLUPbDZ1Tz6sSdNRtPQ9KEXy4haS586w/view?usp=sharing)
-- :open_book: [Demo 2](https://)
-- :open_book: [Demo 3](https://)
-- :open_book: [Demo 4](https://)
+- :open_book: [Overleaf SRS](https://www.overleaf.com/read/jftdfnkqnghg)
 
 ## Demo Videos
 
