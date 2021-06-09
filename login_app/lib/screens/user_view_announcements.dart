@@ -4,7 +4,7 @@ import 'user_homepage.dart';
 import '../services/globals.dart' as globals;
 
 class UserViewAnnouncements extends StatefulWidget {
-  static const routeName = "/userannouncements";
+  static const routeName = "/user_announcements";
 
   @override
   _UserViewAnnouncementsState createState() => _UserViewAnnouncementsState();
