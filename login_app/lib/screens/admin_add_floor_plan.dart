@@ -9,7 +9,7 @@ import '../services/request/create_floor_plan_request.dart';
 import '../services/response/create_floor_plan_response.dart';
 
 class AddFloorPlan extends StatefulWidget {
-  static const routeName = "/addfloorplan";
+  static const routeName = "/admin_add_floorplan";
 
   @override
   _AddFloorPlanState createState() => _AddFloorPlanState();
