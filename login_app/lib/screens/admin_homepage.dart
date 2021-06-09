@@ -46,7 +46,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           Container (
-                              height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
+                              height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
                               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                               padding: EdgeInsets.all(20),
                               child: Column (
@@ -180,6 +180,43 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                               )
                                           );
                                           */
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Manage user accounts')),
+                                              Icon(Icons.person_remove)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          //Navigator.of(context).pushReplacementNamed(AdminManageUserAccounts.routeName);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('Manage company user accounts'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
                                         }
                                     ),
                                   ]
