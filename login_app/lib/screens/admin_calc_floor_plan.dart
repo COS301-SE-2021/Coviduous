@@ -4,7 +4,7 @@ import 'admin_add_floor_plan.dart';
 import '../services/globals.dart' as globals;
 
 class CalcFloorPlan extends StatefulWidget {
-  static const routeName = "/calcfloorplan";
+  static const routeName = "/admin_calc_floorplan";
 
   @override
   _CalcFloorPlanState createState() => _CalcFloorPlanState();
