@@ -82,7 +82,19 @@ class DropDownState extends State<DropDown>{
                       height: 20.0,
                     ),
                     Text('Selected: ${_selectedType.name}'),
-
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: "Topic: ",
+                          labelStyle: TextStyle(fontSize: 24, color: Colors.black),
+                          border: InputBorder.none,
+                          fillColor: Colors.black12,
+                          filled: true),
+                      obscureText: false,
+                      maxLength: 20,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
               ],
               ),
             ),
