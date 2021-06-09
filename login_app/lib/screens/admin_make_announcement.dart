@@ -55,8 +55,15 @@ class DropDownState extends State<DropDown>{
     });
   }
 
+  @override
   Widget build(BuildContext context){
-    return new MaterialApp();
-
+    return new MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: new Scaffold(
+        appBar: new AppBar(
+        title: new Text("Make Announcement"),
+    ),
+        ),
+    );
   }
 }
