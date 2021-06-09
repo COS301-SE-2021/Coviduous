@@ -49,6 +49,12 @@ class DropDownState extends State<DropDown>{
     return items;
   }
 
+  onChangeDropdownItem(Announcement selectedtype) {
+    setState(() {
+      _selectedType = selectedtype;
+    });
+  }
+
   Widget build(BuildContext context){
     return new MaterialApp();
 
