@@ -154,7 +154,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         child: Row (
                                             children: <Widget>[
-                                              Expanded(child: Text('Create announcements')),
+                                              Expanded(child: Text('View announcements')),
                                               Icon(Icons.add_circle_rounded)
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
