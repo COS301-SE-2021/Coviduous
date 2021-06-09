@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MakeAnnouncement extends StatefulWidget {
-  static const routeName = "/announce";
+  static const routeName = "/admin_make_announcement";
   MakeAnnouncement() : super();
 
   final String title = "Make announcement";
