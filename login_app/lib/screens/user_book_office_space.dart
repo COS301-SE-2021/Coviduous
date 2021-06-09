@@ -6,7 +6,7 @@ import '../services/globals.dart' as globals;
 import '../services/services.dart';
 
 class UserBookOfficeSpace extends StatefulWidget {
-  static const routeName = "/bookspace";
+  static const routeName = "/user_book_space";
   @override
   _UserBookOfficeSpaceState createState() => _UserBookOfficeSpaceState();
 }
