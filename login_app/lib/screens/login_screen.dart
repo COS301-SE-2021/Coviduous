@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
       String _userTypeString = "admin";
 
       //Convert string to enum value
-      _userType = UserType.values.firstWhere((e) => e.toString() == _userTypeString);
+      _userType = UserType.values.firstWhere((e) => e.toString() == "UserType." + _userTypeString);
 
       if (_userType == UserType.user) {
         Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
