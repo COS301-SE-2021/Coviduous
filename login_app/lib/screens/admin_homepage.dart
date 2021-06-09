@@ -156,7 +156,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         child: Row (
                                             children: <Widget>[
                                               Expanded(child: Text('View announcements')),
-                                              Icon(Icons.add_circle_rounded)
+                                              Icon(Icons.add_alert)
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
