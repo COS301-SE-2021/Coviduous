@@ -71,7 +71,14 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                   ListView(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-
+                    children: [
+                      Container(
+                        height: 50,
+                        color: Colors.white,
+                        //child: Text('Type: ' + announcements[index].type, style: TextStyle(color: Colors.black)),
+                        child: Text('Type: General', style: TextStyle(color: Colors.black)),
+                      ),
+                    ],
                   )
                 ]
               ),
