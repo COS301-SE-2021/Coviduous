@@ -62,7 +62,26 @@ class DropDownState extends State<DropDown>{
         home: new Scaffold(
         appBar: new AppBar(
         title: new Text("Make Announcement"),
-    ),
+        ),
+          body: new Container(
+            child:Center(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                  Text("Select announcement type"),
+              SizedBox(
+                height: 20.0,
+              ),
+                    DropdownButton(
+                      value: _selectedType,
+                      items: _dropdownMenuItems,
+                      onChanged: onChangeDropdownItem,
+                    ),
+              ],
+              ),
+            ),
+          ),
         ),
     );
   }
