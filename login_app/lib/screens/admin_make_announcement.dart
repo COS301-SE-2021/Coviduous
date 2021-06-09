@@ -107,6 +107,13 @@ class DropDownState extends State<DropDown>{
                     SizedBox(
                       height: 16,
                     ),
+                    FlatButton(
+                      child: Text("Post"),
+                      color: Colors.blueAccent,
+                      onPressed: () {
+                        // handleSubmit(); (function for backend)
+                      },
+                    )
               ],
               ),
             ),
