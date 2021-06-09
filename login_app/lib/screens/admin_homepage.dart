@@ -227,6 +227,40 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         },
                       )
                   ),
+                ),
+                Container (
+                  alignment: Alignment.bottomLeft,
+                  child: Container (
+                      height: 50,
+                      width: 150,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Manage account'),
+                        onPressed: (){
+                          //Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Placeholder'),
+                                content: Text('Manage account'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('Okay'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  )
+                                ],
+                              )
+                          );
+                        },
+                      )
+                  ),
                 )
               ]
           )
