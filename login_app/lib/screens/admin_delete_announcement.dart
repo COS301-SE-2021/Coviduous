@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'admin_homepage.dart';
+import 'admin_view_announcements.dart';
 import '../services/globals.dart' as globals;
 
 class AdminDeleteAnnouncement extends StatefulWidget {
@@ -116,7 +116,7 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
           title: Text('Delete announcement'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
             },
           ),
         ),
