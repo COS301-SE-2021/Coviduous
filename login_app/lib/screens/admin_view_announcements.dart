@@ -68,6 +68,11 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                     color: Theme.of(context).primaryColor,
                     child: Text('Announcement ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
                   ),
+                  ListView(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+
+                  )
                 ]
               ),
             );
