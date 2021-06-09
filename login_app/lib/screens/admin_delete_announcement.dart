@@ -4,7 +4,7 @@ import 'admin_homepage.dart';
 import '../services/globals.dart' as globals;
 
 class AdminDeleteAnnouncement extends StatefulWidget {
-  static const routeName = "/admindeleteannouncement";
+  static const routeName = "/admin_delete_announcement";
 
   @override
   _AdminDeleteAnnouncementState createState() => _AdminDeleteAnnouncementState();
