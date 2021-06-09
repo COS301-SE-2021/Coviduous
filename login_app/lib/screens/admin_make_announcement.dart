@@ -24,7 +24,13 @@ class Announcement {
 }
 
 class DropDownState extends State<DropDown>{
+
+  List<Announcement> _announceType = Announcement.getAnnouncementType();
+  List<DropdownMenuItem<Announcement>> _dropdownMenuItems;
+  Announcement _selectedType;
+
   @override
+
   Widget build(BuildContext context){
     return new MaterialApp();
 
