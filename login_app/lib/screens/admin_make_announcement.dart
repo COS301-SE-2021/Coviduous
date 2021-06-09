@@ -78,6 +78,11 @@ class DropDownState extends State<DropDown>{
                       items: _dropdownMenuItems,
                       onChanged: onChangeDropdownItem,
                     ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text('Selected: ${_selectedType.name}'),
+
               ],
               ),
             ),
