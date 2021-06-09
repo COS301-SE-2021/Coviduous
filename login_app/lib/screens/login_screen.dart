@@ -247,7 +247,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   recognizer: new TapGestureRecognizer()
                                   ..onTap = () {
                                     launch(
-                                        'https://www.google.com');
+                                        'https://www.google.com'
+                                    );
                                   },
                                 )
                               ),
