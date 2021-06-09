@@ -95,6 +95,18 @@ class DropDownState extends State<DropDown>{
                     SizedBox(
                       height: 16,
                     ),
+                    TextField(
+                      decoration: InputDecoration(
+                          hintText: "Write your announcement",
+                          labelText: "Description",
+                          labelStyle: TextStyle(fontSize: 24, color: Colors.black),
+                          border: UnderlineInputBorder()),
+                      obscureText: false,
+                      maxLines: 3,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
               ],
               ),
             ),
