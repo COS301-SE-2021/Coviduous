@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget{
     )
         ],
       child: MaterialApp(
-      title: 'Login App',
+      title: 'Coviduous',
       theme: ThemeData(
         primaryColor: Color(0xff056676), //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
