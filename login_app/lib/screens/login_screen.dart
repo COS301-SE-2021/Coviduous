@@ -97,7 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
           _authData['email'],
           _authData['password']
       );
-      globals.email = _authData['email']; //Set global email variable so that it appears on the user homepage
+      //Set global email variable so that it appears on the user homepage
+      globals.email = _authData['email'];
       if (_userType == UserType.user) {
         Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
       } else if (_userType == UserType.admin) {
@@ -121,7 +122,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void _changeUserType(UserType value) {
     setState(() {
       _userType = value;
-      //print(_userType);
     });
   }
 
@@ -136,11 +136,13 @@ class _LoginScreenState extends State<LoginScreen> {
 @override
   Widget build(BuildContext context) {
     return new WillPopScope(
-      onWillPop: () async => false, //Prevent the back button from working
+      //Prevent the back button from working
+      onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Login'),
-          automaticallyImplyLeading: false, //Back button will not show up in app bar
+          //Back button will not show up in app bar
+          automaticallyImplyLeading: false,
           actions: <Widget>[
           TextButton(
             child: Row(
@@ -160,7 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         body: Stack(
           children: <Widget>[
-            SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+            //So the element doesn't overflow when you open the keyboard
+            SingleChildScrollView(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -191,7 +194,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: <Widget>[
                               //email
                               TextFormField(
-                                textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                //The "return" button becomes a "next" button when typing
+                                textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(labelText: 'Email'),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value)
@@ -208,7 +212,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               //password
                               TextFormField(
-                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                //The "return" button becomes a "done" button when typing
+                                textInputAction: TextInputAction.done,
                                 decoration: InputDecoration(labelText:'Password'),
                                 obscureText: true,
                                 validator: (value)
