@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'admin_homepage.dart';
+import 'admin_delete_announcement.dart';
+
 import '../services/globals.dart' as globals;
 
 class AdminViewAnnouncements extends StatefulWidget {
@@ -75,6 +77,12 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                       Container(
                         height: 50,
                         color: Colors.white,
+                        //child: Text('ID: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
+                        child: Text('ID: A1', style: TextStyle(color: Colors.black)),
+                      ),
+                      Container(
+                        height: 50,
+                        color: Colors.white,
                         //child: Text('Type: ' + announcements[index].type, style: TextStyle(color: Colors.black)),
                         child: Text('Type: General', style: TextStyle(color: Colors.black)),
                       ),
@@ -89,12 +97,6 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                         color: Colors.white,
                         //child: Text('Message: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
                         child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
-                      ),
-                      Container(
-                        height: 50,
-                        color: Colors.white,
-                        //child: Text('Message: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
-                        child: Text('Announcement ID: A1', style: TextStyle(color: Colors.black)),
                       ),
                     ],
                   )
@@ -120,6 +122,25 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
               Center (
                   child: getList()
               ),
+              Container (
+                alignment: Alignment.bottomLeft,
+                child: Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Delete announcement'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName);
+                      },
+                    )
+                ),
+              )
             ]
         )
     );
