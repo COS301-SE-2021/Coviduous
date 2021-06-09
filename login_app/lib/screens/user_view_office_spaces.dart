@@ -4,7 +4,7 @@ import '../services/floorplan/floor.dart';
 import '../services/globals.dart' as globals;
 
 class UserViewOfficeSpaces extends StatefulWidget {
-  static const routeName = "/viewspaces";
+  static const routeName = "/user_office_spaces";
   @override
   _UserViewOfficeSpacesState createState() => _UserViewOfficeSpacesState();
 }
