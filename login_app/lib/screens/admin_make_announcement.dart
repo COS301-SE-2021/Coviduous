@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'admin_view_announcements.dart';
+import '../services/globals.dart' as globals;
+
 class MakeAnnouncement extends StatefulWidget {
   static const routeName = "/admin_make_announcement";
   MakeAnnouncement() : super();
@@ -57,15 +60,20 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: new Scaffold(
+    return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Make Announcement"),
+          title: new Text("Make announcement"),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+            },
+          ),
         ),
-        body: new Container(
-
-          child: Center(
+        body: Center(
+          child: new Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height/(1.8*globals.getWidgetScaling()),
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +93,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                 Text('Selected: ${_selectedType.name}'),
                 TextField(
                   decoration: InputDecoration(
-                      labelText: "Topic: ",
+                      labelText: "Topic",
                       labelStyle: TextStyle(fontSize: 24, color: Colors.black),
                       border: InputBorder.none,
                       fillColor: Colors.black12,
@@ -108,9 +116,13 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                 SizedBox(
                   height: 16,
                 ),
-                FlatButton(
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   child: Text("Post"),
-                  color: Colors.blueAccent,
                   onPressed: () {
                     // handleSubmit(); (function for backend)
                   },
@@ -119,7 +131,6 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
             ),
           ),
         ),
-      ),
     );
   }
 }
