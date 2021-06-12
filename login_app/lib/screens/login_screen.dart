@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
       globals.email = _authData['email'];
 
       //Retrieve user type from database response
-      String _userTypeString = "admin";
+      String _userTypeString = "user";
 
       //Convert string to enum value
       _userType = UserType.values.firstWhere((e) => e.toString() == "UserType." + _userTypeString);
@@ -145,141 +145,150 @@ class _LoginScreenState extends State<LoginScreen> {
     return new WillPopScope(
       //Prevent the back button from working
       onWillPop: () async => false,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Login'),
-          //Back button will not show up in app bar
-          automaticallyImplyLeading: false,
-          actions: <Widget>[
-          TextButton(
-            child: Row(
-                children: <Widget>[
-                  Text('Register '),
-                  Icon(Icons.person_add)
-                ],
-              ),
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(Register.routeName);
-              },
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-              ),
-            ),
-          ],
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
-        body: Stack(
-          children: <Widget>[
-            //So the element doesn't overflow when you open the keyboard
-            SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container (
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.all(20.0),
-                      child: Image(
-                        alignment: Alignment.center,
-                        image: AssetImage('assets/placeholder.com-logo1.png'),
-                        color: Colors.white,
-                        width: double.maxFinite,
-                        height: MediaQuery.of(context).size.height/8,
-                      ),
-                    ),
-                    SizedBox (
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    Container(
-                      color: Colors.white,
-                      width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
-                      padding: EdgeInsets.all(16),
-                      child: Form(
-                        key: _formKey,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: <Widget>[
-                              //email
-                              TextFormField(
-                                //The "return" button becomes a "next" button when typing
-                                textInputAction: TextInputAction.next,
-                                decoration: InputDecoration(labelText: 'Email'),
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (value)
-                                {
-                                  if(value.isEmpty || !value.contains('@'))
-                                  {
-                                    return 'invalid email';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value){
-                                  _authData['email'] = value;
-                                },
-                              ),
-                              //password
-                              TextFormField(
-                                //The "return" button becomes a "done" button when typing
-                                textInputAction: TextInputAction.done,
-                                decoration: InputDecoration(labelText:'Password'),
-                                obscureText: true,
-                                validator: (value)
-                                  {
-                                  if(value.isEmpty || value.length<=5)
-                                  {
-                                    return 'invalid password';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value)
-                                {
-                                  _authData['password'] = value;
-                                },
-                              ),
-                              SizedBox (
-                                height: MediaQuery.of(context).size.height/48,
-                                width: MediaQuery.of(context).size.width,
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  text: 'Forgot password?',
-                                  style: new TextStyle(color: Color(0xff056676)),
-                                  recognizer: new TapGestureRecognizer()
-                                  ..onTap = () {
-                                    launch(
-                                        'https://www.google.com'
-                                    );
-                                  },
-                                )
-                              ),
-                              SizedBox (
-                                height: MediaQuery.of(context).size.height/48,
-                                width: MediaQuery.of(context).size.width,
-                              ),
-                              ElevatedButton(
-                                child: Text(
-                                  'Submit'
-                                ),
-                                onPressed: ()
-                                {
-                                    _submit();
-                                },
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        ),
-                      ),
-                    ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent, //To show background image
+          appBar: AppBar(
+            title: Text('Login'),
+            //Back button will not show up in app bar
+            automaticallyImplyLeading: false,
+            actions: <Widget>[
+            TextButton(
+              child: Row(
+                  children: <Widget>[
+                    Text('Register '),
+                    Icon(Icons.person_add)
                   ],
                 ),
+                onPressed: (){
+                  Navigator.of(context).pushReplacementNamed(Register.routeName);
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
               ),
-            )
-          ],
+            ],
+          ),
+          body: Stack(
+            children: <Widget>[
+              //So the element doesn't overflow when you open the keyboard
+              SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container (
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(20.0),
+                        child: Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/placeholder.com-logo1.png'),
+                          color: Colors.white,
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height/8,
+                        ),
+                      ),
+                      SizedBox (
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      Container(
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+                        padding: EdgeInsets.all(16),
+                        child: Form(
+                          key: _formKey,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                //email
+                                TextFormField(
+                                  //The "return" button becomes a "next" button when typing
+                                  textInputAction: TextInputAction.next,
+                                  decoration: InputDecoration(labelText: 'Email'),
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value)
+                                  {
+                                    if(value.isEmpty || !value.contains('@'))
+                                    {
+                                      return 'invalid email';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value){
+                                    _authData['email'] = value;
+                                  },
+                                ),
+                                //password
+                                TextFormField(
+                                  //The "return" button becomes a "done" button when typing
+                                  textInputAction: TextInputAction.done,
+                                  decoration: InputDecoration(labelText:'Password'),
+                                  obscureText: true,
+                                  validator: (value)
+                                    {
+                                    if(value.isEmpty || value.length<=5)
+                                    {
+                                      return 'invalid password';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value)
+                                  {
+                                    _authData['password'] = value;
+                                  },
+                                ),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: 'Forgot password?',
+                                    style: new TextStyle(color: Color(0xff056676)),
+                                    recognizer: new TapGestureRecognizer()
+                                    ..onTap = () {
+                                      launch(
+                                          'https://www.google.com'
+                                      );
+                                    },
+                                  )
+                                ),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                ElevatedButton(
+                                  child: Text(
+                                    'Submit'
+                                  ),
+                                  onPressed: ()
+                                  {
+                                      _submit();
+                                  },
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
