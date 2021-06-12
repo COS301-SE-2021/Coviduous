@@ -63,7 +63,7 @@ void main() {
   //     throw Exception("Invalid Request");
   //   }
 
-  /** TODO: add throw Exception if passed in */
+  /** TODO: add throw Exception if passed in req == null in createFloorPlan service */
   //   createFloorPlanResponse resp = service.createFloorPlan(req); // should throw Exception
 
   //   expect(resp.getResponse(), true);
