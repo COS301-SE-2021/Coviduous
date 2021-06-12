@@ -269,7 +269,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   alignment: Alignment.bottomLeft,
                   child: Container (
                       height: 50,
-                      width: 150,
+                      width: 180,
                       padding: EdgeInsets.all(10),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom (
