@@ -70,64 +70,62 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
           ),
         ),
         body: Center(
-          child: new Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height/(1.8*globals.getWidgetScaling()),
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Select announcement type"),
-                SizedBox(
-                  height: 20.0,
-                ),
-                DropdownButton(
-                  value: _selectedType,
-                  items: _dropdownMenuItems,
-                  onChanged: onChangeDropdownItem,
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Text('Selected: ${_selectedType.name}'),
-                TextField(
-                  decoration: InputDecoration(
-                      labelText: "Topic",
-                      labelStyle: TextStyle(fontSize: 24, color: Colors.black),
-                      border: InputBorder.none,
-                      fillColor: Colors.black12,
-                      filled: true),
-                  obscureText: false,
-                  maxLength: 20,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      hintText: "Write your announcement",
-                      labelText: "Description",
-                      labelStyle: TextStyle(fontSize: 24, color: Colors.black),
-                      border: UnderlineInputBorder()),
-                  obscureText: false,
-                  maxLines: 3,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+          child: SingleChildScrollView(
+            child: new Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Select announcement type"),
+                  SizedBox(
+                    height: 20.0,
                   ),
-                  child: Text("Post"),
-                  onPressed: () {
-                    // handleSubmit(); (function for backend)
-                  },
-                )
-              ],
+                  DropdownButton(
+                    value: _selectedType,
+                    items: _dropdownMenuItems,
+                    onChanged: onChangeDropdownItem,
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Selected: ${_selectedType.name}'),
+                  TextField(
+                    decoration: InputDecoration(
+                        labelText: "Topic",
+                    ),
+                    obscureText: false,
+                    maxLength: 20,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                        hintText: "Write your announcement",
+                        labelText: "Description",
+                    ),
+                    obscureText: false,
+                    maxLines: 3,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text("Post"),
+                    onPressed: () {
+                      // handleSubmit(); (function for backend)
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),
