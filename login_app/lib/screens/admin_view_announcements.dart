@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'admin_homepage.dart';
+import 'admin_make_announcement.dart';
 import 'admin_delete_announcement.dart';
 
 import '../services/globals.dart' as globals;
@@ -140,7 +141,26 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                       },
                     )
                 ),
-              )
+              ),
+              Container (
+                alignment: Alignment.bottomCenter,
+                child: Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Create announcement'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(MakeAnnouncement.routeName);
+                      },
+                    )
+                ),
+              ),
             ]
         )
     );
