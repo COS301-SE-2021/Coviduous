@@ -36,6 +36,7 @@ void main() {
   //====================UNIT TESTS======================
   /**TODO: add more parameters to response objects, not just a boolean param*/
   /**TODO: mock out used storage structures, don't use actual DB in testing*/
+  /**TODO: create separate .dart test files for each subsystem*/
 
   //-----------CreateFloorplan UC1------------//
   test('Correct CreateFloorPlanRequest construction', () {
@@ -63,7 +64,7 @@ void main() {
   //   }
 
   /** TODO: add throw Exception if passed in req == null in createFloorPlan service */
-  //   createFloorPlanResponse resp = service.createFloorPlan(req); // show throw Exception
+  //   createFloorPlanResponse resp = service.createFloorPlan(req); // should throw Exception
 
   //   expect(resp.getResponse(), true);
   // });
