@@ -1,3 +1,14 @@
+/*
+  File name: login_screen.dart
+  Purpose: The login screen of the app. This is the entry point of Coviduous, for both admins and users.
+  Collaborators:
+    - Rudolf van Graan
+    - Clementine Mashile
+  Classes and enums:
+    - class LoginScreen extends StatefulWidget
+    - enum UserType
+    - class _LoginScreenState extends State<LoginScreen>
+ */
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,17 +20,30 @@ import 'signup_screen.dart';
 import '../models/authentication.dart';
 import '../services/globals.dart' as globals;
 
+/*
+  Class name: LoginScreen
+  Purpose: This class defines the route name of the login screen, so it can be
+    accessed from any other location in the app. It also defines a function for creating this screen.
+ */
 class LoginScreen extends StatefulWidget {
   static const routeName = "/login";
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+/*
+  Enum name: userType
+  Purpose: Defines a user type.
+ */
 enum UserType {
   admin, user
 }
 
-class _LoginScreenState extends State<LoginScreen>{
+/*
+  Class name: _LoginScreenState
+  Purpose: This class defines the layout of the page.
+ */
+class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   Map<String, String> _authData = {
     'email' : '',
@@ -27,6 +51,14 @@ class _LoginScreenState extends State<LoginScreen>{
   };
   UserType _userType = UserType.user;
 
+  /*
+    Function name: _showErrorDialog
+    Purpose: Displays an error message.
+    Parameters:
+    - String msg: an error message to show
+    Output:
+    - An error message that will be displayed as a dialog box.
+   */
   void _showErrorDialog(String msg)
   {
     showDialog(
@@ -45,6 +77,15 @@ class _LoginScreenState extends State<LoginScreen>{
         )
     );
   }
+
+  /*
+    Function name: _submit
+    Purpose: Submits a login query.
+    Parameters:
+    - None
+    Output:
+    - After a successful login, the user is taken to their relevant homepage.
+   */
   Future<void> _submit() async
   {
     if(!_formKey.currentState.validate()) {
@@ -56,7 +97,15 @@ class _LoginScreenState extends State<LoginScreen>{
           _authData['email'],
           _authData['password']
       );
-      globals.email = _authData['email']; //Set global email variable so that it appears on the user homepage
+      //Set global email variable so that it appears on the user homepage
+      globals.email = _authData['email'];
+
+      //Retrieve user type from database response
+      String _userTypeString = "admin";
+
+      //Convert string to enum value
+      _userType = UserType.values.firstWhere((e) => e.toString() == "UserType." + _userTypeString);
+
       if (_userType == UserType.user) {
         Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
       } else if (_userType == UserType.admin) {
@@ -69,21 +118,38 @@ class _LoginScreenState extends State<LoginScreen>{
     }
   }
 
+  /*
+    Function name: _changeUserType
+    Purpose: Changes the user type enum.
+    Parameters:
+      - UserType value: The value to set the user type to. Can be either "admin" or "user"
+    Output:
+      - None
+   */
   void _changeUserType(UserType value) {
     setState(() {
       _userType = value;
-      //print(_userType);
     });
   }
 
+  /*
+    Function name: build
+    Purpose: Visually displays the login screen.
+    Parameters:
+      - BuildContext context
+    Output:
+      - The app's screen is displayed as a Widget.
+   */
 @override
   Widget build(BuildContext context) {
     return new WillPopScope(
-      onWillPop: () async => false, //Prevent the back button from working
+      //Prevent the back button from working
+      onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Login'),
-          automaticallyImplyLeading: false, //Back button will not show up in app bar
+          //Back button will not show up in app bar
+          automaticallyImplyLeading: false,
           actions: <Widget>[
           TextButton(
             child: Row(
@@ -103,7 +169,8 @@ class _LoginScreenState extends State<LoginScreen>{
         ),
         body: Stack(
           children: <Widget>[
-            SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+            //So the element doesn't overflow when you open the keyboard
+            SingleChildScrollView(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +201,8 @@ class _LoginScreenState extends State<LoginScreen>{
                             children: <Widget>[
                               //email
                               TextFormField(
-                                textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                //The "return" button becomes a "next" button when typing
+                                textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(labelText: 'Email'),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value)
@@ -151,7 +219,8 @@ class _LoginScreenState extends State<LoginScreen>{
                               ),
                               //password
                               TextFormField(
-                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                //The "return" button becomes a "done" button when typing
+                                textInputAction: TextInputAction.done,
                                 decoration: InputDecoration(labelText:'Password'),
                                 obscureText: true,
                                 validator: (value)
@@ -171,41 +240,17 @@ class _LoginScreenState extends State<LoginScreen>{
                                 height: MediaQuery.of(context).size.height/48,
                                 width: MediaQuery.of(context).size.width,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Row (
-                                    children: [
-                                      Text('Admin'),
-                                      Radio (
-                                          value: UserType.admin,
-                                          groupValue: _userType,
-                                          onChanged: _changeUserType
-                                      )
-                                    ],
-                                  ),
-                                  Row (
-                                    children: [
-                                      Text('User'),
-                                      Radio (
-                                          value: UserType.user,
-                                          groupValue: _userType,
-                                          onChanged: _changeUserType
-                                      )
-                                    ],
-                                  ),
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Forgot password?',
-                                      style: new TextStyle(color: Color(0xff056676)),
-                                      recognizer: new TapGestureRecognizer()
-                                      ..onTap = () {
-                                        launch(
-                                            'https://www.google.com');
-                                      },
-                                    )
-                                  ),
-                                ],
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Forgot password?',
+                                  style: new TextStyle(color: Color(0xff056676)),
+                                  recognizer: new TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launch(
+                                        'https://www.google.com'
+                                    );
+                                  },
+                                )
                               ),
                               SizedBox (
                                 height: MediaQuery.of(context).size.height/48,

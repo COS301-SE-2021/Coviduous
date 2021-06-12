@@ -17,6 +17,10 @@ void main() {
   int expectedTotalRooms;
   bool expectedBoolean;
 
+  //add mock DB repos + storage structures (arrays, etc.) to use
+
+
+  // automated object instantiation - used throughout life of tests
   setUp(() {
     expectedAdmin = "Admin-1";
     expectedUser = "User-1";
@@ -26,9 +30,13 @@ void main() {
     expectedBoolean = false;
   });
 
+  // cleaning up / nullifying of repos and objects after tests
   tearDown(() => null);
 
   //====================UNIT TESTS======================
+  /**TODO: add more parameters to response objects, not just a boolean param*/
+  /**TODO: mock out used storage structures, don't use actual DB in testing*/
+  /**TODO: create separate .dart test files for each subsystem*/
 
   //-----------CreateFloorplan UC1------------//
   test('Correct CreateFloorPlanRequest construction', () {
@@ -43,10 +51,23 @@ void main() {
   test('Correct CreateFloorPlanResponse construction', () {
     CreateFloorPlanResponse resp = new CreateFloorPlanResponse();
 
-    resp.setResponse(expectedBoolean);
+    resp.setResponse(expectedBoolean); // resp needs more params
 
     expect(resp.getResponse(), false);
   });
+
+  // test('When createFloorPlanRequest is null', () {
+  //   req = null;
+
+  //   if (req == null) {
+  //     throw Exception("Invalid Request");
+  //   }
+
+  /** TODO: add throw Exception if passed in req == null in createFloorPlan service */
+  //   createFloorPlanResponse resp = service.createFloorPlan(req); // should throw Exception
+
+  //   expect(resp.getResponse(), true);
+  // });
 
   test('Correct create floor plan construction', () {
     CreateFloorPlanRequest req = new CreateFloorPlanRequest(expectedAdmin, expectedFloorNumber, expectedTotalRooms);
@@ -74,7 +95,7 @@ void main() {
 
   test('Correct bookOfficeSpaceResponse construction', () {
     BookOfficeSpaceResponse bookResp =
-    new BookOfficeSpaceResponse(expectedBoolean);
+    new BookOfficeSpaceResponse(expectedBoolean); // resp needs more params
 
     expect(bookResp.getResponse(), false);
   });
@@ -84,7 +105,7 @@ void main() {
     BookOfficeSpaceResponse bookResp = service.bookOfficeSpace(bookReq);
 
     expect(bookResp.getResponse(), true);
-    //expect(service.getBookings().length, 1);
+    //expect(service.getBookings().length, 1); // create mock bookings array object / mock bookings repo
   });
 
   //-----------viewOfficeSpace UC3------------//

@@ -6,7 +6,7 @@ import '../services/globals.dart' as globals;
 //import '../services/services.dart';
 
 class UserViewCurrentBookings extends StatefulWidget {
-  static const routeName = "/viewbookings";
+  static const routeName = "/user_bookings";
   @override
   _UserViewCurrentBookingsState createState() => _UserViewCurrentBookingsState();
 }

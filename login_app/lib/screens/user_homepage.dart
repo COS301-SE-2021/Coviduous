@@ -46,7 +46,7 @@ class _UserHomepageState extends State<UserHomepage> {
                       width: MediaQuery.of(context).size.width,
                     ),
                     Container (
-                      height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
                       width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                       padding: EdgeInsets.all(16),
                       child: Column (
@@ -157,6 +157,40 @@ class _UserHomepageState extends State<UserHomepage> {
                         ));
                     },
                 )
+              ),
+            ),
+            Container (
+              alignment: Alignment.bottomLeft,
+              child: Container (
+                  height: 50,
+                  width: 180,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text('Manage account'),
+                    onPressed: (){
+                      //Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
+                      showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: Text('Placeholder'),
+                            content: Text('Manage account'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('Okay'),
+                                onPressed: (){
+                                  Navigator.of(ctx).pop();
+                                },
+                              )
+                            ],
+                          )
+                      );
+                    },
+                  )
               ),
             )
           ]

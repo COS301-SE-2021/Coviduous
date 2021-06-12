@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/login_screen.dart';
-import 'package:login_app/screens/admin_add_floor_plan.dart';
+
+import 'login_screen.dart';
+import 'admin_add_floor_plan.dart';
+import 'admin_view_announcements.dart';
 
 import '../services/globals.dart' as globals;
 
@@ -44,9 +46,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           Container (
-                              height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+                              height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
                               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.all(20),
                               child: Column (
                                   children: <Widget>[
                                     ElevatedButton (
@@ -71,7 +73,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
-
                                     ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
@@ -109,45 +110,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
-
-                                    ElevatedButton (
-                                        style: ElevatedButton.styleFrom (
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        child: Row (
-                                            children: <Widget>[
-                                              Expanded(child: Text('Make Announcement')),
-                                              Icon(Icons.update_rounded)
-                                            ],
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                        ),
-                                        onPressed: () {
-                                          //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
-                                          showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                title: Text('Placeholder'),
-                                                content: Text('Make Announcement'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: Text('Okay'),
-                                                    onPressed: (){
-                                                      Navigator.of(ctx).pop();
-                                                    },
-                                                  )
-                                                ],
-                                              )
-                                          );
-                                        }
-                                    ),
-                                    SizedBox (
-                                      height: MediaQuery.of(context).size.height/48,
-                                      width: MediaQuery.of(context).size.width,
-                                    ),
-
                                     ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
@@ -185,7 +147,78 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
-
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('View announcements')),
+                                              Icon(Icons.add_alert)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                                          /*
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('View announcements'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                          */
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Manage user accounts')),
+                                              Icon(Icons.person_remove)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          //Navigator.of(context).pushReplacementNamed(AdminManageUserAccounts.routeName);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('Manage company user accounts'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
+                                    ),
                                   ]
                               )
                           ),
@@ -193,7 +226,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       )
                   ),
                 ),
-
                 Container (
                   alignment: Alignment.bottomRight,
                   child: Container (
@@ -229,6 +261,40 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   )
                                 ],
                               ));
+                        },
+                      )
+                  ),
+                ),
+                Container (
+                  alignment: Alignment.bottomLeft,
+                  child: Container (
+                      height: 50,
+                      width: 180,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Manage account'),
+                        onPressed: (){
+                          //Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Placeholder'),
+                                content: Text('Manage account'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('Okay'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  )
+                                ],
+                              )
+                          );
                         },
                       )
                   ),

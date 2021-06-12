@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/admin_calc_floor_plan.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/admin_homepage.dart';
 import 'screens/admin_add_floor_plan.dart';
+import 'screens/admin_calc_floor_plan.dart';
+import 'screens/admin_delete_announcement.dart';
+import 'screens/admin_view_announcements.dart';
+import 'screens/admin_make_announcement.dart';
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
 import 'screens/user_view_office_spaces.dart';
 import 'screens/user_view_current_bookings.dart';
+import 'screens/user_view_announcements.dart';
 import 'models/authentication.dart';
 import 'services/globals.dart' as globals;
 
@@ -26,7 +30,8 @@ class MyApp extends StatelessWidget{
     )
         ],
       child: MaterialApp(
-      title: 'Login App',
+      debugShowCheckedModeBanner: false, //Remove "debug" banner
+      title: 'Coviduous',
       theme: ThemeData(
         primaryColor: Color(0xff056676), //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
@@ -38,12 +43,16 @@ class MyApp extends StatelessWidget{
           Register.routeName: (ctx)=> Register(),
           LoginScreen.routeName: (ctx)=> LoginScreen(),
           AdminHomePage.routeName: (ctx)=> AdminHomePage(),
+          AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
+          AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
+          MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
           AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
           CalcFloorPlan.routeName: (ctx)=> CalcFloorPlan(),
           UserHomepage.routeName: (ctx)=> UserHomepage(),
           UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
           UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),
-          UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings()
+          UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
+          UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements()
         },
     ));
   }
