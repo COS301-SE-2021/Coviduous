@@ -56,9 +56,14 @@ void main() {
     expect(resp.getResponse(), false);
   });
 
-  
+  // test('When createFloorPlanRequest is null', () {
+  //   req = null;
 
-  /** TODO: add throw Exception if passed in req == null in createFloorPlan service */
+  //   if (req == null) {
+  //     throw Exception("Invalid Request");
+  //   }
+
+  /** TODO: add throw Exception if passed in */
   //   createFloorPlanResponse resp = service.createFloorPlan(req); // should throw Exception
 
   //   expect(resp.getResponse(), true);
