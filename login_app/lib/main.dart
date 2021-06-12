@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget{
     )
         ],
       child: MaterialApp(
+      debugShowCheckedModeBanner: false, //Remove "debug" banner
       title: 'Coviduous',
       theme: ThemeData(
         primaryColor: Color(0xff056676), //AppBar and buttons default color
