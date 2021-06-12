@@ -8,6 +8,7 @@ import 'screens/admin_add_floor_plan.dart';
 import 'screens/admin_calc_floor_plan.dart';
 import 'screens/admin_delete_announcement.dart';
 import 'screens/admin_view_announcements.dart';
+import 'screens/admin_make_announcement.dart';
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
 import 'screens/user_view_office_spaces.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget{
           AdminHomePage.routeName: (ctx)=> AdminHomePage(),
           AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
           AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
+          MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
           AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
           CalcFloorPlan.routeName: (ctx)=> CalcFloorPlan(),
           UserHomepage.routeName: (ctx)=> UserHomepage(),
