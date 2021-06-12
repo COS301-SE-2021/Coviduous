@@ -124,7 +124,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                   child: getList()
               ),
               Container (
-                alignment: Alignment.bottomLeft,
+                alignment: Alignment.bottomRight,
                 child: Container (
                     height: 50,
                     width: 200,
@@ -143,7 +143,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                 ),
               ),
               Container (
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.bottomLeft,
                 child: Container (
                     height: 50,
                     width: 200,
