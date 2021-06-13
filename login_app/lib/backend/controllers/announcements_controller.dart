@@ -14,8 +14,10 @@ class AnnouncementsController {
   void
       createAnnouncement() {} // this function needs to be modified to fit the creation of the announcement. Nb use announcementQueries.createAnnouncement()
 
-  void
-      viewAnnouncements() {} //this function must also follow the same standards
+  bool viewAnnouncements() {
+    return true;
+  } //this function must also follow the same standards
+
   DeleteAnnouncementResponse deleteAnnouncement(DeleteAnnouncementRequest req) {
     if (announcementQueries.deleteAnnouncement(req.getAnnouncementId())) {
       return new DeleteAnnouncementResponse(
