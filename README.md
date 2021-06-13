@@ -23,7 +23,10 @@
 
 ## Documentation
 
-- :open_book: [Overleaf SRS](https://www.overleaf.com/read/jftdfnkqnghg)
+- :open_book: [SRS version 1](https://drive.google.com/file/d/1ZLUPbDZ1Tz6sSdNRtPQ9KEXy4haS586w/view?usp=sharing)
+- :open_book: [SRS version 2](https://)
+- :open_book: [SRS version 3](https://)
+- :open_book: [SRS version 4](https://)
 
 ## Demo Videos
 
