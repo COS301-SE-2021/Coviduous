@@ -18,11 +18,14 @@
 
 ## Documentation
 
-- :open_book: [Overleaf SRS](https://www.overleaf.com/read/zzggfsgzmsdf)
+- :open_book: [SRS version 1](https://drive.google.com/file/d/1ZLUPbDZ1Tz6sSdNRtPQ9KEXy4haS586w/view?usp=sharing)
+- :open_book: [SRS version 2](https://drive.google.com/file/d/1ZLUPbDZ1Tz6sSdNRtPQ9KEXy4haS586w/view?usp=sharing)
+- :open_book: [SRS version 3](https://drive.google.com/file/d/1ZLUPbDZ1Tz6sSdNRtPQ9KEXy4haS586w/view?usp=sharing)
+- :open_book: [SRS version 4](https://drive.google.com/file/d/1ZLUPbDZ1Tz6sSdNRtPQ9KEXy4haS586w/view?usp=sharing)
 
 ## Demo Videos
 
-- :tv: [Demo 1](https://)
+- :tv: [Demo 1](https://drive.google.com/file/d/1-HOCL1wZZynbaPYpgCzQ1dZxWsur90yV/view?usp=sharing)
 - :tv: [Demo 2](https://)
 - :tv: [Demo 3](https://)
 - :tv: [Demo 4](https://)
