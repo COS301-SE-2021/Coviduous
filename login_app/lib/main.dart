@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget{
       title: 'Coviduous',
       theme: ThemeData(
         primaryColor: Color(0xff056676), //AppBar and buttons default color
+        //primaryColor: Color(0xff5E2C25), //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
         scaffoldBackgroundColor: Color(0xff022C33), //Scaffold background default color
       ),
