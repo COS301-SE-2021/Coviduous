@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/screens/login_screen.dart';
 import 'package:login_app/screens/user_book_office_space.dart';
+import 'package:login_app/screens/user_manage_account.dart';
 import 'package:login_app/screens/user_view_announcements.dart';
 import 'package:login_app/screens/user_view_current_bookings.dart';
 import 'package:login_app/screens/user_view_office_spaces.dart';
@@ -196,22 +197,7 @@ class _UserHomepageState extends State<UserHomepage> {
                     ),
                     child: Text('Manage account'),
                     onPressed: (){
-                      //Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: Text('Placeholder'),
-                            content: Text('Manage account'),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text('Okay'),
-                                onPressed: (){
-                                  Navigator.of(ctx).pop();
-                                },
-                              )
-                            ],
-                          )
-                      );
+                      Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
                     },
                   )
               ),
