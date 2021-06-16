@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
+import 'admin_manage_account.dart';
 import 'admin_add_floor_plan.dart';
 import 'admin_view_announcements.dart';
 
@@ -242,22 +243,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                         child: Text('Manage account'),
                         onPressed: (){
-                          //Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                title: Text('Placeholder'),
-                                content: Text('Manage account'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('Okay'),
-                                    onPressed: (){
-                                      Navigator.of(ctx).pop();
-                                    },
-                                  )
-                                ],
-                              )
-                          );
+                          Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
                         },
                       )
                   ),
