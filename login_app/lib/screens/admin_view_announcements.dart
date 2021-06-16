@@ -17,7 +17,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
   @override
   Widget build(BuildContext context) {
     Widget getList() {
-      int numberOfAnnouncements = 1;
+      int numberOfAnnouncements = globals.globalNumAnnouncements;
 
       if (numberOfAnnouncements == 0) {
         return Column(
