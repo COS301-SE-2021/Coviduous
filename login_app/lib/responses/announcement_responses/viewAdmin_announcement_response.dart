@@ -9,19 +9,19 @@ class ViewAdminAnnouncementResponse {
     this.type = type;
   }
 
-  /*  String getDate() {
-        return date;
-    }
+  String getDate() {
+    return date;
+  }
 
-     String getMessage() {
-        return message;
-    }
+  String getMessage() {
+    return message;
+  }
 
-     String getType() {
-        return type;
-    }
+  String getType() {
+    return type;
+  }
 
-     void setType(String type) {
-        this.type = type;
-    }*/
+  void setType(String type) {
+    this.type = type;
+  }
 }
