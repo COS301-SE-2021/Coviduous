@@ -14,6 +14,7 @@ import 'office/booking.dart';
 List<Floor> globalFloors = [];
 List<Booking> globalBookings = [];
 int globalNumFloors = 0;
+int globalNumAnnouncements = 1;
 
 //Frontend global variables
 //==========================
