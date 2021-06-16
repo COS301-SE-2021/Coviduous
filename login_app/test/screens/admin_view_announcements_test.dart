@@ -15,7 +15,7 @@ void main() {
       );
     }
 
-    //Build admin delete announcement screen
+    //Build admin view announcements screen
     await tester.pumpWidget(createWidgetForTesting(child: new AdminViewAnnouncements()));
 
     int numberOfAnnouncements = 1;
