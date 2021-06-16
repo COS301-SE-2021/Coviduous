@@ -16,7 +16,7 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
   List<String> announcementIds = ['1', '2'];
 
   Widget getList() {
-    int numberOfAnnouncements = 1; //Would instead equal globals.globalAnnouncements.length once that is implemented
+    int numberOfAnnouncements = globals.globalNumAnnouncements;
 
     if (numberOfAnnouncements == 0) {
       return Column(
