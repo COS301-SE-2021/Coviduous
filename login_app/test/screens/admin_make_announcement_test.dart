@@ -18,7 +18,6 @@ void main() {
     //Build admin make announcement screen
     await tester.pumpWidget(createWidgetForTesting(child: new MakeAnnouncement()));
 
-
     //Verify that the correct widgets appear in the correct order
     expect(find.text('Select announcement type'), findsOneWidget); //Find one widget containing 'Select announcement type'
     expect(find.text('Description'), findsOneWidget); //Find one widget containing 'Description'
