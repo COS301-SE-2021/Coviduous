@@ -21,4 +21,14 @@ class CreateAnnouncementRequest {
    	{
 		return this.message;
 	}
+
+	String getAdminID()
+   	{
+		return this.AdminID;
+	}
+
+	String getCompanyID()
+   	{
+		return this.CompanyID;
+	}
 }
