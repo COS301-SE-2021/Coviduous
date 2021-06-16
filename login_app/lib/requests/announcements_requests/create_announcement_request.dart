@@ -11,4 +11,14 @@ class CreateAnnouncementRequest {
 		this.AdminID = AdminID;
 		this.CompanyID = CompanyID;
 	}
+
+	String getType()
+	{
+		return this.type;
+	}
+
+	String getMessage()
+   	{
+		return this.message;
+	}
 }
