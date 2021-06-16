@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/screens/admin_view_announcements.dart';
+import 'package:login_app/services/globals.dart' as globals;
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);
@@ -18,7 +19,7 @@ void main() {
     //Build admin view announcements screen
     await tester.pumpWidget(createWidgetForTesting(child: new AdminViewAnnouncements()));
 
-    int numberOfAnnouncements = 1;
+    int numberOfAnnouncements = globals.globalNumAnnouncements;
 
     //Verify that the correct widgets appear in the correct order
     if (numberOfAnnouncements == 0) {
