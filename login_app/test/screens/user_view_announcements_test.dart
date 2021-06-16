@@ -15,7 +15,7 @@ void main() {
       );
     }
 
-    //Build user view announcement screen
+    //Build user view announcements screen
     await tester.pumpWidget(createWidgetForTesting(child: new UserViewAnnouncements()));
 
     int numberOfAnnouncements = 1;
