@@ -12,6 +12,7 @@ import 'screens/admin_make_announcement.dart';
 import 'screens/admin_manage_account.dart';
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
+import 'screens/user_manage_account.dart';
 import 'screens/user_view_office_spaces.dart';
 import 'screens/user_view_current_bookings.dart';
 import 'screens/user_view_announcements.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget{
           UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
           UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),
           UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
-          UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements()
+          UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
+          UserManageAccount.routeName: (ctx)=> UserManageAccount(),
         },
     ));
   }
