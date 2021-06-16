@@ -15,7 +15,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
   Widget build(BuildContext context) {
 
     Widget getList() {
-      int numberOfAnnouncements = 1; //Would instead equal globals.globalAnnouncements.length once that is implemented
+      int numberOfAnnouncements = globals.globalNumAnnouncements;
 
       if (numberOfAnnouncements == 0) {
         return Column(
