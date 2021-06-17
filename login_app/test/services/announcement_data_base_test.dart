@@ -62,4 +62,15 @@ void main() {
     expect(results.length, isNot(0));
   });
   
+  test('View announcement', () async {
+    // to replace with actual viewAnnouncement use case handling function maybe
+    var results = await connection.query("SELECT * FROM announcements");
+
+    print(results);
+    //print(results[0]);
+
+    // expect on use case responses -> expect(expectedResponse, resp.getResponse())
+    expect(results.length, isNot(0));
+  });
+  
 }
