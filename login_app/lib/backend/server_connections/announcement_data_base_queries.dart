@@ -19,6 +19,22 @@ class AnnouncementDatabaseQueries {
     timestamp = null;
   }
 
+  void setAnnouncementID(String aID) {
+    this.announcementID = aID;
+  }
+
+  void setTimestamp(String timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  String getAnnouncementID() {
+    return announcementID;
+  }
+
+  String getTimestamp() {
+    return timestamp;
+  }
+
   bool createAnnouncement() {
     return false;
   }
