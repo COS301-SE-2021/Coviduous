@@ -1,7 +1,23 @@
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:postgres/postgres.dart';
+
+import 'dart:math';
 
 class AnnouncementDatabaseQueries {
-  AnnouncementDatabaseQueries() {}
+  PostgreSQLConnection connection;
+  String host = 'localhost';
+  int port = 5432;
+  String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
+  String user = 'postgres';
+  String pass = ' '; // your postgres user password
+
+  String announcementID;
+  String timestamp;
+
+  AnnouncementDatabaseQueries() {
+    announcementID = null;
+    timestamp = null;
+  }
 
   bool createAnnouncement() {
     return false;
