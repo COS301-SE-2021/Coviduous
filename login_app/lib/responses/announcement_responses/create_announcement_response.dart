@@ -19,4 +19,12 @@ class CreateAnnouncementResponse {
   String getTimestamp() {
     return this.timestamp;
   }
+
+  bool getResponse() {
+    return this.response;
+  }
+
+  String getResponseMessage() {
+    return this.responseMessage;
+  }
 }
