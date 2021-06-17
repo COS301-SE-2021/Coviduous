@@ -35,6 +35,20 @@ class AnnouncementDatabaseQueries {
     return timestamp;
   }
 
+  // DB connection function to be called in each use case - need to test
+  Future connect() async {
+    connection = PostgreSQLConnection(host, port, dbName,
+        username: user, password: pass);
+
+    try {
+      await connection.open();
+      print("Connected to postgres database...");
+    } catch (e) {
+      print("error");
+      print(e.toString());
+    }
+  }
+
   bool createAnnouncement() {
     return false;
   }
