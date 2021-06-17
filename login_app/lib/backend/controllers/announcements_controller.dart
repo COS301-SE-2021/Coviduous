@@ -1,4 +1,6 @@
 import 'package:login_app/backend/server_connections/announcement_data_base_queries.dart';
+import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
+import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 
@@ -11,8 +13,21 @@ class AnnouncementsController {
   AnnouncementsController() {
     this.announcementQueries = new AnnouncementDatabaseQueries();
   }
-  void
-      createAnnouncement() {} // this function needs to be modified to fit the creation of the announcement. Nb use announcementQueries.createAnnouncement()
+  
+  CreateAnnouncementResponse createAnnouncement(CreateAnnouncementRequest req) {
+    if (announcementQueries.createAnnouncement(req.getMessage(), req.getType(),
+            req.getAdminID(), req.getCompanyID()) !=
+        null) {
+      return new CreateAnnouncementResponse(
+          announcementQueries.getAnnouncementID(),
+          announcementQueries.getTimestamp(),
+          true,
+          "Successfully Created Announcement");
+    } else // throw Exception
+    {
+      throw new Exception("Announcement unsuccessfully created");
+    }
+  }
 
   bool viewAnnouncements() {
     return true;
