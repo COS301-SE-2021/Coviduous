@@ -33,5 +33,10 @@ void main() {
   tearDown(() async {
     await connection.close();
   });
+
+  test('Database connection', () async {
+    expect(expectedMessage, "Connected to postgres database...");
+    expect(await connection.execute('select 1'), equals(1));
+  });
   
 }
