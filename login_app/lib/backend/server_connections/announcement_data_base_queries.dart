@@ -49,7 +49,33 @@ class AnnouncementDatabaseQueries {
     }
   }
 
-  bool createAnnouncement() {
+  Future<bool> createAnnouncement(
+      String type, String message, String adminID, String companyID) async {
+    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    String announcementID = "ANOUNC-" + randomInt.toString();
+    String timestamp = DateTime.now().toString();
+
+    connect(); // connect to db
+
+    var result = await connection
+        .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
+                                  VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
+            substitutionValues: {
+          'id': announcementID,
+          'type': type,
+          'date': timestamp,
+          'message': message,
+          'adminid': adminID,
+          'companyid': companyID,
+        });
+
+    if (result != null) {
+      setAnnouncementID(announcementID);
+      setTimestamp(timestamp);
+
+      return true;
+    }
+
     return false;
   }
 
