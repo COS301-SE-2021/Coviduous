@@ -12,5 +12,26 @@ void main() {
 
   String expectedValue;
   String expectedMessage;
+
+  setUp(() async {
+    expectedValue = "test3";
+
+    // connect to db
+    connection = PostgreSQLConnection(host, port, dbName,
+        username: user, password: pass);
+
+    try {
+      await connection.open();
+      expectedMessage = "Connected to postgres database...";
+      print(expectedMessage);
+    } catch (e) {
+      print("error");
+      print(e.toString());
+    }
+  });
+
+  tearDown(() async {
+    await connection.close();
+  });
   
 }
