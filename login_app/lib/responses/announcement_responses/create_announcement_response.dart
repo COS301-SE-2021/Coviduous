@@ -11,4 +11,12 @@ class CreateAnnouncementResponse {
     this.response = response;
     this.responseMessage = responseMessage;
   }
+
+  String getAnnouncementID() {
+    return this.announcementID;
+  }
+
+  String getTimestamp() {
+    return this.timestamp;
+  }
 }
