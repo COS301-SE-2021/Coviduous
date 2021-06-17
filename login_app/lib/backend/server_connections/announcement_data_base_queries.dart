@@ -1,10 +1,10 @@
 import 'package:mongo_dart/mongo_dart.dart';
-import 'package:postgres/postgres.dart';
+//import 'package:postgres/postgres.dart';
 
 import 'dart:math';
 
 class AnnouncementDatabaseQueries {
-  PostgreSQLConnection connection;
+  //PostgreSQLConnection connection;
   String host = 'localhost';
   int port = 5432;
   String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
@@ -36,48 +36,48 @@ class AnnouncementDatabaseQueries {
   }
 
   // DB connection function to be called in each use case - need to test
-  Future connect() async {
-    connection = PostgreSQLConnection(host, port, dbName,
-        username: user, password: pass);
+  // Future connect() async {
+  //   connection = PostgreSQLConnection(host, port, dbName,
+  //       username: user, password: pass);
 
-    try {
-      await connection.open();
-      print("Connected to postgres database...");
-    } catch (e) {
-      print("error");
-      print(e.toString());
-    }
-  }
+  //   try {
+  //     await connection.open();
+  //     print("Connected to postgres database...");
+  //   } catch (e) {
+  //     print("error");
+  //     print(e.toString());
+  //   }
+  // }
 
-  Future<bool> createAnnouncement(
-      String type, String message, String adminID, String companyID) async {
-    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-    String announcementID = "ANOUNC-" + randomInt.toString();
-    String timestamp = DateTime.now().toString();
+  // Future<bool> createAnnouncement(
+  //     String type, String message, String adminID, String companyID) async {
+  //   int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+  //   String announcementID = "ANOUNC-" + randomInt.toString();
+  //   String timestamp = DateTime.now().toString();
 
-    connect(); // connect to db
+  //   connect(); // connect to db
 
-    var result = await connection
-        .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
-                                  VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
-            substitutionValues: {
-          'id': announcementID,
-          'type': type,
-          'date': timestamp,
-          'message': message,
-          'adminid': adminID,
-          'companyid': companyID,
-        });
+  //   var result = await connection
+  //       .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
+  //                                 VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
+  //           substitutionValues: {
+  //         'id': announcementID,
+  //         'type': type,
+  //         'date': timestamp,
+  //         'message': message,
+  //         'adminid': adminID,
+  //         'companyid': companyID,
+  //       });
 
-    if (result != null) {
-      setAnnouncementID(announcementID);
-      setTimestamp(timestamp);
+  //   if (result != null) {
+  //     setAnnouncementID(announcementID);
+  //     setTimestamp(timestamp);
 
-      return true;
-    }
+  //     return true;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   void viewAnnouncements() //arraylist
   {}
