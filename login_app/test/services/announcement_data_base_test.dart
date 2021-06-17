@@ -61,7 +61,7 @@ void main() {
     // expect on use case responses -> expect(expectedResponse, resp.getResponse())
     expect(results.length, isNot(0));
   });
-  
+
   test('View announcement', () async {
     // to replace with actual viewAnnouncement use case handling function maybe
     var results = await connection.query("SELECT * FROM announcements");
@@ -71,6 +71,19 @@ void main() {
 
     // expect on use case responses -> expect(expectedResponse, resp.getResponse())
     expect(results.length, isNot(0));
+  });
+
+  test('Delete announcement', () async {
+    // to replace with actual deleteAnnouncement use case handling function maybe
+    var results = await connection.query(
+        "DELETE FROM announcements WHERE announcementid = @id",
+        substitutionValues: {'id': expectedValue});
+
+    //print(results);
+    //print(results[0]);
+
+    // expect on use case responses -> expect(expectedResponse, resp.getResponse())
+    expect(results.length, 0);
   });
   
 }
