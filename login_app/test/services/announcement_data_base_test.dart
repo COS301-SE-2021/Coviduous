@@ -38,5 +38,28 @@ void main() {
     expect(expectedMessage, "Connected to postgres database...");
     expect(await connection.execute('select 1'), equals(1));
   });
+
+  test('Create announcement', () async {
+    // to replace with actual createAnnouncement use case handling function maybe
+    await connection
+        .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
+                                  VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
+            substitutionValues: {
+          'id': expectedValue,
+          'type': expectedValue,
+          'date': expectedValue,
+          'message': expectedValue,
+          'adminid': expectedValue,
+          'companyid': expectedValue,
+        });
+
+    var results = await connection.query("SELECT * FROM announcements");
+
+    //print(results);
+    //print(results[0][0]);
+
+    // expect on use case responses -> expect(expectedResponse, resp.getResponse())
+    expect(results.length, isNot(0));
+  });
   
 }
