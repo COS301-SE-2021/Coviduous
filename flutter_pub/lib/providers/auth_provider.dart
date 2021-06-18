@@ -58,4 +58,8 @@ class AuthClass{
       return "Error occured";
     }
   }
+  //sign out
+  void signOut(){
+    auth.signOut();
+  }
 }
