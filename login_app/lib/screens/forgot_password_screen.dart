@@ -6,7 +6,7 @@ import 'login_screen.dart';
 import '../models/auth_provider.dart';
 
 class ForgotPassword extends StatefulWidget {
-  static const routeName = "/resetPassword";
+  static const routeName = "/forgotPassword";
 
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
