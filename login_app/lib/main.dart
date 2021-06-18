@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/delete_user_account.dart';
 import 'screens/admin_signup_screen.dart';
 import 'screens/user_signup_screen.dart';
 import 'screens/splash_screen.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget{
     ),
       home: Home(),
       routes: {
+        DeleteAccount.routeName: (ctx)=> DeleteAccount(),
         Register.routeName: (ctx)=> Register(),
         AdminRegister.routeName: (ctx)=> AdminRegister(),
         UserRegister.routeName: (ctx)=> UserRegister(),
