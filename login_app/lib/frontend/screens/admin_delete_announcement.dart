@@ -1,35 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
-import 'user_homepage.dart';
-import '../services/globals.dart' as globals;
-import 'package:login_app/backend/backend_globals/floor_globals.dart'
-    as floorGlobals;
-import '../services/services.dart';
+import 'admin_view_announcements.dart';
+import 'package:login_app/services/globals.dart' as globals;
 
-class UserBookOfficeSpace extends StatefulWidget {
-  static const routeName = "/user_book_space";
+class AdminDeleteAnnouncement extends StatefulWidget {
+  static const routeName = "/admin_delete_announcement";
+
   @override
-  _UserBookOfficeSpaceState createState() => _UserBookOfficeSpaceState();
+  _AdminDeleteAnnouncementState createState() =>
+      _AdminDeleteAnnouncementState();
 }
 
-class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
-  String dropdownFloorValue = '1';
-  String dropdownFloorInfo = ' ';
-  List<Floor> listOfFloors = floorGlobals.globalFloors;
-  List<String> floorNumbers = ['1', '2'];
-  //int numberOfFloors = globals.globalNumFloors;
-  int numberOfFloors = 2;
-
-  Services service = new Services();
+class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
+  String dropdownAnnouncementValue = '1';
+  String dropdownAnnouncementInfo = ' ';
+  List<String> announcementIds = ['1', '2'];
 
   Widget getList() {
-    /*
-    for (int i = 0; i <= numberOfFloors; i++) {
-        floorNumbers.add((i+1).toString());
-    }
-     */
-    if (numberOfFloors == 0) {
+    int numberOfAnnouncements =
+        1; //Would instead equal globals.globalAnnouncements.length once that is implemented
+
+    if (numberOfAnnouncements == 0) {
       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
           alignment: Alignment.center,
@@ -38,7 +29,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
           height: MediaQuery.of(context).size.height /
               (24 * globals.getWidgetScaling()),
           color: Theme.of(context).primaryColor,
-          child: Text('No floor plans found',
+          child: Text('No announcements found',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
@@ -51,7 +42,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                 (12 * globals.getWidgetScaling()),
             color: Colors.white,
             padding: EdgeInsets.all(12),
-            child: Text('No floors have been registered for your company.',
+            child: Text('You have no announcements.',
                 style: TextStyle(
                     fontSize:
                         (MediaQuery.of(context).size.height * 0.01) * 2.5)))
@@ -72,9 +63,10 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                   crossAxisAlignment: CrossAxisAlignment
                       .center, //Center row contents vertically
                   children: <Widget>[
-                    Text('Select floor', style: TextStyle(color: Colors.black)),
+                    Text('Select announcement ID',
+                        style: TextStyle(color: Colors.black)),
                     DropdownButton<String>(
-                      value: dropdownFloorValue,
+                      value: dropdownAnnouncementValue,
                       icon: const Icon(Icons.arrow_downward,
                           color: Color(0xff056676)),
                       iconSize: 24,
@@ -86,12 +78,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                       ),
                       onChanged: (String newValue) {
                         setState(() {
-                          dropdownFloorValue = newValue;
-                          /*
-                          dropdownFloorInfo = 'Number of rooms: ' + listOfFloors[int.parse(dropdownFloorValue)].numOfRooms.toString() +
-                                              '\nMaximum capacity: ' + listOfFloors[int.parse(dropdownFloorValue)].maxCapacity.toString() +
-                                              '\nCurrent capacity: ' + listOfFloors[int.parse(dropdownFloorValue)].currentCapacity.toString();
-                           */
+                          dropdownAnnouncementValue = newValue;
                         });
                       },
                       items: <String>['1', '2']
@@ -103,7 +90,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                       }).toList(),
                     )
                   ]),
-              Text(dropdownFloorInfo),
+              Text(dropdownAnnouncementInfo),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -116,7 +103,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                         context: context,
                         builder: (ctx) => AlertDialog(
                               title: Text('Placeholder'),
-                              content: Text('Booking successfully created.'),
+                              content: Text('Announcement deleted.'),
                               actions: <Widget>[
                                 TextButton(
                                   child: Text('Okay'),
@@ -126,30 +113,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                                 )
                               ],
                             ));
-                  }
-                  /*
-                    if (listOfFloors[int.parse(dropdownFloorValue)].currentCapacity < listOfFloors[int.parse(dropdownFloorValue)].maxCapacity) { //Check if floor has space
-
-                    }
-                    else {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: Text('No space'),
-                            content: Text('Floor has no more space available. Try a different floor or contact your administrator.'),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text('Okay'),
-                                onPressed: (){
-                                  Navigator.of(ctx).pop();
-                                },
-                              )
-                            ],
-                          )
-                      );
-                    }
-                  } */
-                  )
+                  })
             ],
           ));
     }
@@ -159,12 +123,12 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-          title: Text('Book an office space'),
+          title: Text('Delete announcement'),
           leading: BackButton(
             //Specify back button
             onPressed: () {
               Navigator.of(context)
-                  .pushReplacementNamed(UserHomepage.routeName);
+                  .pushReplacementNamed(AdminViewAnnouncements.routeName);
             },
           ),
         ),

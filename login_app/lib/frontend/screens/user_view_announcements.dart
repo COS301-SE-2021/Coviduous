@@ -1,36 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/subsystems/office_subsystem/booking.dart';
 
 import 'user_homepage.dart';
-import 'package:login_app/backend/backend_globals/office_globals.dart'
-    as officeGlobals;
-import '../services/globals.dart' as globals;
-//import '../services/services.dart';
+import 'package:login_app/services/globals.dart' as globals;
 
-class UserViewCurrentBookings extends StatefulWidget {
-  static const routeName = "/user_bookings";
+class UserViewAnnouncements extends StatefulWidget {
+  static const routeName = "/user_announcements";
+
   @override
-  _UserViewCurrentBookingsState createState() =>
-      _UserViewCurrentBookingsState();
+  _UserViewAnnouncementsState createState() => _UserViewAnnouncementsState();
 }
 
-class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
-  int numberOfBookings =
-      officeGlobals.globalBookings.length; //Number of bookings
-  List<Booking> bookings = officeGlobals.globalBookings;
-
+class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
   @override
   Widget build(BuildContext context) {
     Widget getList() {
-      //For demo 1
-      //================================================================
-      officeGlobals.globalBookings.add(new Booking("test user", "2", "3", 6));
-      numberOfBookings = officeGlobals.globalBookings.length;
-      bookings = officeGlobals.globalBookings;
-      //================================================================
+      int numberOfAnnouncements =
+          1; //Would instead equal globals.globalAnnouncements.length once that is implemented
 
-      if (numberOfBookings == 0) {
-        //If the number of bookings = 0, don't display a list
+      if (numberOfAnnouncements == 0) {
         return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
             alignment: Alignment.center,
@@ -39,7 +26,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
             height: MediaQuery.of(context).size.height /
                 (24 * globals.getWidgetScaling()),
             color: Theme.of(context).primaryColor,
-            child: Text('No bookings found',
+            child: Text('No announcements found',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize:
@@ -53,7 +40,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                   (12 * globals.getWidgetScaling()),
               color: Colors.white,
               padding: EdgeInsets.all(12),
-              child: Text('You have no active bookings.',
+              child: Text('You have no announcements.',
                   style: TextStyle(
                       fontSize:
                           (MediaQuery.of(context).size.height * 0.01) * 2.5)))
@@ -62,9 +49,9 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
         //Else create and return a list
         return ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: numberOfBookings,
+            itemCount: numberOfAnnouncements,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH booking in bookings[]
+              //Display a list tile FOR EACH announcement in announcements[]
               return ListTile(
                 title: Column(children: [
                   Container(
@@ -72,7 +59,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Booking ' + (index + 1).toString(),
+                    child: Text('Announcement ' + (index + 1).toString(),
                         style: TextStyle(color: Colors.white)),
                   ),
                   ListView(
@@ -83,33 +70,22 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text('User: ' + bookings[index].user,
+                          //child: Text('Type: ' + announcements[index].type, style: TextStyle(color: Colors.black)),
+                          child: Text('Type: General',
                               style: TextStyle(color: Colors.black)),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Date: ' + bookings[index].dateTime.toString(),
+                          //child: Text('Date: ' + announcements[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
+                          child: Text('Date: test',
                               style: TextStyle(color: Colors.black)),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text('Floor: ' + bookings[index].floorNum,
-                              style: TextStyle(color: Colors.black)),
-                        ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Room: ' + bookings[index].roomNum,
-                              style: TextStyle(color: Colors.black)),
-                        ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text(
-                              'Desk: ' + bookings[index].deskNum.toString(),
+                          //child: Text('Message: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
+                          child: Text('Message: Hello World',
                               style: TextStyle(color: Colors.black)),
                         ),
                       ])
@@ -122,7 +98,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
 
     return new Scaffold(
         appBar: AppBar(
-          title: Text('View current bookings'),
+          title: Text('Announcements'),
           leading: BackButton(
             //Specify back button
             onPressed: () {
