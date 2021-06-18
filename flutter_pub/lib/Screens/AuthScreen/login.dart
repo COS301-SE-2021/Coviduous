@@ -58,7 +58,13 @@ class _LoginPageState extends State<LoginPage> {
                                   builder: (context) => HomePage()), (
                                   route) => false);
                         }
-                        
+                        else {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(value)));
+                        }
                       });
                     
                     },
