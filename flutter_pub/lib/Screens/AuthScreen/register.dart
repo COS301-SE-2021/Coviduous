@@ -138,6 +138,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text("Create Account")
                 ),
 
+                SizedBox(height: 20,),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: Text("Already have an account? Login!"),
+                ),
+
               ],
           ),
 
