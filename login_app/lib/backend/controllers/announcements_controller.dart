@@ -3,8 +3,10 @@ import 'package:login_app/requests/announcements_requests/create_announcement_re
 // import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
 // import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
+import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
+import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 
 class AnnouncementsController {
 //This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
@@ -16,7 +18,20 @@ class AnnouncementsController {
     this.announcementQueries = new AnnouncementDatabaseQueries();
   }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////Concrete Implementations////////////////////////////////////////////////
+  bool viewAnnouncements() {
+    return true;
+  } //this function must also follow the same standards
+
+  /*DeleteAnnouncementResponse deleteAnnouncement(DeleteAnnouncementRequest req) {
+    if (announcementQueries.deleteAnnouncement(req.getAnnouncementId())) {
+      return new DeleteAnnouncementResponse(
+          true, "Successfully Deleted Announcement");
+    } else {
+      return new DeleteAnnouncementResponse(false, "Unsuccessful Operation");
+    }
+  }*/
+//////////////////////////////////Mocked Implementations/////////////////////////////////////////////////////////////////////
   //create Announcement Mock
   /**
    * This function is used to test if the logic and implementation of creating an announcement works
@@ -37,8 +52,6 @@ class AnnouncementsController {
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Delete Announcement Mock
   /**
    * This function is used to test if the logic and implementation of deleting an announcement works
@@ -55,16 +68,15 @@ class AnnouncementsController {
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  bool viewAnnouncements() {
-    return true;
-  } //this function must also follow the same standards
-
-  /*DeleteAnnouncementResponse deleteAnnouncement(DeleteAnnouncementRequest req) {
-    if (announcementQueries.deleteAnnouncement(req.getAnnouncementId())) {
-      return new DeleteAnnouncementResponse(
-          true, "Successfully Deleted Announcement");
+//View Announcement Mock
+  ViewAdminAnnouncementResponse viewAnnouncementsAdminMock(
+      ViewAdminAnnouncementRequest req) {
+    var list = announcementQueries.viewAnnouncementsAdminMock(req.getAdminId());
+    if (list != null) {
+      return new ViewAdminAnnouncementResponse(
+          list, "Successfully Fetched Announcements For Admin");
     } else {
-      return new DeleteAnnouncementResponse(false, "Unsuccessful Operation");
+      throw new Exception("Announcement id does not exist");
     }
-  }*/
+  }
 }
