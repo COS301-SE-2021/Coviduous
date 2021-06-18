@@ -56,7 +56,12 @@ class _ResetPageState extends State<ResetPage> {
                     child: Text("Reset password")
                 ),
                 SizedBox(height: 20,),
-
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: Text("Click here! to return to Log In Page"),
+                ),
               ],
           ),
         ) : Center(child: CircularProgressIndicator(),
