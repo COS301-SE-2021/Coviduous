@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'admin_reset_password_screen.dart';
 import 'admin_homepage.dart';
 import 'delete_user_account.dart';
 import '../services/globals.dart' as globals;
@@ -87,22 +88,7 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                       crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                   ),
                                   onPressed: () {
-                                    //Navigator.of(context).pushReplacementNamed(AdminResetPassword.routeName);
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Placeholder'),
-                                          content: Text('Reset password'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
+                                    Navigator.of(context).pushReplacementNamed(AdminResetPassword.routeName);
                                   }
                               ),
                               SizedBox (
