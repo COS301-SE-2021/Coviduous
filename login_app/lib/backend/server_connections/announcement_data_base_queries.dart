@@ -1,3 +1,6 @@
+import 'package:login_app/announcement_subsystem/announcement.dart';
+import 'package:login_app/backend/globals/announcements_globals.dart'
+    as globals;
 import 'package:mongo_dart/mongo_dart.dart';
 //import 'package:postgres/postgres.dart';
 
@@ -78,6 +81,38 @@ class AnnouncementDatabaseQueries {
 
   //   return false;
   // }
+/////////////////////////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * This function mocks out the database interaction of creating an announcement, the fuction will be used in tests
+ */
+  bool createAnnouncementMock(
+      String message, String type, String adminID, String companyID) {
+    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    this.announcementID = "ANOUNC-" + randomInt.toString();
+    this.timestamp = DateTime.now().toString();
+
+    // conection to DB
+    //for mock purposes we will mock out the connection which will either be true of false
+    bool connection = true;
+    // prepared Statement
+
+    if (connection != false) {
+      //set up your prepared statement
+
+      var announcement1 = new Announcement(this.announcementID, type,
+          this.timestamp, message, adminID, companyID);
+      globals.announcementDatabaseTable.add(announcement1);
+      print("Added a new announcement");
+      //execute sql statement
+      globals.numAnnouncements++;
+      print("Number of announcements : " + globals.numAnnouncements.toString());
+      return true;
+    } else {
+      //This means connection could not be established
+      return false;
+    }
+  }
 
   void viewAnnouncements() //arraylist
   {}
