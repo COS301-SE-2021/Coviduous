@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import '../models/auth_provider.dart';
 
-class ResetPage extends StatefulWidget {
+class ForgotPassword extends StatefulWidget {
   static const routeName = "/resetPassword";
 
   @override
-  _ResetPageState createState() => _ResetPageState();
+  _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -17,7 +17,7 @@ User user = FirebaseAuth.instance.currentUser;
 DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(user.uid).get() as DocumentSnapshot;
 String type = snap['Type'];
 
-class _ResetPageState extends State<ResetPage> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   TextEditingController _email = TextEditingController();
   bool isLoading = false;
   @override
