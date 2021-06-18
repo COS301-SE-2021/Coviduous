@@ -39,7 +39,14 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                       hintText: 'Password'),
                 ),
-                
+
+                FlatButton(
+                  color: Colors.blue,
+
+
+                    child: Text("Log In")
+                ),
+
               ],
           ),
         ) :Center(child: CircularProgressIndicator(),
