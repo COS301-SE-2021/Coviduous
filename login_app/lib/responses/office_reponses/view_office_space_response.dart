@@ -1,4 +1,4 @@
-import 'package:login_app/services/office/booking.dart';
+import 'package:login_app/subsystems/office_subsystem/booking.dart';
 
 class ViewOfficeSpaceResponse {
   bool successful = false;

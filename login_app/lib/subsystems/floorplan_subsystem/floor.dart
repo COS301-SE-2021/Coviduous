@@ -1,4 +1,4 @@
-import 'package:login_app/services/floorplan/room.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 class Floor {
   List<Room> rooms = [];
@@ -32,7 +32,8 @@ class Floor {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
         if (rooms.asMap().containsKey(i)) {
-          if (rooms[i].roomNum == roomNum) { //Checks if the room number in rooms array is the same as the room number the user specified
+          if (rooms[i].roomNum == roomNum) {
+            //Checks if the room number in rooms array is the same as the room number the user specified
             rooms[i].displayCapacity();
           }
         }
@@ -43,18 +44,18 @@ class Floor {
   bool bookDesk(String roomNum) {
     if (rooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
-          if (rooms.asMap().containsKey(i)) {
-            if ((rooms[i].roomNum) ==
-                roomNum) //Checks if the room number in rooms array is the same as the room number the user specified
-                {
-              if (rooms[i].bookDesk()) {
-                print("Successfully Booked.");
-                return true;
-              }
+        if (rooms.asMap().containsKey(i)) {
+          if ((rooms[i].roomNum) ==
+              roomNum) //Checks if the room number in rooms array is the same as the room number the user specified
+          {
+            if (rooms[i].bookDesk()) {
+              print("Successfully Booked.");
+              return true;
             }
           }
         }
       }
+    }
     return false;
   }
 

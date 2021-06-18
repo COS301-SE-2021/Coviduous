@@ -1,27 +1,19 @@
+import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
+
 class ViewAdminAnnouncementResponse {
   String message;
-  String type;
-  String date;
+  List<Announcement> announcementArrayList;
 
-  ViewAnnouncementResponse(String message, String type, String date) {
-    this.message = message;
-    this.date = date;
-    this.type = type;
-  }
-
-  String getDate() {
-    return date;
+  ViewAdminAnnouncementResponse(List<Announcement> list, String Message) {
+    this.message = Message;
+    this.announcementArrayList = list;
   }
 
   String getMessage() {
     return message;
   }
 
-  String getType() {
-    return type;
-  }
-
-  void setType(String type) {
-    this.type = type;
+  List<Announcement> getAdminAnnouncements() {
+    return announcementArrayList;
   }
 }

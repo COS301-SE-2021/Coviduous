@@ -1,6 +1,6 @@
 class CreateAnnouncementRequest {
+  	String type;
   	String message;
-	String type;
 	String AdminID;
 	String CompanyID;
 

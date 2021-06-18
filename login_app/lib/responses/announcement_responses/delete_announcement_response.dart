@@ -7,7 +7,7 @@ class DeleteAnnouncementResponse {
     this.response = resp;
   }
 
-  String getResponse() {
+  String getResponseMessage() {
     return this.response;
   }
 
