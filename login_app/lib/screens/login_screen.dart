@@ -9,8 +9,6 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'admin_homepage.dart';
@@ -31,11 +29,6 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-FirebaseAuth auth = FirebaseAuth.instance;
-User user = FirebaseAuth.instance.currentUser;
-DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(user.uid).get() as DocumentSnapshot;
-String type = snap.get('Type');
-
 /*
   Class name: _LoginScreenState
   Purpose: This class defines the layout of the page.
@@ -46,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _password = TextEditingController();
 
   bool isLoading = false;
+  String userType = "User";
 
   /*
     Function name: build
@@ -168,6 +162,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: MediaQuery.of(context).size.height/48,
                                   width: MediaQuery.of(context).size.width,
                                 ),
+                                Text('Select user type'),
+                                DropdownButtonFormField<String>(
+                                  style: const TextStyle(color: Colors.black),
+                                  value: userType,
+                                  icon: const Icon(Icons.arrow_downward,
+                                      color: Color(0xff056676)),
+                                  iconSize: 24,
+                                  dropdownColor: Colors.white,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      userType = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Admin',
+                                    'User'
+                                  ].map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                ),
                                 ElevatedButton(
                                   child: Text(
                                     'Submit'
@@ -183,14 +200,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                         setState(() {
                                           isLoading = false;
                                         });
-                                        if (type == 'Admin') {
-                                          Navigator.pushAndRemoveUntil(context,
-                                              MaterialPageRoute(builder: (context) => AdminHomePage()), (
-                                                  route) => false);
+
+                                        if (userType == 'Admin') {
+                                          Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                        } else if (userType == 'User') {
+                                          Navigator.pushReplacementNamed(context, UserHomepage.routeName);
                                         } else {
-                                          Navigator.pushAndRemoveUntil(context,
-                                              MaterialPageRoute(builder: (context) => UserHomepage()), (
-                                                  route) => false);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Error'),
+                                                content: Text('Invalid user type'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
                                         }
                                       }
                                       else {
