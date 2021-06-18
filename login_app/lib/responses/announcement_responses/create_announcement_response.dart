@@ -3,6 +3,7 @@ class CreateAnnouncementResponse {
   String timestamp;
   bool response;
   String responseMessage;
+  int numAnnouncements;
 
   CreateAnnouncementResponse(String announcementID, String timestamp,
       bool response, String responseMessage) {
@@ -10,6 +11,14 @@ class CreateAnnouncementResponse {
     this.timestamp = timestamp;
     this.response = response;
     this.responseMessage = responseMessage;
+  }
+
+  void setNumAnnouncements(int num) {
+    this.numAnnouncements = num;
+  }
+
+  int getNumAnnouncements() {
+    return this.numAnnouncements;
   }
 
   String getAnnouncementID() {
