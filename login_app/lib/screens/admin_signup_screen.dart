@@ -223,7 +223,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                         isLoading = false;
                                       });
 
-                                      adminSetup("Admin", _firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
+                                      adminSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) => LoginScreen()), (
                                               route) => false);
