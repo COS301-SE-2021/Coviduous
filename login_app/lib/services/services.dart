@@ -1,13 +1,16 @@
-import 'package:login_app/services/office/booking.dart';
-import 'package:login_app/services/request/book_office_space_request.dart';
-import 'package:login_app/services/request/view_office_space_request.dart';
-import 'package:login_app/services/response/book_office_space_response.dart';
-import 'package:login_app/services/response/view_office_space_response.dart';
+import 'package:login_app/requests/office_requests/book_office_space_request.dart';
+import 'package:login_app/requests/office_requests/view_office_space_request.dart';
+import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
+import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
+import 'package:login_app/subsystems/office_subsystem/booking.dart';
 
-import 'request/create_floor_plan_request.dart';
-import '../services/globals.dart' as globals;
-import 'floorplan/floor.dart';
-import 'response/create_floor_plan_response.dart';
+import '../requests/floor_plan_requests/create_floor_plan_request.dart';
+import 'package:login_app/backend/backend_globals/floor_globals.dart'
+    as floorGlobals;
+import 'package:login_app/backend/backend_globals/office_globals.dart'
+    as officeGlobals;
+import '../responses/floor_plan_responses/create_floor_plan_response.dart';
 
 class Services {
 //This class provides an interface to all the service contracts of the system. It provides a bridge between the front end screens and backend functionality.
@@ -16,21 +19,21 @@ class Services {
   CreateFloorPlanResponse createFloorPlan(CreateFloorPlanRequest req) {
     var holder =
         new Floor(req.getAdmin(), req.getFloorNumber(), req.getTotalRooms());
-    globals.globalFloors.add(holder);
+    floorGlobals.globalFloors.add(holder);
     CreateFloorPlanResponse resp = new CreateFloorPlanResponse();
     resp.setResponse(true);
-    globals.globalNumFloors++;
+    floorGlobals.globalNumFloors++;
     return resp;
   }
 
   bool addRoom(String floorNum, String roomNum, double dimensions,
       double percentage, int numDesks, double deskLength, double deskWidth) {
-    for (int i = 0; i < globals.globalFloors.length; i++) {
-      if (globals.globalFloors[i] != null &&
-          globals.globalFloors[i].floorNum == floorNum) {
-        globals.globalFloors[i].addRoom(
+    for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
+      if (floorGlobals.globalFloors[i] != null &&
+          floorGlobals.globalFloors[i].floorNum == floorNum) {
+        floorGlobals.globalFloors[i].addRoom(
             roomNum, dimensions, percentage, numDesks, deskLength, deskWidth);
-        globals.globalFloors[i].viewRoomDetails(roomNum);
+        floorGlobals.globalFloors[i].viewRoomDetails(roomNum);
         return true;
       }
     }
@@ -38,13 +41,13 @@ class Services {
   }
 
   BookOfficeSpaceResponse bookOfficeSpace(BookOfficeSpaceRequest req) {
-    for (int i = 0; i < globals.globalFloors.length; i++) {
-      if (globals.globalFloors[i] != null &&
-          globals.globalFloors[i].floorNum == req.getFloorNumber()) {
-        if (globals.globalFloors[i].bookDesk(req.getRoomNumber())) {
+    for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
+      if (floorGlobals.globalFloors[i] != null &&
+          floorGlobals.globalFloors[i].floorNum == req.getFloorNumber()) {
+        if (floorGlobals.globalFloors[i].bookDesk(req.getRoomNumber())) {
           Booking holder = new Booking(
               req.getUser(), req.getFloorNumber(), req.getRoomNumber(), 1);
-          globals.globalBookings.add(holder);
+          officeGlobals.globalBookings.add(holder);
           return new BookOfficeSpaceResponse(true);
         }
       }
@@ -53,16 +56,17 @@ class Services {
   }
 
   ViewOfficeSpaceResponse viewOfficeSpace(ViewOfficeSpaceRequest req) {
-    for (int i = 0; i < globals.globalBookings.length; i++) {
-      if (globals.globalBookings[i] != null &&
-          globals.globalBookings[i].user == req.getUser()) {
-        return new ViewOfficeSpaceResponse(true, globals.globalBookings[i]);
+    for (int i = 0; i < officeGlobals.globalBookings.length; i++) {
+      if (officeGlobals.globalBookings[i] != null &&
+          officeGlobals.globalBookings[i].user == req.getUser()) {
+        return new ViewOfficeSpaceResponse(
+            true, officeGlobals.globalBookings[i]);
       }
     }
     return null;
   }
 
   int getNumberOfFloors() {
-    return globals.globalNumFloors;
+    return floorGlobals.globalNumFloors;
   }
 }
