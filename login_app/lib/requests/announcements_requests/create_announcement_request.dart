@@ -1,15 +1,15 @@
 class CreateAnnouncementRequest {
   	String type;
   	String message;
-	String AdminID;
-	String CompanyID;
+	String adminID;
+	String companyID;
 
-	CreateAnnouncementRequest(String type, String message, String AdminID, String CompanyID) 
+	CreateAnnouncementRequest(String type, String message, String adminID, String companyID) 
 	{
 		this.type = type;
 		this.message = message;
-		this.AdminID = AdminID;
-		this.CompanyID = CompanyID;
+		this.adminID = adminID;
+		this.companyID = companyID;
 	}
 
 	String getType()
@@ -24,11 +24,11 @@ class CreateAnnouncementRequest {
 
 	String getAdminID()
    	{
-		return this.AdminID;
+		return this.adminID;
 	}
 
 	String getCompanyID()
    	{
-		return this.CompanyID;
+		return this.companyID;
 	}
 }
