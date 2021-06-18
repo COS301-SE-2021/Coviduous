@@ -141,4 +141,30 @@ class AnnouncementDatabaseQueries {
       return false;
     }
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  /// View Announcements For The admin to view their assosiated announcements
+  List<Announcement> viewAnnouncementsAdminMock(String adminId) {
+    List<Announcement> resultSet = [];
+    // conection to DB
+    //for mock purposes we will mock out the connection which will either be true of false
+    bool connection = true;
+    // prepared Statement
+
+    if (connection != false && adminId != "") {
+      //set up prepared statement.
+      //execute prepared statement to fetch all announcements with specified announcement Id
+      //this loop mocks the functionality of fetching assosiated announcements from the database
+      for (var i = 0; i < globals.announcementDatabaseTable.length; i++) {
+        if (globals.announcementDatabaseTable[i].getadminId() == adminId) {
+          if (globals.announcementDatabaseTable[i] != null) {
+            resultSet.add(globals.announcementDatabaseTable[i]);
+          }
+        }
+      }
+      return resultSet;
+    } else {
+      return null;
+    }
+  }
 }
