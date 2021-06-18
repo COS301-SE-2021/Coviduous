@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'delete_user_account.dart';
 import 'user_homepage.dart';
-
 import '../services/globals.dart' as globals;
 
 class UserManageAccount extends StatefulWidget {
@@ -103,6 +103,28 @@ class _UserManageAccountState extends State<UserManageAccount> {
                                           ],
                                         )
                                     );
+                                  }
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/48,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              ElevatedButton (
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  child: Row (
+                                      children: <Widget>[
+                                        Expanded(child: Text('Delete account')),
+                                        Icon(Icons.delete_forever_rounded)
+                                      ],
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacementNamed(DeleteAccount.routeName);
                                   }
                               ),
                             ]
