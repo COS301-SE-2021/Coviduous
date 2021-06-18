@@ -17,6 +17,7 @@ class AnnouncementsController {
   }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //create Announcement Mock
   /**
    * This function is used to test if the logic and implementation of creating an announcement works
    */
@@ -29,6 +30,24 @@ class AnnouncementsController {
           announcementQueries.getTimestamp(),
           true,
           "Successfully Created Announcement");
+    } else // throw Exception
+    {
+      throw new Exception("Announcement unsuccessfully created");
+    }
+  }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //Delete Announcement Mock
+  /**
+   * This function is used to test if the logic and implementation of deleting an announcement works
+   */
+  DeleteAnnouncementResponse deleteAnnouncementMock(
+      DeleteAnnouncementRequest req) {
+    if (announcementQueries.deleteAnnouncementMock(req.getAnnouncementId())) {
+      return DeleteAnnouncementResponse(
+          true, "Sucessfully Deleted Announcement");
     } else // throw Exception
     {
       throw new Exception("Announcement unsuccessfully created");
