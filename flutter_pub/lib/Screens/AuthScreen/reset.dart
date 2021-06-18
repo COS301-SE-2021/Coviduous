@@ -29,7 +29,33 @@ class _ResetPageState extends State<ResetPage> {
                   ),
                 ),
                 const SizedBox(height: 30,),
-                
+                FlatButton(
+                    color: Colors.blue,
+                    onPressed: (){
+                      setState(() {
+                        isLoading = true;
+                      });
+                      AuthClass().resetPassword(email: _email.text.trim()).then((value) {
+                        if (value == "Email sent") {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder: (context) => LoginPage()), (
+                                  route) => false);
+                        }
+                        else {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(value)));
+                        }
+                      });
+                    },
+                    child: Text("Reset password")
+                ),
+
               ],
           ),
         ) : Center(child: CircularProgressIndicator(),
