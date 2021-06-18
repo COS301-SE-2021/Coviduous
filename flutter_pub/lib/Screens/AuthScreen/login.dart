@@ -14,4 +14,28 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _password = TextEditingController();
 
   bool isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
+      ),
+      body: isLoading == false ?  Padding(
+        padding: const EdgeInsets.all(8.0),
+          child: Column(
+              children: [
+                TextFormField(
+                  controller: _email,
+                  decoration: InputDecoration(
+                      hintText: 'Email'
+                  ),
+                ),
+
+                const SizedBox(height: 30,),
+              ],
+          ),
+        ) :Center(child: CircularProgressIndicator(),
+       ),
+    );
+  }
 }
