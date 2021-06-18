@@ -10,3 +10,17 @@ class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
+
+class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController _firstName = TextEditingController();
+  TextEditingController _lastName = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _userName = TextEditingController();
+  TextEditingController _companyName = TextEditingController();
+  TextEditingController _companyLocation = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  TextEditingController _confirmPassword = TextEditingController();
+  bool isLoading = false;
+  @override
+  
+}
