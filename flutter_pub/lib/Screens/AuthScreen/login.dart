@@ -66,10 +66,24 @@ class _LoginPageState extends State<LoginPage> {
                               SnackBar(content: Text(value)));
                         }
                       });
-                    
                     },
                     child: Text("Log In")
                 ),
+                SizedBox(height: 20,),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                  },
+                  child: Text("Don't have an account? Register!"),
+                ),
+
+                const SizedBox(height: 10,),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPage()));
+                  },
+                  child: Text("Forgot Password? Reset!"),
+                )
 
               ],
           ),
