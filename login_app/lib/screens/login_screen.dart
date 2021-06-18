@@ -9,15 +9,15 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
-import 'package:flutter/gestures.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:provider/provider.dart';
 
 import 'admin_homepage.dart';
 import 'user_homepage.dart';
 import 'signup_screen.dart';
-import '../models/authentication.dart';
+import '../models/auth_provider.dart';
+import 'reset_password_screen.dart';
 import '../services/globals.dart' as globals;
 
 /*
@@ -31,13 +31,10 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-/*
-  Enum name: userType
-  Purpose: Defines a user type.
- */
-enum UserType {
-  admin, user
-}
+FirebaseAuth auth = FirebaseAuth.instance;
+User user = FirebaseAuth.instance.currentUser;
+DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(user.uid).get() as DocumentSnapshot;
+String type = snap.get('Type');
 
 /*
   Class name: _LoginScreenState
@@ -45,92 +42,10 @@ enum UserType {
  */
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  Map<String, String> _authData = {
-    'email' : '',
-    'password' : ''
-  };
-  UserType _userType = UserType.user;
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
 
-  /*
-    Function name: _showErrorDialog
-    Purpose: Displays an error message.
-    Parameters:
-    - String msg: an error message to show
-    Output:
-    - An error message that will be displayed as a dialog box.
-   */
-  void _showErrorDialog(String msg)
-  {
-    showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: Text('An Error Occurred'),
-          content: Text(msg),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Okay'),
-              onPressed: (){
-                Navigator.of(ctx).pop();
-              },
-            )
-          ],
-        )
-    );
-  }
-
-  /*
-    Function name: _submit
-    Purpose: Submits a login query.
-    Parameters:
-    - None
-    Output:
-    - After a successful login, the user is taken to their relevant homepage.
-   */
-  Future<void> _submit() async
-  {
-    if(!_formKey.currentState.validate()) {
-      return;
-    }
-    _formKey.currentState.save();
-    try {
-      await Provider.of<Authentication>(context, listen: false).login(
-          _authData['email'],
-          _authData['password']
-      );
-      //Set global email variable so that it appears on the user homepage
-      globals.email = _authData['email'];
-
-      //Retrieve user type from database response
-      String _userTypeString = "user";
-
-      //Convert string to enum value
-      _userType = UserType.values.firstWhere((e) => e.toString() == "UserType." + _userTypeString);
-
-      if (_userType == UserType.user) {
-        Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
-      } else if (_userType == UserType.admin) {
-        Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-      }
-    } catch (error) {
-        var errorMessage = 'Authentication failed.';
-        _showErrorDialog(errorMessage);
-        return;
-    }
-  }
-
-  /*
-    Function name: _changeUserType
-    Purpose: Changes the user type enum.
-    Parameters:
-      - UserType value: The value to set the user type to. Can be either "admin" or "user"
-    Output:
-      - None
-   */
-  void _changeUserType(UserType value) {
-    setState(() {
-      _userType = value;
-    });
-  }
+  bool isLoading = false;
 
   /*
     Function name: build
@@ -152,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Scaffold(
+        child: isLoading == false ? Scaffold(
           backgroundColor: Colors.transparent, //To show background image
           appBar: AppBar(
             title: Text('Login'),
@@ -213,6 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   textInputAction: TextInputAction.next,
                                   decoration: InputDecoration(labelText: 'Email'),
                                   keyboardType: TextInputType.emailAddress,
+                                  controller: _email,
                                   validator: (value)
                                   {
                                     if(value.isEmpty || !value.contains('@'))
@@ -221,9 +137,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                     return null;
                                   },
-                                  onSaved: (value){
-                                    _authData['email'] = value;
-                                  },
                                 ),
                                 //password
                                 TextFormField(
@@ -231,34 +144,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                   textInputAction: TextInputAction.done,
                                   decoration: InputDecoration(labelText:'Password'),
                                   obscureText: true,
+                                  controller: _password,
                                   validator: (value)
                                     {
-                                    if(value.isEmpty || value.length<=5)
+                                    if(value.isEmpty || value.length <= 5)
                                     {
                                       return 'invalid password';
                                     }
                                     return null;
-                                  },
-                                  onSaved: (value)
-                                  {
-                                    _authData['password'] = value;
                                   },
                                 ),
                                 SizedBox (
                                   height: MediaQuery.of(context).size.height/48,
                                   width: MediaQuery.of(context).size.width,
                                 ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'Forgot password?',
-                                    style: new TextStyle(color: Color(0xff056676)),
-                                    recognizer: new TapGestureRecognizer()
-                                    ..onTap = () {
-                                      launch(
-                                          'https://www.google.com'
-                                      );
-                                    },
-                                  )
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPage()));
+                                  },
+                                  child: Text("Forgot password?"),
                                 ),
                                 SizedBox (
                                   height: MediaQuery.of(context).size.height/48,
@@ -270,7 +174,33 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   onPressed: ()
                                   {
-                                      _submit();
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    AuthClass().signIn(email: _email.text.trim(),
+                                        password: _password.text.trim()).then((value) {
+                                      if (value == "welcome") {
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        if (type == 'Admin') {
+                                          Navigator.pushAndRemoveUntil(context,
+                                              MaterialPageRoute(builder: (context) => AdminHomePage()), (
+                                                  route) => false);
+                                        } else {
+                                          Navigator.pushAndRemoveUntil(context,
+                                              MaterialPageRoute(builder: (context) => UserHomepage()), (
+                                                  route) => false);
+                                        }
+                                      }
+                                      else {
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text(value)));
+                                      }
+                                    });
                                   },
                                   style: ElevatedButton.styleFrom (
                                     shape: RoundedRectangleBorder(
@@ -289,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
               )
             ],
           ),
-        ),
+        ) : Center( child: CircularProgressIndicator())
       ),
     );
   }
