@@ -30,6 +30,20 @@ void main() {
     print(
         "/////////////////////////////Completed Mock Testing For Creating Announcements ///////////////////");
     expect(globals.numAnnouncements, isNot(0));
+  test('Exception handle for Create Announcement Mock', (){
+    
+    print("Exception Handle if the attributes are empty")
+
+
+
+  }
+  
+  
+  )
+
+
+
+
   });
   ////////////////////////////////////////////// Delete Announcement  /////////////////////////////////////////////////////
 
