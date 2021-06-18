@@ -3,7 +3,7 @@ import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'user_homepage.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
-import '../services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserViewOfficeSpaces extends StatefulWidget {
   static const routeName = "/user_office_spaces";

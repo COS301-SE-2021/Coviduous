@@ -4,7 +4,7 @@ import 'package:login_app/subsystems/office_subsystem/booking.dart';
 import 'user_homepage.dart';
 import 'package:login_app/backend/backend_globals/office_globals.dart'
     as officeGlobals;
-import '../services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 //import '../services/services.dart';
 
 class UserViewCurrentBookings extends StatefulWidget {

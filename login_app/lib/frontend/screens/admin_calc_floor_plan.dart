@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'admin_add_floor_plan.dart';
-import '../services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class CalcFloorPlan extends StatefulWidget {
   static const routeName = "/admin_calc_floorplan";
@@ -9,6 +9,7 @@ class CalcFloorPlan extends StatefulWidget {
   @override
   _CalcFloorPlanState createState() => _CalcFloorPlanState();
 }
+
 class _CalcFloorPlanState extends State<CalcFloorPlan> {
   String _dimensions;
   String _numdesks;
@@ -17,7 +18,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
 
   final dimensionFormat = RegExp(r'^\d\*\d$');
 
-  Widget _buildDimensions(){
+  Widget _buildDimensions() {
     return TextFormField(
       maxLength: 15,
       decoration: InputDecoration(
@@ -25,86 +26,79 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
       ),
       validator: (String value) {
         //int dimension = int.tryParse(value);
-        if(value == null){
+        if (value == null) {
           return 'Dimensions are required';
         } else if (!dimensionFormat.hasMatch(value)) {
           return 'Value must be in the form x*y';
         }
         return null;
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _dimensions = value;
       },
     );
   }
 
-  Widget _buildDesks(){
+  Widget _buildDesks() {
     return TextFormField(
-      decoration: InputDecoration(
-          labelText: 'Number of desks'
-      ),
+      decoration: InputDecoration(labelText: 'Number of desks'),
       keyboardType: TextInputType.number,
       validator: (String value) {
         int desk = int.tryParse(value);
-        if(desk == null || desk <= 0){
+        if (desk == null || desk <= 0) {
           return 'Number of desks is required';
         }
         return null;
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _numdesks = value;
       },
     );
   }
 
-  Widget _buildLength(){
+  Widget _buildLength() {
     return TextFormField(
-      decoration: InputDecoration(
-          labelText: 'Length'
-      ),
+      decoration: InputDecoration(labelText: 'Length'),
       keyboardType: TextInputType.number,
       validator: (String value) {
-
         int length = int.tryParse(value);
-        if(length == null || length <= 0){
+        if (length == null || length <= 0) {
           return 'Width must be greater than zero';
         }
         return null;
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _length = value;
       },
     );
   }
 
-  Widget _buildWidth(){
+  Widget _buildWidth() {
     return TextFormField(
-      decoration: InputDecoration(
-          labelText: 'Width'
-      ),
+      decoration: InputDecoration(labelText: 'Width'),
       keyboardType: TextInputType.number,
       validator: (String value) {
-
         int _wid = int.tryParse(value);
-        if(_wid == null || _wid <= 0){
+        if (_wid == null || _wid <= 0) {
           return 'Length must be greater than zero';
         }
         return null;
       },
-      onSaved: (String value){
+      onSaved: (String value) {
         _width = value;
       },
     );
   }
 
-  final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Calculate floor plan"),
-        leading: BackButton( //Specify back button
-          onPressed: (){
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
             Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
           },
         ),
@@ -112,7 +106,8 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+            width: MediaQuery.of(context).size.width /
+                (2 * globals.getWidgetScaling()),
             color: Colors.white,
             margin: EdgeInsets.all(20),
             child: SingleChildScrollView(
@@ -123,11 +118,10 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
                   children: <Widget>[
                     Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildDimensions()
-                    ),
+                        child: _buildDimensions()),
                     Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildDesks(),
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: _buildDesks(),
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -138,18 +132,18 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
                       child: _buildWidth(),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height/48,
+                      height: MediaQuery.of(context).size.height / 48,
                       width: MediaQuery.of(context).size.width,
                     ),
                     ElevatedButton(
-                        style: ElevatedButton.styleFrom (
+                        style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                         child: Text('Save'),
                         onPressed: () {
-                          if(!_formKey.currentState.validate()) {
+                          if (!_formKey.currentState.validate()) {
                             return;
                           }
 
@@ -159,10 +153,9 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
                           print('Number of desks: ' + _numdesks);
                           print('Length: ' + _length);
                           print('Width: ' + _width);
-                        }
-                    ),
+                        }),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height/48,
+                      height: MediaQuery.of(context).size.height / 48,
                       width: MediaQuery.of(context).size.width,
                     ),
                   ],
@@ -175,6 +168,3 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
     );
   }
 }
-
-
-

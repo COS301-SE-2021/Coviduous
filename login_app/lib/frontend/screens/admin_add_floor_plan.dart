@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
+import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 
 import 'admin_homepage.dart';
 import 'admin_calc_floor_plan.dart';
 //import 'screens/selectfloors.dart';
-import '../services/globals.dart' as globals;
-import '../services/services.dart';
-import '../requests/floor_plan_requests/create_floor_plan_request.dart';
-import '../responses/floor_plan_responses/create_floor_plan_response.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/admin_add_floorplan";
@@ -22,7 +22,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
   //String _maxCapacity;
   //String _currCapacity;
 
-  Services service = new Services();
+  FloorPlanController floorplan = new FloorPlanController();
 
   Widget _buildFloors() {
     return TextFormField(
@@ -161,8 +161,8 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                           }
                           _formKey.currentState.save();
 
-                          CreateFloorPlanResponse response =
-                              service.createFloorPlan(CreateFloorPlanRequest(
+                          CreateFloorPlanResponse response = floorplan
+                              .createFloorPlanMock(CreateFloorPlanRequest(
                                   globals.email,
                                   _numFloor,
                                   int.parse(_numRooms)));

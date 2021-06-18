@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/backend/controllers/office_controller.dart';
 
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
@@ -6,10 +8,10 @@ import 'package:login_app/responses/office_reponses/book_office_space_response.d
 import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
-import 'package:login_app/services/services.dart';
 
 void main() {
-  Services service = new Services();
+  FloorPlanController floorplan = new FloorPlanController();
+  OfficeController office = new OfficeController();
   String expectedAdmin;
   String expectedUser;
   String expectedFloorNumber;
@@ -72,14 +74,14 @@ void main() {
   test('Correct create floor plan construction', () {
     CreateFloorPlanRequest req = new CreateFloorPlanRequest(
         expectedAdmin, expectedFloorNumber, expectedTotalRooms);
-    CreateFloorPlanResponse resp = service.createFloorPlan(req);
+    CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
 
     expect(resp.getResponse(), true);
-    expect(service.getNumberOfFloors(), isNot(0));
+    expect(floorplan.getNumberOfFloors(), isNot(0));
   });
 
   test('Correct add a room construction', () {
-    bool value = service.addRoom(
+    bool value = floorplan.addRoomMock(
         expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 6);
 
     expect(value, true);
@@ -106,7 +108,7 @@ void main() {
   test('Correct book office space construction', () {
     BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(
         expectedUser, expectedFloorNumber, expectedRoomNumber);
-    BookOfficeSpaceResponse bookResp = service.bookOfficeSpace(bookReq);
+    BookOfficeSpaceResponse bookResp = office.bookOfficeSpaceMock(bookReq);
 
     expect(bookResp.getResponse(), true);
     //expect(service.getBookings().length, 1); // create mock bookings array object / mock bookings repo
@@ -129,7 +131,7 @@ void main() {
 
   test('Correct view office space construction', () {
     ViewOfficeSpaceRequest viewReq = new ViewOfficeSpaceRequest(expectedUser);
-    ViewOfficeSpaceResponse viewResp = service.viewOfficeSpace(viewReq);
+    ViewOfficeSpaceResponse viewResp = office.viewOfficeSpaceMock(viewReq);
 
     expect(viewResp.getResponse(), true);
   });
