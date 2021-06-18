@@ -2,12 +2,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
+import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
+import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:postgres/postgres.dart';
 import 'package:login_app/backend/globals/announcements_globals.dart'
     as globals;
 
 void main() {
+  /////////////////////////////////// These Are Unit Tests To Test Concrete Implementations For Announcements ////////////////////
   /*PostgreSQLConnection connection;
   String host = 'localhost';
   int port = 5432;
@@ -67,19 +70,6 @@ void main() {
     expect(results.length, isNot(0));
   });*/
 
-/////////////////////////////////////////////////////////////////////////////////
-  test('Create Announcement Mock', () {
-    var announcementController = AnnouncementsController();
-    CreateAnnouncementRequest req = new CreateAnnouncementRequest(
-        "General", "Please Register For PaySlips", "USRAD-1", "CID-1");
-    CreateAnnouncementResponse resp =
-        announcementController.createAnnouncementMock(req);
-    print("Response : " + resp.getResponseMessage());
-    print("AnnouncementID : " + resp.getAnnouncementID());
-
-    expect(globals.numAnnouncements, isNot(0));
-  });
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////
   /*test('View announcement', () async {
     // to replace with actual viewAnnouncement use case handling function maybe
     var results = await connection.query("SELECT * FROM announcements");
@@ -103,4 +93,41 @@ void main() {
     // expect on use case responses -> expect(expectedResponse, resp.getResponse())
     expect(results.length, 0);
   });*/
+
+///////////////////////////////////// These Unit Tests Test Mocked Functionality For The Announcement System ///////////
+////////////////////////////////////////////// Create Announcement/////////////////////////////////////////////////////
+  test('Create Announcement Mock', () {
+    var announcementController = AnnouncementsController();
+    CreateAnnouncementRequest req = new CreateAnnouncementRequest(
+        "General", "Please Register For PaySlips", "USRAD-1", "CID-1");
+    CreateAnnouncementResponse resp =
+        announcementController.createAnnouncementMock(req);
+    print("Response : " + resp.getResponseMessage());
+    print("AnnouncementID : " + resp.getAnnouncementID());
+
+    expect(globals.numAnnouncements, isNot(0));
+  });
+  ////////////////////////////////////////////// Delete Announcement  /////////////////////////////////////////////////////
+
+  test('Delete Announcement Mock', () {
+    var announcementController = AnnouncementsController();
+    CreateAnnouncementRequest req = new CreateAnnouncementRequest(
+        "General", "Please Register For PaySlips", "USRAD-1", "CID-1");
+    CreateAnnouncementResponse resp =
+        announcementController.createAnnouncementMock(req);
+    print("Response : " + resp.getResponseMessage());
+    print("AnnouncementID : " + resp.getAnnouncementID());
+    print("Successfully created announcement will now attempt to delete it");
+
+    DeleteAnnouncementRequest delReq =
+        new DeleteAnnouncementRequest(resp.getAnnouncementID());
+
+    DeleteAnnouncementResponse delResp =
+        announcementController.deleteAnnouncementMock(delReq);
+    print("Response : " + delResp.getResponseMessage());
+
+    //number of announcement should be zero since we only made 1 announcement and the deleted it.
+    expect(globals.numAnnouncements, 0);
+  });
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
