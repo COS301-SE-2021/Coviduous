@@ -1,11 +1,11 @@
 class ViewAdminAnnouncementRequest {
-  String announcement_id;
+  String adminId;
 
-  ViewAdminAnnouncementRequest(String announcementID) {
-    this.announcement_id = announcementID;
+  ViewAdminAnnouncementRequest(String AdminId) {
+    this.adminId = AdminId;
   }
 
-  String getAnnouncement_id() {
-    return announcement_id;
+  String getAdminId() {
+    return adminId;
   }
 }
