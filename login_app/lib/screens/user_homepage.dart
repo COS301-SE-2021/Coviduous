@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:login_app/screens/login_screen.dart';
-import 'package:login_app/screens/user_book_office_space.dart';
-import 'package:login_app/screens/user_manage_account.dart';
-import 'package:login_app/screens/user_view_announcements.dart';
-import 'package:login_app/screens/user_view_current_bookings.dart';
-import 'package:login_app/screens/user_view_office_spaces.dart';
+import 'login_screen.dart';
+import 'user_book_office_space.dart';
+import 'user_manage_account.dart';
+import 'user_view_announcements.dart';
+import 'user_view_current_bookings.dart';
+import 'user_view_office_spaces.dart';
+import '../models/auth_provider.dart';
 import '../services/globals.dart' as globals;
 
 class UserHomepage extends StatefulWidget {
@@ -16,13 +18,15 @@ class UserHomepage extends StatefulWidget {
 }
 
 class _UserHomepageState extends State<UserHomepage> {
+  String email = FirebaseAuth.instance.currentUser.email;
+
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
       onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Welcome ' + globals.email),
+          title: Text('Welcome ' + email),
           automaticallyImplyLeading: false, //Back button will not show up in app bar
         ),
         body: Stack (
@@ -167,8 +171,9 @@ class _UserHomepageState extends State<UserHomepage> {
                             TextButton(
                               child: Text('Yes'),
                               onPressed: (){
-                                globals.email = ''; //Clear currently signed in email
-                                Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                                //globals.email = ''; //Clear currently signed in email
+                                AuthClass().signOut();
+                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                               },
                             ),
                             TextButton(
