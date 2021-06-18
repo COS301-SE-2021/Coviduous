@@ -6,6 +6,8 @@ import 'login_screen.dart';
 import '../models/auth_provider.dart';
 
 class ResetPage extends StatefulWidget {
+  static const routeName = "/resetPassword";
+
   @override
   _ResetPageState createState() => _ResetPageState();
 }
