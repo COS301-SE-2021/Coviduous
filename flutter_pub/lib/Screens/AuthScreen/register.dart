@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'Firstname'
                   ),
                 ),
-                
+
                 const SizedBox(height: 30,),
 
                 TextFormField(
@@ -45,6 +45,26 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'Lastname'
                   ),
                 ),
+
+
+                const SizedBox(height: 30,),
+
+                TextFormField(
+                  controller: _email,
+                  decoration: InputDecoration(
+                      hintText: 'Email'
+                  ),
+                ),
+
+                const SizedBox(height: 30,),
+
+                TextFormField(
+                  controller: _userName,
+                  decoration: InputDecoration(
+                      hintText: 'Username'
+                  ),
+                ),
+
 
               ],
           ),
