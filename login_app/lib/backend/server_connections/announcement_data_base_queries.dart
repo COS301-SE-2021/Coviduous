@@ -1,6 +1,6 @@
-import 'package:login_app/announcement_subsystem/announcement.dart';
 import 'package:login_app/backend/globals/announcements_globals.dart'
     as globals;
+import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 //import 'package:postgres/postgres.dart';
 
@@ -16,6 +16,7 @@ class AnnouncementDatabaseQueries {
 
   String announcementID;
   String timestamp;
+  String companyIdentification;
 
   AnnouncementDatabaseQueries() {
     announcementID = null;
@@ -159,6 +160,48 @@ class AnnouncementDatabaseQueries {
         if (globals.announcementDatabaseTable[i].getadminId() == adminId) {
           if (globals.announcementDatabaseTable[i] != null) {
             resultSet.add(globals.announcementDatabaseTable[i]);
+          }
+        }
+      }
+      return resultSet;
+    } else {
+      return null;
+    }
+  }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+  /// View Announcements For The User to view their company assosiated announcements
+  List<Announcement> viewAnnouncementsUserMock(String userId) {
+    List<Announcement> resultSet = [];
+    this.companyIdentification = "";
+
+    // conection to DB
+    //for mock purposes we will mock out the connection which will either be true of false
+    bool connection = true;
+    // prepared Statement
+
+    if (connection != false && userId != "") {
+      //set up prepared statement.
+      //execute prepared statement to fetch the users companyid announcements for assosiated announcements to the company
+      //this loop mocks the functionality of fetching assosiated companyid from the database
+
+      for (var i = 0; i < globals.userDatabaseTable.length; i++) {
+        if (globals.userDatabaseTable[i].getUserId() == userId) {
+          if (globals.userDatabaseTable[i] != null) {
+            this.companyIdentification =
+                globals.userDatabaseTable[i].getCompanyId();
+            print("Found Users Company ID : " + companyIdentification);
+          }
+        }
+      }
+
+      //once the companyId is fetched we can use it to query for all announcements assosiated with that company that the user is listed under
+      for (var i = 0; i < globals.announcementDatabaseTable.length; i++) {
+        if (globals.announcementDatabaseTable[i].getCompanyId() ==
+            this.companyIdentification) {
+          if (globals.announcementDatabaseTable[i] != null) {
+            resultSet.add(globals.announcementDatabaseTable[i]);
+            print("Company Announcement Added");
           }
         }
       }
