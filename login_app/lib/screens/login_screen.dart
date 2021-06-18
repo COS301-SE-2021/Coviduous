@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 
 import 'admin_homepage.dart';
 import 'user_homepage.dart';
-import 'signup_screen.dart';
+import 'home_signup_screen.dart';
 import '../models/auth_provider.dart';
 import 'reset_password_screen.dart';
 import '../services/globals.dart' as globals;
