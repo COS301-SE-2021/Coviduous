@@ -7,9 +7,9 @@ void main() {
   PostgreSQLConnection connection;
   String host = 'localhost';
   int port = 5432;
-  String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
+  String dbName = 'coviduous'; // an existing DB name on your localhost
   String user = 'postgres';
-  String pass = ' '; // your postgres user password
+  String pass = 'Malaks073#'; // your postgres user password
 
   String expectedValue;
   String expectedMessage;
