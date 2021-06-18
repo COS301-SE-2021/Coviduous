@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'login_screen.dart';
 import 'admin_manage_account.dart';
 import 'admin_add_floor_plan.dart';
 import 'admin_view_announcements.dart';
-
+import '../models/auth_provider.dart';
 import '../services/globals.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
@@ -213,8 +214,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   TextButton(
                                     child: Text('Yes'),
                                     onPressed: (){
-                                      globals.email = ''; //Clear currently signed in email
-                                      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                                      //globals.email = ''; //Clear currently signed in email
+                                      AuthClass().signOut();
+                                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                                     },
                                   ),
                                   TextButton(
