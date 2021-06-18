@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/admin_signup_screen.dart';
+import 'screens/user_signup_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
-import 'screens/signup_screen.dart';
+import 'screens/home_signup_screen.dart';
 import 'screens/admin_homepage.dart';
 import 'screens/admin_add_floor_plan.dart';
 import 'screens/admin_calc_floor_plan.dart';
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget{
       home: Home(),
       routes: {
         Register.routeName: (ctx)=> Register(),
+        AdminRegister.routeName: (ctx)=> AdminRegister(),
+        UserRegister.routeName: (ctx)=> UserRegister(),
         LoginScreen.routeName: (ctx)=> LoginScreen(),
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
         AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
