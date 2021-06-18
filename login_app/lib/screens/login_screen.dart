@@ -15,7 +15,7 @@ import 'admin_homepage.dart';
 import 'user_homepage.dart';
 import 'home_signup_screen.dart';
 import '../models/auth_provider.dart';
-import 'reset_password_screen.dart';
+import 'forgot_password_screen.dart';
 import '../services/globals.dart' as globals;
 
 /*
@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPage()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
                                   },
                                   child: Text("Forgot password?"),
                                 ),
