@@ -20,6 +20,7 @@ import 'screens/user_manage_account.dart';
 import 'screens/user_view_office_spaces.dart';
 import 'screens/user_view_current_bookings.dart';
 import 'screens/user_view_announcements.dart';
+import 'screens/reset_password_screen.dart';
 import 'services/globals.dart' as globals;
 
 void main() {
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget{
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
         UserManageAccount.routeName: (ctx)=> UserManageAccount(),
+        ResetPage.routeName: (ctx)=> ResetPage(),
       },
     );
   }
