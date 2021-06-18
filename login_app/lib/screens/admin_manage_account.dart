@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'admin_homepage.dart';
-
+import 'delete_user_account.dart';
 import '../services/globals.dart' as globals;
 
 class AdminManageAccount extends StatefulWidget {
@@ -117,29 +117,14 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                   ),
                                   child: Row (
                                       children: <Widget>[
-                                        Expanded(child: Text('Delete user account')),
+                                        Expanded(child: Text('Delete account')),
                                         Icon(Icons.delete_forever_rounded)
                                       ],
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                       crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
                                   ),
                                   onPressed: () {
-                                    // Navigator.of(context).pushReplacementNamed(AdminDeleteAccount.routeName);
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Placeholder'),
-                                          content: Text('Delete user account'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
+                                    Navigator.of(context).pushReplacementNamed(DeleteAccount.routeName);
                                   }
                               ),
                             ]
