@@ -1,4 +1,4 @@
-import 'package:login_app/backend/globals/announcements_globals.dart'
+import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:mongo_dart/mongo_dart.dart';
