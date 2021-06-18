@@ -4,9 +4,11 @@ import 'package:login_app/requests/announcements_requests/create_announcement_re
 // import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
+import 'package:login_app/requests/announcements_requests/viewUser_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
+import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
 
 class AnnouncementsController {
 //This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
@@ -68,7 +70,7 @@ class AnnouncementsController {
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//View Announcement Mock
+//View Announcement Mock For Admin
   ViewAdminAnnouncementResponse viewAnnouncementsAdminMock(
       ViewAdminAnnouncementRequest req) {
     var list = announcementQueries.viewAnnouncementsAdminMock(req.getAdminId());
@@ -79,4 +81,18 @@ class AnnouncementsController {
       throw new Exception("Announcement id does not exist");
     }
   }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//View Announcement Mock For User
+  ViewUserAnnouncementResponse viewAnnouncementsUserMock(
+      ViewUserAnnouncementRequest req) {
+    var list = announcementQueries.viewAnnouncementsUserMock(req.getUserId());
+    if (list != null) {
+      return new ViewUserAnnouncementResponse(
+          list, "Successfully Fetched Announcements For User");
+    } else {
+      throw new Exception("Announcement id does not exist");
+    }
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
