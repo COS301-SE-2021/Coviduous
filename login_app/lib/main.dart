@@ -1,12 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/delete_user_account.dart';
-import 'screens/admin_signup_screen.dart';
-import 'screens/user_signup_screen.dart';
+//Splash screen and login
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
+
+//Signup screens
 import 'screens/home_signup_screen.dart';
+import 'screens/admin_signup_screen.dart';
+import 'screens/user_signup_screen.dart';
+
+//Admin subsystem screens
 import 'screens/admin_homepage.dart';
 import 'screens/admin_add_floor_plan.dart';
 import 'screens/admin_calc_floor_plan.dart';
@@ -14,13 +18,23 @@ import 'screens/admin_delete_announcement.dart';
 import 'screens/admin_view_announcements.dart';
 import 'screens/admin_make_announcement.dart';
 import 'screens/admin_manage_account.dart';
+
+//User subsystem screens
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
 import 'screens/user_manage_account.dart';
 import 'screens/user_view_office_spaces.dart';
 import 'screens/user_view_current_bookings.dart';
 import 'screens/user_view_announcements.dart';
+
+//Reset password screens
 import 'screens/forgot_password_screen.dart';
+import 'screens/admin_reset_password_screen.dart';
+import 'screens/user_reset_password_screen.dart';
+
+//Delete account screen
+import 'screens/delete_user_account.dart';
+
 import 'services/globals.dart' as globals;
 
 void main() {
@@ -62,6 +76,8 @@ class MyApp extends StatelessWidget{
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
         UserManageAccount.routeName: (ctx)=> UserManageAccount(),
         ForgotPassword.routeName: (ctx)=> ForgotPassword(),
+        AdminResetPassword.routeName: (ctx)=> AdminResetPassword(),
+        UserResetPassword.routeName: (ctx)=> UserResetPassword(),
       },
     );
   }
