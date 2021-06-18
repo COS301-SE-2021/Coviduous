@@ -55,6 +55,7 @@ class _ResetPageState extends State<ResetPage> {
                     },
                     child: Text("Reset password")
                 ),
+                SizedBox(height: 20,),
 
               ],
           ),
