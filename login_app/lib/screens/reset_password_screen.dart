@@ -29,45 +29,50 @@ class _ResetPageState extends State<ResetPage> {
           },
         ),
       ),
-      body: isLoading == false ? Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: _email,
-              decoration: InputDecoration(
-                  hintText: 'Email'
-              ),
-            ),
+      body: isLoading == false ? Center(
+        child: Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _email,
+                  decoration: InputDecoration(
+                      hintText: 'Email'
+                  ),
+                ),
 
-            const SizedBox(height: 30,),
+                const SizedBox(height: 30,),
 
-            TextButton(
-                onPressed: (){
-                  setState(() {
-                    isLoading = true;
-                  });
-                  AuthClass().resetPassword(email: _email.text.trim()).then((value) {
-                    if (value == "Email sent") {
+                ElevatedButton(
+                    onPressed: (){
                       setState(() {
-                        isLoading = false;
+                        isLoading = true;
                       });
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()), (
-                              route) => false);
-                    }
-                    else {
-                      setState(() {
-                        isLoading = false;
+                      AuthClass().resetPassword(email: _email.text.trim()).then((value) {
+                        if (value == "Email sent") {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder: (context) => LoginScreen()), (
+                                  route) => false);
+                        }
+                        else {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(value)));
+                        }
                       });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(value)));
-                    }
-                  });
-                },
-                child: Text("Reset password")
+                    },
+                    child: Text("Reset password")
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ) : Center(child: CircularProgressIndicator(),
     ),
