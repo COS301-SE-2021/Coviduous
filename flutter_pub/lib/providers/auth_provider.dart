@@ -44,4 +44,18 @@ class AuthClass{
       }
     }
   }
+  //reset password
+  Future<String> resetPassword({
+    String email
+  }) async {
+    try {
+      await auth.sendPasswordResetEmail(
+          email: email
+      );
+      return "Email sent";
+    }
+    catch (e) {
+      return "Error occured";
+    }
+  }
 }
