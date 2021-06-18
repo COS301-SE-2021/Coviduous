@@ -1,17 +1,17 @@
 class DeleteAnnouncementResponse {
-  bool successful;
-  String response;
+  bool response;
+  String responseMessage;
 
-  DeleteAnnouncementResponse(bool succsess, String resp) {
-    this.successful = succsess;
-    this.response = resp;
+  DeleteAnnouncementResponse(bool response, String responseMessage) {
+    this.response = response;
+    this.responseMessage = responseMessage;
   }
 
-  String getResponseMessage() {
+  bool getResponse() {
     return this.response;
   }
 
-  bool isSuccessful() {
-    return this.successful;
+  String getResponseMessage() {
+    return this.responseMessage;
   }
 }
