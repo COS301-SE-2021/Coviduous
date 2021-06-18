@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
 import '../models/auth_provider.dart';
+
+import '../services/globals.dart' as globals;
 
 class ForgotPassword extends StatefulWidget {
   static const routeName = "/forgotPassword";
@@ -28,6 +28,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
       body: isLoading == false ? Center(
         child: Container(
+          width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+          height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
           color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
