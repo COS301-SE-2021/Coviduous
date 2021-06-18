@@ -84,6 +84,21 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 const SizedBox(height: 30,),
 
+                TextFormField(
+                  controller: _companyName,
+                  decoration: InputDecoration(
+                      hintText: 'Company Name'
+                  ),
+                ),
+
+                const SizedBox(height: 30,),
+
+                TextFormField(
+                  controller: _companyLocation,
+                  decoration: InputDecoration(
+                      hintText: 'Company Location'
+                  ),
+                ),
 
 
               ],
