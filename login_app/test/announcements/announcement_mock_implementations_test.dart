@@ -9,7 +9,7 @@ import 'package:login_app/responses/announcement_responses/delete_announcement_r
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
-import 'package:login_app/backend/globals/announcements_globals.dart'
+import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
 
 void main() {
