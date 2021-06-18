@@ -40,8 +40,8 @@ class AnnouncementsController {
    */
   CreateAnnouncementResponse createAnnouncementMock(
       CreateAnnouncementRequest req) {
-    if (announcementQueries.createAnnouncementMock(req.getMessage(),
-        req.getType(), req.getAdminID(), req.getCompanyID())) {
+    if (announcementQueries.createAnnouncementMock(req.getType(),
+        req.getMessage(), req.getAdminID(), req.getCompanyID())) {
       return new CreateAnnouncementResponse(
           announcementQueries.getAnnouncementID(),
           announcementQueries.getTimestamp(),
