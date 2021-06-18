@@ -116,14 +116,29 @@ class AnnouncementDatabaseQueries {
 
   void viewAnnouncements() //arraylist
   {}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//Delete Announcement Mock
+  bool deleteAnnouncementMock(String announcementId) {
+    // conection to DB
+    //for mock purposes we will mock out the connection which will either be true of false
+    bool connection = true;
+    // prepared Statement
 
-  void deleteAnnouncement(String announcementId) async {
-    var db = Db("mongodb://localhost:27017/test");
-    await db.open();
-    DbCollection coll = db.collection('people');
-    print('Connected to database');
-    await coll.remove(coll.findOne(where.eq("first_name", announcementId)));
-    print('Deleted from database');
-    // return true;
+    if (connection != false) {
+      //set up your prepared statement
+      for (var i = 0; i < globals.announcementDatabaseTable.length; i++) {
+        if (globals.announcementDatabaseTable[i].getAnnouncementId() ==
+            announcementId) {
+          print("Removed Announcement");
+          globals.announcementDatabaseTable.removeAt(i);
+          globals.numAnnouncements--;
+        } else {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 }
