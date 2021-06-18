@@ -1,4 +1,4 @@
-import 'package:login_app/announcement_subsystem/announcement.dart';
+import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 
 class ViewAdminAnnouncementResponse {
   String message;
