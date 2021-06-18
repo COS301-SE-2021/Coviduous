@@ -163,7 +163,6 @@ class _UserRegisterState extends State<UserRegister>{
                               TextFormField(
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(labelText:'Company ID'),
-                                obscureText: true,
                                 controller: _companyId,
                                 validator: (value) {
                                   if(value.isEmpty || !value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
