@@ -165,7 +165,6 @@ class _AdminRegisterState extends State<AdminRegister>{
                               TextFormField(
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(labelText:'Company ID'),
-                                obscureText: true,
                                 controller: _companyId,
                                 validator: (value) {
                                   if(value.isEmpty || !value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
@@ -179,7 +178,6 @@ class _AdminRegisterState extends State<AdminRegister>{
                               TextFormField(
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(labelText:'Company name'),
-                                obscureText: true,
                                 controller: _companyName,
                                 validator: (value) {
                                   if(value.isEmpty || !value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
@@ -193,7 +191,6 @@ class _AdminRegisterState extends State<AdminRegister>{
                               TextFormField(
                                 textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
                                 decoration: InputDecoration(labelText:'Company address'),
-                                obscureText: true,
                                 controller: _companyLocation,
                                 validator: (value) {
                                   if(value.isEmpty || !value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
