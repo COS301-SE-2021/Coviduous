@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:login_app/services/request/book_office_space_request.dart';
-import 'package:login_app/services/request/view_office_space_request.dart';
-import 'package:login_app/services/response/book_office_space_response.dart';
-import 'package:login_app/services/response/view_office_space_response.dart';
-import 'package:login_app/services/request/create_floor_plan_request.dart';
-import 'package:login_app/services/response/create_floor_plan_response.dart';
+import 'package:login_app/requests/office_requests/book_office_space_request.dart';
+import 'package:login_app/requests/office_requests/view_office_space_request.dart';
+import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
+import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
+import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
+import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/services/services.dart';
 
 void main() {
@@ -18,7 +18,6 @@ void main() {
   bool expectedBoolean;
 
   //add mock DB repos + storage structures (arrays, etc.) to use
-
 
   // automated object instantiation - used throughout life of tests
   setUp(() {
@@ -40,7 +39,8 @@ void main() {
 
   //-----------CreateFloorplan UC1------------//
   test('Correct CreateFloorPlanRequest construction', () {
-    CreateFloorPlanRequest req = new CreateFloorPlanRequest(expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
 
     expect(req, isNot(null));
     expect(req.getAdmin(), expectedAdmin);
@@ -70,7 +70,8 @@ void main() {
   // });
 
   test('Correct create floor plan construction', () {
-    CreateFloorPlanRequest req = new CreateFloorPlanRequest(expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
     CreateFloorPlanResponse resp = service.createFloorPlan(req);
 
     expect(resp.getResponse(), true);
@@ -78,14 +79,16 @@ void main() {
   });
 
   test('Correct add a room construction', () {
-    bool value = service.addRoom(expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 6);
+    bool value = service.addRoom(
+        expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 6);
 
     expect(value, true);
   });
 
   //-----------bookOfficeSpace UC2------------//
   test('Correct bookOfficeSpaceRequest construction', () {
-    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(expectedUser, expectedFloorNumber, expectedRoomNumber);
+    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(
+        expectedUser, expectedFloorNumber, expectedRoomNumber);
 
     expect(bookReq, isNot(null));
     expect(bookReq.getUser(), expectedUser);
@@ -95,13 +98,14 @@ void main() {
 
   test('Correct bookOfficeSpaceResponse construction', () {
     BookOfficeSpaceResponse bookResp =
-    new BookOfficeSpaceResponse(expectedBoolean); // resp needs more params
+        new BookOfficeSpaceResponse(expectedBoolean); // resp needs more params
 
     expect(bookResp.getResponse(), false);
   });
 
   test('Correct book office space construction', () {
-    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(expectedUser, expectedFloorNumber, expectedRoomNumber);
+    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(
+        expectedUser, expectedFloorNumber, expectedRoomNumber);
     BookOfficeSpaceResponse bookResp = service.bookOfficeSpace(bookReq);
 
     expect(bookResp.getResponse(), true);
@@ -117,7 +121,8 @@ void main() {
   });
 
   test('Correct viewOfficeSpaceResponse construction', () {
-    ViewOfficeSpaceResponse bookResp = new ViewOfficeSpaceResponse(expectedBoolean, null);
+    ViewOfficeSpaceResponse bookResp =
+        new ViewOfficeSpaceResponse(expectedBoolean, null);
 
     expect(bookResp.getResponse(), false);
   });
