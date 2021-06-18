@@ -100,6 +100,43 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
 
+                FlatButton(
+                    color: Colors.blue,
+                    onPressed: (){
+                      setState(() {
+                        isLoading = true;
+                      });
+                      AuthClass().createAccount(email: _email.text.trim(),
+                          password: _password.text.trim()).then((value) {
+                        if (value == "Account created") {
+                          setState(() {
+                            isLoading = false;
+
+                          });
+                          //User updateUser = FirebaseAuth.instance.currentUser;
+                          // updateUser.updateProfile(Firstname: _firstName.text,
+                          //     Lastname: _lastName.text,
+                          //     Username: _userName.text,
+                          //     Company Name: _companyName.text,
+                          //     Company Location: _companyLocation.text);
+
+                          userSetup(_firstName.text, _lastName.text, _userName.text, _companyName.text, _companyLocation.text);
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder: (context) => HomePage()), (
+                                  route) => false);
+                        }
+                        else {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(value)));
+                        }
+                      });
+
+                    },
+                    child: Text("Create Account")
+                ),
 
               ],
           ),
