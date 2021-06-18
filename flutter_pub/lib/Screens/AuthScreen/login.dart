@@ -42,8 +42,26 @@ class _LoginPageState extends State<LoginPage> {
 
                 FlatButton(
                   color: Colors.blue,
+                    onPressed: (){
+                      setState(() {
+                        isLoading = true;
+                      });
 
-
+                      AuthClass().signIn(email: _email.text.trim(),
+                      password: _password.text.trim()).then((value) {
+                        if (value == "Welcome") {
+                          setState(() {
+                            isLoading = false;
+                          });
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()), (
+                                  route) => false);
+                        }
+                        
+                      });
+                    
+                    },
                     child: Text("Log In")
                 ),
 
