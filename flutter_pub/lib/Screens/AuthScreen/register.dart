@@ -22,5 +22,34 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _confirmPassword = TextEditingController();
   bool isLoading = false;
   @override
-  
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Register"),
+      ),
+      body: isLoading == false ? Padding(
+          child: Column(
+              children: [
+                TextFormField(
+                  controller: _firstName,
+                  decoration: InputDecoration(
+                      hintText: 'Firstname'
+                  ),
+                ),
+                
+                const SizedBox(height: 30,),
+
+                TextFormField(
+                  controller: _lastName,
+                  decoration: InputDecoration(
+                      hintText: 'Lastname'
+                  ),
+                ),
+
+              ],
+          ),
+
+      ): Center( child: CircularProgressIndicator())
+    );
+  }
 }
