@@ -12,11 +12,6 @@ class ForgotPassword extends StatefulWidget {
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
-FirebaseAuth auth = FirebaseAuth.instance;
-User user = FirebaseAuth.instance.currentUser;
-DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(user.uid).get() as DocumentSnapshot;
-String type = snap['Type'];
-
 class _ForgotPasswordState extends State<ForgotPassword> {
   TextEditingController _email = TextEditingController();
   bool isLoading = false;
