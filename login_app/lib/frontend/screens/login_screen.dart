@@ -18,7 +18,7 @@ import 'admin_homepage.dart';
 import 'user_homepage.dart';
 import 'signup_screen.dart';
 import '../models/authentication.dart';
-import 'package:login_app/services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 /*
   Class name: LoginScreen

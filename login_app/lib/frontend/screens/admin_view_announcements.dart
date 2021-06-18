@@ -4,7 +4,7 @@ import 'admin_homepage.dart';
 import 'admin_make_announcement.dart';
 import 'admin_delete_announcement.dart';
 
-import 'package:login_app/services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminViewAnnouncements extends StatefulWidget {
   static const routeName = "/admin_announcements";

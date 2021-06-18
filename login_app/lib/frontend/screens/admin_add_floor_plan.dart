@@ -6,7 +6,7 @@ import 'package:login_app/responses/floor_plan_responses/create_floor_plan_respo
 import 'admin_homepage.dart';
 import 'admin_calc_floor_plan.dart';
 //import 'screens/selectfloors.dart';
-import 'package:login_app/services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/admin_add_floorplan";

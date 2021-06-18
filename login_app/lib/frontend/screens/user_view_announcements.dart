@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'user_homepage.dart';
-import 'package:login_app/services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserViewAnnouncements extends StatefulWidget {
   static const routeName = "/user_announcements";

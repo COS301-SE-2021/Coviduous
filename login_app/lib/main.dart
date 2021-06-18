@@ -15,7 +15,7 @@ import 'frontend/screens/user_view_office_spaces.dart';
 import 'frontend/screens/user_view_current_bookings.dart';
 import 'frontend/screens/user_view_announcements.dart';
 import 'frontend/models/authentication.dart';
-import 'services/globals.dart' as globals;
+import 'frontend/front_end_globals.dart' as globals;
 
 void main() => runApp(MyApp());
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 import 'user_homepage.dart';
-import 'package:login_app/services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 

@@ -5,7 +5,7 @@ import 'package:login_app/frontend/screens/user_view_announcements.dart';
 import 'package:login_app/frontend/screens/user_view_current_bookings.dart';
 import 'package:login_app/frontend/screens/user_view_office_spaces.dart';
 
-import 'package:login_app/services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserHomepage extends StatefulWidget {
   static const routeName = "/user";

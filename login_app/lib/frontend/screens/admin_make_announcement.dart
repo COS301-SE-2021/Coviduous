@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'admin_view_announcements.dart';
-import 'package:login_app/services/globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class MakeAnnouncement extends StatefulWidget {
   static const routeName = "/admin_make_announcement";
