@@ -193,7 +193,7 @@ class _UserRegisterState extends State<UserRegister>{
                                         isLoading = false;
                                       });
 
-                                      userSetup("User", _firstName.text, _lastName.text, _userName.text, _companyId.text);
+                                      userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) => LoginScreen()), (
                                               route) => false);
