@@ -68,7 +68,7 @@ void main() {
   });*/
 
 /////////////////////////////////////////////////////////////////////////////////
-  test('Create Announcement Mock', () async {
+  test('Create Announcement Mock', () {
     var announcementController = AnnouncementsController();
     CreateAnnouncementRequest req = new CreateAnnouncementRequest(
         "General", "Please Register For PaySlips", "USRAD-1", "CID-1");
