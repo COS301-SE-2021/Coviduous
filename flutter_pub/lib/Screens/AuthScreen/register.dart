@@ -65,6 +65,26 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
 
+                const SizedBox(height: 30,),
+
+                TextFormField(
+                  controller: _password,
+                  decoration: InputDecoration(
+                      hintText: 'Password'),
+                ),
+
+                const SizedBox(height: 30,),
+
+                TextFormField(
+                  controller: _confirmPassword,
+                  decoration: InputDecoration(
+                      hintText: 'Confirm Password'
+                  ),
+                ),
+
+                const SizedBox(height: 30,),
+
+
 
               ],
           ),
