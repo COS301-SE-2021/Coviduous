@@ -44,6 +44,26 @@ class AnnouncementsController {
     }
   }
 
+  Future<ViewAdminAnnouncementResponse> viewAdminAnnouncement(
+      ViewAdminAnnouncementRequest req) async {
+    if (req != null) {
+      if (await announcementQueries
+              .viewAdminAnnouncement(req.getAnnouncement_id()) ==
+          true) {
+        return new ViewAdminAnnouncementResponse(
+            null, null, null, true, "Announcement successfully found");
+      } else {
+        //throw new Exception("Announcement unsuccessfully found");
+        return new ViewAdminAnnouncementResponse(
+            null, null, null, false, "Announcement unsuccessfully found");
+      }
+    } else {
+      //throw new Exception("Announcement unsuccessfully found");
+      return new ViewAdminAnnouncementResponse(
+          null, null, null, false, "Announcement unsuccessfully found");
+    }
+  }
+
   Future<DeleteAnnouncementResponse> deleteAnnouncement(
       DeleteAnnouncementRequest req) async {
     if (req != null) {
