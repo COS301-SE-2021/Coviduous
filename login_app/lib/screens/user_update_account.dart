@@ -242,6 +242,12 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                         SnackBar(content: Text('Invalid password')));
                                   }
                                 });
+                              } else {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Invalid password')));
                               }
                             },
                             style: ElevatedButton.styleFrom(
