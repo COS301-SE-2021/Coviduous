@@ -1,12 +1,12 @@
 import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
-//import 'package:postgres/postgres.dart';
+import 'package:postgres/postgres.dart';
 
 import 'dart:math';
 
 class AnnouncementDatabaseQueries {
-  //PostgreSQLConnection connection;
+  PostgreSQLConnection connection;
   String host = 'localhost';
   int port = 5432;
   String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
@@ -38,49 +38,73 @@ class AnnouncementDatabaseQueries {
     return timestamp;
   }
 
-  // DB connection function to be called in each use case - need to test
-  // Future connect() async {
-  //   connection = PostgreSQLConnection(host, port, dbName,
-  //       username: user, password: pass);
+  // create DB connection function to be called in each use case
+  Future<void> connect() async {
+    connection = PostgreSQLConnection(host, port, dbName,
+        username: user, password: pass);
 
-  //   try {
-  //     await connection.open();
-  //     print("Connected to postgres database...");
-  //   } catch (e) {
-  //     print("error");
-  //     print(e.toString());
-  //   }
-  // }
+    try {
+      await connection.open();
+      print("Connected to postgres database...");
+    } catch (e) {
+      print("error");
+      print(e.toString());
+    }
+  }
 
-  // Future<bool> createAnnouncement(
-  //     String type, String message, String adminID, String companyID) async {
-  //   int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-  //   String announcementID = "ANOUNC-" + randomInt.toString();
-  //   String timestamp = DateTime.now().toString();
+  Future<bool> createAnnouncement(
+      String type, String message, String adminID, String companyID) async {
+    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    String announcementID = "ANOUNC-" + randomInt.toString();
+    String timestamp = DateTime.now().toString();
 
-  //   connect(); // connect to db
+    await connect(); // connect to db
 
-  //   var result = await connection
-  //       .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
-  //                                 VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
-  //           substitutionValues: {
-  //         'id': announcementID,
-  //         'type': type,
-  //         'date': timestamp,
-  //         'message': message,
-  //         'adminid': adminID,
-  //         'companyid': companyID,
-  //       });
+    // PostgreSQLConnection connection = PostgreSQLConnection(
+    //     'localhost', 5432, 'mock_CoviduousDB',
+    //     username: 'postgres', password: 'TripleHBK2000');
 
-  //   if (result != null) {
-  //     setAnnouncementID(announcementID);
-  //     setTimestamp(timestamp);
+    // try {
+    //   await connection.open();
+    //   print("Connected to postgres database...");
+    // } catch (e) {
+    //   print("error");
+    //   print(e.toString());
+    // }
 
-  //     return true;
-  //   }
+    var adminIDQuery = await connection.query(
+        "SELECT adminid FROM users WHERE adminid = @id",
+        substitutionValues: {'id': adminID});
 
-  //   return false;
-  // }
+    var companyIDQuery = await connection.query(
+        "SELECT companyid FROM users WHERE adminid = @id",
+        substitutionValues: {'id': adminID});
+
+    // check if given adminID && companyID exist in DB
+    if (adminIDQuery.length != 0 && companyIDQuery.length != 0) {
+      var result = await connection
+          .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
+                                  VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
+              substitutionValues: {
+            'id': announcementID,
+            'type': type,
+            'date': timestamp,
+            'message': message,
+            'adminid': adminID,
+            'companyid': companyID,
+          });
+
+      if (result != null) {
+        setAnnouncementID(announcementID);
+        setTimestamp(timestamp);
+
+        return true;
+      }
+    }
+
+    return false;
+  }
+  
 /////////////////////////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
