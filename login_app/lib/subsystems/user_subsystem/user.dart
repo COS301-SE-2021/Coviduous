@@ -27,6 +27,14 @@ class User {
   }
 
   //Currently announcements will need the companyId and userId more getters need to be implemented
+  String getFirstName() {
+    return first_name;
+  }
+
+  String getLastName() {
+    return last_name;
+  }
+
   String getCompanyId() {
     return companyId;
   }
