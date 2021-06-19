@@ -139,7 +139,7 @@ class AnnouncementDatabaseQueries {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Delete Announcement Mock
   bool deleteAnnouncementMock(String announcementId) {
-    // conection to DB
+    // connection to DB
     //for mock purposes we will mock out the connection which will either be true of false
     bool connection = true;
     // prepared Statement
@@ -152,8 +152,6 @@ class AnnouncementDatabaseQueries {
           print("Removed Announcement");
           globals.announcementDatabaseTable.removeAt(i);
           globals.numAnnouncements--;
-        } else {
-          return false;
         }
       }
       return true;
