@@ -17,12 +17,14 @@ void main() {
       new AnnouncementsController();
 
   String expectedValue = "test";
-  String expectedType;
-  String expectedMessage;
-  String expectedAdminID;
-  String expectedCompanyID;
+  // String expectedType;
+  // String expectedMessage;
+  // String expectedAdminID;
+  // String expectedCompanyID;
 
   setUp(() async {
+    expectedValue = "test";
+
     // connect to db
     connection = PostgreSQLConnection(host, port, dbName,
         username: user, password: pass);
