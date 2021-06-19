@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/backend/controllers/announcements_controller.dart';
+import 'package:login_app/requests/announcements_requests/viewUser_announcement_request.dart';
+import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
+import '../../subsystems/announcement_subsystem/announcement.dart' as announcement;
 
 import 'user_homepage.dart';
 import '../front_end_globals.dart' as globals;
-import '../../backend/backend_globals/announcements_globals.dart' as announcementGlobals;
 
 class UserViewAnnouncements extends StatefulWidget {
   static const routeName = "/user_announcements";
@@ -14,9 +17,11 @@ class UserViewAnnouncements extends StatefulWidget {
 class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
   @override
   Widget build(BuildContext context) {
-
     Widget getList() {
-      int numberOfAnnouncements = announcementGlobals.numAnnouncements;
+      AnnouncementsController services = new AnnouncementsController();
+      ViewUserAnnouncementResponse response = services.viewAnnouncementsUserMock(ViewUserAnnouncementRequest("test"));
+      List<announcement.Announcement> announcements = response.announcementArrayList;
+      int numberOfAnnouncements = announcements.length;
 
       if (numberOfAnnouncements == 0) {
         return Column(
@@ -61,20 +66,20 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('Type: ' + announcements[index].type, style: TextStyle(color: Colors.black)),
-                              child: Text('Type: General', style: TextStyle(color: Colors.black)),
+                              child: Text('Type: ' + announcements[index].getType(), style: TextStyle(color: Colors.black)),
+                              //child: Text('Type: General', style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('Date: ' + announcements[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
-                              child: Text('Date: test', style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + announcements[index].getDate(), style: TextStyle(color: Colors.black)),
+                              //child: Text('Date: test', style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('Message: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
-                              child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
+                              child: Text('Message: ' + announcements[index].getMessage(), style: TextStyle(color: Colors.black)),
+                              //child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
                             ),
                           ]
                       )
