@@ -4,7 +4,7 @@ import 'package:login_app/requests/announcements_requests/delete_announcement_re
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
-import '../../subsystems/announcement_subsystem/announcement.dart' as announcement;
+import '../../subsystems/announcement_subsystem/announcement.dart';
 
 import 'admin_view_announcements.dart';
 import '../front_end_globals.dart' as globals;
@@ -23,7 +23,7 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
   Widget getList() {
     AnnouncementsController services = new AnnouncementsController();
     ViewAdminAnnouncementResponse response = services.viewAnnouncementsAdminMock(ViewAdminAnnouncementRequest("test"));
-    List<announcement.Announcement> announcements = response.announcementArrayList;
+    List<Announcement> announcements = response.announcementArrayList;
 
     int numberOfAnnouncements = announcementGlobals.numAnnouncements;
     if (numberOfAnnouncements == 0) {
