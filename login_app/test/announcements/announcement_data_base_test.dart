@@ -23,6 +23,8 @@ void main() {
   String expectedCompanyID;
 
   setUp(() async {
+    expectedValue = "test";
+
     // connect to db
     connection = PostgreSQLConnection(host, port, dbName,
         username: user, password: pass);

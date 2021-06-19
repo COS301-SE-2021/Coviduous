@@ -142,8 +142,18 @@ void main() {
         "lefatsi@gmail.com", "123456", "USR-1", "CID-1");
 
     globals.userDatabaseTable.add(admin);
+    globals.numUsers++;
     globals.userDatabaseTable.add(user);
+    globals.numUsers++;
     print("Successfully added admin user and general user");
+    for (var i = 0; i < globals.userDatabaseTable.length; i++) {
+      print("Printing out a user");
+      print("Name : " + globals.userDatabaseTable[i].getFirstName());
+      print("Last Name : " + globals.userDatabaseTable[i].getLastName());
+      print("Company ID : " + globals.userDatabaseTable[i].getCompanyId());
+      print("User ID : " + globals.userDatabaseTable[i].getUserId());
+    }
+    print("//////////////////////////////////////////////////");
     CreateAnnouncementRequest req = new CreateAnnouncementRequest(
         "GENERAL", "Please Register For PaySlips", "USRAD-1", "CID-1");
     CreateAnnouncementResponse resp =
@@ -175,17 +185,19 @@ void main() {
     print(
         "/////////////////////////////Successfully added announcements ///////////////////");
     ViewUserAnnouncementRequest viewReq =
-        new ViewUserAnnouncementRequest("USR-1");
+        new ViewUserAnnouncementRequest(user.getUserId());
 
     ViewUserAnnouncementResponse viewResp =
         announcementController.viewAnnouncementsUserMock(viewReq);
     print("Response : " + viewResp.getMessage());
     List<Announcement> list = viewResp.getUserAnnouncements();
+    print("//////////////////////////////////////////////////");
     for (var j = 0; j < list.length; j++) {
       print("Printing User Announcement");
       print("Message : " + list[j].getMessage());
       print("Date : " + list[j].getDate());
       print("Type : " + list[j].getType());
+      print("//////////////////////////////////////////////////");
     }
 
     /**
