@@ -15,18 +15,19 @@ class User {
   User(String type, String FirstName, String LastName, String Username,
       String Email, String Password, String adminID, String companyID) {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    int randomInt2 = new Random().nextInt((9999 - 100) + 1) + 10;
+    
     this.userId = "USR-" + randomInt.toString();
     this.type = type;
     this.first_name = FirstName;
     this.last_name = LastName;
     this.email = Email;
     this.password = Password;
-    this.activation_code = "ACTIV-" + randomInt.toString();
+    this.activation_code = "ACTIV-" + randomInt2.toString();
     this.adminId = adminID;
     this.companyId = companyID;
   }
 
-  //Currently announcements will need the companyId and userId more getters need to be implemented
   String getFirstName() {
     return first_name;
   }
