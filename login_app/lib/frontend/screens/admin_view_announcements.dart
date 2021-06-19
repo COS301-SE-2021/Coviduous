@@ -6,7 +6,7 @@ import 'package:login_app/responses/announcement_responses/viewAdmin_announcemen
 import 'admin_homepage.dart';
 import 'admin_make_announcement.dart';
 import 'admin_delete_announcement.dart';
-import '../../subsystems/announcement_subsystem/announcement.dart' as announcement;
+import '../../subsystems/announcement_subsystem/announcement.dart';
 
 import '../front_end_globals.dart' as globals;
 
@@ -23,7 +23,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
     Widget getList() {
       AnnouncementsController services = new AnnouncementsController();
       ViewAdminAnnouncementResponse response = services.viewAnnouncementsAdminMock(ViewAdminAnnouncementRequest("test"));
-      List<announcement.Announcement> announcements = response.announcementArrayList;
+      List<Announcement> announcements = response.announcementArrayList;
       int numberOfAnnouncements = announcements.length;
 
       if (numberOfAnnouncements == 0) {
