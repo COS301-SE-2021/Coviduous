@@ -87,6 +87,27 @@ class AnnouncementDatabaseQueries {
     return false;
   }
 
+  Future<bool> deleteAnnouncement(String announcementID) async {
+    await connect(); // connect to db
+
+    var announcementIDQuery = await connection.query(
+        "SELECT announcementid FROM announcements WHERE announcementid = @id",
+        substitutionValues: {'id': announcementID});
+
+    // check if given announcementID exist in DB
+    if (announcementIDQuery.length != 0) {
+      var result = await connection.query(
+          "DELETE FROM announcements WHERE announcementid = @id",
+          substitutionValues: {'id': announcementID});
+
+      if (result != null) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 /////////////////////////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
