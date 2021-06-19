@@ -8,6 +8,7 @@ import 'package:login_app/responses/announcement_responses/create_announcement_r
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
+import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
@@ -111,7 +112,7 @@ void main() {
         announcementController.viewAnnouncementsAdminMock(viewReq);
     print("Response : " + viewResp.getMessage());
     if (viewResp.getAdminAnnouncements() != null) {
-      var list = viewResp.getAdminAnnouncements();
+      List<Announcement> list = viewResp.getAdminAnnouncements();
       for (var j = 0; j < list.length; j++) {
         print("Printing Admin Announcement");
         print("Message : " + list[j].getMessage());
@@ -179,14 +180,12 @@ void main() {
     ViewUserAnnouncementResponse viewResp =
         announcementController.viewAnnouncementsUserMock(viewReq);
     print("Response : " + viewResp.getMessage());
-    if (viewResp.getUserAnnouncements() != null) {
-      var list = viewResp.getUserAnnouncements();
-      for (var j = 0; j < list.length; j++) {
-        print("Printing User Announcement");
-        print("Message : " + list[j].getMessage());
-        print("Date : " + list[j].getDate());
-        print("Type : " + list[j].getType());
-      }
+    List<Announcement> list = viewResp.getUserAnnouncements();
+    for (var j = 0; j < list.length; j++) {
+      print("Printing User Announcement");
+      print("Message : " + list[j].getMessage());
+      print("Date : " + list[j].getDate());
+      print("Type : " + list[j].getType());
     }
 
     /**
