@@ -120,7 +120,7 @@ class AnnouncementDatabaseQueries {
     }
   }
 
-  void viewAnnouncements() //arraylist
+  bool viewAnnouncementsAdmin(String adminId) //arraylist
   {}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Delete Announcement Mock
