@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'user_homepage.dart';
 import '../../subsystems/floorplan_subsystem/floor.dart';
-import '../../backend/controllers/office_controller.dart';
+//import '../../backend/controllers/office_controller.dart';
 import '../front_end_globals.dart' as globals;
 import '../../backend/backend_globals/floor_globals.dart' as floorGlobals;
 
@@ -20,7 +20,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   //int numberOfFloors = globals.globalNumFloors;
   int numberOfFloors = 2;
 
-  OfficeController service = new OfficeController();
+  //OfficeController services = new OfficeController();
 
   Widget getList() {
     /*
