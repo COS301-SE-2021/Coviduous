@@ -26,7 +26,7 @@ class Announcement {
     ];
   }
 }
-
+//class make announcement..
 class MakeAnnouncementState extends State<MakeAnnouncement> {
   //
   List<Announcement> _announceType = Announcement.getAnnouncementType();
