@@ -6,12 +6,12 @@ import 'package:login_app/responses/announcement_responses/create_announcement_r
 import 'package:postgres/postgres.dart';
 
 void main() {
-  // PostgreSQLConnection connection;
-  // String host = 'localhost';
-  // int port = 5432;
-  // String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
-  // String user = 'postgres';
-  // String pass = 'TripleHBK2000'; // your postgres user password
+  PostgreSQLConnection connection;
+  String host = 'localhost';
+  int port = 5432;
+  String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
+  String user = 'postgres';
+  String pass = ' '; // your postgres user password
 
   AnnouncementsController announcementController =
       new AnnouncementsController();
@@ -23,123 +23,66 @@ void main() {
   String expectedCompanyID;
 
   setUp(() async {
-    expectedValue = "test-1";
-    expectedType = "General";
-    expectedMessage = "This is a test announcement message";
-    expectedAdminID = "ADMN-1";
-    expectedCompanyID = "CMPNY-1";
-
     // connect to db
-    // connection = PostgreSQLConnection(host, port, dbName,
-    //     username: user, password: pass);
+    connection = PostgreSQLConnection(host, port, dbName,
+        username: user, password: pass);
 
-    // try {
-    //   await connection.open();
-    //   expectedMessage = "Connected to postgres database...";
-    //   print(expectedMessage);
-    // } catch (e) {
-    //   print("error");
-    //   print(e.toString());
-    // }
+    try {
+      await connection.open();
+      expectedMessage = "Connected to postgres database...";
+      print(expectedMessage);
+    } catch (e) {
+      print("error");
+      print(e.toString());
+    }
   });
 
   tearDown(() async {
-    // await connection.close();
-  });
-
-  group('Create Announcement', () {
-    test('Correct create announcement', () async {
-      CreateAnnouncementRequest req = new CreateAnnouncementRequest(
-          expectedType, expectedMessage, expectedAdminID, expectedCompanyID);
-      CreateAnnouncementResponse resp =
-          await announcementController.createAnnouncement(req);
-
-      //print("Response : " + resp.getResponseMessage());
-      print("AnnouncementID : " + resp.getAnnouncementID());
-
-      expect(resp, isNot(null));
-      expect(true, resp.getResponse());
-    });
-
-    test('Invalid createAnnouncement request', () async {
-      CreateAnnouncementRequest req = null;
-      CreateAnnouncementResponse resp =
-          await announcementController.createAnnouncement(req);
-
-      //print("Response : " + resp.getResponseMessage());
-
-      //expect exception handling
-      //expect(await resp, throwsA("Announcement unsuccessfully created"));
-      expect(false, resp.getResponse());
-    });
-
-    test('Invalid Admin ID on announcement creation', () async {
-      CreateAnnouncementRequest req = new CreateAnnouncementRequest(
-          expectedType, expectedMessage, 'Invalid_admin_ID', expectedCompanyID);
-      CreateAnnouncementResponse resp =
-          await announcementController.createAnnouncement(req);
-
-      //print("Response : " + resp.getResponseMessage());
-      //print("AnnouncementID : " + resp.getAnnouncementID());
-      expect(resp, isNot(null));
-      expect(false, resp.getResponse());
-    });
-
-    test('Invalid Company ID on announcement creation', () async {
-      CreateAnnouncementRequest req = new CreateAnnouncementRequest(
-          expectedType, expectedMessage, expectedAdminID, 'Invalid_company_ID');
-      CreateAnnouncementResponse resp =
-          await announcementController.createAnnouncement(req);
-
-      //print("Response : " + resp.getResponseMessage());
-      //print("AnnouncementID : " + resp.getAnnouncementID());
-      expect(resp, isNot(null));
-      expect(false, resp.getResponse());
-    });
+    await connection.close();
   });
 
   // ======================DB TESTING======================== //
 
-  // test('Successful database connection', () async {
-  //   expect(expectedMessage, "Connected to postgres database...");
-  //   expect(await connection.execute('select 1'), equals(1));
-  // });
+  test('Successful database connection', () async {
+    expect(expectedMessage, "Connected to postgres database...");
+    expect(await connection.execute('select 1'), equals(1));
+  });
 
-  // test('Create announcement', () async {
-  //   await connection
-  //       .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
-  //                                 VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
-  //           substitutionValues: {
-  //         'id': expectedValue,
-  //         'type': expectedValue,
-  //         'date': expectedValue,
-  //         'message': expectedValue,
-  //         'adminid': expectedValue,
-  //         'companyid': expectedValue,
-  //       });
+  test('Create announcement', () async {
+    await connection
+        .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
+                                  VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
+            substitutionValues: {
+          'id': expectedValue,
+          'type': expectedValue,
+          'date': expectedValue,
+          'message': expectedValue,
+          'adminid': expectedValue,
+          'companyid': expectedValue,
+        });
 
-  //   //var results = await connection.query("SELECT * FROM announcements");
+    //var results = await connection.query("SELECT * FROM announcements");
 
-  //   print(results);
+    print(results);
 
-  //   //expect(results.length, isNot(0));
-  // });
+    //expect(results.length, isNot(0));
+  });
 
-  // test('View announcement', () async {
-  //   var results = await connection.query("SELECT * FROM announcements");
+  test('View announcement', () async {
+    var results = await connection.query("SELECT * FROM announcements");
 
-  //   print(results);
+    print(results);
 
-  //   expect(results.length, isNot(0));
-  // });
+    expect(results.length, isNot(0));
+  });
 
-  // test('Delete announcement', () async {
-  //   var results = await connection.query(
-  //       "DELETE FROM announcements WHERE announcementid = @id",
-  //       substitutionValues: {'id': expectedValue});
+  test('Delete announcement', () async {
+    var results = await connection.query(
+        "DELETE FROM announcements WHERE announcementid = @id",
+        substitutionValues: {'id': expectedValue});
 
-  //   //print(results);
+    //print(results);
 
-  //   expect(results.length, 0);
-  // });
+    expect(results.length, 0);
+  });
 }
