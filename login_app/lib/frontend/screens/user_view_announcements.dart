@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/viewUser_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
-import '../../subsystems/announcement_subsystem/announcement.dart' as announcement;
+import '../../subsystems/announcement_subsystem/announcement.dart';
 
 import 'user_homepage.dart';
 import '../front_end_globals.dart' as globals;
@@ -20,7 +20,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
     Widget getList() {
       AnnouncementsController services = new AnnouncementsController();
       ViewUserAnnouncementResponse response = services.viewAnnouncementsUserMock(ViewUserAnnouncementRequest("test"));
-      List<announcement.Announcement> announcements = response.announcementArrayList;
+      List<Announcement> announcements = response.announcementArrayList;
       int numberOfAnnouncements = announcements.length;
 
       if (numberOfAnnouncements == 0) {
