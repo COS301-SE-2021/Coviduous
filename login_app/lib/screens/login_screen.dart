@@ -9,6 +9,7 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'admin_homepage.dart';
@@ -203,6 +204,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                         setState(() {
                                           isLoading = false;
                                         });
+
+                                        /*
+                                        //get user type
+                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                          var query = FirebaseFirestore.instance.collection('Users')
+                                              .where("Email", isEqualTo: _email.text.trim()).limit(1);
+                                          query.get().then((data) {
+                                            if (data.docs.length > 0) {
+                                              userType = data.docs[0].get('Type');
+                                              print(userType);
+                                            }
+                                          });
+                                        });
+                                         */
 
                                         if (userType == 'Admin') {
                                           Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
