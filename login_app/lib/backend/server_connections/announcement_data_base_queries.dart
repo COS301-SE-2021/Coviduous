@@ -218,7 +218,7 @@ class AnnouncementDatabaseQueries {
     bool connection = true;
     // prepared Statement
 
-    if (connection != false && userId != "") {
+    if (connection) {
       //set up prepared statement.
       //execute prepared statement to fetch the users companyid announcements for assosiated announcements to the company
       //this loop mocks the functionality of fetching assosiated companyid from the database
