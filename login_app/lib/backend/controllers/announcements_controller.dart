@@ -106,10 +106,10 @@ class AnnouncementsController {
       DeleteAnnouncementRequest req) {
     if (announcementQueries.deleteAnnouncementMock(req.getAnnouncementId())) {
       return DeleteAnnouncementResponse(
-          true, "Sucessfully Deleted Announcement");
+          true, "Successfully Deleted Announcement");
     } else // throw Exception
     {
-      throw new Exception("Announcement unsuccessfully created");
+      throw new Exception("Announcement unsuccessfully deleted");
     }
   }
 

@@ -19,8 +19,8 @@ void main() {
     expectedValue = "test-1";
     expectedType = "General";
     expectedMessage = "This is a test announcement message";
-    expectedAdminID = "ADMN-1";
-    expectedCompanyID = "CMPNY-1";
+    expectedAdminID = "test-1";
+    expectedCompanyID = "test-1";
   });
 
   tearDown(() async {
@@ -81,7 +81,7 @@ void main() {
   group('Delete Announcement', () {
     test('Correct delete announcement', () async {
       DeleteAnnouncementRequest req =
-          new DeleteAnnouncementRequest('ANOUNC-810');
+          new DeleteAnnouncementRequest('ANOUNC-1729');
       DeleteAnnouncementResponse resp =
           await announcementController.deleteAnnouncement(req);
 

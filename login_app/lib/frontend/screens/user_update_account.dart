@@ -171,10 +171,6 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                       String oldEmail = FirebaseAuth.instance.currentUser.email;
                                       AuthClass().updateEmail(newEmail: _email.text.trim()).then((value) {
                                         if (value == "Success") {
-                                          setState(() {
-                                            isLoading = false;
-                                          });
-
                                           //If update was successful, update in Firestore document as well
                                           FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                             var query = FirebaseFirestore.instance.collection('Users')
@@ -187,9 +183,6 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                 });
                                           });
                                         } else {
-                                          setState(() {
-                                           isLoading = false;
-                                         });
                                           ScaffoldMessenger.of(context).showSnackBar(
                                               SnackBar(content: Text(value)));
                                         }

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/backend/controllers/announcements_controller.dart';
+import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
+import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
+import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
+import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
+import '../../subsystems/announcement_subsystem/announcement.dart' as announcement;
 
 import 'admin_view_announcements.dart';
 import '../front_end_globals.dart' as globals;
@@ -12,13 +18,14 @@ class AdminDeleteAnnouncement extends StatefulWidget {
 }
 
 class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
-  String dropdownAnnouncementValue = '1';
-  String dropdownAnnouncementInfo = ' ';
-  List<String> announcementIds = ['1', '2'];
+  TextEditingController _announcementId = TextEditingController();
 
   Widget getList() {
-    int numberOfAnnouncements = announcementGlobals.numAnnouncements;
+    AnnouncementsController services = new AnnouncementsController();
+    ViewAdminAnnouncementResponse response = services.viewAnnouncementsAdminMock(ViewAdminAnnouncementRequest("test"));
+    List<announcement.Announcement> announcements = response.announcementArrayList;
 
+    int numberOfAnnouncements = announcementGlobals.numAnnouncements;
     if (numberOfAnnouncements == 0) {
       return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -49,36 +56,22 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row (
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
-                  children: <Widget>[
-                    Text('Select announcement ID', style: TextStyle(color: Colors.black)),
-                    DropdownButton<String>(
-                      value: dropdownAnnouncementValue,
-                      icon: const Icon(Icons.arrow_downward, color: Color(0xff056676)),
-                      iconSize: 24,
-                      style: const TextStyle(color: Colors.black),
-                      dropdownColor: Colors.white,
-                      underline: Container(
-                        height: 2,
-                        color: Colors.white,
-                      ),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          dropdownAnnouncementValue = newValue;
-                        });
-                      },
-                      items: <String>['1', '2'].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )
-                  ]
+              TextFormField(
+                //The "return" button becomes a "next" button when typing
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(labelText: 'Announcement ID'),
+                keyboardType: TextInputType.emailAddress,
+                controller: _announcementId,
+                //validate ID
+                validator: (value)
+                {
+                  if(value.isEmpty)
+                  {
+                    return 'please input an ID';
+                  }
+                  return null;
+                },
               ),
-              Text(dropdownAnnouncementInfo),
               ElevatedButton(
                   style: ElevatedButton.styleFrom (
                     shape: RoundedRectangleBorder(
@@ -87,22 +80,9 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
                   ),
                   child: Text('Proceed'),
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (ctx) => AlertDialog(
-                          title: Text('Placeholder'),
-                          content: Text('Announcement deleted.'),
-                          actions: <Widget>[
-                            TextButton(
-                              child: Text('Okay'),
-                              onPressed: (){
-                                Navigator.of(ctx).pop();
-                              },
-                            )
-                          ],
-                        )
-                    );
-                  }
+                      DeleteAnnouncementResponse response2 = services.deleteAnnouncementMock(DeleteAnnouncementRequest(_announcementId.text));
+                      print(response2.getResponse());
+                    }
               )
             ],
           )

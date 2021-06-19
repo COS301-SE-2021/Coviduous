@@ -7,7 +7,7 @@ void main() {
   int port = 5432;
   String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
   String user = 'postgres';
-  String pass = 'TripleHBK2000'; // your postgres user password
+  String pass = 'postgres'; // your postgres user password
 
   String expectedValue;
   String expectedMessage;

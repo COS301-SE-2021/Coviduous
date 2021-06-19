@@ -9,9 +9,9 @@ class AnnouncementDatabaseQueries {
   PostgreSQLConnection connection;
   String host = 'localhost';
   int port = 5432;
-  String dbName = 'coviduous'; // an existing DB name on your localhost
+  String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
   String user = 'postgres';
-  String pass = 'Sql@0845635040'; // your postgres user password
+  String pass = 'postgres'; // your postgres user password
 
   String announcementId;
   String timeStamp;
@@ -160,7 +160,7 @@ class AnnouncementDatabaseQueries {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Delete Announcement Mock
   bool deleteAnnouncementMock(String announcementId) {
-    // conection to DB
+    // connection to DB
     //for mock purposes we will mock out the connection which will either be true of false
     bool connection = true;
     // prepared Statement
@@ -173,8 +173,6 @@ class AnnouncementDatabaseQueries {
           print("Removed Announcement");
           globals.announcementDatabaseTable.removeAt(i);
           globals.numAnnouncements--;
-        } else {
-          return false;
         }
       }
       return true;
