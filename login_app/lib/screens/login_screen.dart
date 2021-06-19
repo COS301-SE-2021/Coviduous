@@ -124,6 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   decoration: InputDecoration(labelText: 'Email'),
                                   keyboardType: TextInputType.emailAddress,
                                   controller: _email,
+                                  //validate email
                                   validator: (value)
                                   {
                                     if(value.isEmpty || !value.contains('@'))
