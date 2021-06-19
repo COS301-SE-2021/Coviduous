@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../models/auth_provider.dart';
-import '../models/firestore_cloud.dart';
 import 'admin_manage_account.dart';
 import '../services/globals.dart' as globals;
 
