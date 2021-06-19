@@ -303,7 +303,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                     isLoading = false;
                                   });
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Invalid password')));
+                                      SnackBar(content: Text('Invalid password')));
                                 }
                               });
                             },
