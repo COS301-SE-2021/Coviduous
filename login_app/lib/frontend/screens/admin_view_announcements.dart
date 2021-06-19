@@ -9,7 +9,6 @@ import 'admin_delete_announcement.dart';
 import '../../subsystems/announcement_subsystem/announcement.dart' as announcement;
 
 import '../front_end_globals.dart' as globals;
-import '../../backend/backend_globals/announcements_globals.dart' as announcementGlobals;
 
 class AdminViewAnnouncements extends StatefulWidget {
   static const routeName = "/admin_announcements";
@@ -22,10 +21,10 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
   @override
   Widget build(BuildContext context) {
     Widget getList() {
-      int numberOfAnnouncements = announcementGlobals.numAnnouncements;
       AnnouncementsController services = new AnnouncementsController();
       ViewAdminAnnouncementResponse response = services.viewAnnouncementsAdminMock(ViewAdminAnnouncementRequest("test"));
       List<announcement.Announcement> announcements = response.announcementArrayList;
+      int numberOfAnnouncements = announcements.length;
 
       if (numberOfAnnouncements == 0) {
         return Column(
