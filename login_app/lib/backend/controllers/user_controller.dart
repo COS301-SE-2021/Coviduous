@@ -3,9 +3,11 @@ import 'package:login_app/backend/server_connections/user_data_base_queries.dart
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
+import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
+import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
 
 class UserController {
 //This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
@@ -107,4 +109,15 @@ class UserController {
   //         null, null, false, "Announcement unsuccessfully created");
   //   }
   // }
+  /*DeleteAccountUserResponse deleteUserAccount(DeleteAccountUserRequest request) throws Exception {
+		if(userQueries.deleteUserAccount(request.getUserID()))
+		{
+			return new DeleteAccountUserResponse("Successfully Deleted");
+		}
+		else
+		{
+			throw new Exception("User unsuccessfully deleted ");
+		}
+	}*/
+
 }
