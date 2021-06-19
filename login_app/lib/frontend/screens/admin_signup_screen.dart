@@ -4,20 +4,22 @@ import '../models/auth_provider.dart';
 import '../models/firestore_cloud.dart';
 import 'home_signup_screen.dart';
 import 'login_screen.dart';
-import '../services/globals.dart' as globals;
+import '../front_end_globals.dart' as globals;
 
-class UserRegister extends StatefulWidget {
-  static const routeName = "/userRegister";
+class AdminRegister extends StatefulWidget {
+  static const routeName = "/adminRegister";
   @override
-  _UserRegisterState createState() => _UserRegisterState();
+  _AdminRegisterState createState() => _AdminRegisterState();
 }
 
-class _UserRegisterState extends State<UserRegister>{
+class _AdminRegisterState extends State<AdminRegister>{
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _userName = TextEditingController();
   TextEditingController _companyId = TextEditingController();
+  TextEditingController _companyName = TextEditingController();
+  TextEditingController _companyLocation = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _confirmPassword = TextEditingController();
   bool isLoading = false;
@@ -172,6 +174,32 @@ class _UserRegisterState extends State<UserRegister>{
                                   return null;
                                 },
                               ),
+                              //company name
+                              TextFormField(
+                                textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                decoration: InputDecoration(labelText:'Company name'),
+                                controller: _companyName,
+                                validator: (value) {
+                                  if(value.isEmpty || !value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
+                                      {
+                                    return 'please input a valid company name';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              //company address
+                              TextFormField(
+                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                decoration: InputDecoration(labelText:'Company address'),
+                                controller: _companyLocation,
+                                validator: (value) {
+                                  if(value.isEmpty || !value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
+                                      {
+                                    return 'please input a valid company address';
+                                  }
+                                  return null;
+                                },
+                              ),
                               SizedBox (
                                 height: MediaQuery.of(context).size.height/48,
                                 width: MediaQuery.of(context).size.width,
@@ -192,7 +220,7 @@ class _UserRegisterState extends State<UserRegister>{
                                         isLoading = false;
                                       });
 
-                                      userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
+                                      adminSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) => LoginScreen()), (
                                               route) => false);

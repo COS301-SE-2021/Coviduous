@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/auth_provider.dart';
 import 'user_manage_account.dart';
-import '../services/globals.dart' as globals;
+import '../front_end_globals.dart' as globals;
 
 class UserUpdateAccount extends StatefulWidget {
   static const routeName = "/userUpdateAccount";
