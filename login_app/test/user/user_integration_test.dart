@@ -10,10 +10,12 @@ void main() {
   String pass = 'postgres'; // your postgres user password
 
   String expectedValue;
+  String expectedUpdate;
   String expectedMessage;
 
   setUp(() async {
     expectedValue = "test-1";
+    expectedUpdate = "test-2";
 
     //connect to db
     connection = PostgreSQLConnection(host, port, dbName,
@@ -33,7 +35,7 @@ void main() {
     await connection.close();
   });
 
-  test('Database connection', () async {
+  test('Successful Database connection', () async {
     expect(expectedMessage, "Connected to postgres database...");
     expect(await connection.execute('select 1'), equals(1));
   });
@@ -62,6 +64,49 @@ void main() {
     expect(results.length, isNot(0));
   });
 
+  // test('Correct Register Company', () async {
+  //   await connection
+  //       .query('''INSERT INTO company (companyid, name, address, adminid)
+  //                                 VALUES (@id, @name, @address, @a_id)''',
+  //           substitutionValues: {
+  //         'id': expectedValue,
+  //         'name': expectedValue,
+  //         'address': expectedValue,
+  //         'a_id': expectedValue,
+  //       });
+
+  //   var results = await connection.query("SELECT * FROM company");
+
+  //   //print(results);
+
+  //   expect(results.length, isNot(0));
+  // });
+
+  test('Correct Update account info', () async {
+    var results = await connection.query(
+        "UPDATE users SET firstName = @fName, lastName = @lName, email = @email WHERE userid = @id",
+        substitutionValues: {
+          'id': expectedValue,
+          'fName': expectedUpdate,
+          'lName': expectedUpdate,
+          'email': expectedUpdate,
+        });
+
+    //print(results);
+
+    expect(results.length, 0);
+  });
+
+  test('Correct reset password', () async {
+    var results = await connection.query(
+        "UPDATE users SET password = @pass WHERE userid = @id",
+        substitutionValues: {'id': expectedValue, 'pass': expectedUpdate});
+
+    //print(results);
+
+    expect(results.length, 0);
+  });
+
   test('Correct Delete User Account', () async {
     var results = await connection.query("DELETE FROM users WHERE userid = @id",
         substitutionValues: {'id': expectedValue});
@@ -69,24 +114,6 @@ void main() {
     //print(results);
 
     expect(results.length, 0);
-  });
-
-  test('Register Company', () async {
-    await connection
-        .query('''INSERT INTO company (companyid, name, address, adminid)
-                                  VALUES (@id, @name, @address, @a_id)''',
-            substitutionValues: {
-          'id': expectedValue,
-          'name': expectedValue,
-          'address': expectedValue,
-          'a_id': expectedValue,
-        });
-
-    var results = await connection.query("SELECT * FROM company");
-
-    //print(results);
-
-    expect(results.length, isNot(0));
   });
 
 
