@@ -3,10 +3,12 @@ import 'package:login_app/backend/server_connections/user_data_base_queries.dart
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
+import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
+import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
 import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 
 class UserController {
@@ -48,6 +50,17 @@ class UserController {
     } else {
       return new RegisterUserResponse(
           null, null, null, false, "Unsuccessfully registered user");
+    }
+  }
+
+  DeleteAccountUserResponse deleteAccountUserMock(
+      DeleteAccountUserRequest request) {
+    if (request != null) {
+      if (userQueries.deleteAnnouncementMock(request.userID)) {
+        return new DeleteAccountUserResponse("Successfully Deleted");
+      } else {
+        return null;
+      }
     }
   }
 
