@@ -44,6 +44,26 @@ class AnnouncementsController {
     }
   }
 
+  Future<DeleteAnnouncementResponse> deleteAnnouncement(
+      DeleteAnnouncementRequest req) async {
+    if (req != null) {
+      if (await announcementQueries
+              .deleteAnnouncement(req.getAnnouncementId()) ==
+          true) {
+        return new DeleteAnnouncementResponse(
+            true, "Successfully Deleted Announcement");
+      } else {
+        //throw new Exception("Announcement unsuccessfully deleted");
+        return new DeleteAnnouncementResponse(
+            false, "Announcement unsuccessfully deleted");
+      }
+    } else {
+      //throw new Exception("Announcement unsuccessfully deleted");
+      return new DeleteAnnouncementResponse(
+          false, "Announcement unsuccessfully deleted");
+    }
+  }
+
 ////////////////////////////////Concrete Implementations////////////////////////////////////////////////
   bool viewAnnouncements() {
     return true;
