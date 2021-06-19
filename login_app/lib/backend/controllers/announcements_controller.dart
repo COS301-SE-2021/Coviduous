@@ -24,15 +24,6 @@ class AnnouncementsController {
   Future<CreateAnnouncementResponse> createAnnouncement(
       CreateAnnouncementRequest req) async {
     if (req != null) {
-      // await announcementQueries.createAnnouncement(req.getMessage(),
-      //     req.getType(), req.getAdminID(), req.getCompanyID());
-
-      // return new CreateAnnouncementResponse(
-      //     announcementQueries.getAnnouncementID(),
-      //     announcementQueries.getTimestamp(),
-      //     true,
-      //     "Successfully Created Announcement");
-      //         req.getType(), req.getAdminID(), req.getCompanyID())
       if (await announcementQueries.createAnnouncement(req.getType(),
               req.getMessage(), req.getAdminID(), req.getCompanyID()) ==
           true) {
@@ -44,7 +35,7 @@ class AnnouncementsController {
       } else {
         //throw new Exception("Announcement unsuccessfully created");
         return new CreateAnnouncementResponse(
-            null, null, false, "Announcement unsuccessfully created");
+            "", "", false, "Announcement unsuccessfully created");
       }
     } else {
       //throw new Exception("Announcement unsuccessfully created");

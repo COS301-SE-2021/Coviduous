@@ -9,33 +9,33 @@ class AnnouncementDatabaseQueries {
   PostgreSQLConnection connection;
   String host = 'localhost';
   int port = 5432;
-  String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
+  String dbName = 'coviduous'; // an existing DB name on your localhost
   String user = 'postgres';
-  String pass = ''; // your postgres user password
+  String pass = 'Sql@0845635040'; // your postgres user password
 
-  String announcementID;
-  String timestamp;
+  String announcementId;
+  String timeStamp;
   String companyIdentification;
 
   AnnouncementDatabaseQueries() {
-    announcementID = null;
-    timestamp = null;
+    announcementId = null;
+    timeStamp = null;
   }
 
   void setAnnouncementID(String aID) {
-    this.announcementID = aID;
+    this.announcementId = aID;
   }
 
   void setTimestamp(String timestamp) {
-    this.timestamp = timestamp;
+    this.timeStamp = timestamp;
   }
 
   String getAnnouncementID() {
-    return announcementID;
+    return announcementId;
   }
 
   String getTimestamp() {
-    return timestamp;
+    return timeStamp;
   }
 
   // create DB connection function to be called in each use case
@@ -55,22 +55,9 @@ class AnnouncementDatabaseQueries {
   Future<bool> createAnnouncement(
       String type, String message, String adminID, String companyID) async {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-    String announcementID = "ANOUNC-" + randomInt.toString();
-    String timestamp = DateTime.now().toString();
-
+    this.announcementId = "ANOUNC-" + randomInt.toString();
+    this.timeStamp = DateTime.now().toString();
     await connect(); // connect to db
-
-    // PostgreSQLConnection connection = PostgreSQLConnection(
-    //     'localhost', 5432, 'mock_CoviduousDB',
-    //     username: 'postgres', password: 'TripleHBK2000');
-
-    // try {
-    //   await connection.open();
-    //   print("Connected to postgres database...");
-    // } catch (e) {
-    //   print("error");
-    //   print(e.toString());
-    // }
 
     var adminIDQuery = await connection.query(
         "SELECT adminid FROM users WHERE adminid = @id",
@@ -82,29 +69,24 @@ class AnnouncementDatabaseQueries {
 
     // check if given adminID && companyID exist in DB
     if (adminIDQuery.length != 0 && companyIDQuery.length != 0) {
+      // ignore: unused_local_variable
       var result = await connection
           .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
                                   VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
               substitutionValues: {
-            'id': announcementID,
+            'id': announcementId,
             'type': type,
-            'date': timestamp,
+            'date': timeStamp,
             'message': message,
             'adminid': adminID,
             'companyid': companyID,
           });
-
-      if (result != null) {
-        setAnnouncementID(announcementID);
-        setTimestamp(timestamp);
-
-        return true;
-      }
+      return true;
     }
 
     return false;
   }
-  
+
 /////////////////////////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -113,8 +95,8 @@ class AnnouncementDatabaseQueries {
   bool createAnnouncementMock(
       String message, String type, String adminID, String companyID) {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-    this.announcementID = "ANOUNC-" + randomInt.toString();
-    this.timestamp = DateTime.now().toString();
+    this.announcementId = "ANOUNC-" + randomInt.toString();
+    this.timeStamp = DateTime.now().toString();
 
     // conection to DB
     //for mock purposes we will mock out the connection which will either be true of false
@@ -124,8 +106,8 @@ class AnnouncementDatabaseQueries {
     if (connection != false) {
       //set up your prepared statement
 
-      var announcement1 = new Announcement(this.announcementID, type,
-          this.timestamp, message, adminID, companyID);
+      var announcement1 = new Announcement(this.announcementId, type,
+          this.timeStamp, message, adminID, companyID);
       globals.announcementDatabaseTable.add(announcement1);
       print("Added a new announcement");
       //execute sql statement
