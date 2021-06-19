@@ -21,6 +21,8 @@ class AnnouncementsController {
     this.announcementQueries = new AnnouncementDatabaseQueries();
   }
 
+  ////////////////////////////////Concrete Implementations////////////////////////////////////////////////
+
   Future<CreateAnnouncementResponse> createAnnouncement(
       CreateAnnouncementRequest req) async {
     if (req != null) {
@@ -44,27 +46,24 @@ class AnnouncementsController {
     }
   }
 
-  /*
-  Future<ViewAdminAnnouncementResponse> viewAdminAnnouncement(
-      ViewAdminAnnouncementRequest req) async {
-    if (req != null) {
-      if (await announcementQueries
-              .viewAdminAnnouncement(req.getAnnouncement_id()) ==
-          true) {
-        return new ViewAdminAnnouncementResponse(
-            null, null, null, true, "Announcement successfully found");
-      } else {
-        //throw new Exception("Announcement unsuccessfully found");
-        return new ViewAdminAnnouncementResponse(
-            null, null, null, false, "Announcement unsuccessfully found");
-      }
-    } else {
-      //throw new Exception("Announcement unsuccessfully found");
-      return new ViewAdminAnnouncementResponse(
-          null, null, null, false, "Announcement unsuccessfully found");
-    }
-  }
-   */
+  // Future<ViewAdminAnnouncementResponse> viewAdminAnnouncement(
+  //     ViewAdminAnnouncementRequest req) async {
+  //   if (req != null) {
+  //     if (await announcementQueries.viewAdminAnnouncement(req.getAdminId()) ==
+  //         true) {
+  //       return new ViewAdminAnnouncementResponse(
+  //           null, true, "Announcement successfully found");
+  //     } else {
+  //       //throw new Exception("Announcement unsuccessfully found");
+  //       return new ViewAdminAnnouncementResponse(
+  //           null, false, "Announcement unsuccessfully found");
+  //     }
+  //   } else {
+  //     //throw new Exception("Announcement unsuccessfully found");
+  //     return new ViewAdminAnnouncementResponse(
+  //         null, false, "Announcement unsuccessfully found");
+  //   }
+  // }
 
   Future<DeleteAnnouncementResponse> deleteAnnouncement(
       DeleteAnnouncementRequest req) async {
@@ -86,19 +85,6 @@ class AnnouncementsController {
     }
   }
 
-////////////////////////////////Concrete Implementations////////////////////////////////////////////////
-  bool viewAnnouncements() {
-    return true;
-  } //this function must also follow the same standards
-
-  /*DeleteAnnouncementResponse deleteAnnouncement(DeleteAnnouncementRequest req) {
-    if (announcementQueries.deleteAnnouncement(req.getAnnouncementId())) {
-      return new DeleteAnnouncementResponse(
-          true, "Successfully Deleted Announcement");
-    } else {
-      return new DeleteAnnouncementResponse(false, "Unsuccessful Operation");
-    }
-  }*/
 //////////////////////////////////Mocked Implementations/////////////////////////////////////////////////////////////////////
   //create Announcement Mock
   /**
@@ -106,16 +92,23 @@ class AnnouncementsController {
    */
   CreateAnnouncementResponse createAnnouncementMock(
       CreateAnnouncementRequest req) {
-    if (announcementQueries.createAnnouncementMock(req.getType(),
-        req.getMessage(), req.getAdminID(), req.getCompanyID())) {
+    if (req != null) {
+      if (announcementQueries.createAnnouncementMock(req.getType(),
+          req.getMessage(), req.getAdminID(), req.getCompanyID())) {
+        return new CreateAnnouncementResponse(
+            announcementQueries.getAnnouncementID(),
+            announcementQueries.getTimestamp(),
+            true,
+            "Successfully Created Announcement");
+      } else {
+        // throw new Exception("Announcement unsuccessfully created");
+        return new CreateAnnouncementResponse(
+            null, null, false, "Announcement unsuccessfully created");
+      }
+    } else {
+      // throw new Exception("Announcement unsuccessfully created");
       return new CreateAnnouncementResponse(
-          announcementQueries.getAnnouncementID(),
-          announcementQueries.getTimestamp(),
-          true,
-          "Successfully Created Announcement");
-    } else // throw Exception
-    {
-      throw new Exception("Announcement unsuccessfully created");
+          null, null, false, "Announcement unsuccessfully created");
     }
   }
 
