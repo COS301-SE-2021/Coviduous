@@ -1,31 +1,49 @@
 class RegisterUserRequest {
-  String firstname;
-  String lastname;
+  String type;
+  String firstName;
+  String lastName;
   String username;
   String email;
   String password;
-  String activationCode;
   String companyID;
 
-  RegisterUserRequest() {}
-
-  String getFirstname() {
-    return firstname;
+  RegisterUserRequest(String type, String firstName, String lastName,
+      String username, String email, String password, String companyID) {
+    this.type = type;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.companyID = companyID;
   }
 
-  String getLastname() {
-    return lastname;
+  String getType() {
+    return this.type;
+  }
+
+  String getFirstName() {
+    return this.firstName;
+  }
+
+  String getLastName() {
+    return this.lastName;
   }
 
   String getUsername() {
-    return username;
+    return this.username;
   }
 
   String getEmail() {
-    return email;
+    return this.email;
+  }
+
+  String getPassword() {
+    return this.password;
   }
 
   String getCompanyID() {
-    return companyID;
+    return this.companyID;
   }
 }
+
