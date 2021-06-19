@@ -31,18 +31,22 @@ void main() {
     print(
         "/////////////////////////////Completed Mock Testing For Creating Announcements ///////////////////");
     expect(globals.numAnnouncements, isNot(0));
-    //test('Exception handle for Create Announcement Mock', () {
-    // print("Exception Handle if the attributes are empty");
-
-    /* CreateAnnouncementRequest req1 =
-          new CreateAnnouncementRequest("", "", "", "");
-      CreateAnnouncementResponse response =
-          announcementController.createAnnouncementMock(req1);
-      print("Response : " + resp.getResponseMessage());
-      print("AnnouncementID : " + resp.getAnnouncementID());
-       expect(()=>Range(5,5),throwsException);*/
-    // });
   });
+
+  test('Invalid create announcement request', () {
+    var announcementController = AnnouncementsController();
+    print(
+        "/////////////////////////////Testing Invalid Create Announcement Request ///////////////////");
+    CreateAnnouncementRequest req = null;
+    CreateAnnouncementResponse resp =
+        announcementController.createAnnouncementMock(req);
+    print("Response : " + resp.getResponseMessage());
+
+    print(
+        "/////////////////////////////Completed Mock Testing For Invalid Create Announcement Request ///////////////////");
+    expect(false, resp.getResponse());
+  });
+
   ////////////////////////////////////////////// Delete Announcement  /////////////////////////////////////////////////////
 
   test('Delete Announcement Mock', () {
