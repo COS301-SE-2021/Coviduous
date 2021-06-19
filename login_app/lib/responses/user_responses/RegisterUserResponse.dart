@@ -1,30 +1,48 @@
-class RegisterUserResponse {
-  String userID;
-  String adminID;
-  bool response;
-  String responseMessage;
+class RegisterUserRequest {
+  String type;
+  String firstName;
+  String lastName;
+  String username;
+  String email;
+  String password;
+  String companyID;
 
-  RegisterUserResponse(
-      String userID, String adminID, bool response, String responseMessage) {
-    this.userID = userID;
-    this.adminID = adminID;
-    this.response = response;
-    this.responseMessage = responseMessage;
+  RegisterUserRequest(String type, String firstName, String lastName,
+      String username, String email, String password, String companyID) {
+    this.type = type;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.companyID = companyID;
   }
 
-  String getUserID() {
-    return this.userID;
+  String getType() {
+    return this.type;
   }
 
-  String getAdminID() {
-    return this.adminID;
+  String getFirstName() {
+    return this.firstName;
   }
 
-  bool getResponse() {
-    return this.response;
+  String getLastName() {
+    return this.lastName;
   }
 
-  String getResponseMessage() {
-    return this.responseMessage;
+  String getUsername() {
+    return this.username;
+  }
+
+  String getEmail() {
+    return this.email;
+  }
+
+  String getPassword() {
+    return this.password;
+  }
+
+  String getCompanyID() {
+    return this.companyID;
   }
 }
