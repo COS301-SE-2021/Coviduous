@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/backend/controllers/announcements_controller.dart';
+import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
+import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 
 import 'admin_view_announcements.dart';
 import '../front_end_globals.dart' as globals;
@@ -28,6 +31,10 @@ class Announcement {
 }
 //class make announcement..
 class MakeAnnouncementState extends State<MakeAnnouncement> {
+  TextEditingController _topic = TextEditingController();
+  TextEditingController _description = TextEditingController();
+
+  AnnouncementsController services = new AnnouncementsController();
   //
   List<Announcement> _announceType = Announcement.getAnnouncementType();
   List<DropdownMenuItem<Announcement>> _dropdownMenuItems;
@@ -40,9 +47,9 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
     super.initState();
   }
 
-  List<DropdownMenuItem<Announcement>> buildDropdownMenuItems(List typeofAnnounc) {
-    List<DropdownMenuItem<Announcement>> items = List();
-    for (Announcement _type in typeofAnnounc) {
+  List<DropdownMenuItem<Announcement>> buildDropdownMenuItems(List typeofAnnounce) {
+    List<DropdownMenuItem<Announcement>> items = [];
+    for (Announcement _type in typeofAnnounce) {
       items.add(
         DropdownMenuItem(
           value: _type,
@@ -92,23 +99,25 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                     height: 20.0,
                   ),
                   Text('Selected: ${_selectedType.name}'),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                         labelText: "Topic",
                     ),
                     obscureText: false,
                     maxLength: 20,
+                    controller: _topic,
                   ),
                   SizedBox(
                     height: 16,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                         hintText: "Write your announcement",
                         labelText: "Description",
                     ),
                     obscureText: false,
                     maxLines: 3,
+                    controller: _description,
                   ),
                   SizedBox(
                     height: 16,
@@ -121,7 +130,8 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                     ),
                     child: Text("Post"),
                     onPressed: () {
-                      // handleSubmit(); (function for backend)
+                      CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_description.text, _selectedType.name, "test", "test"));
+                      print(response.getAnnouncementID() + " " + response.getResponse().toString());
                     },
                   )
                 ],
