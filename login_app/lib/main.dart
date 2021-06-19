@@ -23,10 +23,11 @@ import 'screens/admin_update_account.dart';
 //User subsystem screens
 import 'screens/user_book_office_space.dart';
 import 'screens/user_homepage.dart';
-import 'screens/user_manage_account.dart';
 import 'screens/user_view_office_spaces.dart';
 import 'screens/user_view_current_bookings.dart';
 import 'screens/user_view_announcements.dart';
+import 'screens/user_manage_account.dart';
+import 'screens/user_update_account.dart';
 
 //Reset password screens
 import 'screens/forgot_password_screen.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget{
         MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
         AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
         AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
+        UserUpdateAccount.routeName: (ctx)=> UserUpdateAccount(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         CalcFloorPlan.routeName: (ctx)=> CalcFloorPlan(),
         UserHomepage.routeName: (ctx)=> UserHomepage(),
