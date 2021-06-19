@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'user_reset_password_screen.dart';
-import 'delete_user_account.dart';
 import 'user_homepage.dart';
+import 'user_update_account.dart';
+import 'delete_user_account.dart';
 import '../services/globals.dart' as globals;
 
 class UserManageAccount extends StatefulWidget {
@@ -51,22 +52,7 @@ class _UserManageAccountState extends State<UserManageAccount> {
                                       crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                   ),
                                   onPressed: () {
-                                    //Navigator.of(context).pushReplacementNamed(UserUpdateAccountInfo.routeName);
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Placeholder'),
-                                          content: Text('Update account info'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
+                                    Navigator.of(context).pushReplacementNamed(UserUpdateAccount.routeName);
                                   }
                               ),
                               SizedBox (
