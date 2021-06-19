@@ -68,6 +68,34 @@ class AuthClass {
     }
   }
 
+  //delete account
+  Future<String> deleteAccount() async {
+    try {
+      FirebaseAuth.instance.currentUser.delete();
+      return 'Success';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        return 'The user must reauthenticate before this operation can be executed.';
+      }
+      return 'Error occurred';
+    }
+  }
+
+  //update email
+  Future<String> updateEmail({
+    String newEmail
+  }) async {
+     try {
+       await auth.currentUser.updateEmail(newEmail);
+       return 'Success';
+     } on FirebaseAuthException catch (e) {
+       if (e.code == 'requires-recent-login') {
+         return 'The user must reauthenticate before this operation can be executed.';
+       }
+       return 'Error occurred';
+     }
+  }
+
   //sign out
   void signOut(){
     auth.signOut();
