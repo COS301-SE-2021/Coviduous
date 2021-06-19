@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget{
         AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
         AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
         AdminDeleteAccount.routeName: (ctx)=> AdminDeleteAccount(),
-        
+
         //User subsystem
         UserHomepage.routeName: (ctx)=> UserHomepage(),
         UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),
