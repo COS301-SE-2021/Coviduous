@@ -1,25 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'admin_manage_account.dart';
 import 'login_screen.dart';
 import '../models/auth_provider.dart';
 
-import '../services/globals.dart' as globals;
+import '../front_end_globals.dart' as globals;
 
-class AdminResetPassword extends StatefulWidget {
-  static const routeName = "/adminResetPassword";
+class ForgotPassword extends StatefulWidget {
+  static const routeName = "/forgotPassword";
 
   @override
-  _AdminResetPasswordState createState() => _AdminResetPasswordState();
+  _ForgotPasswordState createState() => _ForgotPasswordState();
 }
-FirebaseAuth auth = FirebaseAuth.instance;
-User user = FirebaseAuth.instance.currentUser;
-DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(user.uid).get() as DocumentSnapshot;
-String type = snap['Type'];
 
-class _AdminResetPasswordState extends State<AdminResetPassword> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   TextEditingController _email = TextEditingController();
   bool isLoading = false;
   @override
@@ -29,7 +22,7 @@ class _AdminResetPasswordState extends State<AdminResetPassword> {
         title: Text("Reset password"),
         leading: BackButton( //Specify back button
           onPressed: (){
-            Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
+            Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
           },
         ),
       ),
@@ -81,7 +74,7 @@ class _AdminResetPasswordState extends State<AdminResetPassword> {
           ),
         ),
       ) : Center(child: CircularProgressIndicator(),
-      ),
+    ),
     );
   }
 }
