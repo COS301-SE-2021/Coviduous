@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
@@ -33,6 +35,8 @@ class Announcement {
 class MakeAnnouncementState extends State<MakeAnnouncement> {
   TextEditingController _topic = TextEditingController();
   TextEditingController _description = TextEditingController();
+  String _adminId = "test";
+  String _companyId = "test";
 
   AnnouncementsController services = new AnnouncementsController();
   //
@@ -130,7 +134,21 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                     ),
                     child: Text("Post"),
                     onPressed: () {
-                      CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_description.text, _selectedType.name, "test", "test"));
+                      /*
+                      //get admin ID and company ID
+                      FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                        var query = FirebaseFirestore.instance.collection('Users')
+                            .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email).limit(1);
+                        query.get().then((data) {
+                          if (data.docs.length > 0) {
+                            _adminId = data.docs[0].get('uid');
+                            _companyId = data.docs[0].get('Company ID');
+                          }
+                        });
+                      });
+                       */
+
+                      CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_description.text, _selectedType.name, _adminId, _companyId));
                       print(response.getAnnouncementID() + " " + response.getResponse().toString());
                     },
                   )
