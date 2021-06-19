@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'admin_delete_account.dart';
 import 'admin_reset_password_screen.dart';
 import 'admin_homepage.dart';
 import 'admin_update_account.dart';
-import 'delete_user_account.dart';
 import '../front_end_globals.dart' as globals;
 
 class AdminManageAccount extends StatefulWidget {
@@ -96,7 +96,7 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                       crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
                                   ),
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacementNamed(DeleteAccount.routeName);
+                                    Navigator.of(context).pushReplacementNamed(AdminDeleteAccount.routeName);
                                   }
                               ),
                             ]
