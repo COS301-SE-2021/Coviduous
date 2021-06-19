@@ -35,7 +35,8 @@ import 'frontend/screens/admin_reset_password_screen.dart';
 import 'frontend/screens/user_reset_password_screen.dart';
 
 //Delete account screen
-import 'frontend/screens/delete_user_account.dart';
+import 'frontend/screens/admin_delete_account.dart';
+import 'frontend/screens/user_delete_account.dart';
 
 import 'frontend/front_end_globals.dart' as globals;
 
@@ -59,26 +60,36 @@ class MyApp extends StatelessWidget{
       ),
       home: Home(),
       routes: {
-        DeleteAccount.routeName: (ctx)=> DeleteAccount(),
-        Register.routeName: (ctx)=> Register(),
-        AdminRegister.routeName: (ctx)=> AdminRegister(),
-        UserRegister.routeName: (ctx)=> UserRegister(),
-        LoginScreen.routeName: (ctx)=> LoginScreen(),
+        //Admin subsystem
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
-        AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
-        AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
-        MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
-        AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
-        AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
-        UserUpdateAccount.routeName: (ctx)=> UserUpdateAccount(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         CalcFloorPlan.routeName: (ctx)=> CalcFloorPlan(),
+        MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
+        AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
+        AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
+        AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
+        AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
+        AdminDeleteAccount.routeName: (ctx)=> AdminDeleteAccount(),
+        
+        //User subsystem
         UserHomepage.routeName: (ctx)=> UserHomepage(),
-        UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),
+        UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
         UserManageAccount.routeName: (ctx)=> UserManageAccount(),
+        UserUpdateAccount.routeName: (ctx)=> UserUpdateAccount(),
+        UserDeleteAccount.routeName: (ctx)=> UserDeleteAccount(),
+
+        //Signup screens
+        Register.routeName: (ctx)=> Register(),
+        AdminRegister.routeName: (ctx)=> AdminRegister(),
+        UserRegister.routeName: (ctx)=> UserRegister(),
+
+        //Login screen
+        LoginScreen.routeName: (ctx)=> LoginScreen(),
+
+        //Reset password
         ForgotPassword.routeName: (ctx)=> ForgotPassword(),
         AdminResetPassword.routeName: (ctx)=> AdminResetPassword(),
         UserResetPassword.routeName: (ctx)=> UserResetPassword(),
