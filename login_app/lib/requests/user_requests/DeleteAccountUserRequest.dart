@@ -1,8 +1,11 @@
 class DeleteAccountUserRequest {
   String userID;
 
-  /* DeleteAccountUserRequest(String userid) {
+  DeleteAccountUserRequest(String userid) {
     this.userID = userid;
-  }*/
+  }
 
+  String getUserID() {
+    return userID;
+  }
 }
