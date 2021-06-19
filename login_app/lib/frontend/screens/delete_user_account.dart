@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../models/auth_provider.dart';
-import 'admin_manage_account.dart';
+import '../../frontend/models/auth_provider.dart';
+import '../../frontend/screens/admin_manage_account.dart';
 import 'user_manage_account.dart';
 import 'login_screen.dart';
-import '../services/globals.dart' as globals;
+import '../front_end_globals.dart' as globals;
 
 class DeleteAccount extends StatefulWidget {
   static const routeName = "/adminDeleteUser";

@@ -4,7 +4,8 @@ import 'admin_homepage.dart';
 import 'admin_make_announcement.dart';
 import 'admin_delete_announcement.dart';
 
-import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import '../front_end_globals.dart' as globals;
+import '../../backend/backend_globals/announcements_globals.dart' as announcementGlobals;
 
 class AdminViewAnnouncements extends StatefulWidget {
   static const routeName = "/admin_announcements";
@@ -17,50 +18,59 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
   @override
   Widget build(BuildContext context) {
     Widget getList() {
-      int numberOfAnnouncements = 1;
+      int numberOfAnnouncements = announcementGlobals.numAnnouncements;
 
       if (numberOfAnnouncements == 0) {
-        return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width /
-                (2 * globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height /
-                (24 * globals.getWidgetScaling()),
-            color: Theme.of(context).primaryColor,
-            child: Text('No announcements found',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize:
-                        (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-          ),
-          Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width /
-                  (2 * globals.getWidgetScaling()),
-              height: MediaQuery.of(context).size.height /
-                  (12 * globals.getWidgetScaling()),
-              color: Colors.white,
-              padding: EdgeInsets.all(12),
-              child: Text('You have no announcements.',
-                  style: TextStyle(
-                      fontSize:
-                          (MediaQuery.of(context).size.height * 0.01) * 2.5)))
-        ]);
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width / (2 * globals.getWidgetScaling()),
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / (24 * globals.getWidgetScaling()),
+                color: Theme
+                    .of(context)
+                    .primaryColor,
+                child: Text('No announcements found',
+                    style: TextStyle(color: Colors.white, fontSize: (MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.01) * 2.5)),
+              ),
+              Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                  color: Colors.white,
+                  padding: EdgeInsets.all(12),
+                  child: Text('You have no announcements.',
+                      style: TextStyle(fontSize: (MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.01) * 2.5))
+              )
+            ]
+        );
       } else {
         return ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: numberOfAnnouncements,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Column(children: [
+          padding: const EdgeInsets.all(8),
+          itemCount: numberOfAnnouncements,
+          itemBuilder: (context, index){
+            return ListTile(
+              title: Column(
+                children: [
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 24,
+                    height: MediaQuery.of(context).size.height/24,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Announcement ' + (index + 1).toString(),
-                        style: TextStyle(color: Colors.white)),
+                    child: Text('Announcement ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
                   ),
                   ListView(
                     shrinkWrap: true,
@@ -70,89 +80,90 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                         height: 50,
                         color: Colors.white,
                         //child: Text('ID: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
-                        child: Text('ID: A1',
-                            style: TextStyle(color: Colors.black)),
+                        child: Text('ID: A1', style: TextStyle(color: Colors.black)),
                       ),
                       Container(
                         height: 50,
                         color: Colors.white,
                         //child: Text('Type: ' + announcements[index].type, style: TextStyle(color: Colors.black)),
-                        child: Text('Type: General',
-                            style: TextStyle(color: Colors.black)),
+                        child: Text('Type: General', style: TextStyle(color: Colors.black)),
                       ),
                       Container(
                         height: 50,
                         color: Colors.white,
                         //child: Text('Date: ' + announcements[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
-                        child: Text('Date: test',
-                            style: TextStyle(color: Colors.black)),
+                        child: Text('Date: test', style: TextStyle(color: Colors.black)),
                       ),
                       Container(
                         height: 50,
                         color: Colors.white,
                         //child: Text('Message: ' + announcements[index].message, style: TextStyle(color: Colors.black)),
-                        child: Text('Message: Hello World',
-                            style: TextStyle(color: Colors.black)),
+                        child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
                       ),
                     ],
                   )
-                ]),
-              );
-            });
+                ]
+              ),
+            );
+          }
+        );
       }
     }
 
     return new Scaffold(
         appBar: AppBar(
           title: Text('Announcements'),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(AdminHomePage.routeName);
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
             },
           ),
         ),
-        body: Stack(children: <Widget>[
-          Center(child: getList()),
-          Container(
-            alignment: Alignment.bottomRight,
-            child: Container(
-                height: 50,
-                width: 200,
-                padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text('Delete announcement'),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(
-                        AdminDeleteAnnouncement.routeName);
-                  },
-                )),
-          ),
-          Container(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-                height: 50,
-                width: 200,
-                padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text('Create announcement'),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(MakeAnnouncement.routeName);
-                  },
-                )),
-          ),
-        ]));
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+              Container (
+                alignment: Alignment.bottomRight,
+                child: Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Delete announcement'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName);
+                      },
+                    )
+                ),
+              ),
+              Container (
+                alignment: Alignment.bottomLeft,
+                child: Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Create announcement'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(MakeAnnouncement.routeName);
+                      },
+                    )
+                ),
+              ),
+            ]
+        )
+    );
   }
 }

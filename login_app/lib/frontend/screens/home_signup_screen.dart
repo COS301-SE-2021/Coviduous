@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'admin_signup_screen.dart';
 import 'user_signup_screen.dart';
 import 'login_screen.dart';
-import '../services/globals.dart' as globals;
+import '../front_end_globals.dart' as globals;
 
 class Register extends StatefulWidget {
   static const routeName = "/register";
