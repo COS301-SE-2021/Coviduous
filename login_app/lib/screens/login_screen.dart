@@ -125,6 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   keyboardType: TextInputType.emailAddress,
                                   controller: _email,
                                   //validate email
+                                  //should implement more functionality like check email
                                   validator: (value)
                                   {
                                     if(value.isEmpty || !value.contains('@'))
