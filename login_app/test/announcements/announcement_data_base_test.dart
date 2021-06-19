@@ -49,7 +49,7 @@ void main() {
   });
 
   test('Create announcement', () async {
-    var results = await connection
+    await connection
         .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
                                   VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
             substitutionValues: {
