@@ -120,8 +120,22 @@ class AnnouncementDatabaseQueries {
     }
   }
 
-  void viewAnnouncements() //arraylist
-  {}
+  Future<bool> viewAnnouncementsAdmin(String adminId) //arraylist
+  async {
+    //connection to the DB
+    await connect();
+
+    var adminIDQuery = await connection.query(
+        "SELECT adminid FROM users WHERE adminid = @id",
+        substitutionValues: {'id': adminId});
+
+    if (adminIDQuery != 0) {
+      var result = await connection.query(
+          "SELECT * FROM announcements WHERE announcementid =@id",
+          substitutionValues: {'id': adminIDQuery});
+    }
+  }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //Delete Announcement Mock
   bool deleteAnnouncementMock(String announcementId) {
