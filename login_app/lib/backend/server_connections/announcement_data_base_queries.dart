@@ -81,30 +81,35 @@ class AnnouncementDatabaseQueries {
             'adminid': adminID,
             'companyid': companyID,
           });
-      return true;
+
+      if (result != null) {
+        setAnnouncementID(announcementID);
+        setTimestamp(timestamp);
+
+        return true;
+      }
     }
 
     return false;
   }
 
-  Future<bool> viewAdminAnnouncement(String announcementID) async {
+  Future<bool> viewAdminAnnouncement(String adminID) async {
     await connect(); // connect to db
 
-    var announcementIDQuery = await connection.query(
-        "SELECT announcementid FROM announcements WHERE announcementid = @id",
-        substitutionValues: {'id': announcementID});
+    var adminIDQuery = await connection.query(
+        "SELECT adminid FROM users WHERE adminid = @id",
+        substitutionValues: {'id': adminID});
 
-    // check if given announcementID exist in DB
-    if (announcementIDQuery.length != 0) {
+    // check if given adminID exist in DB
+    if (adminIDQuery.length != 0) {
       var result = await connection.query(
-          "SELECT * FROM announcements WHERE announcementid = @id",
-          substitutionValues: {'id': announcementID});
+          "SELECT * FROM announcements WHERE adminid = @id",
+          substitutionValues: {'id': adminID});
 
       if (result != null) {
         return true;
       }
     }
-
     return false;
   }
 
