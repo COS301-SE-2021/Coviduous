@@ -50,6 +50,7 @@ void main() {
 
       //expect exception handling
       //expect(await resp, throwsA("Announcement unsuccessfully created"));
+      expect(resp, isNot(null));
       expect(false, resp.getResponse());
     });
 
@@ -78,45 +79,40 @@ void main() {
     });
   });
 
-  /*
-  group('View Announcement', () {
-    test('Correct view announcement', () async {
-      ViewAdminAnnouncementRequest req =
-          new ViewAdminAnnouncementRequest('test');
-      ViewAdminAnnouncementResponse resp =
-          await announcementController.viewAdminAnnouncement(req);
+  // group('View Announcement', () {
+  //   test('Correct view announcement', () async {
+  //     ViewAdminAnnouncementRequest req =
+  //         new ViewAdminAnnouncementRequest(expectedValue);
+  //     ViewAdminAnnouncementResponse resp =
+  //         await announcementController.viewAdminAnnouncement(req);
 
-      print("Response : " + resp.getResponseMessage());
+  //     print("Response : " + resp.getResponseMessage());
 
-      expect(resp, isNot(null));
-      expect(true, resp.getResponse());
-    });
+  //     expect(resp, isNot(null));
+  //     expect(true, resp.getResponse());
+  //   });
 
-    test('Invalid viewAnnouncement request', () async {
-      ViewAdminAnnouncementRequest req = null;
-      ViewAdminAnnouncementResponse resp =
-          await announcementController.viewAdminAnnouncement(req);
+  //   test('Invalid viewAnnouncement request', () async {
+  //     ViewAdminAnnouncementRequest req = null;
+  //     ViewAdminAnnouncementResponse resp =
+  //         await announcementController.viewAdminAnnouncement(req);
 
-      //print("Response : " + resp.getResponseMessage());
+  //     //expect exception handling
+  //     //expect(await resp, throwsA("Announcement unsuccessfully created"));
+  //     expect(resp, isNot(null));
+  //     expect(false, resp.getResponse());
+  //   });
 
-      //expect exception handling
-      //expect(await resp, throwsA("Announcement unsuccessfully created"));
-      expect(false, resp.getResponse());
-    });
+  //   test('Invalid Admin ID on viewing announcement', () async {
+  //     ViewAdminAnnouncementRequest req =
+  //         new ViewAdminAnnouncementRequest('Invalid_admin_ID');
+  //     ViewAdminAnnouncementResponse resp =
+  //         await announcementController.viewAdminAnnouncement(req);
 
-    test('Invalid Announcement ID on viewing announcement', () async {
-      ViewAdminAnnouncementRequest req =
-          new ViewAdminAnnouncementRequest('Invalid_announcement_id');
-      ViewAdminAnnouncementResponse resp =
-          await announcementController.viewAdminAnnouncement(req);
-
-      //print("Response : " + resp.getResponseMessage());
-      //print("AnnouncementID : " + resp.getAnnouncementID());
-      expect(resp, isNot(null));
-      expect(false, resp.getResponse());
-    });
-  });
-   */
+  //     expect(resp, isNot(null));
+  //     expect(false, resp.getResponse());
+  //   });
+  // });
 
   group('Delete Announcement', () {
     test('Correct delete announcement', () async {
@@ -140,6 +136,7 @@ void main() {
 
       //expect exception handling
       //expect(await resp, throwsA("Announcement unsuccessfully created"));
+      expect(resp, isNot(null));
       expect(false, resp.getResponse());
     });
 
