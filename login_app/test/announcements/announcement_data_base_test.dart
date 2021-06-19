@@ -11,12 +11,12 @@ void main() {
   int port = 5432;
   String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
   String user = 'postgres';
-  String pass = ' '; // your postgres user password
+  String pass = 'postgres'; // your postgres user password
 
   AnnouncementsController announcementController =
       new AnnouncementsController();
 
-  String expectedValue;
+  String expectedValue = "test";
   String expectedType;
   String expectedMessage;
   String expectedAdminID;
@@ -61,11 +61,11 @@ void main() {
           'companyid': expectedValue,
         });
 
-    //var results = await connection.query("SELECT * FROM announcements");
+    var results = await connection.query("SELECT * FROM announcements");
 
     print(results);
 
-    //expect(results.length, isNot(0));
+    expect(results.length, isNot(0));
   });
 
   test('View announcement', () async {
@@ -81,7 +81,7 @@ void main() {
         "DELETE FROM announcements WHERE announcementid = @id",
         substitutionValues: {'id': expectedValue});
 
-    //print(results);
+    print(results);
 
     expect(results.length, 0);
   });
