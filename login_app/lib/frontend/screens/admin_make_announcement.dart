@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
@@ -18,20 +18,7 @@ class MakeAnnouncement extends StatefulWidget {
   MakeAnnouncementState createState() => MakeAnnouncementState();
 }
 
-class Announcement {
-  int id;
-  String name;
-
-  Announcement(this.id, this.name);
-
-  static List<Announcement> getAnnouncementType() {
-    return <Announcement>[
-      Announcement(1, 'General'),
-      Announcement(2, 'Emergency'),
-    ];
-  }
-}
-//class make announcement..
+//class make announcement
 class MakeAnnouncementState extends State<MakeAnnouncement> {
   TextEditingController _topic = TextEditingController();
   TextEditingController _description = TextEditingController();
@@ -39,10 +26,9 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
   String _companyId = "test";
 
   AnnouncementsController services = new AnnouncementsController();
-  //
-  List<Announcement> _announceType = Announcement.getAnnouncementType();
-  List<DropdownMenuItem<Announcement>> _dropdownMenuItems;
-  Announcement _selectedType;
+  List<String> _announceType = ['General', 'Emergency'];
+  List<DropdownMenuItem<String>> _dropdownMenuItems;
+  String _selectedType;
 
   @override
   void initState() {
@@ -51,19 +37,19 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
     super.initState();
   }
 
-  List<DropdownMenuItem<Announcement>> buildDropdownMenuItems(List typeofAnnounce) {
-    List<DropdownMenuItem<Announcement>> items = [];
-    for (Announcement _type in typeofAnnounce) {
+  List<DropdownMenuItem<String>> buildDropdownMenuItems(List typeofAnnounce) {
+    List<DropdownMenuItem<String>> items = [];
+    for (String _type in typeofAnnounce) {
       items.add(
         DropdownMenuItem(
           value: _type,
-          child: Text(_type.name),
+          child: Text(_type),
         ),
       );
     }
     return items;
   }
-  onChangeDropdownItem(Announcement selected_type) {
+  onChangeDropdownItem(String selected_type) {
     setState(() {
       _selectedType = selected_type;
     });
@@ -102,7 +88,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  Text('Selected: ${_selectedType.name}'),
+                  Text('Selected: ${_selectedType}'),
                   TextFormField(
                     decoration: InputDecoration(
                         labelText: "Topic",
@@ -148,7 +134,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                       });
                        */
 
-                      CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_description.text, _selectedType.name, _adminId, _companyId));
+                      CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_description.text, _selectedType, _adminId, _companyId));
                       print(response.getAnnouncementID() + " " + response.getResponse().toString());
                     },
                   )
