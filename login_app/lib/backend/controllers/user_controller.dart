@@ -4,10 +4,12 @@ import 'package:login_app/requests/announcements_requests/create_announcement_re
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
+import 'package:login_app/requests/user_requests/UpdateAccountInfoRequest.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
+import 'package:login_app/responses/user_responses/UpdateAccountInfoResponse.dart';
 
 class UserController {
 //This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
@@ -119,5 +121,17 @@ class UserController {
 			throw new Exception("User unsuccessfully deleted ");
 		}
 	}*/
+  /*UpdateAccountInfoResponse updateInfoAccount(UpdateAccountInfoRequest req) throws Exception
+	{
+		if(userQueries.updateAccountInfo(req.getFirstname(),req.getLastname(),req.getEmail(),req.getType(),req.getAdminID(),req.getUserID()))
+		{
+			return new UpdateAccountInfoResponse("Successfully Updated");
+		}
+		else
+		{
+			throw new Exception("Update account unsuccessfully");
+		}
+	}
 
+*/
 }
