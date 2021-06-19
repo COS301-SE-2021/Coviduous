@@ -78,6 +78,7 @@ void main() {
     });
   });
 
+  /*
   group('View Announcement', () {
     test('Correct view announcement', () async {
       ViewAdminAnnouncementRequest req =
@@ -115,6 +116,7 @@ void main() {
       expect(false, resp.getResponse());
     });
   });
+   */
 
   group('Delete Announcement', () {
     test('Correct delete announcement', () async {

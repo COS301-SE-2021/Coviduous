@@ -44,6 +44,7 @@ class AnnouncementsController {
     }
   }
 
+  /*
   Future<ViewAdminAnnouncementResponse> viewAdminAnnouncement(
       ViewAdminAnnouncementRequest req) async {
     if (req != null) {
@@ -63,6 +64,7 @@ class AnnouncementsController {
           null, null, null, false, "Announcement unsuccessfully found");
     }
   }
+   */
 
   Future<DeleteAnnouncementResponse> deleteAnnouncement(
       DeleteAnnouncementRequest req) async {
