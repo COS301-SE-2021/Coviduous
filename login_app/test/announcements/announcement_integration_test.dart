@@ -78,6 +78,44 @@ void main() {
     });
   });
 
+  group('View Announcement', () {
+    test('Correct view announcement', () async {
+      ViewAdminAnnouncementRequest req =
+          new ViewAdminAnnouncementRequest('test');
+      ViewAdminAnnouncementResponse resp =
+          await announcementController.viewAdminAnnouncement(req);
+
+      print("Response : " + resp.getResponseMessage());
+
+      expect(resp, isNot(null));
+      expect(true, resp.getResponse());
+    });
+
+    test('Invalid viewAnnouncement request', () async {
+      ViewAdminAnnouncementRequest req = null;
+      ViewAdminAnnouncementResponse resp =
+          await announcementController.viewAdminAnnouncement(req);
+
+      //print("Response : " + resp.getResponseMessage());
+
+      //expect exception handling
+      //expect(await resp, throwsA("Announcement unsuccessfully created"));
+      expect(false, resp.getResponse());
+    });
+
+    test('Invalid Announcement ID on viewing announcement', () async {
+      ViewAdminAnnouncementRequest req =
+          new ViewAdminAnnouncementRequest('Invalid_announcement_id');
+      ViewAdminAnnouncementResponse resp =
+          await announcementController.viewAdminAnnouncement(req);
+
+      //print("Response : " + resp.getResponseMessage());
+      //print("AnnouncementID : " + resp.getAnnouncementID());
+      expect(resp, isNot(null));
+      expect(false, resp.getResponse());
+    });
+  });
+
   group('Delete Announcement', () {
     test('Correct delete announcement', () async {
       DeleteAnnouncementRequest req =
