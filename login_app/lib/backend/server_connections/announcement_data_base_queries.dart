@@ -9,9 +9,9 @@ class AnnouncementDatabaseQueries {
   PostgreSQLConnection connection;
   String host = 'localhost';
   int port = 5432;
-  String dbName = 'coviduous'; // an existing DB name on your localhost
+  String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
   String user = 'postgres';
-  String pass = 'Sql@0845635040'; // your postgres user password
+  String pass = 'postgres'; // your postgres user password
 
   String announcementId;
   String timeStamp;
