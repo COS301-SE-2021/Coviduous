@@ -30,17 +30,17 @@ void main() {
     print(
         "/////////////////////////////Completed Mock Testing For Creating Announcements ///////////////////");
     expect(globals.numAnnouncements, isNot(0));
-    test('Exception handle for Create Announcement Mock', () {
-      print("Exception Handle if the attributes are empty");
+    //test('Exception handle for Create Announcement Mock', () {
+    // print("Exception Handle if the attributes are empty");
 
-      CreateAnnouncementRequest req1 =
+    /* CreateAnnouncementRequest req1 =
           new CreateAnnouncementRequest("", "", "", "");
       CreateAnnouncementResponse response =
           announcementController.createAnnouncementMock(req1);
       print("Response : " + resp.getResponseMessage());
       print("AnnouncementID : " + resp.getAnnouncementID());
-      // expect();
-    });
+       expect(()=>Range(5,5),throwsException);*/
+    // });
   });
   ////////////////////////////////////////////// Delete Announcement  /////////////////////////////////////////////////////
 
@@ -188,6 +188,11 @@ void main() {
         print("Type : " + list[j].getType());
       }
     }
+
+    /**
+     * Check if the userid is not given throw Exception 
+     * Check if the userid given is invaild 
+     */
 
     print(
         "/////////// Completed View Announcement For User Mock Test //////////////////////");
