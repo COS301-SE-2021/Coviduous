@@ -131,20 +131,40 @@ class _DeleteAccountState extends State<DeleteAccount>{
                                   context: context,
                                   builder: (ctx) => AlertDialog(
                                     title: Text('Warning'),
-                                    content: Text('Are you sure you want to delete your account? This is an irreversible operation.'),
+                                    content: Text('Are you sure you want to delete your account? This cannot be undone.'),
                                     actions: <Widget>[
                                       TextButton(
                                         child: Text('Yes'),
                                         onPressed: (){
-                                          try {
-                                            FirebaseAuth.instance.currentUser.delete();
-                                          } on FirebaseAuthException catch (e) {
-                                            if (e.code == 'requires-recent-login') {
-                                              print('The user must reauthenticate before this operation can be executed.');
+                                          setState(() {
+                                            isLoading = true;
+                                          });
+                                          String oldEmail = FirebaseAuth.instance.currentUser.email;
+                                          AuthClass().deleteAccount().then((value) {
+                                            if (value == "Success") {
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+
+                                              //If delete was successful, delete from Firestore as well
+                                              FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                                var query = FirebaseFirestore.instance.collection('Users')
+                                                    .where("Email", isEqualTo: oldEmail);
+                                                var querySnapshot = await query.get();
+                                                String id = querySnapshot.docs.first.id;
+                                                FirebaseFirestore.instance.collection('Users').doc(id).delete();
+                                              });
+
+                                              AuthClass().signOut();
+                                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+                                            } else {
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text(value)));
                                             }
-                                          }
-                                          AuthClass().signOut();
-                                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+                                          });
                                         },
                                       ),
                                       TextButton(
