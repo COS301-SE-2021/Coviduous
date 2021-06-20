@@ -83,8 +83,8 @@ class AnnouncementDatabaseQueries {
           });
 
       if (result != null) {
-        setAnnouncementID(announcementID);
-        setTimestamp(timestamp);
+        setAnnouncementID(announcementId);
+        setTimestamp(timeStamp);
 
         return true;
       }
