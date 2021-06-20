@@ -1,3 +1,12 @@
+/*
+  File name: register_user_request.dart
+  Purpose: Holds the request class for registering a user
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
+
 /**
  * This class holds the request object for registering a user
  */
