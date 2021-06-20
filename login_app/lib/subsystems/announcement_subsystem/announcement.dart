@@ -1,3 +1,6 @@
+/**
+ * This class acts as an announcement entity mimicking the announcement table attribute in the database
+ */
 class Announcement {
   String message;
   String type;
