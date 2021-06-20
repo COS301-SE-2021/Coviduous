@@ -17,3 +17,5 @@ login_app/build/
 .idea/vcs.xml
 .idea/libraries/Dart_Packages.xml
 .idea/libraries/Dart_SDK.xml
+login_app/android/local.properties
+login_app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
