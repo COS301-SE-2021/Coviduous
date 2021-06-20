@@ -4,11 +4,13 @@ import 'package:login_app/requests/announcements_requests/create_announcement_re
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
+import 'package:login_app/requests/user_requests/RegisterCompanyRequest.dart';
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
+import 'package:login_app/responses/user_responses/RegisterCompanyResponse.dart';
 import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 
 class UserController {
@@ -23,6 +25,15 @@ class UserController {
   }
 
   // //////////////////////////////////Mocked Implementations/////////////////////////////////////////////////////////////////////
+  RegisterCompanyResponse registerCompanyMock(RegisterCompanyRequest req) {
+    if (userQueries.registerCompanyMock(
+        req.getcompanyName(), req.getAddress(), req.getAdminId())) {
+      return RegisterCompanyResponse(true, "Suceesful Company Registration");
+    } else {
+      return RegisterCompanyResponse(false, "UnSuceesful Company Registration");
+    }
+  }
+
   // //register user Mock
   // /**
   //  * This function is used to test if the logic and implementation of creating a user works
