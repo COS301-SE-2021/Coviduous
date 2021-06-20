@@ -1,3 +1,6 @@
+/**
+ * This class holds the request object for registering a user
+ */
 class RegisterUserRequest {
   String type;
   String firstName;
@@ -46,4 +49,3 @@ class RegisterUserRequest {
     return this.companyID;
   }
 }
-

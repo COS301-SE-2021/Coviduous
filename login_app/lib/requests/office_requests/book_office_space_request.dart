@@ -1,3 +1,7 @@
+/**
+ * This class holds the request object for booking an office space in a room
+ */
+
 class BookOfficeSpaceRequest {
   String floorNum = "";
   String roomNum = "";
@@ -14,11 +18,13 @@ class BookOfficeSpaceRequest {
   String getFloorNumber() {
     return floorNum;
   }
+
 //get number of rooms
 // return number of rooms
   String getRoomNumber() {
     return roomNum;
   }
+
 //get name of user
 // return user
   String getUser() {

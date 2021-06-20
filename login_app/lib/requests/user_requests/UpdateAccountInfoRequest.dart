@@ -1,3 +1,7 @@
+/**
+ * This class holds the request object for updating account info of a user
+ */
+
 class UpdateAccountInfoRequest {
   String firstname;
   String lastname;
