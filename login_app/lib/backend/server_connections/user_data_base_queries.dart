@@ -84,7 +84,6 @@ class UserDatabaseQueries {
 
   bool deleteUserAccountMock(String userID) {
     if (userID != null) {
-      print("userID: " + userID);
       for (var x = 0; x < userGlobals.userDatabaseTable.length; x++) {
         if (userGlobals.userDatabaseTable[x].getUserId() == userID) {
           print("Removed Successfully");
@@ -93,6 +92,7 @@ class UserDatabaseQueries {
           return true;
         }
       }
+      return false;
     } else
       return false;
   }

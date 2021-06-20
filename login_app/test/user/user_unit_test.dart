@@ -117,4 +117,35 @@ void main() {
 
     expect(true, response.getResponse());
   });
+
+  test("Invaild userID request", () {
+    var userController = UserController();
+    RegisterUserRequest req = new RegisterUserRequest("User", "Njabulo",
+        "Skosana", "Nskosana", "njabuloskosana24@gmail", "Ns01", "CID-1");
+    RegisterUserResponse resp = userController.registerUserMock(req);
+
+    DeleteAccountUserRequest request = new DeleteAccountUserRequest("USR-110");
+
+    DeleteAccountUserResponse response =
+        userController.deleteAccountUserMock(request);
+
+    print("Response: " + response.getMessage());
+
+    expect(false, response.getResponse());
+  });
+
+  test("UserID request is null", () {
+    var userController = UserController();
+    RegisterUserRequest reqes = new RegisterUserRequest("User", "Adam", "Paul",
+        "adamlaup12", "johnjacobs99@gmail.com", "a_paul@yahoo.com", "CID-2");
+    RegisterUserResponse respn = userController.registerUserMock(reqes);
+
+    DeleteAccountUserRequest request = new DeleteAccountUserRequest(null);
+
+    DeleteAccountUserResponse response =
+        userController.deleteAccountUserMock(request);
+    print("Response: " + response.getMessage());
+
+    expect(false, response.getResponse());
+  });
 }
