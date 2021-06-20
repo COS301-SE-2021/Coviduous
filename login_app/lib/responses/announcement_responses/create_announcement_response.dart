@@ -1,5 +1,14 @@
+/*
+  File name: create_announcement_response.dart
+  Purpose: Holds the response class of creating an announcement
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
+
 /**
- * This class holds the response object for creating an announcement
+ * Purpose: This class holds the response object for creating an announcement
  */
 class CreateAnnouncementResponse {
   String announcementID;
