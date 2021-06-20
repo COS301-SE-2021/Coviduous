@@ -94,12 +94,12 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
   Widget build(BuildContext context) {
     return new Scaffold(
       child : Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/bg.jpg'),
-              fit: BoxFit.cover,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bg.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
         appBar: AppBar(
           title: Text('Delete announcement'),
           leading: BackButton( //Specify back button
