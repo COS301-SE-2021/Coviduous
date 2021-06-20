@@ -94,22 +94,31 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Announcements'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
-            },
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
         ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-            ]
-        )
+      ),
+      child: new Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text('Announcements'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+              },
+            ),
+          ),
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+              ]
+          )
+      ),
     );
   }
 }
