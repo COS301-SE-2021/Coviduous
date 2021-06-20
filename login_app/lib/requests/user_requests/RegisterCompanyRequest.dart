@@ -1,5 +1,8 @@
 import 'dart:math';
 
+/**
+ * This class holds the request object for registering a company
+ */
 class RegisterCompanyRequest {
   String company_name;
   String address;
