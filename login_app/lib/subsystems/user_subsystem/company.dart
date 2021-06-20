@@ -6,9 +6,9 @@ class Company {
   String adminId;
   String companyId;
 
-  User(String name, String companyAddress, String adminID) {
+  Company(String name, String companyAddress, String adminID) {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-
+    this.company_name = name;
     this.companyId = "CID-" + randomInt.toString();
     this.adminId = adminID;
     this.addresss = companyAddress;
