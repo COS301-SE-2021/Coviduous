@@ -95,6 +95,13 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
     }
 
     return new Scaffold(
+        child: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+         ),
+       ),
         appBar: AppBar(
           title: Text('Announcements'),
           leading: BackButton( //Specify back button
@@ -110,6 +117,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
               ),
             ]
         )
+        ),
     );
   }
 }
