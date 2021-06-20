@@ -1,10 +1,13 @@
 import 'dart:math';
 
+import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:postgres/postgres.dart';
 
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:login_app/backend/backend_globals/announcements_globals.dart'
-    as globals;
+    as announcementGlobals;
+import 'package:login_app/backend/backend_globals/user_globals.dart'
+    as userGlobals;
 
 class UserDatabaseQueries {
   PostgreSQLConnection connection;
@@ -16,6 +19,9 @@ class UserDatabaseQueries {
 
   String announcementID;
   String timestamp;
+  String userId;
+  String adminId;
+  String activationCode;
 
   UserDatabaseQueries() {
     announcementID = null;
@@ -36,6 +42,18 @@ class UserDatabaseQueries {
 
   String getTimestamp() {
     return timestamp;
+  }
+
+  String getUserID() {
+    return userId;
+  }
+
+  String getAdminID() {
+    return adminId;
+  }
+
+  String getActivationCode() {
+    return activationCode;
   }
 
   // create DB connection function to be called in each use case
@@ -238,15 +256,26 @@ class UserDatabaseQueries {
 
       var announcement1 = new Announcement(this.announcementID, type,
           this.timestamp, message, adminID, companyID);
-      globals.announcementDatabaseTable.add(announcement1);
+      announcementGlobals.announcementDatabaseTable.add(announcement1);
       print("Added a new announcement");
       //execute sql statement
-      globals.numAnnouncements++;
-      print("Number of announcements : " + globals.numAnnouncements.toString());
+      announcementGlobals.numAnnouncements++;
+      print("Number of announcements : " +
+          announcementGlobals.numAnnouncements.toString());
       return true;
     } else {
       //This means connection could not be established
       return false;
     }
+  }
+
+  bool registerUserMock(String type, String FirstName, String LastName,
+      String Username, String Email, String Password, String companyID) {
+    User usr = new User(
+        type, FirstName, LastName, Username, Email, Password, companyID);
+
+    userGlobals.userDatabaseTable.add(usr);
+    userGlobals.numUsers++;
+    return true;
   }
 }
