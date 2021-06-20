@@ -1,3 +1,11 @@
+/*
+  File name: user_controller.dart
+  Purpose: Holds the controller class for user, all service contracts for the user subsystem are offered through this class.
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/backend/server_connections/announcement_data_base_queries.dart';
 import 'package:login_app/backend/server_connections/user_data_base_queries.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
@@ -13,10 +21,15 @@ import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dar
 import 'package:login_app/responses/user_responses/RegisterCompanyResponse.dart';
 import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 
+/**
+ * Class name: UserController
+ * Purpose: This class is the controller for user, all service contracts for the user subsystem are offered through this class
+ * The class has both mock and concrete implementations of the service contracts.
+ */
 class UserController {
-//This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
+//This class provides an interface to all the user service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
   /** 
-   * announcementQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
+   * userQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
   UserDatabaseQueries userQueries;
 
