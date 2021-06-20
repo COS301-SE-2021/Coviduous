@@ -1,7 +1,15 @@
-/**
- * This class holds the request object object of creating an announcement
+/*
+  File name: create_announcement_request.dart
+  Purpose: Holds the request class of creating an announcement
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
  */
 
+/**
+ * Purpose: This class holds the request object of creating an announcement
+ */
 class CreateAnnouncementRequest {
   String type;
   String message;
