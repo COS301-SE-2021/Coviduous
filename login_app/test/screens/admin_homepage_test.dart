@@ -23,6 +23,7 @@ void main() {
     expect(find.text('Update floor plan'), findsOneWidget); //Find one widget containing 'Update floor plan'
     expect(find.text('Delete floor plan'), findsOneWidget); //Find one widget containing 'Delete floor plan'
     expect(find.text('View announcements'), findsOneWidget); //Find one widget containing 'View announcements'
+    expect(find.text('Manage account'), findsOneWidget); //Find one widget containing 'Manage account'
     expect(find.text('Log out'), findsOneWidget); //Find one widget containing 'Log out'
   });
 }
