@@ -118,60 +118,69 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Announcements'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-            },
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
         ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-              Container (
-                alignment: Alignment.bottomRight,
-                child: Container (
-                    height: 50,
-                    width: 200,
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text('Delete announcement'),
-                      onPressed: (){
-                        Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName);
-                      },
-                    )
+      ),
+      child: new Scaffold(
+          backgroundColor: Colors.transparent, //To show background image
+          appBar: AppBar(
+            title: Text('Announcements'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+              },
+            ),
+          ),
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
                 ),
-              ),
-              Container (
-                alignment: Alignment.bottomLeft,
-                child: Container (
-                    height: 50,
-                    width: 200,
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                Container (
+                  alignment: Alignment.bottomRight,
+                  child: Container (
+                      height: 50,
+                      width: 200,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      child: Text('Create announcement'),
-                      onPressed: (){
-                        Navigator.of(context).pushReplacementNamed(MakeAnnouncement.routeName);
-                      },
-                    )
+                        child: Text('Delete announcement'),
+                        onPressed: (){
+                          Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName);
+                        },
+                      )
+                  ),
                 ),
-              ),
-            ]
-        )
+                Container (
+                  alignment: Alignment.bottomLeft,
+                  child: Container (
+                      height: 50,
+                      width: 200,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Create announcement'),
+                        onPressed: (){
+                          Navigator.of(context).pushReplacementNamed(MakeAnnouncement.routeName);
+                        },
+                      )
+                  ),
+                ),
+              ]
+          )
+      ),
     );
   }
 }
