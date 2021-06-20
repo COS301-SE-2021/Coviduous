@@ -7,38 +7,212 @@ import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
 
 class UserDatabaseQueries {
-  String userID;
-  String adminID;
-  String activation_code;
+  PostgreSQLConnection connection;
+  String host = 'localhost';
+  int port = 5432;
+  String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
+  String user = 'postgres';
+  String pass = 'TripleHBK2000'; // your postgres user password
+
+  String announcementID;
+  String timestamp;
 
   UserDatabaseQueries() {
-    userID = null;
-    adminID = null;
-    activation_code = null;
+    announcementID = null;
+    timestamp = null;
   }
 
-  void setUserID(String uID) {
-    this.userID = uID;
+  void setAnnouncementID(String aID) {
+    this.announcementID = aID;
   }
 
-  void setAdminID(String aID) {
-    this.adminID = aID;
+  void setTimestamp(String timestamp) {
+    this.timestamp = timestamp;
   }
 
-  void setActivationCode(String code) {
-    this.activation_code = code;
+  String getAnnouncementID() {
+    return announcementID;
   }
 
-  String getUserID() {
-    return userID;
+  String getTimestamp() {
+    return timestamp;
   }
 
-  String getAdminID() {
-    return adminID;
+  // create DB connection function to be called in each use case
+  Future<void> connect() async {
+    connection = PostgreSQLConnection(host, port, dbName,
+        username: user, password: pass);
+
+    try {
+      await connection.open();
+      print("Connected to postgres database...");
+    } catch (e) {
+      print("error");
+      print(e.toString());
+    }
   }
 
-  String getActivationCode() {
-    return activation_code;
+  Future<bool> createAnnouncement(
+      String type, String message, String adminID, String companyID) async {
+    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    String announcementID = "ANOUNC-" + randomInt.toString();
+    String timestamp = DateTime.now().toString();
+
+    await connect(); // connect to db
+
+    // PostgreSQLConnection connection = PostgreSQLConnection(
+    //     'localhost', 5432, 'mock_CoviduousDB',
+    //     username: 'postgres', password: 'TripleHBK2000');
+
+    // try {
+    //   await connection.open();
+    //   print("Connected to postgres database...");
+    // } catch (e) {
+    //   print("error");
+    //   print(e.toString());
+    // }
+
+    var adminIDQuery = await connection.query(
+        "SELECT adminid FROM users WHERE adminid = @id",
+        substitutionValues: {'id': adminID});
+
+    var companyIDQuery = await connection.query(
+        "SELECT companyid FROM users WHERE adminid = @id",
+        substitutionValues: {'id': adminID});
+
+    // check if given adminID && companyID exist in DB
+    if (adminIDQuery.length != 0 && companyIDQuery.length != 0) {
+      var result = await connection
+          .query('''INSERT INTO announcements (announcementid, type, datecreated, message, adminid, companyid)
+                                  VALUES (@id, @type, @date, @message, @adminid, @companyid)''',
+              substitutionValues: {
+            'id': announcementID,
+            'type': type,
+            'date': timestamp,
+            'message': message,
+            'adminid': adminID,
+            'companyid': companyID,
+          });
+
+      if (result != null) {
+        setAnnouncementID(announcementID);
+        setTimestamp(timestamp);
+
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  Future<bool> deleteAnnouncement(String announcementID) async {
+    await connect(); // connect to db
+
+    var announcementIDQuery = await connection.query(
+        "SELECT announcementid FROM announcements WHERE announcementid = @id",
+        substitutionValues: {'id': announcementID});
+
+    // check if given announcementID exist in DB
+    if (announcementIDQuery.length != 0) {
+      var result = await connection.query(
+          "DELETE FROM announcements WHERE announcementid = @id",
+          substitutionValues: {'id': announcementID});
+
+      if (result != null) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+/*
+  Future<bool> deleteUserAccount(String userID) async {
+    if (userID != "") {
+      await connect();
+
+      var user = await connection.query(
+          "SELECT userid FROM users WHERE userid = @id",
+          substitutionValues: {'id': userID});
+
+      if (user != 0) {
+        var result = await connection.query(
+            "DELETE FROM users WHERE userid = @id",
+            substitutionValues: {'id': userID});
+        if (result != 0) {
+          return true;
+        }
+      }
+    } else {
+      return false;
+    }
+*/
+  /*bool deleteUserAccountMock(String userID) {
+    if (userID != "") {
+      for (int x = 0; x < globals.userDatabaseTable.length; x++) {
+        if (globals.userDatabaseTable[x].getUserId() == userID) {
+          print("Removed Successfully");
+          globals.userDatabaseTable.removeAt(x);
+          globals.numUsers--;
+          return true;
+        }
+      }
+    } else
+      return false;
+  }
+*/
+  /*	statement = connection.prepareStatement("DELETE FROM users WHERE userid=?");
+				statement.setString(1, userID);
+
+				int affectedRows=statement.executeUpdate();
+			
+				if(affectedRows>0)
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+		       }
+		       else
+		       {
+			       throw new Exception("UserID is not given");
+		       }
+     }
+
+		
+  }*/
+
+  // void deleteAnnouncement(String announcementId) async {
+  //   var db = Db("mongodb://localhost:27017/test");
+  //   await db.open();
+  //   DbCollection coll = db.collection('people');
+  //   print('Connected to database');
+  //   await coll.remove(coll.findOne(where.eq("first_name", announcementId)));
+  //   print('Deleted from database');
+  //   // return true;
+  // }
+
+  Future<bool> viewAdminAnnouncement(String announcementID) async {
+    await connect(); // connect to db
+
+    var announcementIDQuery = await connection.query(
+        "SELECT announcementid FROM announcements WHERE announcementid = @id",
+        substitutionValues: {'id': announcementID});
+
+    // check if given announcementID exist in DB
+    if (announcementIDQuery.length != 0) {
+      var result = await connection.query(
+          "SELECT * FROM announcements WHERE announcementid = @id",
+          substitutionValues: {'id': announcementID});
+
+      if (result != null) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /////////////////////////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
@@ -46,9 +220,11 @@ class UserDatabaseQueries {
 /**
  * This function mocks out the database interaction of creating an announcement, the fuction will be used in tests
  */
-  bool registerUserMock(String type, String firstName, String lastName,
-      String username, String email, String password, String companyID) {
+  bool createAnnouncementMock(
+      String message, String type, String adminID, String companyID) {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    this.announcementID = "ANOUNC-" + randomInt.toString();
+    this.timestamp = DateTime.now().toString();
 
     // conection to DB
     //for mock purposes we will mock out the connection which will either be true of false
@@ -58,47 +234,17 @@ class UserDatabaseQueries {
     if (connection != false) {
       //set up your prepared statement
 
-      if (type == 'Admin') {
-        String adminID = "ADMN-" + randomInt.toString();
-
-        var user = new User(type, firstName, lastName, username, email,
-            password, adminID, companyID);
-
-        globals.userDatabaseTable.add(user);
-
-        print("Added a new admin user");
-
-        setUserID(user.getUserId());
-        setAdminID(adminID);
-        setActivationCode(user.activation_code);
-
-        //execute sql statement
-        globals.numUsers++;
-        print("Number of users : " + globals.numUsers.toString());
-      } else {
-        String adminID = " ";
-
-        var user = new User(type, firstName, lastName, username, email,
-            password, adminID, companyID);
-
-        globals.userDatabaseTable.add(user);
-
-        print("Added a new user");
-
-        setUserID(user.getUserId());
-        setAdminID(adminID);
-        setActivationCode(user.activation_code);
-
-        //execute sql statement
-        globals.numUsers++;
-        print("Number of users : " + globals.numUsers.toString());
-      }
-
+      var announcement1 = new Announcement(this.announcementID, type,
+          this.timestamp, message, adminID, companyID);
+      globals.announcementDatabaseTable.add(announcement1);
+      print("Added a new announcement");
+      //execute sql statement
+      globals.numAnnouncements++;
+      print("Number of announcements : " + globals.numAnnouncements.toString());
       return true;
     } else {
       //This means connection could not be established
       return false;
     }
   }
-  
 }
