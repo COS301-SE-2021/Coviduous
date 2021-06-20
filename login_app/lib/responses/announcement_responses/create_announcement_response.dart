@@ -1,3 +1,6 @@
+/**
+ * This class holds the response object for creating an announcement
+ */
 class CreateAnnouncementResponse {
   String announcementID;
   String timestamp;

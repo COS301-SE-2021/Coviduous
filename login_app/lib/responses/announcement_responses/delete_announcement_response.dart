@@ -1,3 +1,6 @@
+/**
+ * This class holds the response object for deleting an announcement by the admin
+ */
 class DeleteAnnouncementResponse {
   bool response;
   String responseMessage;
