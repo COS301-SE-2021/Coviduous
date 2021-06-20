@@ -73,7 +73,7 @@ void main() {
     print(
         "/////////////////////////////Completed Mock Test For Delete ///////////////////");
     //number of announcement should be zero since we only made 1 announcement and the deleted it.
-    expect(globals.numAnnouncements, 0);
+    expect(delResp.getResponse(), true);
   });
   /////////////////////////////////////////////// View Announcement Admin /////////////////////////////////////////////////////
   test('View Announcement For Admin Mock', () {
