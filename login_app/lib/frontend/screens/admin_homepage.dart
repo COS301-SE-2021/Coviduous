@@ -19,11 +19,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Widget build(BuildContext context) {
     return new WillPopScope(
       onWillPop: () async => false, //Prevent the back button from working
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/bg.jpg'),
+              fit: BoxFit.cover,
           ),
         ),
       child: Scaffold(
