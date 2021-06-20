@@ -141,9 +141,9 @@ void main() {
     print(
         "/////////////////////////////Testing Mock User View Announcements ///////////////////");
     User admin = User("ADMIN", "Njabulo", "Skosana", "njabuloS",
-        "njabulo@gmail.com", "123456", "USRAD-1", "CID-1");
+        "njabulo@gmail.com", "123456", "CID-1");
     User user = User("USER", "Mpho", "Lefatsi", "MphoLefatsi09",
-        "lefatsi@gmail.com", "123456", "USR-1", "CID-1");
+        "lefatsi@gmail.com", "123456", "CID-1");
 
     globals.userDatabaseTable.add(admin);
     globals.numUsers++;
