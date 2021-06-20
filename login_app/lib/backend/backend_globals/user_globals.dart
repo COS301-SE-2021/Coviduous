@@ -17,7 +17,7 @@ List<User> userDatabaseTable = [];
 int numUsers = 0;
 
 /**
- * List<Announcement> companyDatabaseTable = [] acts like a database table that holds companies , this is to mock out functionality for testing
+ * List<Company> companyDatabaseTable = [] acts like a database table that holds companies , this is to mock out functionality for testing
  * numCompanies keeps track of number of companies in the mock company database table
  */
 List<Company> companyDatabaseTable = [];
