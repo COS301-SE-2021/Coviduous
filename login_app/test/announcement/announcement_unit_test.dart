@@ -12,6 +12,8 @@ import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
+import 'package:login_app/backend/backend_globals/user_globals.dart'
+    as userGlobals;
 
 void main() {
   ///////////////////////////////////// These Unit Tests Test Mocked Functionality For The Announcement System ///////////
@@ -143,19 +145,19 @@ void main() {
     User admin = User("ADMIN", "Njabulo", "Skosana", "njabuloS",
         "njabulo@gmail.com", "123456", "CID-1");
     User user = User("USER", "Mpho", "Lefatsi", "MphoLefatsi09",
-        "lefatsi@gmail.com", "123456", "CID-1");
+        "lefatsi@gmail.com", "MphoLefatsi09", "CID-1");
 
-    globals.userDatabaseTable.add(admin);
-    globals.numUsers++;
-    globals.userDatabaseTable.add(user);
-    globals.numUsers++;
+    userGlobals.userDatabaseTable.add(admin);
+    userGlobals.numUsers++;
+    userGlobals.userDatabaseTable.add(user);
+    userGlobals.numUsers++;
     print("Successfully added admin user and general user");
-    for (var i = 0; i < globals.userDatabaseTable.length; i++) {
+    for (var i = 0; i < userGlobals.userDatabaseTable.length; i++) {
       print("Printing out a user");
-      print("Name : " + globals.userDatabaseTable[i].getFirstName());
-      print("Last Name : " + globals.userDatabaseTable[i].getLastName());
-      print("Company ID : " + globals.userDatabaseTable[i].getCompanyId());
-      print("User ID : " + globals.userDatabaseTable[i].getUserId());
+      print("Name : " + userGlobals.userDatabaseTable[i].getFirstName());
+      print("Last Name : " + userGlobals.userDatabaseTable[i].getLastName());
+      print("Company ID : " + userGlobals.userDatabaseTable[i].getCompanyId());
+      print("User ID : " + userGlobals.userDatabaseTable[i].getUserId());
     }
     print("//////////////////////////////////////////////////");
     CreateAnnouncementRequest req = new CreateAnnouncementRequest(
