@@ -34,6 +34,7 @@ class _AdminResetPasswordState extends State<AdminResetPassword> {
         ),
       ),
       body: isLoading == false ? Center(
+        // adding background.
         child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
