@@ -135,7 +135,7 @@ class AnnouncementsController {
     var list = announcementQueries.viewAnnouncementsAdminMock(req.getAdminId());
     if (list != null) {
       return new ViewAdminAnnouncementResponse(
-          list, "Successfully Fetched Announcements For Admin");
+          list, true, "Successfully Fetched Announcements For Admin");
     } else {
       throw new Exception("Announcement id does not exist");
     }
@@ -148,7 +148,7 @@ class AnnouncementsController {
     var list = announcementQueries.viewAnnouncementsUserMock(req.getUserId());
     if (list != null) {
       return new ViewUserAnnouncementResponse(
-          list, "Successfully Fetched Announcements For User");
+          list, true, "Successfully Fetched Announcements For User");
     } else {
       throw new Exception("Announcement id does not exist");
     }
