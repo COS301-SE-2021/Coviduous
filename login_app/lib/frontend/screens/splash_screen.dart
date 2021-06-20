@@ -15,10 +15,19 @@ class _SplashState extends State<Splash> {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
 
     });
-    return Scaffold(
-      body: Center(
-        child: FlutterLogo(
-          size: 80,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent, //To show background image
+        body: Center(
+          child: FlutterLogo(
+            size: 80,
+          ),
         ),
       ),
     );
