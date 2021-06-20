@@ -1,3 +1,11 @@
+/*
+  File name: announcement_dat_base_queries.dart
+  Purpose: Allows database interaction for all service contracts for the Announcement subsystem
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
 import 'package:login_app/backend/backend_globals/user_globals.dart'
@@ -8,7 +16,8 @@ import 'package:postgres/postgres.dart';
 import 'dart:math';
 
 /**
- * This class allows database interaction for all service contracts for the Announcement subsystem 
+ * Class name: AnnouncementDatabaseQueries
+ * Purpose: This class allows database interaction for all service contracts for the Announcement subsystem 
  * The class has both mock and concrete implementations of the service contracts.
  */
 class AnnouncementDatabaseQueries {
