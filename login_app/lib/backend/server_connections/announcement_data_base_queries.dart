@@ -115,6 +115,22 @@ class AnnouncementDatabaseQueries {
     return false;
   }
 
+  // Future<bool> viewAnnouncementsAdmin(String adminId) //arraylist
+  // async {
+  //   //connection to the DB
+  //   await connect();
+
+  //   var adminIDQuery = await connection.query(
+  //       "SELECT adminid FROM users WHERE adminid = @id",
+  //       substitutionValues: {'id': adminId});
+
+  //   if (adminIDQuery != 0) {
+  //     var result = await connection.query(
+  //         "SELECT * FROM announcements WHERE announcementid =@id",
+  //         substitutionValues: {'id': adminIDQuery});
+  //   }
+  // }
+
   Future<bool> deleteAnnouncement(String announcementID) async {
     await connect(); // connect to db
 
@@ -166,22 +182,6 @@ class AnnouncementDatabaseQueries {
     } else {
       //This means connection could not be established
       return false;
-    }
-  }
-
-  Future<bool> viewAnnouncementsAdmin(String adminId) //arraylist
-  async {
-    //connection to the DB
-    await connect();
-
-    var adminIDQuery = await connection.query(
-        "SELECT adminid FROM users WHERE adminid = @id",
-        substitutionValues: {'id': adminId});
-
-    if (adminIDQuery != 0) {
-      var result = await connection.query(
-          "SELECT * FROM announcements WHERE announcementid =@id",
-          substitutionValues: {'id': adminIDQuery});
     }
   }
 
