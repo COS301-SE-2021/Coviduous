@@ -1,5 +1,7 @@
 import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
+import 'package:login_app/backend/backend_globals/user_globals.dart'
+    as userGlobals;
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:postgres/postgres.dart';
 
@@ -249,11 +251,11 @@ class AnnouncementDatabaseQueries {
       //execute prepared statement to fetch the users companyid announcements for assosiated announcements to the company
       //this loop mocks the functionality of fetching assosiated companyid from the database
 
-      for (var i = 0; i < globals.userDatabaseTable.length; i++) {
-        if (globals.userDatabaseTable[i].getUserId() == userId) {
-          if (globals.userDatabaseTable[i] != null) {
+      for (var i = 0; i < userGlobals.userDatabaseTable.length; i++) {
+        if (userGlobals.userDatabaseTable[i].getUserId() == userId) {
+          if (userGlobals.userDatabaseTable[i] != null) {
             this.companyIdentification =
-                globals.userDatabaseTable[i].getCompanyId();
+                userGlobals.userDatabaseTable[i].getCompanyId();
             print("Found Users Company ID : " + companyIdentification);
           }
         }
