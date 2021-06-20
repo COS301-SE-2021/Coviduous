@@ -1,3 +1,6 @@
+/**
+ * This class holds the request object for viewing an office space that was assigned to a user
+ */
 class ViewOfficeSpaceRequest {
   String user;
 
