@@ -40,11 +40,11 @@ class AnnouncementsController {
             "Successfully Created Announcement");
       } else {
         return new CreateAnnouncementResponse(
-            "", "", false, "Announcement unsuccessfully created");
+            null, null, false, "Announcement unsuccessfully created");
       }
     } else {
       return new CreateAnnouncementResponse(
-          "", "", false, "Announcement unsuccessfully created");
+          null, null, false, "Announcement unsuccessfully created");
     }
   }
 
