@@ -29,10 +29,10 @@
 
 ### Demo 2
 
-- :open_book: [SRS version 2](https://)
-- :open_book: [Architectural design](https://)
-- :open_book: [Coding standards](https://)
-- :open_book: [User manual](https://)
+- :open_book: [SRS version 2](https://drive.google.com/file/d/1f-ebESjeLfm9mud0u7zV_heWcDekBGhN/view?usp=sharing)
+- :open_book: [Architectural design](https://drive.google.com/file/d/1Wnnvy8sYmdPnRgwT-dhfFAx2wAaIyi5C/view?usp=sharing)
+- :open_book: [Coding standards](https://drive.google.com/file/d/1s-dk_Le9LpUd8vULxenfFeVNqAMgox2R/view?usp=sharing)
+- :open_book: [User manual](https://drive.google.com/file/d/1II1HLj6RPal8AyY9fyWczwdHGdeyffJi/view?usp=sharing)
 
 ### Demo 3
 
