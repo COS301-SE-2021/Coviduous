@@ -174,20 +174,20 @@ class UserDatabaseQueries {
       return false;
     }
 */
-  /*bool deleteUserAccountMock(String userID) {
+  bool deleteUserAccountMock(String userID) {
     if (userID != "") {
-      for (int x = 0; x < globals.userDatabaseTable.length; x++) {
-        if (globals.userDatabaseTable[x].getUserId() == userID) {
+      for (var x = 0; x < userGlobals.userDatabaseTable.length; x++) {
+        if (userGlobals.userDatabaseTable[x].getUserId() == userID) {
           print("Removed Successfully");
-          globals.userDatabaseTable.removeAt(x);
-          globals.numUsers--;
+          userGlobals.userDatabaseTable.removeAt(x);
+          userGlobals.numUsers--;
           return true;
         }
       }
     } else
       return false;
   }
-*/
+
   bool updateAccountInfoMock(String firstname, String lastname, String email) {}
 
   /*	statement = connection.prepareStatement("DELETE FROM users WHERE userid=?");

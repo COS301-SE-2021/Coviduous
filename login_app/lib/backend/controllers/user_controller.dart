@@ -48,27 +48,29 @@ class UserController {
           req.getEmail(),
           req.getPassword(),
           req.getCompanyID())) {
-        return new RegisterUserResponse(userQueries.getAdminID(), true, "Successfully Registered User");
+        return new RegisterUserResponse(
+            userQueries.getAdminID(), true, "Successfully Registered User");
       } else {
         return new RegisterUserResponse(
             null, false, "Unsuccessfully registered user");
       }
     } else {
-      return new RegisterUserResponse(null, false, "Unsuccessfully registered user");
+      return new RegisterUserResponse(
+          null, false, "Unsuccessfully registered user");
     }
   }
-/*
+
   DeleteAccountUserResponse deleteAccountUserMock(
       DeleteAccountUserRequest request) {
     if (request != null) {
-      if (userQueries.deleteAnnouncementMock(request.userID)) {
-        return new DeleteAccountUserResponse("Successfully Deleted");
+      if (userQueries.deleteUserAccountMock(request.getUserID())) {
+        return new DeleteAccountUserResponse(true, "Successfully Deleted");
       } else {
         return null;
       }
     }
   }
-*/
+
   /*DeleteAccountUserResponse deleteUserAccount(DeleteAccountUserRequest request) throws Exception {
     if(userQueries.deleteUserAccount(request.getUserID()))
     {
