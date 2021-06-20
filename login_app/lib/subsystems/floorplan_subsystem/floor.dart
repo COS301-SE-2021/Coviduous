@@ -1,5 +1,8 @@
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
+/**
+ * This class acts as an floor entity mimicking the floors table attributes in the database
+ */
 class Floor {
   List<Room> rooms = [];
   String floorNum = "";

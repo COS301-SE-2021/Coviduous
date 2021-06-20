@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/**
+ * This class acts as an user entity mimicking the user table attribute in the database
+ */
 class User {
   String userId;
   String adminId;

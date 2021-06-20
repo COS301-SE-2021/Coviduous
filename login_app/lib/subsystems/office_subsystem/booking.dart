@@ -1,3 +1,6 @@
+/**
+ * This class acts as an booking entity mimicking the booking table attribute in the database
+ */
 class Booking {
   DateTime dateTime;
   String floorNum = "";
@@ -14,7 +17,7 @@ class Booking {
     this.deskNum = deskNum;
   }
 //function display booking
- // displays booking details..
+  // displays booking details..
   void displayBooking() {
     print(
         "***************************************************************************************");
