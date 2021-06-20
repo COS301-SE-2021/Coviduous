@@ -37,13 +37,6 @@ class _AdminRegisterState extends State<AdminRegister>{
   @override
   Widget build(BuildContext context) {
     return isLoading == false ? Scaffold(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/bg.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
       appBar: AppBar(
         title: Text('Register'),
         leading: BackButton( //Specify back button
@@ -273,7 +266,6 @@ class _AdminRegisterState extends State<AdminRegister>{
           )
         ],
       ),
-        ),
     ) : Center( child: CircularProgressIndicator());
   }
 }
