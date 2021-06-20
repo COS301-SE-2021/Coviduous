@@ -1,5 +1,8 @@
 import 'package:login_app/subsystems/office_subsystem/booking.dart';
 
+/**
+ * This class holds the response object for viewing office bookings
+ */
 class ViewOfficeSpaceResponse {
   bool successful = false;
   Booking myBooking;

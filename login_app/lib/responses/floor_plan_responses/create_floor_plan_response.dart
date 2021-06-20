@@ -1,3 +1,7 @@
+/**
+ * This class holds the response object for creating a floor plan
+ */
+
 class CreateFloorPlanResponse {
   bool successful = false;
 

@@ -1,3 +1,7 @@
+/**
+ * This class holds the response object for booking an office space
+ */
+
 class BookOfficeSpaceResponse {
   bool successful = false;
 
