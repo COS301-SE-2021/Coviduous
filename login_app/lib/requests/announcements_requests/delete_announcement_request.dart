@@ -1,5 +1,14 @@
+/*
+  File name: delete_announcement_request.dart
+  Purpose: Holds the request class of deleting an announcement
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
+
 /**
- * This class holds the request object object of deleting an announcement by an admin user
+ * Purpose: This class holds the request object of deleting an announcement by an admin user
  */
 class DeleteAnnouncementRequest {
   String announcementId;

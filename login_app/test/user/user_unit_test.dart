@@ -115,11 +115,6 @@ void main() {
         userController.deleteAccountUserMock(request);
     print("Response: " + response.getMessage());
 
-    for (int x = 0; x < globals.userDatabaseTable.length; x++) {
-      print(globals.userDatabaseTable[x].getUserId());
-    }
-
-    /*
-    //expect(true, response.getResponse());*/
+    expect(true, response.getResponse());
   });
 }
