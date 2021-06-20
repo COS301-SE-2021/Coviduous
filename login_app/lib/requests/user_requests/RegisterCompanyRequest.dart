@@ -1,3 +1,11 @@
+/*
+  File name: register_company_request.dart
+  Purpose: Holds the request class for registering a company
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'dart:math';
 
 /**
