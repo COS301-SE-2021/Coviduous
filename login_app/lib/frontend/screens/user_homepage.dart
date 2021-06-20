@@ -23,13 +23,6 @@ class _UserHomepageState extends State<UserHomepage> {
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
-        child: Container(
-        decoration: BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage('assets/bg.jpg'),
-        fit: BoxFit.cover,
-         ),
-      ),
       onWillPop: () async => false, //Prevent the back button from working
       child: Scaffold(
         appBar: AppBar(
@@ -217,7 +210,6 @@ class _UserHomepageState extends State<UserHomepage> {
           ]
         )
       ),
-        ),
     );
   }
 }
