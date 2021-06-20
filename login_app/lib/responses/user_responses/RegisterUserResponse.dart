@@ -1,3 +1,12 @@
+/*
+  File name: register_user_response.dart
+  Purpose: Holds the response class of registering a user
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
+
 /**
  * This class holds the response object for registering a user
  */
