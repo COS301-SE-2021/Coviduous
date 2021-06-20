@@ -63,7 +63,7 @@ class UserDatabaseQueries {
       setUserId("");
     } else {
       setUserId(usr.getUserId());
-      setAdminId("");
+      setAdminId(usr.getUserId());
     }
     userGlobals.userDatabaseTable.add(usr);
     userGlobals.numUsers++;
@@ -77,7 +77,8 @@ class UserDatabaseQueries {
   }
 
   bool deleteUserAccountMock(String userID) {
-    if (userID != "") {
+    if (userID != null) {
+      print("userID: " + userID);
       for (var x = 0; x < userGlobals.userDatabaseTable.length; x++) {
         if (userGlobals.userDatabaseTable[x].getUserId() == userID) {
           print("Removed Successfully");
