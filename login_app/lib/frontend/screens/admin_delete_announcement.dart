@@ -81,7 +81,9 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
                   child: Text('Proceed'),
                   onPressed: () {
                       DeleteAnnouncementResponse response2 = services.deleteAnnouncementMock(DeleteAnnouncementRequest(_announcementId.text));
-                      print(response2.getResponse());
+                      print(response2.getResponseMessage());
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(response2.getResponseMessage())));
                     }
               )
             ],
