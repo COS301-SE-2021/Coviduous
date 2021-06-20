@@ -1,11 +1,15 @@
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 
+/**
+ * This class holds the response object for viewing an announcement by a user
+ */
 class ViewUserAnnouncementResponse {
   List<Announcement> announcementArrayList;
   bool response;
   String message;
 
-  ViewUserAnnouncementResponse(List<Announcement> list, bool response, String Message) {
+  ViewUserAnnouncementResponse(
+      List<Announcement> list, bool response, String Message) {
     this.announcementArrayList = list;
     this.response = response;
     this.message = Message;
