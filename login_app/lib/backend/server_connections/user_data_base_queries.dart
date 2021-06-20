@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:login_app/subsystems/user_subsystem/company.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:postgres/postgres.dart';
 
@@ -276,6 +277,12 @@ class UserDatabaseQueries {
 
     userGlobals.userDatabaseTable.add(usr);
     userGlobals.numUsers++;
+    return true;
+  }
+
+  bool registerCompanyMock(String name, String companyAddress, String adminID) {
+    Company cmp = new Company(name, companyAddress, adminID);
+    userGlobals.companyDatabaseTable.add(cmp);
     return true;
   }
 }
