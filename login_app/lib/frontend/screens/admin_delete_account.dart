@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'package:login_app/backend/controllers/user_controller.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/screens/admin_manage_account.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+//import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
+//import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
 
 class AdminDeleteAccount extends StatefulWidget {
   static const routeName = "/adminDeleteAccount";
@@ -22,6 +25,8 @@ String _email = snap.get('Email');
 String _password = snap.get('Password');
 
 class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
+  UserController services = new UserController();
+
   TextEditingController _userEmail = TextEditingController();
   TextEditingController _userPassword = TextEditingController();
   TextEditingController _confirmUserPassword = TextEditingController();
@@ -149,6 +154,9 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
                                                 String id = querySnapshot.docs.first.id;
                                                 FirebaseFirestore.instance.collection('Users').doc(id).delete();
                                               });
+
+                                              //DeleteAccountUserResponse response = services.deleteAccountUserMock(DeleteAccountUserRequest(globals.loggedInUserId));
+                                              //print(response.getResponse());
 
                                               AuthClass().signOut();
                                               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
