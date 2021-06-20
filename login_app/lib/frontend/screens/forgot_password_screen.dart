@@ -18,6 +18,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        child: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/bg.jpg'),
+    fit: BoxFit.cover,
+    ),
+    ),
       appBar: AppBar(
         title: Text("Reset password"),
         leading: BackButton( //Specify back button
@@ -75,6 +82,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       ) : Center(child: CircularProgressIndicator(),
     ),
+        ),
     );
   }
 }
