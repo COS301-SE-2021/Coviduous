@@ -20,6 +20,6 @@ void main() {
 
     //Verify that the correct widgets appear in the correct order
     expect(find.text('Email'), findsOneWidget); //Find one widget containing 'Email'
-    expect(find.text('Reset password'), findsOneWidget); //Find one widget containing 'Reset password'
+    expect(find.text('Reset password'), findsNWidgets(2)); //Find two widgets containing 'Reset password'
   });
 }
