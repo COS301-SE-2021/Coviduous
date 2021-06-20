@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/backend/controllers/user_controller.dart';
 
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/models/firestore_cloud.dart';
 import 'package:login_app/frontend/screens/home_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/requests/user_requests/RegisterCompanyRequest.dart';
+import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
+import 'package:login_app/responses/user_responses/RegisterCompanyResponse.dart';
+import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 
 class AdminRegister extends StatefulWidget {
   static const routeName = "/adminRegister";
@@ -13,6 +18,8 @@ class AdminRegister extends StatefulWidget {
 }
 
 class _AdminRegisterState extends State<AdminRegister>{
+  UserController services = new UserController();
+
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _email = TextEditingController();
@@ -221,6 +228,10 @@ class _AdminRegisterState extends State<AdminRegister>{
                                       });
 
                                       adminSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
+                                      RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("Admin", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
+                                      print(response.getResponse());
+                                      RegisterCompanyResponse response2 = services.registerCompanyMock(RegisterCompanyRequest(_companyName.text, _companyLocation.text, response.getAdminId()));
+                                      print(response2.getResponse());
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) => LoginScreen()), (
                                               route) => false);
