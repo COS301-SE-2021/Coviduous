@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../frontend/screens/login_screen.dart';
-import 'user_book_office_space.dart';
-import 'user_manage_account.dart';
-import 'user_view_announcements.dart';
-import 'user_view_current_bookings.dart';
-import 'user_view_office_spaces.dart';
-import '../../frontend/models/auth_provider.dart';
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/user_book_office_space.dart';
+import 'package:login_app/frontend/screens/user_manage_account.dart';
+import 'package:login_app/frontend/screens/user_view_announcements.dart';
+import 'package:login_app/frontend/screens/user_view_current_bookings.dart';
+import 'package:login_app/frontend/screens/user_view_office_spaces.dart';
+import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserHomepage extends StatefulWidget {
   static const routeName = "/user";

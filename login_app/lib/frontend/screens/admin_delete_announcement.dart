@@ -4,11 +4,11 @@ import 'package:login_app/requests/announcements_requests/delete_announcement_re
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/delete_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
-import '../../subsystems/announcement_subsystem/announcement.dart';
+import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 
 import 'admin_view_announcements.dart';
-import '../front_end_globals.dart' as globals;
-import '../../backend/backend_globals/announcements_globals.dart' as announcementGlobals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/backend/backend_globals/announcements_globals.dart' as announcementGlobals;
 
 class AdminDeleteAnnouncement extends StatefulWidget {
   static const routeName = "/admin_delete_announcement";

@@ -6,7 +6,7 @@ import 'package:login_app/requests/announcements_requests/create_announcement_re
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 
 import 'admin_view_announcements.dart';
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class MakeAnnouncement extends StatefulWidget {
   static const routeName = "/admin_make_announcement";

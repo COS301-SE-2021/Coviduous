@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/frontend/screens/admin_make_announcement.dart';
+import 'package:login_app/frontend/screens/admin_make_announcement.dart';
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../lib/frontend/screens/user_view_announcements.dart';
-import '../../lib/backend/backend_globals/announcements_globals.dart' as announcementGlobals;
+import 'package:login_app/frontend/screens/user_view_announcements.dart';
+import 'package:login_app/backend/backend_globals/announcements_globals.dart' as announcementGlobals;
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);

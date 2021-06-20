@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../frontend/models/auth_provider.dart';
-import '../../frontend/models/firestore_cloud.dart';
-import '../../frontend/screens/home_signup_screen.dart';
-import '../../frontend/screens/login_screen.dart';
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/models/firestore_cloud.dart';
+import 'package:login_app/frontend/screens/home_signup_screen.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserRegister extends StatefulWidget {
   static const routeName = "/userRegister";

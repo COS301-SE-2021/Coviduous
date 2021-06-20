@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'user_delete_account.dart';
-import 'user_reset_password_screen.dart';
-import 'user_homepage.dart';
-import 'user_update_account.dart';
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/screens/user_delete_account.dart';
+import 'package:login_app/frontend/screens/user_reset_password_screen.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/user_update_account.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserManageAccount extends StatefulWidget {
   static const routeName = "/userManageAccount";

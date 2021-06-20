@@ -3,12 +3,12 @@ import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 
-import 'admin_homepage.dart';
-import 'admin_make_announcement.dart';
-import 'admin_delete_announcement.dart';
-import '../../subsystems/announcement_subsystem/announcement.dart';
+import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/admin_make_announcement.dart';
+import 'package:login_app/frontend/screens/admin_delete_announcement.dart';
+import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminViewAnnouncements extends StatefulWidget {
   static const routeName = "/admin_announcements";

@@ -12,13 +12,13 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'admin_homepage.dart';
-import 'user_homepage.dart';
-import 'home_signup_screen.dart';
-import '../models/auth_provider.dart';
-import 'forgot_password_screen.dart';
+import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/home_signup_screen.dart';
+import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/screens/forgot_password_screen.dart';
 
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 /*
   Class name: LoginScreen

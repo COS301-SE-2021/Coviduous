@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'login_screen.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 
 class Splash extends StatefulWidget {
   @override

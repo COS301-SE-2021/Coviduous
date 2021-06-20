@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'user_homepage.dart';
-import '../../subsystems/floorplan_subsystem/floor.dart';
-//import '../../backend/controllers/office_controller.dart';
-import '../front_end_globals.dart' as globals;
-import '../../backend/backend_globals/floor_globals.dart' as floorGlobals;
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
+//import 'package:login_app/backend/controllers/office_controller.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class UserBookOfficeSpace extends StatefulWidget {
   static const routeName = "/user_book_space";

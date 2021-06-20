@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'user_manage_account.dart';
-import '../../frontend/screens/login_screen.dart';
-import '../../frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/screens/user_manage_account.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/models/auth_provider.dart';
 
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserResetPassword extends StatefulWidget {
   static const routeName = "/userResetPassword";

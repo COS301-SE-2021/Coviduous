@@ -4,7 +4,7 @@ import 'admin_delete_account.dart';
 import 'admin_reset_password_screen.dart';
 import 'admin_homepage.dart';
 import 'admin_update_account.dart';
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminManageAccount extends StatefulWidget {
   static const routeName = "/adminManageAccount";

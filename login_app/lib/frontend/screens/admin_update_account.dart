@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../frontend/models/auth_provider.dart';
-import '../../frontend/screens/admin_manage_account.dart';
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/screens/admin_manage_account.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminUpdateAccount extends StatefulWidget {
   static const routeName = "/adminUpdateAccount";

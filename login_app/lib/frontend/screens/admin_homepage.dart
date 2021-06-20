@@ -4,8 +4,8 @@ import 'login_screen.dart';
 import 'admin_manage_account.dart';
 import 'admin_add_floor_plan.dart';
 import 'admin_view_announcements.dart';
-import '../models/auth_provider.dart';
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
   static const routeName = "/admin";

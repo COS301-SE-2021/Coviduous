@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'admin_manage_account.dart';
 import 'login_screen.dart';
-import '../models/auth_provider.dart';
+import 'package:login_app/frontend/models/auth_provider.dart';
 
-import '../front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminResetPassword extends StatefulWidget {
   static const routeName = "/adminResetPassword";
