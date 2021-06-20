@@ -1,5 +1,5 @@
 /*
-  File name: announcement_dat_base_queries.dart
+  File name: announcement_data_base_queries.dart
   Purpose: Allows database interaction for all service contracts for the Announcement subsystem
   Collaborators:
     - Njabulo Skosana
