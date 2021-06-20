@@ -35,6 +35,12 @@ class _AdminResetPasswordState extends State<AdminResetPassword> {
       ),
       body: isLoading == false ? Center(
         child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
           width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
           height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
           color: Colors.white,
