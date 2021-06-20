@@ -161,6 +161,8 @@ class UserDatabaseQueries {
       return false;
   }
 */
+  bool updateAccountInfoMock(String firstname, String lastname, String email) {}
+
   /*	statement = connection.prepareStatement("DELETE FROM users WHERE userid=?");
 				statement.setString(1, userID);
 
