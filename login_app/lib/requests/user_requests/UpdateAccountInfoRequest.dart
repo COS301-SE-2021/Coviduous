@@ -1,3 +1,12 @@
+/*
+  File name: update_account_info_request.dart
+  Purpose: Holds the request class of updating account info of a user
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
+
 /**
  * This class holds the request object for updating account info of a user
  */
