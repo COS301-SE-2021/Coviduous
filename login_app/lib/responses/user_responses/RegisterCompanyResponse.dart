@@ -1,3 +1,12 @@
+/*
+  File name: register_company_response.dart
+  Purpose: Holds the response class for registering a company
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
+
 /**
  * This class holds the response object for registering a company
  */
