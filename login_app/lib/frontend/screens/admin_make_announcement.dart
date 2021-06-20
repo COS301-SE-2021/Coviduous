@@ -60,10 +60,10 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
   Widget build(BuildContext context) {
     return new Scaffold(
       child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/bg.jpg'),
+              fit: BoxFit.cover,
           ),
         ),
         appBar: new AppBar(
