@@ -1,3 +1,11 @@
+/*
+  File name: announcements_controller.dart
+  Purpose: Holds the controller class for announcements, all service contracts for the announcement subsystem are offered through this class.
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/backend/server_connections/announcement_data_base_queries.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
@@ -9,7 +17,8 @@ import 'package:login_app/responses/announcement_responses/viewAdmin_announcemen
 import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
 
 /**
- * This class is the controller for announcements, all service contracts for the announcement subsystem are offered through this class
+ * Class name: AnnouncementsController
+ * Purpose: This class is the controller for announcements, all service contracts for the announcement subsystem are offered through this class
  * The class has both mock and concrete implementations of the service contracts.
  */
 class AnnouncementsController {
