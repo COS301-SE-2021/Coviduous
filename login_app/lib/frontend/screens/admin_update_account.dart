@@ -41,6 +41,12 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
           Center(
             child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
               child: Container(
+                      decoration: BoxDecoration(
+                      image: DecorationImage(
+                      image: AssetImage('assets/bg.jpg'),
+                      fit: BoxFit.cover,
+                            ),
+                      ),
                 color: Colors.white,
                 height: MediaQuery.of(context).size.height/(2.8*globals.getWidgetScaling()),
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
