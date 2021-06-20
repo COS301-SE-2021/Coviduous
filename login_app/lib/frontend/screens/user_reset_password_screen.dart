@@ -26,13 +26,6 @@ class _UserResetPasswordState extends State<UserResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
       appBar: AppBar(
         title: Text("Reset password"),
         leading: BackButton( //Specify back button
@@ -89,7 +82,6 @@ class _UserResetPasswordState extends State<UserResetPassword> {
           ),
         ),
       ) : Center(child: CircularProgressIndicator(),
-      ),
       ),
     );
   }

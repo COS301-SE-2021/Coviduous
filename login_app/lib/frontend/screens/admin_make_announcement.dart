@@ -59,13 +59,6 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/bg.jpg'),
-              fit: BoxFit.cover,
-          ),
-        ),
         appBar: new AppBar(
           title: new Text("Make announcement"),
           leading: BackButton( //Specify back button
@@ -151,7 +144,6 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
             ),
           ),
         ),
-      ),
     );
   }
 }
