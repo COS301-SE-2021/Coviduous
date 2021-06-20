@@ -8,6 +8,10 @@ import 'package:login_app/backend/backend_globals/floor_globals.dart'
 import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
 import 'package:login_app/subsystems/office_subsystem/booking.dart';
 
+/**
+ * This class is the controller for Office, all service contracts for the Office subsystem are offered through this class
+ * The class has both mock and concrete implementations of the service contracts.
+ */
 class OfficeController {
 //This class provides an interface to all the Office service contracts of the system. It provides a bridge between the front end screens and backend functionality for office.
   /** 
@@ -18,6 +22,9 @@ class OfficeController {
     this.OfficeQueries = new OfficeController();
   }
 
+/**
+ * This function creates a new booking in a office room that is available
+ */
   BookOfficeSpaceResponse bookOfficeSpaceMock(BookOfficeSpaceRequest req) {
     for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
       if (floorGlobals.globalFloors[i] != null &&
@@ -33,6 +40,10 @@ class OfficeController {
     return new BookOfficeSpaceResponse(false);
   }
 
+//////////////////////////////////////////////////////
+/**
+ * This function allows the viewing of a room, the rooms capacity and current capacity reflecting how many individuals booked the room
+ */
   ViewOfficeSpaceResponse viewOfficeSpaceMock(ViewOfficeSpaceRequest req) {
     for (int i = 0; i < officeGlobals.globalBookings.length; i++) {
       if (officeGlobals.globalBookings[i] != null &&

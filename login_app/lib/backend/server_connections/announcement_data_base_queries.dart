@@ -7,6 +7,10 @@ import 'package:postgres/postgres.dart';
 
 import 'dart:math';
 
+/**
+ * This class allows database interaction for all service contracts for the Announcement subsystem 
+ * The class has both mock and concrete implementations of the service contracts.
+ */
 class AnnouncementDatabaseQueries {
   PostgreSQLConnection connection;
   String host = 'localhost';
@@ -24,22 +28,6 @@ class AnnouncementDatabaseQueries {
     timeStamp = null;
   }
 
-  void setAnnouncementID(String aID) {
-    this.announcementId = aID;
-  }
-
-  void setTimestamp(String timestamp) {
-    this.timeStamp = timestamp;
-  }
-
-  String getAnnouncementID() {
-    return announcementId;
-  }
-
-  String getTimestamp() {
-    return timeStamp;
-  }
-
   // create DB connection function to be called in each use case
   Future<void> connect() async {
     connection = PostgreSQLConnection(host, port, dbName,
@@ -54,6 +42,10 @@ class AnnouncementDatabaseQueries {
     }
   }
 
+///////////////////////////////
+/**
+ * This function allows the admin the ability to create an announcement
+ */
   Future<bool> createAnnouncement(
       String type, String message, String adminID, String companyID) async {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
@@ -95,6 +87,10 @@ class AnnouncementDatabaseQueries {
     return false;
   }
 
+/////////////////////////////////////////////////////////////////////////////////////
+/**
+ * This function allows the admin to view the announcements they issued to their employees
+ */
   Future<bool> viewAdminAnnouncement(String adminID) async {
     await connect(); // connect to db
 
@@ -115,22 +111,10 @@ class AnnouncementDatabaseQueries {
     return false;
   }
 
-  // Future<bool> viewAnnouncementsAdmin(String adminId) //arraylist
-  // async {
-  //   //connection to the DB
-  //   await connect();
-
-  //   var adminIDQuery = await connection.query(
-  //       "SELECT adminid FROM users WHERE adminid = @id",
-  //       substitutionValues: {'id': adminId});
-
-  //   if (adminIDQuery != 0) {
-  //     var result = await connection.query(
-  //         "SELECT * FROM announcements WHERE announcementid =@id",
-  //         substitutionValues: {'id': adminIDQuery});
-  //   }
-  // }
-
+////////////////////////////////////////////////////////////
+/**
+ * This function allows the admin to delete an announcement using the announcement ID
+ */
   Future<bool> deleteAnnouncement(String announcementID) async {
     await connect(); // connect to db
 
@@ -150,6 +134,23 @@ class AnnouncementDatabaseQueries {
     }
 
     return false;
+  }
+
+//////////////////////////////Getters and Setters/////////////////////////////////////////////////
+  void setAnnouncementID(String aID) {
+    this.announcementId = aID;
+  }
+
+  void setTimestamp(String timestamp) {
+    this.timeStamp = timestamp;
+  }
+
+  String getAnnouncementID() {
+    return announcementId;
+  }
+
+  String getTimestamp() {
+    return timeStamp;
   }
 
 /////////////////////////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
