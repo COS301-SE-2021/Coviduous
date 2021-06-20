@@ -1,3 +1,6 @@
+/**
+ * This class holds the response object for deleting a users account by the admin
+ */
 class DeleteAccountUserResponse {
   String message;
   bool successful;
