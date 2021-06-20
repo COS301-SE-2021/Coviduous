@@ -1,5 +1,6 @@
 library globals;
 
+import 'package:login_app/subsystems/user_subsystem/company.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 
 //Global variables used throughout the program
@@ -14,3 +15,10 @@ import 'package:login_app/subsystems/user_subsystem/user.dart';
  */
 List<User> userDatabaseTable = [];
 int numUsers = 0;
+
+/**
+ * List<Announcement> companyDatabaseTable = [] acts like a database table that holds companies , this is to mock out functionality for testing
+ * numCompanies keeps track of number of companies in the mock company database table
+ */
+List<Company> companyDatabaseTable = [];
+int numCompanies = 0;
