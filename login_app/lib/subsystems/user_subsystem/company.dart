@@ -1,5 +1,8 @@
 import 'dart:math';
 
+/**
+ * This class acts as an company entity mimicking the company table attribute in the database
+ */
 class Company {
   String company_name;
   String addresss;
