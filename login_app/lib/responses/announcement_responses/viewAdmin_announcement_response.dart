@@ -1,3 +1,11 @@
+/*
+  File name: viewAdmin_announcement_response.dart
+  Purpose: Holds the response class of viewing an announcement
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 
 /**
