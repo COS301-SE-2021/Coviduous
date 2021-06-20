@@ -1,3 +1,11 @@
+/*
+  File name: user_data_base_queries.dart
+  Purpose: Allows database interaction for all service contracts for the User subsystem
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'dart:math';
 
 import 'package:login_app/subsystems/user_subsystem/company.dart';
@@ -10,14 +18,12 @@ import 'package:login_app/backend/backend_globals/announcements_globals.dart'
 import 'package:login_app/backend/backend_globals/user_globals.dart'
     as userGlobals;
 
+/**
+ * Class name: UserDatabaseQueries
+ * Purpose: This class allows database interaction for all service contracts for the User subsystem 
+ * The class has both mock and concrete implementations of the service contracts.
+ */
 class UserDatabaseQueries {
-  // PostgreSQLConnection connection;
-  // String host = 'localhost';
-  // int port = 5432;
-  // String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
-  // String user = 'postgres';
-  // String pass = 'TripleHBK2000'; // your postgres user password
-
   String userId;
   String adminId;
   String activationCode;
