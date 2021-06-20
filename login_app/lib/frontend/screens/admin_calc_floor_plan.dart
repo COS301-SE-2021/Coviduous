@@ -110,6 +110,12 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
         ),
       ),
       body: Center(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
