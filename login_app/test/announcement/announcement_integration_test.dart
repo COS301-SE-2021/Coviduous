@@ -167,7 +167,7 @@ void main() {
       ViewAdminAnnouncementResponse resp2 =
           await announcementController.viewAdminAnnouncement(req2);
 
-      print("Response : " + resp2.getResponseMessage());
+      //print("Response : " + resp2.getMessage());
 
       // create announcement responses
       expect(resp, isNot(null));
