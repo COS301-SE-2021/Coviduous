@@ -16,11 +16,19 @@ class _SplashState extends State<Splash> {
 
     });
     return Scaffold(
+        child: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+          ),
+        ),
       body: Center(
         child: FlutterLogo(
           size: 80,
         ),
       ),
+        ),
     );
   }
 }
