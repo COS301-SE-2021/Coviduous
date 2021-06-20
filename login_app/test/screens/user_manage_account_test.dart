@@ -15,7 +15,7 @@ void main() {
       );
     }
 
-    //Build admin manage account screen
+    //Build user manage account screen
     await tester.pumpWidget(createWidgetForTesting(child: new UserManageAccount()));
 
     //Verify that the correct widgets appear in the correct order
