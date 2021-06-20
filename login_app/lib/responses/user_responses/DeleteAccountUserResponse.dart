@@ -1,3 +1,12 @@
+/*
+  File name: delete_account_user_response.dart
+  Purpose: Holds the response class of deleting a users account by the admin
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
+
 /**
  * This class holds the response object for deleting a users account by the admin
  */
