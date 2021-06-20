@@ -18,11 +18,13 @@ class AdminViewAnnouncements extends StatefulWidget {
 }
 
 class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
+  String _adminId = globals.loggedInUserId;
+
   @override
   Widget build(BuildContext context) {
     Widget getList() {
       AnnouncementsController services = new AnnouncementsController();
-      ViewAdminAnnouncementResponse response = services.viewAnnouncementsAdminMock(ViewAdminAnnouncementRequest("test"));
+      ViewAdminAnnouncementResponse response = services.viewAnnouncementsAdminMock(ViewAdminAnnouncementRequest(_adminId));
       List<Announcement> announcements = response.announcementArrayList;
       int numberOfAnnouncements = announcements.length;
 

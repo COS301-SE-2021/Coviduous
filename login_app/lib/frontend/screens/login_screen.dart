@@ -19,6 +19,7 @@ import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/screens/forgot_password_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
 
 /*
   Class name: LoginScreen
@@ -204,6 +205,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         setState(() {
                                           isLoading = false;
                                         });
+
+                                        globals.loggedInUserId = userGlobals.getUserId(_email.text);
+                                        print(globals.loggedInUserId);
 
                                         /*
                                         //get user type

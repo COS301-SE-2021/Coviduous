@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 //Email of logged in user for displaying in other screens
 String email = '';
 
+//User ID of currently logged in user
+String loggedInUserId = '';
+
 //Adjusts scaling of containers based on platform
 double getWidgetScaling() {
   if (kIsWeb) {

@@ -7,6 +7,7 @@ import 'package:login_app/responses/announcement_responses/create_announcement_r
 
 import 'admin_view_announcements.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
 
 class MakeAnnouncement extends StatefulWidget {
   static const routeName = "/admin_make_announcement";
@@ -22,8 +23,8 @@ class MakeAnnouncement extends StatefulWidget {
 class MakeAnnouncementState extends State<MakeAnnouncement> {
   TextEditingController _topic = TextEditingController();
   TextEditingController _description = TextEditingController();
-  String _adminId = "test";
-  String _companyId = "test";
+  String _adminId = globals.loggedInUserId;
+  String _companyId = userGlobals.getCompanyId(globals.loggedInUserId);
 
   AnnouncementsController services = new AnnouncementsController();
   List<String> _announceType = ['General', 'Emergency'];

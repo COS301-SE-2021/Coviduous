@@ -1,12 +1,12 @@
 class RegisterUserResponse {
   bool response;
   String responseMessage;
-  String adminId;
+  String id;
 
-  RegisterUserResponse(String adminId, bool response, String responsemessage) {
+  RegisterUserResponse(String id, bool response, String responsemessage) {
     this.response = response;
     this.responseMessage = responsemessage;
-    this.adminId = adminId;
+    this.id = id;
   }
 
   bool getResponse() {
@@ -17,7 +17,7 @@ class RegisterUserResponse {
     return this.responseMessage;
   }
 
-  String getAdminId() {
-    return this.adminId;
+  String getId() {
+    return this.id;
   }
 }

@@ -200,6 +200,7 @@ class _UserRegisterState extends State<UserRegister>{
                                       userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
                                       RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("User", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
                                       print(response.getResponse());
+                                      globals.loggedInUserId = response.getId();
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) => LoginScreen()), (
                                               route) => false);

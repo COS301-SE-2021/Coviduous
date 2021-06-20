@@ -19,9 +19,11 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
   Widget build(BuildContext context) {
     Widget getList() {
       AnnouncementsController services = new AnnouncementsController();
-      ViewUserAnnouncementResponse response = services.viewAnnouncementsUserMock(ViewUserAnnouncementRequest("test"));
+      ViewUserAnnouncementResponse response = services.viewAnnouncementsUserMock(ViewUserAnnouncementRequest(globals.loggedInUserId));
       List<Announcement> announcements = response.announcementArrayList;
       int numberOfAnnouncements = announcements.length;
+
+      print(numberOfAnnouncements);
 
       if (numberOfAnnouncements == 0) {
         return Column(

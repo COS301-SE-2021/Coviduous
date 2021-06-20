@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 class User {
   String userId;
   String adminId;
@@ -51,5 +53,19 @@ class User {
 
   String getAdminId() {
     return adminId;
+  }
+
+  String getId() {
+    if (adminId == "") {
+      return userId;
+    } else if (userId == "") {
+      return adminId;
+    } else {
+      return null;
+    }
+  }
+
+  String getEmail() {
+    return email;
   }
 }

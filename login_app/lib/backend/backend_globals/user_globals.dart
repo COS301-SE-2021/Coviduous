@@ -16,6 +16,24 @@ import 'package:login_app/subsystems/user_subsystem/user.dart';
 List<User> userDatabaseTable = [];
 int numUsers = 0;
 
+String getUserId(String email) {
+  for (int i = 0; i < userDatabaseTable.length; i++) {
+    if (userDatabaseTable[i].getEmail() == email) {
+      return userDatabaseTable[i].getId();
+    }
+  }
+  return null;
+}
+
+String getCompanyId(String id) {
+  for (int i = 0; i < userDatabaseTable.length; i++) {
+    if (userDatabaseTable[i].getId() == id) {
+      return userDatabaseTable[i].getCompanyId();
+    }
+  }
+  return null;
+}
+
 /**
  * List<Company> companyDatabaseTable = [] acts like a database table that holds companies , this is to mock out functionality for testing
  * numCompanies keeps track of number of companies in the mock company database table

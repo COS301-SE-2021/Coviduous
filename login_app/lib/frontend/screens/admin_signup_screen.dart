@@ -231,8 +231,9 @@ class _AdminRegisterState extends State<AdminRegister>{
                                       adminSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
                                       RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("Admin", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
                                       print(response.getResponse());
-                                      RegisterCompanyResponse response2 = services.registerCompanyMock(RegisterCompanyRequest(_companyName.text, _companyLocation.text, response.getAdminId()));
+                                      RegisterCompanyResponse response2 = services.registerCompanyMock(RegisterCompanyRequest(_companyName.text, _companyLocation.text, response.getId()));
                                       print(response2.getResponse());
+                                      globals.loggedInUserId = response.getId();
                                       //print(userGlobals.userDatabaseTable[0].adminId);
                                       //print(userGlobals.companyDatabaseTable[0].companyId);
                                       Navigator.pushAndRemoveUntil(context,
