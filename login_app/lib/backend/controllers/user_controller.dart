@@ -52,7 +52,7 @@ class UserController {
           null, null, null, false, "Unsuccessfully registered user");
     }
   }
-
+/*
   DeleteAccountUserResponse deleteAccountUserMock(
       DeleteAccountUserRequest request) {
     if (request != null) {
@@ -63,7 +63,7 @@ class UserController {
       }
     }
   }
-
+*/
   /*DeleteAccountUserResponse deleteUserAccount(DeleteAccountUserRequest request) throws Exception {
     if(userQueries.deleteUserAccount(request.getUserID()))
     {
