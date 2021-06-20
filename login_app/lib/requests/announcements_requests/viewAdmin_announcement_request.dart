@@ -1,3 +1,7 @@
+/**
+ * This class holds the request object  of viewing an announcement by the admin
+ */
+
 class ViewAdminAnnouncementRequest {
   String adminId;
 
