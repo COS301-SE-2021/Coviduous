@@ -48,42 +48,6 @@ class UserDatabaseQueries {
     return activationCode;
   }
 
-  // create DB connection function to be called in each use case
-  // Future<void> connect() async {
-  //   connection = PostgreSQLConnection(host, port, dbName,
-  //       username: user, password: pass);
-
-  //   try {
-  //     await connection.open();
-  //     print("Connected to postgres database...");
-  //   } catch (e) {
-  //     print("error");
-  //     print(e.toString());
-  //   }
-  // }
-
-/*
-  Future<bool> deleteUserAccount(String userID) async {
-    if (userID != "") {
-      await connect();
-
-      var user = await connection.query(
-          "SELECT userid FROM users WHERE userid = @id",
-          substitutionValues: {'id': userID});
-
-      if (user != 0) {
-        var result = await connection.query(
-            "DELETE FROM users WHERE userid = @id",
-            substitutionValues: {'id': userID});
-        if (result != 0) {
-          return true;
-        }
-      }
-    } else {
-      return false;
-    }
-*/
-
   /////////////////////////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -125,26 +89,4 @@ class UserDatabaseQueries {
     } else
       return false;
   }
-
-  /*bool updateAccountInfoMock(String firstname, String lastname, String email) {}
-  statement = connection.prepareStatement("DELETE FROM users WHERE userid=?");
-        statement.setString(1, userID);
-
-        int affectedRows=statement.executeUpdate();
-      
-        if(affectedRows>0)
-        {
-          return true;
-        }
-        else 
-        {
-          return false;
-        }
-           }
-           else
-           {
-             throw new Exception("UserID is not given");
-           }
-     }
-  }*/
 }
