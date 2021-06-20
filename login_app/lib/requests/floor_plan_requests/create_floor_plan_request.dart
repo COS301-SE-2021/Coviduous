@@ -1,3 +1,7 @@
+/**
+ * This class holds the request object for creating a floor plan
+ */
+
 class CreateFloorPlanRequest {
   String admin = "";
   String floorNumber = "";
@@ -17,6 +21,7 @@ class CreateFloorPlanRequest {
   String getFloorNumber() {
     return floorNumber;
   }
+
 //get total number of rooms
   // return total rooms
   int getTotalRooms() {
