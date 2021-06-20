@@ -37,6 +37,14 @@ class UserDatabaseQueries {
     this.timestamp = timestamp;
   }
 
+  void setAdminId(String adminId) {
+    this.adminId = adminId;
+  }
+
+  void setUserId(String userId) {
+    this.userId = userId;
+  }
+
   String getAnnouncementID() {
     return announcementID;
   }
@@ -275,6 +283,13 @@ class UserDatabaseQueries {
     User usr = new User(
         type, FirstName, LastName, Username, Email, Password, companyID);
 
+    if (type == "Admin" || type == "admin" || type == "ADMIN") {
+      setAdminId(usr.getAdminId());
+      setUserId("");
+    } else {
+      setUserId(usr.getUserId());
+      setAdminId("");
+    }
     userGlobals.userDatabaseTable.add(usr);
     userGlobals.numUsers++;
     return true;

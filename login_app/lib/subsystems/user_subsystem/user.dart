@@ -2,6 +2,7 @@ import 'dart:math';
 
 class User {
   String userId;
+  String adminId;
   String type;
   String first_name;
   String last_name;
@@ -16,7 +17,13 @@ class User {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
     int randomInt2 = new Random().nextInt((9999 - 100) + 1) + 10;
 
-    this.userId = "USR-" + randomInt.toString();
+    if (type == "Admin" || type == "admin" || type == "ADMIN") {
+      this.adminId = "USRAD-" + randomInt.toString();
+      this.userId = "";
+    } else {
+      this.userId = "USR-" + randomInt.toString();
+      this.adminId = "";
+    }
     this.type = type;
     this.first_name = FirstName;
     this.last_name = LastName;
@@ -40,5 +47,9 @@ class User {
 
   String getUserId() {
     return userId;
+  }
+
+  String getAdminId() {
+    return adminId;
   }
 }

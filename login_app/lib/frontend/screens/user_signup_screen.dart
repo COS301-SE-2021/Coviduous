@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/backend/controllers/user_controller.dart';
 
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/models/firestore_cloud.dart';
 import 'package:login_app/frontend/screens/home_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
+import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 
 class UserRegister extends StatefulWidget {
   static const routeName = "/userRegister";
@@ -13,6 +16,8 @@ class UserRegister extends StatefulWidget {
 }
 
 class _UserRegisterState extends State<UserRegister>{
+  UserController services = new UserController();
+
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _email = TextEditingController();
@@ -161,7 +166,7 @@ class _UserRegisterState extends State<UserRegister>{
                               ),
                               //company ID
                               TextFormField(
-                                textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
                                 decoration: InputDecoration(labelText:'Company ID'),
                                 controller: _companyId,
                                 validator: (value) {
@@ -193,6 +198,8 @@ class _UserRegisterState extends State<UserRegister>{
                                       });
 
                                       userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
+                                      RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("User", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
+                                      print(response.getResponse());
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) => LoginScreen()), (
                                               route) => false);

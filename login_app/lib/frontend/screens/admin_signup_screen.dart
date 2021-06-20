@@ -6,6 +6,7 @@ import 'package:login_app/frontend/models/firestore_cloud.dart';
 import 'package:login_app/frontend/screens/home_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+//import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
 import 'package:login_app/requests/user_requests/RegisterCompanyRequest.dart';
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
 import 'package:login_app/responses/user_responses/RegisterCompanyResponse.dart';
@@ -232,6 +233,8 @@ class _AdminRegisterState extends State<AdminRegister>{
                                       print(response.getResponse());
                                       RegisterCompanyResponse response2 = services.registerCompanyMock(RegisterCompanyRequest(_companyName.text, _companyLocation.text, response.getAdminId()));
                                       print(response2.getResponse());
+                                      //print(userGlobals.userDatabaseTable[0].adminId);
+                                      //print(userGlobals.companyDatabaseTable[0].companyId);
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) => LoginScreen()), (
                                               route) => false);
