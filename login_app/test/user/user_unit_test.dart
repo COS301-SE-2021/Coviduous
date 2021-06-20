@@ -94,4 +94,13 @@ void main() {
         "/////////////////// Completed Mock Testing For Invalid Register User Request ///////////////////");
     expect(false, resp.getResponse());
   });
+
+  test('Delete User Mock', () {
+    var userController = UserController();
+    DeleteAccountUserRequest request = new DeleteAccountRequest("Ns01");
+    DeleteAccountResponse response =
+        userController.deleteAccountUserMock(request);
+    print("Response: " + response.getMessage());
+    expect(true, response.getResponse());
+  });
 }

@@ -122,6 +122,12 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       body: Center(
         child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
           child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
             width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
             color: Colors.white,
             margin: EdgeInsets.all(20),

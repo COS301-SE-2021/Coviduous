@@ -1,3 +1,6 @@
+/**
+ * This class holds the request object for viewing an announcement by the user
+ */
 class ViewUserAnnouncementRequest {
   String userId;
   ViewUserAnnouncementRequest(String Userid) {

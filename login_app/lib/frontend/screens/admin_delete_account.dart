@@ -38,6 +38,13 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
   @override
   Widget build(BuildContext context) {
     return isLoading == false ? Scaffold(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/bg.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
       appBar: AppBar(
         title: Text('Delete user'),
         leading: BackButton( //Specify back button
@@ -194,6 +201,7 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
           )
         ],
       ),
+        ),
     ) : Center( child: CircularProgressIndicator());
   }
 }
