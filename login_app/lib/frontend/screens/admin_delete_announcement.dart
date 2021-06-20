@@ -92,22 +92,31 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Delete announcement'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-            },
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
         ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-            ]
-        )
+      ),
+      child: new Scaffold(
+        backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text('Delete announcement'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+              },
+            ),
+          ),
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+              ]
+          )
+      ),
     );
   }
 }
