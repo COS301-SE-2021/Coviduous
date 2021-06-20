@@ -38,9 +38,9 @@ jobs:
     #  run: flutter format --set-exit-if-changed .
     
     # Statically analyze the Dart code for any errors.
-    - name: Analyze code for errors
-      working-directory: login_app
-      run: flutter analyze .
+    # - name: Analyze code for errors
+    #  working-directory: login_app
+    #  run: flutter analyze .
     
     # Run widget tests for our flutter project.
     - name: Run tests
