@@ -26,6 +26,13 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
   @override
   Widget build(BuildContext context) {
     return isLoading == false ? Scaffold(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/bg.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
       appBar: AppBar(
         title: Text('Update account information'),
         leading: BackButton( //Specify back button
@@ -258,6 +265,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
           )
         ],
       ),
+        ),
     ) : Center( child: CircularProgressIndicator());
   }
 }

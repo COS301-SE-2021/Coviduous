@@ -17,6 +17,13 @@ class _UserManageAccountState extends State<UserManageAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        child: Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+                ),
+           ),
         appBar: AppBar(
           title: Text('Manage account'),
           leading: BackButton( //Specify back button
@@ -107,6 +114,7 @@ class _UserManageAccountState extends State<UserManageAccount> {
             ),
           ),
         )
+        ),
     );
   }
 }
