@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/user_controller.dart';
+import 'package:login_app/requests/user_requests/RegisterCompanyRequest.dart';
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
+import 'package:login_app/responses/user_responses/RegisterCompanyResponse.dart';
 import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 import 'package:login_app/backend/backend_globals/user_globals.dart' as globals;
 
@@ -8,6 +10,28 @@ void main() {
   ///////////////////////////////////// These Unit Tests Test Mocked Functionality For The User System ///////////
 
   ///////////////// User Unit tests ///////////////////
+  //Register company Mock Function
+  test('Register Company Mock', () {
+    var userController = UserController();
+    print(
+        "/////////////////// Testing Mock Register Company ///////////////////");
+    RegisterCompanyRequest req = new RegisterCompanyRequest(
+        "AWS", "78 Roeland St, Gardens, Cape Town, 8001", "USRAD-1");
+    RegisterCompanyResponse resp = userController.registerCompanyMock(req);
+
+    print("Current Companies Registered");
+    for (var i = 0; i < globals.companyDatabaseTable.length; i++) {
+      print("Name: " + globals.companyDatabaseTable[i].getcompanyName());
+      print("Address: " + globals.companyDatabaseTable[i].getAddress());
+      print("Admin ID: " + globals.companyDatabaseTable[i].getAdminId());
+      print("Company ID: " + globals.companyDatabaseTable[i].getCompanyId());
+      print("////////////////////////////");
+    }
+
+    print(
+        "/////////////////// Completed Mock Testing For valid Register User Request ///////////////////");
+    expect(resp.getResponse(), true);
+  });
 
   test('Register User Mock', () {
     var userController = UserController();
