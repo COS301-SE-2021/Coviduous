@@ -1,7 +1,5 @@
 import 'package:login_app/backend/server_connections/announcement_data_base_queries.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
-// import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
-// import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewUser_announcement_request.dart';
@@ -10,6 +8,10 @@ import 'package:login_app/responses/announcement_responses/delete_announcement_r
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
 
+/**
+ * This class is the controller for announcements, all service contracts for the announcement subsystem are offered through this class
+ * The class has both mock and concrete implementations of the service contracts.
+ */
 class AnnouncementsController {
 //This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
   /** 
@@ -22,7 +24,9 @@ class AnnouncementsController {
   }
 
   ////////////////////////////////Concrete Implementations////////////////////////////////////////////////
-
+  /**
+   * createAnnouncement creates a new announcement, This activity is only done by the admin user who is responsisble for issuing announcements
+   */
   Future<CreateAnnouncementResponse> createAnnouncement(
       CreateAnnouncementRequest req) async {
     if (req != null) {
@@ -35,17 +39,19 @@ class AnnouncementsController {
             true,
             "Successfully Created Announcement");
       } else {
-        //throw new Exception("Announcement unsuccessfully created");
         return new CreateAnnouncementResponse(
             "", "", false, "Announcement unsuccessfully created");
       }
     } else {
-      //throw new Exception("Announcement unsuccessfully created");
       return new CreateAnnouncementResponse(
-          null, null, false, "Announcement unsuccessfully created");
+          "", "", false, "Announcement unsuccessfully created");
     }
   }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * View Admin Announcement : Returns a list of all announcements issued by an admin based on their admin ID 
+ */
   Future<ViewAdminAnnouncementResponse> viewAdminAnnouncement(
       ViewAdminAnnouncementRequest req) async {
     if (req != null) {
@@ -54,17 +60,19 @@ class AnnouncementsController {
         return new ViewAdminAnnouncementResponse(
             null, true, "Announcement successfully found");
       } else {
-        //throw new Exception("Announcement unsuccessfully found");
         return new ViewAdminAnnouncementResponse(
             null, false, "Announcement unsuccessfully found");
       }
     } else {
-      //throw new Exception("Announcement unsuccessfully found");
       return new ViewAdminAnnouncementResponse(
           null, false, "Announcement unsuccessfully found");
     }
   }
 
+///////////////////////////////////////////////////////////////
+/**
+ * deleteAnnouncement Deletes an announcement made by an admin based on the announcement id which can be seen when the admin views the announcement
+ */
   Future<DeleteAnnouncementResponse> deleteAnnouncement(
       DeleteAnnouncementRequest req) async {
     if (req != null) {
@@ -74,12 +82,10 @@ class AnnouncementsController {
         return new DeleteAnnouncementResponse(
             true, "Successfully Deleted Announcement");
       } else {
-        //throw new Exception("Announcement unsuccessfully deleted");
         return new DeleteAnnouncementResponse(
             false, "Announcement unsuccessfully deleted");
       }
     } else {
-      //throw new Exception("Announcement unsuccessfully deleted");
       return new DeleteAnnouncementResponse(
           false, "Announcement unsuccessfully deleted");
     }
@@ -101,12 +107,10 @@ class AnnouncementsController {
             true,
             "Successfully Created Announcement");
       } else {
-        // throw new Exception("Announcement unsuccessfully created");
         return new CreateAnnouncementResponse(
             null, null, false, "Announcement unsuccessfully created");
       }
     } else {
-      // throw new Exception("Announcement unsuccessfully created");
       return new CreateAnnouncementResponse(
           null, null, false, "Announcement unsuccessfully created");
     }
@@ -130,6 +134,9 @@ class AnnouncementsController {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //View Announcement Mock For Admin
+  /**
+   * This function is used to test if the logic and implementation of viewing an announcement by the admin works
+   */
   ViewAdminAnnouncementResponse viewAnnouncementsAdminMock(
       ViewAdminAnnouncementRequest req) {
     var list = announcementQueries.viewAnnouncementsAdminMock(req.getAdminId());
@@ -143,6 +150,9 @@ class AnnouncementsController {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //View Announcement Mock For User
+/**
+   * This function is used to test if the logic and implementation of viewing an announcement by the user works
+   */
   ViewUserAnnouncementResponse viewAnnouncementsUserMock(
       ViewUserAnnouncementRequest req) {
     var list = announcementQueries.viewAnnouncementsUserMock(req.getUserId());
