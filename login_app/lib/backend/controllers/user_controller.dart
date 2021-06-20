@@ -79,7 +79,7 @@ class UserController {
       if (userQueries.deleteUserAccountMock(request.getUserID())) {
         return new DeleteAccountUserResponse(true, "Successfully Deleted");
       } else {
-        return null;
+        return new DeleteAccountUserResponse(false, "Unsuccessfully Deleted");
       }
     }
   }

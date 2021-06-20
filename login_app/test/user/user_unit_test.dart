@@ -1,7 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/user_controller.dart';
+import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
 import 'package:login_app/requests/user_requests/RegisterCompanyRequest.dart';
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
+import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
 import 'package:login_app/responses/user_responses/RegisterCompanyResponse.dart';
 import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 import 'package:login_app/backend/backend_globals/user_globals.dart' as globals;
@@ -97,10 +99,27 @@ void main() {
 
   test('Delete User Mock', () {
     var userController = UserController();
-    DeleteAccountUserRequest request = new DeleteAccountRequest("Ns01");
-    DeleteAccountResponse response =
+
+    RegisterUserRequest req = new RegisterUserRequest("User", "Njabulo",
+        "Skosana", "Nskosana", "njabuloskosana24@gmail", "Ns01", "CID-1");
+    RegisterUserResponse resp = userController.registerUserMock(req);
+
+    RegisterUserRequest reqes = new RegisterUserRequest("User", "Adam", "Paul",
+        "adamlaup12", "johnjacobs99@gmail.com", "a_paul@yahoo.com", "CID-2");
+    RegisterUserResponse respn = userController.registerUserMock(reqes);
+
+    DeleteAccountUserRequest request =
+        new DeleteAccountUserRequest(resp.getId());
+
+    DeleteAccountUserResponse response =
         userController.deleteAccountUserMock(request);
     print("Response: " + response.getMessage());
-    expect(true, response.getResponse());
+
+    for (int x = 0; x < globals.userDatabaseTable.length; x++) {
+      print(globals.userDatabaseTable[x].getUserId());
+    }
+
+    /*
+    //expect(true, response.getResponse());*/
   });
 }
