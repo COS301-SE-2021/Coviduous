@@ -1,3 +1,7 @@
+/**
+ * This class holds the response object for registering an admin
+ */
+
 class RegisterAdminResponse {
   String userID;
   String adminID;

@@ -1,3 +1,7 @@
+/**
+ * This class holds the response object for registering a user
+ */
+
 class RegisterUserResponse {
   bool response;
   String responseMessage;

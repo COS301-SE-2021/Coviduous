@@ -1,3 +1,6 @@
+/**
+ * This class holds the response object for upadting account information
+ */
 class UpdateAccountInfoResponse {
   String Message;
 

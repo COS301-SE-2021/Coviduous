@@ -1,3 +1,6 @@
+/**
+ * This class holds the response object for registering a company
+ */
 class RegisterCompanyResponse {
   bool response;
   String responseMessage;
