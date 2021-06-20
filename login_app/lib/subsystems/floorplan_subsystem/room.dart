@@ -1,3 +1,6 @@
+/**
+ * This class acts as an room entity mimicking the rooms table attribute in the database
+ */
 class Room {
   String roomNum; //Room identifier
   double
