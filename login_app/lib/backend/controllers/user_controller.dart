@@ -37,19 +37,13 @@ class UserController {
           req.getEmail(),
           req.getPassword(),
           req.getCompanyID())) {
-        return new RegisterUserResponse(
-            userQueries.getUserID(),
-            userQueries.getAdminID(),
-            userQueries.getActivationCode(),
-            true,
-            "Successfully Registered User");
+        return new RegisterUserResponse(true, "Successfully Registered User");
       } else {
         return new RegisterUserResponse(
-            null, null, null, false, "Unsuccessfully registered user");
+            false, "Unsuccessfully registered user");
       }
     } else {
-      return new RegisterUserResponse(
-          null, null, null, false, "Unsuccessfully registered user");
+      return new RegisterUserResponse(false, "Unsuccessfully registered user");
     }
   }
 /*
