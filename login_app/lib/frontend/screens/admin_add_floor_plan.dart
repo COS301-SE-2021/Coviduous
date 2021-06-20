@@ -110,110 +110,119 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Add floor plan"),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-            Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-          },
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/bg.jpg'),
-                fit: BoxFit.cover,
+      child: Scaffold(
+        backgroundColor: Colors.transparent, //To show background image
+        appBar: AppBar(
+          title: Text("Add floor plan"),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+            },
+          ),
+        ),
+        body: Center(
+          child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/bg.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-            color: Colors.white,
-            margin: EdgeInsets.all(20),
-            child: Form(
-              key: _formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildFloors()
-                    ),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildRooms()
-                    ),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildMaxCapacity()
-                    ),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildCurrentCapacity()
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+              color: Colors.white,
+              margin: EdgeInsets.all(20),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: _buildFloors()
+                      ),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: _buildRooms()
+                      ),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: _buildMaxCapacity()
+                      ),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: _buildCurrentCapacity()
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom (
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ),
-                        child: Text('Proceed'),
-                        onPressed: () {
-                          if(!_formKey.currentState.validate()) {
-                            return;
-                          }
-                          _formKey.currentState.save();
+                          child: Text('Proceed'),
+                          onPressed: () {
+                            if(!_formKey.currentState.validate()) {
+                              return;
+                            }
+                            _formKey.currentState.save();
 
-                          CreateFloorPlanResponse response = service.createFloorPlanMock(CreateFloorPlanRequest(globals.email, _numFloor, int.parse(_numRooms)));
+                            CreateFloorPlanResponse response = service.createFloorPlanMock(CreateFloorPlanRequest(globals.email, _numFloor, int.parse(_numRooms)));
 
-                          if (response.getResponse()) {
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Creation successful'),
-                                  content: Text('Proceeding to next step.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Okay'),
-                                      onPressed: (){
-                                        Navigator.of(ctx).pop();
-                                        Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
-                                      },
-                                    )
-                                  ],
-                                )
-                            );
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Creation unsuccessful'),
-                                  content: Text('Please check your details.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Okay'),
-                                      onPressed: (){
-                                        Navigator.of(ctx).pop();
-                                      },
-                                    )
-                                  ],
-                                )
-                            );
+                            if (response.getResponse()) {
+                              showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: Text('Creation successful'),
+                                    content: Text('Proceeding to next step.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text('Okay'),
+                                        onPressed: (){
+                                          Navigator.of(ctx).pop();
+                                          Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
+                                        },
+                                      )
+                                    ],
+                                  )
+                              );
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: Text('Creation unsuccessful'),
+                                    content: Text('Please check your details.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text('Okay'),
+                                        onPressed: (){
+                                          Navigator.of(ctx).pop();
+                                        },
+                                      )
+                                    ],
+                                  )
+                              );
+                            }
                           }
-                        }
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                  ],
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -100,78 +100,81 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Calculate floor plan"),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-            Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
-          },
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
         ),
       ),
-      body: Center(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
+      child: Scaffold(
+        backgroundColor: Colors.transparent, //To show background image
+        appBar: AppBar(
+          title: Text("Calculate floor plan"),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
+            },
           ),
         ),
-        child: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-            color: Colors.white,
-            margin: EdgeInsets.all(20),
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+              color: Colors.white,
+              margin: EdgeInsets.all(20),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: _buildDimensions()
+                      ),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: _buildDesks(),
+                      ),
+                      Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildDimensions()
-                    ),
-                    Padding(
+                        child: _buildLength(),
+                      ),
+                      Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: _buildDesks(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: _buildLength(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: _buildWidth(),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                        child: _buildWidth(),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom (
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ),
-                        child: Text('Save'),
-                        onPressed: () {
-                          if(!_formKey.currentState.validate()) {
-                            return;
+                          child: Text('Save'),
+                          onPressed: () {
+                            if(!_formKey.currentState.validate()) {
+                              return;
+                            }
+
+                            _formKey.currentState.save();
+
+                            print('Dimensions: ' + _dimensions);
+                            print('Number of desks: ' + _numdesks);
+                            print('Length: ' + _length);
+                            print('Width: ' + _width);
                           }
-
-                          _formKey.currentState.save();
-
-                          print('Dimensions: ' + _dimensions);
-                          print('Number of desks: ' + _numdesks);
-                          print('Length: ' + _length);
-                          print('Width: ' + _width);
-                        }
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                  ],
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

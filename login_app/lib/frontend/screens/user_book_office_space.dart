@@ -148,22 +148,31 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
-          title: Text('Book an office space'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
-            },
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
       ),
-      body: Stack (
-        children: <Widget>[
-          Center (
-            child: getList()
+      child: new Scaffold(
+        backgroundColor: Colors.transparent, //To show background image
+        appBar: AppBar(
+            title: Text('Book an office space'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+              },
             ),
-        ]
-      )
+        ),
+        body: Stack (
+          children: <Widget>[
+            Center (
+              child: getList()
+              ),
+          ]
+        )
+      ),
     );
   }
 }
