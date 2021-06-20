@@ -149,13 +149,6 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        child: Container(
-        decoration: BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage('assets/bg.jpg'),
-         fit: BoxFit.cover,
-          ),
-        ),
       appBar: AppBar(
           title: Text('Book an office space'),
           leading: BackButton( //Specify back button
@@ -171,7 +164,6 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
             ),
         ]
       )
-        ),
     );
   }
 }
