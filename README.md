@@ -45,7 +45,7 @@
 ## Demo Videos
 
 - :tv: [Demo 1](https://drive.google.com/file/d/1-HOCL1wZZynbaPYpgCzQ1dZxWsur90yV/view?usp=sharing)
-- :tv: [Demo 2](https://)
+- :tv: [Demo 2](https://drive.google.com/file/d/11yZ_MvnepDA6nE7AoT_r6qu6L0K51FlA/view?usp=sharing)
 - :tv: [Demo 3](https://)
 - :tv: [Demo 4](https://)
 
