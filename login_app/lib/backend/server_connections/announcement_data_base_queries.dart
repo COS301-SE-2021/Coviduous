@@ -168,7 +168,7 @@ class AnnouncementDatabaseQueries {
  * This function mocks out the database interaction of creating an announcement, the fuction will be used in tests
  */
   bool createAnnouncementMock(
-      String message, String type, String adminID, String companyID) {
+      String type, String message, String adminID, String companyID) {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
     this.announcementId = "ANOUNC-" + randomInt.toString();
     this.timeStamp = DateTime.now().toString();
