@@ -84,17 +84,6 @@ class UserController {
     }
   }
 
-  /*DeleteAccountUserResponse deleteUserAccount(DeleteAccountUserRequest request) throws Exception {
-    if(userQueries.deleteUserAccount(request.getUserID()))
-    {
-      return new DeleteAccountUserResponse("Successfully Deleted");
-    }
-    else
-    {
-      throw new Exception("User unsuccessfully deleted ");
-    }
-  }*/
-
   /*UpdateAccountInfoResponse updateInfoAccount(UpdateAccountInfoRequest req) throws Exception
   {
     if(userQueries.updateAccountInfo(req.getFirstname(),req.getLastname(),req.getEmail(),req.getType(),req.getAdminID(),req.getUserID()))
