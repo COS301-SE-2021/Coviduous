@@ -23,19 +23,6 @@ void main() {
     expectedMessage = "This is a test announcement message";
     expectedAdminID = "ADMN-1";
     expectedCompanyID = "CMPNY-1";
-
-    // connect to db
-    // connection = PostgreSQLConnection(host, port, dbName,
-    //     username: user, password: pass);
-
-    // try {
-    //   await connection.open();
-    //   expectedMessage = "Connected to postgres database...";
-    //   print(expectedMessage);
-    // } catch (e) {
-    //   print("error");
-    //   print(e.toString());
-    // }
   });
 
   tearDown(() async {
