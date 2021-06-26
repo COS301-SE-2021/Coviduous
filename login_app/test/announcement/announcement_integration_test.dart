@@ -26,7 +26,7 @@ void main() {
   });
 
   tearDown(() async {
-    // await connection.close();
+
   });
 
   group('Create Announcement', () {
@@ -65,7 +65,7 @@ void main() {
           await announcementController.createAnnouncement(req);
 
       //print("Response : " + resp.getResponseMessage());
-      //print("AnnouncementID : " + resp.getAnnouncementID());
+      
       expect(resp, isNot(null));
       expect(false, resp.getResponse());
     });
