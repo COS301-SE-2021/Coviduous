@@ -1,3 +1,11 @@
+/*
+  File name: announcement_unit_test.dart
+  Purpose: Testing of announcement mock functions
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
@@ -17,7 +25,7 @@ import 'package:login_app/backend/backend_globals/user_globals.dart'
 
 void main() {
   ///////////////////////////////////// These Unit Tests Test Mocked Functionality For The Announcement System ///////////
-////////////////////////////////////////////// Create Announcement/////////////////////////////////////////////////////
+////////////////////////////////////////////// Create Announcement /////////////////////////////////////////////////////
 
   test('Create Announcement Mock', () {
     var announcementController = AnnouncementsController();
