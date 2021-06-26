@@ -38,7 +38,7 @@ void main() {
       CreateAnnouncementResponse resp =
           await announcementController.createAnnouncement(req);
 
-      //print("Response : " + resp.getResponseMessage());
+      //print("Response : " + resp.getMessage());
       print("AnnouncementID : " + resp.getAnnouncementID());
 
       expect(resp, isNot(null));
@@ -50,7 +50,7 @@ void main() {
       CreateAnnouncementResponse resp =
           await announcementController.createAnnouncement(req);
 
-      //print("Response : " + resp.getResponseMessage());
+      //print("Response : " + resp.getMessage());
 
       //expect exception handling
       //expect(await resp, throwsA("Announcement unsuccessfully created"));
@@ -64,7 +64,7 @@ void main() {
       CreateAnnouncementResponse resp =
           await announcementController.createAnnouncement(req);
 
-      //print("Response : " + resp.getResponseMessage());
+      //print("Response : " + resp.getMessage());
 
       expect(resp, isNot(null));
       expect(false, resp.getResponse());
@@ -118,7 +118,7 @@ void main() {
       DeleteAnnouncementResponse resp =
           await announcementController.deleteAnnouncement(req);
 
-      //print("Response : " + resp.getResponseMessage());
+      //print("Response : " + resp.getMessage());
 
       //expect exception handling
       //expect(await resp, throwsA("Announcement unsuccessfully created"));
@@ -132,8 +132,8 @@ void main() {
       DeleteAnnouncementResponse resp =
           await announcementController.deleteAnnouncement(req);
 
-      //print("Response : " + resp.getResponseMessage());
-      //print("AnnouncementID : " + resp.getAnnouncementID());
+      //print("Response : " + resp.getMessage());
+
       expect(resp, isNot(null));
       expect(false, resp.getResponse());
     });
@@ -147,7 +147,7 @@ void main() {
       CreateAnnouncementResponse resp =
           await announcementController.createAnnouncement(req);
 
-      //print("Response : " + resp.getResponseMessage());
+      //print("Response : " + resp.getMessage());
       print("AnnouncementID : " + resp.getAnnouncementID());
 
       // VIEW CREATED ANNOUNCEMENT
@@ -182,6 +182,8 @@ void main() {
           new ViewAdminAnnouncementRequest('Invalid_admin_ID');
       ViewAdminAnnouncementResponse resp =
           await announcementController.viewAdminAnnouncement(req);
+
+      //print("Response : " + resp.getMessage());
 
       expect(resp, isNot(null));
       expect(false, resp.getResponse());
