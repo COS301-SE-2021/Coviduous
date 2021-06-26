@@ -1,3 +1,11 @@
+/*
+  File name: announcements_controller.dart
+  Purpose: Holds the controller class for floorplan, all service contracts for the floorplan subsystem are offered through this class.
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/backend/server_connections/floor_plan_data_base_queries.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
