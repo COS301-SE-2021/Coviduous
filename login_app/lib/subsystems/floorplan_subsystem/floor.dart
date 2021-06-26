@@ -1,8 +1,13 @@
+/*
+  File name: floor.dart
+  Purpose: This class acts as an floor entity mimicking the floor table attribute in the database
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
-/**
- * This class acts as an floor entity mimicking the floors table attributes in the database
- */
 class Floor {
   List<Room> rooms = [];
   String floorNum = "";
