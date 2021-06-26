@@ -1,5 +1,10 @@
-/**
- * This class acts as an announcement entity mimicking the announcement table attribute in the database
+/*
+  File name: announcement.dart
+  Purpose: This class acts as an announcement entity mimicking the announcement table attribute in the database
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
  */
 class Announcement {
   String message;
