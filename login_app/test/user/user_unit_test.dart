@@ -1,3 +1,11 @@
+/*
+  File name: user_unit_test.dart
+  Purpose: Testing of user mock functions
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/user_controller.dart';
 import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
@@ -9,7 +17,7 @@ import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
 import 'package:login_app/backend/backend_globals/user_globals.dart' as globals;
 
 void main() {
-  ///////////////////////////////////// These Unit Tests Test Mocked Functionality For The User System ///////////
+  ///////////////////////////////////// These Unit Tests Test Mocked Functionality For The User System /////////////////////////////////////
 
   ///////////////// User Unit tests ///////////////////
   //Register company Mock Function
