@@ -203,6 +203,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                     content: Text('Please check your details.'),
                                     actions: <Widget>[
                                       TextButton(
+                                        //confirm button.
                                         child: Text('Okay'),
                                         onPressed: (){
                                           Navigator.of(ctx).pop();
