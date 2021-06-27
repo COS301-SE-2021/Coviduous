@@ -162,6 +162,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                         width: MediaQuery.of(context).size.width,
                       ),
                       ElevatedButton(
+                        //proceed button.
                           style: ElevatedButton.styleFrom (
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
