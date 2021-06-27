@@ -95,7 +95,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       ),
       keyboardType: TextInputType.number,
       validator: (String value) {
-
+        //check current capacity of rooms.
         int rooms = int.tryParse(value);
         if(rooms == null || rooms <= 0){
           return 'Current capacity must be greater than zero';
