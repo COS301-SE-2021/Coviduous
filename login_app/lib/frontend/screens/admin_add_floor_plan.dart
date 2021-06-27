@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'admin_homepage.dart';
-import 'admin_calc_floor_plan.dart';
-import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
+import 'package:login_app/frontend/screens/home_floor_plan.dart';
+import 'package:login_app/frontend/screens/admin_calc_floor_plan.dart';
+
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AddFloorPlan extends StatefulWidget {
-  static const routeName = "/admin_add_floorplan";
+  static const routeName = "/admin_add_floor_plan";
 
   @override
   _AddFloorPlanState createState() => _AddFloorPlanState();
@@ -16,9 +17,6 @@ class AddFloorPlan extends StatefulWidget {
 //add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
-  String _numRooms;
-  //String _maxCapacity;
-  //String _currCapacity;
 
   FloorPlanController service = new FloorPlanController();
 
@@ -42,70 +40,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       },
     );
   }
-//build for rooms
-  Widget _buildRooms(){
-    return TextFormField(
-      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-      decoration: InputDecoration(
-          labelText: 'Enter number of rooms'
-      ),
-      keyboardType: TextInputType.number,
-      validator: (String value) {
 
-        int rooms = int.tryParse(value);
-        if(rooms == null || rooms <= 0){
-          return 'Number of rooms must be greater than zero';
-        }
-        return null;
-      },
-      onSaved: (String value){
-        _numRooms = value;
-      },
-    );
-  }
-//build for add max capacity
-  Widget _buildMaxCapacity(){
-    return TextFormField(
-      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-      decoration: InputDecoration(
-          labelText: 'Set maximum capacity'
-      ),
-      keyboardType: TextInputType.number,
-      validator: (String value) {
-
-        int rooms = int.tryParse(value);
-        if(rooms == null || rooms <= 0){
-          return 'Maximum capacity must be greater than zero';
-        }
-        return null;
-      },
-      onSaved: (String value){
-        //_maxCapacity = value;
-      },
-    );
-  }
-
-//build for current capacity
-  Widget _buildCurrentCapacity(){
-    return TextFormField(
-      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
-      decoration: InputDecoration(
-          labelText: 'Set current capacity'
-      ),
-      keyboardType: TextInputType.number,
-      validator: (String value) {
-
-        int rooms = int.tryParse(value);
-        if(rooms == null || rooms <= 0){
-          return 'Current capacity must be greater than zero';
-        }
-        return null;
-      },
-      onSaved: (String value){
-        //_currCapacity = value;
-      },
-    );
-  }
 //global key _formkey.
   final GlobalKey<FormState> _formKey  = GlobalKey<FormState>();
   @override
@@ -123,7 +58,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
           title: Text("Add floor plan"),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+              Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
             },
           ),
         ),
@@ -144,18 +79,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: _buildFloors()
                       ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: _buildRooms()
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: _buildMaxCapacity()
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: _buildCurrentCapacity()
-                      ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height/48,
                         width: MediaQuery.of(context).size.width,
@@ -173,7 +96,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                             }
                             _formKey.currentState.save();
 
-                            CreateFloorPlanResponse response = service.createFloorPlanMock(CreateFloorPlanRequest(globals.email, _numFloor, int.parse(_numRooms)));
+                            CreateFloorPlanResponse response = service.createFloorPlanMock(CreateFloorPlanRequest(globals.email, _numFloor, 0));
 
                             if (response.getResponse()) {
                               showDialog(
@@ -186,7 +109,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                         child: Text('Okay'),
                                         onPressed: (){
                                           Navigator.of(ctx).pop();
-                                          Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
+                                          //Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
                                         },
                                       )
                                     ],
@@ -197,7 +120,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                   context: context,
                                   builder: (ctx) => AlertDialog(
                                     title: Text('Creation unsuccessful'),
-                                    content: Text('Please check your details.'),
+                                    content: Text('Floor plans must have at least one floor.'),
                                     actions: <Widget>[
                                       TextButton(
                                         child: Text('Okay'),
