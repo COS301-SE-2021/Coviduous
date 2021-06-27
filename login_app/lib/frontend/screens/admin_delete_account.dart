@@ -59,6 +59,7 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
             Center(
               child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
                 child: Container(
+                  //manage container size
                   color: Colors.white,
                   height: MediaQuery.of(context).size.height/(2.8*globals.getWidgetScaling()),
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
