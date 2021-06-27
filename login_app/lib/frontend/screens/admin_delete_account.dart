@@ -140,6 +140,7 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
                                     builder: (ctx) => AlertDialog(
                                       title: Text('Warning'),
                                       content: Text('Are you sure you want to delete your account? This cannot be undone.'),
+                                      //create button to alert user of changes.
                                       actions: <Widget>[
                                         TextButton(
                                           child: Text('Yes'),
@@ -164,6 +165,7 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
                                                 });
 
                                                 //DeleteAccountUserResponse response = services.deleteAccountUserMock(DeleteAccountUserRequest(globals.loggedInUserId));
+
                                                 //print(response.getResponse());
 
                                                 AuthClass().signOut();
