@@ -112,7 +112,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
         appBar: AppBar(
           //calculate floor plan button.
           title: Text("Calculate floor plan"),
-          leading: BackButton( //Specify back button
+          leading: BackButton( //Specify back button.
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
             },
