@@ -172,6 +172,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
                           }
                       ),
                       SizedBox(
+                        //manage box size.
                         height: MediaQuery.of(context).size.height/48,
                         width: MediaQuery.of(context).size.width,
                       ),
