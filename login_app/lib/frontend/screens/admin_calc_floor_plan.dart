@@ -110,6 +110,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
       child: Scaffold(
         backgroundColor: Colors.transparent, //To show background image
         appBar: AppBar(
+          //calculate floor plan button.
           title: Text("Calculate floor plan"),
           leading: BackButton( //Specify back button
             onPressed: (){
