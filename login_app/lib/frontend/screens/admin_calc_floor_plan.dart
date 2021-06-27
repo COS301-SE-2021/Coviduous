@@ -151,6 +151,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
                         width: MediaQuery.of(context).size.width,
                       ),
                       ElevatedButton(
+                        //Save button.
                           style: ElevatedButton.styleFrom (
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
