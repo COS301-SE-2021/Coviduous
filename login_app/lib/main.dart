@@ -12,6 +12,7 @@ import 'frontend/screens/user_signup_screen.dart';
 
 //Admin subsystem screens
 import 'frontend/screens/admin_homepage.dart';
+import 'frontend/screens/home_floor_plan.dart';
 import 'frontend/screens/admin_add_floor_plan.dart';
 import 'frontend/screens/admin_calc_floor_plan.dart';
 import 'frontend/screens/admin_delete_announcement.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget{
       routes: {
         //Admin subsystem
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
+        FloorPlan.routeName: (ctx)=> FloorPlan(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         CalcFloorPlan.routeName: (ctx)=> CalcFloorPlan(),
         MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
