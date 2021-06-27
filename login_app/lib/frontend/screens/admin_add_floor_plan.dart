@@ -4,7 +4,7 @@ import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/frontend/screens/home_floor_plan.dart';
-import 'package:login_app/frontend/screens/admin_calc_floor_plan.dart';
+import 'package:login_app/frontend/screens/admin_view_floors.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -109,7 +109,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                         child: Text('Okay'),
                                         onPressed: (){
                                           Navigator.of(ctx).pop();
-                                          //Navigator.of(context).pushReplacementNamed(CalcFloorPlan.routeName);
+                                          Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
                                         },
                                       )
                                     ],
