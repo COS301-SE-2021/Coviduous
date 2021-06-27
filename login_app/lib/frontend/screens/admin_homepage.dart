@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'login_screen.dart';
-import 'admin_manage_account.dart';
-import 'admin_add_floor_plan.dart';
-import 'admin_view_announcements.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/admin_manage_account.dart';
+import 'package:login_app/frontend/screens/admin_add_floor_plan.dart';
+import 'package:login_app/frontend/screens/admin_view_announcements.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -26,14 +26,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               fit: BoxFit.cover,
           ),
         ),
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Scaffold(
+          child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               title: Text('Admin dashboard'),
@@ -55,218 +48,217 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 color: Colors.white,
                                 width: double.maxFinite,
                                 height: MediaQuery.of(context).size.height/8,
-                              ),
+                             ),
                             ),
                             SizedBox (
                               height: MediaQuery.of(context).size.height/48,
                               width: MediaQuery.of(context).size.width,
                             ),
                             Container (
-                                height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                               height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
                                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                                 padding: EdgeInsets.all(20),
                                 child: Column (
                                     children: <Widget>[
                                       ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Add a floor plan')),
-                                                Icon(Icons.add_circle_rounded)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                          ),
-                                          onPressed: () {
-                                           Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
-                                          }
-                                      ),
-                                      SizedBox (
-                                        height: MediaQuery.of(context).size.height/48,
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Update floor plan')),
-                                                Icon(Icons.update_rounded)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                          ),
-                                          onPressed: () {
-                                            //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
-                                            showDialog(
-                                                context: context,
-                                                builder: (ctx) => AlertDialog(
-                                                  title: Text('Placeholder'),
-                                                  content: Text('Update floor plan'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: Text('Okay'),
-                                                      onPressed: (){
-                                                        Navigator.of(ctx).pop();
-                                                      },
-                                                    )
-                                                  ],
-                                                )
-                                            );
-                                          }
-                                      ),
-                                      SizedBox (
-                                        height: MediaQuery.of(context).size.height/48,
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Delete floor plan')),
-                                                Icon(Icons.delete_forever_rounded)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
-                                          ),
-                                          onPressed: () {
-                                            // Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
-                                            showDialog(
-                                                context: context,
-                                                builder: (ctx) => AlertDialog(
-                                                  title: Text('Placeholder'),
-                                                  content: Text('Delete floor plan'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: Text('Okay'),
-                                                      onPressed: (){
-                                                        Navigator.of(ctx).pop();
-                                                      },
-                                                    )
-                                                  ],
-                                                )
-                                            );
-                                          }
-                                      ),
-                                      SizedBox (
-                                        height: MediaQuery.of(context).size.height/48,
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('View announcements')),
-                                                Icon(Icons.add_alert)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-                                            /*
-                                            showDialog(
-                                                context: context,
-                                                builder: (ctx) => AlertDialog(
-                                                  title: Text('Placeholder'),
-                                                  content: Text('View announcements'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: Text('Okay'),
-                                                      onPressed: (){
-                                                        Navigator.of(ctx).pop();
-                                                      },
-                                                    )
-                                                  ],
-                                                )
-                                            );
-                                            */
-                                          }
-                                      ),
-                                    ]
-                                )
-                            ),
-                          ],
-                        )
-                    ),
-                  ),
-                  Container (
-                    alignment: Alignment.bottomRight,
-                    child: Container (
-                        height: 50,
-                        width: 100,
-                        padding: EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom (
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: Text('Log out'),
-                          onPressed: (){
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Warning'),
-                                  content: Text('Are you sure you want to log out?'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Yes'),
-                                      onPressed: (){
-                                        //globals.email = ''; //Clear currently signed in email
-                                        AuthClass().signOut();
-                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
-                                      },
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Add a floor plan')),
+                                              Icon(Icons.add_circle_rounded)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                         Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
+                                        }
                                     ),
-                                    TextButton(
-                                      child: Text('No'),
-                                      onPressed: (){
-                                        Navigator.of(ctx).pop();
-                                      },
-                                    )
-                                  ],
-                                ));
-                          },
-                        )
-                    ),
-                  ),
-                  Container (
-                    alignment: Alignment.bottomLeft,
-                    child: Container (
-                        height: 50,
-                        width: 180,
-                        padding: EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom (
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Update floor plan')),
+                                              Icon(Icons.update_rounded)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('Update floor plan'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Delete floor plan')),
+                                              Icon(Icons.delete_forever_rounded)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
+                                        ),
+                                        onPressed: () {
+                                          // Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('Delete floor plan'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('View announcements')),
+                                              Icon(Icons.add_alert)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                                          /*
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Placeholder'),
+                                                content: Text('View announcements'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                          */
+                                        }
+                                    ),
+                                  ]
+                              )
                           ),
-                          child: Text('Manage account'),
-                          onPressed: (){
-                            Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
-                          },
-                        )
-                    ),
-                  )
-                ]
-            )
-        ),
+                        ],
+                      )
+                  ),
+                ),
+                Container (
+                  alignment: Alignment.bottomRight,
+                  child: Container (
+                      height: 50,
+                      width: 100,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Log out'),
+                        onPressed: (){
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Warning'),
+                                content: Text('Are you sure you want to log out?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('Yes'),
+                                    onPressed: (){
+                                      //globals.email = ''; //Clear currently signed in email
+                                      AuthClass().signOut();
+                                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text('No'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  )
+                                ],
+                              ));
+                        },
+                      )
+                  ),
+                ),
+                Container (
+                  alignment: Alignment.bottomLeft,
+                  child: Container (
+                      height: 50,
+                      width: 180,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Manage account'),
+                        onPressed: (){
+                          Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
+                        },
+                      )
+                  ),
+                )
+              ]
+          )
       ),
     ),
     );
