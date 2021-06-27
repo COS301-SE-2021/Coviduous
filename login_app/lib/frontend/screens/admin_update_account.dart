@@ -7,7 +7,7 @@ import 'package:login_app/frontend/screens/admin_manage_account.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminUpdateAccount extends StatefulWidget {
-  static const routeName = "/adminUpdateAccount";
+  static const routeName = "/admin_update_account";
   @override
   _AdminUpdateAccountState createState() => _AdminUpdateAccountState();
 }
