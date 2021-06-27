@@ -164,7 +164,7 @@ class _CalcFloorPlanState extends State<CalcFloorPlan> {
                             }
 
                             _formKey.currentState.save();
-
+                              // dimensions specified by admin.
                             print('Dimensions: ' + _dimensions);
                             print('Number of desks: ' + _numdesks);
                             print('Length: ' + _length);
