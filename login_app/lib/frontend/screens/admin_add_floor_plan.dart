@@ -13,8 +13,9 @@ class AddFloorPlan extends StatefulWidget {
   @override
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
-//add floor plan
+//add floor plan class declaration.
 class _AddFloorPlanState extends State<AddFloorPlan> {
+  //variables declaration.
   String _numFloor;
   String _numRooms;
   //String _maxCapacity;
