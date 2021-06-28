@@ -15,6 +15,12 @@ String email = '';
 //User ID of currently logged in user
 String loggedInUserId = '';
 
+//Current floor you're working with
+int currentFloorNum = 0;
+
+//Current room you're working with
+int currentRoomNum = 0;
+
 //Adjusts scaling of containers based on platform
 double getWidgetScaling() {
   if (kIsWeb) {
