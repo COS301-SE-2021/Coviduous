@@ -82,7 +82,7 @@ void main() {
 
   test('Correct add a room construction', () {
     bool value = floorplan.addRoomMock(
-        expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 6);
+        expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6);
 
     expect(value, true);
   });
