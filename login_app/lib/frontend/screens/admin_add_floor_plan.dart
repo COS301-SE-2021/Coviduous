@@ -5,10 +5,10 @@ import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/frontend/screens/home_floor_plan.dart';
 import 'package:login_app/frontend/screens/admin_view_floors.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
-import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/admin_add_floor_plan";
@@ -101,25 +101,10 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                             CreateFloorPlanResponse response = service.createFloorPlanMock(CreateFloorPlanRequest(globals.email, _numFloor, 0));
 
                             if (response.getResponse()) {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Creation successful'),
-                                    content: Text('Proceeding to next step.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                          Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
                               floorGlobals.globalFloors.clear();
                               floorGlobals.globalFloors = new List<Floor>.generate(int.parse(_numFloor), (int index) => new Floor(globals.email, "", 0));
                               floorGlobals.globalNumFloors = int.parse(_numFloor);
+                              Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
                             } else {
                               showDialog(
                                   context: context,
