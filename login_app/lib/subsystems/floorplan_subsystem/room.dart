@@ -22,31 +22,31 @@ class Room {
       capacityOfPeopleForEightFtCircle; //Number of people allowed in the room for 8ft distance to be maintained
   double occupiedDesks;
 
-  Room(String roomNum, double dimensions, double percentage, int numDesks,
-      double deskLength, double deskWidth) {
+  double deskDimentions; // dimentions of a desk
+
+  Room(String roomNum, double roomDimensions, double percentage, int numDesks,
+      double deskdimentions) {
     this.roomNum = roomNum;
-    this.dimensions = dimensions;
+    this.dimensions = roomDimensions;
     this.percentage = percentage;
     this.numDesks = numDesks;
-    this.deskLength = deskLength;
-    this.deskWidth = deskWidth;
+    this.deskDimentions = deskdimentions;
+
     this.capacityOfPeopleForTwelveFtGrid =
-        (((dimensions) - ((deskLength * deskWidth) * numDesks)) / 144);
+        (((dimensions) - ((deskDimentions) * numDesks)) / 144);
     this.capacityOfPeopleForSixFtGrid =
-        ((((dimensions) - ((deskLength * deskWidth) * numDesks)) *
+        ((((dimensions) - ((deskDimentions) * numDesks)) *
                 (percentage / 100.0)) /
             36);
     this.capacityOfPeopleForSixFtCircle =
-        ((((dimensions) - ((deskLength * deskWidth) * numDesks)) *
+        (((((dimensions) - (deskDimentions) * numDesks)) *
                 (percentage / 100.0)) /
             28);
     this.capacityOfPeopleForEightFtGrid =
-        ((((dimensions) - ((deskLength * deskWidth) * numDesks)) *
-                (percentage / 100.0)) /
+        ((((dimensions) - (deskDimentions * numDesks)) * (percentage / 100.0)) /
             64);
     this.occupiedDesks = 0;
   }
-
   void displayCapacity() {
     print(
         "***************************************************************************************");
