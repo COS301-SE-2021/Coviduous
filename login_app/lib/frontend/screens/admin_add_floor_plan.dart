@@ -24,7 +24,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
   Widget _buildFloors(){
     return TextFormField(
-      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
       decoration: InputDecoration(
           labelText: 'Enter number of floors'
       ),
