@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/admin_add_floor_plan.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class FloorPlan extends StatefulWidget {
   static const routeName = "/floor_plan";
@@ -54,7 +56,25 @@ class _FloorPlanState extends State<FloorPlan> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
+                              if (floorGlobals.globalFloors.isEmpty) { //Only allow a new floor plan to be created if it does not exist already
+                                Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Floor plan already exists'),
+                                      content: Text('A floor plan already exists for your company. Please remove the old one before creating a new one.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: (){
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                );
+                              }
                             }
                         ),
                         SizedBox (
