@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/home_floor_plan.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
+import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
-import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 class AdminViewFloors extends StatefulWidget {
   static const routeName = "/admin_view_floors";
@@ -73,22 +74,8 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                   ElevatedButton(
                                       child: Text('Edit'),
                                       onPressed: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                              title: Text('Placeholder'),
-                                              content: Text('Edit floor.'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: Text('Okay'),
-                                                  onPressed: (){
-                                                    Navigator.of(ctx).pop();
-                                                    //Navigator.of(context).pushReplacementNamed(AdminAddRooms.routeName);
-                                                  },
-                                                )
-                                              ],
-                                            )
-                                        );
+                                        globals.currentFloorNum = index;
+                                        Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
                                       }
                                   ),
                                   ElevatedButton(
@@ -104,7 +91,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                               context: context,
                                               builder: (ctx) => AlertDialog(
                                                 title: Text('Error'),
-                                                content: Text('Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature.'),
+                                                content: Text('Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the previous page.'),
                                                 actions: <Widget>[
                                                   TextButton(
                                                     child: Text('Okay'),
