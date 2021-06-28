@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/home_floor_plan.dart';
 
-//import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
@@ -19,6 +19,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
     Widget getList() {
       FloorPlanController services = new FloorPlanController();
       //ViewAdminFloorPlanResponse response = services.viewFloorPlanAdminMock(ViewAdminFloorPlanRequest());
+      //List<Floor> floors = response.getFloors();
       List<Floor> floors = floorGlobals.globalFloors;
       int numOfFloors = floorGlobals.globalNumFloors;
 
@@ -93,25 +94,28 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                   ElevatedButton(
                                       child: Text('Delete'),
                                       onPressed: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                              title: Text('Placeholder'),
-                                              content: Text('Delete floor.'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: Text('Okay'),
-                                                  onPressed: (){
-                                                    Navigator.of(ctx).pop();
-                                                    //Navigator.of(context).pushReplacementNamed(AdminDeleteFloor.routeName);
-                                                  },
-                                                )
-                                              ],
-                                            )
-                                        );
                                         //Temporary: remove floor and reload page
-                                        floorGlobals.globalNumFloors--;
-                                        setState(() {});
+                                        if (floorGlobals.globalNumFloors > 1) { //Only allow deletion of floors if there is more than one floor
+                                          floorGlobals.globalNumFloors--;
+                                          floorGlobals.globalFloors.removeAt(index);
+                                          setState(() {});
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Error'),
+                                                content: Text('Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
                                       }
                                   ),
                                 ],
@@ -174,6 +178,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                     onPressed: (){
                       //Add new floor and reload page
                       floorGlobals.globalNumFloors++;
+                      floorGlobals.globalFloors.add(new Floor(globals.email, "", 0));
                       setState(() {});
                     },
                   )
