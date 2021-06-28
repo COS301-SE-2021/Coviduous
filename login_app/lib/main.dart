@@ -15,6 +15,7 @@ import 'frontend/screens/admin_homepage.dart';
 import 'frontend/screens/home_floor_plan.dart';
 import 'frontend/screens/admin_add_floor_plan.dart';
 import 'frontend/screens/admin_view_floors.dart';
+import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 import 'frontend/screens/admin_delete_announcement.dart';
 import 'frontend/screens/admin_view_announcements.dart';
 import 'frontend/screens/admin_make_announcement.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget{
         FloorPlan.routeName: (ctx)=> FloorPlan(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         AdminViewFloors.routeName: (ctx)=> AdminViewFloors(),
+        AdminViewRooms.routeName: (ctx)=> AdminViewRooms(),
         MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
         AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
         AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
