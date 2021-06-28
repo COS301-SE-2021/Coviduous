@@ -8,6 +8,7 @@ import 'package:login_app/frontend/screens/admin_view_floors.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/admin_add_floor_plan";
@@ -98,7 +99,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                             _formKey.currentState.save();
 
                             CreateFloorPlanResponse response = service.createFloorPlanMock(CreateFloorPlanRequest(globals.email, _numFloor, 0));
-                            floorGlobals.globalNumFloors = int.parse(_numFloor);
 
                             if (response.getResponse()) {
                               showDialog(
@@ -117,6 +117,9 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                     ],
                                   )
                               );
+                              floorGlobals.globalFloors.clear();
+                              floorGlobals.globalFloors = new List<Floor>.generate(int.parse(_numFloor), (int index) => new Floor(globals.email, "", 0));
+                              floorGlobals.globalNumFloors = int.parse(_numFloor);
                             } else {
                               showDialog(
                                   context: context,
