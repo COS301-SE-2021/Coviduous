@@ -89,7 +89,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                                                   child: Text('Okay'),
                                                   onPressed: (){
                                                     Navigator.of(ctx).pop();
-                                                    globals.currentFloorNum = index;
+                                                    globals.currentRoomNum = index;
                                                     //Navigator.of(context).pushReplacementNamed(AdminEditRoom.routeName);
                                                   },
                                                 )
