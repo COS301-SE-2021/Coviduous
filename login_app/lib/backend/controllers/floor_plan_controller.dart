@@ -37,12 +37,12 @@ class FloorPlanController {
  * For every floor, there are rooms assosiated with a floor , this function allows you to populate rooms for each floor
  */
   bool addRoomMock(String floorNum, String roomNum, double dimensions,
-      double percentage, int numDesks, double deskLength, double deskWidth) {
+      double percentage, int numDesks, double deskDimentions) {
     for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
       if (floorGlobals.globalFloors[i] != null &&
           floorGlobals.globalFloors[i].floorNum == floorNum) {
-        floorGlobals.globalFloors[i].addRoom(
-            roomNum, dimensions, percentage, numDesks, deskLength, deskWidth);
+        floorGlobals.globalFloors[i]
+            .addRoom(roomNum, dimensions, percentage, numDesks, deskDimentions);
         floorGlobals.globalFloors[i].viewRoomDetails(roomNum);
         return true;
       }
