@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/frontend/screens/admin_edit_room.dart';
 import 'package:login_app/frontend/screens/admin_view_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
@@ -79,23 +80,8 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                                   ElevatedButton(
                                       child: Text('Edit'),
                                       onPressed: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                              title: Text('Placeholder'),
-                                              content: Text('Edit room.'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: Text('Okay'),
-                                                  onPressed: (){
-                                                    Navigator.of(ctx).pop();
-                                                    globals.currentRoomNum = index;
-                                                    //Navigator.of(context).pushReplacementNamed(AdminEditRoom.routeName);
-                                                  },
-                                                )
-                                              ],
-                                            )
-                                        );
+                                        globals.currentRoomNum = index;
+                                        Navigator.of(context).pushReplacementNamed(AdminEditRoom.routeName);
                                       }
                                   ),
                                   ElevatedButton(
