@@ -12,7 +12,19 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Floor-Plan'),
+        backgroundColor: Colors.grey,
+      ),
+      backgroundColor: Colors.white70,
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
 
+            ],
+        ),
+      ),
 
     );
   }
