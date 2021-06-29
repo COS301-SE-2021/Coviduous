@@ -13,6 +13,14 @@ class _ModifyFloorPlanState extends State<ModifyFloorPlan> {
 
     @override
     Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Modify Floor-plan'),
+          backgroundColor: Colors.grey,
+        ),
+        backgroundColor: Colors.grey[850],
+
+      );
 
   }
 }
