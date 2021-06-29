@@ -8,15 +8,15 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
-class EditFloorPlan extends StatefulWidget {
-  static const routeName = "/modify_room";
+class AdminModifyRooms extends StatefulWidget {
+  static const routeName = "/admin_modify_rooms";
   @override
-  EditFloorPlanState createState() {
-    return EditFloorPlanState();
+  AdminModifyRoomsState createState() {
+    return AdminModifyRoomsState();
   }
 }
 
-class EditFloorPlanState extends State<EditFloorPlan> {
+class AdminModifyRoomsState extends State<AdminModifyRooms> {
   @override
   Widget build(BuildContext context) {
     Widget getList() {
@@ -158,7 +158,7 @@ class EditFloorPlanState extends State<EditFloorPlan> {
             //Specify back button
             onPressed: () {
               Navigator.of(context)
-                  .pushReplacementNamed(ModifyFloorPlan.routeName);
+                  .pushReplacementNamed(AdminModifyFloors.routeName);
             },
           ),
         ),

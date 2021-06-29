@@ -33,7 +33,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
             title: Text('Manage room ' + (globals.currentRoomNum + 1).toString() + ' in floor ' + (globals.currentFloorNum + 1).toString()),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(EditFloorPlan.routeName);
+                Navigator.of(context).pushReplacementNamed(AdminModifyRooms.routeName);
               },
             ),
           ),

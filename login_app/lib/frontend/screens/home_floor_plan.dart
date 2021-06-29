@@ -99,7 +99,7 @@ class _FloorPlanState extends State<FloorPlan> {
                             ),
                             onPressed: () {
                               if (floorGlobals.globalFloors.isNotEmpty) { //Only allow a floor plan to be modified if it exists
-                                Navigator.of(context).pushReplacementNamed(ModifyFloorPlan.routeName);
+                                Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
                               } else {
                                 showDialog(
                                     context: context,

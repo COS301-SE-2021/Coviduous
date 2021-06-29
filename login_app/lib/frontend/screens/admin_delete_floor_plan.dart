@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 ///import 'package:flutter/rendering.dart';
 
 class DeleteFloorPlan extends StatefulWidget {
-  static const routeName = "/delete_floor_plan";
+  static const routeName = "/admin_delete_floor_plan";
   @override
   DeleteFloorPlanState createState() {
     return DeleteFloorPlanState();
