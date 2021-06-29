@@ -117,7 +117,6 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                             TextFormField(
                               textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                               decoration: InputDecoration(labelText:'Company ID'),
-                              obscureText: true,
                               controller: _userCompanyId,
                               validator: (value) {
                                 if (value.isEmpty || value != _companyId) {
