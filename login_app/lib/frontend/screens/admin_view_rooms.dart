@@ -6,8 +6,7 @@ import 'package:login_app/frontend/screens/admin_view_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
-import 'package:login_app/backend/backend_globals/floor_globals.dart'
-    as floorGlobals;
+import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class AdminViewRooms extends StatefulWidget {
   static const routeName = "/admin_view_rooms";
