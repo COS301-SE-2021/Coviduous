@@ -10,6 +10,11 @@ class EditFloorPlan extends StatefulWidget {
 class EditFloorPlanState extends State<EditFloorPlan> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Floor-Plan'),
+        backgroundColor: Colors.grey,
+      ),
+    );
   }
 }
