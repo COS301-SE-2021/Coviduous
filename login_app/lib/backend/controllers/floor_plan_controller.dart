@@ -1,4 +1,4 @@
-import 'package:login_app/backend/server_connections/floor_plan_data_base_queries.dart';
+import 'package:login_app/backend/server_connections/floor_plan_model.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
@@ -14,22 +14,23 @@ class FloorPlanController {
   /** 
    * floorPlanQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
-  FloorPlanDatabaseQueries floorPlanQueries;
+  FloorPlanModel floorPlanQueries;
   FloorPlanController() {
-    this.floorPlanQueries = new FloorPlanDatabaseQueries();
+    this.floorPlanQueries = new FloorPlanModel();
   }
 
 /**
  * createFloorPlanMock : Mocks out the functionality of creating a floor plan for a building
  */
   CreateFloorPlanResponse createFloorPlanMock(CreateFloorPlanRequest req) {
-    var holder =
-        new Floor(req.getAdmin(), req.getFloorNumber(), req.getTotalRooms());
-    floorGlobals.globalFloors.add(holder);
-    CreateFloorPlanResponse resp = new CreateFloorPlanResponse();
-    resp.setResponse(true);
-    floorGlobals.globalNumFloors++;
-    return resp;
+    if (floorPlanQueries.createFloorPlanMock(
+        req.getAdmin(), req.getFloorNumber(), req.getTotalRooms())) {
+      CreateFloorPlanResponse resp = new CreateFloorPlanResponse(true);
+      return resp;
+    } else {
+      CreateFloorPlanResponse resp2 = new CreateFloorPlanResponse(false);
+      return resp2;
+    }
   }
 
 ////////////////////////////////////////////////////////////
