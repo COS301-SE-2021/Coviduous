@@ -84,6 +84,21 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
               ),
 
 
+              Padding(
+                   padding: EdgeInsets.only(top: 50, right: 3),
+                    child: FlatButton(
+                      color: Colors.blue,
+                      child: Text('Proceed',
+                      style: TextStyle(color: Colors.black),
+                      ),
+                      onPressed: () {
+
+                          }
+                      )
+              )
+
+
+
 
             ],
         ),
