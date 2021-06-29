@@ -18,7 +18,7 @@ import 'frontend/screens/admin_modify_floors.dart';
 import 'frontend/screens/admin_modify_rooms.dart';
 import 'frontend/screens/admin_delete_floor_plan.dart';
 import 'frontend/screens/admin_view_floors.dart';
-import 'frontend/screens/admin_edit_room.dart';
+import 'frontend/screens/admin_edit_room_add.dart';
 import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 import 'frontend/screens/admin_delete_announcement.dart';
 import 'frontend/screens/admin_view_announcements.dart';
