@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/backend/controllers/office_controller.dart';
+import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
+import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
 import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
@@ -81,10 +83,11 @@ void main() {
   });
 
   test('Correct add a room construction', () {
-    bool value = floorplan.addRoomMock(
+    AddRoomRequest req = new AddRoomRequest(
         expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6);
+    AddRoomResponse resp = floorplan.addRoomMock(req);
 
-    expect(value, true);
+    expect(resp.getResponse(), true);
   });
 
   //-----------bookOfficeSpace UC2------------//
