@@ -85,17 +85,43 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
 
 
               Padding(
-                   padding: EdgeInsets.only(top: 50, right: 3),
-                    child: FlatButton(
-                      color: Colors.blue,
-                      child: Text('Proceed',
-                      style: TextStyle(color: Colors.black),
-                      ),
-                      onPressed: () {
+                padding: EdgeInsets.only(top: 50, right: 3),
+                child: FlatButton(
+                  color: Colors.blue,
+                  child: Text('Proceed',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onPressed: () {
+                    AlertDialog alert = AlertDialog(
+                      title: Text('Alert'),
+                      content: Text("Are You Sure Want To Proceed ?"),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("YES"),
+                          onPressed: () {
+                            //Put your code here which you want to execute on Yes button click.
+                            Navigator.of(context).pop();
+                          },
+                        ),
 
-                          }
-                      )
-              )
+                        FlatButton(
+                          child: Text("NO"),
+                          onPressed: () {
+                            //Put your code here which you want to execute on No button click.
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
+                  },
+                ),
+              ),
 
 
 
