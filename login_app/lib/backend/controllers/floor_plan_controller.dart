@@ -59,5 +59,9 @@ class FloorPlanController {
   int getNumberOfFloors() {
     return floorGlobals.globalNumFloors;
   }
+
+  void setNumFloors(int num) {
+    floorPlanQueries.setNumFloors(num);
+  }
   ////////////////////////////////////////////////////////////////////////////////
 }
