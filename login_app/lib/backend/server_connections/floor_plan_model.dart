@@ -1,5 +1,3 @@
-import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
-import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
@@ -14,5 +12,19 @@ class FloorPlanModel {
     floorGlobals.globalFloors.add(holder);
     floorGlobals.globalNumFloors++;
     return true;
+  }
+
+  bool addRoomMock(String floorNum, String roomNum, double dimensions,
+      double percentage, int numDesks, double deskDimentions) {
+    for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
+      if (floorGlobals.globalFloors[i] != null &&
+          floorGlobals.globalFloors[i].floorNum == floorNum) {
+        floorGlobals.globalFloors[i]
+            .addRoom(roomNum, dimensions, percentage, numDesks, deskDimentions);
+        floorGlobals.globalFloors[i].viewRoomDetails(roomNum);
+        return true;
+      }
+    }
+    return false;
   }
 }
