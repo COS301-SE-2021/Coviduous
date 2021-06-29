@@ -86,13 +86,11 @@ class _ModifyFloorPlanState extends State<ModifyFloorPlan> {
                               },
                             ),
                           ),
-
-                          ],
-
+                        ],
                     ),
-            ],
-          ),
-        )
+                 ],
+              ),
+          )
       );
 
   }
