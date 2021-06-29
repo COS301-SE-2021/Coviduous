@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EditFloorPlan extends StatefulWidget {
+  static const routeName = "/modify_room";
   @override
   EditFloorPlanState createState() {
     return EditFloorPlanState();

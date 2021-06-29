@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/admin_add_floor_plan.dart';
+import 'package:login_app/frontend/screens/admin_modify_floors.dart';
+import 'package:login_app/frontend/screens/admin_delete_floor_plan.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
@@ -96,22 +98,25 @@ class _FloorPlanState extends State<FloorPlan> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              //Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('Modify floor plan'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              if (floorGlobals.globalFloors.isNotEmpty) { //Only allow a floor plan to be modified if it exists
+                                Navigator.of(context).pushReplacementNamed(ModifyFloorPlan.routeName);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Floor plan does not exist'),
+                                      content: Text('A floor plan has not been added for your company.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: (){
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                );
+                              }
                             }
                         ),
                         SizedBox (
@@ -133,22 +138,25 @@ class _FloorPlanState extends State<FloorPlan> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
                             ),
                             onPressed: () {
-                              // Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('Delete floor plan'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              if (floorGlobals.globalFloors.isNotEmpty) { //Only allow a floor plan to be deleted if it exists
+                                Navigator.of(context).pushReplacementNamed(DeleteFloorPlan.routeName);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Floor plan does not exist'),
+                                      content: Text('A floor plan has not been added for your company.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: (){
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                );
+                              }
                             }
                         ),
                       ]
