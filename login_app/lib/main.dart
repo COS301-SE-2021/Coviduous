@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget{
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         AdminViewFloors.routeName: (ctx)=> AdminViewFloors(),
         AdminViewRooms.routeName: (ctx)=> AdminViewRooms(),
-        AdminEditRoom.routeName: (ctx)=> AdminEditRoom(),
+        AdminEditRoomAdd.routeName: (ctx)=> AdminEditRoomAdd(),
         ModifyFloorPlan.routeName: (ctx)=> ModifyFloorPlan(),
         EditFloorPlan.routeName: (ctx)=> EditFloorPlan(),
         DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
