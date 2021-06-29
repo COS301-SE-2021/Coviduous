@@ -96,7 +96,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                                   onPressed: () {
                                     globals.currentRoomNum = index;
                                     Navigator.of(context).pushReplacementNamed(
-                                        AdminEditRoom.routeName);
+                                        AdminEditRoomAdd.routeName);
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
