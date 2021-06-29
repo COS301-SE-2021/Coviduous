@@ -68,4 +68,8 @@ class Room {
       return false;
     }
   }
+
+  String getRoomNum() {
+    return roomNum;
+  }
 }
