@@ -22,10 +22,31 @@ class Floor {
     this.currentCapacity = 0;
   }
 
+  bool searchRoom(String roomNum) {
+    for (var i = 0; i < rooms.length; i++) {
+      if (rooms[i].getRoomNum() == roomNum) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool editRoom(String roomNum, double dimensions, double percentage,
+      int numDesks, double deskArea) {
+    if (!searchRoom(roomNum)) {
+      if (addRoom(roomNum, dimensions, percentage, numDesks, deskArea)) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+    return false;
+  }
+
   bool addRoom(String roomNum, double dimensions, double percentage,
       int numDesks, double deskArea) {
     Room holder = new Room(roomNum, dimensions, percentage, numDesks, deskArea);
-    rooms.add(holder);
+    this.rooms.add(holder);
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
   }
@@ -79,5 +100,9 @@ class Floor {
 
   String getFloorNumber() {
     return floorNum;
+  }
+
+  List<Room> getAllRooms() {
+    return rooms;
   }
 }
