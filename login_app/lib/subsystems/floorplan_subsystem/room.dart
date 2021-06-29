@@ -8,8 +8,6 @@ class Room {
   double
       percentage; //The percentage is determined by the alert level of the country
   int numDesks; //Number of desks inside the room it is also assumed at this stage that desks only have a shape of rectangle or square and all desks inside a room have the same length and width.
-  double deskLength; //Length of desk
-  double deskWidth; //Width of desk
   double
       capacityOfPeopleForTwelveFtGrid; //Number of people allowed in the room for 12ft distance to be maintained
   double
@@ -23,14 +21,16 @@ class Room {
   double occupiedDesks;
 
   double deskDimentions; // dimentions of a desk
+  int deskMaxCapcity;
 
   Room(String roomNum, double roomDimensions, double percentage, int numDesks,
-      double deskdimentions) {
+      double deskdimentions, int maxCapacityOfDesks) {
     this.roomNum = roomNum;
     this.dimensions = roomDimensions;
     this.percentage = percentage;
     this.numDesks = numDesks;
     this.deskDimentions = deskdimentions;
+    this.deskMaxCapcity = maxCapacityOfDesks;
 
     this.capacityOfPeopleForTwelveFtGrid =
         (((dimensions) - ((deskDimentions) * numDesks)) / 144);
