@@ -18,7 +18,8 @@ import 'frontend/screens/admin_modify_floors.dart';
 import 'frontend/screens/admin_modify_rooms.dart';
 import 'frontend/screens/admin_delete_floor_plan.dart';
 import 'frontend/screens/admin_view_floors.dart';
-import 'frontend/screens/admin_edit_room.dart';
+import 'frontend/screens/admin_edit_room_add.dart';
+import 'frontend/screens/admin_edit_room_modify.dart';
 import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 import 'frontend/screens/admin_delete_announcement.dart';
 import 'frontend/screens/admin_view_announcements.dart';
@@ -72,9 +73,10 @@ class MyApp extends StatelessWidget{
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         AdminViewFloors.routeName: (ctx)=> AdminViewFloors(),
         AdminViewRooms.routeName: (ctx)=> AdminViewRooms(),
-        AdminEditRoom.routeName: (ctx)=> AdminEditRoom(),
-        ModifyFloorPlan.routeName: (ctx)=> ModifyFloorPlan(),
-        EditFloorPlan.routeName: (ctx)=> EditFloorPlan(),
+        AdminEditRoomAdd.routeName: (ctx)=> AdminEditRoomAdd(),
+        AdminEditRoomModify.routeName: (ctx)=> AdminEditRoomModify(),
+        AdminModifyFloors.routeName: (ctx)=> AdminModifyFloors(),
+        AdminModifyRooms.routeName: (ctx)=> AdminModifyRooms(),
         DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
         MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
         AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),

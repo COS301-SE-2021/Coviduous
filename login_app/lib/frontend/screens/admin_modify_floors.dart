@@ -9,13 +9,13 @@ import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
-class ModifyFloorPlan extends StatefulWidget {
-  static const routeName = "/modify_plan";
+class AdminModifyFloors extends StatefulWidget {
+  static const routeName = "/admin_modify_floors";
   @override
-  _ModifyFloorPlanState createState() => _ModifyFloorPlanState();
+  _AdminModifyFloorsState createState() => _AdminModifyFloorsState();
 }
 
-class _ModifyFloorPlanState extends State<ModifyFloorPlan> {
+class _AdminModifyFloorsState extends State<AdminModifyFloors> {
     String _chosenValue;
 
     @override
@@ -78,7 +78,7 @@ class _ModifyFloorPlanState extends State<ModifyFloorPlan> {
                                         child: Text('Edit'),
                                         onPressed: () {
                                           globals.currentFloorNum = index;
-                                          Navigator.of(context).pushReplacementNamed(EditFloorPlan.routeName);
+                                          Navigator.of(context).pushReplacementNamed(AdminModifyRooms.routeName);
                                         }
                                     ),
                                     ElevatedButton(
