@@ -7,6 +7,10 @@ class FloorPlanModel {
 
   FloorPlanModel() {}
 
+  void setNumFloors(int num) {
+    floorGlobals.globalNumFloors = num;
+  }
+
   bool createFloorPlanMock(String admin, String floorNum, int numRooms) {
     var holder = new Floor(admin, floorNum, numRooms);
     floorGlobals.globalFloors.add(holder);
@@ -14,13 +18,19 @@ class FloorPlanModel {
     return true;
   }
 
-  bool addRoomMock(String floorNum, String roomNum, double dimensions,
-      double percentage, int numDesks, double deskDimentions) {
+  bool addRoomMock(
+      String floorNum,
+      String roomNum,
+      double dimensions,
+      double percentage,
+      int numDesks,
+      double deskDimentions,
+      int deskMaxCapacity) {
     for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
       if (floorGlobals.globalFloors[i] != null &&
           floorGlobals.globalFloors[i].floorNum == floorNum) {
-        floorGlobals.globalFloors[i]
-            .addRoom(roomNum, dimensions, percentage, numDesks, deskDimentions);
+        floorGlobals.globalFloors[i].addRoom(roomNum, dimensions, percentage,
+            numDesks, deskDimentions, deskMaxCapacity);
         floorGlobals.globalFloors[i].viewRoomDetails(roomNum);
         return true;
       }

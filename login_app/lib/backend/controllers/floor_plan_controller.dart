@@ -46,7 +46,8 @@ class FloorPlanController {
         req.getDimentions(),
         req.getPercentage(),
         req.getNumDesks(),
-        req.getDeskDimentions())) {
+        req.getDeskDimentions(),
+        req.getDeskMaxCapaciy())) {
       return new AddRoomResponse(true);
     } else {
       return new AddRoomResponse(false);
@@ -58,6 +59,10 @@ class FloorPlanController {
  */
   int getNumberOfFloors() {
     return floorGlobals.globalNumFloors;
+  }
+
+  void setNumFloors(int num) {
+    floorPlanQueries.setNumFloors(num);
   }
   ////////////////////////////////////////////////////////////////////////////////
 }

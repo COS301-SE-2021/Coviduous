@@ -9,15 +9,23 @@ class AddRoomRequest {
   double percentage;
   int numDesks;
   double deskDimentions;
+  int deskMaxCapaciy;
 
-  AddRoomRequest(String floornum, String roomnum, double Dimentions,
-      double Percentage, int numdesks, double deskdimentions) {
+  AddRoomRequest(
+      String floornum,
+      String roomnum,
+      double Dimentions,
+      double Percentage,
+      int numdesks,
+      double deskdimentions,
+      int DeskMaxCapcity) {
     this.floorNum = floornum;
     this.roomNum = roomnum;
     this.dimensions = Dimentions;
     this.percentage = Percentage;
     this.numDesks = numdesks;
     this.deskDimentions = deskdimentions;
+    this.deskMaxCapaciy = DeskMaxCapcity;
   }
 
   String getFloorNumber() {
@@ -42,5 +50,9 @@ class AddRoomRequest {
 
   double getPercentage() {
     return percentage;
+  }
+
+  int getDeskMaxCapaciy() {
+    return deskMaxCapaciy;
   }
 }

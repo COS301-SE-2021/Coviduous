@@ -32,9 +32,10 @@ class Floor {
   }
 
   bool editRoom(String roomNum, double dimensions, double percentage,
-      int numDesks, double deskArea) {
+      int numDesks, double deskArea, int deskMaxCapcity) {
     if (!searchRoom(roomNum)) {
-      if (addRoom(roomNum, dimensions, percentage, numDesks, deskArea)) {
+      if (addRoom(roomNum, dimensions, percentage, numDesks, deskArea,
+          deskMaxCapcity)) {
         return true;
       }
     } else {
@@ -44,8 +45,9 @@ class Floor {
   }
 
   bool addRoom(String roomNum, double dimensions, double percentage,
-      int numDesks, double deskArea) {
-    Room holder = new Room(roomNum, dimensions, percentage, numDesks, deskArea);
+      int numDesks, double deskArea, int deskMaxCpacity) {
+    Room holder = new Room(
+        roomNum, dimensions, percentage, numDesks, deskArea, deskMaxCpacity);
     this.rooms.add(holder);
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
