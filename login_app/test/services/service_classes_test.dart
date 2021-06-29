@@ -51,7 +51,7 @@ void main() {
   });
 
   test('Correct CreateFloorPlanResponse construction', () {
-    CreateFloorPlanResponse resp = new CreateFloorPlanResponse();
+    CreateFloorPlanResponse resp = new CreateFloorPlanResponse(false);
 
     resp.setResponse(expectedBoolean); // resp needs more params
 
