@@ -24,7 +24,8 @@ class _ModifyFloorPlanState extends State<ModifyFloorPlan> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-
+                padding: const EdgeInsets.all(0.0),
+                color: Colors.grey[300],
               ),
             ],
           ),
