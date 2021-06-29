@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/frontend/screens/admin_edit_room_modify.dart';
 import 'package:login_app/frontend/screens/admin_modify_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
@@ -93,7 +94,7 @@ class EditFloorPlanState extends State<EditFloorPlan> {
                                   child: Text('Edit'),
                                   onPressed: () {
                                     globals.currentRoomNum = index;
-                                    //Navigator.of(context).pushReplacementNamed(AdminEditRoom.routeName);
+                                    Navigator.of(context).pushReplacementNamed(AdminEditRoomModify.routeName);
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
