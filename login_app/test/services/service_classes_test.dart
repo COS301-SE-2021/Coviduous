@@ -85,7 +85,7 @@ void main() {
 
   test('Correct add a room construction', () {
     AddRoomRequest req = new AddRoomRequest(
-        expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6);
+        expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 0);
     AddRoomResponse resp = floorplan.addRoomMock(req);
 
     expect(resp.getResponse(), true);
