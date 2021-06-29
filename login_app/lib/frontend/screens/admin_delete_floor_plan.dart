@@ -164,7 +164,7 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
                                         ));
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Please enter all fields")));
+                                        SnackBar(content: Text("Please complete all fields")));
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
