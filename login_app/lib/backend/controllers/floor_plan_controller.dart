@@ -1,5 +1,7 @@
 import 'package:login_app/backend/server_connections/floor_plan_model.dart';
+import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
+import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
@@ -37,10 +39,18 @@ class FloorPlanController {
 /**
  * For every floor, there are rooms assosiated with a floor , this function allows you to populate rooms for each floor
  */
-  bool addRoomMock(String floorNum, String roomNum, double dimensions,
-      double percentage, int numDesks, double deskDimentions) {
-    return floorPlanQueries.addRoomMock(
-        floorNum, roomNum, dimensions, percentage, numDesks, deskDimentions);
+  AddRoomResponse addRoomMock(AddRoomRequest req) {
+    if (floorPlanQueries.addRoomMock(
+        req.getFloorNumber(),
+        req.getRoomNumber(),
+        req.getDimentions(),
+        req.getPercentage(),
+        req.getNumDesks(),
+        req.getDeskDimentions())) {
+      return new AddRoomResponse(true);
+    } else {
+      return new AddRoomResponse(false);
+    }
   }
 
 /**
