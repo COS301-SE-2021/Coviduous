@@ -38,6 +38,21 @@ class EditFloorPlanState extends State<EditFloorPlan> {
                 ),
               ),
 
+              Padding(
+                padding: EdgeInsets.fromLTRB(350, 1, 350, 2),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                    ),
+                    labelText: 'Room area',
+                  ),
+                ),
+              ),
+
             ],
         ),
       ),
