@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
-class AdminEditRoom extends StatefulWidget {
-  static const routeName = "/admin_edit_room";
+class AdminEditRoomAdd extends StatefulWidget {
+  static const routeName = "/admin_edit_room_add";
 
   @override
-  _AdminEditRoomState createState() => _AdminEditRoomState();
+  _AdminEditRoomAddState createState() => _AdminEditRoomAddState();
 }
 
-class _AdminEditRoomState extends State<AdminEditRoom> {
+class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
   TextEditingController _roomNumber = TextEditingController();
   TextEditingController _roomArea = TextEditingController();
   TextEditingController _deskArea = TextEditingController();
