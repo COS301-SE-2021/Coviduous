@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
-import 'package:login_app/frontend/screens/admin_edit_room.dart';
+import 'package:login_app/frontend/screens/admin_edit_room_add.dart';
 import 'package:login_app/frontend/screens/admin_view_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
