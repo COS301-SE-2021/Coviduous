@@ -52,6 +52,29 @@ class _ModifyFloorPlanState extends State<ModifyFloorPlan> {
                         },
                       ),
               ),
+
+                    Row(
+
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+
+                          Padding(
+                            padding: EdgeInsets.only(top: 50, right: 3),
+                            child: FlatButton(
+                              color: Colors.white,
+                              child: Text('Edit',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  //darkMode = false;
+                                });                    },
+                            ),
+                          ),
+
+                          ],
+
+                    ),
             ],
           ),
         )
