@@ -72,6 +72,21 @@ class _ModifyFloorPlanState extends State<ModifyFloorPlan> {
                             ),
                           ),
 
+                          Padding(
+                            padding: EdgeInsets.only(top: 50, left: 3),
+                            child: FlatButton(
+                              color: Colors.black,
+                              child: Text('Discard',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  //darkMode = true;
+                                });
+                              },
+                            ),
+                          ),
+
                           ],
 
                     ),
