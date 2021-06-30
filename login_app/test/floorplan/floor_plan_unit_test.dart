@@ -5,16 +5,19 @@ import 'package:login_app/backend/server_connections/floor_plan_model.dart';
 import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
 
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_room_response.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
 import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:login_app/backend/backend_globals/user_globals.dart'
     as userGlobals;
@@ -138,15 +141,58 @@ void main() {
         "SDFN-3", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
     AddRoomResponse resp2 = floorplan.addRoomMock(holder);
 
+    print("Adding a room in floor : SDFN-1");
     AddRoomRequest holder2 = AddRoomRequest(
         "SDFN-1", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
     AddRoomResponse resp3 = floorplan.addRoomMock(holder2);
-
+    print("Adding a room in floor : SDFN-1");
     AddRoomRequest holder3 = AddRoomRequest(
         "SDFN-1", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
     AddRoomResponse resp4 = floorplan.addRoomMock(holder3);
 
     floorplan.printAllFloorDetails();
+
+    expect(resp2.getResponse(), true);
+    expect(resp3.getResponse(), true);
+    expect(resp4.getResponse(), true);
+    expect(floors.globalRooms.length, 3);
+  });
+
+  test('Delete A Room In A Floor That Exits In A FloorPlan', () {
+    //register an admin to be able to have admin previliges
+    User admin = User("ADMIN", "Njabulo", "Skosana", "njabuloS",
+        "njabulo@gmail.com", "123456", "CID-1");
+    userGlobals.userDatabaseTable.add(admin);
+    userGlobals.numUsers++;
+    //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
+    CreateFloorPlanRequest req =
+        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
+    floorplan.printAllFloorDetails();
+    print("Adding a room in floor : SDFN-3");
+    AddRoomRequest holder = AddRoomRequest(
+        "SDFN-3", "chat room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp2 = floorplan.addRoomMock(holder);
+
+    print("Adding a room in floor : SDFN-1");
+    AddRoomRequest holder2 = AddRoomRequest(
+        "SDFN-1", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp3 = floorplan.addRoomMock(holder2);
+    print("Adding a room in floor : SDFN-1");
+    AddRoomRequest holder3 = AddRoomRequest(
+        "SDFN-1", "meeting room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp4 = floorplan.addRoomMock(holder3);
+
+    floorplan.printAllFloorDetails();
+    List<Room> rooms = floorplan.getRoomsForFloorNum("SDFN-1");
+    print("Printing Rooms in the floor : SDFN-1");
+    for (int i = 0; i < rooms.length; i++) {
+      rooms[i].displayCapacity();
+    }
+
+    print("Delete meeting room in floor SDFN-1");
+    DeleteRoomRequest holder4 = new DeleteRoomRequest("SDFN-1", "meeting room");
+    DeleteRoomResponse resp5 = floorplan.deleteRoomMock(holder4);
 
     expect(resp2.getResponse(), true);
     expect(resp3.getResponse(), true);
