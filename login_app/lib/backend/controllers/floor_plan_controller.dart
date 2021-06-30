@@ -26,7 +26,7 @@ class FloorPlanController {
  */
   CreateFloorPlanResponse createFloorPlanMock(CreateFloorPlanRequest req) {
     if (floorPlanQueries.createFloorPlanMock(
-        req.getAdmin(), req.getFloorNumber(), req.getTotalRooms())) {
+        req.getNumFloors(), req.getAdmin())) {
       CreateFloorPlanResponse resp = new CreateFloorPlanResponse(true);
       return resp;
     } else {
