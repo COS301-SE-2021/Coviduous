@@ -21,12 +21,27 @@ class FloorPlanModel {
 
   bool addFloorMock(String admin, String floorNum, int numRooms) {
     if (floorNum == "") {
-      floorNum = "SDFN:" + (floorGlobals.globalFloors.length + 1).toString();
+      floorNum = "SDFN-" + (floorGlobals.globalFloors.length + 1).toString();
     }
     Floor holder = new Floor(admin, floorNum, numRooms);
     floorGlobals.globalFloors.add(holder);
     floorGlobals.globalNumFloors++;
     return true;
+  }
+
+  bool deleteFloorMock(String floornum) {
+    for (var i = 0; i < floorGlobals.globalFloors.length; i++) {
+      if (floornum == floorGlobals.globalFloors[i].getFloorNumber()) {
+        for (var j = 0; j < floorGlobals.globalRooms.length; j++) {
+          if (floorGlobals.globalRooms[j].getFloorNum() == floornum) {
+            floorGlobals.globalRooms.removeAt(j);
+          }
+        }
+        floorGlobals.globalFloors.removeAt(i);
+        return true;
+      }
+    }
+    return false;
   }
 
   bool addRoomMock(
