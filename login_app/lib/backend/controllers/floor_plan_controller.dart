@@ -79,6 +79,11 @@ class FloorPlanController {
     }
   }
 
+  double getPercentage() //Alert level Percentage
+  {
+    return floorPlanQueries.getPercentage();
+  }
+
 /**
  * This function returns the number of floors in a building
  */
