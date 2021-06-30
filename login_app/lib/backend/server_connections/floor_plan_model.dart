@@ -93,6 +93,35 @@ class FloorPlanModel {
     return false;
   }
 
+  bool editRoomMock(
+      String floorNum,
+      String roomNum,
+      String sdRoomNum,
+      double dimensions,
+      double percentage,
+      int numDesks,
+      double deskDimentions,
+      int deskMaxCapacity) {
+    for (int i = 0; i < floorGlobals.globalRooms.length; i++) {
+      if (floorGlobals.globalRooms[i] != null &&
+          floorGlobals.globalRooms[i].roomNum == sdRoomNum) {
+        floorGlobals.globalRooms[i].floorNum = floorNum;
+        if (roomNum == "") {
+          floorGlobals.globalRooms[i].roomNum = sdRoomNum;
+        } else {
+          floorGlobals.globalRooms[i].roomNum = roomNum;
+        }
+        floorGlobals.globalRooms[i].dimensions = dimensions;
+        floorGlobals.globalRooms[i].numDesks = numDesks;
+        floorGlobals.globalRooms[i].deskDimentions = deskDimentions;
+        floorGlobals.globalRooms[i].deskMaxCapcity = deskMaxCapacity;
+        floorGlobals.globalRooms[i].displayCapacity();
+        return true;
+      }
+    }
+    return false;
+  }
+
   void printAllFloorDetails() {
     for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
       print("Printing Floor Details");
