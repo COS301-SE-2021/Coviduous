@@ -5,12 +5,14 @@ import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request
 import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
+import 'package:login_app/requests/floor_plan_requests/edit_room_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_room_response.dart';
+import 'package:login_app/responses/floor_plan_responses/edit_room_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
@@ -95,6 +97,22 @@ class FloorPlanController {
     }
   }
 
+  EditRoomResponse editRoomMock(EditRoomRequest req) {
+    if (floorPlanQueries.editRoomMock(
+        req.getFloorNumber(),
+        req.getRoomNumber(),
+        req.getSystemDefinedRoomNumber(),
+        req.getDimentions(),
+        req.getPercentage(),
+        req.getNumDesks(),
+        req.getDeskDimentions(),
+        req.getDeskMaxCapaciy())) {
+      return new EditRoomResponse(true);
+    } else {
+      return new EditRoomResponse(false);
+    }
+  }
+
   double getPercentage() //Alert level Percentage
   {
     return floorPlanQueries.getPercentage();
@@ -124,6 +142,10 @@ class FloorPlanController {
 
   void setNumFloors(int num) {
     floorPlanQueries.setNumFloors(num);
+  }
+
+  List<Floor> getFloors() {
+    return floorGlobals.globalFloors;
   }
   ////////////////////////////////////////////////////////////////////////////////
 }
