@@ -1,4 +1,5 @@
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
+import 'package:login_app/backend/backend_globals/floor_globals.dart' as floors;
 
 /**
  * This class acts as an floor entity mimicking the floors table attributes in the database
@@ -31,10 +32,10 @@ class Floor {
     return false;
   }
 
-  bool editRoom(String roomNum, double dimensions, double percentage,
-      int numDesks, double deskArea, int deskMaxCapcity) {
+  bool editRoom(String floornum, String roomNum, double dimensions,
+      double percentage, int numDesks, double deskArea, int deskMaxCapcity) {
     if (!searchRoom(roomNum)) {
-      if (addRoom(roomNum, dimensions, percentage, numDesks, deskArea,
+      if (addRoom(floornum, roomNum, dimensions, percentage, numDesks, deskArea,
           deskMaxCapcity)) {
         return true;
       }
@@ -44,10 +45,10 @@ class Floor {
     return false;
   }
 
-  bool addRoom(String roomNum, double dimensions, double percentage,
-      int numDesks, double deskArea, int deskMaxCpacity) {
-    Room holder = new Room(
-        roomNum, dimensions, percentage, numDesks, deskArea, deskMaxCpacity);
+  bool addRoom(String floornum, String roomNum, double dimensions,
+      double percentage, int numDesks, double deskArea, int deskMaxCpacity) {
+    Room holder = new Room(floornum, roomNum, dimensions, percentage, numDesks,
+        deskArea, deskMaxCpacity);
     this.rooms.add(holder);
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
@@ -106,5 +107,19 @@ class Floor {
 
   List<Room> getAllRooms() {
     return rooms;
+  }
+
+  int getNumRooms() {
+    return numOfRooms;
+  }
+
+  bool deleteRoom(String roomNum) {
+    for (var i = 0; i < floors.globalRooms.length; i++) {
+      if (floors.globalRooms[i].getRoomNum() == roomNum) {
+        floors.globalRooms.removeAt(i);
+        return true;
+      }
+    }
+    return false;
   }
 }
