@@ -2,6 +2,7 @@ import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 class FloorPlanModel {
 //This class provides an interface to all the floorplan service contracts of the system. It provides a bridge between the front end screens and backend functionality for floor plan.
@@ -71,6 +72,26 @@ class FloorPlanModel {
       print("Number of rooms : " +
           floorGlobals.globalFloors[i].getNumRooms().toString());
     }
+  }
+
+  List<Room> getRoomsForFloorNum(String floorNum) {
+    for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
+      if (floorGlobals.globalFloors[i].getFloorNumber() == floorNum) {
+        return floorGlobals.globalFloors[i].getAllRooms(floorNum);
+      }
+    }
+    return null;
+  }
+
+  bool deleteRoomMock(String floornum, String roomnum) {
+    for (int i = 0; i < floorGlobals.globalRooms.length; i++) {
+      if (floorGlobals.globalRooms[i].getFloorNum() == floornum &&
+          floorGlobals.globalRooms[i].getRoomNum() == roomnum) {
+        floorGlobals.globalRooms.removeAt(i);
+        return true;
+      }
+    }
+    return false;
   }
 
   //gets Alert level percentage
