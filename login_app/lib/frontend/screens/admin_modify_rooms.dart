@@ -6,7 +6,8 @@ import 'package:login_app/frontend/screens/admin_modify_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
-import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
+import 'package:login_app/backend/backend_globals/floor_globals.dart'
+    as floorGlobals;
 
 class AdminModifyRooms extends StatefulWidget {
   static const routeName = "/admin_modify_rooms";
@@ -23,8 +24,10 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
       FloorPlanController services = new FloorPlanController();
       //ViewAdminRoomResponse response = services.viewRoomAdminMock(ViewAdminRoomRequest());
       //List<Room> rooms = response.getRooms();
-      List<Room> rooms = floorGlobals.globalFloors[globals.currentFloorNum].rooms;
-      int numOfRooms = floorGlobals.globalFloors[globals.currentFloorNum].totalNumRooms;
+      List<Room> rooms =
+          floorGlobals.globalFloors[globals.currentFloorNum].rooms;
+      int numOfRooms =
+          floorGlobals.globalFloors[globals.currentFloorNum].totalNumRooms;
 
       print(numOfRooms);
 
@@ -45,7 +48,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                 style: TextStyle(
                     color: Colors.white,
                     fontSize:
-                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                        (MediaQuery.of(context).size.height * 0.01) * 2.5)),
           ),
           Container(
               alignment: Alignment.center,
@@ -58,7 +61,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
               child: Text('No rooms have been registered for this floor.',
                   style: TextStyle(
                       fontSize:
-                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+                          (MediaQuery.of(context).size.height * 0.01) * 2.5)))
         ]);
       } else {
         //Else create and return a list
@@ -82,7 +85,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                   ListView(
                       shrinkWrap: true,
                       physics:
-                      NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
+                          NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                       children: <Widget>[
                         Container(
                           height: 50,
@@ -94,16 +97,17 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                   child: Text('Edit'),
                                   onPressed: () {
                                     globals.currentRoomNum = index;
-                                    Navigator.of(context).pushReplacementNamed(AdminEditRoomModify.routeName);
+                                    Navigator.of(context).pushReplacementNamed(
+                                        AdminEditRoomModify.routeName);
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
                                     //Temporary: remove room and reload page
                                     if (floorGlobals
-                                        .globalFloors[
-                                    globals.currentFloorNum]
-                                        .totalNumRooms >
+                                            .globalFloors[
+                                                globals.currentFloorNum]
+                                            .totalNumRooms >
                                         1) {
                                       //Only allow deletion of rooms if there is more than one room
                                       floorGlobals
@@ -118,17 +122,18 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                       showDialog(
                                           context: context,
                                           builder: (ctx) => AlertDialog(
-                                            title: Text('Error'),
-                                            content: Text('Floors must have at least one room. To delete a whole floor, please delete it on the previous page.'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child: Text('Okay'),
-                                                onPressed: () {
-                                                  Navigator.of(ctx).pop();
-                                                },
-                                              )
-                                            ],
-                                          ));
+                                                title: Text('Error'),
+                                                content: Text(
+                                                    'Floors must have at least one room. To delete a whole floor, please delete it on the previous page.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: () {
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              ));
                                     }
                                   }),
                             ],
@@ -193,7 +198,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                       floorGlobals.globalFloors[globals.currentFloorNum]
                           .totalNumRooms++;
                       floorGlobals.globalFloors[globals.currentFloorNum].rooms
-                          .add(new Room("", 0, 0, 0, 0, 0));
+                          .add(new Room("", "", 0, 0, 0, 0, 0));
                       setState(() {});
                     },
                   )),
