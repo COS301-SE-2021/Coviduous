@@ -58,7 +58,7 @@ class FloorPlanController {
  * This function returns the number of floors in a building
  */
   int getNumberOfFloors() {
-    return floorGlobals.globalNumFloors;
+    return floorGlobals.globalFloors.length;
   }
 
   void setNumFloors(int num) {
