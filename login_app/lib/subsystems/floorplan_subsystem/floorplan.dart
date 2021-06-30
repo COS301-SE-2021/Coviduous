@@ -6,11 +6,13 @@ class FloorPlan {
   String id;
   int numFloors;
   String adminId;
+  String companyid;
 
   //Create floorplan
-  FloorPlan(int numfloors, String adminid) {
+  FloorPlan(int numfloors, String adminid, String companyId) {
     this.numFloors = numfloors;
     this.adminId = adminid;
+    this.companyid = companyId;
     this.id = "SDFPN-" +
         (floors.globalFloorPlan.length + 1)
             .toString(); //SYSTEM DEFINED FLOOR PLAN NUMBER
@@ -84,5 +86,13 @@ class FloorPlan {
       }
     }
     return false;
+  }
+
+  String getAdminId() {
+    return adminId;
+  }
+
+  String getCompanyId() {
+    return companyid;
   }
 }
