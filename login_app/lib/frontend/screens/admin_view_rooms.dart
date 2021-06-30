@@ -197,7 +197,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                       floorGlobals.globalFloors[globals.currentFloorNum]
                           .totalNumRooms++;
                       floorGlobals.globalFloors[globals.currentFloorNum].rooms
-                          .add(new Room("", 0, 0, 0, 0, 0));
+                          .add(new Room("", "", 0, 0, 0, 0, 0));
                       setState(() {});
                     },
                   )),
