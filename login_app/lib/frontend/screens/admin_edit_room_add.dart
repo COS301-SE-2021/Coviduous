@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 
 import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/requests/floor_plan_requests/edit_room_request.dart';
+import 'package:login_app/responses/floor_plan_responses/edit_room_response.dart';
 
 class AdminEditRoomAdd extends StatefulWidget {
   static const routeName = "/admin_edit_room_add";
@@ -18,6 +21,8 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
+  FloorPlanController services = new FloorPlanController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +35,7 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Manage room ' + (globals.currentRoomNum + 1).toString() + ' in floor ' + (globals.currentFloorNum + 1).toString()),
+            title: Text('Manage room ' + globals.currentRoomNumString),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
@@ -132,6 +137,9 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                     'Submit'
                                 ),
                                 onPressed: () {
+                                  EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), 0));
+                                  print(response.getResponse());
+                                  /*
                                   showDialog(
                                       context: context,
                                       builder: (ctx) => AlertDialog(
@@ -147,6 +155,7 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                         ],
                                       )
                                   );
+                                   */
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
