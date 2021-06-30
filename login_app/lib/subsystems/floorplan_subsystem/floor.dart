@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floors;
 
@@ -13,7 +15,12 @@ class Floor {
   int currentCapacity = 0;
 
   Floor(String admin, String floorNum, int totalNumOfRoomsInTheFloor) {
-    this.floorNum = floorNum;
+    if (floorNum == "") {
+      int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+      this.floorNum = "SDFN-" + randomInt.toString();
+    } else {
+      this.floorNum = floorNum;
+    }
     this.numOfRooms =
         0; //Represents the rooms that have their capacity determined at this point there are zero rooms that have been initialized within this floor.
     this.admin = admin;
