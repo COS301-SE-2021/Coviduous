@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:login_app/subsystems/floorplan_subsystem/desk.dart';
 
 /**
@@ -35,7 +37,12 @@ class Room {
       int numDesks,
       double deskdimentions,
       int maxCapacityOfDesks) {
-    this.roomNum = roomNum;
+    if (roomNum == "") {
+      int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+      this.roomNum = "SDRN-" + randomInt.toString();
+    } else {
+      this.roomNum = roomNum;
+    }
     this.dimensions = roomDimensions;
     this.percentage = percentage;
     this.numDesks = numDesks;
