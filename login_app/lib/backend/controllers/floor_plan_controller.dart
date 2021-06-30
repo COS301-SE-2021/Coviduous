@@ -2,9 +2,11 @@ import 'package:login_app/backend/server_connections/floor_plan_model.dart';
 import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
@@ -49,6 +51,13 @@ class FloorPlanController {
 
   void printAllFloorDetails() {
     floorPlanQueries.printAllFloorDetails();
+  }
+
+  DeleteFloorResponse deleteFloorMock(DeleteFloorRequest req) {
+    if (floorPlanQueries.deleteFloorMock(req.getFloorNum())) {
+      return new DeleteFloorResponse(true);
+    }
+    return new DeleteFloorResponse(false);
   }
 
 ////////////////////////////////////////////////////////////
