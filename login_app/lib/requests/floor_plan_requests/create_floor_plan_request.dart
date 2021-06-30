@@ -3,14 +3,14 @@
  */
 
 class CreateFloorPlanRequest {
-  String admin = "";
-  String floorNumber = "";
+  String admin;
+  int numFloors;
   int totalRooms = 0;
 
-  CreateFloorPlanRequest(String admin, String floorNumber, int totalRooms) {
+  CreateFloorPlanRequest(String admin, int numfloors, int numRooms) {
     this.admin = admin;
-    this.floorNumber = floorNumber;
-    this.totalRooms = totalRooms;
+    this.numFloors = numfloors;
+    this.totalRooms = 0;
   }
 // get admin function
 //return admin
@@ -18,8 +18,8 @@ class CreateFloorPlanRequest {
     return admin;
   }
 
-  String getFloorNumber() {
-    return floorNumber;
+  int getNumFloors() {
+    return numFloors;
   }
 
 //get total number of rooms
