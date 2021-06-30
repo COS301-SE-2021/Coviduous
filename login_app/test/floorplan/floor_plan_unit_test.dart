@@ -194,9 +194,16 @@ void main() {
     DeleteRoomRequest holder4 = new DeleteRoomRequest("SDFN-1", "meeting room");
     DeleteRoomResponse resp5 = floorplan.deleteRoomMock(holder4);
 
+    List<Room> rooms2 = floorplan.getRoomsForFloorNum("SDFN-1");
+    print("Printing Rooms in the floor : SDFN-1");
+    for (int i = 0; i < rooms2.length; i++) {
+      rooms[i].displayCapacity();
+    }
+
     expect(resp2.getResponse(), true);
     expect(resp3.getResponse(), true);
     expect(resp4.getResponse(), true);
-    expect(floors.globalRooms.length, 3);
+    expect(resp5.getResponse(), true);
+    expect(floors.globalRooms.length, 2);
   });
 }
