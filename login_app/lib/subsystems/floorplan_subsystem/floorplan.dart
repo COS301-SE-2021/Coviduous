@@ -16,7 +16,9 @@ class FloorPlan {
             .toString(); //SYSTEM DEFINED FLOOR PLAN NUMBER
     for (var i = 0; i < numfloors; i++) {
       floors.globalFloors.add(new Floor(
-          adminid, "SDFN:" + i.toString(), 0)); //SYSTEM DEFINED FLOOR  NUMBER
+          adminid,
+          "SDFN:" + (floors.globalFloors.length + 1).toString(),
+          0)); //SYSTEM DEFINED FLOOR  NUMBER
       floors.globalNumFloors++;
     }
   }
@@ -44,15 +46,6 @@ class FloorPlan {
       }
     }
     return holder;
-  }
-
-  bool addFloor(String adminid) {
-    floors.globalFloors.add(new Floor(
-        adminid,
-        "SDFN:" + (floors.globalFloors.length + 1).toString(),
-        0)); //SYSTEM DEFINED FLOOR NUMBER
-    floors.globalNumFloors++;
-    return true;
   }
 
   bool deleteFloor(String floorNum) {
