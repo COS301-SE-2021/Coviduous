@@ -1,6 +1,8 @@
 library globals;
 
+import 'package:login_app/frontend/screens/home_floor_plan.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 //Global variables used throughout the program
 //=============================================
 
@@ -13,3 +15,7 @@ import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
  */
 List<Floor> globalFloors = [];
 int globalNumFloors = 0;
+List<Room> globalRooms = [];
+int globalNumRooms = 0;
+List<FloorPlan> globalFloorPlan = [];
+int globalNumFloorPlans = 0;
