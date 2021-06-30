@@ -5,7 +5,6 @@ import 'package:login_app/backend/backend_globals/floor_globals.dart' as floors;
  * This class acts as an floor entity mimicking the floors table attributes in the database
  */
 class Floor {
-  List<Room> rooms = [];
   String floorNum = "";
   String admin = "";
   int numOfRooms = 0;
@@ -24,8 +23,8 @@ class Floor {
   }
 
   bool searchRoom(String roomNum) {
-    for (var i = 0; i < rooms.length; i++) {
-      if (rooms[i].getRoomNum() == roomNum) {
+    for (var i = 0; i < floors.globalRooms.length; i++) {
+      if (floors.globalRooms[i].getRoomNum() == roomNum) {
         return true;
       }
     }
@@ -47,20 +46,22 @@ class Floor {
 
   bool addRoom(String floornum, String roomNum, double dimensions,
       double percentage, int numDesks, double deskArea, int deskMaxCpacity) {
-    Room holder = new Room(floornum, roomNum, dimensions, percentage, numDesks,
+    Room holder = new Room(floorNum, roomNum, dimensions, percentage, numDesks,
         deskArea, deskMaxCpacity);
-    this.rooms.add(holder);
+    floors.globalRooms.add(holder);
+    floors.globalNumRooms++;
+    this.numOfRooms++;
     this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
     return true;
   }
 
   void viewRoomDetails(String roomNum) {
-    if (rooms.length != 0) {
+    if (floors.globalRooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
-        if (rooms.asMap().containsKey(i)) {
-          if (rooms[i].roomNum == roomNum) {
+        if (floors.globalRooms.asMap().containsKey(i)) {
+          if (floors.globalRooms[i].roomNum == roomNum) {
             //Checks if the room number in rooms array is the same as the room number the user specified
-            rooms[i].displayCapacity();
+            floors.globalRooms[i].displayCapacity();
           }
         }
       }
@@ -68,13 +69,13 @@ class Floor {
   }
 
   bool bookDesk(String roomNum) {
-    if (rooms.length != 0) {
+    if (floors.globalRooms.length != 0) {
       for (int i = 0; i < totalNumRooms; i++) {
-        if (rooms.asMap().containsKey(i)) {
-          if ((rooms[i].roomNum) ==
+        if (floors.globalRooms.asMap().containsKey(i)) {
+          if ((floors.globalRooms[i].roomNum) ==
               roomNum) //Checks if the room number in rooms array is the same as the room number the user specified
           {
-            if (rooms[i].bookDesk()) {
+            if (floors.globalRooms[i].bookDesk()) {
               print("Successfully Booked.");
               return true;
             }
@@ -95,8 +96,8 @@ class Floor {
     print(
         "***************************************************************************************");
     for (int i = 0; i < totalNumRooms; i++) {
-      if (rooms[i] != null) {
-        rooms[i].displayCapacity();
+      if (floors.globalRooms[i] != null) {
+        floors.globalRooms[i].displayCapacity();
       }
     }
   }
@@ -106,7 +107,7 @@ class Floor {
   }
 
   List<Room> getAllRooms() {
-    return rooms;
+    return floors.globalRooms;
   }
 
   int getNumRooms() {
