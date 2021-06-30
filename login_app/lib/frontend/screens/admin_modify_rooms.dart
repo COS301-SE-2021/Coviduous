@@ -24,8 +24,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
       FloorPlanController services = new FloorPlanController();
       //ViewAdminRoomResponse response = services.viewRoomAdminMock(ViewAdminRoomRequest());
       //List<Room> rooms = response.getRooms();
-      List<Room> rooms =
-          floorGlobals.globalFloors[globals.currentFloorNum].getAllRooms();
+      List<Room> rooms = floorGlobals.globalRooms;
       int numOfRooms =
           floorGlobals.globalFloors[globals.currentFloorNum].totalNumRooms;
 
