@@ -2,10 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/backend/controllers/office_controller.dart';
 import 'package:login_app/backend/server_connections/floor_plan_model.dart';
+import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
+import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
 import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
@@ -14,6 +16,7 @@ import 'package:login_app/responses/floor_plan_responses/create_floor_plan_respo
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:login_app/backend/backend_globals/user_globals.dart'
     as userGlobals;
+import 'package:login_app/backend/backend_globals/floor_globals.dart' as floors;
 
 void main() {
   FloorPlanController floorplan = new FloorPlanController();
@@ -74,6 +77,26 @@ void main() {
 
     expect(resp.getResponse(), true);
     expect(floorplan.getNumberOfFloors(), 2);
+  });
+
+  test('Add a Floor To FloorPlan', () {
+    //register an admin to be able to have admin previliges
+    User admin = User("ADMIN", "Njabulo", "Skosana", "njabuloS",
+        "njabulo@gmail.com", "123456", "CID-1");
+    userGlobals.userDatabaseTable.add(admin);
+    userGlobals.numUsers++;
+    //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
+    CreateFloorPlanRequest req =
+        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
+
+    AddFloorRequest holder = AddFloorRequest(admin.getAdminId(), "First Floor");
+    AddFloorResponse resp2 = floorplan.addFloorMock(holder);
+
+    floorplan.printAllFloorDetails();
+
+    expect(resp2.getResponse(), true);
+    expect(floors.globalFloors.length, 5);
   });
 
   test('Correct add a room construction', () {
