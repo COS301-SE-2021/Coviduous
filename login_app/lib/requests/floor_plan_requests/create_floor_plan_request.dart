@@ -10,7 +10,7 @@ class CreateFloorPlanRequest {
   CreateFloorPlanRequest(String admin, int numfloors, int numRooms) {
     this.admin = admin;
     this.numFloors = numfloors;
-    this.totalRooms = 0;
+    this.totalRooms = numRooms;
   }
 // get admin function
 //return admin
