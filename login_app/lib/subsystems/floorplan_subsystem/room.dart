@@ -1,3 +1,5 @@
+import 'package:login_app/subsystems/floorplan_subsystem/desk.dart';
+
 /**
  * This class acts as an room entity mimicking the rooms table attribute in the database
  */
@@ -22,15 +24,30 @@ class Room {
 
   double deskDimentions; // dimentions of a desk
   int deskMaxCapcity;
+  List<Desk> desks = [];
+  String floorNum;
 
-  Room(String roomNum, double roomDimensions, double percentage, int numDesks,
-      double deskdimentions, int maxCapacityOfDesks) {
+  Room(
+      String floornum,
+      String roomNum,
+      double roomDimensions,
+      double percentage,
+      int numDesks,
+      double deskdimentions,
+      int maxCapacityOfDesks) {
     this.roomNum = roomNum;
     this.dimensions = roomDimensions;
     this.percentage = percentage;
     this.numDesks = numDesks;
     this.deskDimentions = deskdimentions;
     this.deskMaxCapcity = maxCapacityOfDesks;
+    this.floorNum = floornum;
+    for (var i = 0; i < numDesks; i++) {
+      Desk holder = new Desk(
+          "Empty Desk", roomNum, deskdimentions, maxCapacityOfDesks, 0);
+      desks.add(holder);
+      print("Empty Desk Created.");
+    }
 
     this.capacityOfPeopleForTwelveFtGrid =
         (((dimensions) - ((deskDimentions) * numDesks)) / 144);
@@ -71,5 +88,9 @@ class Room {
 
   String getRoomNum() {
     return roomNum;
+  }
+
+  String getFloorNum() {
+    return floorNum;
   }
 }
