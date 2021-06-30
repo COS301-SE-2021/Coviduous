@@ -11,9 +11,12 @@ class FloorPlan {
   FloorPlan(int numfloors, String adminid) {
     this.numFloors = numfloors;
     this.adminId = adminid;
+    this.id = "SDFPN:" +
+        (floors.globalFloorPlan.length + 1)
+            .toString(); //SYSTEM DEFINED FLOOR PLAN NUMBER
     for (var i = 0; i < numfloors; i++) {
       floors.globalFloors.add(new Floor(
-          adminid, "SDFN:" + i.toString(), 0)); //SYSTEM DEFINED FLOOR NUMBER
+          adminid, "SDFN:" + i.toString(), 0)); //SYSTEM DEFINED FLOOR  NUMBER
       floors.globalNumFloors++;
     }
   }
