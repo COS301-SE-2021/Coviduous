@@ -11,13 +11,13 @@ class FloorPlan {
   FloorPlan(int numfloors, String adminid) {
     this.numFloors = numfloors;
     this.adminId = adminid;
-    this.id = "SDFPN:" +
+    this.id = "SDFPN-" +
         (floors.globalFloorPlan.length + 1)
             .toString(); //SYSTEM DEFINED FLOOR PLAN NUMBER
     for (var i = 0; i < numfloors; i++) {
       floors.globalFloors.add(new Floor(
           adminid,
-          "SDFN:" + (floors.globalFloors.length + 1).toString(),
+          "SDFN-" + (floors.globalFloors.length + 1).toString(),
           0)); //SYSTEM DEFINED FLOOR  NUMBER
       floors.globalNumFloors++;
     }
@@ -46,21 +46,6 @@ class FloorPlan {
       }
     }
     return holder;
-  }
-
-  bool deleteFloor(String floorNum) {
-    for (var i = 0; i < floors.globalFloors.length; i++) {
-      if (floors.globalFloors[i].getFloorNumber() == floorNum) {
-        for (var j = 0; j < floors.globalRooms.length; j++) {
-          if (floors.globalRooms[j].getFloorNum() == floorNum) {
-            floors.globalRooms.removeAt(j);
-          }
-        }
-        floors.globalFloors.removeAt(i);
-        return true;
-      }
-    }
-    return false;
   }
 
   bool deleteFloorAtIndex(int index) {
