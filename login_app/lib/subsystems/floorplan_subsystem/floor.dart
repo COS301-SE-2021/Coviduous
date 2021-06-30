@@ -106,8 +106,15 @@ class Floor {
     return floorNum;
   }
 
-  List<Room> getAllRooms() {
-    return floors.globalRooms;
+  List<Room> getAllRooms(String floorNum) {
+    List<Room> holder = [];
+    for (var i = 0; i < floors.globalRooms.length; i++) {
+      if (floors.globalRooms[i].getFloorNum() == floorNum) {
+        holder.add(floors.globalRooms[i]);
+      }
+    }
+
+    return holder;
   }
 
   int getNumRooms() {
