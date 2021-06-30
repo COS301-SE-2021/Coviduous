@@ -102,7 +102,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
                             CreateFloorPlanResponse response = service
                                 .createFloorPlanMock(CreateFloorPlanRequest(
-                                    globals.email, 2, 0));
+                                    globals.email, "", 2, 0));
 
                             if (response.getResponse()) {
                               floorGlobals.globalFloors.clear();
