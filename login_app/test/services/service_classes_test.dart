@@ -44,12 +44,12 @@ void main() {
 
   //-----------CreateFloorplan UC1------------//
   test('Correct CreateFloorPlanRequest construction', () {
-    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
-        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    CreateFloorPlanRequest req =
+        new CreateFloorPlanRequest(expectedAdmin, 2, expectedTotalRooms);
 
     expect(req, isNot(null));
     expect(req.getAdmin(), expectedAdmin);
-    expect(req.getFloorNumber(), expectedFloorNumber);
+    expect(req.getNumFloors(), expectedFloorNumber);
     expect(req.getTotalRooms(), expectedTotalRooms);
   });
 
@@ -75,8 +75,8 @@ void main() {
   // });
 
   test('Correct create floor plan construction', () {
-    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
-        expectedAdmin, expectedFloorNumber, expectedTotalRooms);
+    CreateFloorPlanRequest req =
+        new CreateFloorPlanRequest(expectedAdmin, 2, expectedTotalRooms);
     CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
 
     expect(resp.getResponse(), true);
