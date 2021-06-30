@@ -100,19 +100,22 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                             }
                             _formKey.currentState.save();
 
+                            floorGlobals.globalFloors.clear();
                             CreateFloorPlanResponse response = service
                                 .createFloorPlanMock(CreateFloorPlanRequest(
-                                    globals.email, "", 2, 0));
+                                    globals.loggedInUserId, globals.loggedInCompanyId, int.parse(_numFloor), 0));
 
                             if (response.getResponse()) {
+                              /*
                               floorGlobals.globalFloors.clear();
                               floorGlobals.globalFloors =
                                   new List<Floor>.generate(
                                       int.parse(_numFloor),
                                       (int index) =>
-                                          new Floor(globals.email, "", 0));
+                                          new Floor(globals.loggedInUserId, "", 0));
                               floorGlobals.globalNumFloors =
                                   int.parse(_numFloor);
+                               */
                               Navigator.of(context).pushReplacementNamed(
                                   AdminViewFloors.routeName);
                             } else {
