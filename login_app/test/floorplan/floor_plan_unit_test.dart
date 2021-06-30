@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:login_app/backend/backend_globals/floor_globals.dart';
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/backend/controllers/office_controller.dart';
 import 'package:login_app/backend/server_connections/floor_plan_model.dart';
 import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
 
@@ -11,6 +13,7 @@ import 'package:login_app/requests/office_requests/book_office_space_request.dar
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_room_response.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
@@ -55,7 +58,8 @@ void main() {
 
   //-----------CreateFloorplan UC1------------//
   test('CreateFloorPlanRequest construction', () {
-    CreateFloorPlanRequest req = new CreateFloorPlanRequest("ADMIN-1", 2, 5);
+    CreateFloorPlanRequest req =
+        new CreateFloorPlanRequest("ADMIN-1", "CID-1", 2, 5);
 
     expect(req, isNot(null));
     expect(req.getAdmin(), "ADMIN-1");
@@ -76,8 +80,8 @@ void main() {
     userGlobals.userDatabaseTable.add(admin);
     userGlobals.numUsers++;
     //admin creates a floor plan that has 2 floors and total number of rooms is set to 0 initially
-    CreateFloorPlanRequest req =
-        new CreateFloorPlanRequest(admin.getAdminId(), 2, 0);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        admin.getAdminId(), admin.getCompanyId(), 2, 0);
     CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
 
     expect(resp.getResponse(), true);
@@ -91,8 +95,8 @@ void main() {
     userGlobals.userDatabaseTable.add(admin);
     userGlobals.numUsers++;
     //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
-    CreateFloorPlanRequest req =
-        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        admin.getAdminId(), admin.getCompanyId(), 4, 0);
     CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
 
     AddFloorRequest holder = AddFloorRequest(admin.getAdminId(), "First Floor");
@@ -111,8 +115,8 @@ void main() {
     userGlobals.userDatabaseTable.add(admin);
     userGlobals.numUsers++;
     //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
-    CreateFloorPlanRequest req =
-        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        admin.getAdminId(), admin.getCompanyId(), 4, 0);
     CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
     floorplan.printAllFloorDetails();
     print("Deleting a floor from floor plan");
@@ -132,8 +136,8 @@ void main() {
     userGlobals.userDatabaseTable.add(admin);
     userGlobals.numUsers++;
     //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
-    CreateFloorPlanRequest req =
-        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        admin.getAdminId(), admin.getCompanyId(), 4, 0);
     CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
     floorplan.printAllFloorDetails();
     print("Adding a room in floor : SDFN-3");
@@ -165,8 +169,8 @@ void main() {
     userGlobals.userDatabaseTable.add(admin);
     userGlobals.numUsers++;
     //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
-    CreateFloorPlanRequest req =
-        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        admin.getAdminId(), admin.getCompanyId(), 4, 0);
     CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
     floorplan.printAllFloorDetails();
     print("Adding a room in floor : SDFN-3");
@@ -205,5 +209,39 @@ void main() {
     expect(resp4.getResponse(), true);
     expect(resp5.getResponse(), true);
     expect(floors.globalRooms.length, 2);
+  });
+
+  test('Delete Floor Plan Mock', () {
+    //register an admin to be able to have admin previliges
+    User admin = User("ADMIN", "Njabulo", "Skosana", "njabuloS",
+        "njabulo@gmail.com", "123456", "CID-1");
+    userGlobals.userDatabaseTable.add(admin);
+    userGlobals.numUsers++;
+    //admin creates a floor plan that has 2 floors and total number of rooms is set to 0 initially
+    CreateFloorPlanRequest req = new CreateFloorPlanRequest(
+        admin.getAdminId(), admin.getCompanyId(), 4, 0);
+    CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
+
+    print("Adding a room in floor : SDFN-3");
+    AddRoomRequest holder = AddRoomRequest(
+        "SDFN-3", "chat room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp2 = floorplan.addRoomMock(holder);
+
+    print("Adding a room in floor : SDFN-1");
+    AddRoomRequest holder2 = AddRoomRequest(
+        "SDFN-1", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp3 = floorplan.addRoomMock(holder2);
+    print("Adding a room in floor : SDFN-1");
+    AddRoomRequest holder3 = AddRoomRequest(
+        "SDFN-1", "meeting room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp4 = floorplan.addRoomMock(holder3);
+
+    DeleteFloorPlanRequest req2 =
+        new DeleteFloorPlanRequest(admin.getAdminId(), admin.getCompanyId());
+    DeleteFloorPlanResponse resp5 = floorplan.deleteFloorPlanMock(req2);
+
+    expect(resp5.getResponse(), true);
+    expect(floorplan.getNumberOfFloors(), 0);
+    expect(floorplan.getNumOfRooms(), 0);
   });
 }
