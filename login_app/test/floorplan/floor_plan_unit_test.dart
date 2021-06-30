@@ -121,4 +121,36 @@ void main() {
     expect(resp2.getResponse(), true);
     expect(floors.globalFloors.length, 3);
   });
+
+  test('Add A Room In A Floor That Exits In A FloorPlan', () {
+    //register an admin to be able to have admin previliges
+    User admin = User("ADMIN", "Njabulo", "Skosana", "njabuloS",
+        "njabulo@gmail.com", "123456", "CID-1");
+    userGlobals.userDatabaseTable.add(admin);
+    userGlobals.numUsers++;
+    //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
+    CreateFloorPlanRequest req =
+        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
+    floorplan.printAllFloorDetails();
+    print("Adding a room in floor : SDFN-3");
+    AddRoomRequest holder = AddRoomRequest(
+        "SDFN-3", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp2 = floorplan.addRoomMock(holder);
+
+    AddRoomRequest holder2 = AddRoomRequest(
+        "SDFN-1", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp3 = floorplan.addRoomMock(holder2);
+
+    AddRoomRequest holder3 = AddRoomRequest(
+        "SDFN-1", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
+    AddRoomResponse resp4 = floorplan.addRoomMock(holder3);
+
+    floorplan.printAllFloorDetails();
+
+    expect(resp2.getResponse(), true);
+    expect(resp3.getResponse(), true);
+    expect(resp4.getResponse(), true);
+    expect(floors.globalRooms.length, 3);
+  });
 }
