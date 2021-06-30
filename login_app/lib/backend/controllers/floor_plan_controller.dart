@@ -1,6 +1,8 @@
 import 'package:login_app/backend/server_connections/floor_plan_model.dart';
+import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
+import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
@@ -33,6 +35,20 @@ class FloorPlanController {
       CreateFloorPlanResponse resp2 = new CreateFloorPlanResponse(false);
       return resp2;
     }
+  }
+
+  AddFloorResponse addFloorMock(AddFloorRequest req) {
+    if (floorPlanQueries.addFloorMock(req.getAdmin(), req.getFloorNum(), 0)) {
+      AddFloorResponse resp = new AddFloorResponse(true);
+      return resp;
+    } else {
+      AddFloorResponse resp2 = new AddFloorResponse(false);
+      return resp2;
+    }
+  }
+
+  void printAllFloorDetails() {
+    floorPlanQueries.printAllFloorDetails();
   }
 
 ////////////////////////////////////////////////////////////
