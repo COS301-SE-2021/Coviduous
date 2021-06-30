@@ -69,6 +69,7 @@ class Room {
         "***************************************************************************************");
     print("Displaying Room Information");
     print("Room No.: " + roomNum);
+    print("Floor No.: " + floorNum);
     print("Alert Level Percentage : " + percentage.toString());
     print("Occupied Capacity : " + occupiedDesks.toString());
     print("Space Left : " +
