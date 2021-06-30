@@ -15,11 +15,19 @@ String email = '';
 //User ID of currently logged in user
 String loggedInUserId = '';
 
+//Company ID of currently logged in user
+String loggedInCompanyId = 'CID-01';
+
+//Floor plan ID
+String floorPlanId = '';
+
 //Current floor you're working with
 int currentFloorNum = 0;
+String currentFloorNumString = '';
 
 //Current room you're working with
 int currentRoomNum = 0;
+String currentRoomNumString = '';
 
 //Adjusts scaling of containers based on platform
 double getWidgetScaling() {
