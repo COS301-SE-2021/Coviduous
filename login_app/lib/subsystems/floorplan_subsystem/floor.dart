@@ -130,4 +130,8 @@ class Floor {
     }
     return false;
   }
+
+  String getAdminId() {
+    return admin;
+  }
 }
