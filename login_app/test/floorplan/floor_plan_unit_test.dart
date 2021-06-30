@@ -4,11 +4,13 @@ import 'package:login_app/backend/controllers/office_controller.dart';
 import 'package:login_app/backend/server_connections/floor_plan_model.dart';
 import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
 import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
@@ -99,60 +101,24 @@ void main() {
     expect(floors.globalFloors.length, 5);
   });
 
-  test('Correct add a room construction', () {
-    AddRoomRequest req = new AddRoomRequest(
-        expectedFloorNumber, expectedRoomNumber, 900, 50, 8, 6, 0);
-    AddRoomResponse resp = floorplan.addRoomMock(req);
+  test('Delete a Floor From FloorPlan', () {
+    //register an admin to be able to have admin previliges
+    User admin = User("ADMIN", "Njabulo", "Skosana", "njabuloS",
+        "njabulo@gmail.com", "123456", "CID-1");
+    userGlobals.userDatabaseTable.add(admin);
+    userGlobals.numUsers++;
+    //admin creates a floor plan that has 4 floors and total number of rooms is set to 0 initially
+    CreateFloorPlanRequest req =
+        new CreateFloorPlanRequest(admin.getAdminId(), 4, 0);
+    CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
+    floorplan.printAllFloorDetails();
+    print("Deleting a floor from floor plan");
+    DeleteFloorRequest holder = DeleteFloorRequest("SDFN-2");
+    DeleteFloorResponse resp2 = floorplan.deleteFloorMock(holder);
 
-    expect(resp.getResponse(), true);
+    floorplan.printAllFloorDetails();
+
+    expect(resp2.getResponse(), true);
+    expect(floors.globalFloors.length, 3);
   });
-
-  //-----------bookOfficeSpace UC2------------//
-  test('Correct bookOfficeSpaceRequest construction', () {
-    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(
-        expectedUser, expectedFloorNumber, expectedRoomNumber);
-
-    expect(bookReq, isNot(null));
-    expect(bookReq.getUser(), expectedUser);
-    expect(bookReq.getFloorNumber(), expectedFloorNumber);
-    expect(bookReq.getRoomNumber(), expectedRoomNumber);
-  });
-
-  test('Correct bookOfficeSpaceResponse construction', () {
-    BookOfficeSpaceResponse bookResp =
-        new BookOfficeSpaceResponse(expectedBoolean); // resp needs more params
-
-    expect(bookResp.getResponse(), false);
-  });
-
-  /*test('Correct book office space construction', () {
-    BookOfficeSpaceRequest bookReq = new BookOfficeSpaceRequest(
-        expectedUser, expectedFloorNumber, expectedRoomNumber);
-    BookOfficeSpaceResponse bookResp = office.bookOfficeSpaceMock(bookReq);
-
-    expect(bookResp.getResponse(), true);
-    //expect(service.getBookings().length, 1); // create mock bookings array object / mock bookings repo
-  });*/
-
-  //-----------viewOfficeSpace UC3------------//
-  test('Correct viewOfficeSpaceRequest construction', () {
-    ViewOfficeSpaceRequest viewReq = new ViewOfficeSpaceRequest(expectedUser);
-
-    expect(viewReq, isNot(null));
-    expect(viewReq.getUser(), expectedUser);
-  });
-
-  test('Correct viewOfficeSpaceResponse construction', () {
-    ViewOfficeSpaceResponse bookResp =
-        new ViewOfficeSpaceResponse(expectedBoolean, null);
-
-    expect(bookResp.getResponse(), false);
-  });
-
-  /* test('Correct view office space construction', () {
-    ViewOfficeSpaceRequest viewReq = new ViewOfficeSpaceRequest(expectedUser);
-    ViewOfficeSpaceResponse viewResp = office.viewOfficeSpaceMock(viewReq);
-
-    expect(viewResp.getResponse(), true);
-  });*/
 }
