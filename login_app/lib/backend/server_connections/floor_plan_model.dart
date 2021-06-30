@@ -72,4 +72,9 @@ class FloorPlanModel {
           floorGlobals.globalFloors[i].getNumRooms().toString());
     }
   }
+
+  //gets Alert level percentage
+  double getPercentage() {
+    return 50;
+  }
 }
