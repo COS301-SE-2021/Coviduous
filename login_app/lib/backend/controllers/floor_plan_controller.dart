@@ -2,11 +2,13 @@ import 'package:login_app/backend/server_connections/floor_plan_model.dart';
 import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_room_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
@@ -33,11 +35,22 @@ class FloorPlanController {
  */
   CreateFloorPlanResponse createFloorPlanMock(CreateFloorPlanRequest req) {
     if (floorPlanQueries.createFloorPlanMock(
-        req.getNumFloors(), req.getAdmin())) {
+        req.getNumFloors(), req.getAdmin(), req.getCompanyId())) {
       CreateFloorPlanResponse resp = new CreateFloorPlanResponse(true);
       return resp;
     } else {
       CreateFloorPlanResponse resp2 = new CreateFloorPlanResponse(false);
+      return resp2;
+    }
+  }
+
+  DeleteFloorPlanResponse deleteFloorPlanMock(DeleteFloorPlanRequest req) {
+    if (floorPlanQueries.deleteFloorPlanMock(
+        req.getAdimId(), req.getCompanyId())) {
+      DeleteFloorPlanResponse resp = new DeleteFloorPlanResponse(true);
+      return resp;
+    } else {
+      DeleteFloorPlanResponse resp2 = new DeleteFloorPlanResponse(false);
       return resp2;
     }
   }
@@ -96,6 +109,10 @@ class FloorPlanController {
       return new DeleteRoomResponse(true);
     }
     return new DeleteRoomResponse(false);
+  }
+
+  int getNumOfRooms() {
+    return floorGlobals.globalNumRooms;
   }
 
 /**
