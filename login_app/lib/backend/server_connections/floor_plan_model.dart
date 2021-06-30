@@ -1,5 +1,6 @@
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
 
 class FloorPlanModel {
@@ -15,6 +16,16 @@ class FloorPlanModel {
     FloorPlan holder = new FloorPlan(numFloors, admin);
     floorGlobals.globalFloorPlan.add(holder);
     floorGlobals.globalNumFloorPlans++;
+    return true;
+  }
+
+  bool addFloorMock(String admin, String floorNum, int numRooms) {
+    if (floorNum == "") {
+      floorNum = "SDFN:" + (floorGlobals.globalFloors.length + 1).toString();
+    }
+    Floor holder = new Floor(admin, floorNum, numRooms);
+    floorGlobals.globalFloors.add(holder);
+    floorGlobals.globalNumFloors++;
     return true;
   }
 
@@ -36,5 +47,14 @@ class FloorPlanModel {
       }
     }
     return false;
+  }
+
+  void printAllFloorDetails() {
+    for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
+      print("Printing Floor Details");
+      print("Floor Number : " + floorGlobals.globalFloors[i].getFloorNumber());
+      print("Number of rooms : " +
+          floorGlobals.globalFloors[i].getNumRooms().toString());
+    }
   }
 }
