@@ -3,13 +3,16 @@ import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_room_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 /**
  * This class is the controller for floorplan, all service contracts for the floorplan subsystem are offered through this class
@@ -82,6 +85,17 @@ class FloorPlanController {
   double getPercentage() //Alert level Percentage
   {
     return floorPlanQueries.getPercentage();
+  }
+
+  List<Room> getRoomsForFloorNum(String floorNum) {
+    return floorPlanQueries.getRoomsForFloorNum(floorNum);
+  }
+
+  DeleteRoomResponse deleteRoomMock(DeleteRoomRequest req) {
+    if (floorPlanQueries.deleteRoomMock(req.getFloorNum(), req.getRoomNum())) {
+      return new DeleteRoomResponse(true);
+    }
+    return new DeleteRoomResponse(false);
   }
 
 /**
