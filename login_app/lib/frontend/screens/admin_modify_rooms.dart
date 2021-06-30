@@ -25,7 +25,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
       //ViewAdminRoomResponse response = services.viewRoomAdminMock(ViewAdminRoomRequest());
       //List<Room> rooms = response.getRooms();
       List<Room> rooms =
-          floorGlobals.globalFloors[globals.currentFloorNum].rooms;
+          floorGlobals.globalFloors[globals.currentFloorNum].getAllRooms();
       int numOfRooms =
           floorGlobals.globalFloors[globals.currentFloorNum].totalNumRooms;
 
@@ -115,8 +115,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                           .totalNumRooms--;
                                       floorGlobals
                                           .globalFloors[globals.currentFloorNum]
-                                          .rooms
-                                          .removeAt(index);
+                                          .deleteRoom("");
                                       setState(() {});
                                     } else {
                                       showDialog(
@@ -197,8 +196,8 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                       //Add new floor and reload page
                       floorGlobals.globalFloors[globals.currentFloorNum]
                           .totalNumRooms++;
-                      floorGlobals.globalFloors[globals.currentFloorNum].rooms
-                          .add(new Room("", "", 0, 0, 0, 0, 0));
+                      floorGlobals.globalFloors[globals.currentFloorNum]
+                          .addRoom("", "", 0, 0, 0, 0, 0);
                       setState(() {});
                     },
                   )),
