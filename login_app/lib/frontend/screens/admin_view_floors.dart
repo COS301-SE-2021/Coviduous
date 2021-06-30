@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/home_floor_plan.dart';
+import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
+import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 
@@ -17,8 +21,8 @@ class AdminViewFloors extends StatefulWidget {
 class _AdminViewFloorsState extends State<AdminViewFloors> {
   @override
   Widget build(BuildContext context) {
+    FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      FloorPlanController services = new FloorPlanController();
       //ViewAdminFloorPlanResponse response = services.viewFloorPlanAdminMock(ViewAdminFloorPlanRequest());
       //List<Floor> floors = response.getFloors();
       List<Floor> floors = floorGlobals.globalFloors;
@@ -59,7 +63,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Floor ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Floor ' + services.getFloors()[index].getFloorNumber(), style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -74,7 +78,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                   ElevatedButton(
                                       child: Text('Edit'),
                                       onPressed: () {
-                                        globals.currentFloorNum = index;
+                                        globals.currentFloorNumString = services.getFloors()[index].getFloorNumber();
                                         Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
                                       }
                                   ),
@@ -83,8 +87,12 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                       onPressed: () {
                                         //Temporary: remove floor and reload page
                                         if (floorGlobals.globalNumFloors > 1) { //Only allow deletion of floors if there is more than one floor
+                                          DeleteFloorResponse response3 = services.deleteFloorMock(DeleteFloorRequest(services.getFloors()[index].getFloorNumber()));
+                                          print(response3.getResponse());
+                                          /*
                                           floorGlobals.globalNumFloors--;
                                           floorGlobals.globalFloors.removeAt(index);
+                                           */
                                           setState(() {});
                                         } else {
                                           showDialog(
@@ -164,8 +172,12 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                     child: Text('Add floor'),
                     onPressed: (){
                       //Add new floor and reload page
+                      AddFloorResponse response2 = services.addFloorMock(AddFloorRequest(globals.loggedInUserId, ""));
+                      print(response2.getResponse());
+                      /*
                       floorGlobals.globalNumFloors++;
                       floorGlobals.globalFloors.add(new Floor(globals.email, "", 0));
+                       */
                       setState(() {});
                     },
                   )
