@@ -122,6 +122,10 @@ class FloorPlanController {
     return floorPlanQueries.getRoomsForFloorNum(floorNum);
   }
 
+  Room getRoomDetails(String roomNum) {
+    return floorPlanQueries.getRoomDetails(roomNum);
+  }
+
   DeleteRoomResponse deleteRoomMock(DeleteRoomRequest req) {
     if (floorPlanQueries.deleteRoomMock(req.getFloorNum(), req.getRoomNum())) {
       return new DeleteRoomResponse(true);

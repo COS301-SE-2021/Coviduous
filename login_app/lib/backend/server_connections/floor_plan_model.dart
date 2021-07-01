@@ -156,4 +156,13 @@ class FloorPlanModel {
   double getPercentage() {
     return 50;
   }
+
+  Room getRoomDetails(String roomNum) {
+    for (int i = 0; i < floorGlobals.globalRooms.length; i++) {
+      if (floorGlobals.globalRooms[i].getRoomNum() == roomNum) {
+        return floorGlobals.globalRooms[i];
+      }
+    }
+    return null;
+  }
 }
