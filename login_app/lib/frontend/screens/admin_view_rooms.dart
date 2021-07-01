@@ -87,6 +87,26 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                         Container(
                           height: 50,
                           color: Colors.white,
+                          child: Text('Dimensions (in meters^2): ' + services.getRoomDetails(rooms[index].getRoomNum()).dimensions.toString(), style: TextStyle(color: Colors.black)),
+                        ),
+                        Container(
+                          height: 50,
+                          color: Colors.white,
+                          child: Text('Desk dimensions (in meters^2): ' + services.getRoomDetails(rooms[index].getRoomNum()).deskDimentions.toString(), style: TextStyle(color: Colors.black)),
+                        ),
+                        Container(
+                          height: 50,
+                          color: Colors.white,
+                          child: Text('Number of desks: ' + services.getRoomDetails(rooms[index].getRoomNum()).numDesks.toString(), style: TextStyle(color: Colors.black)),
+                        ),
+                        Container(
+                          height: 50,
+                          color: Colors.white,
+                          child: Text('Occupied desk percentage: ' + services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks.toString(), style: TextStyle(color: Colors.black)),
+                        ),
+                        Container(
+                          height: 50,
+                          color: Colors.white,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
