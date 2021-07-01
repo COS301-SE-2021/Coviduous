@@ -88,7 +88,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text('Dimensions (in meters^2): ' + services.getRoomDetails(rooms[index].getRoomNum()).dimensions.toString(), style: TextStyle(color: Colors.black)),
+                          child: Text('Room dimensions (in meters^2): ' + services.getRoomDetails(rooms[index].getRoomNum()).dimensions.toString(), style: TextStyle(color: Colors.black)),
                         ),
                         Container(
                           height: 50,
