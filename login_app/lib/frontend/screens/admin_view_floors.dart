@@ -72,6 +72,11 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                             Container(
                               height: 50,
                               color: Colors.white,
+                              child: Text('Number of rooms: ' + services.getFloors()[index].getNumRooms().toString(), style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
