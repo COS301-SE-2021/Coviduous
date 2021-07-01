@@ -140,6 +140,8 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                   onPressed: () {
                                     EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), 0));
                                     print(response.getResponse());
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("Room information updated")));
                                     /*
                                     showDialog(
                                         context: context,
