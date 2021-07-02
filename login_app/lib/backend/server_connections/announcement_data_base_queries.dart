@@ -1,7 +1,9 @@
 /*
-  File name: announcement_data_base_queries.dart
-  Purpose: Provides an interface to all the floorplan service contracts of the system
-  Collaborators:
+  * File name: announcement_data_base_queries.dart
+  
+  * Purpose: Provides an interface to all the announcement service contracts of the system
+  
+  * Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
     - Chaoane Malakoane
@@ -17,7 +19,9 @@ import 'dart:math';
 
 /**
  * Class name: AnnouncementDatabaseQueries
- * Purpose: This class allows database interaction for all service contracts for the Announcement subsystem 
+ * 
+ * Purpose: This class Provides an interface to all the announcement service contracts of the system
+ * 
  * The class has both mock and concrete implementations of the service contracts.
  */
 class AnnouncementDatabaseQueries {
