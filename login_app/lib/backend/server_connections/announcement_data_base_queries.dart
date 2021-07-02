@@ -1,6 +1,6 @@
 /*
   File name: announcement_data_base_queries.dart
-  Purpose: Allows database interaction for all service contracts for the Announcement subsystem
+  Purpose: Provides an interface to all the floorplan service contracts of the system
   Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
