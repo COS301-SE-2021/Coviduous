@@ -1,3 +1,11 @@
+/*
+  File name: office_controller.dart
+  Purpose: Holds the controller class for office, all service contracts for the office subsystem are offered through this class.
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
