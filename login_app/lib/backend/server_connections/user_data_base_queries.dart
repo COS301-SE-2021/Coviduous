@@ -1,7 +1,9 @@
 /*
-  File name: user_data_base_queries.dart
-  Purpose: Allows database interaction for all service contracts for the User subsystem
-  Collaborators:
+  * File name: user_data_base_queries.dart
+  
+  * Purpose: Allows database interaction for all service contracts for the User subsystem
+  
+  * Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
     - Chaoane Malakoane
@@ -20,7 +22,9 @@ import 'package:login_app/backend/backend_globals/user_globals.dart'
 
 /**
  * Class name: UserDatabaseQueries
- * Purpose: This class allows database interaction for all service contracts for the User subsystem 
+ * 
+ * Purpose: This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the frontend screens and backend functionality for office.
+ * 
  * The class has both mock and concrete implementations of the service contracts.
  */
 class UserDatabaseQueries {
@@ -66,10 +70,10 @@ class UserDatabaseQueries {
 
     if (type == "Admin" || type == "admin" || type == "ADMIN") {
       setAdminId(usr.getAdminId());
-      setUserId("");
+      setUserId(""); // if user == admin then userid should also be set 
     } else {
-      setUserId(usr.getUserId());
-      setAdminId(usr.getUserId());
+      setUserId(usr.getUserId()); 
+      setAdminId(usr.getUserId()); // if user not admin then adminid should be empty
     }
     userGlobals.userDatabaseTable.add(usr);
     userGlobals.numUsers++;
