@@ -26,7 +26,11 @@ import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
-
+/**
+ * Class name: FloorPlanController
+ * Purpose: This class is the controller for floorplans, all service contracts for the floorplan subsystem are offered through this class
+ * The class has both mock and concrete implementations of the service contracts.
+ */
 class FloorPlanController {
 //This class provides an interface to all the floorplan service contracts of the system. It provides a bridge between the front end screens and backend functionality for floor plan.
   /** 
