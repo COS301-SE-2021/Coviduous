@@ -20,7 +20,7 @@ import 'dart:math';
 /**
  * Class name: AnnouncementDatabaseQueries
  * 
- * Purpose: This class provides an interface to all the announcement service contracts of the system
+ * Purpose: This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the frontend screens and backend functionality for office.
  * 
  * The class has both mock and concrete implementations of the service contracts.
  */
