@@ -17,7 +17,8 @@ import 'package:login_app/responses/office_reponses/view_office_space_response.d
 import 'package:login_app/subsystems/office_subsystem/booking.dart';
 
 /**
- * This class is the controller for Office, all service contracts for the Office subsystem are offered through this class
+ * Class name: OfficeController
+ * Purpose: This class is the controller for office, all service contracts for the office subsystem are offered through this class
  * The class has both mock and concrete implementations of the service contracts.
  */
 class OfficeController {
