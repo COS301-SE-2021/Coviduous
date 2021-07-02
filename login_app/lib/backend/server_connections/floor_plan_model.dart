@@ -1,3 +1,11 @@
+/*
+  File name: announcement_data_base_queries.dart
+  Purpose: Provides an interface to all the floorplan service contracts of the system
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
