@@ -6,6 +6,7 @@ import 'package:login_app/subsystems/floorplan_subsystem/desk.dart';
  * This class acts as an room entity mimicking the rooms table attribute in the database
  */
 class Room {
+  String floorPlanId;
   String roomNum; //Room identifier
   double
       dimensions; //The dimensions of a room are determined by the square ft of the room which the admin can calculate or fetch from the buildings architectural documentation.
@@ -30,6 +31,7 @@ class Room {
   String floorNum;
 
   Room(
+      String floorPlanid,
       String floornum,
       String roomNum,
       double roomDimensions,
@@ -37,6 +39,7 @@ class Room {
       int numDesks,
       double deskdimentions,
       int maxCapacityOfDesks) {
+    this.floorPlanId = floorPlanid;
     if (roomNum == "") {
       int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
       this.roomNum = "SDRN-" + randomInt.toString();
@@ -100,5 +103,9 @@ class Room {
 
   String getFloorNum() {
     return floorNum;
+  }
+
+  String getFloorPlanNum() {
+    return floorPlanId;
   }
 }
