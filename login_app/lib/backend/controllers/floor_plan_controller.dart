@@ -40,6 +40,28 @@ class FloorPlanController {
   FloorPlanController() {
     this.floorPlanQueries = new FloorPlanModel();
   }
+////////////////////////////////////////////////////////////////////////////////
+  /// Concrete Implementations
+
+  /**
+ * createFloorPlan : Offers functionality of creating a floor plan for a building
+ */
+  CreateFloorPlanResponse createFloorPlan(CreateFloorPlanRequest req) {
+    var holder = floorPlanQueries.createFloorPlan(
+        req.getNumFloors(), req.getAdmin(), req.getCompanyId());
+    if ("" != holder) {
+      CreateFloorPlanResponse resp =
+          new CreateFloorPlanResponse(true, holder.toString());
+      return resp;
+    } else {
+      CreateFloorPlanResponse resp2 =
+          new CreateFloorPlanResponse(false, holder.toString());
+      return resp2;
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /// Mock Implementations
 
 /**
  * createFloorPlanMock : Mocks out the functionality of creating a floor plan for a building
