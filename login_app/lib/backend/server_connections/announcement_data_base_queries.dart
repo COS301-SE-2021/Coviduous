@@ -1,7 +1,9 @@
 /*
-  File name: announcement_data_base_queries.dart
-  Purpose: Allows database interaction for all service contracts for the Announcement subsystem
-  Collaborators:
+  * File name: announcement_data_base_queries.dart
+  
+  * Purpose: Provides an interface to all the announcement service contracts of the system
+  
+  * Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
     - Chaoane Malakoane
@@ -17,7 +19,9 @@ import 'dart:math';
 
 /**
  * Class name: AnnouncementDatabaseQueries
- * Purpose: This class allows database interaction for all service contracts for the Announcement subsystem 
+ * 
+ * Purpose: This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the frontend screens and backend functionality for office.
+ * 
  * The class has both mock and concrete implementations of the service contracts.
  */
 class AnnouncementDatabaseQueries {
@@ -168,7 +172,7 @@ class AnnouncementDatabaseQueries {
  * This function mocks out the database interaction of creating an announcement, the fuction will be used in tests
  */
   bool createAnnouncementMock(
-      String message, String type, String adminID, String companyID) {
+      String type, String message, String adminID, String companyID) {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
     this.announcementId = "ANOUNC-" + randomInt.toString();
     this.timeStamp = DateTime.now().toString();

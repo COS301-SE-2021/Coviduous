@@ -1,12 +1,27 @@
+/*
+  * File name: floor_plan_model.dart
+  
+  * Purpose: Provides an interface to all the floorplan service contracts of the system
+  
+  * Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
+/**
+ * Class name: FloorPlanModel
+ * 
+ * Purpose: This class provides an interface to all the floorplan service contracts of the system. It provides a bridge between the frontend screens and backend functionality for floorplan.
+ * 
+ * The class has both mock and concrete implementations of the service contracts. 
+ */
 class FloorPlanModel {
-//This class provides an interface to all the floorplan service contracts of the system. It provides a bridge between the front end screens and backend functionality for floor plan.
-
   FloorPlanModel() {}
 
   void setNumFloors(int num) {

@@ -1,3 +1,11 @@
+/*
+  File name: floorplan_controller.dart
+  Purpose: Holds the controller class for floorplans, all service contracts for the floorplan subsystem are offered through this class.
+  Collaborators:
+    - Njabulo Skosana
+    - Peter Okumbe
+    - Chaoane Malakoane
+ */
 import 'package:login_app/backend/server_connections/floor_plan_model.dart';
 import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
@@ -19,7 +27,8 @@ import 'package:login_app/backend/backend_globals/floor_globals.dart'
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 /**
- * This class is the controller for floorplan, all service contracts for the floorplan subsystem are offered through this class
+ * Class name: FloorPlanController
+ * Purpose: This class is the controller for floorplans, all service contracts for the floorplan subsystem are offered through this class
  * The class has both mock and concrete implementations of the service contracts.
  */
 class FloorPlanController {
