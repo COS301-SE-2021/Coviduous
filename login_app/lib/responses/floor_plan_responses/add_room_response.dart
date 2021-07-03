@@ -4,8 +4,10 @@
 
 class AddRoomResponse {
   bool successful = false;
+  String floorPlanId;
 
-  AddRoomResponse(bool success) {
+  AddRoomResponse(bool success, String floorplan) {
+    this.floorPlanId = floorplan;
     this.successful = success;
   }
 
