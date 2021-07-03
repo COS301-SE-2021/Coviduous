@@ -10,8 +10,10 @@ class AddRoomRequest {
   int numDesks;
   double deskDimentions;
   int deskMaxCapaciy;
+  String floorPlanId;
 
   AddRoomRequest(
+      String floorplan,
       String floornum,
       String roomnum,
       double Dimentions,
@@ -19,6 +21,7 @@ class AddRoomRequest {
       int numdesks,
       double deskdimentions,
       int DeskMaxCapcity) {
+    this.floorPlanId = floorplan;
     this.floorNum = floornum;
     this.roomNum = roomnum;
     this.dimensions = Dimentions;
@@ -54,5 +57,9 @@ class AddRoomRequest {
 
   int getDeskMaxCapaciy() {
     return deskMaxCapaciy;
+  }
+
+  String getFloorPlanNumber() {
+    return floorPlanId;
   }
 }
