@@ -219,22 +219,8 @@ void main() {
     userGlobals.numUsers++;
     //admin creates a floor plan that has 2 floors and total number of rooms is set to 0 initially
     CreateFloorPlanRequest req = new CreateFloorPlanRequest(
-        admin.getAdminId(), admin.getCompanyId(), 4, 0);
+        admin.getAdminId(), admin.getCompanyId(), 2, 0);
     CreateFloorPlanResponse resp = floorplan.createFloorPlanMock(req);
-
-    print("Adding a room in floor : SDFN-3");
-    AddRoomRequest holder = AddRoomRequest(
-        "SDFN-3", "chat room", 900, floorplan.getPercentage(), 5, 2, 1);
-    AddRoomResponse resp2 = floorplan.addRoomMock(holder);
-
-    print("Adding a room in floor : SDFN-1");
-    AddRoomRequest holder2 = AddRoomRequest(
-        "SDFN-1", "conference room", 900, floorplan.getPercentage(), 5, 2, 1);
-    AddRoomResponse resp3 = floorplan.addRoomMock(holder2);
-    print("Adding a room in floor : SDFN-1");
-    AddRoomRequest holder3 = AddRoomRequest(
-        "SDFN-1", "meeting room", 900, floorplan.getPercentage(), 5, 2, 1);
-    AddRoomResponse resp4 = floorplan.addRoomMock(holder3);
 
     DeleteFloorPlanRequest req2 =
         new DeleteFloorPlanRequest(admin.getAdminId(), admin.getCompanyId());

@@ -1,4 +1,5 @@
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floors;
+import 'package:login_app/backend/server_connections/floor_plan_Model.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
@@ -16,12 +17,9 @@ class FloorPlan {
     this.id = "SDFPN-" +
         (floors.globalFloorPlan.length + 1)
             .toString(); //SYSTEM DEFINED FLOOR PLAN NUMBER
-    for (var i = 0; i < numfloors; i++) {
-      floors.globalFloors.add(new Floor(
-          adminid,
-          "SDFN-" + (floors.globalFloors.length + 1).toString(),
-          0)); //SYSTEM DEFINED FLOOR  NUMBER
-      floors.globalNumFloors++;
+    var holder = new FloorPlanModel();
+    for (int i = 0; i < numfloors; i++) {
+      holder.addFloorMock(adminid, "", 0);
     }
   }
 

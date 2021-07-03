@@ -30,14 +30,18 @@ class FloorPlanModel {
             for (int j = 0; j < floorGlobals.globalRooms.length; j++) {
               if (floorGlobals.globalRooms[j].getFloorNum() ==
                   floorGlobals.globalFloors[i].getFloorNumber()) {
+                print("Removed Room");
                 floorGlobals.globalRooms.removeAt(j);
                 floorGlobals.globalNumRooms--;
               }
             }
+
+            print("Removed Floor");
             floorGlobals.globalFloors.removeAt(i);
             floorGlobals.globalNumFloors--;
           }
         }
+        print("Removed Floor Plan");
         floorGlobals.globalFloorPlan.removeAt(v);
         floorGlobals.globalNumFloorPlans--;
         return true;
