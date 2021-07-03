@@ -45,12 +45,14 @@ class FloorPlanController {
  * createFloorPlanMock : Mocks out the functionality of creating a floor plan for a building
  */
   CreateFloorPlanResponse createFloorPlanMock(CreateFloorPlanRequest req) {
-    if (floorPlanQueries.createFloorPlanMock(
-        req.getNumFloors(), req.getAdmin(), req.getCompanyId())) {
-      CreateFloorPlanResponse resp = new CreateFloorPlanResponse(true);
+    String holder = floorPlanQueries.createFloorPlanMock(
+        req.getNumFloors(), req.getAdmin(), req.getCompanyId());
+    if ("" != holder) {
+      CreateFloorPlanResponse resp = new CreateFloorPlanResponse(true, holder);
       return resp;
     } else {
-      CreateFloorPlanResponse resp2 = new CreateFloorPlanResponse(false);
+      CreateFloorPlanResponse resp2 =
+          new CreateFloorPlanResponse(false, holder);
       return resp2;
     }
   }
@@ -67,11 +69,14 @@ class FloorPlanController {
   }
 
   AddFloorResponse addFloorMock(AddFloorRequest req) {
-    if (floorPlanQueries.addFloorMock(req.getAdmin(), req.getFloorNum(), 0)) {
-      AddFloorResponse resp = new AddFloorResponse(true);
+    if (floorPlanQueries.addFloorMock(
+        req.getFloorPlanNumber(), req.getAdmin(), req.getFloorNum(), 0)) {
+      AddFloorResponse resp =
+          new AddFloorResponse(true, req.getFloorPlanNumber());
       return resp;
     } else {
-      AddFloorResponse resp2 = new AddFloorResponse(false);
+      AddFloorResponse resp2 =
+          new AddFloorResponse(false, req.getFloorPlanNumber());
       return resp2;
     }
   }
@@ -93,6 +98,7 @@ class FloorPlanController {
  */
   AddRoomResponse addRoomMock(AddRoomRequest req) {
     if (floorPlanQueries.addRoomMock(
+        req.getFloorPlanNumber(),
         req.getFloorNumber(),
         req.getRoomNumber(),
         req.getDimentions(),
@@ -100,9 +106,9 @@ class FloorPlanController {
         req.getNumDesks(),
         req.getDeskDimentions(),
         req.getDeskMaxCapaciy())) {
-      return new AddRoomResponse(true);
+      return new AddRoomResponse(true, req.getFloorPlanNumber());
     } else {
-      return new AddRoomResponse(false);
+      return new AddRoomResponse(false, req.getFloorPlanNumber());
     }
   }
 
