@@ -19,7 +19,7 @@ class FloorPlan {
             .toString(); //SYSTEM DEFINED FLOOR PLAN NUMBER
     var holder = new FloorPlanModel();
     for (int i = 0; i < numfloors; i++) {
-      holder.addFloorMock(adminid, "", 0);
+      holder.addFloorMock(id, adminid, "", 0);
     }
   }
 
@@ -64,6 +64,7 @@ class FloorPlan {
     for (var i = 0; i < floors.globalFloors.length; i++) {
       if (floors.globalFloors[i].getFloorNumber() == floorNum) {
         floors.globalFloors[i].addRoom(
+            floors.globalFloors[i].getFloorPlanNum(),
             floors.globalFloors[i].getFloorNumber(),
             "SYS:" + (floors.globalFloors[i].getNumRooms() + 1).toString(),
             dimensions,
@@ -92,5 +93,9 @@ class FloorPlan {
 
   String getCompanyId() {
     return companyid;
+  }
+
+  String getFlooPlanId() {
+    return id;
   }
 }
