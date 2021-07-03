@@ -7,6 +7,7 @@ import 'package:login_app/backend/backend_globals/floor_globals.dart' as floors;
  * This class acts as an floor entity mimicking the floors table attributes in the database
  */
 class Floor {
+  String floorPlanId = "";
   String floorNum = "";
   String admin = "";
   int numOfRooms = 0;
@@ -14,7 +15,9 @@ class Floor {
   double maxCapacity = 0.0;
   int currentCapacity = 0;
 
-  Floor(String admin, String floorNum, int totalNumOfRoomsInTheFloor) {
+  Floor(String floorPlanNum, String admin, String floorNum,
+      int totalNumOfRoomsInTheFloor) {
+    floorPlanId = floorPlanNum;
     if (floorNum == "") {
       int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
       this.floorNum = "SDFN-" + randomInt.toString();
@@ -38,11 +41,18 @@ class Floor {
     return false;
   }
 
-  bool editRoom(String floornum, String roomNum, double dimensions,
-      double percentage, int numDesks, double deskArea, int deskMaxCapcity) {
+  bool editRoom(
+      String floorplan,
+      String floornum,
+      String roomNum,
+      double dimensions,
+      double percentage,
+      int numDesks,
+      double deskArea,
+      int deskMaxCapcity) {
     if (!searchRoom(roomNum)) {
-      if (addRoom(floornum, roomNum, dimensions, percentage, numDesks, deskArea,
-          deskMaxCapcity)) {
+      if (addRoom(floorplan, floornum, roomNum, dimensions, percentage,
+          numDesks, deskArea, deskMaxCapcity)) {
         return true;
       }
     } else {
@@ -51,10 +61,17 @@ class Floor {
     return false;
   }
 
-  bool addRoom(String floornum, String roomNum, double dimensions,
-      double percentage, int numDesks, double deskArea, int deskMaxCpacity) {
-    Room holder = new Room(floorNum, roomNum, dimensions, percentage, numDesks,
-        deskArea, deskMaxCpacity);
+  bool addRoom(
+      String floornum,
+      String floorplanId,
+      String roomNum,
+      double dimensions,
+      double percentage,
+      int numDesks,
+      double deskArea,
+      int deskMaxCpacity) {
+    Room holder = new Room(floorplanId, floorNum, roomNum, dimensions,
+        percentage, numDesks, deskArea, deskMaxCpacity);
     floors.globalRooms.add(holder);
     floors.globalNumRooms++;
     this.numOfRooms++;
@@ -140,5 +157,9 @@ class Floor {
 
   String getAdminId() {
     return admin;
+  }
+
+  String getFloorPlanNum() {
+    return floorPlanId;
   }
 }
