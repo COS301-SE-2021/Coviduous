@@ -24,7 +24,8 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
   Widget build(BuildContext context) {
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNumString);
+      List<Room> rooms =
+          services.getRoomsForFloorNum(globals.currentFloorNumString);
       int numOfRooms = rooms.length;
 
       print(numOfRooms);
@@ -88,22 +89,46 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text('Room dimensions (in meters^2): ' + services.getRoomDetails(rooms[index].getRoomNum()).dimensions.toString(), style: TextStyle(color: Colors.black)),
+                          child: Text(
+                              'Room dimensions (in meters^2): ' +
+                                  services
+                                      .getRoomDetails(rooms[index].getRoomNum())
+                                      .dimensions
+                                      .toString(),
+                              style: TextStyle(color: Colors.black)),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text('Desk dimensions (in meters^2): ' + services.getRoomDetails(rooms[index].getRoomNum()).deskDimentions.toString(), style: TextStyle(color: Colors.black)),
+                          child: Text(
+                              'Desk dimensions (in meters^2): ' +
+                                  services
+                                      .getRoomDetails(rooms[index].getRoomNum())
+                                      .deskDimentions
+                                      .toString(),
+                              style: TextStyle(color: Colors.black)),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text('Number of desks: ' + services.getRoomDetails(rooms[index].getRoomNum()).numDesks.toString(), style: TextStyle(color: Colors.black)),
+                          child: Text(
+                              'Number of desks: ' +
+                                  services
+                                      .getRoomDetails(rooms[index].getRoomNum())
+                                      .numDesks
+                                      .toString(),
+                              style: TextStyle(color: Colors.black)),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text('Occupied desk percentage: ' + services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks.toString(), style: TextStyle(color: Colors.black)),
+                          child: Text(
+                              'Occupied desk percentage: ' +
+                                  services
+                                      .getRoomDetails(rooms[index].getRoomNum())
+                                      .occupiedDesks
+                                      .toString(),
+                              style: TextStyle(color: Colors.black)),
                         ),
                         Container(
                           height: 50,
@@ -114,7 +139,8 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    globals.currentRoomNumString = rooms[index].getRoomNum();
+                                    globals.currentRoomNumString =
+                                        rooms[index].getRoomNum();
                                     Navigator.of(context).pushReplacementNamed(
                                         AdminEditRoomModify.routeName);
                                   }),
@@ -124,7 +150,10 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                     //Temporary: remove room and reload page
                                     if (numOfRooms > 1) {
                                       //Only allow deletion of rooms if there is more than one room
-                                      DeleteRoomResponse response2 = services.deleteRoomMock(DeleteRoomRequest(globals.currentFloorNumString, rooms[index].getRoomNum()));
+                                      DeleteRoomResponse response2 = services
+                                          .deleteRoomMock(DeleteRoomRequest(
+                                              globals.currentFloorNumString,
+                                              rooms[index].getRoomNum()));
                                       print(response2.getResponse());
                                       /*
                                       floorGlobals
@@ -174,8 +203,8 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
       child: Scaffold(
         backgroundColor: Colors.transparent, //To show background image
         appBar: AppBar(
-          title: Text("Manage rooms for floor " +
-              globals.currentFloorNumString),
+          title:
+              Text("Manage rooms for floor " + globals.currentFloorNumString),
           leading: BackButton(
             //Specify back button
             onPressed: () {
@@ -212,7 +241,16 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                     child: Text('Add room'),
                     onPressed: () {
                       //Add new floor and reload page
-                      AddRoomResponse response2 = services.addRoomMock(AddRoomRequest(globals.currentFloorNumString, "", 0, services.getPercentage(), 0, 0, 0));
+                      AddRoomResponse response2 = services.addRoomMock(
+                          AddRoomRequest(
+                              globals.floorPlanId,
+                              globals.currentFloorNumString,
+                              "",
+                              0,
+                              services.getPercentage(),
+                              0,
+                              0,
+                              0));
                       print(response2.getResponse());
                       /*
                       floorGlobals.globalFloors[globals.currentFloorNum]
