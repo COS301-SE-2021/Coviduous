@@ -28,48 +28,58 @@ class FloorPlanModel {
     floorGlobals.globalNumFloors = num;
   }
 
-  bool createFloorPlanMock(int numFloors, String admin, String companyId) {
+  String createFloorPlanMock(int numFloors, String admin, String companyId) {
     FloorPlan holder = new FloorPlan(numFloors, admin, companyId);
     floorGlobals.globalFloorPlan.add(holder);
     floorGlobals.globalNumFloorPlans++;
-    return true;
+    return holder.getFlooPlanId();
   }
 
   bool deleteFloorPlanMock(String admin, String companyId) {
+    int index = 0;
+    String floorplanNum;
     for (int v = 0; v < floorGlobals.globalFloorPlan.length; v++) {
       if (floorGlobals.globalFloorPlan[v].getAdminId() == admin &&
           floorGlobals.globalFloorPlan[v].getCompanyId() == companyId) {
-        for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
-          if (floorGlobals.globalFloors[i] != null &&
-              floorGlobals.globalFloors[i].getAdminId() == admin) {
-            for (int j = 0; j < floorGlobals.globalRooms.length; j++) {
-              if (floorGlobals.globalRooms[j].getFloorNum() ==
-                  floorGlobals.globalFloors[i].getFloorNumber()) {
-                print("Removed Room");
-                floorGlobals.globalRooms.removeAt(j);
-                floorGlobals.globalNumRooms--;
-              }
-            }
-
-            print("Removed Floor");
-            floorGlobals.globalFloors.removeAt(i);
-            floorGlobals.globalNumFloors--;
-          }
-        }
         print("Removed Floor Plan");
+        floorplanNum = floorGlobals.globalFloorPlan[v].getFlooPlanId();
         floorGlobals.globalFloorPlan.removeAt(v);
         floorGlobals.globalNumFloorPlans--;
-        return true;
       }
     }
-    return false;
+
+    while (index != -1) {
+      if (floorGlobals.globalFloors.length > 0 &&
+          floorGlobals.globalFloors[index].getFloorPlanNum() == floorplanNum) {
+        print("Removed Floor");
+        floorGlobals.globalFloors.removeAt(index);
+        floorGlobals.globalNumFloors--;
+        index = 0;
+      } else
+        index = -1;
+    }
+
+    index = 0;
+    while (index != -1) {
+      if (floorGlobals.globalRooms.length > 0 &&
+          floorGlobals.globalRooms[index].getFloorPlanNum() == floorplanNum) {
+        print("Removed Floor");
+        floorGlobals.globalRooms.removeAt(index);
+        floorGlobals.globalNumRooms--;
+        index = 0;
+      } else
+        index = -1;
+    }
+
+    return true;
   }
 
-  bool addFloorMock(String admin, String floorNum, int numRooms) {
+  bool addFloorMock(
+      String floorplan, String admin, String floorNum, int numRooms) {
     if (floorNum == "") {
       floorNum = "SDFN-" + (floorGlobals.globalFloors.length + 1).toString();
     }
-    Floor holder = new Floor(admin, floorNum, numRooms);
+    Floor holder = new Floor(floorplan, admin, floorNum, numRooms);
     floorGlobals.globalFloors.add(holder);
     floorGlobals.globalNumFloors++;
     return true;
@@ -93,6 +103,7 @@ class FloorPlanModel {
   }
 
   bool addRoomMock(
+      String floorplan,
       String floorNum,
       String roomNum,
       double dimensions,
@@ -103,8 +114,8 @@ class FloorPlanModel {
     for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
       if (floorGlobals.globalFloors[i] != null &&
           floorGlobals.globalFloors[i].floorNum == floorNum) {
-        floorGlobals.globalFloors[i].addRoom(floorNum, roomNum, dimensions,
-            percentage, numDesks, deskDimentions, deskMaxCapacity);
+        floorGlobals.globalFloors[i].addRoom(floorplan, floorNum, roomNum,
+            dimensions, percentage, numDesks, deskDimentions, deskMaxCapacity);
         floorGlobals.globalFloors[i].viewRoomDetails(roomNum);
         return true;
       }
