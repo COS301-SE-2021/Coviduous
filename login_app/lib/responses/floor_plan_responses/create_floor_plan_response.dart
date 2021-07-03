@@ -4,8 +4,10 @@
 
 class CreateFloorPlanResponse {
   bool successful = false;
+  String floorPlanId;
 
-  CreateFloorPlanResponse(bool success) {
+  CreateFloorPlanResponse(bool success, String floorplan) {
+    this.floorPlanId = floorplan;
     this.successful = success;
   }
 
