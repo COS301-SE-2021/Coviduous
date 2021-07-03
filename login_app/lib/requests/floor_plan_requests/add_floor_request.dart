@@ -1,8 +1,10 @@
 class AddFloorRequest {
   String admin;
   String floorNum;
+  String floorPlanId;
 
-  AddFloorRequest(String Admin, String floornum) {
+  AddFloorRequest(String floorplan, String Admin, String floornum) {
+    this.floorPlanId = floorplan;
     this.admin = Admin;
     this.floorNum = floornum;
   }
@@ -13,5 +15,9 @@ class AddFloorRequest {
 
   String getFloorNum() {
     return floorNum;
+  }
+
+  String getFloorPlanNumber() {
+    return floorPlanId;
   }
 }
