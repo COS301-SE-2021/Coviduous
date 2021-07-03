@@ -1,7 +1,9 @@
 class AddFloorResponse {
   bool successful = false;
+  String floorPlanId;
 
-  AddFloorResponse(bool success) {
+  AddFloorResponse(bool success, String floorplan) {
+    this.floorPlanId = floorplan;
     this.successful = success;
   }
 
