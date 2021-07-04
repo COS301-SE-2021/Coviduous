@@ -51,23 +51,21 @@ class _LoginScreenState extends State<LoginScreen> {
    */
   Future getUserType() async {
     String userType = "";
-    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+
+    //Wait for transaction to complete.
+    await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
       var query = FirebaseFirestore.instance.collection('Users')
           .where('Email', isEqualTo: _email.text.trim()).limit(1);
-      query.get().then((data) {
+      await Future.wait([query.get().then((data) {
         if (data.docs.length > 0) {
           userType = data.docs[0].get('Type');
-          //print('data.docs.length = ' + data.docs.length.toString());
-          //print('userType = ' + data.docs[0].get('Type'));
         } else {
           userType = "";
-          //print('No user type found.');
         }
-      });
-    });
-    await Future.delayed(const Duration(seconds: 1), (){});
-    //print('This line should only execute after the transaction completes.');
-    //print('userType is now ' + userType);
+      })]);
+    })]);
+
+    print("userType = " + userType);
     return userType;
   }
 
