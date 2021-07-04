@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 //Frontend global variables
 //==========================
 
+//User type of currently logged in user
+String type = '';
+
 //Email of logged in user for displaying in other screens
 String email = '';
 
