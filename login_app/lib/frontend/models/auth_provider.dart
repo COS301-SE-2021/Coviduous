@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-//imports for the firebase_core and cloud_firestore plugin
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AuthClass {
 
@@ -98,6 +96,11 @@ class AuthClass {
 
   //sign out
   void signOut(){
-    auth.signOut();
+     //Clear currently signed in user data first
+     globals.type = '';
+     globals.email = '';
+     globals.loggedInUserId = '';
+
+     auth.signOut();
   }
 }
