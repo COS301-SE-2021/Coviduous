@@ -9,7 +9,7 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
@@ -42,7 +42,34 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _password = TextEditingController();
 
   bool isLoading = false;
-  String userType = "User";
+
+  /*
+    Function name: getUserType
+    Purpose: Retrieves the user type from the database.
+    Output:
+      - The user type retrieved from the database, either "Admin" or "User".
+   */
+  Future getUserType() async {
+    String userType = "";
+    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      var query = FirebaseFirestore.instance.collection('Users')
+          .where('Email', isEqualTo: _email.text.trim()).limit(1);
+      query.get().then((data) {
+        if (data.docs.length > 0) {
+          userType = data.docs[0].get('Type');
+          //print('data.docs.length = ' + data.docs.length.toString());
+          //print('userType = ' + data.docs[0].get('Type'));
+        } else {
+          userType = "";
+          //print('No user type found.');
+        }
+      });
+    });
+    await Future.delayed(const Duration(seconds: 1), (){});
+    //print('This line should only execute after the transaction completes.');
+    //print('userType is now ' + userType);
+    return userType;
+  }
 
   /*
     Function name: build
@@ -167,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: MediaQuery.of(context).size.height/48,
                                   width: MediaQuery.of(context).size.width,
                                 ),
+                                /*
                                 Text('Select user type'),
                                 DropdownButtonFormField<String>(
                                   style: const TextStyle(color: Colors.black),
@@ -190,6 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     );
                                   }).toList(),
                                 ),
+                                */
                                 ElevatedButton(
                                   child: Text(
                                     'Submit'
@@ -209,41 +238,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                         globals.loggedInUserId = userGlobals.getUserId(_email.text);
                                         print(globals.loggedInUserId);
 
-                                        /*
                                         //get user type
-                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                          var query = FirebaseFirestore.instance.collection('Users')
-                                              .where("Email", isEqualTo: _email.text.trim()).limit(1);
-                                          query.get().then((data) {
-                                            if (data.docs.length > 0) {
-                                              userType = data.docs[0].get('Type');
-                                              print(userType);
-                                            }
-                                          });
+                                        getUserType().then((userType) {
+                                          if (userType == 'Admin') {
+                                            Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                          } else if (userType == 'User') {
+                                            Navigator.pushReplacementNamed(context, UserHomepage.routeName);
+                                          } else {
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) => AlertDialog(
+                                                  title: Text('Error'),
+                                                  content: Text('Encountered error retrieving user type, please try again.'),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: Text('Okay'),
+                                                      onPressed: (){
+                                                        Navigator.of(ctx).pop();
+                                                      },
+                                                    )
+                                                  ],
+                                                )
+                                            );
+                                          }
                                         });
-                                         */
-
-                                        if (userType == 'Admin') {
-                                          Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                        } else if (userType == 'User') {
-                                          Navigator.pushReplacementNamed(context, UserHomepage.routeName);
-                                        } else {
-                                          showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                title: Text('Error'),
-                                                content: Text('Invalid user type'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: Text('Okay'),
-                                                    onPressed: (){
-                                                      Navigator.of(ctx).pop();
-                                                    },
-                                                  )
-                                                ],
-                                              )
-                                          );
-                                        }
                                       }
                                       else {
                                         setState(() {
