@@ -96,7 +96,7 @@ class FloorPlanModel {
     while (index != -1) {
       if (floorGlobals.globalRooms.length > 0 &&
           floorGlobals.globalRooms[index].getFloorPlanNum() == floorplanNum) {
-        print("Removed Floor");
+        print("Removed Room");
         floorGlobals.globalRooms.removeAt(index);
         floorGlobals.globalNumRooms--;
         index = 0;
