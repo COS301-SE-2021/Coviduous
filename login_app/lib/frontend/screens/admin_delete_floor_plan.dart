@@ -6,6 +6,8 @@ import 'package:login_app/frontend/screens/home_floor_plan.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
+import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_response.dart';
 
 class DeleteFloorPlan extends StatefulWidget {
   static const routeName = "/admin_delete_floor_plan";
@@ -141,8 +143,10 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
                                                 if (_userPassword.text.isNotEmpty && _confirmUserPassword.text.isNotEmpty && _userPassword.text == _confirmUserPassword.text) {
                                                   AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _userPassword.text).then((value2) {
                                                     if (value2 == "welcome") {
-                                                      floorGlobals.globalFloors.clear();
-                                                      floorGlobals.globalNumFloors = 0;
+                                                      DeleteFloorPlanResponse response = services.deleteFloorPlanMock(DeleteFloorPlanRequest(globals.loggedInUserId, globals.loggedInCompanyId));
+                                                      print(response.getResponse());
+                                                      //floorGlobals.globalFloors.clear();
+                                                      //floorGlobals.globalNumFloors = 0;
                                                       Navigator.pushReplacementNamed(context, FloorPlan.routeName);
                                                       ScaffoldMessenger.of(context).showSnackBar(
                                                           SnackBar(content: Text("Floor plan deleted")));
