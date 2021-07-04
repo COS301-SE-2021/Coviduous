@@ -19,7 +19,6 @@ class UserDeleteAccount extends StatefulWidget {
 FirebaseAuth auth = FirebaseAuth.instance;
 User admin = FirebaseAuth.instance.currentUser;
 DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(admin.uid).get() as DocumentSnapshot;
-String _type = snap.get('Type');
 String _companyId = snap.get('Company ID');
 String _email = snap.get('Email');
 String _password = snap.get('Password');
