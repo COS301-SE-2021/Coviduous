@@ -179,7 +179,6 @@ class _UserHomepageState extends State<UserHomepage> {
                               TextButton(
                                 child: Text('Yes'),
                                 onPressed: (){
-                                  //globals.email = ''; //Clear currently signed in email
                                   AuthClass().signOut();
                                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                                 },
