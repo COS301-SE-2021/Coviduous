@@ -43,7 +43,10 @@ class FloorPlanModel {
     print(request.body.toString());
     request.headers.addAll(headers);
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response;
+    await Future.wait([request.send()]).then(
+            (_response) => response = _response.first
+    );
 
     if (response.statusCode == 200) {
       print("Success");
