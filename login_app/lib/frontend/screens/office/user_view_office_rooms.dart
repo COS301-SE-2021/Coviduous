@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
-import 'package:login_app/frontend/screens/office/user_view_office_desks.dart';
 import 'package:login_app/frontend/screens/office/user_view_office_floors.dart';
+import 'package:login_app/frontend/screens/office/user_view_office_times.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
@@ -104,7 +104,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                       child: Text('View'),
                                       onPressed: () {
                                         globals.currentRoomNumString = rooms[index].getRoomNum();
-                                        Navigator.of(context).pushReplacementNamed(UserViewOfficeDesks.routeName);
+                                        Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
                                       }),
                                 ],
                               ),
