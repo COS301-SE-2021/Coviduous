@@ -14,8 +14,6 @@ login_app/.dart_tool/
 login_app/lib/generated_plugin_registrant.dart
 .idea/workspace.xml
 login_app/build/
-.idea/vcs.xml
-.idea/libraries/Dart_Packages.xml
-.idea/libraries/Dart_SDK.xml
+.idea/
 login_app/android/local.properties
 login_app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
