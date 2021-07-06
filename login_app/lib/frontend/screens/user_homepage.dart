@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:login_app/frontend/screens/home_office.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/user_book_office_space.dart';
@@ -73,59 +74,15 @@ class _UserHomepageState extends State<UserHomepage> {
                                 ),
                               child: Row (
                                 children: <Widget>[
-                                  Expanded(child: Text('View office spaces')),
+                                  Expanded(child: Text('Manage bookings')),
                                   Icon(Icons.library_books)
                                 ],
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                   crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                               ),
                               onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(UserViewOfficeSpaces.routeName);
+                                Navigator.of(context).pushReplacementNamed(Office.routeName);
                               }
-                            ),
-                            SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            ElevatedButton (
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                child: Row (
-                                    children: <Widget>[
-                                      Expanded(child: Text('Book office space')),
-                                      Icon(Icons.book)
-                                    ],
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(UserBookOfficeSpace.routeName);
-                                }
-                            ),
-                            SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            ElevatedButton (
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                child: Row (
-                                    children: <Widget>[
-                                      Expanded(child: Text('View current bookings')),
-                                      Icon(Icons.access_alarm)
-                                    ],
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
-                                }
                             ),
                             SizedBox (
                               height: MediaQuery.of(context).size.height/48,
