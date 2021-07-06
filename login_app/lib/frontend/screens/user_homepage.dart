@@ -3,22 +3,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:login_app/frontend/screens/office/home_office.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
-import 'package:login_app/frontend/screens/office/user_book_office_space.dart';
 import 'package:login_app/frontend/screens/user/user_manage_account.dart';
 import 'package:login_app/frontend/screens/announcement/user_view_announcements.dart';
-import 'package:login_app/frontend/screens/office/user_view_current_bookings.dart';
-import 'package:login_app/frontend/screens/office/user_view_office_floors.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
-class UserHomepage extends StatefulWidget {
+class UserHomePage extends StatefulWidget {
   static const routeName = "/user";
 
   @override
-  _UserHomepageState createState() => _UserHomepageState();
+  _UserHomePageState createState() => _UserHomePageState();
 }
 
-class _UserHomepageState extends State<UserHomepage> {
+class _UserHomePageState extends State<UserHomePage> {
   String email = FirebaseAuth.instance.currentUser.email;
 
   @override
