@@ -59,3 +59,11 @@ Map<int, Color> textFieldSelectedSwatch = {
 
 MaterialColor textFieldSelectedColor =
     MaterialColor(0xff056676, textFieldSelectedSwatch);
+
+//Check if a string is numeric
+bool isNumeric(String s) {
+  if(s == null) {
+    return false;
+  }
+  return double.parse(s, (e) => null) != null;
+}
