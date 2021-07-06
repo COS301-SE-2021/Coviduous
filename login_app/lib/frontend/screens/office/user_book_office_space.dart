@@ -161,7 +161,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
             title: Text('Book an office space'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
               },
             ),
         ),
