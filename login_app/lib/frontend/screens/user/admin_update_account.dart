@@ -3,20 +3,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/models/auth_provider.dart';
-import 'package:login_app/frontend/screens/user_manage_account.dart';
+import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
-class UserUpdateAccount extends StatefulWidget {
-  static const routeName = "/userUpdateAccount";
+class AdminUpdateAccount extends StatefulWidget {
+  static const routeName = "/admin_update_account";
   @override
-  _UserUpdateAccountState createState() => _UserUpdateAccountState();
+  _AdminUpdateAccountState createState() => _AdminUpdateAccountState();
 }
 
-class _UserUpdateAccountState extends State<UserUpdateAccount>{
+class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _userName = TextEditingController();
+  TextEditingController _companyName = TextEditingController();
+  TextEditingController _companyLocation = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _confirmPassword = TextEditingController();
   bool isLoading = false;
@@ -38,7 +40,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
           title: Text('Update account information'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
             },
           ),
         ),
@@ -129,6 +131,40 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                 return null;
                               },
                             ),
+                            //company name
+                            TextFormField(
+                              textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                              decoration: InputDecoration(labelText:'Company name'),
+                              controller: _companyName,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return null;
+                                } else if (value.isNotEmpty) {
+                                  if(!value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
+                                      {
+                                    return 'please input a valid company name';
+                                  }
+                                }
+                                return null;
+                              },
+                            ),
+                            //company address
+                            TextFormField(
+                              textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                              decoration: InputDecoration(labelText:'Company address'),
+                              controller: _companyLocation,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return null;
+                                } else if (value.isNotEmpty) {
+                                  if(!value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
+                                      {
+                                    return 'please input a valid company address';
+                                  }
+                                }
+                                return null;
+                              },
+                            ),
                             //password
                             TextFormField(
                               textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
@@ -179,6 +215,10 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                         String oldEmail = FirebaseAuth.instance.currentUser.email;
                                         AuthClass().updateEmail(newEmail: _email.text.trim()).then((value) {
                                           if (value == "Success") {
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+
                                             //If update was successful, update in Firestore document as well
                                             FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                               var query = FirebaseFirestore.instance.collection('Users')
@@ -191,6 +231,9 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                   });
                                             });
                                           } else {
+                                            setState(() {
+                                              isLoading = false;
+                                            });
                                             ScaffoldMessenger.of(context).showSnackBar(
                                                 SnackBar(content: Text(value)));
                                           }
@@ -198,18 +241,18 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                       }
                                       if (_firstName.text.isNotEmpty) {
                                         FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                         var query = FirebaseFirestore.instance.collection('Users')
+                                          var query = FirebaseFirestore.instance.collection('Users')
                                               .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
                                           var querySnapshot = await query.get();
                                           String id = querySnapshot.docs.first.id;
                                           FirebaseFirestore.instance.collection('Users').doc(id).update(
                                               {
                                                 'Firstname' : _firstName.text.trim()
-                                             });
-                                       });
+                                              });
+                                        });
                                       }
                                       if (_lastName.text.isNotEmpty) {
-                                       FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                           var query = FirebaseFirestore.instance.collection('Users')
                                               .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
                                           var querySnapshot = await query.get();
@@ -225,19 +268,43 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                           var query = FirebaseFirestore.instance.collection('Users')
                                               .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
                                           var querySnapshot = await query.get();
-                                         String id = querySnapshot.docs.first.id;
+                                          String id = querySnapshot.docs.first.id;
                                           FirebaseFirestore.instance.collection('Users').doc(id).update(
                                               {
                                                 'Username' : _userName.text.trim()
                                               });
                                         });
                                       }
-                                     Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (context) => UserManageAccount()), (
+                                      if (_companyName.text.isNotEmpty) {
+                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                          var query = FirebaseFirestore.instance.collection('Users')
+                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
+                                          var querySnapshot = await query.get();
+                                          String id = querySnapshot.docs.first.id;
+                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                              {
+                                                'Company Name' : _companyName.text.trim()
+                                              });
+                                        });
+                                      }
+                                      if (_companyLocation.text.isNotEmpty) {
+                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                          var query = FirebaseFirestore.instance.collection('Users')
+                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
+                                          var querySnapshot = await query.get();
+                                          String id = querySnapshot.docs.first.id;
+                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                              {
+                                                'Company Location' : _companyLocation.text.trim()
+                                              });
+                                        });
+                                      }
+                                      Navigator.pushAndRemoveUntil(context,
+                                          MaterialPageRoute(builder: (context) => AdminManageAccount()), (
                                               route) => false);
                                     } else {
                                       setState(() {
-                                       isLoading = false;
+                                        isLoading = false;
                                       });
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text('Invalid password')));

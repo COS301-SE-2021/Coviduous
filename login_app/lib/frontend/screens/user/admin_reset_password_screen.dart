@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'admin_manage_account.dart';
-import 'login_screen.dart';
+import '../login_screen.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;

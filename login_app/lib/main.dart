@@ -24,8 +24,8 @@ import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 import 'frontend/screens/announcement/admin_delete_announcement.dart';
 import 'frontend/screens/announcement/admin_view_announcements.dart';
 import 'frontend/screens/announcement/admin_make_announcement.dart';
-import 'frontend/screens/admin_manage_account.dart';
-import 'frontend/screens/admin_update_account.dart';
+import 'frontend/screens/user/admin_manage_account.dart';
+import 'frontend/screens/user/admin_update_account.dart';
 
 //User subsystem screens
 import 'frontend/screens/user_book_office_space.dart';
@@ -35,17 +35,17 @@ import 'frontend/screens/user_view_office_floors.dart';
 import 'frontend/screens/user_view_office_rooms.dart';
 import 'frontend/screens/user_view_current_bookings.dart';
 import 'frontend/screens/announcement/user_view_announcements.dart';
-import 'frontend/screens/user_manage_account.dart';
-import 'frontend/screens/user_update_account.dart';
+import 'frontend/screens/user/user_manage_account.dart';
+import 'frontend/screens/user/user_update_account.dart';
 
 //Reset password screens
 import 'frontend/screens/forgot_password_screen.dart';
-import 'frontend/screens/admin_reset_password_screen.dart';
-import 'frontend/screens/user_reset_password_screen.dart';
+import 'frontend/screens/user/admin_reset_password_screen.dart';
+import 'frontend/screens/user/user_reset_password_screen.dart';
 
 //Delete account screen
-import 'frontend/screens/admin_delete_account.dart';
-import 'frontend/screens/user_delete_account.dart';
+import 'frontend/screens/user/admin_delete_account.dart';
+import 'frontend/screens/user/user_delete_account.dart';
 
 import 'frontend/front_end_globals.dart' as globals;
 

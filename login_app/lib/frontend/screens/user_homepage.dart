@@ -4,7 +4,7 @@ import 'package:login_app/frontend/screens/home_office.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/user_book_office_space.dart';
-import 'package:login_app/frontend/screens/user_manage_account.dart';
+import 'package:login_app/frontend/screens/user/user_manage_account.dart';
 import 'package:login_app/frontend/screens/announcement/user_view_announcements.dart';
 import 'package:login_app/frontend/screens/user_view_current_bookings.dart';
 import 'package:login_app/frontend/screens/user_view_office_floors.dart';

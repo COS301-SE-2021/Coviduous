@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/user_controller.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
-import 'package:login_app/frontend/screens/admin_manage_account.dart';
+import 'package:login_app/frontend/screens/user/user_manage_account.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 //import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
 //import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
 
-class AdminDeleteAccount extends StatefulWidget {
-  static const routeName = "/adminDeleteAccount";
+class UserDeleteAccount extends StatefulWidget {
+  static const routeName = "/userDeleteAccount";
   @override
-  _AdminDeleteAccountState createState() => _AdminDeleteAccountState();
+  _UserDeleteAccountState createState() => _UserDeleteAccountState();
 }
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -23,7 +23,7 @@ String _companyId = snap.get('Company ID');
 String _email = snap.get('Email');
 String _password = snap.get('Password');
 
-class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
+class _UserDeleteAccountState extends State<UserDeleteAccount>{
   UserController services = new UserController();
 
   TextEditingController _userEmail = TextEditingController();
@@ -37,19 +37,19 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
       child: isLoading == false ? Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent, // To show background image
         appBar: AppBar(
           title: Text('Delete user'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
+              Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
             },
           ),
         ),
@@ -200,7 +200,7 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
             )
           ],
         ),
-      ) : Center( child: CircularProgressIndicator()),
+      ) : Center( child: CircularProgressIndicator())
     );
   }
 }

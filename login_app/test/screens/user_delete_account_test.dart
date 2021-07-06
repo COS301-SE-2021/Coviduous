@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:login_app/frontend/screens/user_delete_account.dart';
+import 'package:login_app/frontend/screens/user/user_delete_account.dart';
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'admin_delete_account.dart';
-import 'admin_reset_password_screen.dart';
-import 'admin_homepage.dart';
-import 'admin_update_account.dart';
+import 'package:login_app/frontend/screens/user/user_delete_account.dart';
+import 'package:login_app/frontend/screens/user/user_reset_password_screen.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/user/user_update_account.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
-class AdminManageAccount extends StatefulWidget {
-  static const routeName = "/adminManageAccount";
+class UserManageAccount extends StatefulWidget {
+  static const routeName = "/userManageAccount";
 
   @override
-  _AdminManageAccountState createState() => _AdminManageAccountState();
+  _UserManageAccountState createState() => _UserManageAccountState();
 }
 
-class _AdminManageAccountState extends State<AdminManageAccount> {
+class _UserManageAccountState extends State<UserManageAccount> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +29,7 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
             title: Text('Manage account'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+                Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
               },
             ),
           ),
@@ -60,7 +60,7 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                     ),
                                     onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(AdminUpdateAccount.routeName);
+                                      Navigator.of(context).pushReplacementNamed(UserUpdateAccount.routeName);
                                     }
                                 ),
                                 SizedBox (
@@ -82,7 +82,7 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                     ),
                                     onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(AdminResetPassword.routeName);
+                                      Navigator.of(context).pushReplacementNamed(UserResetPassword.routeName);
                                     }
                                 ),
                                 SizedBox (
@@ -104,7 +104,7 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
                                     ),
                                     onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(AdminDeleteAccount.routeName);
+                                      Navigator.of(context).pushReplacementNamed(UserDeleteAccount.routeName);
                                     }
                                 ),
                               ]
@@ -114,7 +114,7 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                   )
               ),
             ),
-           )
+          )
       ),
     );
   }

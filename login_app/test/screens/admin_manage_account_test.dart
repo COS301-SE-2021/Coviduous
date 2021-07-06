@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:login_app/frontend/screens/admin_manage_account.dart';
+import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);
