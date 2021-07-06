@@ -110,7 +110,7 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
                               ),
                               //company ID
                               TextFormField(
-                                textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
                                 decoration: InputDecoration(labelText:'Company ID'),
                                 controller: _userCompanyId,
                                 validator: (value) {
