@@ -171,27 +171,16 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                       'Submit'
                                   ),
                                   onPressed: () {
-                                    EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), 0));
-                                    print(response.getResponse());
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Room information updated")));
-                                    /*
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Placeholder'),
-                                          content: Text('Update room info.'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
-                                     */
+                                    FormState form = _formKey.currentState;
+                                    if (form.validate()) {
+                                      EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), 0));
+                                      print(response.getResponse());
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Room information updated")));
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Please enter required fields")));
+                                    }
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
