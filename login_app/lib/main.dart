@@ -12,15 +12,15 @@ import 'frontend/screens/user_signup_screen.dart';
 
 //Admin subsystem screens
 import 'frontend/screens/admin_homepage.dart';
-import 'frontend/screens/home_floor_plan.dart';
-import 'frontend/screens/admin_add_floor_plan.dart';
-import 'frontend/screens/admin_modify_floors.dart';
-import 'frontend/screens/admin_modify_rooms.dart';
-import 'frontend/screens/admin_delete_floor_plan.dart';
-import 'frontend/screens/admin_view_floors.dart';
-import 'frontend/screens/admin_edit_room_add.dart';
-import 'frontend/screens/admin_edit_room_modify.dart';
-import 'package:login_app/frontend/screens/admin_view_rooms.dart';
+import 'frontend/screens/floor_plan/home_floor_plan.dart';
+import 'frontend/screens/floor_plan/admin_add_floor_plan.dart';
+import 'frontend/screens/floor_plan/admin_modify_floors.dart';
+import 'frontend/screens/floor_plan/admin_modify_rooms.dart';
+import 'frontend/screens/floor_plan/admin_delete_floor_plan.dart';
+import 'frontend/screens/floor_plan/admin_view_floors.dart';
+import 'frontend/screens/floor_plan/admin_edit_room_add.dart';
+import 'frontend/screens/floor_plan/admin_edit_room_modify.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 import 'frontend/screens/admin_delete_announcement.dart';
 import 'frontend/screens/admin_view_announcements.dart';
 import 'frontend/screens/admin_make_announcement.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
-import 'package:login_app/frontend/screens/admin_edit_room_add.dart';
-import 'package:login_app/frontend/screens/admin_view_floors.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_modify.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_modify_floors.dart';
 import 'package:login_app/requests/floor_plan_requests/add_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
@@ -11,14 +11,15 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
-class AdminViewRooms extends StatefulWidget {
-  static const routeName = "/admin_view_rooms";
-
+class AdminModifyRooms extends StatefulWidget {
+  static const routeName = "/admin_modify_rooms";
   @override
-  _AdminViewRoomsState createState() => _AdminViewRoomsState();
+  AdminModifyRoomsState createState() {
+    return AdminModifyRoomsState();
+  }
 }
 
-class _AdminViewRoomsState extends State<AdminViewRooms> {
+class AdminModifyRoomsState extends State<AdminModifyRooms> {
   @override
   Widget build(BuildContext context) {
     FloorPlanController services = new FloorPlanController();
@@ -141,7 +142,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                                     globals.currentRoomNumString =
                                         rooms[index].getRoomNum();
                                     Navigator.of(context).pushReplacementNamed(
-                                        AdminEditRoomAdd.routeName);
+                                        AdminEditRoomModify.routeName);
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
@@ -208,7 +209,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
             //Specify back button
             onPressed: () {
               Navigator.of(context)
-                  .pushReplacementNamed(AdminViewFloors.routeName);
+                  .pushReplacementNamed(AdminModifyFloors.routeName);
             },
           ),
         ),

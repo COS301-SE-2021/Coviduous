@@ -1,45 +1,42 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
-import 'package:login_app/frontend/screens/home_floor_plan.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_modify_rooms.dart';
+import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
-import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
-import 'package:login_app/frontend/screens/admin_view_rooms.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 
-class AdminViewFloors extends StatefulWidget {
-  static const routeName = "/admin_view_floors";
-
+class AdminModifyFloors extends StatefulWidget {
+  static const routeName = "/admin_modify_floors";
   @override
-  _AdminViewFloorsState createState() => _AdminViewFloorsState();
+  _AdminModifyFloorsState createState() => _AdminModifyFloorsState();
 }
 
-class _AdminViewFloorsState extends State<AdminViewFloors> {
+class _AdminModifyFloorsState extends State<AdminModifyFloors> {
+  String _chosenValue;
+
   @override
   Widget build(BuildContext context) {
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      //ViewAdminFloorPlanResponse response = services.viewFloorPlanAdminMock(ViewAdminFloorPlanRequest());
-      //List<Floor> floors = response.getFloors();
-      List<Floor> floors = floorGlobals.globalFloors;
       int numOfFloors = floorGlobals.globalNumFloors;
 
       print(numOfFloors);
 
       if (numOfFloors == 0) {
-        //This should not happen, but checking just in case.
         showDialog(
             context: context,
             builder: (ctx) => AlertDialog(
                   title: Text('Error'),
                   content: Text(
-                      'No floors have been defined for your company. Please return to the previous page and specify the number of floors.'),
+                      'No floors have been defined for your company. Please return to the previous page and add a new floor plan.'),
                   actions: <Widget>[
                     TextButton(
                       child: Text('Okay'),
@@ -100,7 +97,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                         .getFloors()[index]
                                         .getFloorNumber();
                                     Navigator.of(context).pushReplacementNamed(
-                                        AdminViewRooms.routeName);
+                                        AdminModifyRooms.routeName);
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
@@ -115,9 +112,9 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                                   .getFloorNumber()));
                                       print(response3.getResponse());
                                       /*
-                                          floorGlobals.globalNumFloors--;
-                                          floorGlobals.globalFloors.removeAt(index);
-                                           */
+                                            floorGlobals.globalNumFloors--;
+                                            floorGlobals.globalFloors.removeAt(index);
+                                             */
                                       setState(() {});
                                     } else {
                                       showDialog(
@@ -199,9 +196,9 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                               globals.floorPlanId, globals.loggedInUserId, ""));
                       print(response2.getResponse());
                       /*
-                      floorGlobals.globalNumFloors++;
-                      floorGlobals.globalFloors.add(new Floor(globals.email, "", 0));
-                       */
+                        floorGlobals.globalNumFloors++;
+                        floorGlobals.globalFloors.add(new Floor(globals.email, "", 0));
+                         */
                       setState(() {});
                     },
                   )),

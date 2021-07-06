@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-import 'package:login_app/frontend/screens/admin_add_floor_plan.dart';
-import 'package:login_app/frontend/screens/admin_modify_floors.dart';
-import 'package:login_app/frontend/screens/admin_delete_floor_plan.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_add_floor_plan.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_modify_floors.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_delete_floor_plan.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
