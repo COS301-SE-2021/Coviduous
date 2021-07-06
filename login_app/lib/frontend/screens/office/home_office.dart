@@ -30,7 +30,7 @@ class _OfficeState extends State<Office> {
             title: Text('Manage bookings'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
               },
             ),
           ),
