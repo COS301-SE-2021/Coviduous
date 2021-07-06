@@ -122,6 +122,17 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                           height: 50,
                           color: Colors.white,
                           child: Text(
+                              'Maximum desk capacity (people per desk): ' +
+                                  services
+                                      .getRoomDetails(rooms[index].getRoomNum())
+                                      .deskMaxCapcity
+                                      .toString(),
+                              style: TextStyle(color: Colors.black)),
+                        ),
+                        Container(
+                          height: 50,
+                          color: Colors.white,
+                          child: Text(
                               'Occupied desk percentage: ' +
                                   services
                                       .getRoomDetails(rooms[index].getRoomNum())
