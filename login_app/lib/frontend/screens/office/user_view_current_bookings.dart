@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:login_app/frontend/screens/home_office.dart';
+import 'package:login_app/frontend/screens/office/home_office.dart';
 import 'package:login_app/subsystems/office_subsystem/booking.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;

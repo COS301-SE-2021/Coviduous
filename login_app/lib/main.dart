@@ -28,12 +28,12 @@ import 'frontend/screens/user/admin_manage_account.dart';
 import 'frontend/screens/user/admin_update_account.dart';
 
 //User subsystem screens
-import 'frontend/screens/user_book_office_space.dart';
+import 'frontend/screens/office/user_book_office_space.dart';
 import 'frontend/screens/user_homepage.dart';
-import 'frontend/screens/home_office.dart';
-import 'frontend/screens/user_view_office_floors.dart';
-import 'frontend/screens/user_view_office_rooms.dart';
-import 'frontend/screens/user_view_current_bookings.dart';
+import 'frontend/screens/office/home_office.dart';
+import 'frontend/screens/office/user_view_office_floors.dart';
+import 'frontend/screens/office/user_view_office_rooms.dart';
+import 'frontend/screens/office/user_view_current_bookings.dart';
 import 'frontend/screens/announcement/user_view_announcements.dart';
 import 'frontend/screens/user/user_manage_account.dart';
 import 'frontend/screens/user/user_update_account.dart';

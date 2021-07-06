@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/user_homepage.dart';
-import 'package:login_app/frontend/screens/user_view_current_bookings.dart';
-import 'package:login_app/frontend/screens/user_view_office_floors.dart';
+import 'package:login_app/frontend/screens/office/user_view_current_bookings.dart';
+import 'package:login_app/frontend/screens/office/user_view_office_floors.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
