@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget{
         AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
         AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
-        
+
         //Floor plan
         FloorPlan.routeName: (ctx)=> FloorPlan(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
