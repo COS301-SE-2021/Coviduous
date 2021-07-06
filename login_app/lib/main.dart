@@ -21,9 +21,9 @@ import 'frontend/screens/floor_plan/admin_view_floors.dart';
 import 'frontend/screens/floor_plan/admin_edit_room_add.dart';
 import 'frontend/screens/floor_plan/admin_edit_room_modify.dart';
 import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
-import 'frontend/screens/admin_delete_announcement.dart';
-import 'frontend/screens/admin_view_announcements.dart';
-import 'frontend/screens/admin_make_announcement.dart';
+import 'frontend/screens/announcement/admin_delete_announcement.dart';
+import 'frontend/screens/announcement/admin_view_announcements.dart';
+import 'frontend/screens/announcement/admin_make_announcement.dart';
 import 'frontend/screens/admin_manage_account.dart';
 import 'frontend/screens/admin_update_account.dart';
 
@@ -34,7 +34,7 @@ import 'frontend/screens/home_office.dart';
 import 'frontend/screens/user_view_office_floors.dart';
 import 'frontend/screens/user_view_office_rooms.dart';
 import 'frontend/screens/user_view_current_bookings.dart';
-import 'frontend/screens/user_view_announcements.dart';
+import 'frontend/screens/announcement/user_view_announcements.dart';
 import 'frontend/screens/user_manage_account.dart';
 import 'frontend/screens/user_update_account.dart';
 

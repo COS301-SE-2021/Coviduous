@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/admin_manage_account.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
-import 'package:login_app/frontend/screens/admin_view_announcements.dart';
+import 'package:login_app/frontend/screens/announcement/admin_view_announcements.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 

@@ -4,8 +4,8 @@ import 'package:login_app/requests/announcements_requests/viewAdmin_announcement
 import 'package:login_app/responses/announcement_responses/viewAdmin_announcement_response.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-import 'package:login_app/frontend/screens/admin_make_announcement.dart';
-import 'package:login_app/frontend/screens/admin_delete_announcement.dart';
+import 'package:login_app/frontend/screens/announcement/admin_make_announcement.dart';
+import 'package:login_app/frontend/screens/announcement/admin_delete_announcement.dart';
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;

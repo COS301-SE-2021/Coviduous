@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:login_app/frontend/screens/admin_delete_announcement.dart';
+import 'package:login_app/frontend/screens/announcement/admin_delete_announcement.dart';
 import 'package:login_app/backend/backend_globals/announcements_globals.dart' as announcementGlobals;
 
 void main() {
