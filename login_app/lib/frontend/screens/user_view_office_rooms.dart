@@ -92,12 +92,17 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: ElevatedButton(
-                                  child: Text('View'),
-                                  onPressed: () {
-                                    globals.currentRoomNumString = rooms[index].getRoomNum();
-                                    //Navigator.of(context).pushReplacementNamed(routeName);
-                                  }),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      child: Text('View'),
+                                      onPressed: () {
+                                        globals.currentRoomNumString = rooms[index].getRoomNum();
+                                        //Navigator.of(context).pushReplacementNamed(routeName);
+                                      }),
+                                ],
+                              ),
                             ),
                           ]
                       )
