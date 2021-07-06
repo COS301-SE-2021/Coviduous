@@ -20,6 +20,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
   TextEditingController _roomArea = TextEditingController();
   TextEditingController _deskArea = TextEditingController();
   TextEditingController _numOfDesks = TextEditingController();
+  TextEditingController _deskMaxCapacity = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -32,6 +33,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
     _roomArea.text = room.dimensions.toString();
     _deskArea.text = room.deskDimentions.toString();
     _numOfDesks.text = room.numDesks.toString();
+    _deskMaxCapacity.text = room.deskMaxCapcity.toString();
 
     return Container(
       decoration: BoxDecoration(
@@ -138,7 +140,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                 ),
                                 //Desk area of all desks in the room
                                 TextFormField(
-                                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                  textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                   decoration: InputDecoration(
                                     labelText: 'Number of desks',
                                     hintText: room.numDesks.toString(),
@@ -162,6 +164,31 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                     return null;
                                   },
                                 ),
+                                TextFormField(
+                                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                  decoration: InputDecoration(
+                                    labelText: 'Maximum capacity per desk',
+                                    hintText: room.deskMaxCapcity.toString(),
+                                  ),
+                                  keyboardType: TextInputType.text,
+                                  controller: _deskMaxCapacity,
+                                  validator: (value) {
+                                    if (value.isNotEmpty) {
+                                      if (!globals.isNumeric(value)) {
+                                        return "Maximum capacity must be a number";
+                                      } else if (int.parse(value) <= 0) {
+                                        return "Maximum capacity must be greater than zero";
+                                      } else {
+                                        return null;
+                                      }
+                                    } else {
+                                      if (room.deskMaxCapcity <= 0) {
+                                        return "Maximum capacity must be greater than zero";
+                                      }
+                                    }
+                                    return null;
+                                  },
+                                ),
                                 SizedBox (
                                   height: MediaQuery.of(context).size.height/48,
                                   width: MediaQuery.of(context).size.width,
@@ -173,7 +200,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                   onPressed: () {
                                     FormState form = _formKey.currentState;
                                     if (form.validate()) {
-                                      EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), 0));
+                                      EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), int.parse(_deskMaxCapacity.text)));
                                       print(response.getResponse());
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Room information updated")));
