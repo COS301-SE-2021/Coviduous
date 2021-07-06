@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:login_app/frontend/screens/user_book_office_space.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/user_view_current_bookings.dart';
+import 'package:login_app/frontend/screens/user_view_office_floors.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
@@ -58,7 +58,7 @@ class _OfficeState extends State<Office> {
                             ),
                             onPressed: () {
                               if (floorGlobals.globalFloors.isNotEmpty && floorGlobals.globalRooms.isNotEmpty) { //Only allow a user to book if there are floors and rooms registered
-                                Navigator.of(context).pushReplacementNamed(UserBookOfficeSpace.routeName);
+                                Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
                               } else {
                                 showDialog(
                                     context: context,
