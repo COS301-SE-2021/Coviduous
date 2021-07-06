@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/backend/controllers/office_controller.dart';
+import 'package:login_app/frontend/screens/office/home_office.dart';
 import 'package:login_app/frontend/screens/office/user_view_office_times.dart';
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
@@ -105,13 +106,40 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                           if(response.getResponse() == true) {
                                             ScaffoldMessenger.of(context).showSnackBar(
                                                 SnackBar(content: Text("Desk successfully booked")));
+                                            Navigator.of(context).pushReplacementNamed(Office.routeName);
                                           } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text("Desk not booked, please try again later")));
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) => AlertDialog(
+                                                  title: Text('Desk not booked'),
+                                                  content: Text('Please try again later or contact your administrator.'),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: Text('Okay'),
+                                                      onPressed: (){
+                                                        Navigator.of(ctx).pop();
+                                                      },
+                                                    )
+                                                  ],
+                                                )
+                                            );
                                           }
                                         } else {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Desk not booked, it has reached its maximum capacity")));
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Desk not booked'),
+                                                content: Text('Desk has reached maximum capacity.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
                                         }
                                       }),
                                 ],
