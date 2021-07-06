@@ -4,6 +4,7 @@ import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/requests/floor_plan_requests/edit_room_request.dart';
 import 'package:login_app/responses/floor_plan_responses/edit_room_response.dart';
 import 'package:login_app/frontend/screens/admin_view_rooms.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -26,6 +27,12 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
 
   @override
   Widget build(BuildContext context) {
+    Room room = services.getRoomDetails(globals.currentRoomNumString);
+    _roomNumber.text = room.getRoomNum();
+    _roomArea.text = room.dimensions.toString();
+    _deskArea.text = room.deskDimentions.toString();
+    _numOfDesks.text = room.numDesks.toString();
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -60,16 +67,18 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                               //room number or name (e.g. "Conference room 1" or "R123")
                               TextFormField(
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                decoration: InputDecoration(labelText: 'Room number or name (optional)'),
+                                decoration: InputDecoration(
+                                    labelText: 'Room number or name (optional)',
+                                    hintText: room.getRoomNum(),
+                                ),
                                 keyboardType: TextInputType.text,
                                 controller: _roomNumber,
                                 validator: (value) {
-                                  if (value.isEmpty) {
-                                    return null;
-                                  } else if (value.isNotEmpty) {
-                                    if(!value.contains(RegExp(r"/^[a-z0-9 ,.'-]+$/i"))) //Check if valid name format
+                                  if (value.isNotEmpty) {
+                                    print(room.getRoomNum());
+                                    if(!(RegExp(r"^[a-zA-Z0-9 ,.'-]+$")).hasMatch(value)) //Check if valid name format
                                         {
-                                      return 'Room number or name must only contain letters, numbers, commas, periods, hyphens, apostrophes or spaces';
+                                      return 'Invalid room number or name';
                                     }
                                   }
                                   return null;
@@ -78,16 +87,24 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                               //Room area
                               TextFormField(
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                decoration: InputDecoration(labelText: 'Room area (in meters squared)'),
+                                decoration: InputDecoration(
+                                    labelText: 'Room area (in meters squared)',
+                                    hintText: room.dimensions.toString(),
+                                ),
                                 keyboardType: TextInputType.text,
                                 controller: _roomArea,
                                 validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please input a number';
-                                  } else if (value.isNotEmpty) {
-                                    if(!value.contains(RegExp(r"/^[0-9]+$/i"))) //Check if valid number format
-                                        {
-                                      return 'Please input a number';
+                                  if (value.isNotEmpty) {
+                                    if (!globals.isNumeric(value)) {
+                                      return "Room area must be a number";
+                                    } else if (double.parse(value) <= 0) {
+                                      return "Room area must be greater than zero";
+                                    } else {
+                                      return null;
+                                    }
+                                  } else {
+                                    if (room.dimensions == 0.0) {
+                                      return "Room area must be greater than zero";
                                     }
                                   }
                                   return null;
@@ -96,16 +113,24 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                               //Desk area of all desks in the room
                               TextFormField(
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                decoration: InputDecoration(labelText: 'Desk area (in meters squared)'),
+                                decoration: InputDecoration(
+                                    labelText: 'Desk area (in meters squared)',
+                                    hintText: room.deskDimentions.toString(),
+                                ),
                                 keyboardType: TextInputType.text,
                                 controller: _deskArea,
                                 validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please input a number';
-                                  } else if (value.isNotEmpty) {
-                                    if(!value.contains(RegExp(r"/^[0-9]+$/i"))) //Check if valid number format
-                                        {
-                                      return 'Please input a number';
+                                  if (value.isNotEmpty) {
+                                    if (!globals.isNumeric(value)) {
+                                      return "Desk area must be a number";
+                                    } else if (double.parse(value) <= 0) {
+                                      return "Desk area must be greater than zero";
+                                    } else {
+                                      return null;
+                                    }
+                                  } else {
+                                    if (room.deskDimentions == 0.0) {
+                                      return "Desk area must be greater than zero";
                                     }
                                   }
                                   return null;
@@ -113,17 +138,25 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                               ),
                               //Desk area of all desks in the room
                               TextFormField(
-                                textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                decoration: InputDecoration(labelText: 'Number of desks'),
+                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                decoration: InputDecoration(
+                                    labelText: 'Number of desks',
+                                    hintText: room.numDesks.toString(),
+                                ),
                                 keyboardType: TextInputType.text,
                                 controller: _numOfDesks,
                                 validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please input a number';
-                                  } else if (value.isNotEmpty) {
-                                    if(!value.contains(RegExp(r"/^[0-9]+$/i"))) //Check if valid number format
-                                        {
-                                      return 'Please input a number';
+                                  if (value.isNotEmpty) {
+                                    if (!globals.isNumeric(value)) {
+                                      return "Number of desks must be a number";
+                                    } else if (int.parse(value) <= 0) {
+                                      return "Number of desks must be greater than zero";
+                                    } else {
+                                      return null;
+                                    }
+                                  } else {
+                                    if (room.numDesks == 0) {
+                                      return "Number of desks must be greater than zero";
                                     }
                                   }
                                   return null;
@@ -138,27 +171,16 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                     'Submit'
                                 ),
                                 onPressed: () {
-                                  EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), 0));
-                                  print(response.getResponse());
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("Room information updated")));
-                                  /*
-                                  showDialog(
-                                      context: context,
-                                      builder: (ctx) => AlertDialog(
-                                        title: Text('Placeholder'),
-                                        content: Text('Update room info.'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: Text('Okay'),
-                                            onPressed: (){
-                                              Navigator.of(ctx).pop();
-                                            },
-                                          )
-                                        ],
-                                      )
-                                  );
-                                   */
+                                  FormState form = _formKey.currentState;
+                                  if (form.validate()) {
+                                    EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), 0));
+                                    print(response.getResponse());
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("Room information updated")));
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("Please enter required fields")));
+                                  }
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
