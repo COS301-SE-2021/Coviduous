@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/backend/controllers/office_controller.dart';
-import 'package:login_app/frontend/screens/office/user_view_office_rooms.dart';
+import 'package:login_app/frontend/screens/office/user_view_office_times.dart';
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/desk.dart';
@@ -141,7 +141,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
             title: Text('Book desk in room ' + services.getRoomDetails(globals.currentRoomNumString).getRoomNum()),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
+                Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
               },
             ),
           ),
