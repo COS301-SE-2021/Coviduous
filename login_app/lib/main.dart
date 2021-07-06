@@ -30,6 +30,7 @@ import 'frontend/screens/admin_update_account.dart';
 //User subsystem screens
 import 'frontend/screens/user_book_office_space.dart';
 import 'frontend/screens/user_homepage.dart';
+import 'frontend/screens/home_office.dart';
 import 'frontend/screens/user_view_office_spaces.dart';
 import 'frontend/screens/user_view_current_bookings.dart';
 import 'frontend/screens/user_view_announcements.dart';
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget{
 
         //User subsystem
         UserHomepage.routeName: (ctx)=> UserHomepage(),
+        Office.routeName: (ctx)=> Office(),
         UserViewOfficeSpaces.routeName: (ctx)=> UserViewOfficeSpaces(),
         UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
