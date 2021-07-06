@@ -6,9 +6,9 @@ import 'frontend/screens/splash_screen.dart';
 import 'frontend/screens/login_screen.dart';
 
 //Signup screens
-import 'frontend/screens/home_signup_screen.dart';
-import 'frontend/screens/admin_signup_screen.dart';
-import 'frontend/screens/user_signup_screen.dart';
+import 'frontend/screens/signup/home_signup_screen.dart';
+import 'frontend/screens/signup/admin_signup_screen.dart';
+import 'frontend/screens/signup/user_signup_screen.dart';
 
 //Admin subsystem screens
 import 'frontend/screens/admin_homepage.dart';

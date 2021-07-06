@@ -3,7 +3,7 @@ import 'package:login_app/backend/controllers/user_controller.dart';
 
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/models/firestore_cloud.dart';
-import 'package:login_app/frontend/screens/home_signup_screen.dart';
+import 'package:login_app/frontend/screens/signup/home_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:login_app/frontend/screens/admin_signup_screen.dart';
-import 'package:login_app/frontend/screens/user_signup_screen.dart';
+import 'package:login_app/frontend/screens/signup/admin_signup_screen.dart';
+import 'package:login_app/frontend/screens/signup/user_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
