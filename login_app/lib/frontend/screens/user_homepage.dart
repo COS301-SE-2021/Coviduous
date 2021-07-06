@@ -7,7 +7,7 @@ import 'package:login_app/frontend/screens/user_book_office_space.dart';
 import 'package:login_app/frontend/screens/user_manage_account.dart';
 import 'package:login_app/frontend/screens/user_view_announcements.dart';
 import 'package:login_app/frontend/screens/user_view_current_bookings.dart';
-import 'package:login_app/frontend/screens/user_view_office_spaces.dart';
+import 'package:login_app/frontend/screens/user_view_office_floors.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
