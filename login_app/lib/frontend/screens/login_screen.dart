@@ -243,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
                                           } else if (userType == 'User') {
                                             globals.type = 'User';
-                                            Navigator.pushReplacementNamed(context, UserHomepage.routeName);
+                                            Navigator.pushReplacementNamed(context, UserHomePage.routeName);
                                           } else {
                                             showDialog(
                                                 context: context,
