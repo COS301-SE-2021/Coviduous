@@ -106,7 +106,7 @@ class MyApp extends StatelessWidget{
         AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
         AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
         AdminDeleteAccount.routeName: (ctx)=> AdminDeleteAccount(),
-        UserHomepage.routeName: (ctx)=> UserHomepage(),
+        UserHomePage.routeName: (ctx)=> UserHomePage(),
         UserManageAccount.routeName: (ctx)=> UserManageAccount(),
         UserUpdateAccount.routeName: (ctx)=> UserUpdateAccount(),
         UserDeleteAccount.routeName: (ctx)=> UserDeleteAccount(),
