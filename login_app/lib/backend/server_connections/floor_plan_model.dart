@@ -11,6 +11,7 @@
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
 import 'package:http/http.dart' as http;
+import 'package:login_app/subsystems/floorplan_subsystem/desk.dart';
 import 'dart:convert' as convert;
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
@@ -178,6 +179,14 @@ class FloorPlanModel {
           floorGlobals.globalRooms[i].roomNum = roomNum;
         }
         floorGlobals.globalRooms[i].dimensions = dimensions;
+        for (int j = 0; j < numDesks; j++) {
+          floorGlobals.globalRooms[i].desks.add(new Desk(
+              "SDDN-" + (floorGlobals.globalRooms[i].desks.length + 1).toString(),
+              roomNum,
+              deskDimentions,
+              deskMaxCapacity,
+              0));
+        }
         floorGlobals.globalRooms[i].numDesks = numDesks;
         floorGlobals.globalRooms[i].deskDimentions = deskDimentions;
         floorGlobals.globalRooms[i].deskMaxCapcity = deskMaxCapacity;
