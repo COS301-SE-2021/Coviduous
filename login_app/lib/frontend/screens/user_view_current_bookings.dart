@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'user_homepage.dart';
+import 'package:login_app/frontend/screens/home_office.dart';
 import 'package:login_app/subsystems/office_subsystem/booking.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/office_globals.dart' as officeGlobals;
 
 class UserViewCurrentBookings extends StatefulWidget {
-  static const routeName = "/user_bookings";
+  static const routeName = "/user_view_bookings";
   @override
   _UserViewCurrentBookingsState createState() => _UserViewCurrentBookingsState();
 }
@@ -115,7 +116,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
             title: Text('View current bookings'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+                Navigator.of(context).pushReplacementNamed(Office.routeName);
               },
             ),
           ),
