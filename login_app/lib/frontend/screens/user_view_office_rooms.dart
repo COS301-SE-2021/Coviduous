@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
-import 'package:login_app/frontend/screens/home_office.dart';
+import 'package:login_app/frontend/screens/user_view_office_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
@@ -27,6 +27,10 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (5 * globals.getWidgetScaling()),
+              ),
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
@@ -128,14 +132,22 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
             title: Text('View office spaces'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(Office.routeName);
+                Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
               },
             ),
           ),
           body: Stack(
               children: <Widget>[
-                Center(
-                    child: getList()
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      getList(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 18,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ],
+                  ),
                 ),
               ]
           )
