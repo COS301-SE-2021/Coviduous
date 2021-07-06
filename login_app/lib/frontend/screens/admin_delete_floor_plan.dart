@@ -145,8 +145,13 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
                                                     if (value2 == "welcome") {
                                                       DeleteFloorPlanResponse response = services.deleteFloorPlanMock(DeleteFloorPlanRequest(globals.loggedInUserId, globals.loggedInCompanyId));
                                                       print(response.getResponse());
-                                                      //floorGlobals.globalFloors.clear();
-                                                      //floorGlobals.globalNumFloors = 0;
+
+                                                      //Double checking that everything has been cleared.
+                                                      floorGlobals.globalFloors.clear();
+                                                      floorGlobals.globalRooms.clear();
+                                                      floorGlobals.globalNumFloors = 0;
+                                                      floorGlobals.globalNumFloors = 0;
+
                                                       Navigator.pushReplacementNamed(context, FloorPlan.routeName);
                                                       ScaffoldMessenger.of(context).showSnackBar(
                                                           SnackBar(content: Text("Floor plan deleted")));
