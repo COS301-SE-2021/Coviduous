@@ -6,6 +6,7 @@
     - Peter Okumbe
     - Chaoane Malakoane
  */
+import 'package:login_app/backend/server_connections/office_data_base_queries.dart';
 import 'package:login_app/requests/office_requests/book_office_space_request.dart';
 import 'package:login_app/requests/office_requests/view_office_space_request.dart';
 import 'package:login_app/responses/office_reponses/book_office_space_response.dart';
@@ -26,9 +27,9 @@ class OfficeController {
   /** 
    *  OfficeQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
-  OfficeController OfficeQueries;
+  OfficeDatabaseQueries OfficeQueries;
   OfficeController() {
-    this.OfficeQueries = new OfficeController();
+    this.OfficeQueries = new OfficeDatabaseQueries();
   }
 
 /**
