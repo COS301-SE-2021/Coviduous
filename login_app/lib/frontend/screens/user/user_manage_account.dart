@@ -29,7 +29,7 @@ class _UserManageAccountState extends State<UserManageAccount> {
             title: Text('Manage account'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
               },
             ),
           ),
