@@ -10,8 +10,13 @@ import 'frontend/screens/signup/home_signup_screen.dart';
 import 'frontend/screens/signup/admin_signup_screen.dart';
 import 'frontend/screens/signup/user_signup_screen.dart';
 
-//Admin subsystem screens
-import 'frontend/screens/admin_homepage.dart';
+//Announcement
+import 'frontend/screens/announcement/admin_delete_announcement.dart';
+import 'frontend/screens/announcement/admin_view_announcements.dart';
+import 'frontend/screens/announcement/admin_make_announcement.dart';
+import 'frontend/screens/announcement/user_view_announcements.dart';
+
+//Floor plan
 import 'frontend/screens/floor_plan/home_floor_plan.dart';
 import 'frontend/screens/floor_plan/admin_add_floor_plan.dart';
 import 'frontend/screens/floor_plan/admin_modify_floors.dart';
@@ -21,22 +26,21 @@ import 'frontend/screens/floor_plan/admin_view_floors.dart';
 import 'frontend/screens/floor_plan/admin_edit_room_add.dart';
 import 'frontend/screens/floor_plan/admin_edit_room_modify.dart';
 import 'frontend/screens/floor_plan/admin_view_rooms.dart';
-import 'frontend/screens/announcement/admin_delete_announcement.dart';
-import 'frontend/screens/announcement/admin_view_announcements.dart';
-import 'frontend/screens/announcement/admin_make_announcement.dart';
-import 'frontend/screens/user/admin_manage_account.dart';
-import 'frontend/screens/user/admin_update_account.dart';
 
-//User subsystem screens
-import 'frontend/screens/office/user_book_office_space.dart';
-import 'frontend/screens/user_homepage.dart';
+//Office
 import 'frontend/screens/office/home_office.dart';
 import 'frontend/screens/office/user_view_office_floors.dart';
 import 'frontend/screens/office/user_view_office_rooms.dart';
 import 'frontend/screens/office/user_view_office_times.dart';
 import 'frontend/screens/office/user_view_office_desks.dart';
 import 'frontend/screens/office/user_view_current_bookings.dart';
-import 'frontend/screens/announcement/user_view_announcements.dart';
+import 'frontend/screens/office/user_book_office_space.dart';
+
+//User
+import 'frontend/screens/admin_homepage.dart';
+import 'frontend/screens/user/admin_manage_account.dart';
+import 'frontend/screens/user/admin_update_account.dart';
+import 'frontend/screens/user_homepage.dart';
 import 'frontend/screens/user/user_manage_account.dart';
 import 'frontend/screens/user/user_update_account.dart';
 
@@ -71,8 +75,13 @@ class MyApp extends StatelessWidget{
       ),
       home: Home(),
       routes: {
-        //Admin subsystem
-        AdminHomePage.routeName: (ctx)=> AdminHomePage(),
+        //Announcement
+        MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
+        AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
+        AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
+        UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
+        
+        //Floor plan
         FloorPlan.routeName: (ctx)=> FloorPlan(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         AdminViewFloors.routeName: (ctx)=> AdminViewFloors(),
@@ -82,15 +91,8 @@ class MyApp extends StatelessWidget{
         AdminModifyFloors.routeName: (ctx)=> AdminModifyFloors(),
         AdminModifyRooms.routeName: (ctx)=> AdminModifyRooms(),
         DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
-        MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
-        AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
-        AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
-        AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
-        AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
-        AdminDeleteAccount.routeName: (ctx)=> AdminDeleteAccount(),
 
-        //User subsystem
-        UserHomepage.routeName: (ctx)=> UserHomepage(),
+        //Office
         Office.routeName: (ctx)=> Office(),
         UserViewOfficeFloors.routeName: (ctx)=> UserViewOfficeFloors(),
         UserViewOfficeRooms.routeName: (ctx)=> UserViewOfficeRooms(),
@@ -98,7 +100,13 @@ class MyApp extends StatelessWidget{
         UserViewOfficeDesks.routeName: (ctx)=> UserViewOfficeDesks(),
         UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
-        UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
+
+        //User
+        AdminHomePage.routeName: (ctx)=> AdminHomePage(),
+        AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
+        AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
+        AdminDeleteAccount.routeName: (ctx)=> AdminDeleteAccount(),
+        UserHomepage.routeName: (ctx)=> UserHomepage(),
         UserManageAccount.routeName: (ctx)=> UserManageAccount(),
         UserUpdateAccount.routeName: (ctx)=> UserUpdateAccount(),
         UserDeleteAccount.routeName: (ctx)=> UserDeleteAccount(),
