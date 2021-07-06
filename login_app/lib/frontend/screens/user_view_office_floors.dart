@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'user_homepage.dart';
-import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
+
+import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/frontend/screens/home_office.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
-class UserViewOfficeSpaces extends StatefulWidget {
-  static const routeName = "/user_office_spaces";
+class UserViewOfficeFloors extends StatefulWidget {
+  static const routeName = "/user_office_floors";
   @override
-  _UserViewOfficeSpacesState createState() => _UserViewOfficeSpacesState();
+  _UserViewOfficeFloorsState createState() => _UserViewOfficeFloorsState();
 }
 
-class _UserViewOfficeSpacesState extends State<UserViewOfficeSpaces> {
-List<Floor> floors = floorGlobals.globalFloors; //List of floors
-int numberOfFloors = floorGlobals.globalNumFloors;
-
+class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
   @override
   Widget build(BuildContext context) {
+    FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      if (numberOfFloors == 0) { //If the number of floors = 0, don't display a list
+      int numOfFloors = floorGlobals.globalNumFloors;
+
+      print(numOfFloors);
+
+      if (numOfFloors == 0) { //If the number of floors = 0, don't display a list
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -40,8 +44,10 @@ int numberOfFloors = floorGlobals.globalNumFloors;
         );
       } else { //Else create and return a list
         return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             padding: const EdgeInsets.all(8),
-            itemCount: numberOfFloors,
+            itemCount: numOfFloors,
             itemBuilder: (context, index) { //Display a list tile FOR EACH floor in floors[]
               return ListTile(
                 title: Column(
@@ -49,9 +55,11 @@ int numberOfFloors = floorGlobals.globalNumFloors;
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
+                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Office space', style: TextStyle(color: Colors.white)),
+                        child: Text(
+                            'Floor ' + services.getFloors()[index].getFloorNumber(),
+                            style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -60,22 +68,27 @@ int numberOfFloors = floorGlobals.globalNumFloors;
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Floors: ' + floors[index].floorNum.toString(), style: TextStyle(color: Colors.black)),
+                              child: Text(
+                                  'Number of rooms: ' +
+                                      services.getFloors()[index].getNumRooms().toString(),
+                                  style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Number of rooms: ' + floors[index].totalNumRooms.toString(), style: TextStyle(color: Colors.black)),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Maximum capacity: ' + floors[index].maxCapacity.toString(), style: TextStyle(color: Colors.black)),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Current capacity: ' + floors[index].currentCapacity.toString(), style: TextStyle(color: Colors.black)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      child: Text('View'),
+                                      onPressed: () {
+                                        globals.currentFloorNumString = services
+                                            .getFloors()[index]
+                                            .getFloorNumber();
+                                        //Navigator.pushReplacementNamed(routeName);
+                                      }),
+                                ],
+                              ),
                             ),
                           ]
                       )
@@ -101,14 +114,22 @@ int numberOfFloors = floorGlobals.globalNumFloors;
           title: Text('View office spaces'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHomepage.routeName);
+              Navigator.of(context).pushReplacementNamed(Office.routeName);
             },
           ),
         ),
         body: Stack(
           children: <Widget>[
-            Center(
-              child: getList()
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  getList(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 18,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ]
+              ),
             ),
           ]
         )
