@@ -33,6 +33,7 @@ import 'frontend/screens/user_homepage.dart';
 import 'frontend/screens/office/home_office.dart';
 import 'frontend/screens/office/user_view_office_floors.dart';
 import 'frontend/screens/office/user_view_office_rooms.dart';
+import 'frontend/screens/office/user_view_office_desks.dart';
 import 'frontend/screens/office/user_view_current_bookings.dart';
 import 'frontend/screens/announcement/user_view_announcements.dart';
 import 'frontend/screens/user/user_manage_account.dart';
@@ -92,6 +93,7 @@ class MyApp extends StatelessWidget{
         Office.routeName: (ctx)=> Office(),
         UserViewOfficeFloors.routeName: (ctx)=> UserViewOfficeFloors(),
         UserViewOfficeRooms.routeName: (ctx)=> UserViewOfficeRooms(),
+        UserViewOfficeDesks.routeName: (ctx)=> UserViewOfficeDesks(),
         UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
