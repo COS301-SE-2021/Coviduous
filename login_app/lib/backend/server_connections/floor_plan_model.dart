@@ -179,6 +179,8 @@ class FloorPlanModel {
           floorGlobals.globalRooms[i].roomNum = roomNum;
         }
         floorGlobals.globalRooms[i].dimensions = dimensions;
+
+        floorGlobals.globalRooms[i].desks.clear();
         for (int j = 0; j < numDesks; j++) {
           floorGlobals.globalRooms[i].desks.add(new Desk(
               "SDDN-" + (floorGlobals.globalRooms[i].desks.length + 1).toString(),
@@ -187,6 +189,7 @@ class FloorPlanModel {
               deskMaxCapacity,
               0));
         }
+
         floorGlobals.globalRooms[i].numDesks = numDesks;
         floorGlobals.globalRooms[i].deskDimentions = deskDimentions;
         floorGlobals.globalRooms[i].deskMaxCapcity = deskMaxCapacity;
