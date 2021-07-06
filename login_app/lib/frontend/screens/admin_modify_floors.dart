@@ -8,7 +8,6 @@ import 'package:login_app/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
-import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
@@ -27,9 +26,6 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
   Widget build(BuildContext context) {
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      //ViewAdminFloorPlanResponse response = services.viewFloorPlanAdminMock(ViewAdminFloorPlanRequest());
-      //List<Floor> floors = response.getFloors();
-      List<Floor> floors = floorGlobals.globalFloors;
       int numOfFloors = floorGlobals.globalNumFloors;
 
       print(numOfFloors);
