@@ -19,9 +19,7 @@ void main() {
     await tester.pumpWidget(createWidgetForTesting(child: new AdminHomePage()));
 
     //Verify that the correct widgets appear in the correct order
-    expect(find.text('Add a floor plan'), findsOneWidget); //Find one widget containing 'Add a floor plan'
-    expect(find.text('Update floor plan'), findsOneWidget); //Find one widget containing 'Update floor plan'
-    expect(find.text('Delete floor plan'), findsOneWidget); //Find one widget containing 'Delete floor plan'
+    expect(find.text('Manage floor plans'), findsOneWidget); //Find one widget containing 'Manage floor plans'
     expect(find.text('View announcements'), findsOneWidget); //Find one widget containing 'View announcements'
     expect(find.text('Manage account'), findsOneWidget); //Find one widget containing 'Manage account'
     expect(find.text('Log out'), findsOneWidget); //Find one widget containing 'Log out'
