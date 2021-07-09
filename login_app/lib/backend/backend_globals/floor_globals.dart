@@ -19,7 +19,7 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 //Backend global variables
 //==========================
 /**
- * List<Floor> globalFloors  acts like a database table that holds floors , this is to mock out functionality for testing
+ * List<Floor> globalFloors acts like a database table that holds floors, this is to mock out functionality for testing
  * globalNumFloors keeps track of number of floors in the mock floors database table
  * Floors refer to the buildings floors, each floor is a level inside the building.
  */
