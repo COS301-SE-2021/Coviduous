@@ -93,7 +93,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           child: Row (
                                               children: <Widget>[
                                                 Expanded(child: Text('Manage shifts')),
-                                                Icon(Icons.add_circle_rounded)
+                                                Icon(Icons.alarm)
                                               ],
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                               crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
