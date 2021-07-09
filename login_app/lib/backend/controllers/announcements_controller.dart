@@ -1,7 +1,9 @@
 /*
-  File name: announcements_controller.dart
-  Purpose: Holds the controller class for announcements, all service contracts for the announcement subsystem are offered through this class.
-  Collaborators:
+  * File name: announcements_controller.dart
+  
+  * Purpose: Holds the controller class for announcements, all service contracts for the announcement subsystem are offered through this class.
+  
+  * Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
     - Chaoane Malakoane
