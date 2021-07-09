@@ -19,7 +19,7 @@ import 'package:login_app/subsystems/user_subsystem/user.dart';
 //Backend global variables
 //==========================
 /**
- * List<Announcement> announcementDatabaseTable  acts like a database table that holds announcements , this is to mock out functionality for testing
+ * List<Announcement> announcementDatabaseTable acts like a database table that holds announcements, this is to mock out functionality for testing
  * numAnnouncements keeps track of number of announcements in the mock announcement database table
  */
 List<Announcement> announcementDatabaseTable = [];
