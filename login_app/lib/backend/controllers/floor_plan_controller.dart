@@ -30,7 +30,9 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 /**
  * Class name: FloorPlanController
+ * 
  * Purpose: This class is the controller for floorplans, all service contracts for the floorplan subsystem are offered through this class
+ * 
  * The class has both mock and concrete implementations of the service contracts.
  */
 class FloorPlanController {
@@ -43,9 +45,8 @@ class FloorPlanController {
   FloorPlanController() {
     this.floorPlanQueries = new FloorPlanModel();
   }
-  
-////////////////////////Concrete Implementations/////////////////////////////////
-  /// Concrete Implementations
+
+/////////////////////////////////Concrete Implementations/////////////////////////////////
 
   /**
  * createFloorPlan : Offers functionality of creating a floor plan for a building
@@ -64,8 +65,7 @@ class FloorPlanController {
     }
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /// Mock Implementations
+/////////////////////////////////Mock Implementations/////////////////////////////////
 
 /**
  * createFloorPlanMock : Mocks out the functionality of creating a floor plan for a building
