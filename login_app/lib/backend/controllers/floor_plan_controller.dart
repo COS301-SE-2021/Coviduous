@@ -39,10 +39,12 @@ class FloorPlanController {
    * floorPlanQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
   FloorPlanModel floorPlanQueries;
+
   FloorPlanController() {
     this.floorPlanQueries = new FloorPlanModel();
   }
-////////////////////////////////////////////////////////////////////////////////
+  
+////////////////////////Concrete Implementations/////////////////////////////////
   /// Concrete Implementations
 
   /**
