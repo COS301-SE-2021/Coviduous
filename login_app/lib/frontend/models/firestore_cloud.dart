@@ -17,7 +17,7 @@ async {
     'Lastname' : lastName,
     'Email' : email,
     'Username' : username,
-    'Company Id' :companyId
+    'Company ID' :companyId
   });
   return;
 }
