@@ -12,19 +12,54 @@ class UserUpdateAccount extends StatefulWidget {
   _UserUpdateAccountState createState() => _UserUpdateAccountState();
 }
 
+String _snapFirstName;
+String _snapLastName;
+String _snapEmail;
+String _snapUserName;
+
+Future getSnap() async {
+  User admin = FirebaseAuth.instance.currentUser;
+  await Future.wait([
+    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      var query = FirebaseFirestore.instance.collection('Users')
+          .where('uid', isEqualTo: admin.uid).limit(1);
+      await Future.wait([query.get().then((data) {
+        if (data.docs.length > 0) {
+          _snapFirstName = data.docs[0].get('Firstname');
+          _snapLastName = data.docs[0].get('Lastname');
+          _snapEmail = data.docs[0].get('Email');
+          _snapUserName = data.docs[0].get('Username');
+        } else {
+          _snapFirstName = "";
+          _snapLastName = "";
+          _snapEmail = "";
+          _snapUserName = "";
+        }
+      })]);
+    })
+  ]);
+  return;
+}
+
 class _UserUpdateAccountState extends State<UserUpdateAccount>{
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _userName = TextEditingController();
   TextEditingController _password = TextEditingController();
-  TextEditingController _confirmPassword = TextEditingController();
   bool isLoading = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    getSnap().then((value) {
+      _firstName.text = _snapFirstName;
+      _lastName.text = _snapLastName;
+      _email.text = _snapEmail;
+      _userName.text = _snapUserName;
+    });
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -129,34 +164,6 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                 return null;
                               },
                             ),
-                            //password
-                            TextFormField(
-                              textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                              decoration: InputDecoration(labelText:'Current password'),
-                              obscureText: true,
-                              controller: _password,
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'please input your password';
-                                }
-                                return null;
-                              },
-                            ),
-                            //confirm password
-                            TextFormField(
-                              textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                              decoration: InputDecoration(labelText:'Confirm password'),
-                              obscureText: true,
-                              controller: _confirmPassword,
-                              validator: (value) {
-                                if(value.isEmpty) {
-                                  return 'please input your password';
-                                } else if (value != _password.text) {
-                                  return 'passwords do not match';
-                                }
-                                return null;
-                              },
-                            ),
                             SizedBox (
                               height: MediaQuery.of(context).size.height/48,
                               width: MediaQuery.of(context).size.width,
@@ -165,91 +172,123 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                               child: Text(
                                   'Submit'
                               ),
-                              onPressed: ()
-                              {
-                                setState(() {
-                                  isLoading = true;
-                                });
+                              onPressed: () {
+                                showDialog(context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text('Enter your password'),
+                                        content: TextFormField(
+                                          controller: _password,
+                                          decoration: InputDecoration(hintText: 'Enter your password'),
+                                          obscureText: true,
+                                          validator: (value) {
+                                            if (value.isEmpty) {
+                                              return 'please input your password';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (String value) {
+                                            _password.text = value;
+                                          },
+                                        ),
+                                        actions: [
+                                          ElevatedButton(
+                                            child: Text('Submit'),
+                                            onPressed: () {
+                                              setState(() {
+                                                isLoading = true;
+                                              });
 
-                                //Only allow changes to be made if password is correct; try to sign in with it
-                                if (_password.text.isNotEmpty && _confirmPassword.text.isNotEmpty && _password.text == _confirmPassword.text) {
-                                  AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
-                                    if (value2 == "welcome") {
-                                      if (_email.text.isNotEmpty) {
-                                        String oldEmail = FirebaseAuth.instance.currentUser.email;
-                                        AuthClass().updateEmail(newEmail: _email.text.trim()).then((value) {
-                                          if (value == "Success") {
-                                            //If update was successful, update in Firestore document as well
-                                            FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                              var query = FirebaseFirestore.instance.collection('Users')
-                                                  .where("Email", isEqualTo: oldEmail);
-                                              var querySnapshot = await query.get();
-                                              String id = querySnapshot.docs.first.id;
-                                              FirebaseFirestore.instance.collection('Users').doc(id).update(
-                                                  {
-                                                    'Email' : _email.text.trim()
-                                                  });
-                                            });
-                                          } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text(value)));
-                                          }
-                                        });
-                                      }
-                                      if (_firstName.text.isNotEmpty) {
-                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                         var query = FirebaseFirestore.instance.collection('Users')
-                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                          var querySnapshot = await query.get();
-                                          String id = querySnapshot.docs.first.id;
-                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
-                                              {
-                                                'Firstname' : _firstName.text.trim()
-                                             });
-                                       });
-                                      }
-                                      if (_lastName.text.isNotEmpty) {
-                                       FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                          var query = FirebaseFirestore.instance.collection('Users')
-                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                          var querySnapshot = await query.get();
-                                          String id = querySnapshot.docs.first.id;
-                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
-                                              {
-                                                'Lastname' : _lastName.text.trim()
-                                              });
-                                        });
-                                      }
-                                      if (_userName.text.isNotEmpty) {
-                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                          var query = FirebaseFirestore.instance.collection('Users')
-                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                          var querySnapshot = await query.get();
-                                         String id = querySnapshot.docs.first.id;
-                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
-                                              {
-                                                'Username' : _userName.text.trim()
-                                              });
-                                        });
-                                      }
-                                     Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (context) => UserManageAccount()), (
-                                              route) => false);
-                                    } else {
-                                      setState(() {
-                                       isLoading = false;
-                                      });
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text('Invalid password')));
-                                    }
-                                  });
-                                } else {
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Invalid password')));
-                                }
+                                              //Only allow changes to be made if password is correct; try to sign in with it
+                                              if (_password.text.isNotEmpty) {
+                                                AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
+                                                  if (value2 == "welcome") {
+                                                    if (_email.text.isNotEmpty) {
+                                                      String oldEmail = FirebaseAuth.instance.currentUser.email;
+                                                      AuthClass().updateEmail(newEmail: _email.text.trim()).then((value) {
+                                                        if (value == "Success") {
+                                                          //If update was successful, update in Firestore document as well
+                                                          FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                                            var query = FirebaseFirestore.instance.collection('Users')
+                                                                .where("Email", isEqualTo: oldEmail);
+                                                            var querySnapshot = await query.get();
+                                                            String id = querySnapshot.docs.first.id;
+                                                            FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                                {
+                                                                  'Email' : _email.text.trim()
+                                                                });
+                                                          });
+                                                        } else {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                              SnackBar(content: Text(value)));
+                                                        }
+                                                      });
+                                                    }
+                                                    if (_firstName.text.isNotEmpty) {
+                                                      FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                                        var query = FirebaseFirestore.instance.collection('Users')
+                                                            .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
+                                                        var querySnapshot = await query.get();
+                                                        String id = querySnapshot.docs.first.id;
+                                                        FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                            {
+                                                              'Firstname' : _firstName.text.trim()
+                                                            });
+                                                      });
+                                                    }
+                                                    if (_lastName.text.isNotEmpty) {
+                                                      FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                                        var query = FirebaseFirestore.instance.collection('Users')
+                                                            .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
+                                                        var querySnapshot = await query.get();
+                                                        String id = querySnapshot.docs.first.id;
+                                                        FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                            {
+                                                              'Lastname' : _lastName.text.trim()
+                                                            });
+                                                      });
+                                                    }
+                                                    if (_userName.text.isNotEmpty) {
+                                                      FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                                        var query = FirebaseFirestore.instance.collection('Users')
+                                                            .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
+                                                        var querySnapshot = await query.get();
+                                                        String id = querySnapshot.docs.first.id;
+                                                        FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                            {
+                                                              'Username' : _userName.text.trim()
+                                                            });
+                                                      });
+                                                    }
+                                                    Navigator.pushAndRemoveUntil(context,
+                                                        MaterialPageRoute(builder: (context) => UserManageAccount()), (
+                                                            route) => false);
+                                                  } else {
+                                                    setState(() {
+                                                      isLoading = false;
+                                                    });
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text('Invalid password')));
+                                                    Navigator.pop(context);
+                                                  }
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  isLoading = false;
+                                                });
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                    SnackBar(content: Text('Invalid password')));
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                          ),
+                                          ElevatedButton(
+                                            child: Text('Cancel'),
+                                            onPressed: () => Navigator.pop(context),
+                                          ),
+                                        ]
+                                      );
+                                    });
                               },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
