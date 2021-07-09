@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:login_app/frontend/screens/office/home_office.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -16,7 +15,7 @@ class UserHomePage extends StatefulWidget {
 }
 
 class _UserHomePageState extends State<UserHomePage> {
-  String email = FirebaseAuth.instance.currentUser.email;
+  String email = globals.email;
 
   @override
   Widget build(BuildContext context) {
