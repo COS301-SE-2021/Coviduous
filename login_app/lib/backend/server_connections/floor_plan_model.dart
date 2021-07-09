@@ -26,8 +26,8 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
  */
 class FloorPlanModel {
   FloorPlanModel() {}
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// concerete implementations
+//////////////////////////////////Concerete Implementations///////////////////////////////////
+  
   Future<String> createFloorPlan(
       int numFloors, String admin, String companyId) async {
     FloorPlan holder = new FloorPlan(numFloors, admin, companyId);
@@ -58,8 +58,7 @@ class FloorPlanModel {
     }
   }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /// Mock Implementations
+//////////////////////////////////Mock Implementations///////////////////////////////////
 
   String createFloorPlanMock(int numFloors, String admin, String companyId) {
     FloorPlan holder = new FloorPlan(numFloors, admin, companyId);
