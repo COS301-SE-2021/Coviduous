@@ -36,7 +36,7 @@ class AnnouncementsController {
     this.announcementQueries = new AnnouncementDatabaseQueries();
   }
 
-  ////////////////////////////////Concrete Implementations////////////////////////////////////////////////
+  ////////////////////////////////////////////////Concrete Implementations////////////////////////////////////////////////
   /**
    * createAnnouncement creates a new announcement, This activity is only done by the admin user who is responsisble for issuing announcements
    */
@@ -104,7 +104,8 @@ class AnnouncementsController {
     }
   }
 
-//////////////////////////////////Mocked Implementations/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////Mock Implementations////////////////////////////////////////////////
+
   //create Announcement Mock
   /**
    * This function is used to test if the logic and implementation of creating an announcement works
