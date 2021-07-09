@@ -16,12 +16,28 @@ class UserDeleteAccount extends StatefulWidget {
   _UserDeleteAccountState createState() => _UserDeleteAccountState();
 }
 
-FirebaseAuth auth = FirebaseAuth.instance;
-User admin = FirebaseAuth.instance.currentUser;
-DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(admin.uid).get() as DocumentSnapshot;
-String _companyId = snap.get('Company ID');
-String _email = snap.get('Email');
-String _password = snap.get('Password');
+String _snapCompanyId;
+String _snapEmail;
+
+Future getSnap() async {
+  User admin = FirebaseAuth.instance.currentUser;
+  await Future.wait([
+    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      var query = FirebaseFirestore.instance.collection('Users')
+          .where('uid', isEqualTo: admin.uid).limit(1);
+      await Future.wait([query.get().then((data) {
+        if (data.docs.length > 0) {
+          _snapEmail = data.docs[0].get('Email');
+          _snapCompanyId = data.docs[0].get('Company Id');
+        } else {
+          _snapEmail = "";
+          _snapCompanyId = "";
+        }
+      })]);
+    })
+  ]);
+  return;
+}
 
 class _UserDeleteAccountState extends State<UserDeleteAccount>{
   UserController services = new UserController();
@@ -36,6 +52,8 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
 
   @override
   Widget build(BuildContext context) {
+    getSnap();
+
     return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -76,7 +94,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                               validator: (value) {
                                 if(value.isEmpty || !value.contains('@')) {
                                   return 'invalid email';
-                                } else if (value != _email) {
+                                } else if (value != _snapEmail) {
                                   return 'email does not exist in database';
                                 }
                                 return null;
@@ -91,8 +109,6 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                               validator: (value) {
                                 if(value.isEmpty) {
                                   return 'please input a password';
-                                } else if (value != _password) {
-                                  return 'invalid password';
                                 }
                                 return null;
                               },
@@ -106,7 +122,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                               validator: (value) {
                                 if(value.isEmpty) {
                                   return 'please input a password';
-                                } else if (value != _password) {
+                                } else if (value != _userPassword.text) {
                                   return 'passwords do not match';
                                 }
                                 return null;
@@ -118,7 +134,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                               decoration: InputDecoration(labelText:'Company ID'),
                               controller: _userCompanyId,
                               validator: (value) {
-                                if (value.isEmpty || value != _companyId) {
+                                if (value.isEmpty || value != _snapCompanyId) {
                                   return 'incorrect company ID';
                                 }
                                 return null;
@@ -133,58 +149,69 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                   'Remove'
                               ),
                               onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Warning'),
-                                      content: Text('Are you sure you want to delete your account? This cannot be undone.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Yes'),
-                                          onPressed: (){
-                                            setState(() {
-                                              isLoading = true;
-                                            });
-                                            String oldEmail = FirebaseAuth.instance.currentUser.email;
-                                            AuthClass().deleteAccount().then((value) {
-                                              if (value == "Success") {
-                                                setState(() {
-                                                  isLoading = false;
-                                                });
+                                FormState form = _formKey.currentState;
+                                if (form.validate()){
+                                  AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _userPassword.text).then((value2) {
+                                    if (value2 == "welcome") {
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                    title: Text('Warning'),
+                                                    content: Text('Are you sure you want to delete your account? This cannot be undone.'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('Yes'),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            isLoading = true;
+                                                          });
+                                                          String oldEmail = FirebaseAuth.instance.currentUser.email;
+                                                          AuthClass().deleteAccount().then((value) {
+                                                            if (value == "Success") {
+                                                              setState(() {
+                                                                isLoading = false;
+                                                              });
 
-                                                //If delete was successful, delete from Firestore as well
-                                                FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                  var query = FirebaseFirestore.instance.collection('Users')
-                                                      .where("Email", isEqualTo: oldEmail);
-                                                  var querySnapshot = await query.get();
-                                                  String id = querySnapshot.docs.first.id;
-                                                  FirebaseFirestore.instance.collection('Users').doc(id).delete();
-                                                });
+                                                              //If delete was successful, delete from Firestore as well
+                                                              FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                                                                var query = FirebaseFirestore.instance.collection('Users').where("Email", isEqualTo: oldEmail);
+                                                                var querySnapshot = await query.get();
+                                                                String id = querySnapshot.docs.first.id;
+                                                                FirebaseFirestore.instance.collection('Users').doc(id).delete();
+                                                              });
 
-                                                //DeleteAccountUserResponse response = services.deleteAccountUserMock(DeleteAccountUserRequest(globals.loggedInUserId));
-                                                //print(response.getResponse());
+                                                              //DeleteAccountUserResponse response = services.deleteAccountUserMock(DeleteAccountUserRequest(globals.loggedInUserId));
+                                                              //print(response.getResponse());
 
-                                                AuthClass().signOut();
-                                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
-                                              } else {
-                                                setState(() {
-                                                  isLoading = false;
-                                                });
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(content: Text(value)));
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        TextButton(
-                                          child: Text('No'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    ));
-                              },
+                                                              AuthClass().signOut();
+                                                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+                                                            } else {
+                                                              setState(() {
+                                                                isLoading = false;
+                                                              });
+                                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
+                                                            }
+                                                          });
+                                                        },
+                                                      ),
+                                                      TextButton(
+                                                        child: Text('No'),
+                                                        onPressed: () {
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  ));
+                                      } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Invalid password')));
+                                      }
+                                    });
+                                  } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("Please enter required fields")));
+                                  }
+                                },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
