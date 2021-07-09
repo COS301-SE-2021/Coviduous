@@ -102,7 +102,6 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    //Temporary: remove floor and reload page
                                     if (floorGlobals.globalNumFloors > 1) {
                                       //Only allow deletion of floors if there is more than one floor
                                       DeleteFloorResponse response3 =
@@ -111,10 +110,10 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                                                   .getFloors()[index]
                                                   .getFloorNumber()));
                                       print(response3.getResponse());
-                                      /*
-                                            floorGlobals.globalNumFloors--;
-                                            floorGlobals.globalFloors.removeAt(index);
-                                             */
+
+                                      //TEMPORARY: make sure number of floors is decreased
+                                      floorGlobals.globalNumFloors--;
+
                                       setState(() {});
                                     } else {
                                       showDialog(
