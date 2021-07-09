@@ -1,7 +1,9 @@
 /*
-  File name: floor_globals.dart
-  Purpose: Global variables used for integration with front and backend.
-  Collaborators:
+  * File name: floor_globals.dart
+  
+  * Purpose: Global variables used for integration with front and backend.
+  
+  * Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
     - Chaoane Malakoane
