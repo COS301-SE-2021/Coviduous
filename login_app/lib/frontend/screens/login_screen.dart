@@ -192,31 +192,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   height: MediaQuery.of(context).size.height/48,
                                   width: MediaQuery.of(context).size.width,
                                 ),
-                                /*
-                                Text('Select user type'),
-                                DropdownButtonFormField<String>(
-                                  style: const TextStyle(color: Colors.black),
-                                  value: userType,
-                                  icon: const Icon(Icons.arrow_downward,
-                                      color: Color(0xff056676)),
-                                  iconSize: 24,
-                                  dropdownColor: Colors.white,
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      userType = newValue;
-                                    });
-                                  },
-                                  items: <String>[
-                                    'Admin',
-                                    'User'
-                                  ].map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                ),
-                                */
                                 ElevatedButton(
                                   child: Text(
                                     'Submit'
