@@ -229,9 +229,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     AuthClass().signIn(email: _email.text.trim(),
                                         password: _password.text.trim()).then((value) {
                                       if (value == "welcome") {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
 
                                         globals.loggedInUserId = userGlobals.getUserId(_email.text);
                                         print(globals.loggedInUserId);
@@ -261,6 +258,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 )
                                             );
                                           }
+                                          setState(() {
+                                            isLoading = false;
+                                          });
                                         });
                                       }
                                       else {
