@@ -98,23 +98,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         onPressed: () {
                                           Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-                                          /*
-                                          showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                title: Text('Placeholder'),
-                                                content: Text('View announcements'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: Text('Okay'),
-                                                    onPressed: (){
-                                                      Navigator.of(ctx).pop();
-                                                    },
-                                                  )
-                                                ],
-                                              )
-                                          );
-                                          */
                                         }
                                     ),
                                   ]
