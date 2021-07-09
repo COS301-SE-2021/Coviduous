@@ -27,6 +27,9 @@ import 'frontend/screens/floor_plan/admin_edit_room_add.dart';
 import 'frontend/screens/floor_plan/admin_edit_room_modify.dart';
 import 'frontend/screens/floor_plan/admin_view_rooms.dart';
 
+//Shift
+import 'frontend/screens/shift/home_shift.dart';
+
 //Office
 import 'frontend/screens/office/home_office.dart';
 import 'frontend/screens/office/user_view_office_floors.dart';
@@ -91,6 +94,9 @@ class MyApp extends StatelessWidget{
         AdminModifyFloors.routeName: (ctx)=> AdminModifyFloors(),
         AdminModifyRooms.routeName: (ctx)=> AdminModifyRooms(),
         DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
+
+        //Shift
+        Shift.routeName: (ctx)=> Shift(),
 
         //Office
         Office.routeName: (ctx)=> Office(),
