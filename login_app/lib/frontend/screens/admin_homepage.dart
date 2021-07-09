@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:login_app/frontend/screens/announcement/admin_view_announcements.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
@@ -82,6 +84,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
+                                      ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Row (
+                                              children: <Widget>[
+                                                Expanded(child: Text('Manage shifts')),
+                                                Icon(Icons.add_circle_rounded)
+                                              ],
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(Shift.routeName);
+                                          }
+                                      ),
+                                      SizedBox (
+                                        height: MediaQuery.of(context).size.height/48,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
                                     ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
