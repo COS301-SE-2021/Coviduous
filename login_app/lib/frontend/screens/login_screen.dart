@@ -205,6 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         password: _password.text.trim()).then((value) {
                                       if (value == "welcome") {
 
+                                        globals.email = _email.text;
                                         globals.loggedInUserId = userGlobals.getUserId(_email.text);
                                         print(globals.loggedInUserId);
 
