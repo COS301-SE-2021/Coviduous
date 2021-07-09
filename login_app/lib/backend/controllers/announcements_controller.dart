@@ -20,7 +20,9 @@ import 'package:login_app/responses/announcement_responses/viewUser_announcement
 
 /**
  * Class name: AnnouncementsController
+ * 
  * Purpose: This class is the controller for announcements, all service contracts for the announcement subsystem are offered through this class
+ * 
  * The class has both mock and concrete implementations of the service contracts.
  */
 class AnnouncementsController {
