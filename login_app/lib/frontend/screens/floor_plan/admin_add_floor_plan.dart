@@ -5,11 +5,10 @@ import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:login_app/frontend/screens/floor_plan/admin_view_floors.dart';
-import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
+//import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
-import 'package:login_app/backend/backend_globals/floor_globals.dart'
-    as floorGlobals;
+import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/admin_add_floor_plan";
