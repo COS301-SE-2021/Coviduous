@@ -84,7 +84,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Create shift in room ' + globals.currentRoomNumString),
+            title: Text('Create shift'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
@@ -106,6 +106,42 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                                  color: Theme.of(context).primaryColor,
+                                  child: Text(
+                                    "Floor plan: " + globals.currentFloorPlanNumString,
+                                    style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                                  color: Theme.of(context).primaryColor,
+                                  child: Text(
+                                    "Floor: " + globals.currentFloorNumString,
+                                    style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                                  color: Theme.of(context).primaryColor,
+                                  child: Text(
+                                    "Room: " + globals.currentRoomNumString,
+                                    style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
                                 Text(
                                     "${_selectedDate.toLocal()}".split(' ')[0],
                                     style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
