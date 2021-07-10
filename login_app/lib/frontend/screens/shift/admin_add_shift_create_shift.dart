@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/frontend/screens/shift/admin_add_shift_assign_employees.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
@@ -235,6 +236,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                         //print(response.getResponse());
                                         ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(content: Text("Shift created")));
+                                        Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
                                       } else {
                                         showDialog(
                                             context: context,
