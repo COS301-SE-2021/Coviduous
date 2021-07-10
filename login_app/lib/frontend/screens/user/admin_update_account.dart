@@ -147,7 +147,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                 if (value.isEmpty) {
                                   return null;
                                 } else if (value.isNotEmpty) {
-                                  if(value.isEmpty || !value.contains('@'))
+                                  if(!value.contains('@'))
                                   {
                                     return 'invalid email';
                                   }
