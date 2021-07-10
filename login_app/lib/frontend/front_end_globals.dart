@@ -24,6 +24,10 @@ String loggedInCompanyId = 'CID-01';
 //Floor plan ID
 String floorPlanId = '';
 
+//Current floor plan you're working with
+int currentFloorPlanNum = 0;
+String currentFloorPlanNumString = '';
+
 //Current floor you're working with
 int currentFloorNum = 0;
 String currentFloorNumString = '';
