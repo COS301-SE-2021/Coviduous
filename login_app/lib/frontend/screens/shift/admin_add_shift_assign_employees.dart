@@ -184,6 +184,8 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                   TextButton(
                                     child: Text('Yes'),
                                     onPressed: (){
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Shift created")));
                                       Navigator.of(context).pushReplacementNamed(Shift.routeName);
                                     },
                                   ),
