@@ -234,8 +234,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                       if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
                                         //CreateShiftResponse response = services.createShiftMock(globals.currentFloorPlanNumString, globals.currentFloorNumString, globals.currentRoomNumString, _selectedDate, _selectedStartTime, _selectedEndTime, _groupName, _groupDescription);
                                         //print(response.getResponse());
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("Shift created")));
                                         Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
                                       } else {
                                         showDialog(
