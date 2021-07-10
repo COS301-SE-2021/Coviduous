@@ -57,7 +57,7 @@ class _ShiftState extends State<Shift> {
                             ),
                             onPressed: () {
                               if (floorGlobals.globalFloors.isNotEmpty) { //Only allow shifts to be created if floor plans exist
-                                //Navigator.of(context).pushReplacementNamed(AddShift.routeName);
+                                //Navigator.of(context).pushReplacementNamed(AddShiftFloorPlan.routeName);
                               } else {
                                 showDialog(
                                     context: context,
