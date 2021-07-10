@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
+import 'package:login_app/frontend/screens/shift/admin_add_shift_create_shift.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 //import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
@@ -103,7 +104,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                       child: Text('Create shift'),
                                       onPressed: () {
                                         globals.currentRoomNumString = rooms[index].getRoomNum();
-                                        //Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
+                                        Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
                                       }),
                                 ],
                               ),
