@@ -180,7 +180,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                               context: context,
                               builder: (ctx) => AlertDialog(
                                 title: Text('Warning'),
-                                content: Text('Are you sure you are finished creating this shift?'),
+                                content: Text('Are you sure you are done creating this shift?'),
                                 actions: <Widget>[
                                   TextButton(
                                     child: Text('Yes'),
