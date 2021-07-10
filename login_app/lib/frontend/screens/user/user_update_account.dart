@@ -137,7 +137,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                 if (value.isEmpty) {
                                   return null;
                                 } else if (value.isNotEmpty) {
-                                  if(value.isEmpty || !value.contains('@'))
+                                  if(!value.contains('@'))
                                   {
                                     return 'invalid email';
                                   }
