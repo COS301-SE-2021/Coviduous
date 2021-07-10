@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:login_app/backend/controllers/user_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
+import 'package:login_app/frontend/screens/shift/admin_add_shift_add_employee.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
 
@@ -157,7 +158,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                         ),
                         child: Text('Add employee'),
                         onPressed: () {
-                          //Navigator.of(context).pushReplacementNamed(AddShiftAddEmployee.routeName);
+                          Navigator.of(context).pushReplacementNamed(AddShiftAddEmployee.routeName);
                         },
                       )),
                 ),
