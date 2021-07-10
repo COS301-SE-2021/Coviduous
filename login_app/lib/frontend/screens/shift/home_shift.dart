@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-import 'package:login_app/frontend/screens/floor_plan/admin_delete_floor_plan.dart';
+import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
@@ -57,7 +57,7 @@ class _ShiftState extends State<Shift> {
                             ),
                             onPressed: () {
                               if (floorGlobals.globalFloors.isNotEmpty) { //Only allow shifts to be created if floor plans exist
-                                //Navigator.of(context).pushReplacementNamed(AddShiftFloorPlan.routeName);
+                                Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
                               } else {
                                 showDialog(
                                     context: context,
