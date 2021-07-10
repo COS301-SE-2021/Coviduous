@@ -32,6 +32,7 @@ import 'frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
 import 'frontend/screens/shift/admin_add_shift_floors.dart';
 import 'frontend/screens/shift/admin_add_shift_rooms.dart';
+import 'frontend/screens/shift/admin_add_shift_create_shift.dart';
 
 //Office
 import 'frontend/screens/office/home_office.dart';
@@ -103,6 +104,7 @@ class MyApp extends StatelessWidget{
         AddShiftFloorPlans.routeName: (ctx)=> AddShiftFloorPlans(),
         AddShiftFloors.routeName: (ctx)=> AddShiftFloors(),
         AddShiftRooms.routeName: (ctx)=> AddShiftRooms(),
+        AddShiftCreateShift.routeName: (ctx)=> AddShiftCreateShift(),
 
         //Office
         Office.routeName: (ctx)=> Office(),
