@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/user/user_delete_account.dart';
 import 'package:login_app/frontend/screens/user/user_reset_password_screen.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/user/user_update_account.dart';
+import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserManageAccount extends StatefulWidget {
-  static const routeName = "/userManageAccount";
+  static const routeName = "/user_manage_account";
 
   @override
   _UserManageAccountState createState() => _UserManageAccountState();
@@ -16,6 +20,20 @@ class UserManageAccount extends StatefulWidget {
 class _UserManageAccountState extends State<UserManageAccount> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'User') {
+      if (globals.type == 'Admin') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
