@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_create_shift.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 //import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
@@ -17,6 +20,20 @@ class AddShiftRooms extends StatefulWidget {
 class _AddShiftRoomsState extends State<AddShiftRooms> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
       List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNumString);
