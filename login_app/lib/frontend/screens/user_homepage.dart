@@ -117,7 +117,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                 child: Row (
                                     children: <Widget>[
                                       Expanded(child: Text('Manage notifications')),
-                                      Icon(Icons.add_alert)
+                                      Icon(Icons.notifications_active)
                                     ],
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                     crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
