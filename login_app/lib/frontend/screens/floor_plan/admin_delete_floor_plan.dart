@@ -1,13 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
+import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request.dart';
+import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_response.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
-import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request.dart';
-import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_response.dart';
 
 class DeleteFloorPlan extends StatefulWidget {
   static const routeName = "/admin_delete_floor_plan";
@@ -32,6 +35,20 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
 
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
