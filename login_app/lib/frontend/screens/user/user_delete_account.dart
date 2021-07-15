@@ -1,17 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/backend/controllers/user_controller.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/screens/user/user_manage_account.dart';
+import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+
 //import 'package:login_app/requests/user_requests/DeleteAccountUserRequest.dart';
 //import 'package:login_app/responses/user_responses/DeleteAccountUserResponse.dart';
 
 class UserDeleteAccount extends StatefulWidget {
-  static const routeName = "/userDeleteAccount";
+  static const routeName = "/user_delete_account";
   @override
   _UserDeleteAccountState createState() => _UserDeleteAccountState();
 }
@@ -52,6 +56,20 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
 
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'User') {
+      if (globals.type == 'Admin') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     getSnap();
 
     return Container(
