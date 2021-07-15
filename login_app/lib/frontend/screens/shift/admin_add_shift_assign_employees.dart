@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/backend/controllers/user_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_add_employee.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
@@ -18,6 +21,20 @@ class AddShiftAssignEmployees extends StatefulWidget {
 class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     UserController services = new UserController();
     Widget getList() {
       //List<User> users = services.getUsers();
