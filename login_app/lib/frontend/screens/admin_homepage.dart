@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/notification/admin_home_notifications.dart';
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
@@ -106,24 +107,46 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         height: MediaQuery.of(context).size.height/48,
                                         width: MediaQuery.of(context).size.width,
                                       ),
-                                    ElevatedButton (
-                                        style: ElevatedButton.styleFrom (
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
+                                      ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
                                           ),
-                                        ),
-                                        child: Row (
-                                            children: <Widget>[
-                                              Expanded(child: Text('View announcements')),
-                                              Icon(Icons.add_alert)
-                                            ],
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-                                        }
-                                    ),
+                                          child: Row (
+                                              children: <Widget>[
+                                                Expanded(child: Text('View announcements')),
+                                                Icon(Icons.add_alert)
+                                              ],
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                                          }
+                                      ),
+                                      SizedBox (
+                                        height: MediaQuery.of(context).size.height/48,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                      ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Row (
+                                              children: <Widget>[
+                                                Expanded(child: Text('Manage notifications')),
+                                                Icon(Icons.add_alert)
+                                              ],
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                                          }
+                                      ),
                                   ]
                               )
                           ),
