@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+
 import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/viewUser_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/viewUser_announcement_response.dart';
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
-
+import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserViewAnnouncements extends StatefulWidget {
@@ -17,6 +21,20 @@ class UserViewAnnouncements extends StatefulWidget {
 class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'User') {
+      if (globals.type == 'Admin') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     Widget getList() {
       AnnouncementsController services = new AnnouncementsController();
       ViewUserAnnouncementResponse response = services.viewAnnouncementsUserMock(ViewUserAnnouncementRequest(globals.loggedInUserId));
