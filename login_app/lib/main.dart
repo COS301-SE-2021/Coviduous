@@ -45,6 +45,10 @@ import 'frontend/screens/office/user_view_office_desks.dart';
 import 'frontend/screens/office/user_view_current_bookings.dart';
 import 'frontend/screens/office/user_book_office_space.dart';
 
+//Notification
+import 'frontend/screens/notification/admin_home_notifications.dart';
+import 'frontend/screens/notification/user_home_notifications.dart';
+
 //User
 import 'frontend/screens/admin_homepage.dart';
 import 'frontend/screens/user/admin_manage_account.dart';
@@ -118,6 +122,10 @@ class MyApp extends StatelessWidget{
         UserViewOfficeDesks.routeName: (ctx)=> UserViewOfficeDesks(),
         UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
+
+        //Notification
+        AdminNotifications.routeName: (ctx)=> AdminNotifications(),
+        UserNotifications.routeName: (ctx)=> UserNotifications(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
