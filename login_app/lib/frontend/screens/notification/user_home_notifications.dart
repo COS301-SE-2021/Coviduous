@@ -64,7 +64,7 @@ class _UserNotificationsState extends State<UserNotifications> {
                             ),
                             child: Row (
                                 children: <Widget>[
-                                  Expanded(child: Text('Create notification')),
+                                  Expanded(child: Text('Request access')),
                                   Icon(Icons.add_circle_rounded)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -75,7 +75,7 @@ class _UserNotificationsState extends State<UserNotifications> {
                                   context: context,
                                   builder: (ctx) => AlertDialog(
                                     title: Text('Placeholder'),
-                                    content: Text('Create notification.'),
+                                    content: Text('Request access.'),
                                     actions: <Widget>[
                                       TextButton(
                                         child: Text('Okay'),
