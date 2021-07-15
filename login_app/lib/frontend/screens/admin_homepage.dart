@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/notification/admin_home_notifications.dart';
@@ -7,6 +8,7 @@ import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:login_app/frontend/screens/announcement/admin_view_announcements.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -20,6 +22,20 @@ class AdminHomePage extends StatefulWidget {
 class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     return new WillPopScope(
       onWillPop: () async => false, //Prevent the back button from working
         child: Container(
