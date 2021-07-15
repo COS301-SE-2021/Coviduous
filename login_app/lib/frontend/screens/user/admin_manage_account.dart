@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
-import 'admin_delete_account.dart';
-import 'admin_reset_password_screen.dart';
-import '../admin_homepage.dart';
-import 'admin_update_account.dart';
+import 'package:login_app/frontend/screens/user/admin_delete_account.dart';
+import 'package:login_app/frontend/screens/user/admin_reset_password_screen.dart';
+import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/user/admin_update_account.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminManageAccount extends StatefulWidget {
-  static const routeName = "/adminManageAccount";
+  static const routeName = "/admin_manage_account";
 
   @override
   _AdminManageAccountState createState() => _AdminManageAccountState();
@@ -16,6 +20,20 @@ class AdminManageAccount extends StatefulWidget {
 class _AdminManageAccountState extends State<AdminManageAccount> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
