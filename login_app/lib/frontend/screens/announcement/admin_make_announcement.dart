@@ -1,11 +1,15 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+
 import 'package:login_app/backend/controllers/announcements_controller.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
 import 'package:login_app/responses/announcement_responses/create_announcement_response.dart';
+import 'package:login_app/frontend/screens/announcement/admin_view_announcements.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 
-import 'admin_view_announcements.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
 
@@ -58,6 +62,20 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
 
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
