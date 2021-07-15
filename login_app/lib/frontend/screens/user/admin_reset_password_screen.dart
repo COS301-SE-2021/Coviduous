@@ -1,15 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
-import 'admin_manage_account.dart';
-import '../login_screen.dart';
+import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminResetPassword extends StatefulWidget {
-  static const routeName = "/adminResetPassword";
+  static const routeName = "/admin_reset_password";
 
   @override
   _AdminResetPasswordState createState() => _AdminResetPasswordState();
@@ -24,6 +26,20 @@ class _AdminResetPasswordState extends State<AdminResetPassword> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
