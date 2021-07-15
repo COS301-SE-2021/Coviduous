@@ -4,7 +4,9 @@ import 'package:login_app/frontend/screens/office/home_office.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/user/user_manage_account.dart';
 import 'package:login_app/frontend/screens/announcement/user_view_announcements.dart';
+import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {
@@ -100,6 +102,28 @@ class _UserHomePageState extends State<UserHomePage> {
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
+                                }
+                            ),
+                            SizedBox (
+                              height: MediaQuery.of(context).size.height/48,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                            ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Manage notifications')),
+                                      Icon(Icons.add_alert)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(UserNotifications.routeName);
                                 }
                             ),
                           ]
