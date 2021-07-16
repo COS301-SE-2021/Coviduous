@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -107,21 +108,7 @@ class _UserNotificationsState extends State<UserNotifications> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('View notifications.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
                             }
                         ),
                       ]
