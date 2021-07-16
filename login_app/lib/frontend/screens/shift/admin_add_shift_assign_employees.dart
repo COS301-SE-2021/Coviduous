@@ -203,7 +203,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                     child: Text('Yes'),
                                     onPressed: (){
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Shift created")));
+                                          SnackBar(content: Text("Shift successfully created.")));
                                       Navigator.of(context).pushReplacementNamed(Shift.routeName);
                                     },
                                   ),
