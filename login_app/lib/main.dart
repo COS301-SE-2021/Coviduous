@@ -53,6 +53,7 @@ import 'package:login_app/frontend/screens/notification/admin_make_notification_
 import 'package:login_app/frontend/screens/notification/admin_make_notification_assign_employees.dart';
 import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
+import 'package:login_app/frontend/screens/notification/user_request_access.dart';
 
 //User
 import 'package:login_app/frontend/screens/admin_homepage.dart';
@@ -136,6 +137,7 @@ class MyApp extends StatelessWidget{
         MakeNotificationAddEmployee.routeName: (ctx)=> MakeNotificationAddEmployee(),
         UserNotifications.routeName: (ctx)=> UserNotifications(),
         UserViewNotifications.routeName: (ctx)=> UserViewNotifications(),
+        UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
