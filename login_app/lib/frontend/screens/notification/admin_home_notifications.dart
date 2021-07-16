@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/notification/admin_view_notifications.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -107,21 +108,7 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('View notifications.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
                             }
                         ),
                       ]
