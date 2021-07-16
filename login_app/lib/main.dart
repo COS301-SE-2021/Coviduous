@@ -48,6 +48,9 @@ import 'package:login_app/frontend/screens/office/user_book_office_space.dart';
 //Notification
 import 'package:login_app/frontend/screens/notification/admin_home_notifications.dart';
 import 'package:login_app/frontend/screens/notification/admin_view_notifications.dart';
+import 'package:login_app/frontend/screens/notification/admin_make_notification.dart';
+import 'package:login_app/frontend/screens/notification/admin_make_notification_add_employee.dart';
+import 'package:login_app/frontend/screens/notification/admin_make_notification_assign_employees.dart';
 import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
 
@@ -128,6 +131,9 @@ class MyApp extends StatelessWidget{
         //Notification
         AdminNotifications.routeName: (ctx)=> AdminNotifications(),
         AdminViewNotifications.routeName: (ctx)=> AdminViewNotifications(),
+        MakeNotification.routeName: (ctx)=> MakeNotification(),
+        MakeNotificationAssignEmployees.routeName: (ctx)=> MakeNotificationAssignEmployees(),
+        MakeNotificationAddEmployee.routeName: (ctx)=> MakeNotificationAddEmployee(),
         UserNotifications.routeName: (ctx)=> UserNotifications(),
         UserViewNotifications.routeName: (ctx)=> UserViewNotifications(),
 
