@@ -2,71 +2,73 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 //Splash screen and login
-import 'frontend/screens/splash_screen.dart';
-import 'frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/splash_screen.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
 
 //Signup screens
-import 'frontend/screens/signup/home_signup_screen.dart';
-import 'frontend/screens/signup/admin_signup_screen.dart';
-import 'frontend/screens/signup/user_signup_screen.dart';
+import 'package:login_app/frontend/screens/signup/home_signup_screen.dart';
+import 'package:login_app/frontend/screens/signup/admin_signup_screen.dart';
+import 'package:login_app/frontend/screens/signup/user_signup_screen.dart';
 
 //Announcement
-import 'frontend/screens/announcement/admin_delete_announcement.dart';
-import 'frontend/screens/announcement/admin_view_announcements.dart';
-import 'frontend/screens/announcement/admin_make_announcement.dart';
-import 'frontend/screens/announcement/user_view_announcements.dart';
+import 'package:login_app/frontend/screens/announcement/admin_delete_announcement.dart';
+import 'package:login_app/frontend/screens/announcement/admin_view_announcements.dart';
+import 'package:login_app/frontend/screens/announcement/admin_make_announcement.dart';
+import 'package:login_app/frontend/screens/announcement/user_view_announcements.dart';
 
 //Floor plan
-import 'frontend/screens/floor_plan/home_floor_plan.dart';
-import 'frontend/screens/floor_plan/admin_add_floor_plan.dart';
-import 'frontend/screens/floor_plan/admin_modify_floors.dart';
-import 'frontend/screens/floor_plan/admin_modify_rooms.dart';
-import 'frontend/screens/floor_plan/admin_delete_floor_plan.dart';
-import 'frontend/screens/floor_plan/admin_view_floors.dart';
-import 'frontend/screens/floor_plan/admin_edit_room_add.dart';
-import 'frontend/screens/floor_plan/admin_edit_room_modify.dart';
-import 'frontend/screens/floor_plan/admin_view_rooms.dart';
+import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_add_floor_plan.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_modify_floors.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_modify_rooms.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_delete_floor_plan.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_view_floors.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_add.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_modify.dart';
+import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 
 //Shift
-import 'frontend/screens/shift/home_shift.dart';
+import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
-import 'frontend/screens/shift/admin_add_shift_floors.dart';
-import 'frontend/screens/shift/admin_add_shift_rooms.dart';
-import 'frontend/screens/shift/admin_add_shift_create_shift.dart';
+import 'package:login_app/frontend/screens/shift/admin_add_shift_floors.dart';
+import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
+import 'package:login_app/frontend/screens/shift/admin_add_shift_create_shift.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_assign_employees.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_add_employee.dart';
 
 //Office
-import 'frontend/screens/office/home_office.dart';
-import 'frontend/screens/office/user_view_office_floors.dart';
-import 'frontend/screens/office/user_view_office_rooms.dart';
-import 'frontend/screens/office/user_view_office_times.dart';
-import 'frontend/screens/office/user_view_office_desks.dart';
-import 'frontend/screens/office/user_view_current_bookings.dart';
-import 'frontend/screens/office/user_book_office_space.dart';
+import 'package:login_app/frontend/screens/office/home_office.dart';
+import 'package:login_app/frontend/screens/office/user_view_office_floors.dart';
+import 'package:login_app/frontend/screens/office/user_view_office_rooms.dart';
+import 'package:login_app/frontend/screens/office/user_view_office_times.dart';
+import 'package:login_app/frontend/screens/office/user_view_office_desks.dart';
+import 'package:login_app/frontend/screens/office/user_view_current_bookings.dart';
+import 'package:login_app/frontend/screens/office/user_book_office_space.dart';
 
 //Notification
-import 'frontend/screens/notification/admin_home_notifications.dart';
-import 'frontend/screens/notification/user_home_notifications.dart';
+import 'package:login_app/frontend/screens/notification/admin_home_notifications.dart';
+import 'package:login_app/frontend/screens/notification/admin_view_notifications.dart';
+import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
+import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
 
 //User
-import 'frontend/screens/admin_homepage.dart';
-import 'frontend/screens/user/admin_manage_account.dart';
-import 'frontend/screens/user/admin_update_account.dart';
-import 'frontend/screens/user_homepage.dart';
-import 'frontend/screens/user/user_manage_account.dart';
-import 'frontend/screens/user/user_update_account.dart';
+import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
+import 'package:login_app/frontend/screens/user/admin_update_account.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/user/user_manage_account.dart';
+import 'package:login_app/frontend/screens/user/user_update_account.dart';
 
 //Reset password screens
-import 'frontend/screens/forgot_password_screen.dart';
-import 'frontend/screens/user/admin_reset_password_screen.dart';
-import 'frontend/screens/user/user_reset_password_screen.dart';
+import 'package:login_app/frontend/screens/forgot_password_screen.dart';
+import 'package:login_app/frontend/screens/user/admin_reset_password_screen.dart';
+import 'package:login_app/frontend/screens/user/user_reset_password_screen.dart';
 
 //Delete account screen
-import 'frontend/screens/user/admin_delete_account.dart';
-import 'frontend/screens/user/user_delete_account.dart';
+import 'package:login_app/frontend/screens/user/admin_delete_account.dart';
+import 'package:login_app/frontend/screens/user/user_delete_account.dart';
 
-import 'frontend/front_end_globals.dart' as globals;
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -125,7 +127,9 @@ class MyApp extends StatelessWidget{
 
         //Notification
         AdminNotifications.routeName: (ctx)=> AdminNotifications(),
+        AdminViewNotifications.routeName: (ctx)=> AdminViewNotifications(),
         UserNotifications.routeName: (ctx)=> UserNotifications(),
+        UserViewNotifications.routeName: (ctx)=> UserViewNotifications(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
