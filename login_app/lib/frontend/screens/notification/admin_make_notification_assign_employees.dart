@@ -203,7 +203,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                                     child: Text('Yes'),
                                     onPressed: (){
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Notification created")));
+                                          SnackBar(content: Text("Notification successfully created.")));
                                       Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
                                     },
                                   ),
