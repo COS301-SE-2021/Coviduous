@@ -5,6 +5,7 @@ import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
+import 'package:login_app/frontend/screens/notification/user_request_access.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -72,21 +73,7 @@ class _UserNotificationsState extends State<UserNotifications> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('Request access.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              Navigator.of(context).pushReplacementNamed(UserRequestAccess.routeName);
                             }
                         ),
                         SizedBox (
