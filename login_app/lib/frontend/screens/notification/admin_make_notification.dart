@@ -7,7 +7,6 @@ import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
-
 //import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
 
 class MakeNotification extends StatefulWidget {
