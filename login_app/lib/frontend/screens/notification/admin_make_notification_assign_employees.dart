@@ -35,15 +35,15 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
       return Container();
     }
 
+    //List<User> users = services.getUsers();
+    List<User> users = userGlobals.userDatabaseTable;
+    users.removeWhere((user) => user.adminId == "" || user.adminId.isEmpty); //Only show employees, not admins
+    int numOfUsers = users.length;
+
+    print(numOfUsers);
+
     UserController services = new UserController();
     Widget getList() {
-      //List<User> users = services.getUsers();
-      List<User> users = userGlobals.userDatabaseTable;
-      users.removeWhere((user) => user.adminId == "" || user.adminId.isEmpty); //Only show employees, not admins
-      int numOfUsers = users.length;
-
-      print(numOfUsers);
-
       if (numOfUsers == 0) { //If the number of users = 0, don't display a list
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +141,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
       child: new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Assign employees to shift'),
+            title: Text('Assign employees to notification'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
@@ -193,28 +193,45 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                         ),
                         child: Text('Finish'),
                         onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                title: Text('Warning'),
-                                content: Text('Are you sure you are done creating this notification?'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('Yes'),
-                                    onPressed: (){
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Notification successfully created.")));
-                                      Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text('No'),
-                                    onPressed: (){
-                                      Navigator.of(ctx).pop();
-                                    },
-                                  )
-                                ],
-                              ));
+                          if (numOfUsers <= 0) {
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: Text('Not enough employees assigned'),
+                                  content: Text('A notification must have at least one employee assigned to it.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Okay'),
+                                      onPressed: (){
+                                        Navigator.of(ctx).pop();
+                                      },
+                                    ),
+                                  ],
+                                ));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: Text('Warning'),
+                                  content: Text('Are you sure you are done creating this notification?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Yes'),
+                                      onPressed: (){
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("Notification successfully created.")));
+                                        Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text('No'),
+                                      onPressed: (){
+                                        Navigator.of(ctx).pop();
+                                      },
+                                    )
+                                  ],
+                                ));
+                          }
                         },
                       )),
                 )
