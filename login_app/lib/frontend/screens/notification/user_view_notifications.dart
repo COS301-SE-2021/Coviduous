@@ -185,7 +185,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                   alignment: Alignment.bottomRight,
                   child: Container (
                       height: 50,
-                      width: 200,
+                      width: 170,
                       padding: EdgeInsets.all(10),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom (
