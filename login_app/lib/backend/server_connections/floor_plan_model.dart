@@ -30,7 +30,7 @@ class FloorPlanModel {
 
   }
 
-//////////////////////////////////Mock Implementations///////////////////////////////////
+//////////////////////////////////Concerete Implementations///////////////////////////////////
   
   Future<String> createFloorPlan(
       int numFloors, String admin, String companyId) async {
@@ -62,6 +62,7 @@ class FloorPlanModel {
     }
   }
 
+///////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS ////////////////////
 //////////////////////////////////Mock Implementations///////////////////////////////////
 
   String createFloorPlanMock(int numFloors, String admin, String companyId) {
