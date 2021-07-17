@@ -1,7 +1,7 @@
 /*
-  * File name: floorplan_controller.dart
+  * File name: office_controller.dart
   
-  * Purpose: Holds the controller class for floorplans, all service contracts for the floorplan subsystem are offered through this class.
+  * Purpose: Holds the controller class for office, all service contracts for the office subsystem are offered through this class.
   
   * Collaborators:
     - Njabulo Skosana
