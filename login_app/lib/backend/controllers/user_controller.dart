@@ -29,7 +29,8 @@ import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
  * The class has both mock and concrete implementations of the service contracts.
  */
 class UserController {
-//This class provides an interface to all the user service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
+  //This class provides an interface to all the user service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
+  
   /** 
    * userQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
