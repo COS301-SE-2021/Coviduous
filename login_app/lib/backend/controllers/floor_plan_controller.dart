@@ -36,7 +36,8 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
  * The class has both mock and concrete implementations of the service contracts.
  */
 class FloorPlanController {
-//This class provides an interface to all the floorplan service contracts of the system. It provides a bridge between the front end screens and backend functionality for floor plan.
+  //This class provides an interface to all the floorplan service contracts of the system. It provides a bridge between the front end screens and backend functionality for floor plan.
+
   /** 
    * floorPlanQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
