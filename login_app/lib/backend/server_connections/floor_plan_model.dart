@@ -25,8 +25,12 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
  * The class has both mock and concrete implementations of the service contracts. 
  */
 class FloorPlanModel {
-  FloorPlanModel() {}
-//////////////////////////////////Concerete Implementations///////////////////////////////////
+
+  FloorPlanModel() {
+
+  }
+
+//////////////////////////////////Mock Implementations///////////////////////////////////
   
   Future<String> createFloorPlan(
       int numFloors, String admin, String companyId) async {
