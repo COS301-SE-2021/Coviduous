@@ -25,7 +25,8 @@ import 'package:login_app/subsystems/office_subsystem/booking.dart';
  * The class has both mock and concrete implementations of the service contracts.
  */
 class OfficeController {
-//This class provides an interface to all the Office service contracts of the system. It provides a bridge between the front end screens and backend functionality for office.
+  //This class provides an interface to all the Office service contracts of the system. It provides a bridge between the front end screens and backend functionality for office.
+
   /** 
    *  OfficeQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
