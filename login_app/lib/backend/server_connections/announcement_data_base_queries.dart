@@ -41,7 +41,7 @@ class AnnouncementDatabaseQueries {
     timeStamp = null;
   }
 
-  // create DB connection function to be called in each use case
+  // DB connection function to be called in each use case
   Future<void> connect() async {
     connection = PostgreSQLConnection(host, port, dbName,
         username: user, password: pass);
@@ -55,7 +55,8 @@ class AnnouncementDatabaseQueries {
     }
   }
 
-///////////////////////////////
+//////////////////////////////////Concerete Implementations///////////////////////////////////
+
 /**
  * This function allows the admin the ability to create an announcement
  */
