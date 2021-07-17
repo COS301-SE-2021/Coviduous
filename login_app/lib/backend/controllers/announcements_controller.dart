@@ -26,7 +26,8 @@ import 'package:login_app/responses/announcement_responses/viewUser_announcement
  * The class has both mock and concrete implementations of the service contracts.
  */
 class AnnouncementsController {
-//This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
+  //This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
+  
   /** 
    * announcementQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
