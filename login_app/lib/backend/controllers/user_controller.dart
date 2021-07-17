@@ -1,7 +1,9 @@
 /*
-  File name: user_controller.dart
-  Purpose: Holds the controller class for user, all service contracts for the user subsystem are offered through this class.
-  Collaborators:
+  * File name: floorplan_controller.dart
+  
+  * Purpose: Holds the controller class for floorplans, all service contracts for the floorplan subsystem are offered through this class.
+  
+  * Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
     - Chaoane Malakoane
