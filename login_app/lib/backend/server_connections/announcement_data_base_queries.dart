@@ -167,8 +167,9 @@ class AnnouncementDatabaseQueries {
     return timeStamp;
   }
 
-///////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS////////////////////
-//////////////////////////////////Concerete Implementations///////////////////////////////////
+///////////////////////// END OF CONCRETE IMPLEMENTATIONS BEGIN MOCK IMPLEMENTATIONS FOR THE CONCRETE FUNCTIONS ////////////////////
+//////////////////////////////////Mock Implementations///////////////////////////////////
+
 /**
  * This function mocks out the database interaction of creating an announcement, the fuction will be used in tests
  */
