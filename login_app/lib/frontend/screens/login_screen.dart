@@ -17,6 +17,7 @@ import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/signup/home_signup_screen.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/screens/forgot_password_screen.dart';
+import 'package:login_app/frontend/screens/main_homepage.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
@@ -79,194 +80,193 @@ class _LoginScreenState extends State<LoginScreen> {
    */
 @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
-      //Prevent the back button from working
-      onWillPop: () async => false,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
         ),
-        child: isLoading == false ? Scaffold(
-          backgroundColor: Colors.transparent, //To show background image
-          appBar: AppBar(
-            title: Text('Login'),
-            //Back button will not show up in app bar
-            automaticallyImplyLeading: false,
-            actions: <Widget>[
-            TextButton(
-              child: Row(
-                  children: <Widget>[
-                    Text('Register '),
-                    Icon(Icons.person_add)
-                  ],
-                ),
-                onPressed: (){
-                  Navigator.of(context).pushReplacementNamed(Register.routeName);
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                ),
-              ),
-            ],
+      ),
+      child: isLoading == false ? Scaffold(
+        backgroundColor: Colors.transparent, //To show background image
+        appBar: AppBar(
+          title: Text('Login'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+            },
           ),
-          body: Stack(
-            children: <Widget>[
-              //So the element doesn't overflow when you open the keyboard
-              SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container (
+          actions: <Widget>[
+          TextButton(
+            child: Row(
+                children: <Widget>[
+                  Text('Register '),
+                  Icon(Icons.person_add)
+                ],
+              ),
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(Register.routeName);
+              },
+              style: TextButton.styleFrom(
+                primary: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        body: Stack(
+          children: <Widget>[
+            //So the element doesn't overflow when you open the keyboard
+            SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container (
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(20.0),
+                      child: Image(
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(20.0),
-                        child: Image(
-                          alignment: Alignment.center,
-                          image: AssetImage('assets/placeholder.com-logo1.png'),
-                          color: Colors.white,
-                          width: double.maxFinite,
-                          height: MediaQuery.of(context).size.height/8,
-                        ),
-                      ),
-                      SizedBox (
-                        height: MediaQuery.of(context).size.height/48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      Container(
+                        image: AssetImage('assets/placeholder.com-logo1.png'),
                         color: Colors.white,
-                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
-                        padding: EdgeInsets.all(16),
-                        child: Form(
-                          key: _formKey,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                //email
-                                TextFormField(
-                                  //The "return" button becomes a "next" button when typing
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(labelText: 'Email'),
-                                  keyboardType: TextInputType.emailAddress,
-                                  controller: _email,
-                                  //validate email
-                                  //should implement more functionality like check email
-                                  validator: (value)
+                        width: double.maxFinite,
+                        height: MediaQuery.of(context).size.height/8,
+                      ),
+                    ),
+                    SizedBox (
+                      height: MediaQuery.of(context).size.height/48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    Container(
+                      color: Colors.white,
+                      width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+                      padding: EdgeInsets.all(16),
+                      child: Form(
+                        key: _formKey,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              //email
+                              TextFormField(
+                                //The "return" button becomes a "next" button when typing
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(labelText: 'Email'),
+                                keyboardType: TextInputType.emailAddress,
+                                controller: _email,
+                                //validate email
+                                //should implement more functionality like check email
+                                validator: (value)
+                                {
+                                  if(value.isEmpty || !value.contains('@'))
                                   {
-                                    if(value.isEmpty || !value.contains('@'))
-                                    {
-                                      return 'invalid email';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                //password
-                                TextFormField(
-                                  //The "return" button becomes a "done" button when typing
-                                  textInputAction: TextInputAction.done,
-                                  decoration: InputDecoration(labelText:'Password'),
-                                  obscureText: true,
-                                  controller: _password,
-                                  validator: (value)
-                                    {
-                                    if(value.isEmpty || value.length <= 5)
-                                    {
-                                      return 'invalid password';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                GestureDetector(
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
-                                  },
-                                  child: Text("Forgot password?"),
-                                ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                ElevatedButton(
-                                  child: Text(
-                                    'Submit'
-                                  ),
-                                  onPressed: ()
+                                    return 'invalid email';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              //password
+                              TextFormField(
+                                //The "return" button becomes a "done" button when typing
+                                textInputAction: TextInputAction.done,
+                                decoration: InputDecoration(labelText:'Password'),
+                                obscureText: true,
+                                controller: _password,
+                                validator: (value)
                                   {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    AuthClass().signIn(email: _email.text.trim(),
-                                        password: _password.text.trim()).then((value) {
-                                      if (value == "welcome") {
+                                  if(value.isEmpty || value.length <= 5)
+                                  {
+                                    return 'invalid password';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/48,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+                                },
+                                child: Text("Forgot password?"),
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/48,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              ElevatedButton(
+                                child: Text(
+                                  'Submit'
+                                ),
+                                onPressed: ()
+                                {
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                  AuthClass().signIn(email: _email.text.trim(),
+                                      password: _password.text.trim()).then((value) {
+                                    if (value == "welcome") {
 
-                                        globals.email = _email.text;
-                                        globals.loggedInUserId = userGlobals.getUserId(_email.text);
-                                        print(globals.loggedInUserId);
+                                      globals.email = _email.text;
+                                      globals.loggedInUserId = userGlobals.getUserId(_email.text);
+                                      print(globals.loggedInUserId);
 
-                                        //get user type
-                                        getUserType().then((userType) {
-                                          if (userType == 'Admin') {
-                                            globals.type = 'Admin';
-                                            Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                          } else if (userType == 'User') {
-                                            globals.type = 'User';
-                                            Navigator.pushReplacementNamed(context, UserHomePage.routeName);
-                                          } else {
-                                            showDialog(
-                                                context: context,
-                                                builder: (ctx) => AlertDialog(
-                                                  title: Text('Error'),
-                                                  content: Text('Encountered error retrieving user type, please try again.'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: Text('Okay'),
-                                                      onPressed: (){
-                                                        Navigator.of(ctx).pop();
-                                                      },
-                                                    )
-                                                  ],
-                                                )
-                                            );
-                                          }
-                                          setState(() {
-                                            isLoading = false;
-                                          });
-                                        });
-                                      }
-                                      else {
+                                      //get user type
+                                      getUserType().then((userType) {
+                                        if (userType == 'Admin') {
+                                          globals.type = 'Admin';
+                                          Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                        } else if (userType == 'User') {
+                                          globals.type = 'User';
+                                          Navigator.pushReplacementNamed(context, UserHomePage.routeName);
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Error'),
+                                                content: Text('Encountered error retrieving user type, please try again.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
                                         setState(() {
                                           isLoading = false;
                                         });
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text(value)));
-                                      }
-                                    });
-                                  },
-                                  style: ElevatedButton.styleFrom (
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
+                                      });
+                                    }
+                                    else {
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text(value)));
+                                    }
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                )
-                              ],
-                            )
-                          ),
+                                ),
+                              )
+                            ],
+                          )
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )
-            ],
-          ),
-        ) : Center( child: CircularProgressIndicator())
-      ),
+              ),
+            )
+          ],
+        ),
+      ) : Center( child: CircularProgressIndicator())
     );
   }
 }
