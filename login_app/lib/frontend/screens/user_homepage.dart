@@ -6,6 +6,7 @@ import 'package:login_app/frontend/screens/office/home_office.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/user/user_manage_account.dart';
 import 'package:login_app/frontend/screens/announcement/user_view_announcements.dart';
+import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
 //import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 
@@ -139,7 +140,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                     crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
+                                  Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
                                 }
                             ),
                           ]
