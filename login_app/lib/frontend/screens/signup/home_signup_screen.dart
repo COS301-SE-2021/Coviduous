@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:login_app/frontend/screens/signup/admin_signup_screen.dart';
 import 'package:login_app/frontend/screens/signup/user_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
-import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class Register extends StatefulWidget {
   static const routeName = "/register";
@@ -12,23 +11,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register>{
-  TextEditingController _firstName = TextEditingController();
-  TextEditingController _lastName = TextEditingController();
-  TextEditingController _type = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _userName = TextEditingController();
-  TextEditingController _companyName = TextEditingController();
-  TextEditingController _companyLocation = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _confirmPassword = TextEditingController();
-  bool isLoading = false;
-
-  final GlobalKey<FormState> _formKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
-    String userType = "User";
-
     return WillPopScope(
       onWillPop: () async => false, //Prevent the back button from working
       child: Container(
@@ -38,7 +22,7 @@ class _RegisterState extends State<Register>{
               fit: BoxFit.cover,
             ),
           ),
-        child: isLoading == false ? Scaffold(
+        child: Scaffold(
           backgroundColor: Colors.transparent, //To show background image
           appBar: AppBar(
             title: Text('Register'),
@@ -122,7 +106,7 @@ class _RegisterState extends State<Register>{
                 ]
             ),
           )
-        ) : Center( child: CircularProgressIndicator())
+        ),
       ),
     );
   }
