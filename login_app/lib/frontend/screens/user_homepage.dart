@@ -6,7 +6,7 @@ import 'package:login_app/frontend/screens/office/home_office.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/user/user_manage_account.dart';
 import 'package:login_app/frontend/screens/announcement/user_view_announcements.dart';
-import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
+//import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
@@ -132,14 +132,14 @@ class _UserHomePageState extends State<UserHomePage> {
                                 ),
                                 child: Row (
                                     children: <Widget>[
-                                      Expanded(child: Text('Manage notifications')),
+                                      Expanded(child: Text('View notifications')),
                                       Icon(Icons.notifications_active)
                                     ],
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                     crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(UserNotifications.routeName);
+                                  Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
                                 }
                             ),
                           ]
