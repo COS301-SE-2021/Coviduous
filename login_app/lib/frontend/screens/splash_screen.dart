@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/main_homepage.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
 
     Future.delayed(const Duration(seconds: 2), (){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage()), (route) => false);
 
     });
     return Container(
