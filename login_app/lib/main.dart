@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-//Splash screen and login
+//Splash screen, main homepage, and login
 import 'package:login_app/frontend/screens/splash_screen.dart';
+import 'package:login_app/frontend/screens/main_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 //Signup screens
@@ -156,6 +157,9 @@ class MyApp extends StatelessWidget{
 
         //Login screen
         LoginScreen.routeName: (ctx)=> LoginScreen(),
+
+        //Main homepage screen
+        HomePage.routeName: (ctx)=> HomePage(),
 
         //Reset password
         ForgotPassword.routeName: (ctx)=> ForgotPassword(),
