@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
+//import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/frontend/screens/user_homepage.dart';
 
 class UserViewNotifications extends StatefulWidget {
   static const routeName = "/user_view_notifications";
@@ -172,7 +173,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
             title: Text('Your notifications'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserNotifications.routeName);
+                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
               },
             ),
           ),
