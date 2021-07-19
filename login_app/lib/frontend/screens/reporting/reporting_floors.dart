@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_floor_plan.dart';
+import 'package:login_app/frontend/screens/reporting/reporting_rooms.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -100,21 +101,8 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Placeholder'),
-                                          content: Text('Going to floor ' + services.getFloors()[index].getFloorNumber()),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
+                                    globals.currentFloorNumString = services.getFloors()[index].getFloorNumber();
+                                    Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
                                   }),
                             ],
                           ),
