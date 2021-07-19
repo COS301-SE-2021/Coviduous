@@ -43,7 +43,6 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
     Widget getList() {
       //ViewAdminFloorPlanResponse response = services.viewFloorPlanAdminMock(ViewAdminFloorPlanRequest());
       //List<Floor> floors = response.getFloors();
-      List<Floor> floors = floorGlobals.globalFloors;
       int numOfFloors = floorGlobals.globalNumFloors;
 
       print(numOfFloors);
@@ -65,7 +64,9 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                     )
                   ],
                 ));
-        Navigator.pushReplacementNamed(context, FloorPlan.routeName);
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.pushReplacementNamed(context, FloorPlan.routeName);
+        });
         return Container();
       } else {
         //Else create and return a list
