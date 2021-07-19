@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/notification/admin_home_notifications.dart';
+import 'package:login_app/frontend/screens/reporting/home_reporting.dart';
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
@@ -161,6 +162,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           ),
                                           onPressed: () {
                                             Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                                          }
+                                      ),
+                                      SizedBox (
+                                        height: MediaQuery.of(context).size.height/48,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                      ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Row (
+                                              children: <Widget>[
+                                                Expanded(child: Text('View reports')),
+                                                Icon(Icons.notifications_active)
+                                              ],
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(Reporting.routeName);
                                           }
                                       ),
                                   ]
