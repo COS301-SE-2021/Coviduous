@@ -40,6 +40,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # To change app package name:
+  # change_app_package_name: ^1.0.0
+  # Then in the terminal run "flutter pub run change_app_package_name:main com.new.package.name"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
