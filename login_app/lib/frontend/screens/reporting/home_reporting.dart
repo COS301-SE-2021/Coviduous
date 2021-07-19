@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/reporting/reporting_floor_plan.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class Reporting extends StatefulWidget {
   static const routeName = "/reporting";
@@ -65,27 +67,32 @@ class _ReportingState extends State<Reporting> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Office reports')),
-                                  Icon(Icons.add_circle_rounded)
+                                  Icon(Icons.book)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('Office reports.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              if (floorGlobals.globalNumFloorPlans == 0) {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) =>
+                                        AlertDialog(
+                                          title: Text('No floor plans found'),
+                                          content: Text('No floor plans have been created for your company yet.'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: Text('Okay'),
+                                              onPressed: () {
+                                                Navigator.of(ctx).pop();
+                                              },
+                                            )
+                                          ],
+                                        )
+                                );
+                              } else {
+                                Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
+                              }
                             }
                         ),
                         SizedBox (
@@ -101,7 +108,7 @@ class _ReportingState extends State<Reporting> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Health reports')),
-                                  Icon(Icons.update_rounded)
+                                  Icon(Icons.medical_services)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
