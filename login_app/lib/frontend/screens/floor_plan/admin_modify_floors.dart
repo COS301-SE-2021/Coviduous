@@ -63,7 +63,9 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                     )
                   ],
                 ));
-        Navigator.pushReplacementNamed(context, FloorPlan.routeName);
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.pushReplacementNamed(context, FloorPlan.routeName);
+        });
         return Container();
       } else {
         //Else create and return a list
