@@ -88,7 +88,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         child: Row (
                                             children: <Widget>[
-                                              Expanded(child: Text('Manage floor plans')),
+                                              Expanded(child: Text('Floor plans')),
                                               Icon(Icons.add_circle_rounded)
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -110,7 +110,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           ),
                                           child: Row (
                                               children: <Widget>[
-                                                Expanded(child: Text('Manage shifts')),
+                                                Expanded(child: Text('Shifts')),
                                                 Icon(Icons.alarm)
                                               ],
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -132,7 +132,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           ),
                                           child: Row (
                                               children: <Widget>[
-                                                Expanded(child: Text('View announcements')),
+                                                Expanded(child: Text('Announcements')),
                                                 Icon(Icons.add_alert)
                                               ],
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -154,7 +154,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           ),
                                           child: Row (
                                               children: <Widget>[
-                                                Expanded(child: Text('Manage notifications')),
+                                                Expanded(child: Text('Notifications')),
                                                 Icon(Icons.notifications_active)
                                               ],
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -176,8 +176,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           ),
                                           child: Row (
                                               children: <Widget>[
-                                                Expanded(child: Text('View reports')),
-                                                Icon(Icons.notifications_active)
+                                                Expanded(child: Text('Reports')),
+                                                Icon(Icons.library_books)
                                               ],
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                               crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
