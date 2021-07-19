@@ -60,6 +60,7 @@ import 'package:login_app/frontend/screens/health/user_request_access.dart';
 import 'package:login_app/frontend/screens/reporting/home_reporting.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_floor_plan.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_floors.dart';
+import 'package:login_app/frontend/screens/reporting/reporting_rooms.dart';
 
 //User
 import 'package:login_app/frontend/screens/admin_homepage.dart';
@@ -149,6 +150,7 @@ class MyApp extends StatelessWidget{
         Reporting.routeName: (ctx)=> Reporting(),
         ReportingFloorPlan.routeName: (ctx)=> ReportingFloorPlan(),
         ReportingFloors.routeName: (ctx)=> ReportingFloors(),
+        ReportingRooms.routeName: (ctx)=> ReportingRooms(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
