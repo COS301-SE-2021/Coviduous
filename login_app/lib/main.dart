@@ -56,6 +56,9 @@ import 'package:login_app/frontend/screens/notification/user_home_notifications.
 import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
 import 'package:login_app/frontend/screens/health/user_request_access.dart';
 
+//Reporting
+import 'package:login_app/frontend/screens/reporting/home_reporting.dart';
+
 //User
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/user/admin_manage_account.dart';
@@ -139,6 +142,9 @@ class MyApp extends StatelessWidget{
         UserNotifications.routeName: (ctx)=> UserNotifications(),
         UserViewNotifications.routeName: (ctx)=> UserViewNotifications(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
+
+        //Reporting
+        Reporting.routeName: (ctx)=> Reporting(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
