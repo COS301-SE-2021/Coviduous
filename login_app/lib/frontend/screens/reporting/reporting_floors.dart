@@ -109,7 +109,6 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                         ),
                       ])
                 ]),
-                //title: floors[index].floor()
               );
             });
       }
