@@ -80,7 +80,7 @@ class ReportingShiftsState extends State<ReportingShifts> {
             padding: const EdgeInsets.all(8),
             itemCount: numOfShifts,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH room in rooms[]
+              //Display a list tile FOR EACH shift in shifts[]
               return ListTile(
                 title: Column(children: [
                   Container(
