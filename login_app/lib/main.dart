@@ -62,6 +62,7 @@ import 'package:login_app/frontend/screens/reporting/reporting_floor_plan.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_floors.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_rooms.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_shifts.dart';
+import 'package:login_app/frontend/screens/reporting/reporting_employees.dart';
 
 //User
 import 'package:login_app/frontend/screens/admin_homepage.dart';
@@ -153,6 +154,7 @@ class MyApp extends StatelessWidget{
         ReportingFloors.routeName: (ctx)=> ReportingFloors(),
         ReportingRooms.routeName: (ctx)=> ReportingRooms(),
         ReportingShifts.routeName: (ctx)=> ReportingShifts(),
+        ReportingEmployees.routeName: (ctx)=> ReportingEmployees(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
