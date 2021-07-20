@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_rooms.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -33,7 +32,7 @@ class ReportingShiftsState extends State<ReportingShifts> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
+    //ShiftController services = new ShiftController();
     Widget getList() {
       //List<Shift> shifts = services.getShiftsForRoomNum(globals.currentRoomNumString);
       //int numOfShifts = shifts.length;
