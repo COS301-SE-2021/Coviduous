@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:login_app/frontend/screens/reporting/reporting_employees.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_rooms.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -127,28 +128,13 @@ class ReportingShiftsState extends State<ReportingShifts> {
                                   child: Text('View'),
                                   onPressed: () {
                                     //globals.currentShiftString = shifts[index].getShiftNum();
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Placeholder'),
-                                          content: Text('Going to shift ' + (index + 1).toString()),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
+                                    Navigator.of(context).pushReplacementNamed(ReportingEmployees.routeName);
                                   }),
                             ],
                           ),
                         ),
                       ])
                 ]),
-                //title: floors[index].floor()
               );
             });
       }
