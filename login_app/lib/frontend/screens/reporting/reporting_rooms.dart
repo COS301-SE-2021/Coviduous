@@ -171,7 +171,6 @@ class ReportingRoomsState extends State<ReportingRooms> {
                         ),
                       ])
                 ]),
-                //title: floors[index].floor()
               );
             });
       }
