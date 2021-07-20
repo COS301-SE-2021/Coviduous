@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:universal_html/html.dart' as html;
@@ -24,7 +23,9 @@ class ReportingEmployees extends StatefulWidget {
 }
 
 class ReportingEmployeesState extends State<ReportingEmployees> {
-  final pdf = pw.Document();
+  var pdf = pw.Document();
+
+  List<List<String>> employeeList = [];
 
   //Save PDF on mobile
   Future savePDFMobile() async {
@@ -42,10 +43,10 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
 
   //Save PDF on web
   Future savePDFWeb() async {
-    final bytes = await pdf.save();
-    final blob = html.Blob([bytes], 'application/pdf');
-    final url = html.Url.createObjectUrlFromBlob(blob);
-    final anchor =
+    var bytes = await pdf.save();
+    var blob = html.Blob([bytes], 'application/pdf');
+    var url = html.Url.createObjectUrlFromBlob(blob);
+    var anchor =
     html.document.createElement('a') as html.AnchorElement
       ..href = url
       ..style.display = 'none'
@@ -70,6 +71,14 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
         });
       }
       return Container();
+    }
+
+    employeeList.add(<String>['Employee ID', 'Name', 'Surname']);
+    for (int i = 0; i < 1; i++) {
+      List<String> employeeInfo = <String>[
+        '1', 'John', 'Smith'
+      ];
+      employeeList.add(employeeInfo);
     }
 
     //ShiftController services = new ShiftController();
@@ -193,13 +202,48 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                       child: Text('Create PDF'),
                       onPressed: () {
                         //Create PDF
-                        pdf.addPage(pw.Page(
+                        pdf.addPage(pw.MultiPage(
+                          crossAxisAlignment: pw.CrossAxisAlignment.start,
                           pageFormat: PdfPageFormat.a4,
-                          build: (pw.Context context) {
-                            return pw.Center(
-                              child: pw.Text("Test output")
-                            );
-                          }
+                          orientation: pw.PageOrientation.portrait,
+                          build: (pw.Context context) => <pw.Widget>[
+                            pw.Header(
+                              level: 0,
+                              title: 'Office report',
+                              child: pw.Text('Office report', textScaleFactor: 2),
+                            ),
+                            pw.Bullet(
+                              text: 'Floor plan number: 1'
+                            ),
+                            pw.Bullet(
+                                text: 'Floor number: ' + globals.currentFloorNumString
+                            ),
+                            pw.Bullet(
+                                text: 'Room number: ' + globals.currentRoomNumString
+                            ),
+                            pw.SizedBox(
+                              width: 300,
+                              child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
+                            ),
+                            pw.Bullet(
+                                text: 'Shift number: 1'
+                            ),
+                            pw.Bullet(
+                                text: 'Date: 1 August 2021'
+                            ),
+                            pw.Bullet(
+                                text: 'Time: 3:00 PM to 4:00 PM'
+                            ),
+                            pw.SizedBox(
+                              width: 300,
+                              child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
+                            ),
+                            pw.Header(
+                              level: 2,
+                              text: 'Employees'
+                            ),
+                            pw.Table.fromTextArray(data: employeeList),
+                          ]
                         ));
 
                         //Save PDF
@@ -207,8 +251,10 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                           //If PC web browser
                           savePDFWeb();
                         } else {
-                          //If mobile device
+                          //If mobile app
                           savePDFMobile();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("PDF file saved to downloads folder")));
                         }
                       }),
               ),
