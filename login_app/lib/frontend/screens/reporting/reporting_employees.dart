@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:flutter/services.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:pdf/pdf.dart';
 import 'package:universal_html/html.dart' as html;
@@ -24,9 +25,25 @@ class ReportingEmployees extends StatefulWidget {
 }
 
 class ReportingEmployeesState extends State<ReportingEmployees> {
-  var pdf = pw.Document();
+  var myTheme;
+  var pdf;
 
   List<List<String>> employeeList = [];
+
+  Future loadPDFFonts() async {
+    var fontAssets = await Future.wait([
+      rootBundle.load("assets/OpenSans-Regular.ttf"),
+      rootBundle.load("assets/OpenSans-Bold.ttf"),
+      rootBundle.load("assets/OpenSans-Bold.ttf"),
+      rootBundle.load("assets/OpenSans-BoldItalic.ttf")
+    ]);
+    myTheme = pw.ThemeData.withFont(
+      base: pw.Font.ttf(fontAssets[0]),
+      bold: pw.Font.ttf(fontAssets[1]),
+      italic: pw.Font.ttf(fontAssets[2]),
+      boldItalic: pw.Font.ttf(fontAssets[3]),
+    );
+  }
 
   //Save PDF on mobile
   Future savePDFMobile() async {
@@ -73,6 +90,12 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
       }
       return Container();
     }
+
+    //Load fonts from assets and initialize PDF
+    loadPDFFonts();
+    pdf = pw.Document(
+    theme: myTheme,
+    );
 
     //ShiftController services = new ShiftController();
     Widget getList() {
