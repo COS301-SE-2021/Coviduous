@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:pdf/pdf.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:pdf/widgets.dart' as pw;
@@ -37,7 +38,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
     Directory output = outputs.first;
     print(output.path);
 
-    File file = File("${output.path}/example.pdf");
+    File file = File("${output.path}/report_shift_1234.pdf");
     await file.writeAsBytes(await pdf.save());
   }
 
@@ -50,7 +51,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
     html.document.createElement('a') as html.AnchorElement
       ..href = url
       ..style.display = 'none'
-      ..download = 'example.pdf';
+      ..download = 'report_shift_1234.pdf';
     html.document.body.children.add(anchor);
     anchor.click();
     html.document.body.children.remove(anchor);
@@ -73,20 +74,23 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
       return Container();
     }
 
-    employeeList.add(<String>['Employee ID', 'Name', 'Surname']);
-    for (int i = 0; i < 1; i++) {
-      List<String> employeeInfo = <String>[
-        '1', 'John', 'Smith'
-      ];
-      employeeList.add(employeeInfo);
-    }
-
     //ShiftController services = new ShiftController();
     Widget getList() {
       //List<Shift> shifts = services.getShiftsForRoomNum(globals.currentRoomNumString);
       //List<User> users = shifts.getShift(globals.currentShiftNumString).getUsers();
       //int numOfUsers = users.length;
       int numOfUsers = 1;
+      List<User> users = [
+        new User("User", "John", "Smith", "smithj", "john.smith@email.com", "123456", "1"),
+      ];
+
+      employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email']);
+      for (int i = 0; i < users.length; i++) {
+        List<String> employeeInfo = <String>[
+          users[i].getId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail()
+        ];
+        employeeList.add(employeeInfo);
+      }
 
       print(numOfUsers);
 
@@ -150,7 +154,14 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                           height: 50,
                           color: Colors.white,
                           child: Text(
-                              'Name: John Smith',
+                              'Name: ' + users[index].getFirstName() + ' ' + users[index].getLastName(),
+                              style: TextStyle(color: Colors.black)),
+                        ),
+                        Container(
+                          height: 50,
+                          color: Colors.white,
+                          child: Text(
+                              'Email: ' + users[index].getEmail(),
                               style: TextStyle(color: Colors.black)),
                         ),
                       ])
@@ -222,7 +233,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                                 text: 'Room number: ' + globals.currentRoomNumString
                             ),
                             pw.SizedBox(
-                              width: 300,
+                              width: 500,
                               child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
                             ),
                             pw.Bullet(
@@ -235,7 +246,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                                 text: 'Time: 3:00 PM to 4:00 PM'
                             ),
                             pw.SizedBox(
-                              width: 300,
+                              width: 500,
                               child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
                             ),
                             pw.Header(
