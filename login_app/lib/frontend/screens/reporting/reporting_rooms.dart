@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/reporting/reporting_floors.dart';
+import 'package:login_app/frontend/screens/reporting/reporting_shifts.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -163,21 +164,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                                   child: Text('View'),
                                   onPressed: () {
                                     globals.currentRoomNumString = rooms[index].getRoomNum();
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Placeholder'),
-                                          content: Text('Going to room ' + rooms[index].getRoomNum()),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
+                                    Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
                                   }),
                             ],
                           ),
