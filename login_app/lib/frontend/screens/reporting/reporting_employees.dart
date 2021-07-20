@@ -1,5 +1,13 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:universal_html/html.dart' as html;
+import 'package:pdf/widgets.dart' as pw;
 
 import 'package:login_app/frontend/screens/reporting/reporting_shifts.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
@@ -16,6 +24,38 @@ class ReportingEmployees extends StatefulWidget {
 }
 
 class ReportingEmployeesState extends State<ReportingEmployees> {
+  final pdf = pw.Document();
+
+  //Save PDF on mobile
+  Future savePDFMobile() async {
+    List<Directory> outputs;
+
+    outputs = await Future.wait([
+      DownloadsPathProvider.downloadsDirectory
+    ]);
+    Directory output = outputs.first;
+    print(output.path);
+
+    File file = File("${output.path}/example.pdf");
+    await file.writeAsBytes(await pdf.save());
+  }
+
+  //Save PDF on web
+  Future savePDFWeb() async {
+    final bytes = await pdf.save();
+    final blob = html.Blob([bytes], 'application/pdf');
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    final anchor =
+    html.document.createElement('a') as html.AnchorElement
+      ..href = url
+      ..style.display = 'none'
+      ..download = 'example.pdf';
+    html.document.body.children.add(anchor);
+    anchor.click();
+    html.document.body.children.remove(anchor);
+    html.Url.revokeObjectUrl(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -152,21 +192,24 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                   child:  ElevatedButton(
                       child: Text('Create PDF'),
                       onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Text('Placeholder'),
-                              content: Text('Creating PDF.'),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text('Okay'),
-                                  onPressed: (){
-                                    Navigator.of(ctx).pop();
-                                  },
-                                )
-                              ],
-                            )
-                        );
+                        //Create PDF
+                        pdf.addPage(pw.Page(
+                          pageFormat: PdfPageFormat.a4,
+                          build: (pw.Context context) {
+                            return pw.Center(
+                              child: pw.Text("Test output")
+                            );
+                          }
+                        ));
+
+                        //Save PDF
+                        if (kIsWeb) {
+                          //If PC web browser
+                          savePDFWeb();
+                        } else {
+                          //If mobile device
+                          savePDFMobile();
+                        }
                       }),
               ),
             )
