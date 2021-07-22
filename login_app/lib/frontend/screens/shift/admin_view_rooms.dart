@@ -21,6 +21,19 @@ class AdminViewRooms extends StatefulWidget {
 class _AdminViewRoomsState extends State<AdminViewRooms> {
   @override
   Widget build(BuildContext context) {
+    Widget getList() {
 
+      int Numberofrooms = 1;
+
+      if (Numberofrooms == 0) {
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+            ]
+        );
+      }
+
+    }
   }
 }
