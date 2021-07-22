@@ -84,7 +84,32 @@ class _AdminViewShiftsState extends State<AdminViewShifts> {
           fit: BoxFit.cover,
         ),
       ),
-
+      child: new Scaffold(
+          backgroundColor: Colors.transparent, //To show background image
+          appBar: AppBar(
+            title: Text('Floors'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                //Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
+              },
+            ),
+          ),
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+                Container (
+                  alignment: Alignment.bottomRight,
+                  child: Container (
+                    height: 50,
+                    width: 170,
+                    padding: EdgeInsets.all(10),
+                  ),
+                ),
+              ]
+          )
+      ),
     );
 
   }
