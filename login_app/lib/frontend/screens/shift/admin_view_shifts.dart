@@ -75,8 +75,17 @@ class _AdminViewShiftsState extends State<AdminViewShifts> {
             }
           );
       }
-
     }
+
+    return Container(
+      decoration: BoxDecoration(
+         image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+
+    );
 
   }
 
