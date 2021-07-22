@@ -29,6 +29,52 @@ class _AdminViewShiftsState extends State<AdminViewShifts> {
             ]
         );
       }
+      else {
+        return ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemCount: NumberofRooms,
+            itemBuilder: (context, index){
+              return ListTile(
+                title: Column(
+                    children: [
+                      ListView(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            //child: Text('From: ' + notifications[index].getId(), style: TextStyle(color: Colors.black)),
+                            child: Text('Floor: SDFN-1', style: TextStyle(color: Colors.black)),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            //child: Text('Subject: ' + notifications[index].getSubject(), style: TextStyle(color: Colors.black)),
+                            child: Text('Number of shifts: 2', style: TextStyle(color: Colors.black)),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                    child: Text('View'),
+                                    onPressed: () {
+                                      //Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
+                                    }),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ]
+                ),
+              );
+            }
+          );
+      }
 
     }
 
