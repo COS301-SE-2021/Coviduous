@@ -36,14 +36,14 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('From: ' + notifications[index].getId(), style: TextStyle(color: Colors.black)),
+
                               child: Text('Room: SDFN-1', style: TextStyle(
                                   color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('Subject: ' + notifications[index].getSubject(), style: TextStyle(color: Colors.black)),
+
                               child: Text(
                                   'Number of shifts: 2', style: TextStyle(
                                   color: Colors.black)),
