@@ -18,6 +18,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //no rooms available
             ]
         );
       }
