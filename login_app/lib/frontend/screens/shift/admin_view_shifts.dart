@@ -75,12 +75,12 @@ class _ViewShiftsState extends State<ViewShifts> {
                     Container(
                       height: 50,
                       color: Colors.white,
-                      child: Text('Employee Name: Jeff', style: TextStyle(color: Colors.black)),
+                      child: Text('Employee name: Jeff', style: TextStyle(color: Colors.black)),
                     ),
                     Container(
                       height: 50,
                       color: Colors.white,
-                      child: Text('Employee Surname: Masemola', style: TextStyle(color: Colors.black)),
+                      child: Text('Employee surname: Masemola', style: TextStyle(color: Colors.black)),
                     ),
 
                     Container(
