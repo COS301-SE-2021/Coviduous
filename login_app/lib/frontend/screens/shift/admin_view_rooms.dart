@@ -82,5 +82,64 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
         );
       }
     }
+    return Container(
+      decoration: BoxDecoration(
+         image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: new Scaffold(
+          backgroundColor: Colors.transparent, //To show background image
+          appBar: AppBar(
+            title: Text('Rooms'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                //Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+              },
+            ),
+          ),
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+                Container (
+                  alignment: Alignment.bottomRight,
+                  child: Container (
+                      height: 50,
+                      width: 170,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Clear notifications'),
+                        onPressed: (){
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Placeholder'),
+                                content: Text('Clear notifications.'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('Okay'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  )
+                                ],
+                              )
+                          );
+                        },
+                      )
+                  ),
+                ),
+              ]
+          )
+      ),
+    );
   }
 }
