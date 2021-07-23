@@ -1,15 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
-class AdminEditShift extends StatefulWidget {
-  static const routeName = "/Admin_edit_shifts";
+import 'package:login_app/frontend/screens/shift/admin_view_shifts.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
+
+class ViewShiftsEditShift extends StatefulWidget {
+  static const routeName = "/admin_edit_shifts";
   @override
-  _AdminEditShiftState createState() => _AdminEditShiftState();
+  _ViewShiftsEditShiftState createState() => _ViewShiftsEditShiftState();
 }
 
-class _AdminEditShiftState extends State<AdminEditShift> {
+class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
 
     return Container(
         decoration: BoxDecoration(
@@ -21,19 +41,19 @@ class _AdminEditShiftState extends State<AdminEditShift> {
           child: new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: new AppBar(
-          title: new Text("Edit Shift"),
-          leading: BackButton(
-          onPressed: (){
-
-          },
-        ),
-       ),
+          title: new Text("Edit shift"),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
+              },
+            ),
+          ),
             body: Center(
               child: SingleChildScrollView(
                 child: new Container(
                   color: Colors.white,
-                  //height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
-                  //width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                   padding: EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
