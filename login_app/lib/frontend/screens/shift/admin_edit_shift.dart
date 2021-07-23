@@ -28,7 +28,67 @@ class _AdminEditShiftState extends State<AdminEditShift> {
           },
         ),
        ),
+            body: Center(
+              child: SingleChildScrollView(
+                child: new Container(
+                  color: Colors.white,
+                  //height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
+                  //width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Date",
+                        ),
+                        obscureText: false,
+                        maxLength: 20,
+                        // controller: _subject,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Time",
+                        ),
+                        obscureText: false,
+                        maxLines: 3,
+                        //controller: _description,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "Write your email address",
+                          labelText: "Email",
+                        ),
+                        obscureText: false,
+                        maxLines: 3,
+                        //controller: _description,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text("Submit"),
+                        onPressed: () {
 
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
      ),
     );
   }
