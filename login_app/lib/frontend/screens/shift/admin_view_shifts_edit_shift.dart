@@ -83,7 +83,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          hintText: "Write your email address",
+                          hintText: "Enter your email address",
                           labelText: "Email",
                         ),
                         obscureText: false,
