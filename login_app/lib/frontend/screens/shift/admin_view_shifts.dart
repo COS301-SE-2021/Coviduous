@@ -104,7 +104,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                       title: Text('Alert'),
                                       content: Text('Are you sure you want to delete the shift?'), actions: <Widget>[
                                       TextButton(
-                                        child: Text("YES"),
+                                        child: Text("Yes"),
                                         onPressed: () {
                                           //Put your code here which you want to execute on Yes button click.
                                           Navigator.of(context).pop();
@@ -112,7 +112,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                       ),
 
                                       TextButton(
-                                        child: Text("NO"),
+                                        child: Text("No"),
                                         onPressed: () {
                                           //Put your code here which you want to execute on No button click.
                                           Navigator.of(context).pop();
@@ -120,7 +120,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                       ),
 
                                       TextButton(
-                                        child: Text("CANCEL"),
+                                        child: Text("Cancel"),
                                         onPressed: () {
                                           //Put your code here which you want to execute on Cancel button click.
                                           Navigator.of(context).pop();
