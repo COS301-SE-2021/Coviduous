@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
-import 'admin_shifts_page.dart';
+import 'package:flutter/scheduler.dart';
 
-class AdminViewRooms extends StatefulWidget {
-  static const routeName = "/Admin_view_rooms";
+import 'package:login_app/frontend/screens/shift/admin_view_shifts.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
+
+class ViewShiftsRooms extends StatefulWidget {
+  static const routeName = "/admin_shift_view_rooms";
 
   @override
-  _AdminViewRoomsState createState() => _AdminViewRoomsState();
+  _ViewShiftsRoomsState createState() => _ViewShiftsRoomsState();
 }
 
-class _AdminViewRoomsState extends State<AdminViewRooms> {
+class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.type != 'Admin') {
+      if (globals.type == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
+
     Widget getList() {
       int numberOfRooms = 1;
 
@@ -58,7 +78,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(AdminShiftsPage.routeName);
+                                        Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
                                       }),
                                 ],
                               ),
