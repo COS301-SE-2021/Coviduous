@@ -13,7 +13,16 @@ class _AdminShiftsPageState extends State<AdminShiftsPage> {
   Widget build(BuildContext context) {
 
     Widget getList() {
+      int numberofshifts = 1;
 
+      if (numberofshifts == 0) {
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+            ]
+        );
+      }
     }
   }
 }
