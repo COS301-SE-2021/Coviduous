@@ -115,14 +115,6 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                 Center (
                     child: getList()
                 ),
-                Container (
-                  alignment: Alignment.bottomRight,
-                  child: Container (
-                      height: 50,
-                      width: 170,
-                      padding: EdgeInsets.all(10),
-                  ),
-                ),
               ]
           )
       ),
