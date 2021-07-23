@@ -61,6 +61,56 @@ class _AdminShiftsPageState extends State<AdminShiftsPage> {
                       child: Text('Employee Surname: Masemola', style: TextStyle(color: Colors.black)),
                     ),
 
+                    Container(
+                      height: 50,
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              child: Text('Edit Shift'),
+                              onPressed: () {
+                                //Navigator.of(context).pushReplacementNamed(AdminEditShift.routeName);
+                              }),
+
+                          ElevatedButton(
+                              child: Text('Delete'),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Alert'),
+                                      content: Text('Are you sure you want to delete the shift?'), actions: <Widget>[
+                                      TextButton(
+                                        child: Text("YES"),
+                                        onPressed: () {
+                                          //Put your code here which you want to execute on Yes button click.
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+
+                                      TextButton(
+                                        child: Text("NO"),
+                                        onPressed: () {
+                                          //Put your code here which you want to execute on No button click.
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+
+                                      TextButton(
+                                        child: Text("CANCEL"),
+                                        onPressed: () {
+                                          //Put your code here which you want to execute on Cancel button click.
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                    )
+                                );
+                              }),
+                        ],
+                      ),
+                    ),
                     ]
                   )
 
