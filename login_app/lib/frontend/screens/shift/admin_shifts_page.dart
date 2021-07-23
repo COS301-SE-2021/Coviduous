@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'admin_edit_shift.dart';
 
 class AdminShiftsPage extends StatefulWidget {
   static const routeName = "/Admin_shifts_pages";
@@ -70,7 +71,7 @@ class _AdminShiftsPageState extends State<AdminShiftsPage> {
                           ElevatedButton(
                               child: Text('Edit Shift'),
                               onPressed: () {
-                                //Navigator.of(context).pushReplacementNamed(AdminEditShift.routeName);
+                                Navigator.of(context).pushReplacementNamed(AdminEditShift.routeName);
                               }),
 
                           ElevatedButton(

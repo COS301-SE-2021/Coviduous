@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter/scheduler.dart';
-
-//import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
-///import 'package:login_app/frontend/screens/admin_homepage.dart';
-///import 'package:login_app/frontend/screens/login_screen.dart';
-
-///import 'package:login_app/frontend/front_end_globals.dart' as globals;
-///import 'package:login_app/frontend/screens/user_homepage.dart';
-///import 'home_screen.dart';
-///import 'admin_view_shifts.dart';
-///import 'admin_shifts_page.dart';
+import 'admin_shifts_page.dart';
 
 class AdminViewRooms extends StatefulWidget {
   static const routeName = "/Admin_view_rooms";
@@ -22,9 +12,9 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
   @override
   Widget build(BuildContext context) {
     Widget getList() {
-      int Numberofrooms = 1;
+      int numberOfRooms = 1;
 
-      if (Numberofrooms == 0) {
+      if (numberOfRooms == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -34,7 +24,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
       else {
         return ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: Numberofrooms,
+            itemCount: numberOfRooms,
             itemBuilder: (context, index) {
               return ListTile(
                   title: Column(
@@ -67,7 +57,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        // Navigator.of(context).pushReplacementNamed(AdminShiftsPage.routeName);
+                                        Navigator.of(context).pushReplacementNamed(AdminShiftsPage.routeName);
                                       }),
                                 ],
                               ),
