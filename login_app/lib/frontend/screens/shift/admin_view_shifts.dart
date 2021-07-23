@@ -102,31 +102,23 @@ class _ViewShiftsState extends State<ViewShifts> {
                                     context: context,
                                     builder: (ctx) => AlertDialog(
                                       title: Text('Alert'),
-                                      content: Text('Are you sure you want to delete the shift?'), actions: <Widget>[
-                                      TextButton(
-                                        child: Text("Yes"),
-                                        onPressed: () {
-                                          //Put your code here which you want to execute on Yes button click.
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-
-                                      TextButton(
-                                        child: Text("No"),
-                                        onPressed: () {
-                                          //Put your code here which you want to execute on No button click.
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-
-                                      TextButton(
-                                        child: Text("Cancel"),
-                                        onPressed: () {
-                                          //Put your code here which you want to execute on Cancel button click.
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
+                                      content: Text('Are you sure you want to delete the shift?'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text("Yes"),
+                                          onPressed: () {
+                                            //Put your code here which you want to execute on Yes button click.
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text("No"),
+                                          onPressed: () {
+                                            //Put your code here which you want to execute on No button click.
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
                                     )
                                 );
                               }),
