@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
+import 'package:login_app/frontend/screens/shift/admin_view_shifts_floors.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -113,21 +114,7 @@ class _ShiftState extends State<Shift> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('View shifts.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              Navigator.of(context).pushReplacementNamed(ViewShiftsFloors.routeName);
                               /*
                                 if (shiftGlobals.globalShifts.isNotEmpty) { //Only allow shifts to be viewed if shifts exist
                                 Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
