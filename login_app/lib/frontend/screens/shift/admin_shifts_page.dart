@@ -13,9 +13,9 @@ class _AdminShiftsPageState extends State<AdminShiftsPage> {
   Widget build(BuildContext context) {
 
     Widget getList() {
-      int numberofshifts = 1;
+      int numberOfShifts = 1;
 
-      if (numberofshifts == 0) {
+      if (numberOfShifts == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -27,7 +27,7 @@ class _AdminShiftsPageState extends State<AdminShiftsPage> {
         {
           return ListView.builder(
               padding: const EdgeInsets.all(8),
-              itemCount: numberofshifts,
+              itemCount: numberOfShifts,
               itemBuilder: (context, index){
               return ListTile(
               title: Column(
@@ -121,5 +121,39 @@ class _AdminShiftsPageState extends State<AdminShiftsPage> {
           );
         }
     }
+    return Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+          ),
+           ),
+            child: new Scaffold(
+            backgroundColor: Colors.transparent, //To show background image
+            appBar: AppBar(
+              title: Text('Shifts'),
+              leading: BackButton( //Specify back button
+                onPressed: (){
+                  //Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
+                },
+              ),
+            ),
+            body: Stack (
+                children: <Widget>[
+                  Center (
+                      child: getList()
+                  ),
+                  Container (
+                    alignment: Alignment.bottomRight,
+                    child: Container (
+                      height: 50,
+                      width: 170,
+                      padding: EdgeInsets.all(10),
+                    ),
+                  ),
+                ]
+        ),
+      ),
+    );
   }
 }
