@@ -110,31 +110,6 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                       height: 50,
                       width: 170,
                       padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text('Clear notifications'),
-                        onPressed: (){
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                title: Text('Placeholder'),
-                                content: Text('Clear notifications.'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('Okay'),
-                                    onPressed: (){
-                                      Navigator.of(ctx).pop();
-                                    },
-                                  )
-                                ],
-                              )
-                          );
-                        },
-                      )
                   ),
                 ),
               ]
