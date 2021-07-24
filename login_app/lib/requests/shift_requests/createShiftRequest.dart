@@ -22,6 +22,15 @@ class CreateShiftRequest {
       String adminID,
       String companyID) {
     this.shiftNo = shiftNo;
+    this.date = date;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.description = description;
+    this.floorNo = floorNo;
+    this.roomNo = roomNo;
+    this.numEmployees = numEmployees;
+    this.adminID = adminID;
+    this.companyID = companyID;
   }
 
   String getDate() {
