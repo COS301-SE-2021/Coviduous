@@ -76,6 +76,9 @@ class ShiftModel {
     return true;
   }
 
+/**
+ * the post link of AWS was not working on my PostMan has to be inserted in Uri.parse('')
+ */
   Future<bool> createShifts(
       String startTime, String endTime, String groupNo) async {
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
@@ -109,6 +112,9 @@ class ShiftModel {
     }
   }
 
+/**
+ * the post link of AWS was not working on my PostMan has to be inserted in Uri.parse('')
+ */
   Future<bool> createGroups(String email, String groupName) async {
     List<Group> tempo;
     int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
