@@ -17,6 +17,7 @@ import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/edit_room_request.dart';
+import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
@@ -24,6 +25,7 @@ import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_respo
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/edit_room_response.dart';
+import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
     as floorGlobals;
@@ -50,4 +52,11 @@ class ShiftController {
 
 /////////////////////////////////Concrete Implementations/////////////////////////////////
 
+  GetFloorPlansResponse getFloorPlans(GetFloorPlansRequest req) {
+    if (shiftQueries.getFloorPlans(req.getCompanyId()) == true) {
+      return new GetFloorPlansResponse(null, true);
+    } else {
+      return new GetFloorPlansResponse(null, false);
+    }
+  }
 }
