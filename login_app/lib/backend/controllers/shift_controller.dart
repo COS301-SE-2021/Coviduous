@@ -52,11 +52,11 @@ class ShiftController {
 
 /////////////////////////////////Concrete Implementations/////////////////////////////////
 
-  GetFloorPlansResponse getFloorPlans(GetFloorPlansRequest req) {
-    if (shiftQueries.getFloorPlans(req.getCompanyId()) == true) {
-      return new GetFloorPlansResponse(null, true);
+  Future<GetFloorPlansResponse> getFloorPlans(GetFloorPlansRequest req) async {
+    if (shiftQueries.getFloorPlanUsingCompanyId(req.getCompanyId()) == true) {
+      return new GetFloorPlansResponse([], true);
     } else {
-      return new GetFloorPlansResponse(null, false);
+      return new GetFloorPlansResponse([], false);
     }
   }
 }
