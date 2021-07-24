@@ -6,7 +6,7 @@ class CreateShiftRequest {
   String description;
   String floorNo;
   String roomNo;
-  int numEmployees;
+  String groupNo;
   String adminID;
   String companyID;
 
@@ -18,7 +18,7 @@ class CreateShiftRequest {
       String description,
       String floorNo,
       String roomNo,
-      int numEmployees,
+      String groupNo,
       String adminID,
       String companyID) {
     this.shiftNo = shiftNo;
@@ -28,7 +28,7 @@ class CreateShiftRequest {
     this.description = description;
     this.floorNo = floorNo;
     this.roomNo = roomNo;
-    this.numEmployees = numEmployees;
+    this.groupNo = groupNo;
     this.adminID = adminID;
     this.companyID = companyID;
   }
@@ -57,8 +57,8 @@ class CreateShiftRequest {
     return roomNo;
   }
 
-  int getNumEmployees() {
-    return numEmployees;
+  String getGroupNo() {
+    return groupNo;
   }
 
   String getAdminID() {
