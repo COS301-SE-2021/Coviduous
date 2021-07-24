@@ -18,4 +18,8 @@ class GetFloorPlansResponse {
   int getFumFloorPlan() {
     return numFloorPlans;
   }
+
+  bool getResponse() {
+    return success;
+  }
 }
