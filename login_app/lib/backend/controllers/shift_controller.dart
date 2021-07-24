@@ -17,6 +17,8 @@ import 'package:login_app/requests/floor_plan_requests/delete_floor_plan_request
 import 'package:login_app/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:login_app/requests/floor_plan_requests/delete_room_request.dart';
 import 'package:login_app/requests/floor_plan_requests/edit_room_request.dart';
+import 'package:login_app/requests/shift_requests/createGroupRequest.dart';
+import 'package:login_app/requests/shift_requests/createShiftRequest.dart';
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/add_room_response.dart';
@@ -25,6 +27,8 @@ import 'package:login_app/responses/floor_plan_responses/delete_floor_plan_respo
 import 'package:login_app/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:login_app/responses/floor_plan_responses/delete_room_response.dart';
 import 'package:login_app/responses/floor_plan_responses/edit_room_response.dart';
+import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
+import 'package:login_app/responses/shift_responses/createShiftResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart'
@@ -57,6 +61,28 @@ class ShiftController {
       return new GetFloorPlansResponse([], true);
     } else {
       return new GetFloorPlansResponse([], false);
+    }
+  }
+
+  Future<CreateShiftResponse> createShift(CreateShiftRequest request) async {
+    if (shiftQueries.createShifts(request.getStartDate(), request.getEndDate(),
+            request.getGroupNo()) ==
+        true) {
+      return new CreateShiftResponse(true);
+    } else {
+      return new CreateShiftResponse(false);
+    }
+  }
+
+/**
+ * I have to return a list of group with emails and group names
+ */
+  Future<CreateGroupResponse> createGroups(CreateGroupRequest request) {
+    if (shiftQueries.createGroups(request.getEmail(), request.getGroupName()) ==
+        true) {
+      // return new CreateGroupResponse([], true);
+    } else {
+      //return new CreateGroupResponse([], false);
     }
   }
 }

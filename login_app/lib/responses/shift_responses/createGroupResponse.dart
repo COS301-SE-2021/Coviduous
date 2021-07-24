@@ -1,11 +1,19 @@
-class CreateGroupResponse {
-  String status;
+import 'package:login_app/subsystems/shift_subsystem/group.dart';
 
-  CreateGroupResponse(String status) {
+class CreateGroupResponse {
+  bool status;
+  List<Group> groups;
+
+  CreateGroupResponse(List<Group> groups, bool status) {
+    this.groups = groups;
     this.status = status;
   }
 
-  String getStatus() {
+  List<Group> getGroups() {
+    return groups;
+  }
+
+  bool getStatus() {
     return status;
   }
 }

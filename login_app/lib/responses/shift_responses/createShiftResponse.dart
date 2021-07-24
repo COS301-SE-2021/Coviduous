@@ -1,11 +1,11 @@
 class CreateShiftResponse {
-  String status;
+  bool status;
 
-  CreateShiftResponse(String status) {
+  CreateShiftResponse(bool status) {
     this.status = status;
   }
 
-  String getStatus() {
+  bool getStatus() {
     return status;
   }
 }
