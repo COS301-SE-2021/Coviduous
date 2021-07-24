@@ -5,7 +5,10 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-Future<String> fetchFloorPlanUsingCompanyId(String companyId) async {
+import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
+import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
+
+Future<String> fetchFloorPlanUsingCompanyIdAPI(String companyId) async {
   var headers = {'Content-Type': 'application/json'};
   var request = http.Request(
       'GET',
@@ -46,8 +49,15 @@ void main() async {
   /**TODO: mock out used storage structures, don't use actual DB in testing*/
   /**TODO: create separate .dart test files for each subsystem*/
 
+  test('Http request to AWS Client Using Request And Response Objects',
+      () async {
+    GetFloorPlansRequest req = new GetFloorPlansRequest("CID-1");
+    GetFloorPlansResponse resp = await shift.getFloorPlans(req);
+    expect(resp.getResponse(), true);
+  });
+
   test('Http request to AWS Client', () async {
-    var holder = await fetchFloorPlanUsingCompanyId("CID-1");
+    var holder = await fetchFloorPlanUsingCompanyIdAPI("CID-1");
     expect(holder, "");
   });
 }
