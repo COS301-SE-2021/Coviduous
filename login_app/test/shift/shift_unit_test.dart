@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/testing.dart';
 import 'package:login_app/backend/backend_globals/floor_globals.dart';
 import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/backend/controllers/office_controller.dart';
@@ -21,6 +22,7 @@ import 'package:login_app/responses/office_reponses/book_office_space_response.d
 import 'package:login_app/responses/office_reponses/view_office_space_response.dart';
 import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request.dart';
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/subsystems/user_subsystem/user.dart';
 import 'package:login_app/backend/backend_globals/user_globals.dart'
@@ -28,8 +30,28 @@ import 'package:login_app/backend/backend_globals/user_globals.dart'
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floors;
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'dart:async';
+import 'dart:convert';
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+Future<String> fetchFloorPlan(http.Client client) async {
+  final response = await client.get(Uri.parse(
+      'https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com/floorplan'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return (jsonDecode(response.body)).toString();
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load floorplan');
+  }
+}
+
+void main() async {
   ShiftController shift = new ShiftController();
   String expectedAdmin;
   bool expectedBoolean;
@@ -51,6 +73,13 @@ void main() {
   /**TODO: create separate .dart test files for each subsystem*/
 
   //-----------CreateFloorplan UC1------------//
+
+  test('Http request to AWS Client', () async {
+    bool result = true;
+    var holder = await fetchFloorPlan(http.Client());
+    print(holder);
+    expect(result, true);
+  });
   test('Http request to api', () async {
     bool result;
     var headers = {'Content-Type': 'application/json'};

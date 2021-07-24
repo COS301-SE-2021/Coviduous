@@ -39,6 +39,7 @@ dependencies:
   pdf: ^3.4.2
   downloads_path_provider: ^0.1.0 # Needed to save a PDF to a device from the mobile app
   universal_html: ^2.0.8 # Needed to save a PDF to a device from the PC web app
+  mockito: ^5.0.12
 
 dev_dependencies:
   flutter_test:
