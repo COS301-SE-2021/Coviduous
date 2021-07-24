@@ -29,19 +29,14 @@ class ShiftModel {
 
 //////////////////////////////////Concerete Implementations///////////////////////////////////
 
-  Future<String> getFloorPlans(
-      int numFloors, String admin, String companyId) async {
-    FloorPlan holder = new FloorPlan(numFloors, admin, companyId);
-    floorGlobals.globalFloorPlan.add(holder);
-    floorGlobals.globalNumFloorPlans++;
+  Future<bool> getFloorPlans(String companyId) async {
+    List<FloorPlan> holder;
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('http://localhost:3000/floorplan/create-floorplan'));
-    request.body = convert.json.encode({
-      "floorplanNumber": holder.id,
-      "numFloors": numFloors,
-      "adminID": admin
-    });
+        'GET',
+        Uri.parse(
+            'https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com/floorplan'));
+    request.body = convert.json.encode({"companyId": companyId});
     print(request.body.toString());
     request.headers.addAll(headers);
 
@@ -51,10 +46,14 @@ class ShiftModel {
 
     if (response.statusCode == 200) {
       print("Success");
-      return holder.getFlooPlanId();
+      // return holder.getFlooPlanId();
+      // floorGlobals.globalFloorPlan.add(holder);
+      // floorGlobals.globalNumFloorPlans++;
+      return true;
     } else {
       print("Something went wrong");
-      return holder.getFlooPlanId();
+      //return holder.getFlooPlanId();
+      return false;
     }
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
