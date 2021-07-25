@@ -8,7 +8,7 @@
  */
 
 /**
- * Purpose: This class holds the request object of retrieving shifts by an admin user
+ * Purpose: This class holds the request object of retrieving shifts
  */
 class GetShiftsRequest {
   // String adminID;
