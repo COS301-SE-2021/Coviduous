@@ -103,11 +103,6 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                               color: Colors.white,
                               child: Text('Room: ' + bookings[index].roomNum, style: TextStyle(color: Colors.black)),
                             ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Desk: ' + bookings[index].deskNum.toString(), style: TextStyle(color: Colors.black)),
-                            ),
                           ]
                       )
                     ]
