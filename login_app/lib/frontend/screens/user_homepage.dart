@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/office/home_office.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/user/user_manage_account.dart';
@@ -140,6 +141,28 @@ class _UserHomePageState extends State<UserHomePage> {
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+                                }
+                            ),
+                            SizedBox (
+                              height: MediaQuery.of(context).size.height/48,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                            ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Health')),
+                                      Icon(Icons.notifications_active)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
                                 }
                             ),
                           ]
