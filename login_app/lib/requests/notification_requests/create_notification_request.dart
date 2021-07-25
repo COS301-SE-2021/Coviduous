@@ -15,7 +15,6 @@ class CreateNotificationRequest {
   String userEmail;
   String subject;
   String message;
-  String timestamp;
   String adminId;
   String companyId;
 
@@ -24,7 +23,6 @@ class CreateNotificationRequest {
     String userEmail,
     String subject,
     String message,
-    String timestamp,
     String adminId,
     String companyId,
   ) {
@@ -32,7 +30,6 @@ class CreateNotificationRequest {
     this.userEmail = userEmail;
     this.subject = subject;
     this.message = message;
-    this.timestamp = timestamp;
     this.adminId = adminId;
     this.companyId = companyId;
   }
