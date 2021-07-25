@@ -9,6 +9,7 @@
     - Chaoane Malakoane
  */
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:login_app/backend/backend_globals/notification_globals.dart'
     as notificationGlobals;
@@ -44,6 +45,40 @@ class NotificationDatabaseQueries {
   }
 
   //////////////////////////////////Concerete Implementations///////////////////////////////////
+  /**
+   * createNotification : creates a Notification issued by an admin
+   */
+  Future<bool> createNotification(String userId, String userEmail,
+      String subject, String message, String adminId, String companyId) async {
+    String path = '/notification/create-notification';
+    String url = server + path;
+    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    this.notificationId = "NTFN-" + randomInt.toString();
+    this.timestamp = DateTime.now().toString();
+
+    var request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "notificationID": notificationId,
+      "userID": userId,
+      "userEmail": userEmail,
+      "subject": subject,
+      "message": message,
+      "timestamp": timestamp,
+      "adminID": adminId,
+      "companyID": companyId,
+    });
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+
+    return false;
+  }
+
   /**
    * getNotifications : Returns a list of all notifications created
    */
