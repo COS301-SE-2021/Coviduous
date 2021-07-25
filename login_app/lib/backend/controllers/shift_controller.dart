@@ -13,11 +13,13 @@ import 'package:login_app/backend/server_connections/shift_model.dart';
 import 'package:login_app/requests/shift_requests/createGroupRequest.dart';
 import 'package:login_app/requests/shift_requests/createShiftRequest.dart';
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
+import 'package:login_app/requests/shift_requests/get_floors_request.dart';
 import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
 import 'package:login_app/responses/shift_responses/createShiftResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/backend/backend_globals/shift_globals.dart'
     as shiftGlobal;
+import 'package:login_app/responses/shift_responses/get_floors_response.dart';
 
 /**
  * Class name: ShiftController
@@ -46,6 +48,16 @@ class ShiftController {
       return new GetFloorPlansResponse(shiftGlobal.globalFloorplans, true);
     } else {
       return new GetFloorPlansResponse([], false);
+    }
+  }
+
+  Future<GetFloorsResponse> getFloors(GetFloorsRequest req) async {
+    if ((await shiftQueries
+            .getFloorsUsingFloorPlanNumber(req.getFloorPlanNum())) ==
+        true) {
+      return new GetFloorsResponse(shiftGlobal.globalFloors, true);
+    } else {
+      return new GetFloorsResponse([], false);
     }
   }
 
