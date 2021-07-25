@@ -1,14 +1,15 @@
 /*
   * File name: shift_controller.dart
   
-  * Purpose: Holds the controller class for shift, all service contracts for the floorplan subsystem are offered through this class.
+  * Purpose: Holds the controller class for shifts, all service contracts for the shift subsystem are offered through this class.
   
   * Collaborators:
     - Njabulo Skosana
     - Peter Okumbe
     - Chaoane Malakoane
  */
-
+import 'package:login_app/backend/backend_globals/shift_globals.dart'
+    as shiftGlobals;
 import 'package:login_app/backend/server_connections/shift_model.dart';
 import 'package:login_app/requests/shift_requests/createGroupRequest.dart';
 import 'package:login_app/requests/shift_requests/createShiftRequest.dart';
@@ -17,9 +18,15 @@ import 'package:login_app/requests/shift_requests/get_floors_request.dart';
 import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
 import 'package:login_app/responses/shift_responses/createShiftResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
-import 'package:login_app/backend/backend_globals/shift_globals.dart'
-    as shiftGlobal;
 import 'package:login_app/responses/shift_responses/get_floors_response.dart';
+
+// import 'package:login_app/requests/shift_requests/create_shift_request.dart';
+import 'package:login_app/requests/shift_requests/delete_shift_request.dart';
+import 'package:login_app/requests/shift_requests/get_shift_request.dart';
+import 'package:login_app/requests/shift_requests/get_shifts_request.dart';
+// import 'package:login_app/responses/shift_responses/create_shift_response.dart';
+import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
+import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
 
 /**
  * Class name: ShiftController
@@ -36,7 +43,7 @@ class ShiftController {
    */
   ShiftModel shiftQueries = new ShiftModel();
 
-  FloorPlanController() {
+  ShiftController() {
     //this.shiftQueries = new ShiftModel();
   }
 
@@ -45,7 +52,7 @@ class ShiftController {
   Future<GetFloorPlansResponse> getFloorPlans(GetFloorPlansRequest req) async {
     if ((await shiftQueries.getFloorPlanUsingCompanyId(req.getCompanyId())) ==
         true) {
-      return new GetFloorPlansResponse(shiftGlobal.globalFloorplans, true);
+      return new GetFloorPlansResponse(shiftGlobals.globalFloorplans, true);
     } else {
       return new GetFloorPlansResponse([], false);
     }
@@ -55,7 +62,7 @@ class ShiftController {
     if ((await shiftQueries
             .getFloorsUsingFloorPlanNumber(req.getFloorPlanNum())) ==
         true) {
-      return new GetFloorsResponse(shiftGlobal.globalFloors, true);
+      return new GetFloorsResponse(shiftGlobals.globalFloors, true);
     } else {
       return new GetFloorsResponse([], false);
     }
@@ -82,4 +89,86 @@ class ShiftController {
       //return new CreateGroupResponse([], false);
     }
   }
-}
+
+  /**
+   * createShift : Creates a new shift issued by the admin
+   */
+  // this is a WORKING concrete create shift function, see respective createShift request / response classes commented out in class files
+  // Future<CreateShiftResponse> createShift(CreateShiftRequest req) async {
+  //   if (req != null) {
+  //     if (await shiftQueries.createShift(
+  //             req.date,
+  //             req.startTime,
+  //             req.endTime,
+  //             req.description,
+  //             req.floorNumber,
+  //             req.roomNumber,
+  //             req.groupNumber,
+  //             req.adminId,
+  //             req.companyId) ==
+  //         true) {
+  //       return new CreateShiftResponse(shiftQueries.getShiftID(),
+  //           DateTime.now().toString(), true, "Created shift successfully");
+  //     } else {
+  //       return new CreateShiftResponse(
+  //           null, null, false, "Unsuccessfully created shift");
+  //     }
+  //   } else {
+  //     return new CreateShiftResponse(
+  //         null, null, false, "Unsuccessfully created shift");
+  //   }
+  // }
+
+  /**
+   * getShifts : Returns a list of all shifts issued by an admin
+   */
+  Future<GetShiftsResponse> getShifts(GetShiftsRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.getShifts() == true) {
+        return new GetShiftsResponse(shiftGlobals.shiftDatabaseTable, true,
+            "Retrieved all shifts successfully");
+      } else {
+        return new GetShiftsResponse(
+            null, false, "Unsuccessfully retrieved shifts");
+      }
+    } else {
+      return new GetShiftsResponse(
+          null, false, "Unsuccessfully retrieved shifts");
+    }
+  }
+
+  /**
+   * getShifts : Returns a list of all shifts based on a given roomNumber
+   */
+  Future<GetShiftsResponse> getShift(GetShiftRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.getShift(req.getRoomNumber()) == true) {
+        return new GetShiftsResponse(shiftGlobals.shiftDatabaseTable, true,
+            "Retrieved shifts successfully");
+      } else {
+        return new GetShiftsResponse(
+            null, false, "Unsuccessfully retrieved shifts");
+      }
+    } else {
+      return new GetShiftsResponse(
+          null, false, "Unsuccessfully retrieved shifts");
+    }
+  }
+
+  /**
+   * deleteShift : Deletes a specific shift based on a given shiftID
+   */
+  Future<DeleteShiftResponse> deleteShift(DeleteShiftRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.deleteShift(req.getShiftID()) == true) {
+        return new DeleteShiftResponse(true, "Deleted shift successfully");
+      } else {
+        return new DeleteShiftResponse(false, "Unsuccessfully deleted shift");
+      }
+    } else {
+      return new DeleteShiftResponse(false, "Unsuccessfully deleted shift");
+    }
+  }
+
+
+} // class
