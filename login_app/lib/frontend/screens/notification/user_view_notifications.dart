@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-//import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
