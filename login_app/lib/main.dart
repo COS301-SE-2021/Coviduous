@@ -28,6 +28,10 @@ import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_add.dart';
 import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_modify.dart';
 import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 
+//Health
+import 'package:login_app/frontend/screens/health/user_home_health.dart';
+import 'package:login_app/frontend/screens/health/user_request_access.dart';
+
 //Shift
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
@@ -56,9 +60,7 @@ import 'package:login_app/frontend/screens/notification/admin_view_notifications
 import 'package:login_app/frontend/screens/notification/admin_make_notification.dart';
 import 'package:login_app/frontend/screens/notification/admin_make_notification_add_employee.dart';
 import 'package:login_app/frontend/screens/notification/admin_make_notification_assign_employees.dart';
-import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
-import 'package:login_app/frontend/screens/health/user_request_access.dart';
 
 //Reporting
 import 'package:login_app/frontend/screens/reporting/home_reporting.dart';
@@ -124,6 +126,10 @@ class MyApp extends StatelessWidget{
         AdminModifyRooms.routeName: (ctx)=> AdminModifyRooms(),
         DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
 
+        //Health
+        UserHealth.routeName: (ctx)=> UserHealth(),
+        UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
+
         //Shift
         Shift.routeName: (ctx)=> Shift(),
         AddShiftFloorPlans.routeName: (ctx)=> AddShiftFloorPlans(),
@@ -152,9 +158,7 @@ class MyApp extends StatelessWidget{
         MakeNotification.routeName: (ctx)=> MakeNotification(),
         MakeNotificationAssignEmployees.routeName: (ctx)=> MakeNotificationAssignEmployees(),
         MakeNotificationAddEmployee.routeName: (ctx)=> MakeNotificationAddEmployee(),
-        UserNotifications.routeName: (ctx)=> UserNotifications(),
         UserViewNotifications.routeName: (ctx)=> UserViewNotifications(),
-        UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
 
         //Reporting
         Reporting.routeName: (ctx)=> Reporting(),

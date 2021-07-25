@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/frontend/screens/notification/user_home_notifications.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
@@ -54,7 +54,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
           title: new Text("Request access"),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserNotifications.routeName);
+              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
             },
           ),
         ),
@@ -100,7 +100,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Request successfully submitted.")));
-                      Navigator.of(context).pushReplacementNamed(UserNotifications.routeName);
+                      Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
                     },
                   )
                 ],
