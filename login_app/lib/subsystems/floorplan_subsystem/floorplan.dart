@@ -98,4 +98,12 @@ class FloorPlan {
   String getFlooPlanId() {
     return id;
   }
+
+  void setFloorPlanNum(String num) {
+    id = num;
+  }
+
+  int getNumFloors() {
+    return numFloors;
+  }
 }
