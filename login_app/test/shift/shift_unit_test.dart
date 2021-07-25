@@ -21,6 +21,8 @@ Future<String> fetchFloorPlanUsingCompanyIdAPI(String companyId) async {
 
   if (response.statusCode == 200) {
     print(await response.stream.bytesToString());
+    var lst = jsonEncode(response.stream.bytesToString());
+    print(lst[1]);
     return "";
   } else {
     print(response.reasonPhrase);
