@@ -93,7 +93,7 @@ class ShiftController {
   /**
    * createShift : Creates a new shift issued by the admin
    */
-  // this is a WORKING concrete create shift function, see respective createShift request / response classes commented out in class files
+  // this is a WORKING concrete create shift function, see respective createShift request / response classes in 'create_shift_request.dart' and 'create_shift_response.dart' class files
   // Future<CreateShiftResponse> createShift(CreateShiftRequest req) async {
   //   if (req != null) {
   //     if (await shiftQueries.createShift(
