@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
-import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
 import 'package:login_app/frontend/screens/health/user_request_access.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
