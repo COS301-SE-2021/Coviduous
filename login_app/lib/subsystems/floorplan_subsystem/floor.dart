@@ -12,7 +12,7 @@ class Floor {
   String admin = "";
   int numOfRooms = 0;
   int totalNumRooms = 0;
-  double maxCapacity = 0.0;
+  int maxCapacity = 0;
   int currentCapacity = 0;
 
   Floor(String floorPlanNum, String admin, String floorNum,
@@ -25,7 +25,7 @@ class Floor {
       this.floorNum = floorNum;
     }
     this.numOfRooms =
-        0; //Represents the rooms that have their capacity determined at this point there are zero rooms that have been initialized within this floor.
+        totalNumOfRoomsInTheFloor; //Represents the rooms that have their capacity determined at this point there are zero rooms that have been initialized within this floor.
     this.admin = admin;
     this.totalNumRooms = totalNumOfRoomsInTheFloor;
     this.maxCapacity = 0;
@@ -75,7 +75,8 @@ class Floor {
     floors.globalRooms.add(holder);
     floors.globalNumRooms++;
     this.numOfRooms++;
-    this.maxCapacity = this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid);
+    this.maxCapacity =
+        this.maxCapacity + (holder.capacityOfPeopleForSixFtGrid.round());
     return true;
   }
 
@@ -161,5 +162,21 @@ class Floor {
 
   String getFloorPlanNum() {
     return floorPlanId;
+  }
+
+  int getMaxCapacity() {
+    return maxCapacity;
+  }
+
+  int getCurrentCapacity() {
+    return currentCapacity;
+  }
+
+  void setMaxCapacity(int val) {
+    maxCapacity = val;
+  }
+
+  void setCurrentCapacity(int val) {
+    currentCapacity = val;
   }
 }
