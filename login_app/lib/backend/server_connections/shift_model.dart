@@ -46,9 +46,17 @@ class ShiftModel {
 
 //////////////////////////////////Concerete Implementations///////////////////////////////////
 
+  ///Fetch floorplans using companyid
   Future<bool> getFloorPlanUsingCompanyId(String companyId) async {
     bool succeeded =
         await shiftGlobal.fetchFloorPlanUsingCompanyIdAPI(companyId);
+    return succeeded;
+  }
+
+  ///Fetch Rooms using floorplan Number/id
+  Future<bool> getFloorsUsingFloorPlanNumber(String floorplanNo) async {
+    bool succeeded =
+        await shiftGlobal.fetchFloorsUsingPlanNumberAPI(floorplanNo);
     return succeeded;
   }
 
