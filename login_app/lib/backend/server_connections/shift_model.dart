@@ -71,38 +71,38 @@ class ShiftModel {
 /**
  * the post link of AWS was not working on my PostMan has to be inserted in Uri.parse('')
  */
-  Future<bool> createShifts(
-      String startTime, String endTime, String groupNo) async {
-    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-    this.ShiftNo = "SHIFT-" + randomInt.toString();
-    this.date = DateTime.now().toString();
+  // Future<bool> createShifts(
+  //     String startTime, String endTime, String groupNo) async {
+  //   int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+  //   this.ShiftNo = "SHIFT-" + randomInt.toString();
+  //   this.date = DateTime.now().toString();
 
-    String description = "Test is case";
+  //   String description = "Test is case";
 
-    final response = await http.post(
-      Uri.parse(''),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'shiftID': ShiftNo,
-        'adminID': adminID,
-        'companyID': companyID,
-        'date': date,
-        'description': description,
-        'endTime': endTime,
-        'floorNo': floorNo,
-        'GroupNo': groupNo,
-        'roomNo': roomNo,
-        'startTime': startTime
-      }),
-    );
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  //   final response = await http.post(
+  //     Uri.parse(''),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //     },
+  //     body: jsonEncode(<String, String>{
+  //       'shiftID': ShiftNo,
+  //       'adminID': adminID,
+  //       'companyID': companyID,
+  //       'date': date,
+  //       'description': description,
+  //       'endTime': endTime,
+  //       'floorNo': floorNo,
+  //       'GroupNo': groupNo,
+  //       'roomNo': roomNo,
+  //       'startTime': startTime
+  //     }),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
 /**
  * the post link of AWS was not working on my PostMan has to be inserted in Uri.parse('')
@@ -139,45 +139,45 @@ class ShiftModel {
    * createShift : creates a Shift issued by an admin
    */
    // WORKING concrete create shift function
-  // Future<bool> createShift(
-  //     String date,
-  //     String startTime,
-  //     String endTime,
-  //     String description,
-  //     String floorNumber,
-  //     String roomNumber,
-  //     String groupNumber,
-  //     String adminId,
-  //     String companyId) async {
-  //   String path = '/shift/create-shift';
-  //   String url = server + path;
-  //   int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-  //   this.shiftId = "SHFT-" + randomInt.toString();
+  Future<bool> createShift(
+      String date,
+      String startTime,
+      String endTime,
+      String description,
+      String floorNumber,
+      String roomNumber,
+      String groupNumber,
+      String adminId,
+      String companyId) async {
+    String path = '/shift/create-shift';
+    String url = server + path;
+    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    this.shiftId = "SHFT-" + randomInt.toString();
 
-  //   var request = http.Request('POST', Uri.parse(url));
-  //   request.body = json.encode({
-  //     "shiftID": shiftId,
-  //     "date": date,
-  //     "startTime": startTime,
-  //     "endTime": endTime,
-  //     "description": description,
-  //     "floorNumber": floorNumber,
-  //     "roomNumber": roomNumber,
-  //     "groupNumber": groupNumber,
-  //     "adminID": adminId,
-  //     "companyID": companyId,
-  //   });
+    var request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "shiftID": shiftId,
+      "date": date,
+      "startTime": startTime,
+      "endTime": endTime,
+      "description": description,
+      "floorNumber": floorNumber,
+      "roomNumber": roomNumber,
+      "groupNumber": groupNumber,
+      "adminID": adminId,
+      "companyID": companyId,
+    });
 
-  //   var response = await request.send();
+    var response = await request.send();
 
-  //   if (response.statusCode == 200) {
-  //     print(await response.stream.bytesToString());
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
 
-  //     return true;
-  //   }
+      return true;
+    }
 
-  //   return false;
-  // }
+    return false;
+  }
 
   /**
    * getShifts : Returns a list of all shifts created
