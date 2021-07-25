@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/shift/admin_view_shifts_rooms.dart';
+import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -100,7 +101,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
             title: Text('Floors'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                //Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
+                Navigator.of(context).pushReplacementNamed(Shift.routeName);
               },
             ),
           ),
