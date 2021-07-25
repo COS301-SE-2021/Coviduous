@@ -42,7 +42,7 @@ class _UserHealthState extends State<UserHealth> {
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Manage health documentation'),
+            title: Text('Health'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
@@ -66,7 +66,7 @@ class _UserHealthState extends State<UserHealth> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Complete health check')),
-                                  Icon(Icons.update_rounded)
+                                  Icon(Icons.check_circle)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -88,7 +88,7 @@ class _UserHealthState extends State<UserHealth> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('View permissions')),
-                                  Icon(Icons.update_rounded)
+                                  Icon(Icons.zoom_in)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -110,7 +110,7 @@ class _UserHealthState extends State<UserHealth> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Request access')),
-                                  Icon(Icons.add_circle_rounded)
+                                  Icon(Icons.help)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -132,7 +132,7 @@ class _UserHealthState extends State<UserHealth> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Upload COVID-19 test results')),
-                                  Icon(Icons.update_rounded)
+                                  Icon(Icons.file_upload)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -154,7 +154,7 @@ class _UserHealthState extends State<UserHealth> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Upload COVID-19 vaccine confirmation')),
-                                  Icon(Icons.update_rounded)
+                                  Icon(Icons.file_upload)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -176,7 +176,7 @@ class _UserHealthState extends State<UserHealth> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Report COVID-19 infection')),
-                                  Icon(Icons.update_rounded)
+                                  Icon(Icons.notifications_active)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
