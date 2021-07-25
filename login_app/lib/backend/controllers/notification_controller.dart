@@ -11,8 +11,10 @@
 import 'package:login_app/backend/backend_globals/notification_globals.dart'
     as notificationGlobals;
 import 'package:login_app/backend/server_connections/notification_data_base_queries.dart';
+import 'package:login_app/requests/notification_requests/create_notification_request.dart';
 import 'package:login_app/requests/notification_requests/get_notification_request.dart';
 import 'package:login_app/requests/notification_requests/get_notifications_request.dart';
+import 'package:login_app/responses/notification_responses/create_notification_response.dart';
 import 'package:login_app/responses/notification_responses/get_notifications_response.dart';
 
 /**
@@ -34,6 +36,35 @@ class NotificationController {
     this.notificationQueries = new NotificationDatabaseQueries();
   }
   ////////////////////////////////////////////////Concrete Implementations////////////////////////////////////////////////
+  /**
+   * createNotification : Creates a new notification issued by the admin
+   */
+  Future<CreateNotificationResponse> createNotification(
+      CreateNotificationRequest req) async {
+    if (req != null) {
+      if (await notificationQueries.createNotification(
+              req.userId,
+              req.userEmail,
+              req.subject,
+              req.message,
+              req.adminId,
+              req.companyId) ==
+          true) {
+        return new CreateNotificationResponse(
+            notificationQueries.getNotificationID(),
+            notificationQueries.getTimestamp(),
+            true,
+            "Created notification successfully");
+      } else {
+        return new CreateNotificationResponse(
+            null, null, false, "Unsuccessfully created notification");
+      }
+    } else {
+      return new CreateNotificationResponse(
+          null, null, false, "Unsuccessfully created notification");
+    }
+  }
+
   /**
    * getNotifications : Returns a list of all notifications issued by an admin 
    */
