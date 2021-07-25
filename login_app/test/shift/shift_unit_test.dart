@@ -7,28 +7,9 @@ import 'dart:convert';
 
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
-
-Future<String> fetchFloorPlanUsingCompanyIdAPI(String companyId) async {
-  var headers = {'Content-Type': 'application/json'};
-  var request = http.Request(
-      'GET',
-      Uri.parse(
-          'https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com/floorplan/get-floorplan-companyId'));
-  request.body = json.encode({"companyId": companyId});
-  request.headers.addAll(headers);
-
-  http.StreamedResponse response = await request.send();
-
-  if (response.statusCode == 200) {
-    print(await response.stream.bytesToString());
-    var lst = jsonEncode(response.stream.bytesToString());
-    print(lst[1]);
-    return "";
-  } else {
-    print(response.reasonPhrase);
-    return "";
-  }
-}
+import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
+import 'package:login_app/backend/backend_globals/shift_globals.dart'
+    as shiftGlobal;
 
 void main() async {
   ShiftController shift = new ShiftController();
@@ -46,20 +27,34 @@ void main() async {
   // cleaning up / nullifying of repos and objects after tests
   tearDown(() => null);
 
-  //====================UNIT TESTS======================
-  /**TODO: add more parameters to response objects, not just a boolean param*/
-  /**TODO: mock out used storage structures, don't use actual DB in testing*/
-  /**TODO: create separate .dart test files for each subsystem*/
+  //====================INTERGRATION TESTS======================
 
   test('Http request to AWS Client Using Request And Response Objects',
       () async {
     GetFloorPlansRequest req = new GetFloorPlansRequest("CID-1");
     GetFloorPlansResponse resp = await shift.getFloorPlans(req);
+    List<FloorPlan> floorplans = resp.getFloorPlans();
+    for (int i = 0; i < floorplans.length; i++) {
+      print("Iteration: " + i.toString());
+      print(floorplans[i].getFlooPlanId());
+      print(floorplans[i].getAdminId());
+      print(floorplans[i].getCompanyId());
+      print(floorplans[i].getNumFloors());
+    }
     expect(resp.getResponse(), true);
   });
 
-  test('Http request to AWS Client', () async {
-    var holder = await fetchFloorPlanUsingCompanyIdAPI("CID-1");
-    expect(holder, "");
+  test(
+      'Http request to AWS Client Without Request and Response Objects to test function: fetchFloorPlanUsingCompanyIdAPI',
+      () async {
+    var holder = await shiftGlobal.fetchFloorPlanUsingCompanyIdAPI("CID-1");
+    for (int i = 0; i < shiftGlobal.numFloorPlans; i++) {
+      print("Iteration: " + i.toString());
+      print(shiftGlobal.globalFloorplans[i].getFlooPlanId());
+      print(shiftGlobal.globalFloorplans[i].getAdminId());
+      print(shiftGlobal.globalFloorplans[i].getCompanyId());
+      print(shiftGlobal.globalFloorplans[i].getNumFloors());
+    }
+    expect(shiftGlobal.numFloorPlans, 2);
   });
 }
