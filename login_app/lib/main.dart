@@ -28,6 +28,9 @@ import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_add.dart';
 import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_modify.dart';
 import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 
+//Health
+import 'package:login_app/frontend/screens/health/user_home_health.dart';
+
 //Shift
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
@@ -122,6 +125,9 @@ class MyApp extends StatelessWidget{
         AdminModifyFloors.routeName: (ctx)=> AdminModifyFloors(),
         AdminModifyRooms.routeName: (ctx)=> AdminModifyRooms(),
         DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
+
+        //Health
+        UserHealth.routeName: (ctx)=> UserHealth(),
 
         //Shift
         Shift.routeName: (ctx)=> Shift(),
