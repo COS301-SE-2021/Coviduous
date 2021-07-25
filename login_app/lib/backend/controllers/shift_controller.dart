@@ -12,19 +12,19 @@ import 'package:login_app/backend/backend_globals/shift_globals.dart'
     as shiftGlobals;
 import 'package:login_app/backend/server_connections/shift_model.dart';
 import 'package:login_app/requests/shift_requests/createGroupRequest.dart';
-import 'package:login_app/requests/shift_requests/createShiftRequest.dart';
+// import 'package:login_app/requests/shift_requests/createShiftRequest.dart';
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/requests/shift_requests/get_floors_request.dart';
 import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
-import 'package:login_app/responses/shift_responses/createShiftResponse.dart';
+// import 'package:login_app/responses/shift_responses/createShiftResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/responses/shift_responses/get_floors_response.dart';
 
-// import 'package:login_app/requests/shift_requests/create_shift_request.dart';
+import 'package:login_app/requests/shift_requests/create_shift_request.dart';
 import 'package:login_app/requests/shift_requests/delete_shift_request.dart';
 import 'package:login_app/requests/shift_requests/get_shift_request.dart';
 import 'package:login_app/requests/shift_requests/get_shifts_request.dart';
-// import 'package:login_app/responses/shift_responses/create_shift_response.dart';
+import 'package:login_app/responses/shift_responses/create_shift_response.dart';
 import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
 import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
 
@@ -68,15 +68,15 @@ class ShiftController {
     }
   }
 
-  Future<CreateShiftResponse> createShift(CreateShiftRequest request) async {
-    if (shiftQueries.createShifts(request.getStartDate(), request.getEndDate(),
-            request.getGroupNo()) ==
-        true) {
-      return new CreateShiftResponse(true);
-    } else {
-      return new CreateShiftResponse(false);
-    }
-  }
+  // Future<CreateShiftResponse> createShift(CreateShiftRequest request) async {
+  //   if (shiftQueries.createShifts(request.getStartDate(), request.getEndDate(),
+  //           request.getGroupNo()) ==
+  //       true) {
+  //     return new CreateShiftResponse(true);
+  //   } else {
+  //     return new CreateShiftResponse(false);
+  //   }
+  // }
 
 /**
  * I have to return a list of group with emails and group names
@@ -94,30 +94,30 @@ class ShiftController {
    * createShift : Creates a new shift issued by the admin
    */
   // this is a WORKING concrete create shift function, see respective createShift request / response classes in 'create_shift_request.dart' and 'create_shift_response.dart' class files
-  // Future<CreateShiftResponse> createShift(CreateShiftRequest req) async {
-  //   if (req != null) {
-  //     if (await shiftQueries.createShift(
-  //             req.date,
-  //             req.startTime,
-  //             req.endTime,
-  //             req.description,
-  //             req.floorNumber,
-  //             req.roomNumber,
-  //             req.groupNumber,
-  //             req.adminId,
-  //             req.companyId) ==
-  //         true) {
-  //       return new CreateShiftResponse(shiftQueries.getShiftID(),
-  //           DateTime.now().toString(), true, "Created shift successfully");
-  //     } else {
-  //       return new CreateShiftResponse(
-  //           null, null, false, "Unsuccessfully created shift");
-  //     }
-  //   } else {
-  //     return new CreateShiftResponse(
-  //         null, null, false, "Unsuccessfully created shift");
-  //   }
-  // }
+  Future<CreateShiftResponse> createShift(CreateShiftRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.createShift(
+              req.date,
+              req.startTime,
+              req.endTime,
+              req.description,
+              req.floorNumber,
+              req.roomNumber,
+              req.groupNumber,
+              req.adminId,
+              req.companyId) ==
+          true) {
+        return new CreateShiftResponse(shiftQueries.getShiftID(),
+            DateTime.now().toString(), true, "Created shift successfully");
+      } else {
+        return new CreateShiftResponse(
+            null, null, false, "Unsuccessfully created shift");
+      }
+    } else {
+      return new CreateShiftResponse(
+          null, null, false, "Unsuccessfully created shift");
+    }
+  }
 
   /**
    * getShifts : Returns a list of all shifts issued by an admin
