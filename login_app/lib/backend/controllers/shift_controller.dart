@@ -20,13 +20,20 @@ import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/responses/shift_responses/get_floors_response.dart';
 
+import 'package:login_app/backend/server_connections/shift_data_base_queries.dart';
+import 'package:login_app/requests/shift_requests/create_group_request.dart';
 import 'package:login_app/requests/shift_requests/create_shift_request.dart';
 import 'package:login_app/requests/shift_requests/delete_shift_request.dart';
+import 'package:login_app/requests/shift_requests/get_groups_request.dart';
 import 'package:login_app/requests/shift_requests/get_shift_request.dart';
 import 'package:login_app/requests/shift_requests/get_shifts_request.dart';
+import 'package:login_app/requests/shift_requests/update_shift_request.dart';
+import 'package:login_app/responses/shift_responses/create_group_response.dart';
 import 'package:login_app/responses/shift_responses/create_shift_response.dart';
 import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
+import 'package:login_app/responses/shift_responses/get_groups_response.dart';
 import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
+import 'package:login_app/responses/shift_responses/update_shift_response.dart';
 
 /**
  * Class name: ShiftController
@@ -91,7 +98,8 @@ class ShiftController {
       //return new CreateGroupResponse([], false);
     }
   }*/
-///////////////////////////////////////////////
+
+  //////////////////// SHIFT ////////////////////
   /**
    * createShift : Creates a new shift issued by the admin
    */
@@ -157,6 +165,23 @@ class ShiftController {
     }
   }
 
+    /**
+   * updateShift : Updates a specific shift based on a given shiftID
+   */
+  Future<UpdateShiftResponse> updateShift(UpdateShiftRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.updateShift(
+              req.getShiftID(), req.getStartTime(), req.getEndTime()) ==
+          true) {
+        return new UpdateShiftResponse(true, "Updated shift successfully");
+      } else {
+        return new UpdateShiftResponse(false, "Unsuccessfully updated shift");
+      }
+    } else {
+      return new UpdateShiftResponse(false, "Unsuccessfully updated shift");
+    }
+  }
+
   /**
    * deleteShift : Deletes a specific shift based on a given shiftID
    */
@@ -171,4 +196,9 @@ class ShiftController {
       return new DeleteShiftResponse(false, "Unsuccessfully deleted shift");
     }
   }
+
+  //////////////////// GROUP ////////////////////
+
+
+
 } // class
