@@ -68,6 +68,12 @@ class ShiftModel {
     return succeeded;
   }
 
+  ///Fetch Rooms using floorplan Number/id
+  Future<bool> getRoomsUsingFloorNumberAPI(String floorNo) async {
+    bool succeeded = await shiftGlobals.fetchRoomsUsingFloorNumberAPI(floorNo);
+    return succeeded;
+  }
+
 /**
  * the post link of AWS was not working on my PostMan has to be inserted in Uri.parse('')
  */
@@ -138,7 +144,7 @@ class ShiftModel {
   /**
    * createShift : creates a Shift issued by an admin
    */
-   // WORKING concrete create shift function
+  // WORKING concrete create shift function
   Future<bool> createShift(
       String date,
       String startTime,
