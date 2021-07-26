@@ -12,6 +12,7 @@ library globals;
 
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/subsystems/shift_subsystem/group.dart';
 import 'package:login_app/subsystems/shift_subsystem/shift.dart';
 import 'package:http/http.dart' as http;
@@ -35,6 +36,12 @@ int numFloorPlans = 0;
  */
 List<Floor> globalFloors = [];
 int numFloors = 0;
+/**
+ * List<Rooms> globalFloors holds a list of Floors from the databse
+ * numFloors keeps track of number of floors 
+ */
+List<Room> globalRooms = [];
+int numRooms = 0;
 /**
  * List<Shift> shiftDatabaseTable acts like a database table that holds shifts, this is to mock out functionality for testing
  * numShifts keeps track of number of shifts in the mock shift database table
@@ -129,6 +136,53 @@ bool convertJsonToFloorsList(dynamic json) {
     numFloors++;
   }
   if (numFloors > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+//Helper to make http request to retrieve json containing rooms
+Future<bool> fetchRoomsUsingFloorNumberAPI(String floorNo) async {
+  var headers = {'Content-Type': 'application/json'};
+  var request = http.Request(
+      'GET',
+      Uri.parse(
+          'https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com/floorplan//get-rooms-floorNo'));
+  request.body = json.encode({"floorNo": floorNo});
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+
+  if (response.statusCode == 200) {
+    //print(await response.stream.bytesToString());
+    String lst = (await response.stream.bytesToString()).toString();
+    dynamic str = jsonDecode(lst);
+    return convertJsonToRoomsList(str["Item"]);
+  } else {
+    print(response.reasonPhrase);
+    return false;
+  }
+}
+
+//Helper to convert json to list of floors
+bool convertJsonToRoomsList(dynamic json) {
+  globalRooms = [];
+  numRooms = 0;
+  for (int i = 0; i < json.length; i++) {
+    Room holder = new Room(
+        json[i]['floorplanNo'],
+        json[i]['roomNo'],
+        json[i]['floorNo'],
+        json[i]['roomArea'],
+        json[i]['currentCapacity'],
+        json[i]['maxCapacity'],
+        json[i]['deskArea'],
+        json[i]['numDesks']);
+    globalRooms.add(holder);
+    numRooms++;
+  }
+  if (numRooms > 0) {
     return true;
   } else {
     return false;
