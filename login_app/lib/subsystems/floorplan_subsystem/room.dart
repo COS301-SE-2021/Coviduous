@@ -34,10 +34,10 @@ class Room {
       String floorPlanid,
       String floornum,
       String roomNum,
-      double roomDimensions,
-      double percentage,
+      int roomDimensions,
+      int percentage,
       int numDesks,
-      double deskdimentions,
+      int deskdimentions,
       int maxCapacityOfDesks) {
     this.floorPlanId = floorPlanid;
     if (roomNum == "") {
@@ -46,15 +46,15 @@ class Room {
     } else {
       this.roomNum = roomNum;
     }
-    this.dimensions = roomDimensions;
-    this.percentage = percentage;
+    this.dimensions = roomDimensions.toDouble();
+    this.percentage = percentage.toDouble();
     this.numDesks = numDesks;
-    this.deskDimentions = deskdimentions;
+    this.deskDimentions = deskdimentions.toDouble();
     this.deskMaxCapcity = maxCapacityOfDesks;
     this.floorNum = floornum;
     for (var i = 0; i < numDesks; i++) {
-      Desk holder = new Desk(
-          "Empty Desk", roomNum, deskdimentions, maxCapacityOfDesks, 0);
+      Desk holder = new Desk("Empty Desk", roomNum, deskdimentions.toDouble(),
+          maxCapacityOfDesks, 0);
       desks.add(holder);
       print("Empty Desk Created.");
     }
@@ -107,5 +107,25 @@ class Room {
 
   String getFloorPlanNum() {
     return floorPlanId;
+  }
+
+  double getPercentage() {
+    return percentage;
+  }
+
+  double getMaxCapacity() {
+    return capacityOfPeopleForSixFtGrid;
+  }
+
+  double getCurrentCapacity() {
+    return occupiedDesks;
+  }
+
+  double getDeskArea() {
+    return deskDimentions;
+  }
+
+  double getRoomArea() {
+    return dimensions;
   }
 }
