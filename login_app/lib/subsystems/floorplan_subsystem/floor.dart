@@ -70,8 +70,8 @@ class Floor {
       int numDesks,
       double deskArea,
       int deskMaxCpacity) {
-    Room holder = new Room(floorplanId, floorNum, roomNum, dimensions,
-        percentage, numDesks, deskArea, deskMaxCpacity);
+    Room holder = new Room(floorplanId, floorNum, roomNum, dimensions.round(),
+        percentage.round(), numDesks, deskArea.round(), deskMaxCpacity);
     floors.globalRooms.add(holder);
     floors.globalNumRooms++;
     this.numOfRooms++;
