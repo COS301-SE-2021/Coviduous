@@ -31,6 +31,7 @@ class ShiftModel {
   ShiftModel() {}
   String server = "https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com";
   String shiftId;
+  String groupId;
 
   String ShiftNo;
   String date;
@@ -50,6 +51,10 @@ class ShiftModel {
 
   String getShiftID() {
     return shiftId;
+  }
+
+  String getGroupID() {
+    return groupId;
   }
 
 //////////////////////////////////Concerete Implementations///////////////////////////////////
@@ -135,6 +140,7 @@ class ShiftModel {
   //   }
   // }
 
+  //////////////////// SHIFT ////////////////////
   /**
    * createShift : creates a Shift issued by an admin
    */
@@ -237,6 +243,26 @@ class ShiftModel {
         //     shiftGlobals.shiftDatabaseTable[shiftGlobals.numShifts].startTime);
         shiftGlobals.numShifts++;
       }
+
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<bool> updateShift(
+    String shiftID, String startTime, String endTime) async {
+    String path = '/shift/edit-shift';
+    String url = server + path;
+
+    var request = http.Request('PATCH', Uri.parse(url));
+    request.body = json.encode(
+        {"shiftID": shiftID, "startTime": startTime, "endTime": endTime});
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
 
       return true;
     }
