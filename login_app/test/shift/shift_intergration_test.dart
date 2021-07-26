@@ -7,8 +7,10 @@ import 'dart:convert';
 
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/requests/shift_requests/get_floors_request.dart';
+import 'package:login_app/requests/shift_requests/get_rooms_request.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/responses/shift_responses/get_floors_response.dart';
+import 'package:login_app/responses/shift_responses/get_rooms_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:login_app/backend/backend_globals/shift_globals.dart'
@@ -21,6 +23,7 @@ import 'package:login_app/requests/shift_requests/get_shifts_request.dart';
 import 'package:login_app/responses/shift_responses/create_shift_response.dart';
 import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
 import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 
 void main() async {
   ShiftController shiftController = new ShiftController();
@@ -36,15 +39,15 @@ void main() async {
   String expectedCompanyId;
 
   setUp(() {
-    expectedDate = "test";
-    expectedStartTime = "test";
-    expectedEndTime = "test";
-    expectedDescription = "test";
-    expectedFloorNumber = "test";
-    expectedRoomNumber = "test";
-    expectedGroupNumber = "test";
-    expectedAdminId = "test";
-    expectedCompanyId = "test";
+    expectedDate = "2021/07/06";
+    expectedStartTime = "14:01";
+    expectedEndTime = "15:30";
+    expectedDescription = "Moring Shift Call Center department";
+    expectedFloorNumber = "FLP-1";
+    expectedRoomNumber = "RN-1";
+    expectedGroupNumber = "GRP-2";
+    expectedAdminId = "AUSR-1";
+    expectedCompanyId = "CID-1";
   });
 
   tearDown(() {});
@@ -120,6 +123,42 @@ void main() async {
     expect(resp.getResponse(), true);
   });
 
+  test(
+      'Http request to AWS Client Without Request and Response Objects to test function: fetchRoomsUsingFloorNumberAPI',
+      () async {
+    var holder = await shiftGlobals.fetchRoomsUsingFloorNumberAPI("FLR-1");
+    for (int i = 0; i < shiftGlobals.numRooms; i++) {
+      print("Iteration: " + i.toString());
+      print(shiftGlobals.globalRooms[i].getRoomNum());
+      print(shiftGlobals.globalRooms[i].getFloorNum());
+      print(shiftGlobals.globalRooms[i].getFloorPlanNum());
+      print(shiftGlobals.globalRooms[i].getRoomArea());
+      print(shiftGlobals.globalRooms[i].getMaxCapacity());
+      print(shiftGlobals.globalRooms[i].getCurrentCapacity());
+      print(shiftGlobals.globalRooms[i].getPercentage());
+    }
+    expect(shiftGlobals.numRooms, isNot(0));
+    expect(holder, true);
+  });
+
+  test(
+      'Http request to Application Server Using Request And Response Objects To Fetch rooms Assosiated With A Floor number',
+      () async {
+    GetRoomsRequest req = new GetRoomsRequest("FLR-1");
+    GetRoomsResponse resp = await shiftController.getRooms(req);
+    List<Room> floors = resp.getRooms();
+    for (int i = 0; i < floors.length; i++) {
+      print("Iteration: " + i.toString());
+      print(floors[i].getRoomNum());
+      print(floors[i].getFloorNum());
+      print(floors[i].getFloorPlanNum());
+      print(floors[i].getRoomArea());
+      print(floors[i].getMaxCapacity());
+      print(floors[i].getCurrentCapacity());
+      print(floors[i].getPercentage());
+    }
+    expect(resp.getResponse(), true);
+  });
   //=====================================================
 
   test('Correct create shift', () async {
@@ -210,6 +249,4 @@ void main() async {
     expect(resp2, isNot(null));
     expect(true, resp2.getResponse());
   });
-
-
 }
