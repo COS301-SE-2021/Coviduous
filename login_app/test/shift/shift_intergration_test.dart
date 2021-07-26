@@ -14,17 +14,24 @@ import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:login_app/backend/backend_globals/shift_globals.dart'
     as shiftGlobals;
 
+import 'package:login_app/requests/shift_requests/create_group_request.dart';
 import 'package:login_app/requests/shift_requests/create_shift_request.dart';
 import 'package:login_app/requests/shift_requests/delete_shift_request.dart';
+import 'package:login_app/requests/shift_requests/get_groups_request.dart';
 import 'package:login_app/requests/shift_requests/get_shift_request.dart';
 import 'package:login_app/requests/shift_requests/get_shifts_request.dart';
+import 'package:login_app/requests/shift_requests/update_shift_request.dart';
+import 'package:login_app/responses/shift_responses/create_group_response.dart';
 import 'package:login_app/responses/shift_responses/create_shift_response.dart';
 import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
+import 'package:login_app/responses/shift_responses/get_groups_response.dart';
 import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
+import 'package:login_app/responses/shift_responses/update_shift_response.dart';
 
 void main() async {
   ShiftController shiftController = new ShiftController();
 
+  // shift expected variables
   String expectedDate;
   String expectedStartTime;
   String expectedEndTime;
@@ -35,16 +42,27 @@ void main() async {
   String expectedAdminId;
   String expectedCompanyId;
 
+  // group expected variables
+  String expectedUserEmail;
+  String expectedShiftNumber;
+  String expectedGroupName;
+
   setUp(() {
+    // shift expected variables
     expectedDate = "test";
     expectedStartTime = "test";
     expectedEndTime = "test";
-    expectedDescription = "test";
-    expectedFloorNumber = "test";
-    expectedRoomNumber = "test";
-    expectedGroupNumber = "test";
-    expectedAdminId = "test";
-    expectedCompanyId = "test";
+    expectedDescription = "this is a test";
+    expectedFloorNumber = "FLR-test";
+    expectedRoomNumber = "RM-test";
+    expectedGroupNumber = "GRP-test";
+    expectedAdminId = "AID-test";
+    expectedCompanyId = "CID-test";
+
+    // group expected variables
+    expectedUserEmail = "test@gmail.com";
+    expectedShiftNumber = "SHFT-test";
+    expectedGroupName = "group test";
   });
 
   tearDown(() {});
@@ -122,94 +140,196 @@ void main() async {
 
   //=====================================================
 
-  test('Correct create shift', () async {
-    CreateShiftRequest req = new CreateShiftRequest(
-        expectedDate,
-        expectedStartTime,
-        expectedEndTime,
-        expectedDescription,
-        expectedFloorNumber,
-        expectedRoomNumber,
-        expectedGroupNumber,
-        expectedAdminId,
-        expectedCompanyId);
-    CreateShiftResponse resp = await shiftController.createShift(req);
+  group('SHIFT TESTS', () {
+    test('Correct create shift', () async {
+      CreateShiftRequest req = new CreateShiftRequest(
+          expectedDate,
+          expectedStartTime,
+          expectedEndTime,
+          expectedDescription,
+          expectedFloorNumber,
+          expectedRoomNumber,
+          expectedGroupNumber,
+          expectedAdminId,
+          expectedCompanyId);
+      CreateShiftResponse resp = await shiftController.createShift(req);
 
-    GetShiftsRequest req2 = new GetShiftsRequest();
-    GetShiftsResponse resp2 = await shiftController.getShifts(req2);
+      GetShiftsRequest req2 = new GetShiftsRequest();
+      GetShiftsResponse resp2 = await shiftController.getShifts(req2);
 
-    for (var data in resp2.getShifts()) {
-      print(data.shiftId);
-    }
+      for (var data in resp2.getShifts()) {
+        print(data.shiftId);
+      }
 
-    print("shiftID: " + resp.getShiftID());
-    print("Response : " + resp.getResponseMessage());
+      print("Created shift shiftID: " + resp.getShiftID());
+      print("Response : " + resp.getResponseMessage());
 
-    expect(resp, isNot(null));
-    expect(true, resp.getResponse());
-  });
+      expect(resp, isNot(null));
+      expect(true, resp.getResponse());
+    });
 
-  test('Correct view shifts', () async {
-    GetShiftsRequest req = new GetShiftsRequest();
-    GetShiftsResponse resp = await shiftController.getShifts(req);
+    test('Correct view shifts', () async {
+      GetShiftsRequest req = new GetShiftsRequest();
+      GetShiftsResponse resp = await shiftController.getShifts(req);
 
-    for (var data in resp.getShifts()) {
-      print(data.shiftId);
-    }
+      for (var data in resp.getShifts()) {
+        print(data.shiftId);
+      }
 
-    print("Response : " + resp.getResponseMessage());
+      print("Response : " + resp.getResponseMessage());
 
-    expect(resp, isNot(null));
-    expect(true, resp.getResponse());
-  });
+      expect(resp, isNot(null));
+      expect(true, resp.getResponse());
+    });
 
-  test('Correct view shifts based on room number', () async {
-    // CREATE SHIFTS FIRST with SAME room numbers then view based on roomNumber
+    test('Correct view shifts based on room number', () async {
+      // CREATE SHIFTS FIRST with SAME room numbers then view based on roomNumber
 
-    GetShiftRequest req = new GetShiftRequest("test");
-    GetShiftsResponse resp = await shiftController.getShift(req);
+      GetShiftRequest req = new GetShiftRequest(expectedRoomNumber);
+      GetShiftsResponse resp = await shiftController.getShift(req);
 
-    for (var data in resp.getShifts()) {
-      print(data.shiftId);
-    }
+      for (var data in resp.getShifts()) {
+        print("shiftID: " + data.shiftId + " roomNumber: " + data.roomNumber);
+      }
 
-    print("Response : " + resp.getResponseMessage());
+      print("Response : " + resp.getResponseMessage());
 
-    expect(resp, isNot(null));
-    expect(true, resp.getResponse());
-  });
+      expect(resp, isNot(null));
+      expect(true, resp.getResponse());
+    });
 
-  test('Correct delete shift based on shiftID', () async {
-    // CREATE SHIFTS FIRST THEN DELETE based on created shift IDs
-    CreateShiftRequest req = new CreateShiftRequest(
-        expectedDate,
-        expectedStartTime,
-        expectedEndTime,
-        expectedDescription,
-        expectedFloorNumber,
-        expectedRoomNumber,
-        expectedGroupNumber,
-        expectedAdminId,
-        expectedCompanyId);
-    CreateShiftResponse resp = await shiftController.createShift(req);
+    test('Correct edit shift based on shiftID', () async {
+      // CREATE SHIFTS FIRST THEN UPDATE based on created shift IDs
+      CreateShiftRequest req = new CreateShiftRequest(
+          expectedDate,
+          expectedStartTime,
+          expectedEndTime,
+          expectedDescription,
+          expectedFloorNumber,
+          expectedRoomNumber,
+          expectedGroupNumber,
+          expectedAdminId,
+          expectedCompanyId);
+      CreateShiftResponse resp = await shiftController.createShift(req);
 
-    print(resp.getShiftID());
+      print("Created shift shiftID: " + resp.getShiftID());
 
-    DeleteShiftRequest req2 = new DeleteShiftRequest(resp.getShiftID());
-    DeleteShiftResponse resp2 = await shiftController.deleteShift(req2);
+      GetShiftsRequest req3 = new GetShiftsRequest();
+      GetShiftsResponse resp3 = await shiftController.getShifts(req3);
 
-    GetShiftsRequest req3 = new GetShiftsRequest();
-    GetShiftsResponse resp3 = await shiftController.getShifts(req3);
+      for (var data in resp3.getShifts()) {
+        if (data.shiftId == resp.getShiftID()) {
+          print("shiftID: " +
+              data.shiftId +
+              " startTime: " +
+              data.startTime +
+              " endTime: " +
+              data.endTime);
+        }
+      }
 
-    for (var data in resp3.getShifts()) {
-      print(data.shiftId);
-    }
+      // update start + end times
+      expectedStartTime = "00:00";
+      expectedEndTime = "00:00";
 
-    print("Response : " + resp2.getResponseMessage());
+      UpdateShiftRequest req2 = new UpdateShiftRequest(
+          resp.getShiftID(), expectedStartTime, expectedEndTime);
+      UpdateShiftResponse resp2 = await shiftController.updateShift(req2);
 
-    expect(resp2, isNot(null));
-    expect(true, resp2.getResponse());
-  });
+      req3 = new GetShiftsRequest();
+      resp3 = await shiftController.getShifts(req3);
+
+      print("UPDATED TIMES:");
+      for (var data in resp3.getShifts()) {
+        if (data.shiftId == resp.getShiftID()) {
+          print("shiftID: " +
+              data.shiftId +
+              " startTime: " +
+              data.startTime +
+              " endTime: " +
+              data.endTime);
+        }
+      }
+
+      print("Response : " + resp2.getResponseMessage());
+
+      expect(resp2, isNot(null));
+      expect(true, resp2.getResponse());
+    });
+
+    test('Correct delete shift based on shiftID', () async {
+      // CREATE SHIFTS FIRST THEN DELETE based on created shift IDs
+      CreateShiftRequest req = new CreateShiftRequest(
+          expectedDate,
+          expectedStartTime,
+          expectedEndTime,
+          expectedDescription,
+          expectedFloorNumber,
+          expectedRoomNumber,
+          expectedGroupNumber,
+          expectedAdminId,
+          expectedCompanyId);
+      CreateShiftResponse resp = await shiftController.createShift(req);
+
+      print("Created shift shiftID: " + resp.getShiftID());
+
+      DeleteShiftRequest req2 = new DeleteShiftRequest(resp.getShiftID());
+      DeleteShiftResponse resp2 = await shiftController.deleteShift(req2);
+
+      GetShiftsRequest req3 = new GetShiftsRequest();
+      GetShiftsResponse resp3 = await shiftController.getShifts(req3);
+
+      for (var data in resp3.getShifts()) {
+        print(data.shiftId);
+      }
+
+      print("Response : " + resp2.getResponseMessage());
+
+      expect(resp2, isNot(null));
+      expect(true, resp2.getResponse());
+    });
+  }); // end SHIFT tests
+
+  group('SHIFT GROUP TESTS', () {
+    test('Correct create group', () async {
+      CreateGroupRequest req = new CreateGroupRequest(
+          expectedGroupNumber,
+          expectedGroupName,
+          expectedUserEmail,
+          expectedShiftNumber,
+          expectedFloorNumber,
+          expectedRoomNumber,
+          expectedAdminId);
+      CreateGroupResponse resp = await shiftController.createGroup(req);
+
+      GetGroupsRequest req2 = new GetGroupsRequest();
+      GetGroupsResponse resp2 = await shiftController.getGroups(req2);
+
+      for (var data in resp2.getGroups()) {
+        print(data.groupId);
+      }
+
+      print("Created group groupID: " + resp.getGroupID());
+      print("Response : " + resp.getResponseMessage());
+
+      expect(resp, isNot(null));
+      expect(true, resp.getResponse());
+    });
+
+    test('Correct view groups', () async {
+      GetGroupsRequest req = new GetGroupsRequest();
+      GetGroupsResponse resp = await shiftController.getGroups(req);
+
+      for (var data in resp.getGroups()) {
+        print(data.groupId);
+      }
+
+      print("Response : " + resp.getResponseMessage());
+
+      expect(resp, isNot(null));
+      expect(true, resp.getResponse());
+    });
+  }); // end SHIFT GROUP tests
 
 
 }
