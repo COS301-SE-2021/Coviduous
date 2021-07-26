@@ -15,6 +15,7 @@ import 'package:login_app/requests/shift_requests/createGroupRequest.dart';
 // import 'package:login_app/requests/shift_requests/createShiftRequest.dart';
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/requests/shift_requests/get_floors_request.dart';
+import 'package:login_app/requests/shift_requests/get_rooms_request.dart';
 import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
 // import 'package:login_app/responses/shift_responses/createShiftResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
@@ -26,6 +27,7 @@ import 'package:login_app/requests/shift_requests/get_shift_request.dart';
 import 'package:login_app/requests/shift_requests/get_shifts_request.dart';
 import 'package:login_app/responses/shift_responses/create_shift_response.dart';
 import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
+import 'package:login_app/responses/shift_responses/get_rooms_response.dart';
 import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
 
 /**
@@ -65,6 +67,15 @@ class ShiftController {
       return new GetFloorsResponse(shiftGlobals.globalFloors, true);
     } else {
       return new GetFloorsResponse([], false);
+    }
+  }
+
+  Future<GetRoomsResponse> getRooms(GetRoomsRequest req) async {
+    if ((await shiftQueries.getRoomsUsingFloorNumberAPI(req.getRoomNum())) ==
+        true) {
+      return new GetRoomsResponse(shiftGlobals.globalRooms, true);
+    } else {
+      return new GetRoomsResponse([], false);
     }
   }
 
