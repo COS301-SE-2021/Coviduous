@@ -22,8 +22,26 @@ class UserRequestAccess extends StatefulWidget {
 class UserRequestAccessState extends State<UserRequestAccess> {
   TextEditingController _companyId = TextEditingController();
   TextEditingController _adminId = TextEditingController();
+  TextEditingController _reason = TextEditingController();
+
+  DateTime _currentDate = DateTime.now();
+  DateTime _tomorrowDate = DateTime.now().add(Duration(days: 1));
+  DateTime _selectedDate = DateTime.now();
 
   //NotificationsController services = new NotificationsController();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked_date = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate,
+        firstDate: _currentDate,
+        lastDate: _tomorrowDate
+    );
+    if (picked_date != null && picked_date != _selectedDate)
+      setState(() {
+        _selectedDate = picked_date;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +80,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
           child: SingleChildScrollView(
             child: new Container(
               color: Colors.white,
-              height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
+              height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
               padding: EdgeInsets.all(10),
               child: Column(
@@ -86,6 +104,31 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                     ),
                     obscureText: false,
                     controller: _adminId,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    "${_selectedDate.toLocal()}".split(' ')[0],
+                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _selectDate(context),
+                    child: Text('Date'),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "The reason you want access",
+                      labelText: "Reason",
+                    ),
+                    obscureText: false,
+                    controller: _reason,
                   ),
                   SizedBox(
                     height: 16,
