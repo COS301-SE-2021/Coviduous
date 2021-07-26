@@ -30,6 +30,7 @@ import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 
 //Health
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
+import 'package:login_app/frontend/screens/health/user_health_check.dart';
 import 'package:login_app/frontend/screens/health/user_request_access.dart';
 
 //Shift
@@ -128,6 +129,7 @@ class MyApp extends StatelessWidget{
 
         //Health
         UserHealth.routeName: (ctx)=> UserHealth(),
+        UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
 
         //Shift
