@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/health/user_health_check.dart';
+import 'package:login_app/frontend/screens/health/user_report_infection.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -183,7 +184,7 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-
+                              Navigator.of(context).pushReplacementNamed(UserReportInfection.routeName);
                             }
                         ),
                       ]
