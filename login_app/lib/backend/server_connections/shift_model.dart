@@ -31,6 +31,7 @@ class ShiftModel {
   ShiftModel() {}
   String server = "https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com";
   String shiftId;
+  String groupId;
 
   String ShiftNo;
   String date;
@@ -50,6 +51,10 @@ class ShiftModel {
 
   String getShiftID() {
     return shiftId;
+  }
+
+  String getGroupID() {
+    return groupId;
   }
 
 //////////////////////////////////Concerete Implementations///////////////////////////////////
@@ -141,6 +146,7 @@ class ShiftModel {
   //   }
   // }
 
+  //////////////////// SHIFT ////////////////////
   /**
    * createShift : creates a Shift issued by an admin
    */
@@ -250,6 +256,26 @@ class ShiftModel {
     return false;
   }
 
+  Future<bool> updateShift(
+    String shiftID, String startTime, String endTime) async {
+    String path = '/shift/edit-shift';
+    String url = server + path;
+
+    var request = http.Request('PATCH', Uri.parse(url));
+    request.body = json.encode(
+        {"shiftID": shiftID, "startTime": startTime, "endTime": endTime});
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+
+    return false;
+  }
+
   Future<bool> deleteShift(String shiftID) async {
     String path = '/shift/delete-shift';
     String url = server + path;
@@ -261,6 +287,78 @@ class ShiftModel {
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
+
+      return true;
+    }
+
+    return false;
+  }
+
+  //////////////////// GROUP ////////////////////
+  /**
+   * createGroup : creates a shift group issued by an admin
+   */
+  Future<bool> createGroup(
+      String groupId,
+      String groupName,
+      String userEmail,
+      String shiftNumber,
+      String floorNumber,
+      String roomNumber,
+      String adminId) async {
+    String path = '/shift/create-group';
+    String url = server + path;
+    //int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    //this.groupId = "GRP-" + randomInt.toString();
+    this.groupId = groupId;
+
+    var request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "groupID": groupId,
+      "groupName": groupName,
+      "userEmail": userEmail,
+      "shiftNumber": shiftNumber,
+      "floorNumber": floorNumber,
+      "roomNumber": roomNumber,
+      "adminID": adminId,
+    });
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * getGroups : Returns a list of all shift groups created
+   */
+  Future<bool> getGroups() async {
+    String path = '/shift/get-groups';
+    String url = server + path;
+
+    var response = await http.get(url);
+    // http.Response response = await http
+    //     .get(Uri.https('hvofiy7xh6.execute-api.us-east-1.amazonaws.com', path));
+
+    if (response.statusCode == 200) {
+      //print(response.body);
+
+      var jsonString = response.body;
+      var jsonMap = jsonDecode(jsonString);
+
+      for (var data in jsonMap["Item"]) {
+        //print(data["shiftID"]);
+        var groupData = Group.fromJson(data);
+        shiftGlobals.groupDatabaseTable.add(groupData);
+        // print(
+        //     shiftGlobals.groupDatabaseTable[shiftGlobals.numGroups].groupId);
+        shiftGlobals.numGroups++;
+      }
 
       return true;
     }

@@ -21,14 +21,21 @@ import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/responses/shift_responses/get_floors_response.dart';
 
+//import 'package:login_app/backend/server_connections/shift_data_base_queries.dart';
+import 'package:login_app/requests/shift_requests/create_group_request.dart';
 import 'package:login_app/requests/shift_requests/create_shift_request.dart';
 import 'package:login_app/requests/shift_requests/delete_shift_request.dart';
+import 'package:login_app/requests/shift_requests/get_groups_request.dart';
 import 'package:login_app/requests/shift_requests/get_shift_request.dart';
 import 'package:login_app/requests/shift_requests/get_shifts_request.dart';
+import 'package:login_app/requests/shift_requests/update_shift_request.dart';
+import 'package:login_app/responses/shift_responses/create_group_response.dart';
 import 'package:login_app/responses/shift_responses/create_shift_response.dart';
 import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
+import 'package:login_app/responses/shift_responses/get_groups_response.dart';
 import 'package:login_app/responses/shift_responses/get_rooms_response.dart';
 import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
+import 'package:login_app/responses/shift_responses/update_shift_response.dart';
 
 /**
  * Class name: ShiftController
@@ -102,7 +109,8 @@ class ShiftController {
       //return new CreateGroupResponse([], false);
     }
   }*/
-///////////////////////////////////////////////
+
+  //////////////////// SHIFT ////////////////////
   /**
    * createShift : Creates a new shift issued by the admin
    */
@@ -169,6 +177,23 @@ class ShiftController {
   }
 
   /**
+   * updateShift : Updates a specific shift based on a given shiftID
+   */
+  Future<UpdateShiftResponse> updateShift(UpdateShiftRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.updateShift(
+              req.getShiftID(), req.getStartTime(), req.getEndTime()) ==
+          true) {
+        return new UpdateShiftResponse(true, "Updated shift successfully");
+      } else {
+        return new UpdateShiftResponse(false, "Unsuccessfully updated shift");
+      }
+    } else {
+      return new UpdateShiftResponse(false, "Unsuccessfully updated shift");
+    }
+  }
+
+  /**
    * deleteShift : Deletes a specific shift based on a given shiftID
    */
   Future<DeleteShiftResponse> deleteShift(DeleteShiftRequest req) async {
@@ -180,6 +205,51 @@ class ShiftController {
       }
     } else {
       return new DeleteShiftResponse(false, "Unsuccessfully deleted shift");
+    }
+  }
+
+  //////////////////// GROUP ////////////////////
+  /**
+   * createGroup : Creates a new shift group issued by the admin
+   */
+  /* Future<CreateGroupResponse> createGroup(CreateGroupRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.createGroup(
+              req.groupId,
+              req.groupName,
+              req.userEmail,
+              req.shiftNumber,
+              req.floorNumber,
+              req.roomNumber,
+              req.adminId) ==
+          true) {
+        return new CreateGroupResponse(shiftQueries.getGroupID(),
+            DateTime.now().toString(), true, "Created group successfully");
+      } else {
+        return new CreateGroupResponse(
+            null, null, false, "Unsuccessfully created group");
+      }
+    } else {
+      return new CreateGroupResponse(
+          null, null, false, "Unsuccessfully created group");
+    }
+  }
+*/
+  /**
+   * getGroups : Returns a list of all shift groups issued by an admin
+   */
+  Future<GetGroupsResponse> getGroups(GetGroupsRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.getGroups() == true) {
+        return new GetGroupsResponse(shiftGlobals.groupDatabaseTable, true,
+            "Retrieved all groups successfully");
+      } else {
+        return new GetGroupsResponse(
+            null, false, "Unsuccessfully retrieved groups");
+      }
+    } else {
+      return new GetGroupsResponse(
+          null, false, "Unsuccessfully retrieved groups");
     }
   }
 } // class

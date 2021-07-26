@@ -17,12 +17,12 @@ void main() {
   String expectedCompanyId;
 
   setUp(() {
-    expectedUserID = "test";
+    expectedUserID = "UID-test";
     expectedUserEmail = "test@gmail.com";
-    expectedSubject = "test";
-    expectedMessage = "test";
-    expectedAdminId = "test";
-    expectedCompanyId = "test";
+    expectedSubject = "this is a test";
+    expectedMessage = "this is a test";
+    expectedAdminId = "AID-test";
+    expectedCompanyId = "CID-test";
   });
 
   tearDown(() {});
@@ -46,7 +46,7 @@ void main() {
       print(data.notificationId);
     }
 
-    print("notificationID: " + resp.getNotificationID());
+    print("Created notification notificationID: " + resp.getNotificationID());
     print("Response : " + resp.getResponseMessage());
 
     expect(resp, isNot(null));
@@ -76,7 +76,10 @@ void main() {
         await notificationController.getNotification(req);
 
     for (var data in resp.getNotifications()) {
-      print(data.notificationId);
+      print("notificationID: " +
+          data.notificationId +
+          " userEmail: " +
+          data.userEmail);
     }
 
     print("Response : " + resp.getResponseMessage());
@@ -84,5 +87,4 @@ void main() {
     expect(resp, isNot(null));
     expect(true, resp.getResponse());
   });
-
 }
