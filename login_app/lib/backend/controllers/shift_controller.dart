@@ -198,7 +198,7 @@ class ShiftController {
   }
 
   //////////////////// GROUP ////////////////////
-    /**
+  /**
    * createGroup : Creates a new shift group issued by the admin
    */
   Future<CreateGroupResponse> createGroup(CreateGroupRequest req) async {
