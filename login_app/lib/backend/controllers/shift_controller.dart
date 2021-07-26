@@ -198,7 +198,49 @@ class ShiftController {
   }
 
   //////////////////// GROUP ////////////////////
+    /**
+   * createGroup : Creates a new shift group issued by the admin
+   */
+  Future<CreateGroupResponse> createGroup(CreateGroupRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.createGroup(
+              req.groupId,
+              req.groupName,
+              req.userEmail,
+              req.shiftNumber,
+              req.floorNumber,
+              req.roomNumber,
+              req.adminId) ==
+          true) {
+        return new CreateGroupResponse(shiftQueries.getGroupID(),
+            DateTime.now().toString(), true, "Created group successfully");
+      } else {
+        return new CreateGroupResponse(
+            null, null, false, "Unsuccessfully created group");
+      }
+    } else {
+      return new CreateGroupResponse(
+          null, null, false, "Unsuccessfully created group");
+    }
+  }
 
+  /**
+   * getGroups : Returns a list of all shift groups issued by an admin
+   */
+  Future<GetGroupsResponse> getGroups(GetGroupsRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.getGroups() == true) {
+        return new GetGroupsResponse(shiftGlobals.groupDatabaseTable, true,
+            "Retrieved all groups successfully");
+      } else {
+        return new GetGroupsResponse(
+            null, false, "Unsuccessfully retrieved groups");
+      }
+    } else {
+      return new GetGroupsResponse(
+          null, false, "Unsuccessfully retrieved groups");
+    }
+  }
 
 
 } // class
