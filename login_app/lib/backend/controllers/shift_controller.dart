@@ -81,15 +81,17 @@ class ShiftController {
 /**
  * I have to return a list of group with emails and group names
  */
-  Future<CreateGroupResponse> createGroups(CreateGroupRequest request) {
+
+//create groups
+  /* Future<CreateGroupResponse> createGroups(CreateGroupRequest request) {
     if (shiftQueries.createGroups(request.getEmail(), request.getGroupName()) ==
         true) {
       // return new CreateGroupResponse([], true);
     } else {
       //return new CreateGroupResponse([], false);
     }
-  }
-
+  }*/
+///////////////////////////////////////////////
   /**
    * createShift : Creates a new shift issued by the admin
    */
@@ -169,6 +171,4 @@ class ShiftController {
       return new DeleteShiftResponse(false, "Unsuccessfully deleted shift");
     }
   }
-
-
 } // class
