@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:login_app/backend/controllers/notification_controller.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/office/home_office.dart';
@@ -9,6 +10,8 @@ import 'package:login_app/frontend/screens/user/user_manage_account.dart';
 import 'package:login_app/frontend/screens/announcement/user_view_announcements.dart';
 import 'package:login_app/frontend/screens/notification/user_view_notifications.dart';
 import 'package:login_app/frontend/models/auth_provider.dart';
+import 'package:login_app/requests/notification_requests/get_notification_request.dart';
+import 'package:login_app/responses/notification_responses/get_notifications_response.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -21,6 +24,20 @@ class UserHomePage extends StatefulWidget {
 
 class _UserHomePageState extends State<UserHomePage> {
   String email = globals.email;
+
+  NotificationController services = new NotificationController();
+  GetNotificationsResponse response;
+
+  Future getNotification() async {
+    await Future.wait([
+      services.getNotification(GetNotificationRequest(email))
+    ]).then((responses) {
+      response = responses.first;
+      globals.currentUserNotifications = response.getNotifications();
+      Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+      return;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +157,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                     crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+                                  getNotification();
                                 }
                             ),
                             SizedBox (
