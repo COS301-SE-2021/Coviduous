@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:login_app/backend/controllers/notification_controller.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/notification/admin_make_notification.dart';
 import 'package:login_app/frontend/screens/notification/admin_view_notifications.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/requests/notification_requests/get_notification_request.dart';
+import 'package:login_app/responses/notification_responses/get_notifications_response.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -17,6 +20,20 @@ class AdminNotifications extends StatefulWidget {
 }
 //class admin
 class _AdminNotificationsState extends State<AdminNotifications> {
+  NotificationController services = new NotificationController();
+  GetNotificationsResponse response;
+
+  Future getNotification() async {
+    await Future.wait([
+      services.getNotification(GetNotificationRequest("test@gmail.com"))
+    ]).then((responses) {
+      response = responses.first;
+      globals.currentUserNotifications = response.getNotifications();
+      Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
+      return;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -95,7 +112,7 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
+                              getNotification();
                             }
                         ),
                       ]
