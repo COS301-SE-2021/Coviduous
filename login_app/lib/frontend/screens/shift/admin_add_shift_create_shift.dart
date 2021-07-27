@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/backend/controllers/shift_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_assign_employees.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
-import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
+import 'package:login_app/requests/shift_requests/create_group_request.dart';
+import 'package:login_app/responses/shift_responses/create_group_response.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -29,7 +30,8 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-  FloorPlanController services = new FloorPlanController();
+  ShiftController services = new ShiftController();
+  CreateGroupResponse response;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked_date = await showDatePicker(
@@ -74,6 +76,16 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
       });
   }
 
+  Future createGroup() async {
+    await Future.wait([
+      services.createGroup(CreateGroupRequest("Test", "Test", globals.email, "", globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId))
+    ]).then((responses) {
+      response = responses.first;
+      globals.currentGroupNum = response.getGroupID();
+      Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -89,8 +101,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
       }
       return Container();
     }
-
-    Room room = services.getRoomDetails(globals.currentRoomNumString);
 
     return Container(
       decoration: BoxDecoration(
@@ -131,7 +141,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
-                                    "Floor plan: " + globals.currentFloorPlanNumString,
+                                    "Floor plan: " + globals.currentFloorPlanNum,
                                     style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                   ),
                                 ),
@@ -142,7 +152,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
-                                    "Floor: " + globals.currentFloorNumString,
+                                    "Floor: " + globals.currentFloorNum,
                                     style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                   ),
                                 ),
@@ -153,7 +163,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
-                                    "Room: " + globals.currentRoomNumString,
+                                    "Room: " + globals.currentRoomNum,
                                     style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                   ),
                                 ),
