@@ -98,6 +98,11 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                     return null;
                                   },
                                 ),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                Text('Have you experienced any of the following symptoms in the past 14 days?'),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
                                   title: const Text('2. Dry cough'),
