@@ -223,8 +223,8 @@ void main() async {
 
     test('Correct view shifts based on room number', () async {
       // CREATE SHIFTS FIRST with SAME room numbers then view based on roomNumber
-
-      GetShiftRequest req = new GetShiftRequest(expectedRoomNumber);
+      //expectedRoomNumber
+      GetShiftRequest req = new GetShiftRequest("RN-1");
       GetShiftsResponse resp = await shiftController.getShift(req);
 
       for (var data in resp.getShifts()) {
@@ -369,4 +369,9 @@ void main() async {
       expect(true, resp.getResponse());
     });
   });*/ // end SHIFT GROUP tests
+
+  test('Testing sending email function using SMTP protocol', () async {
+    bool holder = await shiftGlobals.sendMail();
+    expect(true, holder);
+  });
 }
