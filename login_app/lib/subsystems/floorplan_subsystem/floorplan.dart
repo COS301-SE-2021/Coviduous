@@ -95,7 +95,7 @@ class FloorPlan {
     return companyid;
   }
 
-  String getFlooPlanId() {
+  String getFloorPlanId() {
     return id;
   }
 
