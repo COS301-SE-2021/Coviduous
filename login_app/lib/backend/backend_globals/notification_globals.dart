@@ -11,6 +11,7 @@
 library globals;
 
 import 'package:login_app/subsystems/notification_subsystem/notification.dart';
+import 'package:login_app/subsystems/notification_subsystem/tempNotification.dart';
 
 //Global variables used throughout the program
 //=============================================
@@ -23,3 +24,6 @@ import 'package:login_app/subsystems/notification_subsystem/notification.dart';
  */
 List<Notification> notificationDatabaseTable = [];
 int numNotifications = 0;
+
+List<TempNotification> temp = [];
+int tempSize = 0;
