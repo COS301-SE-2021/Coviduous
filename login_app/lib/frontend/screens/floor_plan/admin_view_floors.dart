@@ -214,10 +214,6 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                           AddFloorRequest(
                               globals.floorPlanId, globals.loggedInUserId, ""));
                       print(response2.getResponse());
-                      /*
-                      floorGlobals.globalNumFloors++;
-                      floorGlobals.globalFloors.add(new Floor(globals.email, "", 0));
-                       */
                       setState(() {});
                     },
                   )),
