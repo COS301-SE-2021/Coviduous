@@ -81,7 +81,7 @@ void main() async {
     List<FloorPlan> floorplans = resp.getFloorPlans();
     for (int i = 0; i < floorplans.length; i++) {
       print("Iteration: " + i.toString());
-      print(floorplans[i].getFlooPlanId());
+      print(floorplans[i].getFloorPlanId());
       print(floorplans[i].getAdminId());
       print(floorplans[i].getCompanyId());
       print(floorplans[i].getNumFloors());
@@ -95,7 +95,7 @@ void main() async {
     var holder = await shiftGlobals.fetchFloorPlanUsingCompanyIdAPI("CID-1");
     for (int i = 0; i < shiftGlobals.numFloorPlans; i++) {
       print("Iteration: " + i.toString());
-      print(shiftGlobals.globalFloorplans[i].getFlooPlanId());
+      print(shiftGlobals.globalFloorplans[i].getFloorPlanId());
       print(shiftGlobals.globalFloorplans[i].getAdminId());
       print(shiftGlobals.globalFloorplans[i].getCompanyId());
       print(shiftGlobals.globalFloorplans[i].getNumFloors());
