@@ -36,7 +36,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
 
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNumString);
+      List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNum);
       DateTime today = new DateTime.now();
       //List<DateTime> timeSlots;
       int numOfTimeSlots = 1;
@@ -144,7 +144,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
       child: new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNumString).getRoomNum().toString()),
+            title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
