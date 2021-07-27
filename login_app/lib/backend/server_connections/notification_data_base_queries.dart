@@ -15,6 +15,7 @@ import 'package:login_app/backend/backend_globals/notification_globals.dart'
     as notificationGlobals;
 import 'package:http/http.dart' as http;
 import 'package:login_app/subsystems/notification_subsystem/notification.dart';
+import 'package:login_app/subsystems/notification_subsystem/tempNotification.dart';
 
 /**
  * Class name: NotificationDatabaseQueries
@@ -138,5 +139,23 @@ class NotificationDatabaseQueries {
     }
 
     return false;
+  }
+
+//sends multiple notifications using the list of temporary notifications
+  Future<bool> sendMultipleNotifications(List<TempNotification> list) async {
+    for (int i = 0; i < list.length; i++) {
+      if (await createNotification(
+          list[i].getUserId(),
+          list[i].getUserEmail(),
+          list[i].getSubject(),
+          list[i].getMessage(),
+          list[i].getAdminId(),
+          list[i].getCompanyId())) {
+        //CONTINUE
+      } else {
+        return false;
+      }
+    }
+    return true;
   }
 }
