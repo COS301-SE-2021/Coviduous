@@ -47,30 +47,27 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
       print(numOfRooms);
 
       if (numOfRooms == 0) {
-        return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height /
-                (5 * globals.getWidgetScaling()),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width /
-                (2 * globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height /
-                (24 * globals.getWidgetScaling()),
-            color: Theme.of(context).primaryColor,
-            child: Text('No rooms found',
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+              height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+              color: Theme.of(context).primaryColor,
+              child: Text('No rooms found',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize:
                         (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-          ),
-          Container(
+            ),
+            Container(
               alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width /
-                  (2 * globals.getWidgetScaling()),
-              height: MediaQuery.of(context).size.height /
-                  (12 * globals.getWidgetScaling()),
+              width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+              height: MediaQuery.of(context).size.height / (12 * globals.getWidgetScaling()),
               color: Colors.white,
               padding: EdgeInsets.all(12),
               child: Text('No rooms have been registered for this floor.',
