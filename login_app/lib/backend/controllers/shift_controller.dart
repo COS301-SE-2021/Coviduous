@@ -11,12 +11,11 @@
 import 'package:login_app/backend/backend_globals/shift_globals.dart'
     as shiftGlobals;
 import 'package:login_app/backend/server_connections/shift_model.dart';
-import 'package:login_app/requests/shift_requests/createGroupRequest.dart';
 // import 'package:login_app/requests/shift_requests/createShiftRequest.dart';
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/requests/shift_requests/get_floors_request.dart';
 import 'package:login_app/requests/shift_requests/get_rooms_request.dart';
-import 'package:login_app/responses/shift_responses/createGroupResponse.dart';
+import 'package:login_app/requests/shift_requests/process_shifts_request.dart';
 // import 'package:login_app/responses/shift_responses/createShiftResponse.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/responses/shift_responses/get_floors_response.dart';
@@ -35,7 +34,9 @@ import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
 import 'package:login_app/responses/shift_responses/get_groups_response.dart';
 import 'package:login_app/responses/shift_responses/get_rooms_response.dart';
 import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
+import 'package:login_app/responses/shift_responses/process_shifts_response.dart';
 import 'package:login_app/responses/shift_responses/update_shift_response.dart';
+import 'package:login_app/subsystems/shift_subsystem/tempGroup.dart';
 
 /**
  * Class name: ShiftController
@@ -212,7 +213,7 @@ class ShiftController {
   /**
    * createGroup : Creates a new shift group issued by the admin
    */
-  /* Future<CreateGroupResponse> createGroup(CreateGroupRequest req) async {
+  Future<CreateGroupResponse> createGroup(CreateGroupRequest req) async {
     if (req != null) {
       if (await shiftQueries.createGroup(
               req.groupId,
@@ -234,7 +235,7 @@ class ShiftController {
           null, null, false, "Unsuccessfully created group");
     }
   }
-*/
+
   /**
    * getGroups : Returns a list of all shift groups issued by an admin
    */
@@ -250,6 +251,42 @@ class ShiftController {
     } else {
       return new GetGroupsResponse(
           null, false, "Unsuccessfully retrieved groups");
+    }
+  }
+
+  //front end list of temporary groups that are still to be sent through
+  List<TempGroup> getTempGroup() {
+    return shiftGlobals.tempGroup;
+  }
+
+//holds a list of temporary groups that needs to be sent
+  bool addToTempGroup(
+      String groupid,
+      String groupname,
+      String userid,
+      String useremail,
+      String floorNum,
+      String roomNum,
+      String adminid,
+      String shiftNum) {
+    TempGroup holder = new TempGroup(groupid, groupname, userid, useremail,
+        floorNum, roomNum, adminid, shiftNum);
+    shiftGlobals.tempGroup.add(holder);
+    return true;
+  }
+
+  Future<ProcessShiftsResponse> processShifts(ProcessShiftsRequest req) async {
+    if (req != null) {
+      if (await shiftQueries.sendNotificationsToGroup(req.getList()) == true) {
+        return new ProcessShiftsResponse(
+            true, "Sent multiple notifications successfully");
+      } else {
+        return new ProcessShiftsResponse(
+            false, "Unsuccessfully sent multiple notifications");
+      }
+    } else {
+      return new ProcessShiftsResponse(
+          false, "Unsuccessfully sent multiple notifications");
     }
   }
 } // class
