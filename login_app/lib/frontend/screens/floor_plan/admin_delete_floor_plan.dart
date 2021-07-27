@@ -62,7 +62,7 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
             title: Text('Delete floor plan'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
               },
             ),
           ),
@@ -169,7 +169,7 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
                                                       floorGlobals.globalNumFloors = 0;
                                                       floorGlobals.globalNumFloors = 0;
 
-                                                      Navigator.pushReplacementNamed(context, FloorPlan.routeName);
+                                                      Navigator.pushReplacementNamed(context, FloorPlanScreen.routeName);
                                                       ScaffoldMessenger.of(context).showSnackBar(
                                                           SnackBar(content: Text("Floor plan deleted")));
                                                     } else {
