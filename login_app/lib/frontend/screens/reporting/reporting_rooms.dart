@@ -38,7 +38,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
       List<Room> rooms =
-      services.getRoomsForFloorNum(globals.currentFloorNumString);
+      services.getRoomsForFloorNum(globals.currentFloorNum);
       int numOfRooms = rooms.length;
 
       print(numOfRooms);
@@ -163,7 +163,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    globals.currentRoomNumString = rooms[index].getRoomNum();
+                                    globals.currentRoomNum = rooms[index].getRoomNum();
                                     Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
                                   }),
                             ],
