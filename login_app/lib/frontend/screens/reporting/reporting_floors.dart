@@ -101,7 +101,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    globals.currentFloorNumString = services.getFloors()[index].getFloorNumber();
+                                    globals.currentFloorNum = services.getFloors()[index].getFloorNumber();
                                     Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
                                   }),
                             ],
