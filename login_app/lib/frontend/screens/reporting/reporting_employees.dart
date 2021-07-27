@@ -244,7 +244,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                             pw.Header(
                               level: 0,
                               title: 'Coviduous - Office report',
-                              child: pw.Text('Office report', textScaleFactor: 2),
+                              child: pw.Text('Coviduous - Office report', textScaleFactor: 2),
                             ),
                             pw.Bullet(
                               text: 'Floor plan number: 1'
