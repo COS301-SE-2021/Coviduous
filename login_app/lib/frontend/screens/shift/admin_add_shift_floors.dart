@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/backend/controllers/shift_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/requests/shift_requests/get_rooms_request.dart';
+import 'package:login_app/responses/shift_responses/get_rooms_response.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
-import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class AddShiftFloors extends StatefulWidget {
   static const routeName = "/admin_add_shift_floors";
@@ -17,6 +19,38 @@ class AddShiftFloors extends StatefulWidget {
 }
 
 class _AddShiftFloorsState extends State<AddShiftFloors> {
+  ShiftController services = new ShiftController();
+  GetRoomsResponse response;
+
+  Future getRooms() async {
+    await Future.wait([
+      services.getRooms(GetRoomsRequest(globals.currentFloorNum))
+    ]).then((responses) {
+      response = responses.first;
+      if (response.getNumRooms() != 0) { //Only allow shifts to be created if rooms exist
+        globals.rooms = response.getRooms();
+        Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) =>
+                AlertDialog(
+                  title: Text('No rooms found'),
+                  content: Text('Shifts cannot be assigned at this time. Please add rooms for your company first.'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Okay'),
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                    )
+                  ],
+                )
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -33,9 +67,9 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      int numOfFloors = floorGlobals.globalNumFloors;
+      List<Floor> floors = globals.floors;
+      int numOfFloors = globals.floors.length;
 
       print(numOfFloors);
 
@@ -80,7 +114,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            'Floor ' + services.getFloors()[index].getFloorNumber(),
+                            'Floor ' + floors[index].getFloorNumber(),
                             style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
@@ -91,7 +125,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'Number of rooms: ' + services.getFloors()[index].getNumRooms().toString(),
+                                  'Number of rooms: ' + floors[index].getNumRooms().toString(),
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
@@ -103,10 +137,8 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentFloorNumString = services
-                                            .getFloors()[index]
-                                            .getFloorNumber();
-                                        Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
+                                        globals.currentFloorNum = floors[index].getFloorNumber();
+                                        getRooms();
                                       }),
                                 ],
                               ),
@@ -132,7 +164,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
       child: new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Create shift in floor plan ' + globals.currentFloorPlanNumString),
+            title: Text('Create shift in floor plan ' + globals.currentFloorPlanNum),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
