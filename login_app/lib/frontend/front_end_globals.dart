@@ -1,44 +1,28 @@
 library globals;
 
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Notification;
 
-//Global variables used throughout the program
-//=============================================
+import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
+import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
+import 'package:login_app/subsystems/notification_subsystem/notification.dart';
+import 'package:login_app/subsystems/shift_subsystem/shift.dart';
 
+//==========================
+//==========================
 //Frontend global variables
 //==========================
+//==========================
 
-//User type of currently logged in user
-String type = '';
-
-//Email of logged in user for displaying in other screens
-String email = '';
-
-//User ID of currently logged in user
-String loggedInUserId = '';
-
-//Company ID of currently logged in user
-String loggedInCompanyId = 'CID-01';
-
-//Floor plan ID
-String floorPlanId = '';
-
-//Current floor plan you're working with
-int currentFloorPlanNum = 0;
-String currentFloorPlanNumString = '';
-
-//Current floor you're working with
-int currentFloorNum = 0;
-String currentFloorNumString = '';
-
-//Current room you're working with
-int currentRoomNum = 0;
-String currentRoomNumString = '';
+//======================================
+//Generic global functions and variables
+//======================================
 
 //Get OS if on web browser
+/*
 String getOSWeb() {
   final userAgent = window.navigator.userAgent.toString().toLowerCase();
   if( userAgent.contains("iphone"))  return "iOS";
@@ -46,15 +30,16 @@ String getOSWeb() {
   if( userAgent.contains("android"))  return "Android";
   return "Web";
 }
+*/
 
 //Adjusts scaling of containers based on platform
 double getWidgetScaling() {
   if (kIsWeb) { //If web browser
-    String platform = getOSWeb();
-    if (platform == "Android" || platform == "iOS") //Check if mobile browser
-      return 0.7;
-    else //Else, PC browser
-      return 1;
+    //String platform = getOSWeb();
+    //if (platform == "Android" || platform == "iOS") //Check if mobile browser
+    //return 0.7;
+    //else //Else, PC browser
+    return 1;
   } else { //Else, mobile app
     return 0.7;
   }
@@ -75,7 +60,7 @@ Map<int, Color> textFieldSelectedSwatch = {
 };
 
 MaterialColor textFieldSelectedColor =
-    MaterialColor(0xff056676, textFieldSelectedSwatch);
+MaterialColor(0xff056676, textFieldSelectedSwatch);
 
 //Check if a string is numeric
 bool isNumeric(String s) {
@@ -84,3 +69,70 @@ bool isNumeric(String s) {
   }
   return double.tryParse(s) != null;
 }
+
+//User type of currently logged in user
+String type = '';
+
+//Email of logged in user for displaying in other screens
+String email = '';
+
+//User ID of currently logged in user
+String loggedInUserId = '';
+
+//Company ID of currently logged in user
+String loggedInCompanyId = 'CID-1';
+
+//============================
+//Used in floor plan subsystem
+//============================
+
+//Floor plan ID
+String floorPlanId = '';
+
+//=======================
+//Used in shift subsystem
+//=======================
+
+//Floor plans
+List<FloorPlan> floorPlans = [];
+
+//Floors
+List<Floor> floors = [];
+
+//Rooms
+List<Room> rooms = [];
+
+//Shifts
+List<Shift> shifts = [];
+
+//===========================
+//Used in multiple subsystems
+//===========================
+
+//Current floor plan you're working with
+String currentFloorPlanNum = '';
+
+//Current floor you're working with
+String currentFloorNum = '';
+
+//Current room you're working with
+String currentRoomNum = '';
+
+//Current shift you're working with
+String currentShiftNum = '';
+
+//Current shift you're working with
+String currentGroupNum = '';
+
+//===============================
+//Used in notifications subsystem
+//===============================
+
+//Current subject field
+String currentSubjectField = '';
+
+//Current description field
+String currentDescriptionField = '';
+
+//Global list of notifications
+List<Notification> currentUserNotifications = [];
