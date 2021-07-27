@@ -32,6 +32,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
     }
 
     Widget getList() {
+      //Permission permissions[];
       int numOfPermissions = 1;
 
       if (numOfPermissions == 0) {
@@ -59,7 +60,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
         return ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: numOfPermissions,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH announcement in announcements[]
+            itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
               return ListTile(
                 title: Column(
                     children:[
