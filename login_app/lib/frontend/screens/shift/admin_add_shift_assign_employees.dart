@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/backend/controllers/user_controller.dart';
+import 'package:login_app/backend/controllers/shift_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_add_employee.dart';
-import 'package:login_app/subsystems/user_subsystem/user.dart';
+import 'package:login_app/requests/shift_requests/create_shift_request.dart';
+import 'package:login_app/responses/shift_responses/create_shift_response.dart';
+import 'package:login_app/subsystems/shift_subsystem/tempGroup.dart';
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
-import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
+import 'package:login_app/backend/backend_globals/shift_globals.dart' as shiftGlobals;
 
 class AddShiftAssignEmployees extends StatefulWidget {
   static const routeName = "/admin_add_shift_employees";
@@ -19,6 +21,25 @@ class AddShiftAssignEmployees extends StatefulWidget {
 }
 
 class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
+  ShiftController services = new ShiftController();
+  CreateShiftResponse response;
+
+  Future createShift() async {
+    await Future.wait([
+      services.createShift(CreateShiftRequest("date", "start time", "end time", "description", globals.currentFloorNum, globals.currentRoomNum, globals.currentGroupNum, globals.loggedInUserId, globals.loggedInCompanyId))
+    ]).then((responses) {
+      response = responses.first;
+      if (response != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Shift successfully created.")));
+        Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("An error occurred, please try again.")));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -35,13 +56,10 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
       return Container();
     }
 
-    UserController services = new UserController();
     Widget getList() {
-      //List<User> users = services.getUsers();
-      List<User> users = userGlobals.userDatabaseTable;
-      users.removeWhere((user) => user.adminId == "" || user.adminId.isEmpty); //Only show employees, not admins
-      int numOfUsers = users.length;
+      List<TempGroup> tempShifts = services.getTempGroup();
 
+      int numOfUsers = tempShifts.length;
       print(numOfUsers);
 
       if (numOfUsers == 0) { //If the number of users = 0, don't display a list
@@ -85,7 +103,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            'Employee ID: ' + users[index].getUserId(),
+                            'Email: ' + tempShifts[index].getUserEmail(),
                             style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
@@ -96,14 +114,14 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'First name: ' + users[index].getFirstName(),
+                                  'Group ID: ' + tempShifts[index].getGroupId(),
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'Last name: ' + users[index].getLastName(),
+                                  'Group name: ' + tempShifts[index].getGroupName(),
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
@@ -115,6 +133,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                   ElevatedButton(
                                       child: Text('Remove'),
                                       onPressed: () {
+                                        shiftGlobals.tempGroup.removeAt(index);
                                         setState(() {});
                                       }),
                                 ],
@@ -202,9 +221,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                   TextButton(
                                     child: Text('Yes'),
                                     onPressed: (){
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Shift successfully created.")));
-                                      Navigator.of(context).pushReplacementNamed(Shift.routeName);
+                                      createShift();
                                     },
                                   ),
                                   TextButton(
