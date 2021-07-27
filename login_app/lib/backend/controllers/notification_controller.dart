@@ -14,8 +14,11 @@ import 'package:login_app/backend/server_connections/notification_data_base_quer
 import 'package:login_app/requests/notification_requests/create_notification_request.dart';
 import 'package:login_app/requests/notification_requests/get_notification_request.dart';
 import 'package:login_app/requests/notification_requests/get_notifications_request.dart';
+import 'package:login_app/requests/notification_requests/send_multiple_notifications_request.dart';
 import 'package:login_app/responses/notification_responses/create_notification_response.dart';
 import 'package:login_app/responses/notification_responses/get_notifications_response.dart';
+import 'package:login_app/responses/notification_responses/send_multiple_notifications_response.dart';
+import 'package:login_app/subsystems/notification_subsystem/tempNotification.dart';
 
 /**
  * Class name: NotificationController
@@ -105,6 +108,37 @@ class NotificationController {
     } else {
       return new GetNotificationsResponse(
           null, false, "Unsuccessfully retrieved notifications");
+    }
+  }
+
+  //front end list of temporary notifications that are still to be sent through
+  List<TempNotification> getTempNotifications() {
+    return notificationGlobals.temp;
+  }
+
+//holds a list of temporary notifications that needs to be sent
+  bool addToTemp(String userid, String useremail, String notifSubject,
+      String notifMessage, String adminid, String companyid) {
+    TempNotification holder = new TempNotification(
+        userid, useremail, notifSubject, notifMessage, adminid, companyid);
+    notificationGlobals.temp.add(holder);
+    return true;
+  }
+
+  Future<SendMultipleNotificationResponse> sendMultipleNotifications(
+      SendMultipleNotificationRequest req) async {
+    if (req != null) {
+      if (await notificationQueries.sendMultipleNotifications(req.getList()) ==
+          true) {
+        return new SendMultipleNotificationResponse(
+            true, "Sent multiple notifications successfully");
+      } else {
+        return new SendMultipleNotificationResponse(
+            false, "Unsuccessfully sent multiple notifications");
+      }
+    } else {
+      return new SendMultipleNotificationResponse(
+          false, "Unsuccessfully sent multiple notifications");
     }
   }
 } // class
