@@ -101,7 +101,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
             title: Text('Floors'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(Shift.routeName);
+                Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
               },
             ),
           ),
