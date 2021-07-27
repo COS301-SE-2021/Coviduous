@@ -10,6 +10,9 @@
  */
 library globals;
 
+import 'package:mailer2/mailer.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
@@ -188,3 +191,71 @@ bool convertJsonToRoomsList(dynamic json) {
     return false;
   }
 }
+
+Future<bool> sendMail() async {
+  var options = new GmailSmtpOptions()
+    ..username = 'capslock.cos301@gmail.com'
+    ..password =
+        'Coviduous.COS301'; // If you use Google app-specific passwords, use one of those.
+
+  // As pointed by Justin in the comments, be careful what you store in the source code.
+  // Be extra careful what you check into a public repository.
+  // I'm merely giving the simplest example here.
+
+  // Right now only SMTP transport method is supported.
+  var transport = new SmtpTransport(options);
+
+  // Create the envelope to send.
+  var envelope = new Envelope()
+    ..from = 'capslock.cos301@gmail.com'
+    ..fromName = 'Your company'
+    ..recipients = [
+      'njabuloskosana24@gmail.com',
+      'njabuloskosana0124@gmail.com'
+    ]
+    ..subject = 'Your subject'
+    ..text = 'Here goes your body message';
+
+  // Finally, send it!
+  transport
+      .send(envelope)
+      .then((_) => print('email sent!'))
+      .catchError((e) => print('Error: $e'));
+}
+
+/*Future<bool> sendEmail() async {
+  String username = 'capslock.cos301@gmail.com';
+  String password = 'Coviduous.COS301';
+
+  // ignore: deprecated_member_use
+  final smtpServer = gmail(username, password);
+  // Use the SmtpServer class to configure an SMTP server:
+  // final smtpServer = SmtpServer('smtp.domain.com');
+  // See the named arguments of SmtpServer for further configuration
+  // options.
+
+  // Create our message.
+  final message = Message()
+    ..from = Address(username, 'Coviduous Application')
+    ..recipients.add('njabuloskosana24@gmail.com')
+    ..ccRecipients
+        .addAll(['njabuloskosana0124@gmail.com', 'njabuloskosana5@gmail.com'])
+    ..bccRecipients.add(Address('njabuloskosana24@gmail.com@'))
+    ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+    ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+    ..html =
+        "<h1>Coviduous</h1>\n<p>This Message was sent using coviduous-2021</p>";
+
+  try {
+    final sendReport = await send(message, smtpServer);
+    print('Message sent: ' + sendReport.toString());
+    return true;
+  } on MailerException catch (e) {
+    print('Message not sent.');
+    for (var p in e.problems) {
+      print('Problem: ${p.code}: ${p.msg}');
+    }
+    return false;
+  }
+}
+*/
