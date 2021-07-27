@@ -55,10 +55,10 @@ class FloorPlanModel {
 
     if (response.statusCode == 200) {
       print("Success");
-      return holder.getFlooPlanId();
+      return holder.getFloorPlanId();
     } else {
       print("Something went wrong");
-      return holder.getFlooPlanId();
+      return holder.getFloorPlanId();
     }
   }
 
@@ -69,7 +69,7 @@ class FloorPlanModel {
     FloorPlan holder = new FloorPlan(numFloors, admin, companyId);
     floorGlobals.globalFloorPlan.add(holder);
     floorGlobals.globalNumFloorPlans++;
-    return holder.getFlooPlanId();
+    return holder.getFloorPlanId();
   }
 
   void setNumFloors(int num) {
@@ -83,7 +83,7 @@ class FloorPlanModel {
       if (floorGlobals.globalFloorPlan[v].getAdminId() == admin &&
           floorGlobals.globalFloorPlan[v].getCompanyId() == companyId) {
         print("Removed Floor Plan");
-        floorplanNum = floorGlobals.globalFloorPlan[v].getFlooPlanId();
+        floorplanNum = floorGlobals.globalFloorPlan[v].getFloorPlanId();
         floorGlobals.globalFloorPlan.removeAt(v);
         floorGlobals.globalNumFloorPlans--;
       }
