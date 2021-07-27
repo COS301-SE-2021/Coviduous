@@ -65,7 +65,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                   ],
                 ));
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.pushReplacementNamed(context, FloorPlan.routeName);
+          Navigator.pushReplacementNamed(context, FloorPlanScreen.routeName);
         });
         return Container();
       } else {
@@ -113,7 +113,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    globals.currentFloorNumString = services
+                                    globals.currentFloorNum = services
                                         .getFloors()[index]
                                         .getFloorNumber();
                                     Navigator.of(context).pushReplacementNamed(
@@ -178,7 +178,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+              Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
             },
           ),
         ),
