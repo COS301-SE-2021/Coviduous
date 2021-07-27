@@ -15,7 +15,7 @@ class GetFloorPlansResponse {
     return floorplans;
   }
 
-  int getFumFloorPlan() {
+  int getNumFloorPlan() {
     return numFloorPlans;
   }
 
