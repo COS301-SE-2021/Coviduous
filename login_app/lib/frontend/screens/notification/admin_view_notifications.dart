@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/scheduler.dart';
 
+import 'package:login_app/backend/controllers/notification_controller.dart';
 import 'package:login_app/frontend/screens/notification/admin_home_notifications.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/subsystems/notification_subsystem/notification.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -15,7 +17,8 @@ class AdminViewNotifications extends StatefulWidget {
 }
 
 class _AdminViewNotificationsState extends State<AdminViewNotifications> {
-  //String _adminId = globals.loggedInUserId;
+  NotificationController services = new NotificationController();
+  List<Notification> notifications = globals.currentUserNotifications;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +37,8 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
     }
 
     Widget getList() {
-      //NotificationsController services = new NotificationsController();
-      //ViewAdminNotificationResponse response = services.viewNotificationsAdminMock(ViewAdminNotificationRequest(_adminId));
-      //List<Notification> notifications = response.notificationArrayList;
-      //List<Notification> reverseNotifications = notifications.reversed.toList(); //To display the newest notifications first
-      //int numberOfNotifications = notifications.length;
-      int numberOfNotifications = 1;
+      List<Notification> reverseNotifications = notifications.reversed.toList(); //To display the newest notifications first
+      int numberOfNotifications = notifications.length;
 
       if (numberOfNotifications == 0) {
         return Column(
@@ -91,7 +90,7 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Notification ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Notification ' + reverseNotifications[index].notificationId, style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                         shrinkWrap: true,
@@ -100,26 +99,22 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                           Container(
                             height: 50,
                             color: Colors.white,
-                            //child: Text('From: ' + notifications[index].getId(), style: TextStyle(color: Colors.black)),
-                            child: Text('From: User 1234', style: TextStyle(color: Colors.black)),
+                            child: Text('From: ' + reverseNotifications[index].userId, style: TextStyle(color: Colors.black)),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            //child: Text('Subject: ' + notifications[index].getSubject(), style: TextStyle(color: Colors.black)),
-                            child: Text('Subject: Test Notification', style: TextStyle(color: Colors.black)),
+                            child: Text('Subject: ' + reverseNotifications[index].subject, style: TextStyle(color: Colors.black)),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            //child: Text('Date: ' + notifications[index].getDate(), style: TextStyle(color: Colors.black)),
-                            child: Text('Date: test', style: TextStyle(color: Colors.black)),
+                            child: Text('Date: ' + reverseNotifications[index].timestamp, style: TextStyle(color: Colors.black)),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            //child: Text('Message: ' + notifications[index].getMessage(), style: TextStyle(color: Colors.black)),
-                            child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
+                            child: Text('Message: ' + reverseNotifications[index].message, style: TextStyle(color: Colors.black)),
                           ),
                           Container(
                             height: 50,
@@ -128,23 +123,15 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ElevatedButton(
+                                    style: ElevatedButton.styleFrom (
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
                                     child: Text('Dismiss'),
                                     onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (ctx) => AlertDialog(
-                                            title: Text('Placeholder'),
-                                            content: Text('Dismiss notification.'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                child: Text('Okay'),
-                                                onPressed: (){
-                                                  Navigator.of(ctx).pop();
-                                                },
-                                              )
-                                            ],
-                                          )
-                                      );
+                                      notifications.removeAt(numberOfNotifications-index-1);
+                                      setState(() {});
                                     }),
                               ],
                             ),
@@ -195,21 +182,8 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                         ),
                         child: Text('Clear notifications'),
                         onPressed: (){
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                title: Text('Placeholder'),
-                                content: Text('Clear notifications.'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('Okay'),
-                                    onPressed: (){
-                                      Navigator.of(ctx).pop();
-                                    },
-                                  )
-                                ],
-                              )
-                          );
+                          notifications.clear();
+                          setState(() {});
                         },
                       )
                   ),
