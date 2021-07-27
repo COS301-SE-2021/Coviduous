@@ -31,6 +31,7 @@ import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 //Health
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/health/user_health_check.dart';
+import 'package:login_app/frontend/screens/health/user_view_permissions.dart';
 import 'package:login_app/frontend/screens/health/user_report_infection.dart';
 import 'package:login_app/frontend/screens/health/user_request_access.dart';
 
@@ -131,6 +132,7 @@ class MyApp extends StatelessWidget{
         //Health
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
+        UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
         UserReportInfection.routeName: (ctx)=> UserReportInfection(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
 
