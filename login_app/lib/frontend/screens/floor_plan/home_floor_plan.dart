@@ -11,14 +11,14 @@ import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
-class FloorPlan extends StatefulWidget {
+class FloorPlanScreen extends StatefulWidget {
   static const routeName = "/floor_plan";
 
   @override
-  _FloorPlanState createState() => _FloorPlanState();
+  _FloorPlanScreenState createState() => _FloorPlanScreenState();
 }
 //class admin
-class _FloorPlanState extends State<FloorPlan> {
+class _FloorPlanScreenState extends State<FloorPlanScreen> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
