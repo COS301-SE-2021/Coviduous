@@ -41,7 +41,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
       List<Room> rooms =
-          services.getRoomsForFloorNum(globals.currentFloorNumString);
+          services.getRoomsForFloorNum(globals.currentFloorNum);
       int numOfRooms = rooms.length;
 
       print(numOfRooms);
@@ -166,7 +166,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    globals.currentRoomNumString =
+                                    globals.currentRoomNum =
                                         rooms[index].getRoomNum();
                                     Navigator.of(context).pushReplacementNamed(
                                         AdminEditRoomAdd.routeName);
@@ -179,7 +179,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                                       //Only allow deletion of rooms if there is more than one room
                                       DeleteRoomResponse response2 = services
                                           .deleteRoomMock(DeleteRoomRequest(
-                                              globals.currentFloorNumString,
+                                              globals.currentFloorNum,
                                               rooms[index].getRoomNum()));
                                       print(response2.getResponse());
                                       /*
@@ -231,7 +231,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
         backgroundColor: Colors.transparent, //To show background image
         appBar: AppBar(
           title:
-              Text("Manage rooms for floor " + globals.currentFloorNumString),
+              Text("Manage rooms for floor " + globals.currentFloorNum),
           leading: BackButton(
             //Specify back button
             onPressed: () {
@@ -271,7 +271,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                       AddRoomResponse response2 = services.addRoomMock(
                           AddRoomRequest(
                               globals.floorPlanId,
-                              globals.currentFloorNumString,
+                              globals.currentFloorNum,
                               "",
                               0,
                               services.getPercentage(),
