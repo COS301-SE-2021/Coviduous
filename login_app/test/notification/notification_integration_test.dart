@@ -3,8 +3,10 @@ import 'package:login_app/backend/controllers/notification_controller.dart';
 import 'package:login_app/requests/notification_requests/create_notification_request.dart';
 import 'package:login_app/requests/notification_requests/get_notification_request.dart';
 import 'package:login_app/requests/notification_requests/get_notifications_request.dart';
+import 'package:login_app/requests/notification_requests/send_multiple_notifications_request.dart';
 import 'package:login_app/responses/notification_responses/create_notification_response.dart';
 import 'package:login_app/responses/notification_responses/get_notifications_response.dart';
+import 'package:login_app/responses/notification_responses/send_multiple_notifications_response.dart';
 
 void main() {
   NotificationController notificationController = new NotificationController();
@@ -81,6 +83,37 @@ void main() {
           " userEmail: " +
           data.userEmail);
     }
+
+    print("Response : " + resp.getResponseMessage());
+
+    expect(resp, isNot(null));
+    expect(true, resp.getResponse());
+  });
+
+  test('Sending a Notification to one or more users', () async {
+    String userID = "";
+    String userEmail = "";
+    String mySubject = "General Notification";
+    String message = "Please check your payslip update";
+    String adminId = "AUSR-1";
+    String companyId = "CID-1";
+
+    //this test simulates an admin sending one or more employees the same notification
+    //first the admin needs to enter the subject then the message then enter all the emails for the user/s
+
+    notificationController.addToTemp(
+        "USR-111", "USR111@gmail.com", mySubject, message, adminId, companyId);
+    notificationController.addToTemp(
+        "USR-222", "USR222@gmail.com", mySubject, message, adminId, companyId);
+    notificationController.addToTemp(
+        "USR-333", "USR333@gmail.com", mySubject, message, adminId, companyId);
+
+    //after the admin is done writing the notification and made a list of individuals who will recieve the admin will send it:
+
+    SendMultipleNotificationRequest req = new SendMultipleNotificationRequest(
+        notificationController.getTempNotifications());
+    SendMultipleNotificationResponse resp =
+        await notificationController.sendMultipleNotifications(req);
 
     print("Response : " + resp.getResponseMessage());
 
