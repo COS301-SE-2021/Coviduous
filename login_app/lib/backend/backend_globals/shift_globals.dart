@@ -10,6 +10,7 @@
  */
 library globals;
 
+import 'package:login_app/subsystems/shift_subsystem/tempGroup.dart';
 import 'package:mailer2/mailer.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
@@ -61,6 +62,8 @@ int numGroups = 0;
 
 //Helper Functions For The Shift Model Class To Make Http Request To Application Server And Convert Json To Desired Object List
 //==========================
+
+List<TempGroup> tempGroup = [];
 
 //Helper to convert json to list of floorplans
 bool convertJsonToFloorplanList(dynamic json) {
