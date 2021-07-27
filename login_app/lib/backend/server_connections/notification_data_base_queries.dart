@@ -27,14 +27,10 @@ class NotificationDatabaseQueries {
   String server = "https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com";
 
   // String body;
-  String notificationId;
-  String timestamp;
+  String notificationId = "";
+  String timestamp = "";
 
-  NotificationDatabaseQueries() {
-    // body = null;
-    notificationId = null;
-    timestamp = null;
-  }
+  NotificationDatabaseQueries() {}
 
   String getNotificationID() {
     return notificationId;
