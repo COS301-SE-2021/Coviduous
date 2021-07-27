@@ -33,6 +33,7 @@ import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/health/user_health_check.dart';
 import 'package:login_app/frontend/screens/health/user_view_permissions.dart';
 import 'package:login_app/frontend/screens/health/user_view_guidelines.dart';
+import 'package:login_app/frontend/screens/health/user_upload_covid_test.dart';
 import 'package:login_app/frontend/screens/health/user_report_infection.dart';
 import 'package:login_app/frontend/screens/health/user_request_access.dart';
 
@@ -120,7 +121,7 @@ class MyApp extends StatelessWidget{
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
 
         //Floor plan
-        FloorPlan.routeName: (ctx)=> FloorPlan(),
+        FloorPlanScreen.routeName: (ctx)=> FloorPlanScreen(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         AdminViewFloors.routeName: (ctx)=> AdminViewFloors(),
         AdminViewRooms.routeName: (ctx)=> AdminViewRooms(),
@@ -135,11 +136,12 @@ class MyApp extends StatelessWidget{
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
         UserViewGuidelines.routeName: (ctx)=> UserViewGuidelines(),
+        UserUploadTestResults.routeName: (ctx)=> UserUploadTestResults(),
         UserReportInfection.routeName: (ctx)=> UserReportInfection(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
 
         //Shift
-        Shift.routeName: (ctx)=> Shift(),
+        ShiftScreen.routeName: (ctx)=> ShiftScreen(),
         AddShiftFloorPlans.routeName: (ctx)=> AddShiftFloorPlans(),
         AddShiftFloors.routeName: (ctx)=> AddShiftFloors(),
         AddShiftRooms.routeName: (ctx)=> AddShiftRooms(),
