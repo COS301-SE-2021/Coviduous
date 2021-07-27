@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/backend/controllers/floor_plan_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floors.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_create_shift.dart';
@@ -9,7 +8,6 @@ import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
-//import 'package:login_app/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class AddShiftRooms extends StatefulWidget {
   static const routeName = "/admin_add_shift_rooms";
@@ -18,6 +16,7 @@ class AddShiftRooms extends StatefulWidget {
 }
 
 class _AddShiftRoomsState extends State<AddShiftRooms> {
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -34,10 +33,9 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNumString);
-      int numOfRooms = rooms.length;
+      List<Room> rooms = globals.rooms;
+      int numOfRooms = globals.rooms.length;
 
       print(numOfRooms);
 
@@ -93,22 +91,14 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'Number of desks: ' +
-                                      services
-                                          .getRoomDetails(rooms[index].getRoomNum())
-                                          .numDesks
-                                          .toString(),
+                                  'Number of desks: ' + rooms[index].desks.length.toString(),
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'Occupied desk percentage: ' +
-                                      services
-                                          .getRoomDetails(rooms[index].getRoomNum())
-                                          .occupiedDesks
-                                          .toString(),
+                                  'Occupied desk percentage: ' + rooms[index].getPercentage().toString(),
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
@@ -120,7 +110,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                   ElevatedButton(
                                       child: Text('Create shift'),
                                       onPressed: () {
-                                        globals.currentRoomNumString = rooms[index].getRoomNum();
+                                        globals.currentRoomNum = rooms[index].getRoomNum();
                                         Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
                                       }),
                                 ],
@@ -147,7 +137,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
       child: new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Create shift in floor ' + globals.currentFloorNumString),
+            title: Text('Create shift in floor ' + globals.currentFloorNum),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AddShiftFloors.routeName);
