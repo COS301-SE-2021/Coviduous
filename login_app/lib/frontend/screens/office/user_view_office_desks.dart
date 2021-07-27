@@ -39,8 +39,8 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
     FloorPlanController services = new FloorPlanController();
     OfficeController services2 = new OfficeController();
     Widget getList() {
-      List<Desk> desks = services.getRoomDetails(globals.currentRoomNumString).desks;
-      int numOfDesks = services.getRoomDetails(globals.currentRoomNumString).numDesks;
+      List<Desk> desks = services.getRoomDetails(globals.currentRoomNum).desks;
+      int numOfDesks = services.getRoomDetails(globals.currentRoomNum).numDesks;
 
       print(numOfDesks);
 
@@ -118,7 +118,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                       child: Text('Book'),
                                       onPressed: () {
                                         if (desks[index].currentCapacity != desks[index].maxCapacity) {
-                                          BookOfficeSpaceResponse response = services2.bookOfficeSpaceMock(BookOfficeSpaceRequest(globals.loggedInUserId, globals.currentFloorNumString, globals.currentRoomNumString));
+                                          BookOfficeSpaceResponse response = services2.bookOfficeSpaceMock(BookOfficeSpaceRequest(globals.loggedInUserId, globals.currentFloorNum, globals.currentRoomNum));
                                           print(response.getResponse());
                                           if(response.getResponse() == true) {
                                             ScaffoldMessenger.of(context).showSnackBar(
@@ -183,7 +183,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
       child: new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Book desk in room ' + services.getRoomDetails(globals.currentRoomNumString).getRoomNum()),
+            title: Text('Book desk in room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum()),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
