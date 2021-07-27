@@ -1,5 +1,7 @@
 library globals;
 
+import 'dart:html';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -36,13 +38,24 @@ String currentFloorNumString = '';
 int currentRoomNum = 0;
 String currentRoomNumString = '';
 
+//Get OS if on web browser
+String getOSWeb() {
+  final userAgent = window.navigator.userAgent.toString().toLowerCase();
+  if( userAgent.contains("iphone"))  return "iOS";
+  if( userAgent.contains("ipad")) return "iOS";
+  if( userAgent.contains("android"))  return "Android";
+  return "Web";
+}
+
 //Adjusts scaling of containers based on platform
 double getWidgetScaling() {
-  if (kIsWeb) {
-    //If PC web browser
-    return 1;
-  } else {
-    //If mobile app
+  if (kIsWeb) { //If web browser
+    String platform = getOSWeb();
+    if (platform == "Android" || platform == "iOS") //Check if mobile browser
+      return 0.7;
+    else //Else, PC browser
+      return 1;
+  } else { //Else, mobile app
     return 0.7;
   }
 }
