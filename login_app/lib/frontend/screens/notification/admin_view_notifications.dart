@@ -44,6 +44,10 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (5 * globals.getWidgetScaling()),
+              ),
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery
@@ -79,6 +83,8 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
         );
       } else {
         return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             padding: const EdgeInsets.all(8),
             itemCount: numberOfNotifications,
             itemBuilder: (context, index){
@@ -165,8 +171,16 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
           ),
           body: Stack (
               children: <Widget>[
-                Center (
-                    child: getList()
+                SingleChildScrollView(
+                  child: Column(
+                      children: [
+                        getList(),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 18,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                      ],
+                  ),
                 ),
                 Container (
                   alignment: Alignment.bottomRight,
