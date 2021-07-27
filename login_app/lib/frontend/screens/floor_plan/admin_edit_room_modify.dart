@@ -45,7 +45,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
       return Container();
     }
 
-    Room room = services.getRoomDetails(globals.currentRoomNumString);
+    Room room = services.getRoomDetails(globals.currentRoomNum);
     _roomNumber.text = room.getRoomNum();
     _roomArea.text = room.dimensions.toString();
     _deskArea.text = room.deskDimentions.toString();
@@ -62,7 +62,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Manage room ' + globals.currentRoomNumString),
+            title: Text('Manage room ' + globals.currentRoomNum),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AdminModifyRooms.routeName);
@@ -217,7 +217,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                   onPressed: () {
                                     FormState form = _formKey.currentState;
                                     if (form.validate()) {
-                                      EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNumString, _roomNumber.text, globals.currentRoomNumString, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), int.parse(_deskMaxCapacity.text)));
+                                      EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNum, _roomNumber.text, globals.currentRoomNum, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), int.parse(_deskMaxCapacity.text)));
                                       print(response.getResponse());
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Room information updated")));
