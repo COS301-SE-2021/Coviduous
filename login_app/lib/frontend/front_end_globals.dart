@@ -1,9 +1,8 @@
 library globals;
 
-//import 'dart:html';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
+import 'package:universal_html/html.dart' as html;
 
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
@@ -11,35 +10,31 @@ import 'package:login_app/subsystems/floorplan_subsystem/room.dart';
 import 'package:login_app/subsystems/notification_subsystem/notification.dart';
 import 'package:login_app/subsystems/shift_subsystem/shift.dart';
 
-//==========================
-//==========================
-//Frontend global variables
-//==========================
-//==========================
+//============================
+//FRONT END GLOBAL VARIABLES
+//============================
 
-//======================================
+//========================================
 //Generic global functions and variables
-//======================================
+//========================================
 
 //Get OS if on web browser
-/*
 String getOSWeb() {
-  final userAgent = window.navigator.userAgent.toString().toLowerCase();
+  final userAgent = html.window.navigator.userAgent.toString().toLowerCase();
   if( userAgent.contains("iphone"))  return "iOS";
   if( userAgent.contains("ipad")) return "iOS";
   if( userAgent.contains("android"))  return "Android";
   return "Web";
 }
-*/
 
 //Adjusts scaling of containers based on platform
 double getWidgetScaling() {
   if (kIsWeb) { //If web browser
-    //String platform = getOSWeb();
-    //if (platform == "Android" || platform == "iOS") //Check if mobile browser
-    //return 0.7;
-    //else //Else, PC browser
-    return 1;
+    String platform = getOSWeb();
+    if (platform == "Android" || platform == "iOS") //Check if mobile browser
+     return 0.7;
+    else //Else, PC browser
+     return 1;
   } else { //Else, mobile app
     return 0.7;
   }
@@ -105,6 +100,19 @@ List<Room> rooms = [];
 //Shifts
 List<Shift> shifts = [];
 
+//===============================
+//Used in notifications subsystem
+//===============================
+
+//Current subject field
+String currentSubjectField = '';
+
+//Current description field
+String currentDescriptionField = '';
+
+//Global list of notifications
+List<Notification> currentUserNotifications = [];
+
 //===========================
 //Used in multiple subsystems
 //===========================
@@ -123,16 +131,3 @@ String currentShiftNum = '';
 
 //Current shift you're working with
 String currentGroupNum = '';
-
-//===============================
-//Used in notifications subsystem
-//===============================
-
-//Current subject field
-String currentSubjectField = '';
-
-//Current description field
-String currentDescriptionField = '';
-
-//Global list of notifications
-List<Notification> currentUserNotifications = [];
