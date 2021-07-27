@@ -6,7 +6,6 @@ import 'package:login_app/requests/floor_plan_requests/create_floor_plan_request
 import 'package:login_app/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:login_app/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:login_app/frontend/screens/floor_plan/admin_view_floors.dart';
-//import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -77,7 +76,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+              Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
             },
           ),
         ),
