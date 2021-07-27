@@ -104,7 +104,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentFloorNumString = services
+                                        globals.currentFloorNum = services
                                             .getFloors()[index]
                                             .getFloorNumber();
                                         Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
