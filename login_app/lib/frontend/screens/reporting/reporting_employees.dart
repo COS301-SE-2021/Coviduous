@@ -243,7 +243,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                           build: (pw.Context context) => <pw.Widget>[
                             pw.Header(
                               level: 0,
-                              title: 'Office report',
+                              title: 'Coviduous - Office report',
                               child: pw.Text('Office report', textScaleFactor: 2),
                             ),
                             pw.Bullet(
@@ -281,11 +281,16 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                         ));
 
                         //Save PDF
-                        if (kIsWeb) {
-                          //If PC web browser
-                          savePDFWeb();
-                        } else {
-                          //If mobile app
+                        if (kIsWeb) { //If web browser
+                          String platform = globals.getOSWeb();
+                          if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+                            savePDFMobile();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("PDF file saved to downloads folder")));
+                          } else { //Else, PC web browser
+                            savePDFWeb();
+                          }
+                        } else { //Else, mobile app
                           savePDFMobile();
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("PDF file saved to downloads folder")));
