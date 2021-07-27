@@ -282,14 +282,14 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
 
                         //Save PDF
                         if (kIsWeb) { //If web browser
-                          //String platform = globals.getOSWeb();
-                          //if (platform == "Android" || platform == "iOS") { //Check if mobile browser
-                            //savePDFMobile();
-                            //ScaffoldMessenger.of(context).showSnackBar(
-                                //SnackBar(content: Text("PDF file saved to downloads folder")));
-                          //} else { //Else, PC web browser
+                          String platform = globals.getOSWeb();
+                          if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+                            savePDFMobile();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("PDF file saved to downloads folder")));
+                          } else { //Else, PC web browser
                             savePDFWeb();
-                          //}
+                          }
                         } else { //Else, mobile app
                           savePDFMobile();
                           ScaffoldMessenger.of(context).showSnackBar(
