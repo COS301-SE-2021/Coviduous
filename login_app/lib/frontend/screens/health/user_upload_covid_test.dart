@@ -97,60 +97,90 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
               children: <Widget>[
                 Center(
                   child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-                    child: Container(
-                      color: Colors.white,
-                      height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      padding: EdgeInsets.all(16),
-                      child: SingleChildScrollView(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                            crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
-                            children: <Widget>[
-                              ElevatedButton(
-                                child: Text(
-                                    'Select a file'
-                                ),
-                                onPressed: () {
-                                  getPdf();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                          height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                          color: Theme.of(context).primaryColor,
+                          child: Text(
+                              'Upload your COVID-19 test results',
+                              style: TextStyle(
+                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                                color: Colors.white,
+                              )
+                          ),
+                        ),
+                        Container(
+                          color: Colors.white,
+                          width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                          height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
                               ),
-                              ElevatedButton(
-                                child: Text(
-                                    'Submit'
-                                ),
-                                onPressed: () {
-                                  /*
-                                  if (PDF exists) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("PDF successfully uploaded")));
-                                    Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Please upload a PDF")));
-                                  }
-                                   */
-
-                                  /*
+                              Text(
+                                  'Please note that all documents must be uploaded in a PDF format.'
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
+                                children: <Widget>[
+                                  ElevatedButton(
+                                    child: Text(
+                                        'Select a file'
+                                    ),
+                                    onPressed: () {
+                                      getPdf();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    child: Text(
+                                        'Submit'
+                                    ),
+                                    onPressed: () {
+                                      /*
+                                if (PDF exists) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text("PDF successfully uploaded")));
                                   Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                   */
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              )
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("Please upload a PDF")));
+                                }
+                                 */
+
+                                      /*
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("PDF successfully uploaded")));
+                                Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                 */
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ],
-                          )
-                      ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
