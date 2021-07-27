@@ -95,7 +95,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                         ),
                                         onPressed: () {
-                                         Navigator.of(context).pushReplacementNamed(FloorPlan.routeName);
+                                         Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
                                         }
                                     ),
                                     SizedBox (
@@ -117,7 +117,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                               crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                           ),
                                           onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(Shift.routeName);
+                                            Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
                                           }
                                       ),
                                       SizedBox (
