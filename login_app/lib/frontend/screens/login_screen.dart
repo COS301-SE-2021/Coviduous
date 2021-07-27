@@ -71,6 +71,32 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   /*
+    Function name: getCompanyId
+    Purpose: Retrieves the user's company ID from the database.
+    Output:
+      - The user's company ID, for example "CID-1".
+   */
+  Future getCompanyId() async {
+    String companyID = "";
+
+    //Wait for transaction to complete.
+    await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      var query = FirebaseFirestore.instance.collection('Users')
+          .where('Email', isEqualTo: _email.text.trim()).limit(1);
+      await Future.wait([query.get().then((data) {
+        if (data.docs.length > 0) {
+          companyID = data.docs[0].get('Company ID');
+        } else {
+          companyID = "";
+        }
+      })]);
+    })]);
+
+    print("company ID = " + companyID);
+    return companyID;
+  }
+
+  /*
     Function name: build
     Purpose: Visually displays the login screen.
     Parameters:
@@ -210,33 +236,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                       globals.loggedInUserId = userGlobals.getUserId(_email.text);
                                       print(globals.loggedInUserId);
 
-                                      //get user type
-                                      getUserType().then((userType) {
-                                        if (userType == 'Admin') {
-                                          globals.type = 'Admin';
-                                          Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                        } else if (userType == 'User') {
-                                          globals.type = 'User';
-                                          Navigator.pushReplacementNamed(context, UserHomePage.routeName);
-                                        } else {
-                                          showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                title: Text('Error'),
-                                                content: Text('Encountered error retrieving user type, please try again.'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: Text('Okay'),
-                                                    onPressed: (){
-                                                      Navigator.of(ctx).pop();
-                                                    },
-                                                  )
-                                                ],
-                                              )
-                                          );
-                                        }
-                                        setState(() {
-                                          isLoading = false;
+                                      //First get company ID
+                                      getCompanyId().then((companyID) {
+                                        globals.loggedInCompanyId = companyID;
+
+                                        //Then get user type
+                                        getUserType().then((userType) {
+                                          if (userType == 'Admin') {
+                                            globals.type = 'Admin';
+                                            Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                          } else if (userType == 'User') {
+                                            globals.type = 'User';
+                                            Navigator.pushReplacementNamed(context, UserHomePage.routeName);
+                                          } else {
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) => AlertDialog(
+                                                  title: Text('Error'),
+                                                  content: Text('Encountered error retrieving user type, please try again.'),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: Text('Okay'),
+                                                      onPressed: (){
+                                                        Navigator.of(ctx).pop();
+                                                      },
+                                                    )
+                                                  ],
+                                                )
+                                            );
+                                          }
+                                          setState(() {
+                                            isLoading = false;
+                                          });
                                         });
                                       });
                                     }
