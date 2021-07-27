@@ -18,6 +18,7 @@ import 'dart:convert';
 
 import 'package:login_app/subsystems/shift_subsystem/group.dart';
 import 'package:login_app/subsystems/shift_subsystem/shift.dart';
+import 'package:login_app/subsystems/shift_subsystem/tempGroup.dart';
 
 /**
  * Class name: ShiftModel
@@ -257,7 +258,7 @@ class ShiftModel {
   }
 
   Future<bool> updateShift(
-    String shiftID, String startTime, String endTime) async {
+      String shiftID, String startTime, String endTime) async {
     String path = '/shift/edit-shift';
     String url = server + path;
 
@@ -364,6 +365,24 @@ class ShiftModel {
     }
 
     return false;
+  }
+
+  Future<bool> sendNotificationsToGroup(List<TempGroup> list) async {
+    for (int i = 0; i < list.length; i++) {
+      if (await createGroup(
+          list[i].getGroupId(),
+          list[i].getGroupName(),
+          list[i].getUserEmail(),
+          list[i].getShiftNumber(),
+          list[i].getFloorNumber(),
+          list[i].getRoomNumber(),
+          list[i].getAdminId())) {
+        //CONTINUE
+      } else {
+        return false;
+      }
+    }
+    return true;
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
