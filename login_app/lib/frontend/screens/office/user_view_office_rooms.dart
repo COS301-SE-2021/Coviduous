@@ -36,7 +36,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
     FloorPlanController services = new FloorPlanController();
     Widget getList() {
       List<Room> rooms =
-      services.getRoomsForFloorNum(globals.currentFloorNumString);
+      services.getRoomsForFloorNum(globals.currentFloorNum);
       int numOfRooms = rooms.length;
 
       print(numOfRooms);
@@ -120,7 +120,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentRoomNumString = rooms[index].getRoomNum();
+                                        globals.currentRoomNum = rooms[index].getRoomNum();
                                         Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
                                       }),
                                 ],
