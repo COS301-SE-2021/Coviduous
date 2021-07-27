@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:login_app/backend/controllers/notification_controller.dart';
 import 'package:login_app/frontend/screens/notification/admin_make_notification_assign_employees.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -17,7 +18,7 @@ class MakeNotificationAddEmployee extends StatefulWidget {
 class _MakeNotificationAddEmployeeState extends State<MakeNotificationAddEmployee> {
   String _employeeEmail = "";
 
-  //NotificationsController service = new NotificationsController();
+  NotificationController service = new NotificationController();
 
   Widget _buildEmail() {
     return TextFormField(
@@ -112,28 +113,8 @@ class _MakeNotificationAddEmployeeState extends State<MakeNotificationAddEmploye
                             _formKey.currentState.save();
                             print(_employeeEmail);
 
-                            /*
-                            AddEmployeeToNotificationResponse response = services.addEmployeeToNotificationMock(AddEmployeeToNotificationRequest(_employeeEmail));
-                            print(response);
-                            if (response.getResponse()) {
-                              Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                        title: Text('Employee addition unsuccessful'),
-                                        content: Text('Employee could not be added. Please check the email you entered.'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: Text('Okay'),
-                                            onPressed: () {
-                                              Navigator.of(ctx).pop();
-                                            },
-                                          )
-                                        ],
-                                      ));
-                            }
-                             */
+                            service.addToTemp("", _employeeEmail, globals.currentSubjectField, globals.currentDescriptionField, globals.loggedInUserId, globals.loggedInCompanyId);
+
                             Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
                           }),
                       SizedBox(
