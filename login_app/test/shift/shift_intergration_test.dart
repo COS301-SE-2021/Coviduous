@@ -8,9 +8,11 @@ import 'dart:convert';
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
 import 'package:login_app/requests/shift_requests/get_floors_request.dart';
 import 'package:login_app/requests/shift_requests/get_rooms_request.dart';
+import 'package:login_app/requests/shift_requests/process_shifts_request.dart';
 import 'package:login_app/responses/shift_responses/get_floor_plan_response.dart';
 import 'package:login_app/responses/shift_responses/get_floors_response.dart';
 import 'package:login_app/responses/shift_responses/get_rooms_response.dart';
+import 'package:login_app/responses/shift_responses/process_shifts_response.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floor.dart';
 import 'package:login_app/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:login_app/backend/backend_globals/shift_globals.dart'
@@ -329,7 +331,7 @@ void main() async {
     });
   }); // end SHIFT tests
 
-  /* group('SHIFT GROUP TESTS', () {
+  group('SHIFT GROUP TESTS', () {
     test('Correct create group', () async {
       CreateGroupRequest req = new CreateGroupRequest(
           expectedGroupNumber,
@@ -368,7 +370,44 @@ void main() async {
       expect(resp, isNot(null));
       expect(true, resp.getResponse());
     });
-  });*/ // end SHIFT GROUP tests
+  }); // end SHIFT GROUP tests
+
+  test('Adding users to a group after they have been assigned', () async {
+    String date = "2021/07/27";
+    String startTime = "13:00";
+    String endTime = "15:00";
+    String description = "Afternoon Shift";
+    String floorNumber = "FLR-1";
+    String roomNumber = "RN-1";
+    String groupNumber = "GRP-1";
+    String adminId = "AUSR-1";
+    String companyId = "CID";
+    String shiftNumber = "SFT-1";
+    String groupName = "CAPSLOCK";
+
+    //this test simulates an admin sending one or more employees the same shift notification
+    //first the admin needs to enter the description and times then enter all the emails for the user/s
+
+    shiftController.addToTempGroup(groupNumber, groupName, "USR-111",
+        "USR111@gmail.com", floorNumber, roomNumber, adminId, shiftNumber);
+
+    shiftController.addToTempGroup(groupNumber, groupName, "USR-222",
+        "USR222@gmail.com", floorNumber, roomNumber, adminId, shiftNumber);
+
+    shiftController.addToTempGroup(groupNumber, groupName, "USR-333",
+        "USR333@gmail.com", floorNumber, roomNumber, adminId, shiftNumber);
+
+    //after the admin is done writing the notification and made a list of individuals who will recieve the admin will send it:
+
+    ProcessShiftsRequest req =
+        new ProcessShiftsRequest(shiftController.getTempGroup());
+    ProcessShiftsResponse resp = await shiftController.processShifts(req);
+
+    print("Response : " + resp.getResponseMessage());
+
+    expect(resp, isNot(null));
+    expect(true, resp.getResponse());
+  });
 
   test('Testing sending email function using SMTP protocol', () async {
     bool holder = await shiftGlobals.sendMail();
