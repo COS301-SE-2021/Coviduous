@@ -103,6 +103,8 @@ class MakeNotificationState extends State<MakeNotification> {
                     ),
                     child: Text("Proceed"),
                     onPressed: () {
+                      globals.currentSubjectField = _subject.text;
+                      globals.currentDescriptionField = _description.text;
                       //CreateNotificationResponse response = services.createNotificationMock(CreateNotificationRequest(_subject.text, _description.text, _adminId, _companyId));
                       //print(response.getNotificationID() + " " + response.getResponse().toString());
                       Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
