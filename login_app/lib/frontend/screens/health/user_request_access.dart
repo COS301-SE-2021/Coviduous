@@ -109,6 +109,9 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                     height: 16,
                   ),
                   Text(
+                    'Date'
+                  ),
+                  Text(
                     "${_selectedDate.toLocal()}".split(' ')[0],
                     style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                   ),
@@ -116,8 +119,13 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                     height: 10.0,
                   ),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                     onPressed: () => _selectDate(context),
-                    child: Text('Date'),
+                    child: Text('Select date'),
                   ),
                   SizedBox(
                     height: 16,
