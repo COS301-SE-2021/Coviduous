@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:login_app/backend/controllers/floor_plan_controller.dart';
+import 'package:login_app/backend/controllers/shift_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_assign_employees.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -18,7 +18,7 @@ class AddShiftAddEmployee extends StatefulWidget {
 class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
   String _employeeEmail = "";
 
-  FloorPlanController service = new FloorPlanController();
+  ShiftController services = new ShiftController();
 
   Widget _buildEmail() {
     return TextFormField(
@@ -44,6 +44,7 @@ class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
 
 //global key _formkey.
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -113,28 +114,8 @@ class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
                             _formKey.currentState.save();
                             print(_employeeEmail);
 
-                            /*
-                            AddEmployeeToShiftResponse response = services.addEmployeeToShiftMock(AddEmployeeToShiftRequest(_employeeEmail));
-                            print(response);
-                            if (response.getResponse()) {
-                              Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                        title: Text('Employee addition unsuccessful'),
-                                        content: Text('Employee could not be added. Please check the email you entered.'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: Text('Okay'),
-                                            onPressed: () {
-                                              Navigator.of(ctx).pop();
-                                            },
-                                          )
-                                        ],
-                                      ));
-                            }
-                             */
+                            services.addToTempGroup("group ID", "groupname", "userid", _employeeEmail, globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId, globals.currentShiftNum);
+
                             Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
                           }),
                       SizedBox(
