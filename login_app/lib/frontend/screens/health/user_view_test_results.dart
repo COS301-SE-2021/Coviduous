@@ -5,6 +5,7 @@ import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/health/user_upload_test_results.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:native_pdf_view/native_pdf_view.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -16,6 +17,10 @@ class UserViewTestResults extends StatefulWidget {
 }
 
 class _UserViewTestResultsState extends State<UserViewTestResults> {
+  final pdfController = PdfController(
+    document: PdfDocument.openAsset('assets/sample.pdf'),
+  );
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -60,7 +65,11 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
             width: MediaQuery.of(context).size.width/(1.5*globals.getWidgetScaling()),
             height: MediaQuery.of(context).size.height/(1.5*globals.getWidgetScaling()),
             color: Colors.white,
-            child: Text('PDF of test results will go here.')
+            child: PdfView(
+              documentLoader: Center(child: CircularProgressIndicator()),
+              pageLoader: Center(child: CircularProgressIndicator()),
+              controller: pdfController,
+            ),
         );
       }
     }
