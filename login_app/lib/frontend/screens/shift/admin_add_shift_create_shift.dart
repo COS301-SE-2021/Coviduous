@@ -78,7 +78,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
 
   Future createGroup() async {
     await Future.wait([
-      services.createGroup(CreateGroupRequest("Test", "Test", globals.email, "", globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId))
+      services.createGroup(CreateGroupRequest("Test", "Test", globals.loggedInUserEmail, "", globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId))
     ]).then((responses) {
       response = responses.first;
       globals.currentGroupNum = response.getGroupID();
@@ -89,8 +89,8 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.type != 'Admin') {
-      if (globals.type == 'User') {
+    if (globals.loggedInUserType != 'Admin') {
+      if (globals.loggedInUserType == 'User') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });
