@@ -50,8 +50,9 @@ import 'package:login_app/frontend/screens/shift/admin_add_shift_assign_employee
 import 'package:login_app/frontend/screens/shift/admin_add_shift_add_employee.dart';
 import 'package:login_app/frontend/screens/shift/admin_view_shifts_edit_shift.dart';
 import 'package:login_app/frontend/screens/shift/admin_view_shifts.dart';
-import 'package:login_app/frontend/screens/shift/admin_view_shifts_rooms.dart';
+import 'package:login_app/frontend/screens/shift/admin_view_shifts_floor_plans.dart';
 import 'package:login_app/frontend/screens/shift/admin_view_shifts_floors.dart';
+import 'package:login_app/frontend/screens/shift/admin_view_shifts_rooms.dart';
 
 //Office
 import 'package:login_app/frontend/screens/office/home_office.dart';
@@ -155,6 +156,7 @@ class MyApp extends StatelessWidget{
         AddShiftAssignEmployees.routeName: (ctx)=> AddShiftAssignEmployees(),
         AddShiftAddEmployee.routeName: (ctx)=> AddShiftAddEmployee(),
         ViewShifts.routeName: (ctx)=> ViewShifts(),
+        ViewShiftsFloorPlans.routeName: (ctx)=> ViewShiftsFloorPlans(),
         ViewShiftsFloors.routeName: (ctx)=> ViewShiftsFloors(),
         ViewShiftsRooms.routeName: (ctx)=> ViewShiftsRooms(),
         ViewShiftsEditShift.routeName: (ctx)=> ViewShiftsEditShift(),
