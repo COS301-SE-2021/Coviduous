@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:login_app/backend/controllers/shift_controller.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_floor_plans.dart';
-import 'package:login_app/frontend/screens/shift/admin_view_shifts_floors.dart';
+import 'package:login_app/frontend/screens/shift/admin_view_shifts_floor_plans.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/requests/shift_requests/get_floor_plan_request.dart';
@@ -23,7 +23,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
   ShiftController services = new ShiftController();
   GetFloorPlansResponse response;
 
-  Future getFloorPlans() async {
+  Future getFloorPlansAdd() async {
     await Future.wait([
       services.getFloorPlans(GetFloorPlansRequest(globals.loggedInCompanyId))
     ]).then((responses) {
@@ -37,6 +37,34 @@ class _ShiftScreenState extends State<ShiftScreen> {
             builder: (ctx) => AlertDialog(
               title: Text('No floor plans found'),
               content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Okay'),
+                  onPressed: (){
+                    Navigator.of(ctx).pop();
+                  },
+                )
+              ],
+            )
+        );
+      }
+    });
+  }
+
+  Future getFloorPlansView() async {
+    await Future.wait([
+      services.getFloorPlans(GetFloorPlansRequest(globals.loggedInCompanyId))
+    ]).then((responses) {
+      response = responses.first;
+      if (response.getNumFloorPlan() != 0) { //Only allow shifts to be created if floor plans exist
+        globals.floorPlans = response.getFloorPlans();
+        Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: Text('No floor plans found'),
+              content: Text('Shifts cannot be viewed at this time. Please add floor plans for your company first.'),
               actions: <Widget>[
                 TextButton(
                   child: Text('Okay'),
@@ -107,7 +135,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              getFloorPlans();
+                              getFloorPlansAdd();
                             }
                         ),
                         SizedBox (
@@ -129,28 +157,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(ViewShiftsFloors.routeName);
-                              /*
-                                if (shiftGlobals.globalShifts.isNotEmpty) { //Only allow shifts to be viewed if shifts exist
-                                Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Floor plan does not exist'),
-                                      content: Text('A floor plan has not been added for your company.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                );
-                              }
-                                */
+                              getFloorPlansView();
                             }
                         ),
                       ]
