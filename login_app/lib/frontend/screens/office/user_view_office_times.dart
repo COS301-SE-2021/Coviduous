@@ -21,8 +21,8 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.type != 'User') {
-      if (globals.type == 'Admin') {
+    if (globals.loggedInUserType != 'User') {
+      if (globals.loggedInUserType == 'Admin') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });
