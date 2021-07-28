@@ -97,8 +97,8 @@ class AuthClass {
   //sign out
   void signOut(){
      //Clear currently signed in user data first
-     globals.type = '';
-     globals.email = '';
+     globals.loggedInUserType = '';
+     globals.loggedInUserEmail = '';
      globals.loggedInUserId = '';
 
      auth.signOut();
