@@ -59,7 +59,6 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
       'uid': uid,
       'Document path': str,
     });
-    return;
   }
 
   @override
