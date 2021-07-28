@@ -46,14 +46,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
             savePdf(file.readAsBytesSync(), fileName);
           }
         } else { //Else, PC browser
-          FilePickerResult result = results.first;
-          if (result != null) {
-            File file = File(result.files.single.bytes.toString());
-            String fileName = '${randomName}.pdf';
-            print(fileName);
-            print('${file.readAsBytesSync()}');
-            savePdf(file.readAsBytesSync(), fileName);
-          }
+          //Not sure what to do here
         }
       } else { //Else, mobile app
         FilePickerResult result = results.first;
