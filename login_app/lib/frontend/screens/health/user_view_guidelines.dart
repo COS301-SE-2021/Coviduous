@@ -18,8 +18,8 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.type != 'User') {
-      if (globals.type == 'Admin') {
+    if (globals.loggedInUserType != 'User') {
+      if (globals.loggedInUserType == 'Admin') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });
@@ -32,9 +32,7 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
     }
 
     Widget getList() {
-      bool companyGuidelinesExist = true;
-
-      if (!companyGuidelinesExist) { //If company guidelines have not been uploaded yet
+      if (!globals.companyGuidelinesExist) { //If company guidelines have not been uploaded yet
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
