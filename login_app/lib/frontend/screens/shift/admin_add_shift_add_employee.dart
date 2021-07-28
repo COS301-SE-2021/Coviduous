@@ -114,7 +114,7 @@ class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
                             _formKey.currentState.save();
                             print(_employeeEmail);
 
-                            services.addToTempGroup("group ID", "groupname", "userid", _employeeEmail, globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId, globals.currentShiftNum);
+                            services.addToTempGroup(globals.currentGroupNum, globals.currentGroupNum, globals.currentGroupDescription, _employeeEmail, globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId, globals.currentShiftNum);
 
                             Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
                           }),
