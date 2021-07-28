@@ -142,5 +142,8 @@ String currentRoomNum = '';
 //Current shift you're working with
 String currentShiftNum = '';
 
-//Current shift you're working with
+//Current group you're working with
 String currentGroupNum = '';
+
+//Current group description you're working with
+String currentGroupDescription = '';
