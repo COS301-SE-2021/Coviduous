@@ -89,7 +89,7 @@ String floorPlanId = '';
 //=========================
 
 //Check if company guidelines have been uploaded
-bool companyGuidelinesExist = false;
+bool companyGuidelinesExist = true;
 
 //Check if COVID-19 test results have been uploaded
 bool testResultsExist = false;
