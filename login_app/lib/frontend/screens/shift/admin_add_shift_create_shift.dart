@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/backend/controllers/shift_controller.dart';
-import 'package:login_app/frontend/screens/shift/admin_add_shift_assign_employees.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
-import 'package:login_app/requests/shift_requests/create_group_request.dart';
-import 'package:login_app/responses/shift_responses/create_group_response.dart';
+import 'package:login_app/requests/shift_requests/create_shift_request.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/responses/shift_responses/create_shift_response.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+
+import 'admin_add_shift_assign_employees.dart';
 
 class AddShiftCreateShift extends StatefulWidget {
   static const routeName = "/admin_add_shift";
@@ -31,7 +32,22 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   ShiftController services = new ShiftController();
-  CreateGroupResponse response;
+  CreateShiftResponse response;
+
+  Future createShift() async {
+    await Future.wait([
+      services.createShift(CreateShiftRequest(_selectedDate.toString(), _selectedStartTime.toString(), _selectedEndTime.toString(), _groupDescription.text, globals.currentFloorNum, globals.currentRoomNum, globals.currentGroupNum, globals.loggedInUserId, globals.loggedInCompanyId))
+    ]).then((responses) {
+      response = responses.first;
+      globals.currentGroupNum = _groupName.text;
+      globals.currentGroupDescription = _groupDescription.text;
+      globals.currentShiftNum = response.getShiftID();
+      print(response.getResponseMessage());
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Shift created")));
+      Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+    });
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked_date = await showDatePicker(
@@ -74,16 +90,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
       setState(() {
         _selectedEndTime = picked_end_time;
       });
-  }
-
-  Future createGroup() async {
-    await Future.wait([
-      services.createGroup(CreateGroupRequest("Test", "Test", globals.loggedInUserEmail, "", globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId))
-    ]).then((responses) {
-      response = responses.first;
-      globals.currentGroupNum = response.getGroupID();
-      Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
-    });
   }
 
   @override
@@ -259,9 +265,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                       int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
                                       //Only allow if start time is before end time
                                       if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
-                                        //CreateShiftResponse response = services.createShiftMock(globals.currentFloorPlanNumString, globals.currentFloorNumString, globals.currentRoomNumString, _selectedDate, _selectedStartTime, _selectedEndTime, _groupName, _groupDescription);
-                                        //print(response.getResponse());
-                                        Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+                                        createShift();
                                       } else {
                                         showDialog(
                                             context: context,
