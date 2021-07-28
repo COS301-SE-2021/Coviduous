@@ -66,10 +66,10 @@ bool isNumeric(String s) {
 }
 
 //User type of currently logged in user
-String type = '';
+String loggedInUserType = '';
 
 //Email of logged in user for displaying in other screens
-String email = '';
+String loggedInUserEmail = '';
 
 //User ID of currently logged in user
 String loggedInUserId = '';
@@ -83,6 +83,32 @@ String loggedInCompanyId = 'CID-1';
 
 //Floor plan ID
 String floorPlanId = '';
+
+//=========================
+//Used in health subsystem
+//=========================
+
+//Check if company guidelines have been uploaded
+bool companyGuidelinesExist = false;
+
+//Check if COVID-19 test results have been uploaded
+bool testResultsExist = false;
+
+//Check if vaccine confirmation has been uploaded
+bool vaccineConfirmExists = false;
+
+//===============================
+//Used in notifications subsystem
+//===============================
+
+//Current subject field
+String currentSubjectField = '';
+
+//Current description field
+String currentDescriptionField = '';
+
+//Global list of notifications
+List<Notification> currentUserNotifications = [];
 
 //=======================
 //Used in shift subsystem
@@ -99,19 +125,6 @@ List<Room> rooms = [];
 
 //Shifts
 List<Shift> shifts = [];
-
-//===============================
-//Used in notifications subsystem
-//===============================
-
-//Current subject field
-String currentSubjectField = '';
-
-//Current description field
-String currentDescriptionField = '';
-
-//Global list of notifications
-List<Notification> currentUserNotifications = [];
 
 //===========================
 //Used in multiple subsystems
