@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/health/user_view_covid_test.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
@@ -63,8 +64,8 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.type != 'User') {
-      if (globals.type == 'Admin') {
+    if (globals.loggedInUserType != 'User') {
+      if (globals.loggedInUserType == 'Admin') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });
@@ -152,22 +153,15 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                                         'Submit'
                                     ),
                                     onPressed: () {
-                                      /*
-                                if (PDF exists) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("PDF successfully uploaded")));
-                                  Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("Please upload a PDF")));
-                                }
-                                 */
-
-                                      /*
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("PDF successfully uploaded")));
-                                Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                 */
+                                      globals.testResultsExist = true;
+                                      if (globals.testResultsExist) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("PDF successfully uploaded")));
+                                        Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                      } else {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("Please upload a PDF")));
+                                      }
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
