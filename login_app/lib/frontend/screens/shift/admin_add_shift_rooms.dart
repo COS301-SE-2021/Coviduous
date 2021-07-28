@@ -11,12 +11,12 @@ import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AddShiftRooms extends StatefulWidget {
   static const routeName = "/admin_add_shift_rooms";
+
   @override
   _AddShiftRoomsState createState() => _AddShiftRoomsState();
 }
 
 class _AddShiftRoomsState extends State<AddShiftRooms> {
-
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
