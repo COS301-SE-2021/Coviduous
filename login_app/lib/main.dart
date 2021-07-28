@@ -36,6 +36,7 @@ import 'package:login_app/frontend/screens/health/user_view_guidelines.dart';
 import 'package:login_app/frontend/screens/health/user_upload_test_results.dart';
 import 'package:login_app/frontend/screens/health/user_upload_vaccine_confirm.dart';
 import 'package:login_app/frontend/screens/health/user_view_test_results.dart';
+import 'package:login_app/frontend/screens/health/user_view_vaccine_confirm.dart';
 import 'package:login_app/frontend/screens/health/user_report_infection.dart';
 import 'package:login_app/frontend/screens/health/user_request_access.dart';
 
@@ -141,6 +142,7 @@ class MyApp extends StatelessWidget{
         UserUploadTestResults.routeName: (ctx)=> UserUploadTestResults(),
         UserUploadVaccineConfirm.routeName: (ctx)=> UserUploadVaccineConfirm(),
         UserViewTestResults.routeName: (ctx)=> UserViewTestResults(),
+        UserViewVaccineConfirm.routeName: (ctx)=> UserViewVaccineConfirm(),
         UserReportInfection.routeName: (ctx)=> UserReportInfection(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
 
