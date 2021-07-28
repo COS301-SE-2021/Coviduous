@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:native_pdf_view/native_pdf_view.dart';
 
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
@@ -15,6 +16,10 @@ class UserViewGuidelines extends StatefulWidget {
 }
 
 class _UserViewGuidelinesState extends State<UserViewGuidelines> {
+  final pdfController = PdfController(
+    document: PdfDocument.openAsset('assets/sample.pdf'),
+  );
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -59,7 +64,11 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
             width: MediaQuery.of(context).size.width/(1.5*globals.getWidgetScaling()),
             height: MediaQuery.of(context).size.height/(1.5*globals.getWidgetScaling()),
             color: Colors.white,
-            child: Text('PDF of company guidelines will go here.')
+            child: PdfView(
+              documentLoader: Center(child: CircularProgressIndicator()),
+              pageLoader: Center(child: CircularProgressIndicator()),
+              controller: pdfController,
+            ),
         );
       }
     }
