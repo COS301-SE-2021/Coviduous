@@ -5,6 +5,7 @@ import 'package:login_app/frontend/screens/health/user_health_check.dart';
 import 'package:login_app/frontend/screens/health/user_report_infection.dart';
 import 'package:login_app/frontend/screens/health/user_upload_covid_test.dart';
 import 'package:login_app/frontend/screens/health/user_upload_vaccine_confirm.dart';
+import 'package:login_app/frontend/screens/health/user_view_covid_test.dart';
 import 'package:login_app/frontend/screens/health/user_view_guidelines.dart';
 import 'package:login_app/frontend/screens/health/user_view_permissions.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
@@ -25,8 +26,8 @@ class _UserHealthState extends State<UserHealth> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.type != 'User') {
-      if (globals.type == 'Admin') {
+    if (globals.loggedInUserType != 'User') {
+      if (globals.loggedInUserType == 'Admin') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });
@@ -166,7 +167,10 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
+                              if (globals.testResultsExist)
+                                Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                              else
+                                Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
                             }
                         ),
                         SizedBox (
