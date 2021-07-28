@@ -25,8 +25,8 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.type != 'Admin') {
-      if (globals.type == 'User') {
+    if (globals.loggedInUserType != 'Admin') {
+      if (globals.loggedInUserType == 'User') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });
