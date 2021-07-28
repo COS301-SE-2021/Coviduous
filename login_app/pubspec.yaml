@@ -39,6 +39,7 @@ dependencies:
   pdf: ^3.4.2
   downloads_path_provider: ^0.1.0 # Needed to save a PDF to a device from a mobile device
   universal_html: ^2.0.8 # Needed to save a PDF to a device from a PC
+  native_pdf_view: any # Needed to display a PDF in the app
   mockito: ^5.0.12
   mailer: ^3.3.0
   mailer2: ^1.2.5
@@ -68,6 +69,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/placeholder.com-logo1.png
+    - assets/sample.pdf
     - assets/bg.jpg
     - assets/OpenSans-Regular.ttf
     - assets/OpenSans-Bold.ttf
