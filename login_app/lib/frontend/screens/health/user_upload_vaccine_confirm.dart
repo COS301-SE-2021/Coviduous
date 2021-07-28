@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -33,13 +34,29 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
     await Future.wait([
       FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['pdf'])
     ]).then((results){
-      FilePickerResult result = results.first;
-      if (result != null) {
-        File file = File(result.files.single.path);
-        String fileName = '${randomName}.pdf';
-        print(fileName);
-        print('${file.readAsBytesSync()}');
-        savePdf(file.readAsBytesSync(), fileName);
+      if (kIsWeb) { //If web browser
+        String platform = globals.getOSWeb();
+        if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+          FilePickerResult result = results.first;
+          if (result != null) {
+            File file = File(result.files.single.path);
+            String fileName = '${randomName}.pdf';
+            print(fileName);
+            print('${file.readAsBytesSync()}');
+            savePdf(file.readAsBytesSync(), fileName);
+          }
+        } else { //Else, PC browser
+          //Not sure what to do here
+        }
+      } else { //Else, mobile app
+        FilePickerResult result = results.first;
+        if (result != null) {
+          File file = File(result.files.single.path);
+          String fileName = '${randomName}.pdf';
+          print(fileName);
+          print('${file.readAsBytesSync()}');
+          savePdf(file.readAsBytesSync(), fileName);
+        }
       }
     });
   }
