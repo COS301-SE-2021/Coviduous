@@ -30,17 +30,18 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
       print(rng.nextInt(100));
       randomName += rng.nextInt(100).toString();
     }
-    List<FilePickerResult> results = await Future.wait([
+    await Future.wait([
         FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['pdf'])
-    ]);
-    FilePickerResult result = results.first;
-    if (result != null) {
-      File file = File(result.files.single.path);
-      String fileName = '${randomName}.pdf';
-      print(fileName);
-      print('${file.readAsBytesSync()}');
-      savePdf(file.readAsBytesSync(), fileName);
-    }
+    ]).then((results){
+      FilePickerResult result = results.first;
+      if (result != null) {
+        File file = File(result.files.single.path);
+        String fileName = '${randomName}.pdf';
+        print(fileName);
+        print('${file.readAsBytesSync()}');
+        savePdf(file.readAsBytesSync(), fileName);
+      }
+    });
   }
 
   Future savePdf(List<int> asset, String name) async {
