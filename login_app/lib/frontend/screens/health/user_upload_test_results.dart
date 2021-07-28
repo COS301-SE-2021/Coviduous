@@ -9,7 +9,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-import 'package:login_app/frontend/screens/health/user_view_covid_test.dart';
+import 'package:login_app/frontend/screens/health/user_view_test_results.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
