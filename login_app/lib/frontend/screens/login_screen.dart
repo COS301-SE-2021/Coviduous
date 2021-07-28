@@ -232,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: _password.text.trim()).then((value) {
                                     if (value == "welcome") {
 
-                                      globals.email = _email.text;
+                                      globals.loggedInUserEmail = _email.text;
                                       globals.loggedInUserId = userGlobals.getUserId(_email.text);
                                       print(globals.loggedInUserId);
 
@@ -243,10 +243,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         //Then get user type
                                         getUserType().then((userType) {
                                           if (userType == 'Admin') {
-                                            globals.type = 'Admin';
+                                            globals.loggedInUserType = 'Admin';
                                             Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
                                           } else if (userType == 'User') {
-                                            globals.type = 'User';
+                                            globals.loggedInUserType = 'User';
                                             Navigator.pushReplacementNamed(context, UserHomePage.routeName);
                                           } else {
                                             showDialog(
