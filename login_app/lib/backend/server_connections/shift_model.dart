@@ -209,6 +209,10 @@ class ShiftModel {
       var jsonString = response.body;
       var jsonMap = jsonDecode(jsonString);
 
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      shiftGlobals.shiftDatabaseTable.clear();
+      shiftGlobals.numShifts = 0;
+
       for (var data in jsonMap["Item"]) {
         //print(data["shiftID"]);
         var shiftData = Shift.fromJson(data);
@@ -289,7 +293,22 @@ class ShiftModel {
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
 
+      for (int i = 0; i < shiftGlobals.shiftDatabaseTable.length; i++) {
+        if (shiftGlobals.shiftDatabaseTable[i].shiftId == shiftID) {
+          shiftGlobals.shiftDatabaseTable.removeAt(i);
+          shiftGlobals.numShifts--;
+        }
+      }
+
       return true;
+    }
+
+    //Double check to make sure it isn't still being stored internally
+    for (int i = 0; i < shiftGlobals.numShifts; i++) {
+      if (shiftGlobals.shiftDatabaseTable[i].shiftId == shiftID) {
+        shiftGlobals.shiftDatabaseTable.removeAt(i);
+        shiftGlobals.numShifts--;
+      }
     }
 
     return false;
