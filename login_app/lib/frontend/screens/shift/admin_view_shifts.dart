@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:login_app/backend/controllers/shift_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_view_shifts_edit_shift.dart';
 import 'package:login_app/frontend/screens/shift/admin_view_shifts_rooms.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/requests/shift_requests/delete_shift_request.dart';
+import 'package:login_app/responses/shift_responses/delete_shift_response.dart';
+import 'package:login_app/responses/shift_responses/get_shifts_response.dart';
+import 'package:login_app/subsystems/shift_subsystem/shift.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -15,7 +20,23 @@ class ViewShifts extends StatefulWidget {
   _ViewShiftsState createState() => _ViewShiftsState();
 }
 class _ViewShiftsState extends State<ViewShifts> {
-  //String _userId = globals.loggedInUserId;
+  ShiftController services = new ShiftController();
+  GetShiftsResponse response;
+  DeleteShiftResponse response2;
+  List<Shift> shifts = globals.shifts;
+  int numOfShifts = globals.shifts.length;
+
+  Future deleteShift() async {
+    await Future.wait([
+      services.deleteShift(DeleteShiftRequest(globals.currentShiftNum))
+    ]).then((responses) {
+      response2 = responses.first;
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response2.getResponseMessage())));
+      numOfShifts--;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,104 +55,145 @@ class _ViewShiftsState extends State<ViewShifts> {
     }
 
     Widget getList() {
-      int numberOfShifts = 1;
-
-      if (numberOfShifts == 0) {
+      if (numOfShifts == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
+              SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (5 * globals.getWidgetScaling()),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                color: Theme.of(context).primaryColor,
+                child: Text('No shifts found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+              ),
+              Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                  color: Colors.white,
+                  padding: EdgeInsets.all(12),
+                  child: Text('No shifts have been created for this room.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+              )
             ]
         );
-      }
-      else
-        {
-          return ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: numberOfShifts,
-              itemBuilder: (context, index){
+      } else {
+        return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(8),
+            itemCount: numOfShifts,
+            itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
               return ListTile(
-              title: Column(
-              children: [
-                  ListView(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Text('Date: 23 November 2021', style: TextStyle(color: Colors.black)),
-                    ),
-                    Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Text('Time: Current time', style: TextStyle(color: Colors.black)),
-                    ),
-                    Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Text('Employee ID: INF2221', style: TextStyle(color: Colors.black)),
-                    ),
-                    Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Text('Employee name: Jeff', style: TextStyle(color: Colors.black)),
-                    ),
-                    Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Text('Employee surname: Masemola', style: TextStyle(color: Colors.black)),
-                    ),
-
-                    Container(
-                      height: 50,
-                      color: Colors.white,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton(
-                              child: Text('Edit'),
-                              onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(ViewShiftsEditShift.routeName);
-                              }),
-
-                          ElevatedButton(
-                              child: Text('Delete'),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Alert'),
-                                      content: Text('Are you sure you want to delete the shift?'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text("Yes"),
-                                          onPressed: () {
-                                            //Put your code here which you want to execute on Yes button click.
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        TextButton(
-                                          child: Text("No"),
-                                          onPressed: () {
-                                            //Put your code here which you want to execute on No button click.
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    )
-                                );
-                              }),
-                        ],
+                title: Column(
+                    children:[
+                      Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 24,
+                        color: Theme.of(context).primaryColor,
+                        child: Text(
+                            'Shift ' + shifts[index].shiftId,
+                            style: TextStyle(color: Colors.white)),
                       ),
-                    ),
+                      ListView(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
+                          children: <Widget>[
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
+                                  'Floor number: ' + shifts[index].floorNumber,
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
+                                  'Room number: ' + shifts[index].roomNumber,
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
+                                  'Group number: ' + shifts[index].groupNumber,
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
+                                  'Date: ' + shifts[index].date,
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
+                                  'Start time: ' + shifts[index].startTime,
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
+                                  'End time: ' + shifts[index].endTime,
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  ElevatedButton(
+                                      child: Text('Edit'),
+                                      onPressed: () {
+                                        globals.currentShiftNum = shifts[index].shiftId;
+                                        Navigator.of(context).pushReplacementNamed(ViewShiftsEditShift.routeName);
+                                      }),
+                                  ElevatedButton(
+                                      child: Text('Delete'),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: Text('Alert'),
+                                              content: Text('Are you sure you want to delete the shift?'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: Text("Yes"),
+                                                  onPressed: () {
+                                                    globals.currentShiftNum = shifts[index].shiftId;
+                                                    deleteShift();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                                TextButton(
+                                                  child: Text("No"),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            )
+                                        );
+                                      }),
+                                ],
+                              ),
+                            ),
+                          ]
+                      )
                     ]
-                  )
-
-                 ]
-              ),
-            );
-          }
+                ),
+                //title: floors[index].floor()
+              );
+            }
           );
         }
     }
@@ -154,8 +216,10 @@ class _ViewShiftsState extends State<ViewShifts> {
             ),
             body: Stack (
                 children: <Widget>[
-                  Center (
-                      child: getList()
+                  SingleChildScrollView(
+                    child: Center (
+                        child: getList()
+                    ),
                   ),
                 ]
         ),
