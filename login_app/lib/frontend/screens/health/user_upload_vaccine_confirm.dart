@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/health/user_view_vaccine_confirm.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
@@ -29,17 +30,18 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
       print(rng.nextInt(100));
       randomName += rng.nextInt(100).toString();
     }
-    List<FilePickerResult> results = await Future.wait([
+    await Future.wait([
       FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['pdf'])
-    ]);
-    FilePickerResult result = results.first;
-    if (result != null) {
-      File file = File(result.files.single.path);
-      String fileName = '${randomName}.pdf';
-      print(fileName);
-      print('${file.readAsBytesSync()}');
-      savePdf(file.readAsBytesSync(), fileName);
-    }
+    ]).then((results){
+      FilePickerResult result = results.first;
+      if (result != null) {
+        File file = File(result.files.single.path);
+        String fileName = '${randomName}.pdf';
+        print(fileName);
+        print('${file.readAsBytesSync()}');
+        savePdf(file.readAsBytesSync(), fileName);
+      }
+    });
   }
 
   Future savePdf(List<int> asset, String name) async {
@@ -152,22 +154,15 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
                                         'Submit'
                                     ),
                                     onPressed: () {
-                                      /*
-                                if (PDF exists) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("PDF successfully uploaded")));
-                                  Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("Please upload a PDF")));
-                                }
-                                 */
-
-                                      /*
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("PDF successfully uploaded")));
-                                Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                 */
+                                      globals.vaccineConfirmExists = true;
+                                      if (globals.vaccineConfirmExists) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("PDF successfully uploaded")));
+                                        Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                                      } else {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("Please upload a PDF")));
+                                      }
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
