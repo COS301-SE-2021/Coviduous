@@ -4,8 +4,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:login_app/backend/controllers/shift_controller.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_rooms.dart';
 import 'package:login_app/frontend/screens/shift/admin_add_shift_add_employee.dart';
-import 'package:login_app/requests/shift_requests/create_shift_request.dart';
-import 'package:login_app/responses/shift_responses/create_shift_response.dart';
+import 'package:login_app/requests/shift_requests/process_shifts_request.dart';
+import 'package:login_app/responses/shift_responses/process_shifts_response.dart';
 import 'package:login_app/subsystems/shift_subsystem/tempGroup.dart';
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
@@ -22,16 +22,16 @@ class AddShiftAssignEmployees extends StatefulWidget {
 
 class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
   ShiftController services = new ShiftController();
-  CreateShiftResponse response;
+  ProcessShiftsResponse response;
 
-  Future createShift() async {
+  Future processShifts() async {
     await Future.wait([
-      services.createShift(CreateShiftRequest("date", "start time", "end time", "description", globals.currentFloorNum, globals.currentRoomNum, globals.currentGroupNum, globals.loggedInUserId, globals.loggedInCompanyId))
+      services.processShifts(ProcessShiftsRequest(services.getTempGroup()))
     ]).then((responses) {
       response = responses.first;
       if (response != null) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Shift successfully created.")));
+            SnackBar(content: Text("Notification successfully created.")));
         Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -221,7 +221,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                   TextButton(
                                     child: Text('Yes'),
                                     onPressed: (){
-                                      createShift();
+                                      processShifts();
                                     },
                                   ),
                                   TextButton(
