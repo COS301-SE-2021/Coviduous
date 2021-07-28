@@ -8,6 +8,7 @@ import 'package:login_app/frontend/screens/health/user_upload_vaccine_confirm.da
 import 'package:login_app/frontend/screens/health/user_view_test_results.dart';
 import 'package:login_app/frontend/screens/health/user_view_guidelines.dart';
 import 'package:login_app/frontend/screens/health/user_view_permissions.dart';
+import 'package:login_app/frontend/screens/health/user_view_vaccine_confirm.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -192,7 +193,10 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserUploadVaccineConfirm.routeName);
+                              if (globals.testResultsExist)
+                                Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                              else
+                                Navigator.of(context).pushReplacementNamed(UserUploadVaccineConfirm.routeName);
                             }
                         ),
                         SizedBox (
