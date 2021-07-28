@@ -21,8 +21,8 @@ class _UserManageAccountState extends State<UserManageAccount> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.type != 'User') {
-      if (globals.type == 'Admin') {
+    if (globals.loggedInUserType != 'User') {
+      if (globals.loggedInUserType == 'Admin') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });
