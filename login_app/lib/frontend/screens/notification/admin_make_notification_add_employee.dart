@@ -113,7 +113,7 @@ class _MakeNotificationAddEmployeeState extends State<MakeNotificationAddEmploye
                             _formKey.currentState.save();
                             print(_employeeEmail);
 
-                            service.addToTemp("", _employeeEmail, globals.currentSubjectField, globals.currentDescriptionField, globals.loggedInUserId, globals.loggedInCompanyId);
+                            service.addToTemp("emp ID goes here", _employeeEmail, globals.currentSubjectField, globals.currentDescriptionField, globals.loggedInUserId, globals.loggedInCompanyId);
 
                             Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
                           }),
