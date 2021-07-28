@@ -5,7 +5,7 @@ import 'package:login_app/frontend/screens/health/user_health_check.dart';
 import 'package:login_app/frontend/screens/health/user_report_infection.dart';
 import 'package:login_app/frontend/screens/health/user_upload_test_results.dart';
 import 'package:login_app/frontend/screens/health/user_upload_vaccine_confirm.dart';
-import 'package:login_app/frontend/screens/health/user_view_covid_test.dart';
+import 'package:login_app/frontend/screens/health/user_view_test_results.dart';
 import 'package:login_app/frontend/screens/health/user_view_guidelines.dart';
 import 'package:login_app/frontend/screens/health/user_view_permissions.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
