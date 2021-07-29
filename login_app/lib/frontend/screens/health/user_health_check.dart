@@ -16,14 +16,18 @@ class UserHealthCheck extends StatefulWidget {
 
 class _UserHealthCheckState extends State<UserHealthCheck> {
   TextEditingController _temperature = TextEditingController();
+  bool _hasFever = false;
   bool _hasDryCough = false;
-  bool _hasFatigue = false;
-  bool _hasHeadache = false;
-  bool _hasTasteSmellLoss = false;
-  bool _hasMuscleJointPain = false;
   bool _hasShortnessOfBreath = false;
-  bool _hasSkinRashes = false;
+  bool _hadSoreThroat = false;
+  bool _hasChills = false;
+  bool _hasTasteSmellLoss = false;
+  bool _hasHeadMusclePain = false;
+  bool _hasNauseaDiarrheaVomiting = false;
+
   bool _hasComeIntoContact = false;
+  bool _hasTestedPositive = false;
+  bool _hasTraveled = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -76,7 +80,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                         child: SingleChildScrollView(
                             child: Column(
                               children: <Widget>[
-                                Text('1. Please take your temperature before completing the health check-up.'),
+                                Text('Please take your temperature before completing the health check-up.'),
                                 TextFormField(
                                   textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                   decoration: InputDecoration(
@@ -105,6 +109,16 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                 Text('Have you experienced any of the following symptoms in the past 14 days?'),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
+                                  title: const Text('1. Fever'),
+                                  value: this._hasFever,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this._hasFever = value;
+                                    });
+                                  },
+                                ),
+                                CheckboxListTile(
+                                  //secondary: const Icon(Icons.alarm),
                                   title: const Text('2. Dry cough'),
                                   value: this._hasDryCough,
                                   onChanged: (bool value) {
@@ -115,21 +129,21 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                 ),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
-                                  title: const Text('3. Fatigue'),
-                                  value: this._hasFatigue,
+                                  title: const Text('3. Shortness of breath'),
+                                  value: this._hasShortnessOfBreath,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this._hasFatigue = value;
+                                      this._hasShortnessOfBreath = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
-                                  title: const Text('4. Headache'),
-                                  value: this._hasHeadache,
+                                  title: const Text('4. Sore throat'),
+                                  value: this._hadSoreThroat,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this._hasHeadache = value;
+                                      this._hadSoreThroat = value;
                                     });
                                   },
                                 ),
@@ -145,31 +159,31 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                 ),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
-                                  title: const Text('6. Muscle or joint pain'),
-                                  value: this._hasMuscleJointPain,
+                                  title: const Text('6. Chills'),
+                                  value: this._hasChills,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this._hasMuscleJointPain = value;
+                                      this._hasChills = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
-                                  title: const Text('7. Shortness of breath'),
-                                  value: this._hasShortnessOfBreath,
+                                  title: const Text('7. Head or muscle aches'),
+                                  value: this._hasHeadMusclePain,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this._hasShortnessOfBreath = value;
+                                      this._hasHeadMusclePain = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
-                                  title: const Text('8. Skin rashes'),
-                                  value: this._hasSkinRashes,
+                                  title: const Text('9. Nausea, diarrhea or vomiting'),
+                                  value: this._hasNauseaDiarrheaVomiting,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this._hasSkinRashes = value;
+                                      this._hasNauseaDiarrheaVomiting = value;
                                     });
                                   },
                                 ),
@@ -192,6 +206,36 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                   height: MediaQuery.of(context).size.height/48,
                                   width: MediaQuery.of(context).size.width,
                                 ),
+                                Text('10. Have you tested positive for COVID-19 in the past 14 days?'),
+                                CheckboxListTile(
+                                  //secondary: const Icon(Icons.alarm),
+                                  //title: const Text(''),
+                                  value: this._hasTestedPositive,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this._hasTestedPositive = value;
+                                    });
+                                  },
+                                ),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                Text('11. Have you traveled to another province or country the past 14 days?'),
+                                CheckboxListTile(
+                                  //secondary: const Icon(Icons.alarm),
+                                  //title: const Text(''),
+                                  value: this._hasTraveled,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      this._hasTraveled = value;
+                                    });
+                                  },
+                                ),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
                                 ElevatedButton(
                                   child: Text(
                                       'Submit'
@@ -199,7 +243,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                   onPressed: () {
                                     FormState form = _formKey.currentState;
                                     if (form.validate()) {
-                                      //UserHealthCheckResponse response = services.userCompleteHealthCheckMock(_temperature, _hasDryCough, _hasFatigue, _hasHeadache, _hasTasteSmellLoss, _hasMuscleJointPain, _hasShortnessOfBreath, _hasSkinRashes, _hasComeIntoContact);
+                                      //UserHealthCheckResponse response = services.userCompleteHealthCheckMock(parameters go here);
                                       //print(response.getResponse());
                                       /*
                                       if (response.getResponse()) {
