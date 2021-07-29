@@ -179,7 +179,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                 ),
                                 CheckboxListTile(
                                   //secondary: const Icon(Icons.alarm),
-                                  title: const Text('9. Nausea, diarrhea or vomiting'),
+                                  title: const Text('8. Nausea, diarrhea or vomiting'),
                                   value: this._hasNauseaDiarrheaVomiting,
                                   onChanged: (bool value) {
                                     setState(() {
