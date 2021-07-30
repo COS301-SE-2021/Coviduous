@@ -27,9 +27,9 @@ class HealthController {
    */
   HealthDatabaseQueries healthQueries;
 
-  // HealthController() {
-  //   this.healthQueries = new HealthDatabaseQueries();
-  // }
+  HealthController() {
+    this.healthQueries = new HealthDatabaseQueries();
+  }
 
   ////////////////////////////////////////////////Concrete Implementations////////////////////////////////////////////////
 
