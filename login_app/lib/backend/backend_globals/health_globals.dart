@@ -33,9 +33,9 @@ int numHealthChecks = 0;
 List<Permission> permissionDatabaseTable = [];
 int numPermissions = 0;
 
-// /**
-//  * List<PermissionRequest> permissionDatabaseTable acts like a database table that holds permission requests, this is to mock out functionality for testing
-//  * numPermissionRequests keeps track of number of permission requests in the mock permissionRequest database table
-//  */
-// List<PermissionRequest> permissionRequestDatabaseTable = [];
-// int numPermissionRequests = 0;
+/**
+ * List<PermissionRequest> permissionDatabaseTable acts like a database table that holds permission requests, this is to mock out functionality for testing
+ * numPermissionRequests keeps track of number of permission requests in the mock permissionRequest database table
+ */
+List<PermissionRequest> permissionRequestDatabaseTable = [];
+int numPermissionRequests = 0;
