@@ -28,11 +28,38 @@ app.post('/api/create', (req, res) => {
     })();
 });
 
-exports.app = functions.https.onRequest(app);
+app.get('/api/announcement/view-announcements-admin', (req, res) => {
+  (async () => {
+      try {
+        if(!req.body.adminId) {
+          return res.status(400).send({
+              message: "No adminID received"
+          });
+        }
+          const document = db.collection('announcements').where('adminId', '==', 'test2');
+          const snapshot = await document.get();
+          let list = [];
+          snapshot.forEach(doc => {
+            let id = doc.id;
+            let data = doc.data();
+            list.push({id, ...data});
+          });
+          //let response = item.data();
+          let announce=JSON.stringify(list);
+          return res.json({
+            status: 200,
+            message: 'Announcements successfully fetched',
+            data: announce
+        });
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send({
+            message: err.message || "Some error occurred while fetching announcements."
+        });
+      }
+      })();
+  });
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+ 
+
+exports.app = functions.https.onRequest(app);
