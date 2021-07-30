@@ -195,7 +195,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
       child: new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Create shift'),
+            title: Text('View shifts'),
             leading: BackButton( //Specify back button
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
