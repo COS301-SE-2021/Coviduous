@@ -11,11 +11,24 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-app.get('/hello-world', (req, res) => {
-  return res.status(200).send('Hello World!');
+app.get('/api', (req, res) => {
+  return res.status(200).send('Connected to the coviduous api');
 });
 
-app.post('/api/create', (req, res) => {
+app.delete('/api/announcement/delete-announcement', (req, res) => {
+  (async () => {
+      try {
+          const document = db.collection('announcements').doc(req.body.announcementId);
+          await document.delete();
+          return res.status(200).send();
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+      }
+      })();
+  })
+
+app.post('/api/announcement/create-announcement', (req, res) => {
   (async () => {
       try {
         await db.collection('announcements').doc('/' + req.body.id + '/')
@@ -28,7 +41,7 @@ app.post('/api/create', (req, res) => {
     })();
 });
 
-app.get('/api/announcement/view-announcements-admin', (req, res) => {
+app.get('/api/announcement/view-announcements', (req, res) => {
   (async () => {
       try {
         if(!req.body.adminId) {
@@ -36,16 +49,17 @@ app.get('/api/announcement/view-announcements-admin', (req, res) => {
               message: "No adminID received"
           });
         }
-          const document = db.collection('announcements').where('adminId', '==', 'test2');
+          const document = db.collection('announcements');
           const snapshot = await document.get();
+          
           let list = [];
           snapshot.forEach(doc => {
             let id = doc.id;
             let data = doc.data();
-            list.push({id, ...data});
+            list.push({id,data});
           });
           //let response = item.data();
-          let announce=JSON.stringify(list);
+          let announce=list;
           return res.json({
             status: 200,
             message: 'Announcements successfully fetched',
