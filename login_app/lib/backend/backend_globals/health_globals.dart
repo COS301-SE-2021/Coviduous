@@ -26,12 +26,12 @@ import 'package:login_app/subsystems/health_subsystem/permission_request.dart';
 List<HealthCheck> healthCheckDatabaseTable = [];
 int numHealthChecks = 0;
 
-// /**
-//  * List<Permission> permissionDatabaseTable acts like a database table that holds permissions, this is to mock out functionality for testing
-//  * numPermissions keeps track of number of permissions in the mock permission database table
-//  */
-// List<Permission> permissionDatabaseTable = [];
-// int numPermissions = 0;
+/**
+ * List<Permission> permissionDatabaseTable acts like a database table that holds permissions, this is to mock out functionality for testing
+ * numPermissions keeps track of number of permissions in the mock permission database table
+ */
+List<Permission> permissionDatabaseTable = [];
+int numPermissions = 0;
 
 // /**
 //  * List<PermissionRequest> permissionDatabaseTable acts like a database table that holds permission requests, this is to mock out functionality for testing
