@@ -14,7 +14,8 @@ import 'package:login_app/backend/backend_globals/user_globals.dart'
     as userGlobals;
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:postgres/postgres.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'dart:math';
 
 /**
@@ -40,7 +41,41 @@ class AnnouncementDatabaseQueries {
     announcementId = null;
     timeStamp = null;
   }
+//////////////////////////////////////////////DEMO3 API CLOUD FUNCTIONS ////////////////////////////////////////////////
 
+  Future<bool> createAnnouncementAPI(
+      String type, String message, String adminId, String companyId) async {
+    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
+    this.announcementId = "ANOUNC-" + randomInt.toString();
+    this.timeStamp = DateTime.now().toString();
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            'http://localhost:5001/coviduous-api/us-central1/app/api/announcement/view-announcements'));
+    request.body = request.body = json.encode({
+      "id": announcementId,
+      "announcementId": announcementId,
+      "type": type,
+      "message": message,
+      "timestamp": timeStamp,
+      "adminId": adminId,
+      "companyId": companyId
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      //print(await response.stream.bytesToString());
+      return true;
+    } else {
+      print(response.reasonPhrase);
+      return false;
+    }
+  }
+
+  ////////////////////////////////////////DEMO 1 AND 2 POSTGRES INTERGRATION //////////////////////////////////////////
   // DB connection function to be called in each use case
   Future<void> connect() async {
     connection = PostgreSQLConnection(host, port, dbName,

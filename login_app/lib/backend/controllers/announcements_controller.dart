@@ -27,7 +27,7 @@ import 'package:login_app/responses/announcement_responses/viewUser_announcement
  */
 class AnnouncementsController {
   //This class provides an interface to all the announcement service contracts of the system. It provides a bridge between the front end screens and backend functionality for announcements.
-  
+
   /** 
    * announcementQueries attribute holds the class that provides access to the database , the attribute allows you to access functions that will handle database interaction.
    */
@@ -35,6 +35,27 @@ class AnnouncementsController {
 
   AnnouncementsController() {
     this.announcementQueries = new AnnouncementDatabaseQueries();
+  }
+//////////////////////////////////////////////DEMO3 API CLOUD FUNCTIONS ////////////////////////////////////////////////
+  Future<CreateAnnouncementResponse> createAnnouncementAPI(
+      CreateAnnouncementRequest req) async {
+    if (req != null) {
+      if (await announcementQueries.createAnnouncementAPI(req.getType(),
+              req.getMessage(), req.getAdminID(), req.getCompanyID()) ==
+          true) {
+        return new CreateAnnouncementResponse(
+            announcementQueries.getAnnouncementID(),
+            announcementQueries.getTimestamp(),
+            true,
+            "Successfully Created Announcement");
+      } else {
+        return new CreateAnnouncementResponse(
+            null, null, false, "Announcement unsuccessfully created");
+      }
+    } else {
+      return new CreateAnnouncementResponse(
+          null, null, false, "Announcement unsuccessfully created");
+    }
   }
 
   ////////////////////////////////////////////////Concrete Implementations////////////////////////////////////////////////
