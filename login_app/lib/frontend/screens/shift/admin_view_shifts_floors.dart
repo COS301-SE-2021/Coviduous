@@ -161,7 +161,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                             height: 50,
                             color: Colors.white,
                             child: Text(
-                                'Number of shifts: ',
+                                'Number of rooms: ' + floors[index].getNumRooms().toString(),
                                 style: TextStyle(color: Colors.black)),
                           ),
                           Container(
