@@ -29,6 +29,10 @@ import 'package:login_app/frontend/screens/floor_plan/admin_edit_room_modify.dar
 import 'package:login_app/frontend/screens/floor_plan/admin_view_rooms.dart';
 
 //Health
+import 'package:login_app/frontend/screens/health/admin_employee_permissions.dart';
+import 'package:login_app/frontend/screens/health/admin_home_permissions.dart';
+import 'package:login_app/frontend/screens/health/admin_view_access_requests.dart';
+import 'package:login_app/frontend/screens/health/admin_view_permissions.dart';
 import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/health/user_health_check.dart';
 import 'package:login_app/frontend/screens/health/user_view_permissions.dart';
@@ -140,6 +144,10 @@ class MyApp extends StatelessWidget{
         DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
 
         //Health
+        AdminPermissions.routeName: (ctx)=> AdminPermissions(),
+        EmployeePermissions.routeName: (ctx)=> EmployeePermissions(),
+        AdminViewAccessRequests.routeName: (ctx)=> AdminViewAccessRequests(),
+        AdminViewPermissions.routeName: (ctx)=> AdminViewPermissions(),
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
