@@ -6,13 +6,13 @@ import 'admin_home_permissions.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 
-class EmployeeRequests extends StatefulWidget {
+class AdminViewAccessRequests extends StatefulWidget {
   static const routeName = "/admin_view_notifications";
 
   @override
-  _EmployeeRequestsState createState() => _EmployeeRequestsState();
+  _AdminViewAccessRequestsState createState() => _AdminViewAccessRequestsState();
 }
-class _EmployeeRequestsState extends State<EmployeeRequests> {
+class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
   @override
   Widget build(BuildContext context) {
 
