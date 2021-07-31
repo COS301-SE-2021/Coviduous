@@ -13,7 +13,7 @@ class VisitorHealthCheck extends StatefulWidget {
 }
 
 class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
-  // TextEditingController _temperature = TextEditingController();
+  TextEditingController _temperature = TextEditingController();
   // bool _hasFever = false;
   // bool _hasDryCough = false;
   // bool _hasShortnessOfBreath = false;
@@ -26,7 +26,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
   // bool _hasTestedPositive = false;
   // bool _hasTraveled = false;
 
-  //final GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
 //HealthController services = new HealthController();
 
@@ -71,7 +71,36 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                   height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                   padding: EdgeInsets.all(16),
-
+                  child: Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Text('Please take your temperature before completing the health check-up.'),
+                      TextFormField(
+                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                        decoration: InputDecoration(
+                          labelText: 'Measured temperature (in degrees Celsius)',
+                        ),
+                        keyboardType: TextInputType.text,
+                        controller: _temperature,
+                        validator: (value) {
+                           if (value.isNotEmpty) {
+                             print(_temperature);
+                             if(!globals.isNumeric(value)) //Check if number
+                                 {
+                               return 'Temperature must be a number';
+                             }
+                           } else {
+                             return 'Please enter a temperature';
+                          }
+                          return null;
+                        },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             )
