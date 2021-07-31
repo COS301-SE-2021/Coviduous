@@ -6,6 +6,7 @@ import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/health/visitor_health_check.dart';
 import 'package:login_app/frontend/screens/health/visitor_view_guidelines.dart';
 import 'package:login_app/frontend/screens/health/visitor_view_permissions.dart';
+import 'package:login_app/frontend/screens/main_homepage.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -44,7 +45,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
             title: Text('Health'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                //Navigator.of(context).pushReplacementNamed(VisitorHomePage.routeName);
+                Navigator.of(context).pushReplacementNamed(HomePage.routeName);
               },
             ),
           ),
