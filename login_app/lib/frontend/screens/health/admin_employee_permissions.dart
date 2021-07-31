@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 //import 'admin_home_permissions.dart';
+import 'admin_view_permissions.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -100,10 +101,10 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
       child: new Scaffold(
         backgroundColor: Colors.transparent, //To show background image
         appBar: AppBar(
-          title: Text('Employee Requests'),
+          title: Text('Employee Permissions'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              //Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+              Navigator.of(context).pushReplacementNamed(EmployeeRequests.routeName);
             },
           ),
         ),
@@ -134,6 +135,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                     ),
                     child: Text('Close'),
                     onPressed: (){
+
                     },
                   )
               ),
