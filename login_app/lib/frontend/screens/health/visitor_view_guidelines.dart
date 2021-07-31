@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:login_app/frontend/screens/health/visitor_home_health.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
@@ -22,18 +22,19 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
 
   @override
   Widget build(BuildContext context) {
-    if (globals.loggedInUserType != 'User') {
-      if (globals.loggedInUserType == 'Admin') {
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-        });
-      } else {
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-        });
-      }
-      return Container();
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.loggedInUserType == 'Admin') {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+        return Container();
+      });
+    } else if (globals.loggedInUserType == 'User') {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        return Container();
+      });
     }
+
     Widget getList() {
        if (!globals.companyGuidelinesExist) { //If company guidelines have not been uploaded yet
          return Column(
