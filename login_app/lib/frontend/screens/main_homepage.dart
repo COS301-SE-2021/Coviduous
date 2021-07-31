@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login_app/frontend/screens/login_screen.dart';
+import 'health/visitor_home_health.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";
@@ -79,20 +80,7 @@ class _HomePageState extends State<HomePage>{
                               Text('Visitor')
                           ),
                           onPressed:() {
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Placeholder'),
-                                  content: Text('Go to visitor screen.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Okay'),
-                                      onPressed: () {
-                                        Navigator.of(ctx).pop();
-                                      },
-                                    )
-                                  ],
-                                ));
+                            Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
                           }
                       ),
                     ),
