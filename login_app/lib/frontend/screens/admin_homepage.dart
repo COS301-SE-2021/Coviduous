@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:login_app/frontend/screens/health/admin_home_permissions.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/screens/notification/admin_home_notifications.dart';
 import 'package:login_app/frontend/screens/reporting/home_reporting.dart';
@@ -162,6 +163,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           ),
                                           onPressed: () {
                                             Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                                          }
+                                      ),
+                                      SizedBox (
+                                        height: MediaQuery.of(context).size.height/48,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                      ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Row (
+                                              children: <Widget>[
+                                                Expanded(child: Text('Permissions')),
+                                                Icon(Icons.library_books)
+                                              ],
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
                                           }
                                       ),
                                       SizedBox (
