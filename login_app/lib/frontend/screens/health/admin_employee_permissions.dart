@@ -35,6 +35,17 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (5 * globals.getWidgetScaling()),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                color: Theme.of(context).primaryColor,
+                child: Text('No permissions granted', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+              ),
               Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
@@ -47,6 +58,8 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
         );
       } else { //Else create and return a list
         return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             padding: const EdgeInsets.all(8),
             itemCount: numberOfRequests,
             itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
@@ -58,7 +71,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Permissions for  UserID' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Permissions for UserID' + (index+1).toString(), style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -120,6 +133,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                 ],
               ),
             ),
+            /*
             Container (
               alignment: Alignment.center,
               child: Container (
@@ -139,6 +153,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                   )
               ),
             ),
+            */
           ],
         ),
       ),
