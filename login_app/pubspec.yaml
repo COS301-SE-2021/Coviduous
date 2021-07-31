@@ -37,11 +37,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   postgres: ^2.2.0
 
-#objectbox for NoSQL 
-#objectbox for unitesting 
- objectbox: ^0.11.0
- objectbox_flutter_libs: any
- path_provider: ^1.6.27
+# ObjectBox
+  objectbox: ^0.11.0
+  objectbox_flutter_libs: any
+  path_provider: ^1.6.27
+  
+  
+
+ 
 
 
 
@@ -51,11 +54,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  
-   build_runner: ^1.0.0
+   # ObjectBox
+  build_runner: ^1.0.0
   objectbox_generator: any
-
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
