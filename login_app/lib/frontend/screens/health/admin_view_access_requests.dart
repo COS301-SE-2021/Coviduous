@@ -105,24 +105,52 @@ class _EmployeeRequestsState extends State<EmployeeRequests> {
           fit: BoxFit.cover,
         ),
       ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Employee Requests'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-               // Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-              },
+        child: new Scaffold(
+            backgroundColor: Colors.transparent, //To show background image
+            appBar: AppBar(
+              title: Text('Employee Requests'),
+              leading: BackButton( //Specify back button
+                onPressed: (){
+                  //Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                },
+              ),
             ),
-          ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+            body: Stack (
+                children: <Widget>[
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        getList(),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 18,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container (
+                    alignment: Alignment.center,
+                    child: Container (
+                        height: 50,
+                        width: 170,
+                        padding: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom (
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: Text('Clear requests'),
+                          onPressed: (){
+                            //notifications.clear();
+                            setState(() {});
+                          },
+                        )
+                    ),
+                  ),
+                ]
+            )
+        ),
     );
   }
 }
