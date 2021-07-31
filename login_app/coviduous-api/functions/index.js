@@ -56,7 +56,7 @@ app.get('/api/announcement/view-announcements', (req, res) => {
           snapshot.forEach(doc => {
             let id = doc.id;
             let data = doc.data();
-            list.push({id,data});
+            list.push({data});
           });
           //let response = item.data();
           let announce=list;
