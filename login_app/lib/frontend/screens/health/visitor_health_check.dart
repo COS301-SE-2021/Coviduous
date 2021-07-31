@@ -15,13 +15,13 @@ class VisitorHealthCheck extends StatefulWidget {
 class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
   TextEditingController _temperature = TextEditingController();
   bool _hasFever = false;
-  // bool _hasDryCough = false;
-  // bool _hasShortnessOfBreath = false;
-  // bool _hadSoreThroat = false;
-  // bool _hasChills = false;
-  // bool _hasTasteSmellLoss = false;
-  // bool _hasHeadMusclePain = false;
-  // bool _hasNauseaDiarrheaVomiting = false;
+   bool _hasDryCough = false;
+   bool _hasShortnessOfBreath = false;
+   bool _hadSoreThroat = false;
+   bool _hasChills = false;
+   bool _hasTasteSmellLoss = false;
+   bool _hasHeadMusclePain = false;
+   bool _hasNauseaDiarrheaVomiting = false;
   // bool _hasComeIntoContact = false;
   // bool _hasTestedPositive = false;
   // bool _hasTraveled = false;
@@ -112,7 +112,80 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                               });
                             },
                           ),
-
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('2. Dry cough'),
+                            value: this._hasDryCough,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasDryCough = value;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('3. Shortness of breath'),
+                            value: this._hasShortnessOfBreath,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasShortnessOfBreath = value;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('4. Sore throat'),
+                            value: this._hadSoreThroat,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hadSoreThroat = value;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('5. Loss of smell or taste'),
+                            value: this._hasTasteSmellLoss,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasTasteSmellLoss = value;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('6. Chills'),
+                            value: this._hasChills,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasChills = value;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('7. Head or muscle aches'),
+                            value: this._hasHeadMusclePain,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasHeadMusclePain = value;
+                              });
+                            },
+                          ),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('8. Nausea, diarrhea or vomiting'),
+                            value: this._hasNauseaDiarrheaVomiting,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasNauseaDiarrheaVomiting = value;
+                              });
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
                         ],
                       ),
                     ),
