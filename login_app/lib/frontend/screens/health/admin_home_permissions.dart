@@ -86,8 +86,8 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                     ),
                     child: Row (
                         children: <Widget>[
-                          Expanded(child: Text('Grant Permissions')),
-                          Icon(Icons.zoom_in)
+                          Expanded(child: Text('Grant permissions')),
+                          Icon(Icons.add_alert)
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -109,7 +109,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                     child: Row (
                         children: <Widget>[
                           Expanded(child: Text('Manage PPE')),
-                          Icon(Icons.help)
+                          Icon(Icons.medical_services)
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -130,8 +130,8 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                     ),
                     child: Row (
                         children: <Widget>[
-                          Expanded(child: Text('Contact Trace')),
-                          Icon(Icons.file_upload)
+                          Expanded(child: Text('Contact trace')),
+                          Icon(Icons.help)
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
