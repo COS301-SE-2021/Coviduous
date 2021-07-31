@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
- import 'package:login_app/frontend/screens/admin_homepage.dart';
- import 'package:login_app/frontend/screens/login_screen.dart';
- import 'admin_view_access_requests.dart';
+import 'admin_view_permissions.dart';
+import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/login_screen.dart';
+import 'admin_view_access_requests.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminPermissions extends StatefulWidget {
@@ -69,7 +69,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                     ),
                     onPressed: () {
-                      // Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
+                      Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
                     }
                 ),
                 SizedBox (
@@ -91,7 +91,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(EmployeeRequests.routeName);
+                      Navigator.of(context).pushReplacementNamed(AdminViewAccessRequests.routeName);
                     }
                 ),
                 SizedBox (
