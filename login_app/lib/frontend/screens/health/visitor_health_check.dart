@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-//import 'package:login_app/frontend/screens/health/user_home_health.dart';
+
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/health/visitor_home_health.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class VisitorHealthCheck extends StatefulWidget {
-  static const routeName = "/user_health_check";
+  static const routeName = "/visitor_health_check";
 
   @override
   _VisitorHealthCheckState createState() => _VisitorHealthCheckState();
@@ -252,7 +254,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                                        */
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("Health check successfully completed, permission granted")));
-                                // Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                                Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("Please enter required fields")));
