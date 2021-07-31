@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'admin_home_permissions.dart';
-import 'admin_employee_permissions.dart';
+
+import 'package:login_app/frontend/screens/health/admin_home_permissions.dart';
+import 'package:login_app/frontend/screens/health/admin_employee_permissions.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -40,7 +41,7 @@ class _AdminViewPermissionsState extends State<AdminViewPermissions> {
       child: new Scaffold(
         backgroundColor: Colors.transparent,
         appBar: new AppBar(
-          title: new Text("View Employee Access"),
+          title: new Text("View employee access"),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
