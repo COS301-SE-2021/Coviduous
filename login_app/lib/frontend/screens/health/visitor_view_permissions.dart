@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-//import 'visitor_home_health.dart';
+
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-//import 'package:login_app/frontend/screens/health/user_home_health.dart';
+import 'package:login_app/frontend/screens/health/visitor_home_health.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class VisitorViewPermissions extends StatefulWidget {
-  static const routeName = "/user_view_permissions";
+  static const routeName = "/visitor_view_permissions";
 
   @override
   _VisitorViewPermissionsState createState() => _VisitorViewPermissionsState();
@@ -113,7 +113,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
             title: Text('Permissions'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                //Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
               },
             ),
           ),
