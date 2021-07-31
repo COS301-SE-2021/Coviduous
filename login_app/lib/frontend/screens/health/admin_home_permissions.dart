@@ -75,6 +75,28 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                   height: MediaQuery.of(context).size.height/48,
                   width: MediaQuery.of(context).size.width,
                 ),
+                ElevatedButton (
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Row (
+                        children: <Widget>[
+                          Expanded(child: Text('Grant Permissions')),
+                          Icon(Icons.zoom_in)
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                    ),
+                    onPressed: () {
+                      //Navigator.of(context).pushReplacementNamed(UserViewGuidelines.routeName);
+                    }
+                ),
+                SizedBox (
+                  height: MediaQuery.of(context).size.height/48,
+                  width: MediaQuery.of(context).size.width,
+                ),
               ],
             ),
           ),
