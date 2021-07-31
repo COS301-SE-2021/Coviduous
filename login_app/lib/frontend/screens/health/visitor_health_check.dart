@@ -231,6 +231,39 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                             height: MediaQuery.of(context).size.height/48,
                             width: MediaQuery.of(context).size.width,
                           ),
+                          ElevatedButton(
+                            child: Text(
+                                'Submit'
+                            ),
+                            onPressed: () {
+                              FormState form = _formKey.currentState;
+                              if (form.validate()) {
+                                //UserHealthCheckResponse response = services.userCompleteHealthCheckMock(parameters go here);
+                                //print(response.getResponse());
+                                /*
+                                      if (response.getResponse()) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Health check successfully completed, permission granted")));
+                                        Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                                      } else {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Health check denied, please try again or contact your admin")));
+                                      }
+                                       */
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("Health check successfully completed, permission granted")));
+                                // Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("Please enter required fields")));
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
