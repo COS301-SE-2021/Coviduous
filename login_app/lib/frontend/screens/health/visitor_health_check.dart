@@ -60,7 +60,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
           title: Text('Complete health check'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              // Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+              Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
             },
           ),
         ),
