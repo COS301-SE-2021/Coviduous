@@ -9,7 +9,7 @@ import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 
 class AdminViewPermissions extends StatefulWidget {
-  static const routeName = "/admin_view_employeeRequests";
+  static const routeName = "/admin_view_employeeAccess";
 
   @override
   _AdminViewPermissionsState createState() => _AdminViewPermissionsState();
@@ -40,7 +40,7 @@ class _AdminViewPermissionsState extends State<AdminViewPermissions> {
       child: new Scaffold(
         backgroundColor: Colors.transparent,
         appBar: new AppBar(
-          title: new Text("Request access"),
+          title: new Text("View Employee Access"),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
