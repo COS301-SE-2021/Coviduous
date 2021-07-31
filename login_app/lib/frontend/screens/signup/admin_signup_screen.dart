@@ -5,12 +5,12 @@ import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/models/firestore_cloud.dart';
 import 'package:login_app/frontend/screens/signup/home_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
-import 'package:login_app/frontend/front_end_globals.dart' as globals;
-//import 'package:login_app/backend/backend_globals/user_globals.dart' as userGlobals;
 import 'package:login_app/requests/user_requests/RegisterCompanyRequest.dart';
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
 import 'package:login_app/responses/user_responses/RegisterCompanyResponse.dart';
 import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
+
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminRegister extends StatefulWidget {
   static const routeName = "/adminRegister";
@@ -92,7 +92,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   keyboardType: TextInputType.text,
                                   controller: _firstName,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid first name';
                                     }
@@ -106,7 +106,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   keyboardType: TextInputType.text,
                                   controller: _lastName,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid last name (family name)';
                                     }
@@ -183,7 +183,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   decoration: InputDecoration(labelText:'Company ID'),
                                   controller: _companyId,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[0-9A-Za-z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid company ID';
                                     }
@@ -196,7 +196,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   decoration: InputDecoration(labelText:'Company name'),
                                   controller: _companyName,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[A-Za-z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid company name';
                                     }
@@ -209,7 +209,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   decoration: InputDecoration(labelText:'Company address'),
                                   controller: _companyLocation,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[0-9A-Za-z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid company address';
                                     }
@@ -226,36 +226,39 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   ),
                                   onPressed: ()
                                   {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    AuthClass().createAccount(email: _email.text.trim(),
-                                        password: _password.text.trim()).then((value) {
-                                      if (value == "Account created") {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
+                                    FormState form = _formKey.currentState;
+                                    if (form.validate()) {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      AuthClass().createAccount(email: _email.text.trim(),
+                                          password: _password.text.trim()).then((value) {
+                                        if (value == "Account created") {
+                                          setState(() {
+                                            isLoading = false;
+                                          });
 
-                                        adminSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
-                                        RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("Admin", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
-                                        print(response.getResponse());
-                                        RegisterCompanyResponse response2 = services.registerCompanyMock(RegisterCompanyRequest(_companyName.text, _companyLocation.text, response.getId()));
-                                        print(response2.getResponse());
-                                        globals.loggedInUserId = response.getId();
-                                        //print(userGlobals.userDatabaseTable[0].adminId);
-                                        //print(userGlobals.companyDatabaseTable[0].companyId);
-                                        Navigator.pushAndRemoveUntil(context,
-                                            MaterialPageRoute(builder: (context) => LoginScreen()), (
-                                                route) => false);
-                                      }
-                                      else {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text(value)));
-                                      }
-                                    });
+                                          adminSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
+                                          RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("Admin", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
+                                          print(response.getResponse());
+                                          RegisterCompanyResponse response2 = services.registerCompanyMock(RegisterCompanyRequest(_companyName.text, _companyLocation.text, response.getId()));
+                                          print(response2.getResponse());
+                                          globals.loggedInUserId = response.getId();
+                                          //print(userGlobals.userDatabaseTable[0].adminId);
+                                          //print(userGlobals.companyDatabaseTable[0].companyId);
+                                          Navigator.pushAndRemoveUntil(context,
+                                              MaterialPageRoute(builder: (context) => LoginScreen()), (
+                                                  route) => false);
+                                        }
+                                        else {
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text(value)));
+                                        }
+                                      });
+                                    }
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:login_app/backend/controllers/announcements_controller.dart';
+import 'package:login_app/backend/server_connections/announcement_data_base_queries.dart';
 import 'package:login_app/requests/announcements_requests/create_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/delete_announcement_request.dart';
 import 'package:login_app/requests/announcements_requests/viewAdmin_announcement_request.dart';
@@ -42,5 +43,14 @@ void main() {
 
     expect(resp, isNot(null));
     expect(true, resp.getResponse());
+  });
+
+  test('Correct view announcement', () async {
+    // Run user int. tests first to insert data to users table
+    AnnouncementDatabaseQueries model = new AnnouncementDatabaseQueries();
+    bool holder = await model.viewAnnouncementsAdminAPI("test2");
+
+    expect(model.globalAnnouncements.length, isNot(0));
+    expect(true, holder);
   });
 }

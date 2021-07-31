@@ -32,7 +32,64 @@ class AnnouncementDatabaseQueries {
   String dbName = 'mock_CoviduousDB'; // an existing DB name on your localhost
   String user = 'postgres';
   String pass = 'postgres'; // your postgres user password
-
+  var testJson = json.encode({
+    "data": [
+      {
+        "data": {
+          "announcents": {
+            "type": "test2",
+            "timestamp": "test2",
+            "announcementId": "test2",
+            "message": "test2",
+            "adminId": "test2",
+            "id": "OBlVZojg",
+            "companyId": "test2"
+          }
+        }
+      },
+      {
+        "data": {
+          "announcents": {
+            "type": "test1",
+            "adminId": "test1",
+            "announcementId": "test1",
+            "id": "OBlVZojg94NlTV5GDfQa",
+            "message": "test1",
+            "companyId": "test1",
+            "timestamp": "test1"
+          }
+        }
+      },
+      {
+        "data": {
+          "announcents": {
+            "companyId": "test2",
+            "announcementId": "test2",
+            "adminId": "test2",
+            "message": "test2",
+            "id": "announc",
+            "type": "test2",
+            "timestamp": "test2"
+          }
+        }
+      },
+      {
+        "data": {
+          "announcents": {
+            "timestamp": "test2",
+            "companyId": "test2",
+            "message": "test2",
+            "announcementId": "hvgvfxrt",
+            "id": "undefined",
+            "type": "test2",
+            "adminId": "test2"
+          }
+        }
+      }
+    ]
+  });
+  List<Announcement> globalAnnouncements = [];
+  int numAnnouncements = 0;
   String announcementId;
   String timeStamp;
   String companyIdentification;
@@ -65,14 +122,59 @@ class AnnouncementDatabaseQueries {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200) if (response.statusCode == 200) {
       //print(await response.stream.bytesToString());
       return true;
     } else {
       print(response.reasonPhrase);
       return false;
     }
+  }
+
+  bool convertJsonToAnnouncementList(dynamic json) {
+    //NB on json announcements is spelt wrong announcents
+    globalAnnouncements = [];
+    numAnnouncements = 0;
+    for (int i = 0; i < json.length; i++) {
+      Announcement holder = new Announcement(
+          json[i].data.announcents['announcementId'],
+          json[i].data.announcents['type'],
+          json[i].data.announcents['timestamp'],
+          json[i].data.announcents['message'],
+          json[i].data.announcents['adminId'],
+          json[i].data.announcents['companyId']);
+      globalAnnouncements.add(holder);
+      numAnnouncements++;
+      print("added");
+    }
+    if (numAnnouncements > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> viewAnnouncementsAdminAPI(String floorNo) async {
+    var headers = {'Content-Type': 'application/json'};
+    /* var request = http.Request(
+        'GET',
+        Uri.parse(
+            'http://localhost:5001/coviduous-api/us-central1/app/api/announcement/view-announcements'));
+    request.body = json.encode({"floorNo": floorNo});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      //print(await response.stream.bytesToString());
+      String lst = (await response.stream.bytesToString()).toString();
+      dynamic str = jsonDecode(lst);
+      return convertJsonToAnnouncementList(str["data"]);
+    } else {
+      print(response.reasonPhrase);
+      return false;
+    }*/
+    return convertJsonToAnnouncementList(testJson);
   }
 
   ////////////////////////////////////////DEMO 1 AND 2 POSTGRES INTERGRATION //////////////////////////////////////////

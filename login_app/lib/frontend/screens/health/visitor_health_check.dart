@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-//import 'package:login_app/frontend/screens/health/user_home_health.dart';
+
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
+import 'package:login_app/frontend/screens/health/visitor_home_health.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class VisitorHealthCheck extends StatefulWidget {
-  static const routeName = "/user_health_check";
+  static const routeName = "/visitor_health_check";
 
   @override
   _VisitorHealthCheckState createState() => _VisitorHealthCheckState();
 }
 
 class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _surname = TextEditingController();
+  TextEditingController _email = TextEditingController();
   TextEditingController _temperature = TextEditingController();
   bool _hasFever = false;
    bool _hasDryCough = false;
@@ -32,19 +37,19 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
 
   @override
   Widget build(BuildContext context) {
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.loggedInUserType == 'Admin') {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+      });
+      return Container();
+    } else if (globals.loggedInUserType == 'User') {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+      });
+      return Container();
+    }
 
-    if (globals.loggedInUserType != 'User') {
-       if (globals.loggedInUserType == 'Admin') {
-         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-         });
-       } else {
-         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-           Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-         });
-       }
-       return Container();
-     }
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -58,7 +63,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
           title: Text('Complete health check'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              // Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+              Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
             },
           ),
         ),
@@ -76,26 +81,85 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Text('Please take your temperature before completing the health check-up.'),
-                      TextFormField(
-                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                        decoration: InputDecoration(
-                          labelText: 'Measured temperature (in degrees Celsius)',
-                        ),
-                        keyboardType: TextInputType.text,
-                        controller: _temperature,
-                        validator: (value) {
-                           if (value.isNotEmpty) {
-                             print(_temperature);
-                             if(!globals.isNumeric(value)) //Check if number
-                                 {
-                               return 'Temperature must be a number';
-                             }
-                           } else {
-                             return 'Please enter a temperature';
-                          }
-                          return null;
+                          Text('Name:'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Your first name',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _name,
+                            validator: (value) {
+                              if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
+                                  {
+                                return 'please input a valid first name';
+                              }
+                              return null;
                             },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('Surname:'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Your last name',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _surname,
+                            validator: (value) {
+                              if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
+                                  {
+                                return 'please input a valid last name (family name)';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('Email address:'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Your email address',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _email,
+                            validator: (value) {
+                              if(value.isEmpty || !value.contains('@'))
+                              {
+                                return 'invalid email';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('Please take your temperature before completing the health check-up.'),
+                          TextFormField(
+                            textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Measured temperature (in degrees Celsius)',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _temperature,
+                            validator: (value) {
+                              if (value.isNotEmpty) {
+                                if(!globals.isNumeric(value)) //Check if number
+                                  {
+                                  return 'Temperature must be a number';
+                                  }
+                                } else {
+                                  return 'Please enter a temperature';
+                                }
+                                return null;
+                              },
                           ),
                           SizedBox (
                             height: MediaQuery.of(context).size.height/48,
@@ -252,7 +316,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                                        */
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("Health check successfully completed, permission granted")));
-                                // Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                                Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("Please enter required fields")));

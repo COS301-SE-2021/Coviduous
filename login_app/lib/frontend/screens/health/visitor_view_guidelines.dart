@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-//import 'visitor_home_health.dart';
+
+import 'package:login_app/frontend/screens/health/visitor_home_health.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
-//import 'package:login_app/frontend/screens/health/user_home_health.dart';
-import 'package:login_app/frontend/screens/login_screen.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+
 class VisitorViewGuidelines extends StatefulWidget {
   static const routeName = "/visitor_view_guidelines";
 
@@ -21,18 +22,19 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
 
   @override
   Widget build(BuildContext context) {
-    if (globals.loggedInUserType != 'User') {
-      if (globals.loggedInUserType == 'Admin') {
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-        });
-      } else {
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-        });
-      }
+    //If incorrect type of user, don't allow them to view this page.
+    if (globals.loggedInUserType == 'Admin') {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+      });
+      return Container();
+    } else if (globals.loggedInUserType == 'User') {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+      });
       return Container();
     }
+
     Widget getList() {
        if (!globals.companyGuidelinesExist) { //If company guidelines have not been uploaded yet
          return Column(
@@ -83,7 +85,7 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
             title: Text('Company guidelines'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                //Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
               },
             ),
           ),

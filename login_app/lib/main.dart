@@ -39,6 +39,10 @@ import 'package:login_app/frontend/screens/health/user_view_test_results.dart';
 import 'package:login_app/frontend/screens/health/user_view_vaccine_confirm.dart';
 import 'package:login_app/frontend/screens/health/user_report_infection.dart';
 import 'package:login_app/frontend/screens/health/user_request_access.dart';
+import 'package:login_app/frontend/screens/health/visitor_health_check.dart';
+import 'package:login_app/frontend/screens/health/visitor_home_health.dart';
+import 'package:login_app/frontend/screens/health/visitor_view_guidelines.dart';
+import 'package:login_app/frontend/screens/health/visitor_view_permissions.dart';
 
 //Shift
 import 'package:login_app/frontend/screens/shift/home_shift.dart';
@@ -146,6 +150,10 @@ class MyApp extends StatelessWidget{
         UserViewVaccineConfirm.routeName: (ctx)=> UserViewVaccineConfirm(),
         UserReportInfection.routeName: (ctx)=> UserReportInfection(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
+        VisitorHealth.routeName: (ctx)=> VisitorHealth(),
+        VisitorHealthCheck.routeName: (ctx)=> VisitorHealthCheck(),
+        VisitorViewPermissions.routeName: (ctx)=> VisitorViewPermissions(),
+        VisitorViewGuidelines.routeName: (ctx)=> VisitorViewGuidelines(),
 
         //Shift
         ShiftScreen.routeName: (ctx)=> ShiftScreen(),
