@@ -51,6 +51,11 @@ class _VisitorHealthState extends State<VisitorHealth> {
                 }
 
             ),
+                SizedBox (
+                  height: MediaQuery.of(context).size.height/48,
+                  width: MediaQuery.of(context).size.width,
+                ),
+
               ],
             )
           )
