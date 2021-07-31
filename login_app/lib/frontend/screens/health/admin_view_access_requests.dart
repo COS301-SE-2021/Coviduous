@@ -7,7 +7,7 @@ import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 
 class AdminViewAccessRequests extends StatefulWidget {
-  static const routeName = "/admin_view_notifications";
+  static const routeName = "/admin_view_access-requests";
 
   @override
   _AdminViewAccessRequestsState createState() => _AdminViewAccessRequestsState();
