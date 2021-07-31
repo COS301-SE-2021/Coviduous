@@ -16,6 +16,25 @@ class _VisitorHealthState extends State<VisitorHealth> {
           fit: BoxFit.cover,
         ),
       ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text('Health'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                // Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+              },
+            ),
+          ),
+          body: Center(
+            child: Container (
+            padding: EdgeInsets.all(20),
+            child: Column(
+
+            )
+          )
+          )
+        ),
     );
   }
 }
