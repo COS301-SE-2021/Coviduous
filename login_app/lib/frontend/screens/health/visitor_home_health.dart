@@ -30,7 +30,28 @@ class _VisitorHealthState extends State<VisitorHealth> {
             child: Container (
             padding: EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+            ElevatedButton (
+            style: ElevatedButton.styleFrom (
+            shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            ),
+            ),
+                child: Row (
+                    children: <Widget>[
+                      Expanded(child: Text('Complete health check')),
+                      Icon(Icons.check_circle)
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                ),
+                onPressed: () {
+                  //Navigator.of(context).pushReplacementNamed(VisitorHealthCheck.routeName);
+                }
 
+            ),
+              ],
             )
           )
           )
