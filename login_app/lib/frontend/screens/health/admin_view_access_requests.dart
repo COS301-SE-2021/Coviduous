@@ -148,6 +148,26 @@ class _EmployeeRequestsState extends State<EmployeeRequests> {
                         )
                     ),
                   ),
+                  Container (
+                    alignment: Alignment.centerLeft,
+                    child: Container (
+                        height: 50,
+                        width: 170,
+                        padding: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom (
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: Text('Grant Access'),
+                          onPressed: (){
+                            //notifications.clear();
+                            setState(() {});
+                          },
+                        )
+                    ),
+                  ),
                 ]
             )
         ),
