@@ -22,9 +22,9 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
    bool _hasTasteSmellLoss = false;
    bool _hasHeadMusclePain = false;
    bool _hasNauseaDiarrheaVomiting = false;
-  // bool _hasComeIntoContact = false;
-  // bool _hasTestedPositive = false;
-  // bool _hasTraveled = false;
+   bool _hasComeIntoContact = false;
+   bool _hasTestedPositive = false;
+   bool _hasTraveled = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -179,6 +179,51 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                             onChanged: (bool value) {
                               setState(() {
                                 this._hasNauseaDiarrheaVomiting = value;
+                              });
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('9. Have you come closer than 6 feet (1.83 meters) to someone who has COVID-19 or has displayed symptoms of COVID-19?'),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            //title: const Text(''),
+                            value: this._hasComeIntoContact,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasComeIntoContact = value;
+                              });
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('10. Have you tested positive for COVID-19 in the past 14 days?'),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            //title: const Text(''),
+                            value: this._hasTestedPositive,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasTestedPositive = value;
+                              });
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('11. Have you traveled to another province or country the past 14 days?'),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            //title: const Text(''),
+                            value: this._hasTraveled,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasTraveled = value;
                               });
                             },
                           ),
