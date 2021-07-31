@@ -38,13 +38,13 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
     if (globals.loggedInUserType == 'Admin') {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-        return Container();
       });
+      return Container();
     } else if (globals.loggedInUserType == 'User') {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
-        return Container();
       });
+      return Container();
     }
 
     return Container(
