@@ -8,13 +8,13 @@ import 'package:login_app/frontend/screens/login_screen.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 
-class EmployeeRequests extends StatefulWidget {
+class AdminViewPermissions extends StatefulWidget {
   static const routeName = "/admin_view_employeeRequests";
 
   @override
-  _EmployeeRequestsState createState() => _EmployeeRequestsState();
+  _AdminViewPermissionsState createState() => _AdminViewPermissionsState();
 }
-class _EmployeeRequestsState extends State<EmployeeRequests> {
+class _AdminViewPermissionsState extends State<AdminViewPermissions> {
   TextEditingController _employeeId = TextEditingController();
   @override
   Widget build(BuildContext context) {
