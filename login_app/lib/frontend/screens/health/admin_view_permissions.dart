@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'admin_home_permissions.dart';
 import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
 
@@ -32,6 +33,17 @@ class _EmployeeRequestsState extends State<EmployeeRequests> {
         image: DecorationImage(
           image: AssetImage('assets/bg.jpg'),
           fit: BoxFit.cover,
+        ),
+      ),
+      child: new Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: new AppBar(
+          title: new Text("Request access"),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+            },
+          ),
         ),
       ),
     );
