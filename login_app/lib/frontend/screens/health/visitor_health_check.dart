@@ -46,7 +46,24 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
        return Container();
      }
     return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Text('Complete health check'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              // Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+            },
+          ),
+        ),
 
+      ),
     );
   }
 }
