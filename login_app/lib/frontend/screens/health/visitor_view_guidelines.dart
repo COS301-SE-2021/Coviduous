@@ -8,7 +8,7 @@ import 'package:login_app/frontend/screens/login_screen.dart';
 
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 class VisitorViewGuidelines extends StatefulWidget {
-  static const routeName = "/user_view_guidelines";
+  static const routeName = "/visitor_view_guidelines";
 
   @override
   _VisitorViewGuidelinesState createState() => _VisitorViewGuidelinesState();
