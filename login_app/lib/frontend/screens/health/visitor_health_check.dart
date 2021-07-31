@@ -15,6 +15,9 @@ class VisitorHealthCheck extends StatefulWidget {
 }
 
 class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _surname = TextEditingController();
+  TextEditingController _email = TextEditingController();
   TextEditingController _temperature = TextEditingController();
   bool _hasFever = false;
    bool _hasDryCough = false;
@@ -78,26 +81,85 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          Text('Please take your temperature before completing the health check-up.'),
-                      TextFormField(
-                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                        decoration: InputDecoration(
-                          labelText: 'Measured temperature (in degrees Celsius)',
-                        ),
-                        keyboardType: TextInputType.text,
-                        controller: _temperature,
-                        validator: (value) {
-                           if (value.isNotEmpty) {
-                             print(_temperature);
-                             if(!globals.isNumeric(value)) //Check if number
-                                 {
-                               return 'Temperature must be a number';
-                             }
-                           } else {
-                             return 'Please enter a temperature';
-                          }
-                          return null;
+                          Text('Name:'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Your first name',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _name,
+                            validator: (value) {
+                              if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
+                                  {
+                                return 'please input a valid first name';
+                              }
+                              return null;
                             },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('Surname:'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Your last name',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _surname,
+                            validator: (value) {
+                              if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
+                                  {
+                                return 'please input a valid last name (family name)';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('Email address:'),
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Your email address',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _email,
+                            validator: (value) {
+                              if(value.isEmpty || !value.contains('@'))
+                              {
+                                return 'invalid email';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('Please take your temperature before completing the health check-up.'),
+                          TextFormField(
+                            textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Measured temperature (in degrees Celsius)',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _temperature,
+                            validator: (value) {
+                              if (value.isNotEmpty) {
+                                if(!globals.isNumeric(value)) //Check if number
+                                  {
+                                  return 'Temperature must be a number';
+                                  }
+                                } else {
+                                  return 'Please enter a temperature';
+                                }
+                                return null;
+                              },
                           ),
                           SizedBox (
                             height: MediaQuery.of(context).size.height/48,
