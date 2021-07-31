@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/health/visitor_health_check.dart';
+import 'package:login_app/frontend/screens/health/visitor_view_guidelines.dart';
+import 'package:login_app/frontend/screens/health/visitor_view_permissions.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
+
 class VisitorHealth extends StatefulWidget {
   static const routeName = "/visitor_health";
 
@@ -66,7 +72,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              //Navigator.of(context).pushReplacementNamed(VisitorHealthCheck.routeName);
+                              Navigator.of(context).pushReplacementNamed(VisitorHealthCheck.routeName);
                             }
                         ),
                         SizedBox (
@@ -88,7 +94,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              //Navigator.of(context).pushReplacementNamed(VisitorViewPermissions.routeName);
+                              Navigator.of(context).pushReplacementNamed(VisitorViewPermissions.routeName);
                             }
                         ),
                         SizedBox (
@@ -110,7 +116,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              //Navigator.of(context).pushReplacementNamed(VisitorViewGuidelines.routeName);
+                              Navigator.of(context).pushReplacementNamed(VisitorViewGuidelines.routeName);
                             }
                         ),
                         SizedBox (
