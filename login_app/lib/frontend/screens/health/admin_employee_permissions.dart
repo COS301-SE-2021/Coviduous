@@ -104,7 +104,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
           title: Text('Employee Permissions'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(EmployeeRequests.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
             },
           ),
         ),
