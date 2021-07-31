@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 //import 'visitor_home_health.dart';
-// import 'package:native_pdf_view/native_pdf_view.dart';
+import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
 //import 'package:login_app/frontend/screens/health/user_home_health.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
@@ -15,9 +15,9 @@ class VisitorViewGuidelines extends StatefulWidget {
 }
 
 class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
-  // final pdfController = PdfController(
-  //   document: PdfDocument.openAsset('assets/sample.pdf'),
-  // );
+  final pdfController = PdfController(
+     document: PdfDocument.openAsset('assets/sample.pdf'),
+   );
 
   @override
   Widget build(BuildContext context) {
