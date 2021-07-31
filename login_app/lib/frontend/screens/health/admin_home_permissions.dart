@@ -7,7 +7,7 @@ import 'admin_view_access_requests.dart';
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminPermissions extends StatefulWidget {
-  static const routeName = "/visitor_health";
+  static const routeName = "/admin_PermissionsHome";
 
   @override
   _AdminPermissionsState createState() => _AdminPermissionsState();
@@ -39,7 +39,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('Health'),
+          title: Text('Health Permissions'),
           leading: BackButton( //Specify back button
             onPressed: (){
               // Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
