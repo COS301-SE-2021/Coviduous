@@ -14,7 +14,7 @@ class VisitorHealthCheck extends StatefulWidget {
 
 class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
   TextEditingController _temperature = TextEditingController();
-  // bool _hasFever = false;
+  bool _hasFever = false;
   // bool _hasDryCough = false;
   // bool _hasShortnessOfBreath = false;
   // bool _hadSoreThroat = false;
@@ -95,8 +95,24 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                              return 'Please enter a temperature';
                           }
                           return null;
-                        },
+                            },
                           ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Text('Have you experienced any of the following symptoms in the past 14 days?'),
+                          CheckboxListTile(
+                            //secondary: const Icon(Icons.alarm),
+                            title: const Text('1. Fever'),
+                            value: this._hasFever,
+                            onChanged: (bool value) {
+                              setState(() {
+                                this._hasFever = value;
+                              });
+                            },
+                          ),
+
                         ],
                       ),
                     ),
