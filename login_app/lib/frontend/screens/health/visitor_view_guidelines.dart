@@ -34,7 +34,30 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
       return Container();
     }
     return Container(
-
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: new Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text('Company guidelines'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                //Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+              },
+            ),
+          ),
+          body: Stack (
+              children: <Widget>[
+                Center (
+                  //child: getList()
+                ),
+              ]
+          )
+      ),
     );
   }
 }
