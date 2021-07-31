@@ -66,7 +66,17 @@ class _EmployeeRequestsState extends State<EmployeeRequests> {
                 SizedBox(
                   height: 16,
                 ),
-
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text("Proceed"),
+                  onPressed: () {
+                    //Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
+                  },
+                )
 
               ],
             ),
