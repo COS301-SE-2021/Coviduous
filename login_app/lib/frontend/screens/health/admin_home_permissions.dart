@@ -97,6 +97,49 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                   height: MediaQuery.of(context).size.height/48,
                   width: MediaQuery.of(context).size.width,
                 ),
+                ElevatedButton (
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Row (
+                        children: <Widget>[
+                          Expanded(child: Text('Manage PPE')),
+                          Icon(Icons.help)
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                    ),
+                    onPressed: () {
+                      // Navigator.of(context).pushReplacementNamed(UserRequestAccess.routeName);
+                    }
+                ),
+                SizedBox (
+                  height: MediaQuery.of(context).size.height/48,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                ElevatedButton (
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Row (
+                        children: <Widget>[
+                          Expanded(child: Text('Contact Trace')),
+                          Icon(Icons.file_upload)
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                    ),
+                    onPressed: () {
+                    }
+                ),
+                SizedBox (
+                  height: MediaQuery.of(context).size.height/48,
+                  width: MediaQuery.of(context).size.width,
+                ),
               ],
             ),
           ),
