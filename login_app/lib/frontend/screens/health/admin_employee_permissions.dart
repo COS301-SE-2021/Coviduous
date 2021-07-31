@@ -100,7 +100,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
       child: new Scaffold(
         backgroundColor: Colors.transparent, //To show background image
         appBar: AppBar(
-          title: Text('Employee Permissions'),
+          title: Text('Employee permissions'),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
