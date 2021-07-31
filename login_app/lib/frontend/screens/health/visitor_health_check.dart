@@ -62,7 +62,21 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
             },
           ),
         ),
+        body: Stack(
+          children: <Widget>[
+            Center(
+              child: SingleChildScrollView(
+                child: Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  padding: EdgeInsets.all(16),
 
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
