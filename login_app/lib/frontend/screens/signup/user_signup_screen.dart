@@ -5,9 +5,10 @@ import 'package:login_app/frontend/models/auth_provider.dart';
 import 'package:login_app/frontend/models/firestore_cloud.dart';
 import 'package:login_app/frontend/screens/signup/home_signup_screen.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
-import 'package:login_app/frontend/front_end_globals.dart' as globals;
 import 'package:login_app/requests/user_requests/RegisterUserRequest.dart';
 import 'package:login_app/responses/user_responses/RegisterUserResponse.dart';
+
+import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class UserRegister extends StatefulWidget {
   static const routeName = "/userRegister";
@@ -87,7 +88,7 @@ class _UserRegisterState extends State<UserRegister>{
                                   keyboardType: TextInputType.text,
                                   controller: _firstName,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid first name';
                                     }
@@ -101,7 +102,7 @@ class _UserRegisterState extends State<UserRegister>{
                                   keyboardType: TextInputType.text,
                                   controller: _lastName,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid last name (family name)';
                                     }
@@ -178,7 +179,7 @@ class _UserRegisterState extends State<UserRegister>{
                                   decoration: InputDecoration(labelText:'Company ID'),
                                   controller: _companyId,
                                   validator: (value) {
-                                    if(value.isEmpty || !value.contains(RegExp(r"/^[0-9a-z ,.'-]+$/i"))) //Check if valid name format
+                                    if(value.isEmpty || !value.contains(RegExp(r"^[0-9A-Za-z ,.'-]+$"))) //Check if valid name format
                                         {
                                       return 'please input a valid company ID';
                                     }
@@ -195,32 +196,35 @@ class _UserRegisterState extends State<UserRegister>{
                                   ),
                                   onPressed: ()
                                   {
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    AuthClass().createAccount(email: _email.text.trim(),
-                                        password: _password.text.trim()).then((value) {
-                                      if (value == "Account created") {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
+                                    FormState form = _formKey.currentState;
+                                    if (form.validate()) {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      AuthClass().createAccount(email: _email.text.trim(),
+                                          password: _password.text.trim()).then((value) {
+                                        if (value == "Account created") {
+                                          setState(() {
+                                            isLoading = false;
+                                          });
 
-                                        userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
-                                        RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("User", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
-                                        print(response.getResponse());
-                                        globals.loggedInUserId = response.getId();
-                                        Navigator.pushAndRemoveUntil(context,
-                                            MaterialPageRoute(builder: (context) => LoginScreen()), (
-                                                route) => false);
-                                      }
-                                      else {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text(value)));
-                                      }
-                                    });
+                                          userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
+                                          RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("User", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
+                                          print(response.getResponse());
+                                          globals.loggedInUserId = response.getId();
+                                          Navigator.pushAndRemoveUntil(context,
+                                              MaterialPageRoute(builder: (context) => LoginScreen()), (
+                                                  route) => false);
+                                        }
+                                        else {
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text(value)));
+                                        }
+                                      });
+                                    }
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
