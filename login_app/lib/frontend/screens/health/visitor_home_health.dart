@@ -42,7 +42,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Health'),
+            title: Text('Visitor'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(HomePage.routeName);
