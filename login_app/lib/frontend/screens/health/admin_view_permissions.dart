@@ -14,6 +14,7 @@ class EmployeeRequests extends StatefulWidget {
   _EmployeeRequestsState createState() => _EmployeeRequestsState();
 }
 class _EmployeeRequestsState extends State<EmployeeRequests> {
+  TextEditingController _employeeId = TextEditingController();
   @override
   Widget build(BuildContext context) {
     if (globals.loggedInUserType != 'Admin') {
@@ -43,6 +44,32 @@ class _EmployeeRequestsState extends State<EmployeeRequests> {
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
             },
+          ),
+        ),
+        body: Center(
+          child: new Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Employee ID",
+                  ),
+                  obscureText: false,
+                  controller: _employeeId,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+
+
+              ],
+            ),
           ),
         ),
       ),
