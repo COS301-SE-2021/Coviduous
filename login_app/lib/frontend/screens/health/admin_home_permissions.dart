@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'admin_view_permissions.dart';
+
+import 'package:login_app/frontend/screens/health/admin_view_permissions.dart';
 import 'package:login_app/frontend/screens/admin_homepage.dart';
+import 'package:login_app/frontend/screens/user_homepage.dart';
 import 'package:login_app/frontend/screens/login_screen.dart';
-import 'admin_view_access_requests.dart';
+import 'package:login_app/frontend/screens/health/admin_view_access_requests.dart';
+
 import 'package:login_app/frontend/front_end_globals.dart' as globals;
 
 class AdminPermissions extends StatefulWidget {
@@ -16,19 +19,18 @@ class AdminPermissions extends StatefulWidget {
 class _AdminPermissionsState extends State<AdminPermissions> {
   @override
   Widget build(BuildContext context) {
-
-     if (globals.loggedInUserType != 'User') {
-       if (globals.loggedInUserType == 'Admin') {
-         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-         });
-       } else {
-         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-           Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-         });
-       }
-       return Container();
-     }
+    if (globals.loggedInUserType != 'Admin') {
+      if (globals.loggedInUserType == 'User') {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+        });
+      } else {
+        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        });
+      }
+      return Container();
+    }
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -39,10 +41,10 @@ class _AdminPermissionsState extends State<AdminPermissions> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('Health Permissions'),
+          title: Text('Health permissions'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              // Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
             },
           ),
         ),
