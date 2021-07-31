@@ -21,13 +21,13 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
     if (globals.loggedInUserType == 'Admin') {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-        return Container();
       });
+      return Container();
     } else if (globals.loggedInUserType == 'User') {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
-        return Container();
       });
+      return Container();
     }
 
      Widget getList(){
