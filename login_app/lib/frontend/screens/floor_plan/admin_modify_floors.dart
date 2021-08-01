@@ -130,9 +130,6 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                                                   .getFloorNumber()));
                                       print(response3.getResponse());
 
-                                      //TEMPORARY: make sure number of floors is decreased
-                                      floorGlobals.globalNumFloors--;
-
                                       setState(() {});
                                     } else {
                                       showDialog(
