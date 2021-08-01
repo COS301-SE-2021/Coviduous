@@ -344,6 +344,90 @@ app.get('/api/announcement/view-announcements', (req, res) => {
       //});
   });
 
+
+/**
+ * Create the permission
+ * */
+app.post('/permission/create', (req, res) => {
+  (async () => {
+    try {
+      await db.collection('Permission').doc(req.body.permissionID)
+          .create({permissionID: req.body.permissionID,userID: req.body.userID,Date:req.body.Date,Access:req.body.Access,GrantedBy:req.body.GrantedBy});
+      return res.status(200).send();
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+  })();
+});
+
+/**
+ * Grant Access Permission
+ * */
+app.put('/permisson/grant-access/:permissionID', (req, res) => {
+  (async () => {
+    try {
+      const document = db.collection('Permission').doc(req.params.permissionID);
+      await document.update({
+        GrantedBy: req.body.GrantedBy,
+        Access: req.body.Access
+      });
+      return res.status(200).send();
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+  })();
+});
+
+/**
+ * Request Access Permission
+ * */
+app.post('/permission/request-access', (req, res) => {
+  (async () => {
+    try {
+      await db.collection('PermissionRequest').doc(req.body.perID)
+          .create({reason: req.body.reason,userID: req.body.userID,shiftID: req.body.shiftID,adminID:req.body.adminID,companyID:req.body.companyID});
+      return res.status(200).send(response);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+  })();
+});
+
+/**
+ * Get the Permission with the id
+ * */
+app.get('/permission/read/:permissionID', (req, res) => {
+  (async () => {
+    try {
+      const document = db.collection('Permission').doc(req.params.permissionID);
+      let item = await document.get();
+      let response = item.data();
+      return res.status(200).send(response);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+  })();
+});
+
+/**
+ * Delete the Permission
+ * */
+app.delete('/permission/delete/:permissionID', (req, res) => {
+  (async () => {
+    try {
+      const document = db.collection('Permission').doc(req.params.permissionID);
+      await document.delete();
+      return res.status(200).send();
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+  })();
+});
  
 
 exports.app = functions.https.onRequest(app);
