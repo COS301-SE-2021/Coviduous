@@ -56,6 +56,8 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
         );
       } else { //Else create and return a list
         return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             padding: const EdgeInsets.all(8),
             itemCount: numberOfRequests,
             itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
