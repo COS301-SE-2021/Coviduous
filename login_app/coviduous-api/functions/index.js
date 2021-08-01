@@ -16,12 +16,25 @@ app.get('/api', (req, res) => {
 });
 
 ///////////////////////////////////////// Office Cloud Functions ///////////////////////////////////////////////////////
+app.delete('/api/office/delete-office-space', (req, res) => {
+  (async () => {
+      try {
+          const document = db.collection('booking').doc(req.body.id);
+          await document.delete();
+          return res.status(200).send();
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+      }
+      })();
+  })
 
 app.post('/api/office/book-office-space', (req, res) => {
   (async () => {
       try {
-        await db.collection('booking').doc(req.body.id)
+        await db.collection('booking').doc('/' + req.body.id + '/')
             .create({booking: req.body});
+       
         return res.status(200).send();
       } catch (error) {
         console.log(error);
@@ -29,6 +42,8 @@ app.post('/api/office/book-office-space', (req, res) => {
       }
     })();
 });
+
+
 
 //////////////////////////////////////////Announcement Cloud Functions /////////////////////////
 app.delete('/api/announcement/delete-announcement', (req, res) => {
