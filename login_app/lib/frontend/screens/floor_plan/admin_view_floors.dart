@@ -131,9 +131,6 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                                   .getFloorNumber()));
                                       print(response3.getResponse());
 
-                                      //TEMPORARY: make sure number of floors is decreased
-                                      floorGlobals.globalNumFloors--;
-
                                       setState(() {});
                                     } else {
                                       showDialog(
