@@ -199,6 +199,70 @@ app.get('/api/announcement/view-announcements', (req, res) => {
       //});
   });
 
+  // addFloor POST
+  app.post('/api/floorplan/add-floor', async (req, res) => {
+    //(async () => {
+        try {
+          await db.collection('floors').doc(req.body.floorNumber)
+              .create(req.body); // .add - auto generates document id
+          
+          return res.status(200).send({
+            message: 'Floor successfully created',
+            data: req.body
+          });
+        } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+        }
+      //});
+  });
+
+  // deleteFloor DELETE
+  app.delete('/api/floorplan/delete-floor', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('floors').doc(req.body.floorNumber); // delete based on floorNumber
+            await document.delete();
+            return res.status(200).send({
+              message: 'Floor successfully deleted'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      //})();
+  });
+
+  // getFloors GET
+  app.get('/api/floorplan/get-floors', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('floors');
+            const snapshot = await document.get();
+            
+            let list = [];
+            
+            snapshot.forEach(doc => {
+              //let id = doc.id;
+              let data = doc.data();
+              list.push(data);
+            });
+
+            let floors = list;
+            
+            return res.json({
+              message: 'Successfully retrieved floors',
+              data: floors 
+           });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({
+              message: err.message || "Some error occurred while fetching floors."
+          });
+        }
+      //});
+  });
+
  
 
 exports.app = functions.https.onRequest(app);
