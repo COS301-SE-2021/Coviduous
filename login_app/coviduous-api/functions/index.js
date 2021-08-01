@@ -263,6 +263,87 @@ app.get('/api/announcement/view-announcements', (req, res) => {
       //});
   });
 
+  // addRoom POST
+  app.post('/api/floorplan/add-room', async (req, res) => {
+    //(async () => {
+        try {
+          await db.collection('rooms').doc(req.body.roomNumber)
+              .create(req.body); // .add - auto generates document id
+          
+          return res.status(200).send({
+            message: 'Room successfully created',
+            data: req.body
+          });
+        } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+        }
+      //});
+  });
+ 
+  // editRoom PATCH/PUT
+  app.put('/api/floorplan/edit-room', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('rooms').doc(req.body.roomNumber); // update document based on roomNumber
+            await document.update(req.body);
+
+            return res.status(200).send({
+              message: 'Room successfully updated'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      //});
+  });
+
+  // deleteRoom DELETE
+  app.delete('/api/floorplan/delete-room', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('rooms').doc(req.body.roomNumber); // delete based on roomNumber
+            await document.delete();
+            return res.status(200).send({
+              message: 'Room successfully deleted'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      //})
+  });
+
+  // getRooms GET
+  app.get('/api/floorplan/get-rooms', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('rooms');
+            const snapshot = await document.get();
+            
+            let list = [];
+            
+            snapshot.forEach(doc => {
+              //let id = doc.id;
+              let data = doc.data();
+              list.push(data);
+            });
+
+            let rooms = list;
+            
+            return res.json({
+              message: 'Successfully retrieved rooms',
+              data: rooms 
+           });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({
+              message: err.message || "Some error occurred while fetching rooms."
+          });
+        }
+      //});
+  });
+
  
 
 exports.app = functions.https.onRequest(app);
