@@ -16,26 +16,26 @@ import 'package:login_app/backend/backend_globals/user_globals.dart'
     as userGlobals;
 
 void main() {
+  group(
+      'Model Tests , Tests to test all the server connection classes that perform application logic',
+      () {
+    test('Create announcement', () async {
+      var announcementController = AnnouncementsController();
+      print(
+          "/////////////////////////////Testing Mock Create Announcement ///////////////////");
+      CreateAnnouncementRequest req = new CreateAnnouncementRequest(
+          "GENERAL", "Please Register For PaySlips", "USRAD-1", "CID-1");
+      CreateAnnouncementResponse resp =
+          announcementController.createAnnouncementMock(req);
+      print("Response : " + resp.getResponseMessage());
+      print("AnnouncementID : " + resp.getAnnouncementID());
 
-  group('Model Tests , Tests to test all the server connection classes that perform application logic', () {
-      test('Create announcement', () async {
-        var announcementController = AnnouncementsController();
-    print(
-        "/////////////////////////////Testing Mock Create Announcement ///////////////////");
-    CreateAnnouncementRequest req = new CreateAnnouncementRequest(
-        "GENERAL", "Please Register For PaySlips", "USRAD-1", "CID-1");
-    CreateAnnouncementResponse resp =
-        announcementController.createAnnouncementMock(req);
-    print("Response : " + resp.getResponseMessage());
-    print("AnnouncementID : " + resp.getAnnouncementID());
+      print(
+          "/////////////////////////////Completed Mock Testing For Creating Announcements ///////////////////");
+      expect(globals.numAnnouncements, isNot(0));
+    });
+  });
 
-    print(
-        "/////////////////////////////Completed Mock Testing For Creating Announcements ///////////////////");
-    expect(globals.numAnnouncements, isNot(0));
-       
-      });
-
-  
   ///////////////////////////////////// These Unit Tests Test Mocked Functionality For The Announcement System ///////////
 ////////////////////////////////////////////// Create Announcement/////////////////////////////////////////////////////
 
