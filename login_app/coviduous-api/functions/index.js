@@ -131,6 +131,74 @@ app.get('/api/announcement/view-announcements', (req, res) => {
         })();
     });
 
+  //////////////// FLOORPLAN ////////////////
+
+  //createFloorplan POST
+  app.post('/api/floorplan/create-floorplan', async (req, res) => {
+    //(async () => {
+        try {
+          await db.collection('floorplans').doc(req.body.companyID)
+              .create(req.body); // .add - auto generates document id
+          
+          return res.status(200).send({
+            message: 'Floorplan successfully created',
+            data: req.body
+          });
+        } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+        }
+      //});
+  });
+
+  // deleteFloorplan DELETE
+  app.delete('/api/floorplan/delete-floorplan', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('floorplans').doc(req.body.companyID); // delete document based on companyID
+            //const document = db.collection('floorplans').where("companyID", "==", req.body.companyID); // delete document based on companyID
+            await document.delete();
+
+            return res.status(200).send({
+              message: 'Floorplan successfully deleted'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      //});
+  });
+
+  // getFloorplans GET
+  app.get('/api/floorplan/get-floorplans', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('floorplans');
+            const snapshot = await document.get();
+            
+            let list = [];
+            
+            snapshot.forEach(doc => {
+              //let id = doc.id;
+              let data = doc.data();
+              list.push(data);
+            });
+
+            let floorplans = list;
+            
+            return res.json({
+              message: 'Successfully retrieved floorplans',
+              data: floorplans 
+           });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({
+              message: err.message || "Some error occurred while fetching floorplans."
+          });
+        }
+      //});
+  });
+
  
 
 exports.app = functions.https.onRequest(app);
