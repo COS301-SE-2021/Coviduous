@@ -22,6 +22,24 @@ class OfficeController {
     this.OfficeQueries = new OfficeController();
   }
 
+/////////////////////////////////////////API FUNCTIONALITY///////////////////////////////////////
+
+  BookOfficeSpaceResponse bookOfficeSpaceAPI(BookOfficeSpaceRequest req) {
+    for (int i = 0; i < floorGlobals.globalFloors.length; i++) {
+      if (floorGlobals.globalFloors[i] != null &&
+          floorGlobals.globalFloors[i].floorNum == req.getFloorNumber()) {
+        if (floorGlobals.globalFloors[i].bookDesk(req.getRoomNumber())) {
+          Booking holder = new Booking(
+              req.getUser(), req.getFloorNumber(), req.getRoomNumber(), 1);
+
+          return new BookOfficeSpaceResponse(true);
+        }
+      }
+    }
+    return new BookOfficeSpaceResponse(false);
+  }
+
+/////////////////////////////////MOCKED FUNCTIONALITY/////////////////////////////////////////
 /**
  * This function creates a new booking in a office room that is available
  */

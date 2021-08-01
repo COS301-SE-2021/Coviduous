@@ -15,6 +15,22 @@ app.get('/api', (req, res) => {
   return res.status(200).send('Connected to the coviduous api');
 });
 
+///////////////////////////////////////// Office Cloud Functions ///////////////////////////////////////////////////////
+
+app.post('/api/office/book-office-space', (req, res) => {
+  (async () => {
+      try {
+        await db.collection('booking').doc(req.body.id)
+            .create({booking: req.body});
+        return res.status(200).send();
+      } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+      }
+    })();
+});
+
+//////////////////////////////////////////Announcement Cloud Functions /////////////////////////
 app.delete('/api/announcement/delete-announcement', (req, res) => {
   (async () => {
       try {
@@ -40,6 +56,8 @@ app.post('/api/announcement/create-announcement', (req, res) => {
       }
     })();
 });
+
+
 
 app.get('/api/announcement/view-announcements', (req, res) => {
   (async () => {
@@ -68,6 +86,35 @@ app.get('/api/announcement/view-announcements', (req, res) => {
       }
       })();
   });
+
+
+  app.get('/api/booking/view-bookings', (req, res) => {
+    (async () => {
+        try {
+            const document = db.collection('booking');
+            const snapshot = await document.get();
+            
+            let list = [];
+            snapshot.forEach(doc => {
+              let id = doc.id;
+              let data = doc.data();
+              list.push({data});
+            });
+            //let response = item.data();
+            let announce=list;
+            return res.json({
+              status: 200,
+              message: 'Announcements successfully fetched',
+              data: announce
+          });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({
+              message: err.message || "Some error occurred while fetching announcements."
+          });
+        }
+        })();
+    });
 
  
 
