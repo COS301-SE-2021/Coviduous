@@ -183,14 +183,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                               globals.currentFloorNum,
                                               rooms[index].getRoomNum()));
                                       print(response2.getResponse());
-                                      /*
-                                      floorGlobals
-                                          .globalFloors[globals.currentFloorNum]
-                                          .totalNumRooms--;
-                                      floorGlobals
-                                          .globalFloors[globals.currentFloorNum]
-                                          .deleteRoom("");
-                                       */
+
                                       setState(() {});
                                     } else {
                                       showDialog(
