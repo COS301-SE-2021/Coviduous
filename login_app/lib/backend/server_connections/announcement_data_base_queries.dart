@@ -12,6 +12,7 @@ import 'package:login_app/backend/backend_globals/announcements_globals.dart'
     as globals;
 import 'package:login_app/backend/backend_globals/user_globals.dart'
     as userGlobals;
+import 'package:login_app/frontend/front_end_globals.dart' as frontEndGlobals;
 import 'package:login_app/subsystems/announcement_subsystem/announcement.dart';
 import 'package:postgres/postgres.dart';
 import 'package:http/http.dart' as http;
@@ -414,10 +415,15 @@ class AnnouncementDatabaseQueries {
         }
       }
 
+      if (frontEndGlobals.loggedInUserId == userId) {
+        this.companyIdentification = frontEndGlobals.loggedInCompanyId;
+        print("Found Users Company ID : " + companyIdentification);
+      }
+
       //once the companyId is fetched we can use it to query for all announcements assosiated with that company that the user is listed under
       for (var i = 0; i < globals.announcementDatabaseTable.length; i++) {
         if (globals.announcementDatabaseTable[i].getCompanyId() ==
-            this.companyIdentification) {
+            this.companyIdentification || frontEndGlobals.loggedInCompanyId == this.companyIdentification) {
           if (globals.announcementDatabaseTable[i] != null) {
             resultSet.add(globals.announcementDatabaseTable[i]);
             print("Company Announcement Added");
