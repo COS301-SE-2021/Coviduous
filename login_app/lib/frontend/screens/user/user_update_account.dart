@@ -72,10 +72,14 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
     }
 
     getSnap().then((value) {
-      _firstName.text = _snapFirstName;
-      _lastName.text = _snapLastName;
-      _email.text = _snapEmail;
-      _userName.text = _snapUserName;
+      if (_firstName.text.isEmpty)
+        _firstName.text = _snapFirstName;
+      if (_lastName.text.isEmpty)
+        _lastName.text = _snapLastName;
+      if (_email.text.isEmpty)
+        _email.text = _snapEmail;
+      if (_userName.text.isEmpty)
+        _userName.text = _snapUserName;
     });
 
     return Container(
@@ -278,6 +282,9 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                             });
                                                       });
                                                     }
+                                                    setState(() {
+                                                      isLoading = false;
+                                                    });
                                                     Navigator.pushAndRemoveUntil(context,
                                                         MaterialPageRoute(builder: (context) => UserManageAccount()), (
                                                             route) => false);
