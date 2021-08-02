@@ -117,6 +117,11 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                   ElevatedButton(
                                       child: Text('Book'),
                                       onPressed: () {
+                                        services.getRoomDetails(globals.currentRoomNum).occupiedDesks++;
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("Desk successfully booked")));
+                                        Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                        /*
                                         if (desks[index].currentCapacity != desks[index].maxCapacity) {
                                           BookOfficeSpaceResponse response = services2.bookOfficeSpaceMock(BookOfficeSpaceRequest(globals.loggedInUserId, globals.currentFloorNum, globals.currentRoomNum));
                                           print(response.getResponse());
@@ -158,6 +163,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                               )
                                           );
                                         }
+                                        */
                                       }),
                                 ],
                               ),
