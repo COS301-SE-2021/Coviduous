@@ -102,11 +102,19 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                               height: 50,
                               color: Colors.white,
                               child: Text(
+                                  'Maximum capacity of room: ' +
+                                      (services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity *
+                                          services.getRoomDetails(rooms[index].getRoomNum()).numDesks).toString(),
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
                                   'Number of open desks: ' +
-                                      (services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity
-                                      - (services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks/100
-                                              * services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity)
-                                      ).toString(),
+                                      ((services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity *
+                                      services.getRoomDetails(rooms[index].getRoomNum()).numDesks) -
+                                      services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks).toInt().toString(),
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
@@ -118,6 +126,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
+                                        globals.currentRoomNum = rooms[index].getRoomNum();
                                         Navigator.of(context).pushReplacementNamed(UserViewOfficeDesks.routeName);
                                       }),
                                 ],
