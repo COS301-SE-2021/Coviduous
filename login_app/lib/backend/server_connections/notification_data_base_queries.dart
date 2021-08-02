@@ -83,7 +83,7 @@ class NotificationDatabaseQueries {
     String path = '/notification';
     String url = server + path;
 
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(url));
     // http.Response response = await http
     //     .get(Uri.https('hvofiy7xh6.execute-api.us-east-1.amazonaws.com', path));
 
