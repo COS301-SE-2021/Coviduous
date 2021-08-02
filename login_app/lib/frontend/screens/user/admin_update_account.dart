@@ -80,12 +80,18 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
     }
 
     getSnap().then((value) {
-      _firstName.text = _snapFirstName;
-      _lastName.text = _snapLastName;
-      _email.text = _snapEmail;
-      _userName.text = _snapUserName;
-      _companyName.text = _snapCompanyName;
-      _companyLocation.text = _snapCompanyLocation;
+      if (_firstName.text.isEmpty)
+        _firstName.text = _snapFirstName;
+      if (_lastName.text.isEmpty)
+        _lastName.text = _snapLastName;
+      if (_email.text.isEmpty)
+        _email.text = _snapEmail;
+      if (_userName.text.isEmpty)
+        _userName.text = _snapUserName;
+      if (_companyName.text.isEmpty)
+        _companyName.text = _snapCompanyName;
+      if (_companyLocation.text.isEmpty)
+        _companyLocation.text = _snapCompanyLocation;
     });
 
     return Container(
@@ -265,7 +271,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                               if (_password.text.isNotEmpty) {
                                                 AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
                                                   if (value2 == "welcome") {
-                                                    if (_email.text.isNotEmpty) {
+                                                    if (_email.text.isNotEmpty && _email.text != _snapEmail) {
                                                       String oldEmail = FirebaseAuth.instance.currentUser.email;
                                                       AuthClass().updateEmail(newEmail: _email.text.trim()).then((value) {
                                                         if (value == "Success") {
@@ -293,7 +299,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                                         }
                                                       });
                                                     }
-                                                    if (_firstName.text.isNotEmpty) {
+                                                    if (_firstName.text.isNotEmpty && _firstName.text != _snapFirstName) {
                                                       FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                                         var query = FirebaseFirestore.instance.collection('Users')
                                                             .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
@@ -305,7 +311,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                                             });
                                                       });
                                                     }
-                                                    if (_lastName.text.isNotEmpty) {
+                                                    if (_lastName.text.isNotEmpty && _lastName.text != _snapLastName) {
                                                       FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                                         var query = FirebaseFirestore.instance.collection('Users')
                                                             .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
@@ -317,7 +323,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                                             });
                                                       });
                                                     }
-                                                    if (_userName.text.isNotEmpty) {
+                                                    if (_userName.text.isNotEmpty && _userName.text != _snapUserName) {
                                                       FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                                         var query = FirebaseFirestore.instance.collection('Users')
                                                             .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
@@ -329,7 +335,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                                             });
                                                       });
                                                     }
-                                                    if (_companyName.text.isNotEmpty) {
+                                                    if (_companyName.text.isNotEmpty && _companyName.text != _snapCompanyName) {
                                                       FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                                         var query = FirebaseFirestore.instance.collection('Users')
                                                             .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
@@ -341,7 +347,7 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                                             });
                                                       });
                                                     }
-                                                    if (_companyLocation.text.isNotEmpty) {
+                                                    if (_companyLocation.text.isNotEmpty && _companyLocation.text != _snapCompanyLocation) {
                                                       FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
                                                         var query = FirebaseFirestore.instance.collection('Users')
                                                             .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
@@ -353,6 +359,9 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                                             });
                                                       });
                                                     }
+                                                    setState(() {
+                                                      isLoading = false;
+                                                    });
                                                     Navigator.pushAndRemoveUntil(context,
                                                         MaterialPageRoute(builder: (context) => AdminManageAccount()), (
                                                             route) => false);
