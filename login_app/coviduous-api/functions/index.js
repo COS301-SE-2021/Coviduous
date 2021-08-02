@@ -344,6 +344,74 @@ app.get('/api/announcement/view-announcements', (req, res) => {
       //});
   });
 
+  //////////////// SHIFT ////////////////
+
+  // createShift POST
+  app.post('/api/shift/create-shift', async (req, res) => {
+    //(async () => {
+        try {
+          await db.collection('shifts').doc(req.body.shiftID)
+              .create(req.body); // .add - auto generates document id
+          
+          return res.status(200).send({
+            message: 'Shift successfully created',
+            data: req.body
+          });
+        } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+        }
+      //});
+  });
+
+  // deleteShift DELETE
+  app.delete('/api/shift/delete-shift', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('shifts').doc(req.body.shiftID); // delete based on shiftID
+            await document.delete();
+            return res.status(200).send({
+              message: 'Shift successfully deleted'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      //})
+  });
+
+  // getShifts GET
+  app.get('/api/shift/get-shifts', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('shifts');
+            const snapshot = await document.get();
+            
+            let list = [];
+            
+            snapshot.forEach(doc => {
+              //let id = doc.id;
+              let data = doc.data();
+              list.push(data);
+            });
+
+            let shifts = list;
+            
+            return res.json({
+              message: 'Successfully retrieved shifts',
+              data: shifts 
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({
+              message: err.message || "Some error occurred while fetching shifts."
+          });
+        }
+      //});
+  });
+
+
+//////////////// HEALTH ////////////////
 
 /**
  * Create the permission
