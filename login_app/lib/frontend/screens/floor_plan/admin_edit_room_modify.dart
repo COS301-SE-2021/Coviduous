@@ -46,11 +46,16 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
     }
 
     Room room = services.getRoomDetails(globals.currentRoomNum);
-    _roomNumber.text = room.getRoomNum();
-    _roomArea.text = room.dimensions.toString();
-    _deskArea.text = room.deskDimentions.toString();
-    _numOfDesks.text = room.numDesks.toString();
-    _deskMaxCapacity.text = room.deskMaxCapcity.toString();
+    if (_roomNumber.text.isEmpty)
+      _roomNumber.text = room.getRoomNum();
+    if (_roomArea.text.isEmpty)
+      _roomArea.text = room.dimensions.toString();
+    if (_deskArea.text.isEmpty)
+      _deskArea.text = room.deskDimentions.toString();
+    if (_numOfDesks.text.isEmpty)
+      _numOfDesks.text = room.numDesks.toString();
+    if (_deskMaxCapacity.text.isEmpty)
+      _deskMaxCapacity.text = room.deskMaxCapcity.toString();
 
     return Container(
       decoration: BoxDecoration(
