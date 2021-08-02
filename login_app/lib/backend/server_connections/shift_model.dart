@@ -10,8 +10,7 @@
  */
 import 'dart:math';
 
-import 'package:login_app/backend/backend_globals/shift_globals.dart'
-    as shiftGlobals;
+import 'package:login_app/backend/backend_globals/shift_globals.dart' as shiftGlobals;
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';

@@ -23,14 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.0+4
+  http: ^0.13.3
   provider: ^5.0.0
   # mockito: ^5.0.7
   # build_runner: ^1.11.0 #Needed for mockito
   url_launcher:
-  firebase_core: "^0.7.0"
-  firebase_auth: "^0.20.1"
-  cloud_firestore: "^0.16.0+1"
+  firebase_core: ^1.4.0
+  firebase_auth: ^3.0.1
+  cloud_firestore: ^2.4.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,10 +40,13 @@ dependencies:
   downloads_path_provider: ^0.1.0 # Needed to save a PDF to a device from a mobile device
   universal_html: ^2.0.8 # Needed to save a PDF to a device from a PC
   native_pdf_view: any # Needed to display a PDF in the app
-  mockito: ^5.0.12
-  mailer: ^3.3.0
+  mockito: ^5.0.13
+  mailer: ^5.0.1
   mailer2: ^1.2.5
-  file_picker: ^2.1.7
+  file_picker: ^3.0.4
+  objectdb: ^1.2.1+1
+  build_runner: ^2.0.6
+  random_string: ^2.3.1
 
 dev_dependencies:
   flutter_test:
