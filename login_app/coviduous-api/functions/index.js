@@ -412,7 +412,21 @@ app.get('/permission/read/:permissionID', (req, res) => {
     }
   })();
 });
-
+/**
+ *create health check  
+ */
+ app.post('/health/health-check', (req, res) => {
+  (async () => {
+    try {
+      await db.collection('HealthCheck').doc(req.body.healthcheckID)
+          .create({name: req.body.name,surname: req.body.surname,email: req.body.email,phoneNumber:req.body.phoneNumber,temperature:req.body.temperature,fever: req.body.fever,cough:req.body.cough,soreThroat: req.body.soreThroat,aches:req.body.aches,nausea:req.body.nausea,shortnessOfBreath:req.body.shortnessOfBreath,lossOfTasteSmell:req.body.lossOfTasteSmell});
+      return res.status(200).send(response);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+    }
+  })();
+});
 /**
  * Delete the Permission
  * */
