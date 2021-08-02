@@ -104,10 +104,10 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'Occupied desk percentage: ' +
-                                      services
-                                          .getRoomDetails(rooms[index].getRoomNum())
-                                          .occupiedDesks
+                                  'Available desk percentage: ' +
+                                      (((services.getRoomDetails(rooms[index].getRoomNum()).numDesks -
+                                          services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks) /
+                                          services.getRoomDetails(rooms[index].getRoomNum()).numDesks) * 100)
                                           .toString(),
                                   style: TextStyle(color: Colors.black)),
                             ),
