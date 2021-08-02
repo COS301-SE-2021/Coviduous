@@ -198,7 +198,7 @@ class ShiftModel {
     String path = '/shift';
     String url = server + path;
 
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(url));
     // http.Response response = await http
     //     .get(Uri.https('hvofiy7xh6.execute-api.us-east-1.amazonaws.com', path));
 
@@ -360,7 +360,7 @@ class ShiftModel {
     String path = '/shift/get-groups';
     String url = server + path;
 
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(url));
     // http.Response response = await http
     //     .get(Uri.https('hvofiy7xh6.execute-api.us-east-1.amazonaws.com', path));
 
