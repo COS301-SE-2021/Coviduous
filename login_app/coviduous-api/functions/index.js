@@ -410,6 +410,72 @@ app.get('/api/announcement/view-announcements', (req, res) => {
       //});
   });
 
+  //////////////// NOTIFICATION ////////////////
+  
+  // createNotification POST
+  app.post('/api/notification/create-notification', async (req, res) => {
+    //(async () => {
+        try {
+          await db.collection('notifications').doc(req.body.notificationID)
+              .create(req.body); // .add - auto generates document id
+          
+          return res.status(200).send({
+            message: 'Notification successfully created',
+            data: req.body
+          });
+        } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+        }
+      //});
+  });
+
+  // deleteNotification DELETE
+  app.delete('/api/notification/delete-notification', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('notifications').doc(req.body.notificationID); // delete based on notificationID
+            await document.delete();
+            return res.status(200).send({
+              message: 'Notification successfully deleted'
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+      //})
+  });
+
+  // getNotifications GET
+  app.get('/api/notification/get-notifications', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('notifications'); //.where("userEmail", "==", req.body.userEmail); // get shift documents based on userEmail
+            const snapshot = await document.get();
+            
+            let list = [];
+            
+            snapshot.forEach(doc => {
+              //let id = doc.id;
+              let data = doc.data();
+              list.push(data);
+            });
+
+            let notification = list;
+            
+            return res.json({
+              message: 'Successfully retrieved notifications',
+              data: notification 
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({
+              message: err.message || "Some error occurred while fetching notifications."
+          });
+        }
+      //});
+  });
+
 
 //////////////// HEALTH ////////////////
 
