@@ -161,7 +161,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                         });
                          */
 
-                        CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_description.text, _selectedType, _adminId, _companyId));
+                        CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_selectedType, _description.text, _adminId, _companyId));
                         print(response.getAnnouncementID() + " " + response.getResponse().toString());
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("Announcement " + response.getAnnouncementID() + " successfully created.")));
