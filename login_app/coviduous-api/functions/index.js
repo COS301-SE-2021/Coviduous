@@ -380,6 +380,36 @@ app.get('/api/announcement/view-announcements', (req, res) => {
       //})
   });
 
+  // getShifts GET
+  app.get('/api/shift/get-shifts', async (req, res) => {
+    //(async () => {
+        try {
+            const document = db.collection('shifts');
+            const snapshot = await document.get();
+            
+            let list = [];
+            
+            snapshot.forEach(doc => {
+              //let id = doc.id;
+              let data = doc.data();
+              list.push(data);
+            });
+
+            let shifts = list;
+            
+            return res.json({
+              message: 'Successfully retrieved shifts',
+              data: shifts 
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({
+              message: err.message || "Some error occurred while fetching shifts."
+          });
+        }
+      //});
+  });
+
 
 //////////////// HEALTH ////////////////
 
