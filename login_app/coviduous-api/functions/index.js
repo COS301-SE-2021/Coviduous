@@ -381,6 +381,8 @@ app.get('/api/announcement/view-announcements', (req, res) => {
   });
 
 
+//////////////// HEALTH ////////////////
+
 /**
  * Create the permission
  * */
