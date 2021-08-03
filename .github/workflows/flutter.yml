@@ -29,7 +29,7 @@ jobs:
     
     # Get flutter dependencies.
     - name: Get dependencies
-      working-directory: login_app
+      working-directory: coviduous
       run: flutter pub get
     
     # Check for any formatting issues in the code.
@@ -44,15 +44,15 @@ jobs:
     
     # Run tests for our flutter project.
     - name: Run frontend tests
-      working-directory: login_app
+      working-directory: coviduous
       run: flutter test test/screens/
     
     - name: Run announcement unit tests
-      working-directory: login_app
+      working-directory: coviduous
       run: flutter test test/announcement/announcement_unit_test.dart
 
     - name: Run user unit tests
-      working-directory: login_app
+      working-directory: coviduous
       run: flutter test test/user/user_unit_test.dart
     
     # Build apk.
