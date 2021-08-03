@@ -84,11 +84,15 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
                   ),
                   child: Text('Proceed'),
                   onPressed: () {
-                      DeleteAnnouncementResponse response2 = services.deleteAnnouncementMock(DeleteAnnouncementRequest(_announcementId.text));
-                      print(response2.getResponseMessage());
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(response2.getResponseMessage())));
-                    }
+                    DeleteAnnouncementResponse response2;
+                    if (_announcementId.text.contains("ANOUNC-"))
+                      response2 = services.deleteAnnouncementMock(DeleteAnnouncementRequest(_announcementId.text));
+                    else
+                      response2 = services.deleteAnnouncementMock(DeleteAnnouncementRequest("ANOUNC-" + _announcementId.text));
+                    print(response2.getResponseMessage());
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(response2.getResponseMessage())));
+                  }
               )
             ],
           )
