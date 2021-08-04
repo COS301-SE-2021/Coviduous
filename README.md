@@ -25,18 +25,22 @@
 
 ### Demo 1
 
-- :open_book: [SRS version 1](https://drive.google.com/file/d/1ZLUPbDZ1Tz6sSdNRtPQ9KEXy4haS586w/view?usp=sharing)
+- :open_book: [SRS version 1](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 1.pdf>)
 
 ### Demo 2
 
-- :open_book: [SRS version 2](https://drive.google.com/file/d/1f-ebESjeLfm9mud0u7zV_heWcDekBGhN/view?usp=sharing)
-- :open_book: [Architectural design](https://drive.google.com/file/d/1Wnnvy8sYmdPnRgwT-dhfFAx2wAaIyi5C/view?usp=sharing)
-- :open_book: [Coding standards](https://drive.google.com/file/d/1s-dk_Le9LpUd8vULxenfFeVNqAMgox2R/view?usp=sharing)
-- :open_book: [User manual](https://drive.google.com/file/d/1II1HLj6RPal8AyY9fyWczwdHGdeyffJi/view?usp=sharing)
+- :open_book: [SRS version 2](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 2.pdf>)
+- :open_book: [Architectural design](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Architectural requirements/Coviduous Architectural Requirements Demo 2.pdf>)
+- :open_book: [Coding standards](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Coding standards/Coviduous Coding Standards Demo 2.pdf>)
+- :open_book: [User manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/User manual/Coviduous User Manual Demo 2.pdf>)
 
 ### Demo 3
 
-- :open_book: [SRS version 3](https://)
+- :open_book: [SRS version 2](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 2.pdf>)
+- :open_book: [Architectural design](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Architectural requirements/Coviduous Architectural Requirements Demo 2.pdf>)
+- :open_book: [Coding standards](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Coding standards/Coviduous Coding Standards Demo 2.pdf>)
+- :open_book: [User manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/User manual/Coviduous User Manual Demo 2.pdf>)
+- :open_book: [Installation manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Installation manual/Coviduous Installation Manual Demo 2.pdf>)
 
 ### Demo 4
 
