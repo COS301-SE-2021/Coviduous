@@ -44,7 +44,7 @@
 
 ### Demo 4
 
-- :open_book: [SRS version 4](https://)
+- :open_book: [Software Requirements Specification](https://)
 
 ## Demo Videos
 
