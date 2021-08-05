@@ -31,6 +31,7 @@ const functions = require("firebase-functions");
    
  });
 
+//AUTH FUNCTIONS EVENTS
 exports.userAdded = functions.auth.user().onCreate(user =>{
    console.log("User created");
    return Promise.resolve();
