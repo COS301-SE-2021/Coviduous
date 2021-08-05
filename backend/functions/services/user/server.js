@@ -18,7 +18,7 @@ const jwtCheck = jwt({
     }),
     audience: process.env.AUTH0_API_AUDIENCE,
     issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-    algorithm: 'RS256'
+    algorithms: ['RS256']
 });
 
 const serviceAccount = require('firebase-key');
