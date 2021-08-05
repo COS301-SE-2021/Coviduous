@@ -50,9 +50,13 @@ class Firebase {
         _messagesDb.collection('messages').orderBy('createdAt', 'desc').limit(10).onSnapshot(listener);
     }
 
+    getMessage() {
+        return _messagesDb.collection('messages').orderBy('createdAt', 'desc').limit(1).toString();
+    }
+
     async setToken(token) {
         await firebase.auth().signInWithCustomToken(token);
     }
 }
 
-const firebaseClient = new Firebase();
+module.exports = Firebase;

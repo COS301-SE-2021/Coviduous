@@ -1,14 +1,20 @@
 var chai = require("chai");
 var expect = chai.expect;
+var should = chai.should();
 
-var service = require("../../services/user/user.service");
-var auth0 = require("../../services/user/auth0");
-var auth0Client = auth0Client;
-var firebase = require("../../services/user/firebase");
-var firebaseClient = firebaseClient;
+var service = require("../../services/user/mocks/user.service.mock");
+var serviceRef = new service();
 
 describe('Tests', function(){
     it('Sign in', function(){
-        expect(auth0Client.signIn());
+        expect(serviceRef.signIn()).to.be.true;
     });
+
+    it('View notification', function(){
+        expect(serviceRef.viewNotifications()).to.be.true;
+    })
+
+    it('Sign out', function(){
+        expect(serviceRef.signOut()).to.be.true;
+    })
 });
