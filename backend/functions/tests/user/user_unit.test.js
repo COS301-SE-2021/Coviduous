@@ -1,7 +1,7 @@
 var chai = require("chai");
 var expect = chai.expect;
 
-var service = require("../../services/user/user.service");
+var service = require("../../services/user/mocks/user.service.mock");
 var serviceRef = new service();
 
 describe('Tests', function(){
