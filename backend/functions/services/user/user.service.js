@@ -6,7 +6,7 @@ const firebase = require("firebase");
 const auth0 = require("auth0");
 const server = require("server");
 
-var serviceAccount = require("../../permissions.json");
+//var serviceAccount = require("../../permissions.json");
 
 const serverRef = new server();
 const firebaseClient = new firebase();
