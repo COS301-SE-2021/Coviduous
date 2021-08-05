@@ -174,4 +174,4 @@ node_modules/
 # dotenv environment variables file
 .env
 
-
+backend/functions/services/user/firebase-key.json
