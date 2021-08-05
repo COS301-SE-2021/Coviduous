@@ -2,9 +2,9 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const express = require('express');
 const cors = require('cors');
-const firebase = require("../../services/user/firebase");
-const auth0 = require("../../services/user/auth0");
-const server = require("../../services/user/server");
+const firebase = require("firebase");
+const auth0 = require("auth0");
+const server = require("server");
 
 var serviceAccount = require("../../permissions.json");
 
