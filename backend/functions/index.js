@@ -74,3 +74,5 @@ exports.userAdded = functions.auth.user().onCreate(user =>{
 // app.delete('/api/notification/delete-notification', notificationController.deleteNotification);
 // app.get('/api/notification/view-notifications', notificationController.viewNotifications);
 
+// exports.app = functions.https.onRequest(app);
+
