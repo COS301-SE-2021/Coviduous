@@ -1,12 +1,14 @@
-var user = require("../../services/user/user.service");
-var firebase = require("../../services/user/firebase");
-var auth0 = require("../../services/user/auth0");
 var chai = require("chai");
 var expect = chai.expect;
-var object = new user();
+
+var service = require("../../services/user/user.service");
+var auth0 = require("../../services/user/auth0");
+var auth0Client = auth0Client;
+var firebase = require("../../services/user/firebase");
+var firebaseClient = firebaseClient;
 
 describe('Tests', function(){
-    it('Unit test 1', function(){
-        expect();
+    it('Sign in', function(){
+        expect(auth0Client.signIn());
     });
 });
