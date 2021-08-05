@@ -10,9 +10,11 @@ var serviceAccount = require("../../permissions.json");
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount),
 //   databaseURL: "https://fir-api-9a206..firebaseio.com"
-// });
+//});
+
 
 const db = admin.firestore();
+
   
 exports.createAnnouncement = async (req, res) => {
   //(async () => {
@@ -76,3 +78,11 @@ exports.viewAnnouncements = async (req, res) => {
       }
     //});
 };
+
+var announcements = add(var1,var2)
+{
+        var results=var1+var2;
+        return results;
+}
+module.exports = announcements;
+
