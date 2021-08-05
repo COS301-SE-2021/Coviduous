@@ -1,45 +1,36 @@
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
 const express = require('express');
 const cors = require('cors');
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
-const firebaseAdmin = require('firebase-admin');
-const path = require('path');
+const firebase = require("../../services/user/firebase");
+const auth0 = require("../../services/user/auth0");
+const server = require("../../services/user/server");
 
-const app = express();
-app.use(cors());
-//app.use('/', express.static(path.join(__dirname, 'public')));
+var serviceAccount = require("../../permissions.json");
 
-const jwtCheck = jwt({
-    secret: jwks.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
-    }),
-    audience: process.env.AUTH0_API_AUDIENCE,
-    issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-    algorithm: 'RS256'
-});
+const serverRef = new server();
+const firebaseClient = new firebase();
+const auth0Client = new auth0();
 
-const serviceAccount = require('firebase-key');
-
-firebaseAdmin.initializeApp({
-    credential: firebaseAdmin.credential.cert(serviceAccount),
-    databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
-});
-
-app.get('/firebase', jwtCheck, async (req, res) => {
-    const {sub: uid} = req.user;
-
-    try {
-        const firebaseToken = await firebaseAdmin.auth().createCustomToken(uid);
-        res.json({firebaseToken});
-    } catch (err) {
-        res.status(500).send({
-            message: 'Something went wrong acquiring a Firebase token.',
-            error: err
-        });
+class User {
+    constructor() {
+        console.log("created user class");
     }
-});
 
-app.listen(3001, () => console.log('Server running on localhost:3001'));
+    signIn() {
+        auth0Client.signIn();
+        console.log("signed in");
+    }
+
+    signOut() {
+        auth0Client.signOut();
+        firebaseClient.signOut();
+    }
+
+    viewNotifications() {
+        var message = firebaseClient.getMessage();
+        console.log("message received: " + message);
+    }
+}
+
+module.exports = User;
