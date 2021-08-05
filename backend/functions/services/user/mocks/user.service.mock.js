@@ -2,9 +2,9 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const express = require('express');
 const cors = require('cors');
-const firebase = require("../../services/user/mocks/firebase.mock");
-const auth0 = require("../../services/user/mocks/auth0.mock");
-const server = require("../../services/user/mocks/server.mock");
+const firebase = require("firebase.mock");
+const auth0 = require("auth0.mock");
+const server = require("server.mock");
 
 var serviceAccount = require("../../permissions.json");
 
