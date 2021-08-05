@@ -20,16 +20,20 @@ class User {
     signIn() {
         auth0Client.signIn();
         console.log("signed in");
+        return true;
     }
 
     signOut() {
         auth0Client.signOut();
         firebaseClient.signOut();
+        console.log("signed out");
+        return true;
     }
 
     viewNotifications() {
         var message = firebaseClient.getMessage();
         console.log("message received: " + message);
+        return true;
     }
 }
 
