@@ -50,4 +50,4 @@ class Auth0Client {
     }
 }
 
-const auth0Client = new Auth0Client();
+module.exports = Auth0Client;
