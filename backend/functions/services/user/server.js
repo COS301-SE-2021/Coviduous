@@ -3,7 +3,7 @@ const cors = require('cors');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const firebaseAdmin = require('firebase-admin');
-const path = require('path');
+//const path = require('path');
 
 const app = express();
 app.use(cors());
