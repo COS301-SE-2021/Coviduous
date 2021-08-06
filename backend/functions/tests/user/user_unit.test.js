@@ -10,7 +10,7 @@ describe('User unit tests', function(){
         expect(serviceRef.signIn()).to.be.true;
     });
 
-    it('View notification', function(){
+    it('View messages', function(){
         expect(serviceRef.viewNotifications()).to.be.true;
     })
 
