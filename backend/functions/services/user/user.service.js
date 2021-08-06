@@ -30,6 +30,12 @@ class User {
         return true;
     }
 
+    updateEmail(email) {
+        firebaseClient.updateEmail(email);
+        console.log("updated email");
+        return true;
+    }
+
     viewMessages() {
         var message = firebaseClient.getMessage();
         console.log("message received: " + message);
