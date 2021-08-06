@@ -175,3 +175,4 @@ node_modules/
 .env
 
 backend/functions/services/user/firebase-key.json
+backend/functions/node_modules
