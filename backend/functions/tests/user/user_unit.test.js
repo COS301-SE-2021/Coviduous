@@ -5,7 +5,7 @@ var should = chai.should();
 var service = require("../../services/user/mocks/user.service.mock");
 var serviceRef = new service();
 
-describe('Tests', function(){
+describe('User unit tests', function(){
     it('Sign in', function(){
         expect(serviceRef.signIn()).to.be.true;
     });
