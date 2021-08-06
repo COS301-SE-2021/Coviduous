@@ -39,6 +39,13 @@ class Firebase {
         });
     }
 
+    async updateEmail(email) {
+        if (!firebase.auth().currentUser) return;
+        await firebase.auth().currentUser.updateProfile({
+           email: email,
+        });
+    }
+
     async signOut() {
         await firebase.auth().signOut();
     }
