@@ -14,6 +14,10 @@ describe('User unit tests', function(){
         expect(serviceRef.viewMessages()).to.be.true;
     })
 
+    it('Update emails', function(){
+        expect(serviceRef.updateEmail('test email')).to.be.true;
+    })
+
     it('Sign out', function(){
         expect(serviceRef.signOut()).to.be.true;
     })
