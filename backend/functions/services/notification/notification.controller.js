@@ -32,7 +32,6 @@ exports.createNotification = async (req, res) => {
 };
 
 exports.deleteNotification = async (req, res) => {
-//(async () => {
     try {
         const document = db.collection('notifications').doc(req.body.notificationID); // delete based on notificationID
         await document.delete();
