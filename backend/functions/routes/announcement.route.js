@@ -4,7 +4,7 @@ let router = require('express').Router();
 router.get('/', function (req, res) {
     res.json({
         status: 200,
-        message: 'This is the default announcement api route'
+        message: 'This is the default announcement API route'
     });
 });
 
@@ -12,9 +12,10 @@ router.get('/', function (req, res) {
 const announcementController = require("../services/announcement/announcement.controller.js");
 
 // Announcement routes
-router.get('/view-announcements', announcementController.viewAnnouncements);
-router.post('/create-announcement', announcementController.createAnnouncement);
-router.delete('/delete-announcement', announcementController.deleteAnnouncement);
+// N.B. paths for a subsystem can all be the same
+router.get('/announcements', announcementController.viewAnnouncements);
+router.post('/announcements', announcementController.createAnnouncement);
+router.delete('/announcements', announcementController.deleteAnnouncement);
 
 // Export API routes
 module.exports = router;
