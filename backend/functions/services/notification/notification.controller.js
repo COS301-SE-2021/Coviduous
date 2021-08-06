@@ -32,6 +32,13 @@ exports.createNotification = async (req, res) => {
 };
 
 exports.deleteNotification = async (req, res) => {
+
+    if(req.body.notificationID === null){
+        return res.status(400).send({
+            message: 'Request parameter is null'
+        });
+    }
+
     try {
         const document = db.collection('notifications').doc(req.body.notificationID); // delete based on notificationID
         await document.delete();
@@ -42,11 +49,10 @@ exports.deleteNotification = async (req, res) => {
         console.log(error);
         return res.status(500).send(error);
     }
-    //})
+
 };
 
 exports.viewNotifications = async (req, res) => {
-//(async () => {
     try {
         const document = db.collection('notifications'); //.where("field", "==", req.body.field); // get notification documents based on 'field'
         const snapshot = await document.get();
