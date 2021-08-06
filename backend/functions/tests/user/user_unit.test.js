@@ -14,7 +14,7 @@ describe('User unit tests', function(){
         expect(serviceRef.viewMessages()).to.be.true;
     })
 
-    it('Update emails', function(){
+    it('Update email', function(){
         expect(serviceRef.updateEmail('test email')).to.be.true;
     })
 
