@@ -17,6 +17,10 @@ class Firebase {
         console.log("Mock update profile operation");
     }
 
+    async updateEmail(email) {
+        console.log("Mock update email");
+    }
+
     async signOut() {
         console.log("Mock sign out operation");
     }
