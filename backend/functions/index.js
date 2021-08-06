@@ -5,20 +5,23 @@ const cors = require('cors');
 const app = express();
 app.use(cors({ origin: true }));
 
- app.get('/api', (req, res) => {
-   return res.status(200).send('Connected to the coviduous api');
- });
+app.get('/api', (req, res) => {
+ return res.status(200).send('Connected to the coviduous api');
+});
 
-// // Import controllers
- const floorPlanController = require("./routes/floorplan/floorplan.service.js");
+// Import controllers
+const floorPlanController = require("./routes/floorplan/floorplan.service.js");
+const announcementController = require("./services/announcement/announcement.controller.js");
+const notificationController = require("./services/notification/notification.controller.js");
 
- //subroutes
- app.post('/api/floorplan/create-floorplan', floorPlanController.createFloorPlan);
- exports.app = functions.https.onRequest(app);
+//subroutes
+app.post('/api/floorplan/create-floorplan', floorPlanController.createFloorPlan);
 
-// app.post('/api/announcement/create-announcement', announcementController.createAnnouncement);
-// app.delete('/api/announcement/delete-announcement', announcementController.deleteAnnouncement);
-// app.get('/api/announcement/view-announcements', announcementController.viewAnnouncements);
+app.post('/api/announcement/create-announcement', announcementController.createAnnouncement);
+app.delete('/api/announcement/delete-announcement', announcementController.deleteAnnouncement);
+app.get('/api/announcement/view-announcements', announcementController.viewAnnouncements);
+
+exports.app = functions.https.onRequest(app);
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
