@@ -2,20 +2,11 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
-//const app = express();
 var serviceAccount = require("../../permissions.json");
-
-//app.use(cors({ origin: true }));
-
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: "https://fir-api-9a206..firebaseio.com"
-// });
 
 const db = admin.firestore();
 
 exports.createNotification = async (req, res) => {
-//(async () => {
     try {
         await db.collection('notifications').doc(req.body.notificationID)
             .create(req.body); // .add - auto generates document id
@@ -28,7 +19,6 @@ exports.createNotification = async (req, res) => {
         console.log(error);
         return res.status(500).send(error);
     }
-    //});
 };
 
 exports.deleteNotification = async (req, res) => {
@@ -38,7 +28,6 @@ exports.deleteNotification = async (req, res) => {
             message: 'Request parameter is null'
         });
     }
-
     try {
         const document = db.collection('notifications').doc(req.body.notificationID); // delete based on notificationID
         await document.delete();
@@ -53,7 +42,8 @@ exports.deleteNotification = async (req, res) => {
 };
 
 exports.viewNotifications = async (req, res) => {
-    try {
+
+        try {
         const document = db.collection('notifications'); //.where("field", "==", req.body.field); // get notification documents based on 'field'
         const snapshot = await document.get();
         
@@ -77,5 +67,4 @@ exports.viewNotifications = async (req, res) => {
             message: err.message || "Some error occurred while fetching notifications."
         });
     }
-    //});
 };
