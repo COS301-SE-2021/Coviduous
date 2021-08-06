@@ -7,6 +7,12 @@ var serviceAccount = require("../../permissions.json");
 const db = admin.firestore();
 
 exports.createNotification = async (req, res) => {
+
+    if(req.body.notificationID === null){
+        return res.status(400).send({
+            message: 'Request parameter is null'
+        });
+    }
     try {
         await db.collection('notifications').doc(req.body.notificationID)
             .create(req.body); // .add - auto generates document id
