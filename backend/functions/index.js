@@ -25,65 +25,13 @@ const floorPlanController = require("./routes/floorplan/floorplan.service.js");
 //subroutes
 app.post('/api/floorplan/create-floorplan', floorPlanController.createFloorPlan);
 
+// STRUCTURE: Each subsystem has it's own route.js file, respective routes are defined there
+// and each subsystem route.js file requires respective subsystem.controller.js file where functions are defined
 
 // Import routes
 const announcementRoute = require("./routes/announcement.route.js")
 
-app.use('/api/announcement', announcementRoute);
-
-// app.post('/api/announcement/create-announcement', announcementController.createAnnouncement);
-// app.delete('/api/announcement/delete-announcement', announcementController.deleteAnnouncement);
-// app.get('/api/announcement/view-announcements', announcementController.viewAnnouncements);
-
-// app.post('/api/notification/create-notification', notificationController.createNotification);
-// app.delete('/api/notification/delete-notification', notificationController.deleteNotification);
-// app.get('/api/notification/view-notifications', notificationController.viewNotifications);
+// app.use('/api', subsystem_nameRoute) - use /api/ path for each subsystem route
+app.use('/api/', announcementRoute); // testing http would be '.../api/announcements' - see announcement.route.js file for routes
 
 exports.app = functions.https.onRequest(app);
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
- /*exports.helloWorld = functions.https.onRequest((request, response) => {
-   functions.logger.info("Hello logs!", {structuredData: true});
-   response.send("Hello from Firebase!");
- });
-
- exports.api = functions.https.onRequest(async (request, response) => {
-     switch (request.method) {
-         case 'GET':
-             //const res= await axios.get()
-             response.send("GET REQUEST!");
-             break;
-        case 'POST':
-             response.send("POST REQUEST!");
-             break;
-        case 'DELETE':
-             response.send("DELETE REQUEST!");
-             break;
-        case 'PUT':
-             response.send("PUT REQUEST!");
-             break;
-     
-         default:
-            response.send("CANNOT HANDLE THE REQUEST!");
-             break;
-     }
-   
- });
-
-//AUTH FUNCTIONS EVENTS
-exports.userAdded = functions.auth.user().onCreate(user =>{
-   console.log("User created");
-   return Promise.resolve();
- });
-
- exports.userDeleted = functions.auth.user().onDelete(user =>{
-   console.log("User deleted");
-   return Promise.resolve();
- });
-
-exports.testFunction = functions.https.onRequest((request, response) => {
-    functions.logger.info("Hello logs!", {structuredData: true});
-    response.send("Hello from test function!");
-});*/
