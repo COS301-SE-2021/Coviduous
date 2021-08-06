@@ -30,7 +30,7 @@ class User {
         return true;
     }
 
-    viewNotifications() {
+    viewMessages() {
         var message = firebaseClient.getMessage();
         console.log("message received: " + message);
         return true;
