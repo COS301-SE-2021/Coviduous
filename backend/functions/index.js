@@ -11,7 +11,7 @@ app.use(cors({ origin: true }));
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://fir-api-9a206..firebaseio.com"
-});
+}); 
 
 app.get('/api', (req, res) => {
  return res.status(200).send('Connected to the coviduous api');
