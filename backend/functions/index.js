@@ -19,15 +19,21 @@ app.get('/api', (req, res) => {
 
 // Import controllers
 const floorPlanController = require("./routes/floorplan/floorplan.service.js");
-const announcementController = require("./services/announcement/announcement.controller.js");
+//const announcementController = require("./services/announcement/announcement.controller.js");
 //const notificationController = require("./services/notification/notification.controller.js");
 
 //subroutes
 app.post('/api/floorplan/create-floorplan', floorPlanController.createFloorPlan);
 
-app.post('/api/announcement/create-announcement', announcementController.createAnnouncement);
-app.delete('/api/announcement/delete-announcement', announcementController.deleteAnnouncement);
-app.get('/api/announcement/view-announcements', announcementController.viewAnnouncements);
+
+// Import routes
+const announcementRoute = require("./routes/announcement.route.js")
+
+app.use('/api/announcement', announcementRoute);
+
+// app.post('/api/announcement/create-announcement', announcementController.createAnnouncement);
+// app.delete('/api/announcement/delete-announcement', announcementController.deleteAnnouncement);
+// app.get('/api/announcement/view-announcements', announcementController.viewAnnouncements);
 
 // app.post('/api/notification/create-notification', notificationController.createNotification);
 // app.delete('/api/notification/delete-notification', notificationController.deleteNotification);
