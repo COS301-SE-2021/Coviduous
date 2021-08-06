@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 });
 
 // Import announcement controller
-const announcementController = require("../components/announcement/announcement.controller.js");
+const announcementController = require("../services/announcement/announcement.controller.js");
 
 // Announcement routes
 router.get('/view-announcements', announcementController.viewAnnouncements);
