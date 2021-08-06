@@ -1,5 +1,5 @@
-var chai=require("chai");
-var expect=chai.expect;
+var chai = require("chai");
+var expect = chai.expect;
 //const { expect } = require('chai');
 let chaiHttp = require('chai-http'); // npm install chai-http
 //let server = require('../index.js');
@@ -9,7 +9,7 @@ let should = chai.should();
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-const Announcement = require("../services/announcement/announcement.service.js");
+const Announcement = require("../../services/announcement/announcement.service.js");
 
 // test 
 // var announcements=require("../tests/announcement_unit.test.js");
@@ -28,11 +28,11 @@ describe('Announcement Unit Tests', () => {
     it('should create an announcement', () => {
         //let announcementList = [];
         var obj = new Announcement();
-        announcement = obj.createAnnouncement("test", "test", "test", "test", "test", "test");
+        announcement1 = obj.createAnnouncement("test", "test", "test", "test", "test", "test");
 
         //announcementList.push(announcement);
 
-        expect(announcement).to.be.not.null;
+        expect(announcement1).to.be.not.null;
     })
 
     it('should get all announcements', () => {
@@ -76,18 +76,18 @@ describe('Announcement Unit Tests', () => {
 });
 
 // describe('/POST announcements', () => {
-//     it('it should create an announcement', (done) => {
+//     it('it should create an announcement', () => {
 //         let announcement = {
-//             adminId: "test6",
-//             announcementId: "test6",
-//             companyId: "test6",
-//             id: "test6",
-//             message: "test6",
-//             timestamp: "test6",
-//             type: "test6"
+//             adminId: "test-000",
+//             announcementId: "test-000",
+//             companyId: "test-000",
+//             id: "test-000",
+//             message: "test-000",
+//             timestamp: "test-000",
+//             type: "test-000"
 //         }
 
-//         chai.request('http://localhost:5001/coviduous-api/us-central1/app/')
+//         chai.request(server)
 //         .post('/api/announcement/create-announcement')
 //         .send(announcement)
 //         .end((err, res) => {
@@ -98,23 +98,21 @@ describe('Announcement Unit Tests', () => {
 //             // res.body.announcement.should.have.property('type');
 //             // res.body.announcement.should.have.property('message');
 //             // res.body.announcement.should.have.property('timestamp');
-//             done();
+//             //done();
 //         });
 //     });
 // });
     
-// describe('/GET announcements', () => {
-//     it('it should GET all the announcements', (done) => {
-//   chai.request('http://localhost:5001/coviduous-api/us-central1/app/').get('/api/announcement/view-announcements')
-//       .end((err, res) => {
-//         res.should.have.status(200);
-//         //res.body.should.be.a('array');
-//         //res.body.length.should.be.eql(0);
-//         //expect(err).to.be.null;
-//         //expect(res).to.have.status(200);
-//         //expect(res.body).should.be.a('object');
-//         done();
-//       });
-//     });
-// });
+describe('/GET announcements', () => {
+    it('it should GET all the announcements', () => {
+  chai.request(server).get('/api/announcement/view-announcements')
+      .end((err, res) => {
+        expect(err).to.be.null;
+        res.should.have.status(200);
+        expect(res).to.have.status(200);
+        expect(res.body).should.be.a('object');
+        //done();
+      });
+    });
+});
 

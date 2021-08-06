@@ -1,9 +1,17 @@
-var config=require("./config/config.js");
+var config = require("./config/config.js");
 const functions = require("firebase-functions");
+const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
 const app = express();
+var serviceAccount = require("./permissions.json");
+
 app.use(cors({ origin: true }));
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://fir-api-9a206..firebaseio.com"
+});
 
 app.get('/api', (req, res) => {
  return res.status(200).send('Connected to the coviduous api');
@@ -12,7 +20,7 @@ app.get('/api', (req, res) => {
 // Import controllers
 const floorPlanController = require("./routes/floorplan/floorplan.service.js");
 const announcementController = require("./services/announcement/announcement.controller.js");
-const notificationController = require("./services/notification/notification.controller.js");
+//const notificationController = require("./services/notification/notification.controller.js");
 
 //subroutes
 app.post('/api/floorplan/create-floorplan', floorPlanController.createFloorPlan);
