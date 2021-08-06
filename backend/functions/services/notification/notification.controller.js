@@ -47,7 +47,7 @@ exports.deleteNotification = async (req, res) => {
 
 };
 
-exports.viewNotifications = async (req, res) => {
+exports.viewNotifications = async ( req,res) => {
 
         try {
         const document = db.collection('notifications'); //.where("field", "==", req.body.field); // get notification documents based on 'field'
