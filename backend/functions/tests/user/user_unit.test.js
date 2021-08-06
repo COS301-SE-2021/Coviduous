@@ -11,7 +11,7 @@ describe('User unit tests', function(){
     });
 
     it('View messages', function(){
-        expect(serviceRef.viewNotifications()).to.be.true;
+        expect(serviceRef.viewMessages()).to.be.true;
     })
 
     it('Sign out', function(){
