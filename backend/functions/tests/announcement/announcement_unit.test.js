@@ -9,7 +9,7 @@ let should = chai.should();
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-const Announcement = require("../../services/announcement/announcement.service.js");
+const Announcement = require("../../models/announcement.model.js");
 
 // test 
 // var announcements=require("../tests/announcement_unit.test.js");
@@ -88,7 +88,7 @@ describe('Announcement Unit Tests', () => {
 //         }
 
 //         chai.request(server)
-//         .post('/api/announcement/create-announcement')
+//         .post('/api/announcement')
 //         .send(announcement)
 //         .end((err, res) => {
 //             res.should.have.status(200);
@@ -105,7 +105,7 @@ describe('Announcement Unit Tests', () => {
     
 describe('/GET announcements', () => {
     it('it should GET all the announcements', () => {
-  chai.request(server).get('/api/announcement/view-announcements')
+  chai.request(server).get('/api/announcement/')
       .end((err, res) => {
         expect(err).to.be.null;
         res.should.have.status(200);
