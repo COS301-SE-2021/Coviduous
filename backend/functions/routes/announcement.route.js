@@ -10,6 +10,10 @@ router.get('/', function (req, res) {
 
 // Import announcement controller
 const announcementController = require("../services/announcement/announcement.controller.js");
+const devDatabase = require("../config/announcement.firestore.database.js");
+
+// set database to use
+announcementController.setDatabase(devDatabase);
 
 // Announcement routes
 // N.B. paths for a subsystem can all be the same
