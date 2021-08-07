@@ -106,9 +106,9 @@ exports.viewAnnouncements = async (req, res) => {
 
       // let announcements = list;
       
-      return res.json({
+      return res.status(200).send({
         message: 'Successfully retrieved announcements',
-        data: announcements 
+        data: announcements
       });
   } catch (error) {
       console.log(error);
