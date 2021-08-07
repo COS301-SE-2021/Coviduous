@@ -11,18 +11,7 @@ const admin = require('firebase-admin');
 
 const Announcement = require("../../models/announcement.model.js");
 
-// test 
-// var announcements=require("../tests/announcement_unit.test.js");
-// var myAnnouncement = new announcements();
-
 chai.use(chaiHttp);
-
-// describe('Tests', function(){
-    
-//     it('Unit test1',function(){
-//         expect(myAnnouncement.add(1,2)).to.be.equal(3);
-//     });
-// });
 
 describe('Announcement Unit Tests', () => {
     it('should create an announcement', () => {
@@ -75,44 +64,60 @@ describe('Announcement Unit Tests', () => {
     })
 });
 
-// describe('/POST announcements', () => {
-//     it('it should create an announcement', () => {
-//         let announcement = {
-//             adminId: "test-000",
-//             announcementId: "test-000",
-//             companyId: "test-000",
-//             id: "test-000",
-//             message: "test-000",
-//             timestamp: "test-000",
-//             type: "test-000"
-//         }
+describe('/POST announcements', () => {
+    it('it should create an announcement', () => {
+        let announcement = {
+            adminId: "test-000",
+            announcementId: "test-000",
+            companyId: "test-000",
+            id: "test-000",
+            message: "test-000",
+            timestamp: "test-000",
+            type: "test-000"
+        }
 
-//         chai.request(server)
-//         .post('/api/announcement')
-//         .send(announcement)
-//         .end((err, res) => {
-//             res.should.have.status(200);
-//             res.body.should.be.a('object');
-//             // res.body.should.have.property('message').eql('Announcement successfully created');
-//             // res.body.announcement.should.have.property('announcementId');
-//             // res.body.announcement.should.have.property('type');
-//             // res.body.announcement.should.have.property('message');
-//             // res.body.announcement.should.have.property('timestamp');
-//             //done();
-//         });
-//     });
-// }); 
+        chai.request(server)
+        .post('/api/announcement')
+        .send(announcement)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            // res.body.should.have.property('message').eql('Announcement successfully created');
+            // res.body.announcement.should.have.property('announcementId');
+            // res.body.announcement.should.have.property('type');
+            // res.body.announcement.should.have.property('message');
+            // res.body.announcement.should.have.property('timestamp');
+            //done();
+        });
+    });
+
+    it('it should DELETE an announcement', () => {
+        let announcement = {
+            announcementId: "test-000"
+        }
+
+        chai.request(server).delete('/api/announcement/')
+            .send(announcement)
+            .end((err, res) => {
+            expect(err).to.be.null;
+            //res.should.have.status(200);
+            expect(res).to.have.status(200);
+            expect(res.body).should.be.a('object');
+            //done();
+        })//.catch(done);
+    });
+}); 
     
 describe('/GET announcements', () => {
     it('it should GET all the announcements', () => {
   chai.request(server).get('/api/announcement/')
       .end((err, res) => {
         expect(err).to.be.null;
-        res.should.have.status(200);
+        //res.should.have.status(200);
         expect(res).to.have.status(200);
         expect(res.body).should.be.a('object');
         //done();
-      });
+      })//.catch(done);
     });
 });
 

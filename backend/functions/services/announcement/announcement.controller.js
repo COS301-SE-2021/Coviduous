@@ -70,16 +70,3 @@ exports.viewAnnouncements = async (req, res) => {
   }
 };
 
-// class announcements {
-//     constructor() {
-//         console.log("First Unit test");
-//     }
-//     add(var1, var2) {
-//         let results;
-//         results = var1 + var2;
-//         return results;
-//     }
-// }
-
-// module.exports = announcements;
-
