@@ -20,7 +20,7 @@ app.get('/api', (req, res) => {
 
 // STRUCTURE: Each subsystem has it's own route.js file, respective routes are defined there
 // and each subsystem route.js file requires respective subsystem.controller.js file where functions are defined
-
+let devDatabase = require("./config/firestore.database.js");
 // Import routes
 const announcementRoute = require("./routes/announcement.route.js")
 const floorplanRoute = require("./routes/floorplan.route.js");

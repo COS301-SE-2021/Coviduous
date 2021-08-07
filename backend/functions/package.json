@@ -9,7 +9,8 @@
     "logs": "firebase functions:log",
     "test": "mocha './tests/*/*.test.js'",
     "testUser": "mocha './tests/user/*.test.js'",
-    "testAnnouncement": "mocha './tests/announcement/*.test.js'"
+    "testAnnouncement": "mocha './tests/announcement/*.test.js'",
+    "testFloorPlan": "mocha './tests/floorplan/*.test.js'"
   },
   "engines": {
     "node": "14"
