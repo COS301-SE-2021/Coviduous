@@ -1,19 +1,17 @@
-const Firebase = require("../services/user/firebase.auth");
+const FirebaseClient = require("../services/user/firebase.auth");
 
-const firebaseClient = new Firebase();
+const firebaseClient = new FirebaseClient();
 
 class User {
     constructor() {
         console.log("Created user class");
     }
 
-    async createUser(email, password) {
-        return await firebaseClient.createUser(email, password).then(function (result) {
-            console.log("Create user response: " + result);
-        });
+    createUser(email, password) {
+        return firebaseClient.createUser(email, password);
     }
 
-    async signUserIn(email, password) {
+    signUserIn(email, password) {
         return firebaseClient.signUserIn(email, password);
     }
 
