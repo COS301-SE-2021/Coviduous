@@ -1,20 +1,20 @@
 require('dotenv').config(); //Dependency for environment variables
 
-const firebase = require('firebase');
+const firebaseAuth = require('firebase');
 
 let _db = null;
 let _user = null;
 
 class Firebase {
     constructor() {
-        firebase.initializeApp({
+        firebaseAuth.initializeApp({
             apiKey: process.env.FirebaseClientAPIKey,
             authDomain: process.env.FirebaseClientAuthDomain,
             projectId: process.env.FirebaseClientProjectID,
         });
 
         // initialize Firestore through Firebase
-        _db = firebase.firestore();
+        _db = firebaseAuth.firestore();
 
         // disable deprecated features
         _db.settings({
@@ -23,7 +23,7 @@ class Firebase {
     }
 
     async createUser(email, password) {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebaseAuth.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 let user = userCredential.user;
@@ -37,7 +37,7 @@ class Firebase {
     }
 
     async signUserIn(email, password) {
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        firebaseAuth.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 let user = userCredential.user;
@@ -51,7 +51,7 @@ class Firebase {
     }
 
     async signUserOut() {
-        firebase.auth().signOut().then(() => {
+        firebaseAuth.auth().signOut().then(() => {
             console.log("Sign out successful");
         }).catch((error) => {
             console.log("Sign out unsuccessful: " + error);
@@ -59,7 +59,7 @@ class Firebase {
     }
 
     async getCurrentUser() {
-        _user = await firebase.auth().currentUser;
+        _user = await firebaseAuth.auth().currentUser;
     }
 
     getEmail() {
@@ -69,7 +69,7 @@ class Firebase {
 
     async updateUserEmail(email) {
         if (_user == null) return;
-        await firebase.auth().currentUser.updateEmail(email).then(() => {
+        await firebaseAuth.auth().currentUser.updateEmail(email).then(() => {
             console.log("Email update successful. Email changed to " + email);
         }).catch((error) => {
             console.log("Email update unsuccessful: " + error);
@@ -77,7 +77,7 @@ class Firebase {
     }
 
     async sendPasswordResetEmail(email) {
-        firebase.auth().sendPasswordResetEmail(email)
+        firebaseAuth.auth().sendPasswordResetEmail(email)
             .then(() => {
                 console.log("Password reset email sent to " + email);
             })
