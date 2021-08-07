@@ -2,7 +2,6 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
 const User = require("../../services/user/user.service");
-//const should = chai.should();
 
 let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 
