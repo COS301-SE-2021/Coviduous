@@ -2,7 +2,7 @@ let db;
 
 exports.createShift = async (req,res) => {
 try{
-    await db.createShift(req.body.shiftID);
+    await db.createShift(req.body.shiftID,req.body);
     return res.status(200).send({
         data: req.body
     });
