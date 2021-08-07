@@ -1,3 +1,5 @@
+require('dotenv').config(); //Dependency for environment variables
+
 var config = require("./config/config.js");
 const functions = require("firebase-functions");
 const admin = require('firebase-admin');
@@ -10,7 +12,7 @@ app.use(cors({ origin: true }));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://fir-api-9a206..firebaseio.com"
+  databaseURL: process.env.FirebaseDatabaseURL
 }); 
 
 app.get('/api', (req, res) => {
