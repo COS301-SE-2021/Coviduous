@@ -77,7 +77,7 @@ describe('/POST announcements', () => {
         }
 
         chai.request(server)
-        .post('/api/announcement')
+        .post('/api/announcements/')
         .send(announcement)
         .end((err, res) => {
             res.should.have.status(200);
@@ -96,7 +96,7 @@ describe('/POST announcements', () => {
             announcementId: "test-000"
         }
 
-        chai.request(server).delete('/api/announcement/')
+        chai.request(server).delete('/api/announcements/')
             .send(announcement)
             .end((err, res) => {
             expect(err).to.be.null;
@@ -110,7 +110,7 @@ describe('/POST announcements', () => {
     
 describe('/GET announcements', () => {
     it('it should GET all the announcements', () => {
-  chai.request(server).get('/api/announcement/')
+  chai.request(server).get('/api/announcements/')
       .end((err, res) => {
         expect(err).to.be.null;
         //res.should.have.status(200);
