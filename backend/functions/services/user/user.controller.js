@@ -1,10 +1,10 @@
-const Service = require('../user/user.service');
+const User = require('../../models/user.model');
 
-const service = new Service();
+const userObj = new User();
 
 exports.createUser = async (req, res) => {
     try {
-        await service.createUser(req.body.email, req.body.password);
+        await userObj.createUser(req.body.email, req.body.password);
 
         console.log("User successfully created: " + req.body.email);
 
@@ -20,7 +20,7 @@ exports.createUser = async (req, res) => {
 
 exports.signUserIn = async (req, res) => {
     try {
-        await service.signUserIn(req.body.email, req.body.password);
+        await userObj.signUserIn(req.body.email, req.body.password);
 
         console.log("User successfully signed in: " + req.body.email);
 
