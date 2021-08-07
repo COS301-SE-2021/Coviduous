@@ -7,8 +7,8 @@ class User {
         console.log("Created user class");
     }
 
-    createUser(email, password) {
-        return firebaseClient.createUser(email, password);
+    async createUser(email, password) {
+        return await firebaseClient.createUser(email, password);
     }
 
     signUserIn(email, password) {
