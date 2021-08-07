@@ -1,45 +1,28 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-const express = require('express');
-const cors = require('cors');
-const firebase = require("firebase");
-const auth0 = require("auth0");
-const server = require("server");
+const Firebase = require("../user/firebase");
 
-//var serviceAccount = require("../../permissions.json");
-
-const serverRef = new server();
-const firebaseClient = new firebase();
-const auth0Client = new auth0();
+const firebaseClient = new Firebase();
 
 class User {
     constructor() {
-        console.log("created user class");
+        console.log("Created user class");
     }
 
-    signIn() {
-        auth0Client.signIn();
-        console.log("signed in");
-        return true;
+    async createUser(email, password) {
+        return await firebaseClient.createUser(email, password).then(function (result) {
+            console.log("Create user response: " + result);
+        });
     }
 
-    signOut() {
-        auth0Client.signOut();
-        firebaseClient.signOut();
-        console.log("signed out");
-        return true;
+    async signUserIn(email, password) {
+        return firebaseClient.signUserIn(email, password);
     }
 
-    updateEmail(email) {
-        firebaseClient.updateEmail(email);
-        console.log("updated email");
-        return true;
+    signUserOut() {
+        return firebaseClient.signUserOut();
     }
 
-    viewMessages() {
-        var message = firebaseClient.getMessage();
-        console.log("message received: " + message);
-        return true;
+    updateUserEmail(email) {
+        return firebaseClient.updateUserEmail(email);
     }
 }
 

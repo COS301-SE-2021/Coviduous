@@ -1,24 +1,44 @@
-var chai = require("chai");
-var expect = chai.expect;
-var should = chai.should();
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const expect = chai.expect;
+const User = require("../../services/user/user.service");
+//const should = chai.should();
 
-var service = require("../../services/user/mocks/user.service.mock");
-var serviceRef = new service();
+let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
+
+chai.use(chaiHttp);
 
 describe('User unit tests', function(){
-    it('Sign in', function(){
-        expect(serviceRef.signIn()).to.be.true;
+    const obj = new User();
+    it('Should create user', function(){
+        let user1 = obj.createUser("testEmail@email.com", "testPassword123");
+
+        expect(user1).to.not.be.null;
+        expect(user1).to.not.be.equal('undefined');
     });
+});
 
-    it('View messages', function(){
-        expect(serviceRef.viewMessages()).to.be.true;
-    })
+describe('/POST user', () => {
+    it('Should create a new user account', () => {
+        chai.request(server).post('/api/users')
+            .end((err, res) => {
+                expect(err).to.be.null;
+                res.should.have.status(200);
+                expect(res).to.have.status(200);
+                expect(res.body).should.be.a('object');
+            });
+    });
+});
 
-    it('Update email', function(){
-        expect(serviceRef.updateEmail('test email')).to.be.true;
-    })
-
-    it('Sign out', function(){
-        expect(serviceRef.signOut()).to.be.true;
-    })
+describe('/GET user', () => {
+    it('Should sign a user in', () => {
+        chai.request(server).get('/api/users')
+            .end((err, res) => {
+                console.log("Response: " + res);
+                expect(err).to.be.null;
+                res.should.have.status(200);
+                expect(res).to.have.status(200);
+                expect(res.body).should.be.a('object');
+            });
+    });
 });

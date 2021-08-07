@@ -9,18 +9,21 @@
     "logs": "firebase functions:log",
     "test": "mocha './tests/*/*.test.js'",
     "testUser": "mocha './tests/user/*.test.js'",
-    "testAnnouncement": "mocha './tests/announcement/*.test.js'"
+    "testAnnouncement": "mocha './tests/announcement/*.test.js'",
+    "testFloorPlan": "mocha './tests/floorplan/*.test.js'"
   },
   "engines": {
     "node": "14"
   },
   "main": "index.js",
   "dependencies": {
+    "@firebase/app": "^0.6.29",
     "axios": "^0.21.1",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "firebase": "^8.9.0",
     "firebase-admin": "^9.11.0",
     "firebase-functions": "^3.14.1",
     "firebase-tools": "^9.16.0",
@@ -29,6 +32,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
     "firebase-functions-test": "^0.2.3",
     "mocha": "^9.0.3"
   },

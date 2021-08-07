@@ -1,5 +1,6 @@
 //var database = require("../../config/firestore.database.js");
 let database;
+let lastCallSucceeded=false;
 
 exports.createFloorPlan = async (req, res) => {
         try {
@@ -15,6 +16,11 @@ exports.createFloorPlan = async (req, res) => {
         }
 
   };
+
+  exports.createFloorPlanMock = async (floorplanNumber, data) => {
+      return await database.createFloorPlan(floorplanNumber,data);
+
+};
 
 exports.setDatabse= async(db)=>{
 
