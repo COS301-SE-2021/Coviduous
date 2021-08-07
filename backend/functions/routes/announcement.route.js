@@ -13,9 +13,9 @@ const announcementController = require("../services/announcement/announcement.co
 
 // Announcement routes
 // N.B. paths for a subsystem can all be the same
-router.get('/announcement', announcementController.viewAnnouncements);
-router.post('/announcement', announcementController.createAnnouncement);
-router.delete('/announcement', announcementController.deleteAnnouncement);
+router.get('/announcements', announcementController.viewAnnouncements);
+router.post('/announcements', announcementController.createAnnouncement);
+router.delete('/announcements', announcementController.deleteAnnouncement);
 
 // Export API routes
 module.exports = router;
