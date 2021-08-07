@@ -1,16 +1,12 @@
 const Service = require('../user/user.service');
-const Server = require("../user/server");
 
-const server = new Server();
 const service = new Service();
-
-server.initializeApp();
 
 exports.createUser = async (req, res) => {
     try {
         await service.createUser(req.body.email, req.body.password);
 
-        console.log("User successfully created: " + req.body);
+        console.log("User successfully created: " + req.body.email);
 
         return res.status(200).send({
             message: 'User successfully created',
@@ -26,7 +22,7 @@ exports.signUserIn = async (req, res) => {
     try {
         await service.signUserIn(req.body.email, req.body.password);
 
-        console.log("User successfully signed in: " + req.body);
+        console.log("User successfully signed in: " + req.body.email);
 
         return res.status(200).send({
             message: 'User successfully signed in',
