@@ -9,13 +9,11 @@ let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 chai.use(chaiHttp);
 
 describe('User unit tests', function(){
-    const userObj = new User();
-    it('Should create user', async function(){
-        let userRes = userObj.createUser("testEmail@email.com", "testPassword123")
-            .then(() => {
+    it('Should create user', function(){
+        let userObj1 = new User();
+        userObj1.createUser("testEmail@email.com", "testPassword123")
+            .then((userRes) => {
                 expect(userRes).to.be.true;
-                userObj.signUserOut();
-                console.log("test");
             });
     });
 });
