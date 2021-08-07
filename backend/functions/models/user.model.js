@@ -1,4 +1,4 @@
-const Firebase = require("../services/user/firebase");
+const Firebase = require("../services/user/firebase.auth");
 
 const firebaseClient = new Firebase();
 
