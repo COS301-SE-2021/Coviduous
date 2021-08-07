@@ -20,7 +20,14 @@ describe('User unit tests', function(){
 
 describe('/POST user', () => {
     it('Should create a new user account', () => {
-        chai.request(server).post('/api/users')
+        let user = {
+            email: "testemail2@email.com",
+            password: "123456"
+        }
+
+        chai.request(server)
+            .post('/api/users')
+            .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
                 res.should.have.status(200);
@@ -31,8 +38,15 @@ describe('/POST user', () => {
 });
 
 describe('/GET user', () => {
-    it('Should sign a user in', () => {
-        chai.request(server).get('/api/users')
+    it('Should sign an existing user in', () => {
+        let user = {
+            email: "testemail2@email.com",
+            password: "123456"
+        }
+
+        chai.request(server)
+            .get('/api/users')
+            .send(user)
             .end((err, res) => {
                 console.log("Response: " + res);
                 expect(err).to.be.null;
