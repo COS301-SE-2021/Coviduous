@@ -1,7 +1,7 @@
 //Should return undefined
 console.log('No value for Firebase URL yet:', process.env.FirebaseDatabaseURL);
 
-// If you'd like to only run this code from a production environment: NODE_ENV=production node dotenv-example.js
+// If you'd like to only run this code from a production environment, in the terminal put: NODE_ENV=production node dotenv-example.js
 // if (process.env.NODE_ENV !== 'production') {
 //     require('dotenv').config();
 // }
