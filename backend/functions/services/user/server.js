@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const FirebaseAdmin = require('firebase-admin');
-const serviceAccount = require("../user/firebase-key");
+const serviceAccount = require("../user/firebase-key"); //Requires a file called firebase-key.json to be in this directory, which may not be committed to Git. Please check if you have it
 
 const app = express();
 app.use(cors());
