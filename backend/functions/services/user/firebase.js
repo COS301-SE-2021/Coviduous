@@ -26,12 +26,12 @@ class Firebase {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
-                var user = userCredential.user;
-                console.log("User creation successful: " + user + " has signed in");
+                let user = userCredential.user;
+                console.log("User creation successful: " + user.email + " has signed in");
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                let errorCode = error.code;
+                let errorMessage = error.message;
                 console.log("User creation unsuccessful. Error " + errorCode + ": " + errorMessage);
             });
     }
@@ -40,12 +40,12 @@ class Firebase {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
-                var user = userCredential.user;
-                console.log("Sign in successful: " + user + " has signed in");
+                let user = userCredential.user;
+                console.log("Sign in successful: " + user.email + " has signed in");
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                let errorCode = error.code;
+                let errorMessage = error.message;
                 console.log("Sign in unsuccessful. Error " + errorCode + ": " + errorMessage);
             });
     }
