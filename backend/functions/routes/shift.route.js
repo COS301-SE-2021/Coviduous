@@ -1,4 +1,6 @@
 let router = require('express').Router();
+let db = require("../config/shift_database.js");
+
 
 /**
  * Default a Get router 
@@ -9,3 +11,22 @@ let router = require('express').Router();
         message: 'Shift Router'
     });
 });
+/**
+ * 
+ */
+const Shift = require("../services/shift/shift.controller.js");
+
+
+Shift.setDatabse(db);
+
+
+/**
+ * Shift Routes
+ *  */
+router.post('/shift',Shift.createShift);
+
+
+
+
+// Export API routes
+module.exports = router
