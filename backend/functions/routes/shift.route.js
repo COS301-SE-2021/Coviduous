@@ -17,6 +17,8 @@ let db = require("../config/shift_database.js");
 const Shift = require("../services/shift/shift.controller.js");
 
 
+Shift.setDatabse(db);
+
 
 /**
  * Shift Routes

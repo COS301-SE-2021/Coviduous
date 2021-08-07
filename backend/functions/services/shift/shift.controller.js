@@ -11,3 +11,8 @@ try{
     return res.status(500).send(error);
   }
 };
+
+
+exports.setDatabse= async(_db)=>{
+    db=_db;
+  };
