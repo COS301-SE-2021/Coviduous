@@ -1,5 +1,5 @@
 let router = require('express').Router();
-let db = require("../config/shift_database.js");
+let db = require("../config/shift.firestore.database.js");
 
 
 /**
@@ -24,6 +24,8 @@ Shift.setDatabse(db);
  * Shift Routes
  *  */
 router.post('/shift',Shift.createShift);
+router.delete('/shift',Shift.deleteShift);
+router.get('/shift',Shift.viewShifts);
 
 
 

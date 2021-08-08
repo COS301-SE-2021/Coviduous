@@ -1,5 +1,4 @@
 let db;
-
 exports.createShift = async (req,res) => {
 try{
     await db.createShift(req.body.shiftID,req.body);
@@ -11,7 +10,6 @@ try{
     return res.status(500).send(error);
   }
 };
-
 exports.deleteShift = async (req, res) => {
   try {
       if (await database.deleteShift(req.body.shiftID) == true)
@@ -25,6 +23,20 @@ exports.deleteShift = async (req, res) => {
       return res.status(500).send(error);
   }
 };
+exports.viewShifts = async (req, res) => {
+  try {
+      let viewShifts = await database.viewShifts();  
+      return res.status(200).send({
+        data: viewShifts
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message 
+      });
+  }
+};
+
 
 
 
