@@ -105,6 +105,29 @@ class Firestore {
       }
     }
 
+
+    async editRoom(roomNumber,roomArea,deskArea,numDesks,percentage,maxCapacity,currentCapacity) {
+      try {
+        response= await db.collection('rooms').doc(roomNumber).update(
+          {
+            "roomArea": roomArea,
+            "maxCapacity": maxCapacity,
+            "roomNumber": "RMNR-test",
+            "floorNumber": "test1",
+            "deskArea": deskArea,
+            "roomPercentage": percentage,
+            "currentCapacity": currentCapacity,
+            "numDesks": numDesks
+        }
+        );
+        
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+    
     getIfLastQuerySucceeded() {
         return true;
     }

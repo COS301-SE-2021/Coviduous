@@ -12,14 +12,14 @@ class UserController {
         }
     }
 
-    async setDatabase (db) {
+    async setDatabase(db) {
         database = db;
     }
 
     async createUser(req, res) {
         try {
             await userObj.createUser(req.body.email, req.body.password);
-            await database.createUser(req.body.uid, req.body);
+            await database.createUser(req.body.uid, req.body.email);
 
             return res.status(200).send({
                 message: 'User successfully created',
@@ -35,7 +35,7 @@ class UserController {
         try {
             await userObj.signUserIn(req.body.email, req.body.password);
 
-            let userInfo = await database.getUserInfo(req.body.email);
+            let userInfo = await database.getUserDetails(req.body.email);
             console.log(userInfo);
 
             return res.status(200).send({
@@ -44,6 +44,51 @@ class UserController {
             });
         } catch (error) {
             console.log("Error while signing in user: " + error);
+            return res.status(500).send(error);
+        }
+    }
+
+    async getUserDetails(req, res) {
+        try {
+            await database.getUserDetails(req.body.email);
+
+            return res.status(200).send({
+               message: 'User details found',
+               data: req.body
+            });
+        } catch (error) {
+            console.log("Error while retrieving user details: " + error);
+            return res.status(500).send(error);
+        }
+    }
+
+    async updateUserDetails(req, res) {
+        try {
+            await database.updateUserDetails(req.body.currentEmail.toLowerCase(), req.body.firstName,
+                req.body.lastName, req.body.companyID, req.body.companyName, req.body.companyAddress);
+
+            return res.status(200).send({
+                message: 'User updated',
+                data: req.body
+            });
+        } catch (error) {
+            console.log("Error while updating user details: " + error);
+            return res.status(500).send(error);
+        }
+    }
+
+    async updateUserEmail(req, res) {
+        try {
+            await database.updateEmail(req.body.newEmail.toLowerCase(), req.body.currentEmail.toLowerCase()).then(() => {
+                userObj.updateUserEmail(req.body.newEmail.toLowerCase(), req.body.currentEmail.toLowerCase(), req.body.password);
+            });
+
+            return res.status(200).send({
+                message: 'User updated',
+                data: req.body
+            });
+        } catch (error) {
+            console.log("Error while updating user details: " + error);
             return res.status(500).send(error);
         }
     }

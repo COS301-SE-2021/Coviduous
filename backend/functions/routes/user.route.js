@@ -19,8 +19,11 @@ const userController = new UserController(true);
 userController.setDatabase(devDatabase);
 
 // User routes
-router.get('/users', userController.signUserIn);
-router.post('/users', userController.createUser);
+router.get('/users', userController.getUserDetails);
+router.post('/users/signUp', userController.createUser);
+router.get('/users/signIn', userController.signUserIn);
+router.post('/users/updateDetails', userController.updateUserDetails);
+router.post('/users/updateEmail', userController.updateUserEmail);
 router.get('/passwordReset', userController.sendPasswordResetEmail);
 
 // Export API routes
