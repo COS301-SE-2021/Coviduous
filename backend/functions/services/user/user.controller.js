@@ -1,5 +1,6 @@
 const User = require('../../models/user.model');
 
+let database;
 let userObj = null;
 
 class UserController {
@@ -11,9 +12,14 @@ class UserController {
         }
     }
 
+    async setDatabase (db) {
+        database = db;
+    }
+
     async createUser(req, res) {
         try {
             await userObj.createUser(req.body.email, req.body.password);
+            await database.createUser(req.body.uid, req.body);
 
             return res.status(200).send({
                 message: 'User successfully created',
@@ -28,6 +34,9 @@ class UserController {
     async signUserIn(req, res) {
         try {
             await userObj.signUserIn(req.body.email, req.body.password);
+
+            let userInfo = await database.getUserInfo(req.body.email);
+            console.log(userInfo);
 
             return res.status(200).send({
                 message: 'User successfully signed in',
