@@ -1,18 +1,67 @@
-// let myClass= require("../../services/notification/notification.controller.js");
-// let myObj = new myClass();
-// var chai = require("chai");
-// var expect = chai.expect;
+var chai = require("chai");
+var expect = chai.expect;
+//const { expect } = require('chai');
+let chaiHttp = require('chai-http'); // npm install chai-http
+//let server = require('../index.js');
+let server = 'http://localhost:5001/coviduous-api/us-central1/app/'
+let should = chai.should();
 
-// const functions = require('firebase-functions');
-// const admin = require('firebase-admin');
+//const functions = require('firebase-functions');
+//const admin = require('firebase-admin');
 
-// //not sure how to mock the database.
-// describe("Test suit", function (){
-//     it("Test the delete notification method", function () {
-//         expect(myObj.deleteNotification(req,res)).to.be.equal("Notification successfully deleted");
-//     })
+const Notification = require("../../models/notification.model.js");
+//const notificationDB = require("../../config/notification.firestore.database.js");
 
-//     it("Test the create Notification method", function () {
-//         expect(myObj.createNotification(req,res)).to.be.equal("Notification successfully created");
-//     })
-// })
+chai.use(chaiHttp);
+
+describe('/POST notifications', () => {
+    it('it should create an notification', () => {
+        let notification = {
+            notificationId: "test-000",
+            userId: "test-000",
+            userEmail: "test-000",
+            subject: "test-000",
+            message: "test-000",
+            timestamp: "test-000",
+            adminId: "test-000",
+            companyId: "test-000"
+        }
+
+        chai.request(server)
+        .post('/api/notifications/')
+        .send(notification)
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('Notification successfully created');
+            //done();
+        });
+    });
+
+    it('it should DELETE a notification', () => {
+        let notification = {
+            notificationId: "test-000"
+        }
+
+        chai.request(server).delete('/api/notifications/')
+            .send(notification)
+            .end((err, res) => {
+            expect(err).to.be.null;
+            expect(res).to.have.status(200);
+            expect(res.body).should.be.a('object');
+            //done();
+        })//.catch(done);
+    });
+}); 
+    
+describe('/GET notifications', () => {
+    it('it should GET all the notifications', () => {
+  chai.request(server).get('/api/notifications/')
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body).should.be.a('object');
+        //done();
+      })//.catch(done);
+    });
+});
