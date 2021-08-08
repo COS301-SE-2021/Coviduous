@@ -29,6 +29,8 @@ describe('Announcement Unit Tests', () => {
         var obj = new Announcement();
         announcement1 = obj.createAnnouncement("test", "test", "test", "test", "test", "test");
 
+        //console.log("id: " + announcement1.announcementId);
+
         var obj = new Announcement();
         announcement2 = obj.createAnnouncement("test2", "test2", "test2", "test2", "test2", "test2");
 
@@ -67,13 +69,12 @@ describe('Announcement Unit Tests', () => {
 describe('/POST announcements', () => {
     it('it should create an announcement', () => {
         let announcement = {
-            adminId: "test-000",
             announcementId: "test-000",
-            companyId: "test-000",
-            id: "test-000",
+            type: "test-000",
             message: "test-000",
             timestamp: "test-000",
-            type: "test-000"
+            adminId: "test-000",
+            companyId: "test-000",
         }
 
         chai.request(server)
