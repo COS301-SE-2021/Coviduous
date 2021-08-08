@@ -2,28 +2,20 @@ require('dotenv').config(); //Dependency for environment variables
 
 const Firebase = require('firebase');
 let auth = null;
-
-let _db = null;
 let _user = null;
 
 class FirebaseClient {
-    constructor() {
+    constructor(useEmulator) {
         Firebase.initializeApp({
             apiKey: process.env.FirebaseClientAPIKey,
             authDomain: process.env.FirebaseClientAuthDomain,
             projectId: process.env.FirebaseClientProjectID,
         });
 
-        // initialize Firestore through Firebase
-        _db = Firebase.firestore();
-
-        // disable deprecated features
-        _db.settings({
-            timestampsInSnapshots: true
-        });
-
-        auth = Firebase.auth();
-        auth.useEmulator("http://localhost:9099");
+        if (useEmulator === true) {
+            let auth = Firebase.auth();
+            auth.useEmulator("http://localhost:9099");
+        }
     }
 
     async createUser(email, password) {
@@ -105,8 +97,8 @@ class FirebaseClient {
                 result = true;
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                let errorCode = error.code;
+                let errorMessage = error.message;
                 console.log("Password reset email not sent. Error " + errorCode + ": " + errorMessage);
                 result = false;
             });
