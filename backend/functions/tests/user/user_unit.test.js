@@ -63,6 +63,7 @@ describe('User unit tests - direct interaction with auth', function(){
 describe('User unit tests - interaction over HTTP', function(){
     it('/POST user to create new account', () => {
         let user = {
+            uid: "1",
             email: "testemail2@email.com",
             password: "123456"
         }
