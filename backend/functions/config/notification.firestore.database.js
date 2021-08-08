@@ -24,3 +24,22 @@ exports.deleteNotification = async (notificationId) => {
         return false;
     }
 };
+exports.viewNotifications = async () => {
+    try {
+        const document = db.collection('notifications');
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+
+        return list;
+    } catch (error) {
+        console.log(error);
+        return error;
+
+    }
+};
