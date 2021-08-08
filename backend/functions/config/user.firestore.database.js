@@ -2,11 +2,14 @@ const admin = require('firebase-admin');
 
 const db = admin.firestore();
 
-exports.createUser = async (uid, data) => {
+exports.createUser = async (uid, email) => {
     let result;
     try {
         await db.collection('users')
-            .add(data);
+            .add({
+                uid: uid,
+                email: email
+            });
         result = true;
     } catch (error) {
         console.log(error);
@@ -15,7 +18,46 @@ exports.createUser = async (uid, data) => {
     return result;
 }
 
-exports.getUserInfo = async (email) => {
+exports.updateEmail = async (currentEmail, newEmail) => {
+    let result;
+    try {
+        const document = db.collection('users');
+        const snapshot = await document.get();
+
+        let id;
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            if (data.email === currentEmail) {
+                id = doc.id;
+            }
+        });
+
+        if (id != null) {
+            try {
+                await db.collection('users')
+                    .doc(id)
+                    .set({
+                        email: newEmail
+                    }, { merge: true });
+                console.log("User table updated");
+                result = true;
+            } catch (error) {
+                console.log("Error while updating user info: " + error);
+                result = false;
+            }
+        } else {
+            console.log("Error while updating user info, could not find user with email: " + currentEmail);
+            result = false;
+        }
+    } catch (error) {
+        console.log("Error while accessing user table: " + error);
+        result = false;
+    }
+    return result;
+}
+
+exports.getUserDetails = async (email) => {
     try {
         const document = db.collection('users');
         const snapshot = await document.get();
@@ -35,17 +77,44 @@ exports.getUserInfo = async (email) => {
     }
 }
 
-exports.updateUser = async (uid, data) => {
+exports.updateUserDetails = async (currentEmail, firstName, lastName, companyID, companyName, companyAddress) => {
     let result;
     try {
-        await db.collection('users').doc(uid)
-            .delete()
-            .then(() => {
-                db.collection('users').doc(uid).create(data);
-            });
-        result = true;
+        const document = db.collection('users');
+        const snapshot = await document.get();
+
+        let id;
+
+        snapshot.forEach(doc => {
+           let data = doc.data();
+           if (data.email === currentEmail) {
+               id = doc.id;
+           }
+        });
+
+        if (id != null) {
+            try {
+                await db.collection('users')
+                    .doc(id)
+                    .set({
+                        ...((firstName != null && firstName !== "") && {firstName: firstName}),
+                        ...((lastName != null && lastName !== "") && {lastName: lastName}),
+                        ...((companyID != null && companyID !== "") && {companyID: companyID}),
+                        ...((companyName != null && companyName !== "") && {companyName: companyName}),
+                        ...((companyAddress != null && companyAddress !== "") && {companyAddress: companyAddress})
+                    }, { merge: true });
+                console.log("User table updated")
+                result = true;
+            } catch (error) {
+                console.log("Error while updating user info: " + error);
+                result = false;
+            }
+        } else {
+            console.log("Error while updating user info, could not find user with email: " + currentEmail);
+            result = false;
+        }
     } catch (error) {
-        console.log(error);
+        console.log("Error while accessing user table: " + error);
         result = false;
     }
     return result;
