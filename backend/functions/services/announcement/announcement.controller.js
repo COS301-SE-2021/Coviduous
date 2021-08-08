@@ -1,7 +1,5 @@
-// const functions = require('firebase-functions');
-// const admin = require('firebase-admin'); 
+const Announcement = require("../../models/announcement.model");
 
-// const db = admin.firestore();
 let database;
 
 exports.setDatabase = async (db) => {
@@ -25,12 +23,27 @@ exports.setDatabase = async (db) => {
 
 exports.createAnnouncement = async (req, res) => {
   try {
-    //database.createAnnouncement(new Announcement('req.type', 'req.message', '',..,))
-    if (await database.createAnnouncement(req.body.announcementId, req.body) == true)
+    let randInt = Math.floor(1000 + Math.random() * 9000);
+    let announcementId = "ANNOUNC-" + randInt.toString();
+    let timestamp = new Date().toISOString();
+
+    let announcementObj = new Announcement(announcementId, req.body.type,
+      req.body.message, timestamp, req.body.companyId, req.body.adminId)
+
+    let announcementData = {
+      announcementId: announcementObj.announcementId,
+      type: announcementObj.type,
+      message: announcementObj.message,
+      timestamp: announcementObj.timestamp,
+      adminId: announcementObj.adminId,
+      companyId: announcementObj.companyId
+    }
+
+    if (await database.createAnnouncement(announcementData.announcementId, announcementData) == true)
     {
       return res.status(200).send({
         message: 'Announcement successfully created',
-        data: req.body
+        data: announcementData
       });
     }
   } catch (error) {
@@ -96,15 +109,6 @@ exports.deleteAnnouncement = async (req, res) => {
 exports.viewAnnouncements = async (req, res) => {
   try {
       let announcements = await database.viewAnnouncements();
-    
-      // let list = [];
-      
-      // snapshot.forEach(doc => {
-      //   let data = doc.data();
-      //   list.push(data);
-      // });
-
-      // let announcements = list;
       
       return res.status(200).send({
         message: 'Successfully retrieved announcements',
