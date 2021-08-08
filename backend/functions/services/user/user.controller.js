@@ -64,7 +64,8 @@ class UserController {
 
     async updateUserDetails(req, res) {
         try {
-            await database.updateUserDetails(req.body.currentEmail, req.body.firstName, req.body.lastName, req.body.companyID, req.body.companyName, req.body.companyAddress);
+            await database.updateUserDetails(req.body.currentEmail, req.body.firstName, req.body.lastName,
+                req.body.companyID, req.body.companyName, req.body.companyAddress);
 
             return res.status(200).send({
                 message: 'User updated',
@@ -78,7 +79,8 @@ class UserController {
 
     async updateUserEmail(req, res) {
         try {
-            await database.updateEmail(req.body.currentEmail, req.body.newEmail)
+            await database.updateEmail(req.body.newEmail, req.body.currentEmail);
+            await userObj.updateUserEmail(req.body.newEmail, req.body.currentEmail, req.body.password);
 
             return res.status(200).send({
                 message: 'User updated',
