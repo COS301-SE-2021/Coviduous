@@ -12,8 +12,9 @@ class FirebaseClient {
             projectId: process.env.FirebaseClientProjectID,
         });
 
+        auth = Firebase.auth();
+
         if (useEmulator === true) {
-            let auth = Firebase.auth();
             auth.useEmulator("http://localhost:9099");
         }
     }
