@@ -13,8 +13,30 @@ class Firestore {
 
     async createFloorPlan(floorplanNumber, floorplanData) {
       try {
-        response=await db.collection('floorplan').doc(floorplanNumber)
+        response=await db.collection('floorplans').doc(floorplanNumber)
             .create(floorplanData); 
+            lastQuerySucceeded=true;
+      } catch (error) {
+        console.log(error);
+        lastQuerySucceeded=false;
+      }
+    }
+
+    async createFloor(floorNumber, floorData) {
+      try {
+        response=await db.collection('floors').doc(floorNumber)
+            .create(floorData); 
+            lastQuerySucceeded=true;
+      } catch (error) {
+        console.log(error);
+        lastQuerySucceeded=false;
+      }
+    }
+
+    async createRoom(roomNumber, roomData) {
+      try {
+        response=await db.collection('rooms').doc(roomNumber)
+            .create(roomData); 
             lastQuerySucceeded=true;
       } catch (error) {
         console.log(error);

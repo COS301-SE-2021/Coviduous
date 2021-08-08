@@ -20,9 +20,9 @@ let db= new devDatabase();
 
 
 //Tests to check if database queries / database file for firestore perform therequested operations
-describe('Floorplan unit tests', function(){
+describe('Floorplan intergration tests', function(){
     it('Create Floor Plan', function(){
-       db.createFloorPlan('test-030',{
+       db.createFloorPlan('test-000',{
         adminId: "test-000",
         floorplanNumber: "test-000",
         companyId: "test-000",
@@ -32,4 +32,27 @@ describe('Floorplan unit tests', function(){
         
     });
 
+    it('Create Floor', function(){
+      db.createFloor('test-0110',{
+       adminId: "test-000",
+       floorplanNumber: "test-000",
+       companyId: "test-000",
+       numFloors: "test-000"
+       })
+       expect(db.getIfLastQuerySucceeded()).to.be.true;
+       
+   });
+
+    it('Create Room', function(){
+      db.createRoom('test-0880',{
+       adminId: "test-000",
+       floorplanNumber: "test-000",
+       companyId: "test-000",
+       numFloors: "test-000"
+       })
+       expect(db.getIfLastQuerySucceeded()).to.be.true;
+       
+   });
+
 });
+
