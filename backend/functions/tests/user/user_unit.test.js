@@ -8,7 +8,7 @@ let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 
 chai.use(chaiHttp);
 
-describe('User unit tests', function(){
+describe('User unit tests - direct interaction with auth', function(){
     let userObj1 = new User(true);
 
     it('Create new user directly', function(){
@@ -38,7 +38,9 @@ describe('User unit tests', function(){
               expect(userRes).to.be.true;
            });
     });
+});
 
+describe('User unit tests - interaction over HTTP', function(){
     it('/POST user to create new account', () => {
         let user = {
             email: "testemail2@email.com",
