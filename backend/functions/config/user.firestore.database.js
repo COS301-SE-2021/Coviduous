@@ -24,7 +24,7 @@ exports.updateEmail = async (newEmail, currentEmail) => {
         const document = db.collection('users');
         const snapshot = await document.get();
 
-        let id;
+        let id = null;
 
         snapshot.forEach(doc => {
             let data = doc.data();
@@ -83,7 +83,7 @@ exports.updateUserDetails = async (currentEmail, firstName, lastName, companyID,
         const document = db.collection('users');
         const snapshot = await document.get();
 
-        let id;
+        let id = null;
 
         snapshot.forEach(doc => {
            let data = doc.data();
