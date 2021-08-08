@@ -8,17 +8,19 @@ router.get('/', function (req, res) {
     });
 });
 
-//import notification controller
+// import notification controller
 const notificationController = require("../services/notification/notification.controller.js");
+// import database
 const devDatabase = require("../config/notification.firestore.database.js");
 
-//setting database
+// setting database
 notificationController.setDatabase(devDatabase);
 
-//notification routes
-router.get('/notification', notificationController.viewNotifications);
-router.post('/notification', notificationController.createNotification);
-router.delete('/notification', notificationController.deleteNotification);
+// Notification routes
+router.get('/notifications', notificationController.viewNotifications);
+router.get('/notifications/user-email', notificationController.viewNotificationsUserEmail);
+router.post('/notifications', notificationController.createNotification);
+router.delete('/notifications', notificationController.deleteNotification);
 
 // Export API routes
 module.exports = router;
