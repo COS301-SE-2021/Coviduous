@@ -38,6 +38,16 @@ describe('User unit tests - direct interaction with auth', function(){
               expect(userRes).to.be.true;
            });
     });
+
+    it('Create and send password reset email', function(){
+        userObj1.createUser("capslock.cos301@gmail.com", "123456")
+            .then(() => {
+                userObj1.sendPasswordResetEmail("capslock.cos301@gmail.com")
+                    .then((userRes) => {
+                        expect(userRes).to.be.true;
+                    });
+            });
+    });
 });
 
 describe('User unit tests - interaction over HTTP', function(){
@@ -66,6 +76,22 @@ describe('User unit tests - interaction over HTTP', function(){
 
         chai.request(server)
             .get('/api/users')
+            .send(user)
+            .end((err, res) => {
+                expect(err).to.be.null;
+                should.exist(res.body);
+                res.should.have.status(200);
+                expect(res.body).should.be.a('object');
+            });
+    });
+
+    it('/POST to send password reset email', () => {
+        let user = {
+            email: "testemail2@email.com",
+        }
+
+        chai.request(server)
+            .get('/api/passwordReset')
             .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
