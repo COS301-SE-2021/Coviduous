@@ -148,8 +148,9 @@ describe('User unit tests - interaction over HTTP', function(){
 
     it('POST /api/users/updateEmail to update user email', () => {
         let user = {
+            newEmail: "updatedEmail@email.com",
             currentEmail: "testemail2@email.com",
-            newEmail: "updatedEmail@email.com"
+            password: "123456"
         }
 
         chai.request(server)
