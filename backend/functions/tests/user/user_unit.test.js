@@ -32,6 +32,16 @@ describe('User unit tests - direct interaction with auth', function(){
             });
     });
 
+    it('Get user credentials directly', function(){
+        userObj1.createUser( "yetAnotherNewEmail@email.com", "testPassword123")
+            .then((userRes) => {
+                expect(userObj1.getCurrentUser()).to.not.be.null;
+                expect(userObj1.getEmail()).to.not.be.null;
+                expect(userRes).to.be.true;
+            });
+    });
+
+
     it('Sign out directly', function(){
        userObj1.signUserOut()
            .then((userRes) => {
@@ -42,7 +52,7 @@ describe('User unit tests - direct interaction with auth', function(){
     it('Create and send password reset email', function(){
         userObj1.createUser("capslock.cos301@gmail.com", "123456")
             .then(() => {
-                userObj1.sendPasswordResetEmail("capslock.cos301@gmail.com")
+                userObj1.sendPasswordReset("capslock.cos301@gmail.com")
                     .then((userRes) => {
                         expect(userRes).to.be.true;
                     });
