@@ -24,8 +24,8 @@ class User {
         await auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
-                let user = userCredential.user;
                 _userCredential = userCredential;
+                let user = userCredential.user;
                 console.log("User creation successful: " + user.email + " has signed in");
                 result = true;
             })
@@ -43,6 +43,7 @@ class User {
         await auth.signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
+                _userCredential = userCredential;
                 let user = userCredential.user;
                 console.log("Sign in successful: " + user.email + " has signed in");
                 result = true;
@@ -68,14 +69,16 @@ class User {
         return result;
     }
 
-    async getCurrentUser() {
-        return _userCredential;
+    getCurrentUser() {
+        console.log("getCurrentUser(): " + _userCredential.user.uid);
+        return _userCredential.user;
     }
 
     getEmail() {
         if (_userCredential == null)
             return null;
-        return _userCredential.email;
+        console.log("getEmail(): " + _userCredential.user.email);
+        return _userCredential.user.email;
     }
 
     async updateUserEmail(newEmail, currentEmail, password) {
