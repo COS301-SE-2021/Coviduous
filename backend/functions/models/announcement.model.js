@@ -15,9 +15,9 @@ class Announcement {
         return new Announcement(announcementId, type, message, timestamp, companyId, adminId);
     }
 
-    getAnnouncementId(){
-        return this.announcementId;
-    }
+    // getAnnouncementId(){
+    //     return this.announcementId;
+    // }
 }
 
 module.exports=Announcement;
