@@ -15,9 +15,9 @@ const UserController = require("../services/user/user.controller");
 const userController = new UserController(true);
 
 // User routes
-// N.B. paths for a subsystem can all be the same
 router.get('/users', userController.signUserIn);
 router.post('/users', userController.createUser);
+router.get('/passwordReset', userController.sendPasswordResetEmail);
 
 // Export API routes
 module.exports = router;
