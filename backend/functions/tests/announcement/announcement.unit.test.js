@@ -6,10 +6,11 @@ let chaiHttp = require('chai-http'); // npm install chai-http
 let server = 'http://localhost:5001/coviduous-api/us-central1/app/'
 let should = chai.should();
 
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+//const functions = require('firebase-functions');
+//const admin = require('firebase-admin');
 
 const Announcement = require("../../models/announcement.model.js");
+//const announcementDB = require("../../config/announcement.firestore.database.js");
 
 chai.use(chaiHttp);
 
@@ -83,7 +84,7 @@ describe('/POST announcements', () => {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            // res.body.should.have.property('message').eql('Announcement successfully created');
+            res.body.should.have.property('message').eql('Announcement successfully created');
             // res.body.announcement.should.have.property('announcementId');
             // res.body.announcement.should.have.property('type');
             // res.body.announcement.should.have.property('message');
@@ -101,7 +102,6 @@ describe('/POST announcements', () => {
             .send(announcement)
             .end((err, res) => {
             expect(err).to.be.null;
-            //res.should.have.status(200);
             expect(res).to.have.status(200);
             expect(res.body).should.be.a('object');
             //done();
@@ -114,11 +114,20 @@ describe('/GET announcements', () => {
   chai.request(server).get('/api/announcements/')
       .end((err, res) => {
         expect(err).to.be.null;
-        //res.should.have.status(200);
         expect(res).to.have.status(200);
         expect(res.body).should.be.a('object');
         //done();
       })//.catch(done);
     });
 });
+
+// describe('Get all announcements', () => {
+//     it('it should GET all the announcements', () => {
+//         obj = announcementDB.viewAnnouncements()
+//         .then((res) => {
+//             expect(res).to.be.not.null;
+//             expect(res).to.be.a('object');
+//         });
+//     });
+// });
 

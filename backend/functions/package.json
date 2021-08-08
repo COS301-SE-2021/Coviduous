@@ -11,6 +11,7 @@
     "testUser": "mocha './tests/user/*.test.js' --timeout 5000",
     "testUserWithExit": "mocha './tests/user/*.test.js' --timeout 5000 --exit",
     "testAnnouncement": "mocha './tests/announcement/*.test.js'",
+    "testNotification": "mocha './tests/notification/*.test.js'",
     "testFloorPlan": "mocha './tests/floorplan/*.test.js'"
   },
   "engines": {

@@ -1,4 +1,3 @@
-const functions = require('firebase-functions');
 const admin = require('firebase-admin'); 
 
 const db = admin.firestore();
@@ -21,18 +20,14 @@ exports.deleteAnnouncement = async (announcementId) => {
         const document = db.collection('announcements').doc(announcementId); // delete document based on announcementID
         await document.delete();
   
-        // return res.status(200).send({
-        //     message: 'Announcement successfully deleted'
-        // });
         return true;
     } catch (error) {
         console.log(error);
-        //return res.status(500).send(error);
         return false;
     }
 };
 
-exports.viewAnnouncements = async () => {
+exports.viewAnnouncements = async (value) => {
     try {
         const document = db.collection('announcements');
         const snapshot = await document.get();
@@ -46,17 +41,9 @@ exports.viewAnnouncements = async () => {
     
         let announcements = list;
         
-        // return res.json({
-        //     message: 'Successfully retrieved announcements',
-        //     data: announcements 
-        // });
         return announcements;
     } catch (error) {
         console.log(error);
         return error;
-        // return res.status(500).send({
-        //     message: err.message || "Some error occurred while fetching announcements."
-        // });
-        // return false;
     }
 };
