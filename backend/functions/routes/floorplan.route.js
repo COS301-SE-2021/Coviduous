@@ -1,6 +1,7 @@
 //This file contains all the routes for the coviduous api
 let router = require('express').Router();
 let devDatabase = require("../config/firestore.database.js");
+let db=devDatabase();
 let testDatabase;
 
 // Set default API response
@@ -14,7 +15,7 @@ router.get('/', function (req, res) {
 // Import floorplan service
 const floorplanService = require("../services/floorplan/floorplan.service.js");
 // Set the database you want to work with the test or production database
-floorplanService.setDatabse(devDatabase);
+floorplanService.setDatabse(db);
 
 // Floorplan routes
 // N.B. paths for a subsystem can all be the same
