@@ -10,9 +10,13 @@ router.get('/', function (req, res) {
 
 // Import user controller
 const UserController = require("../services/user/user.controller");
+const devDatabase = require("../config/user.firestore.database.js");
 
 // Optionally use emulator instead of actual Firebase Auth service
 const userController = new UserController(true);
+
+// Set database
+userController.setDatabase(devDatabase);
 
 // User routes
 router.get('/users', userController.signUserIn);
