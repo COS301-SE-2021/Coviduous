@@ -46,14 +46,29 @@ exports.createRoom = async (req, res) => {
 
 };
 
+//NB the spelling of companyId and companyID is very important for this function we query companyID
 exports.viewFloorPlans = async (req, res) => {
   try {
-      let compayId=req.companyId;
-      console.log(compayId);
+    console.log(req.body.companyID);
+      let filteredList=[];
       let floorplans = await database.getFloorPlans();
+      floorplans.forEach(obj => {
+        if(obj.companyID===req.body.companyID)
+        {
+          console.log("Accepted");
+          console.log(obj.companyID);
+          filteredList.push(obj);
+        }
+        else
+        {
+          console.log("rejected");
+          console.log(obj.companyID);
+
+        }
+      });
       return res.status(200).send({
         message: 'Successfully retrieved floorplans',
-        data: floorplans
+        data: filteredList
       });
   } catch (error) {
       console.log(error);
