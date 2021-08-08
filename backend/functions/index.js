@@ -32,6 +32,6 @@ const shiftRoute = require("./routes/shift.route.js");
 app.use('/api/', announcementRoute); // testing http would be '.../api/announcement' - see announcement.route.js file for routes
 app.use('/api/', floorplanRoute);
 app.use('/api/', userRoute);
-app.use('/api',shiftRoute);
+app.use('/api/', shiftRoute);
 
 exports.app = functions.https.onRequest(app);
