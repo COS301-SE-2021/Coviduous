@@ -46,6 +46,23 @@ exports.createRoom = async (req, res) => {
 
 };
 
+exports.viewFloorPlans = async (req, res) => {
+  try {
+      let compayId=req.companyId;
+      console.log(compayId);
+      let floorplans = await database.getFloorPlans();
+      return res.status(200).send({
+        message: 'Successfully retrieved floorplans',
+        data: floorplans
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message || "Some error occurred while fetching floorplans."
+      });
+  }
+};
+
   exports.createFloorPlanMock = async (floorplanNumber, data) => {
       return await database.createFloorPlan(floorplanNumber,data);
 

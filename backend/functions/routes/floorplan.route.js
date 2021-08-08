@@ -22,7 +22,9 @@ floorplanService.setDatabse(db);
 router.post('/floorplan', floorplanService.createFloorPlan);
 router.post('/floorplan/floor', floorplanService.createFloor);
 router.post('/floorplan/room', floorplanService.createRoom);
-//router.get('/floorplan', floorplanService.viewAnnouncements);
+//when we get back our floorplans we query the database based on the companyId.
+//floorplans returned are based on the companyId
+router.get('/floorplan', floorplanService.viewFloorPlans);
 //router.delete('/floorplan', floorplanService.deleteAnnouncement);
 
 // Export API routes

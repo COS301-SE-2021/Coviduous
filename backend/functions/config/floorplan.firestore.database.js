@@ -44,6 +44,26 @@ class Firestore {
       }
     }
 
+    async getFloorPlans() {
+      try {
+        const document = db.collection('floorplans');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+    
+        lastQuerySucceeded=true;
+        return list;
+      } catch (error) {
+        console.log(error);
+        lastQuerySucceeded=false;
+      }
+    }
+
     getIfLastQuerySucceeded() {
         return true;
     }
