@@ -1,9 +1,14 @@
 const FirebaseClient = require("../services/user/firebase.auth");
 
-const firebaseClient = new FirebaseClient();
+let firebaseClient = null;
 
 class User {
-    constructor() {
+    constructor(useEmulator) {
+        if (useEmulator === true) {
+            firebaseClient = new FirebaseClient(true);
+        } else {
+            firebaseClient = new FirebaseClient(false);
+        }
         console.log("Created user class");
     }
 
@@ -11,16 +16,16 @@ class User {
         return await firebaseClient.createUser(email, password);
     }
 
-    signUserIn(email, password) {
-        return firebaseClient.signUserIn(email, password);
+    async signUserIn(email, password) {
+        return await firebaseClient.signUserIn(email, password);
     }
 
-    signUserOut() {
-        return firebaseClient.signUserOut();
+    async signUserOut() {
+        return await firebaseClient.signUserOut();
     }
 
-    updateUserEmail(email) {
-        return firebaseClient.updateUserEmail(email);
+    async updateUserEmail(newEmail, currentEmail, password) {
+        return await firebaseClient.updateUserEmail(newEmail, currentEmail, password);
     }
 }
 

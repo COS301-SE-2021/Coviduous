@@ -9,17 +9,37 @@ let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 chai.use(chaiHttp);
 
 describe('User unit tests', function(){
-    it('Should create user', function(){
-        let userObj1 = new User();
+    let userObj1 = new User(true);
+
+    it('Create new user directly', function(){
         userObj1.createUser("testEmail@email.com", "testPassword123")
             .then((userRes) => {
                 expect(userRes).to.be.true;
             });
     });
-});
 
-describe('/POST user', () => {
-    it('Should create a new user account', () => {
+    it('Sign in directly', function(){
+        userObj1.signUserIn("testEmail@email.com", "testPassword123")
+            .then((userRes) => {
+                expect(userRes).to.be.true;
+            });
+    });
+
+    it('Update email directly', function(){
+        userObj1.updateUserEmail("newEmail@email.com", "testEmail@email.com", "testPassword123")
+            .then((userRes) => {
+                expect(userRes).to.be.true;
+            });
+    });
+
+    it('Sign out directly', function(){
+       userObj1.signUserOut()
+           .then((userRes) => {
+              expect(userRes).to.be.true;
+           });
+    });
+
+    it('/POST user to create new account', () => {
         let user = {
             email: "testemail2@email.com",
             password: "123456"
@@ -35,10 +55,8 @@ describe('/POST user', () => {
                 expect(res.body).should.be.a('object');
             });
     });
-});
 
-describe('/GET user', () => {
-    it('Should sign an existing user in', () => {
+    it('/GET user to sign in', () => {
         let user = {
             email: "testemail2@email.com",
             password: "123456"

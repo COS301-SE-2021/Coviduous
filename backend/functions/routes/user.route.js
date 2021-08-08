@@ -4,12 +4,15 @@ let router = require('express').Router();
 router.get('/', function (req, res) {
     res.json({
         status: 200,
-        message: 'This is the default announcement API route'
+        message: 'This is the default user API route'
     });
 });
 
 // Import user controller
-const userController = require("../services/user/user.controller");
+const UserController = require("../services/user/user.controller");
+
+// Optionally use emulator instead of actual Firebase Auth service
+const userController = new UserController(true);
 
 // User routes
 // N.B. paths for a subsystem can all be the same

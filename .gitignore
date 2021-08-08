@@ -176,3 +176,4 @@ node_modules/
 
 backend/functions/node_modules
 backend/functions/.env
+backend/functions/permissions.json

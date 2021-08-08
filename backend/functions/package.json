@@ -8,7 +8,8 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "test": "mocha './tests/*/*.test.js'",
-    "testUser": "mocha './tests/user/*.test.js' --exit",
+    "testUser": "mocha './tests/user/*.test.js' --timeout 5000",
+    "testUserWithExit": "mocha './tests/user/*.test.js' --timeout 5000 --exit",
     "testAnnouncement": "mocha './tests/announcement/*.test.js'",
     "testFloorPlan": "mocha './tests/floorplan/*.test.js'"
   },
