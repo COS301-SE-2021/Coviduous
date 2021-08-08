@@ -20,15 +20,9 @@ officeService.setDatabse(db);
 // Floorplan routes
 // N.B. paths for a subsystem can all be the same
 router.post('/office', officeService.createBooking);
-//when we get back our floorplans we query the database based on the companyId.
-//floorplans returned are based on the companyId
-//router.get('/floorplan', floorplanService.viewFloorPlans);
-// we retrieve our floors based on the floorplanNumber
-//router.get('/floorplan/floors', floorplanService.viewFloors);
-// we retrieve our roomss based on the floorNumber
-//router.get('/floorplan/floors/rooms', floorplanService.viewRooms);
-//router.put('/floorplan/room',floorplanService.updateRoom);
-//router.delete('/floorplan', floorplanService.deleteAnnouncement);
+router.get('/office', officeService.viewBookings);
+router.delete('/office', officeService.deleteBooking);
+
 
 // Export API routes
 module.exports = router;
