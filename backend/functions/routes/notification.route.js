@@ -7,3 +7,12 @@ router.get('/', function (req, res) {
         message: 'This is the default notification API route'
     });
 });
+
+//import notification controller
+const notificationController = require("../services/notification/notification.controller.js");
+const devDatabase = require("../config/notification.firestore.database.js");
+
+//setting database
+notificationController.setDatabase(devDatabase);
+
+
