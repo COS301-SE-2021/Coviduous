@@ -15,4 +15,11 @@ const devDatabase = require("../config/notification.firestore.database.js");
 //setting database
 notificationController.setDatabase(devDatabase);
 
+//notification routes
+router.get('/notification', notificationController.viewNotifications);
+router.post('/notification', notificationController.createNotification);
+router.delete('/notification', notificationController.deleteNotification);
+
+// Export API routes
+module.exports = router;
 
