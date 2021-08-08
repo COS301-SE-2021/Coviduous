@@ -12,7 +12,7 @@ class UserController {
         }
     }
 
-    async setDatabase (db) {
+    async setDatabase(db) {
         database = db;
     }
 
