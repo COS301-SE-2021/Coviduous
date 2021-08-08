@@ -60,7 +60,7 @@ describe('User unit tests - direct interaction with auth', function(){
     });
 });
 
-describe('User unit tests - interaction over HTTP', function(){
+describe('User unit tests - interaction with auth and database over HTTP', function(){
     it('POST /api/users/signUp to create new user', () => {
         let user = {
             uid: "1",
