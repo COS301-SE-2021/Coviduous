@@ -64,6 +64,47 @@ class Firestore {
       }
     }
 
+
+    async getFloors() {
+      try {
+        const document = db.collection('floors');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+    
+        lastQuerySucceeded=true;
+        return list;
+      } catch (error) {
+        console.log(error);
+        lastQuerySucceeded=false;
+      }
+    }
+
+    async getRooms() {
+      try {
+        const document = db.collection('rooms');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+    
+        lastQuerySucceeded=true;
+        return list;
+      } catch (error) {
+        console.log(error);
+        lastQuerySucceeded=false;
+      }
+    }
+
     getIfLastQuerySucceeded() {
         return true;
     }
