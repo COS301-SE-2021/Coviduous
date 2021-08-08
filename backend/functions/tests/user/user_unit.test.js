@@ -61,7 +61,7 @@ describe('User unit tests - direct interaction with auth', function(){
 });
 
 describe('User unit tests - interaction over HTTP', function(){
-    it('/POST user to create new account', () => {
+    it('POST /api/users/signUp to create new user', () => {
         let user = {
             uid: "1",
             email: "testemail2@email.com",
@@ -69,7 +69,7 @@ describe('User unit tests - interaction over HTTP', function(){
         }
 
         chai.request(server)
-            .post('/api/users')
+            .post('/api/users/signUp')
             .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
@@ -79,10 +79,44 @@ describe('User unit tests - interaction over HTTP', function(){
             });
     });
 
-    it('/GET user to sign in', () => {
+    it('GET /api/users/signIn to sign in', () => {
         let user = {
             email: "testemail2@email.com",
             password: "123456"
+        }
+
+        chai.request(server)
+            .get('/api/users/signIn')
+            .send(user)
+            .end((err, res) => {
+                expect(err).to.be.null;
+                should.exist(res.body);
+                res.should.have.status(200);
+                expect(res.body).should.be.a('object');
+            });
+    });
+
+    it('POST /api/users/updateDetails to update user details', () => {
+        let user = {
+            currentEmail: "testemail2@email.com",
+            firstName: "Hello",
+            lastName: "World"
+        }
+
+        chai.request(server)
+            .post('/api/users/updateDetails')
+            .send(user)
+            .end((err, res) => {
+                expect(err).to.be.null;
+                should.exist(res.body);
+                res.should.have.status(200);
+                expect(res.body).should.be.a('object');
+            });
+    });
+
+    it('GET /api/users to retrieve user details', () => {
+        let user = {
+            email: "testemail2@email.com",
         }
 
         chai.request(server)
@@ -96,13 +130,30 @@ describe('User unit tests - interaction over HTTP', function(){
             });
     });
 
-    it('/POST to send password reset email', () => {
+    it('POST /api/passwordReset to send password reset email', () => {
         let user = {
             email: "testemail2@email.com",
         }
 
         chai.request(server)
             .get('/api/passwordReset')
+            .send(user)
+            .end((err, res) => {
+                expect(err).to.be.null;
+                should.exist(res.body);
+                res.should.have.status(200);
+                expect(res.body).should.be.a('object');
+            });
+    });
+
+    it('POST /api/users/updateEmail to update user email', () => {
+        let user = {
+            currentEmail: "testemail2@email.com",
+            newEmail: "updatedEmail@email.com"
+        }
+
+        chai.request(server)
+            .post('/api/users/updateEmail')
             .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
