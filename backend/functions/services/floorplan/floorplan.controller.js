@@ -143,6 +143,21 @@ exports.viewRooms = async (req, res) => {
 
 };
 
+exports.updateRoom = async (req, res) => {
+  try {
+    await database.editRoom(req.body.roomNumber,req.body.roomArea,req.body.deskArea,req.body.numDesks,req.body.percentage,req.body.maxCapacity,req.body.currentCapacity);
+    
+    return res.status(200).send({
+      message: 'room successfully updated',
+      data: req.body
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+
+};
+
 exports.setDatabse= async(db)=>{
 
   database=db;

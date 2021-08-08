@@ -29,6 +29,7 @@ router.get('/floorplan', floorplanService.viewFloorPlans);
 router.get('/floorplan/floors', floorplanService.viewFloors);
 // we retrieve our roomss based on the floorNumber
 router.get('/floorplan/floors/rooms', floorplanService.viewRooms);
+router.put('/floorplan/room',floorplanService.updateRoom);
 //router.delete('/floorplan', floorplanService.deleteAnnouncement);
 
 // Export API routes
