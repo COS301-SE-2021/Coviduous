@@ -37,9 +37,9 @@ class FirebaseClient {
         return result;
     }
 
-    signUserIn(email, password) {
+    async signUserIn(email, password) {
         let result = false;
-        auth.signInWithEmailAndPassword(email, password)
+        await auth.signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 let user = userCredential.user;
@@ -55,9 +55,9 @@ class FirebaseClient {
         return result;
     }
 
-    signUserOut() {
+    async signUserOut() {
         let result = false;
-        auth.signOut().then(() => {
+        await auth.signOut().then(() => {
             console.log("Sign out successful");
             result = true;
         }).catch((error) => {
@@ -67,32 +67,41 @@ class FirebaseClient {
         return result;
     }
 
-    getCurrentUser() {
-        _user = Firebase.auth().currentUser;
+    async getCurrentUser() {
+        _user = await auth.currentUser;
         return _user;
     }
 
     getEmail() {
-        if (_user == null) return;
+        if (_user == null) return null;
         return _user.email;
     }
 
-    updateUserEmail(email) {
+    async updateUserEmail(newEmail, currentEmail, password) {
         let result = false;
-        if (_user == null) return;
-        auth.currentUser.updateEmail(email).then(() => {
-            console.log("Email update successful. Email changed to " + email);
-            result = true;
-        }).catch((error) => {
-            console.log("Email update unsuccessful: " + error);
-            result = false;
+        await auth.signInWithEmailAndPassword(currentEmail, password)
+            .then((userCredential) => {
+                userCredential.user.updateEmail(newEmail).then(() => {
+                    console.log("Email update successful. Email changed to " + newEmail);
+                    result = true;
+                }).catch((error) => {
+                    let errorCode = error.code;
+                    let errorMessage = error.message;
+                    console.log("Email update unsuccessful. Error " + errorCode + ": " + errorMessage);
+                    result = false;
+                });
+            }).catch((error) => {
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                console.log("Email update unsuccessful. Error " + errorCode + ": " + errorMessage);
+                result = false;
         });
         return result;
     }
 
-    sendPasswordResetEmail(email) {
+    async sendPasswordResetEmail(email) {
         let result = false;
-        auth.sendPasswordResetEmail(email)
+        await auth.sendPasswordResetEmail(email)
             .then(() => {
                 console.log("Password reset email sent to " + email);
                 result = true;
