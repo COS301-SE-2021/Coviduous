@@ -18,7 +18,7 @@ exports.createUser = async (uid, email) => {
     return result;
 }
 
-exports.updateEmail = async (currentEmail, newEmail) => {
+exports.updateEmail = async (newEmail, currentEmail) => {
     let result;
     try {
         const document = db.collection('users');
