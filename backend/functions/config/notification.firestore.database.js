@@ -2,7 +2,6 @@ const admin = require('firebase-admin');
 
 const db = admin.firestore();
 
-//generate notification id
 exports.createNotification = async (notificationId, data) => {
     try {
         await db.collection('notifications').doc(notificationId)
@@ -16,7 +15,7 @@ exports.createNotification = async (notificationId, data) => {
 
 exports.deleteNotification = async (notificationId) => {
     try {
-        const document = db.collection('announcements').doc(notificationId); // delete document based on announcementID
+        const document = db.collection('notifications').doc(notificationId); // delete document based on notificationId
         await document.delete();
         return true;
     } catch (error) {
@@ -24,6 +23,7 @@ exports.deleteNotification = async (notificationId) => {
         return false;
     }
 };
+
 exports.viewNotifications = async () => {
     try {
         const document = db.collection('notifications');
@@ -40,6 +40,24 @@ exports.viewNotifications = async () => {
     } catch (error) {
         console.log(error);
         return error;
+    }
+};
 
+exports.viewNotificationsUserEmail = async (userEmail) => {
+    try {
+        const document = db.collection('notifications').where("userEmail", "==", userEmail);
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+
+        return list;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
