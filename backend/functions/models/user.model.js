@@ -1,9 +1,14 @@
 const FirebaseClient = require("../services/user/firebase.auth");
 
-const firebaseClient = new FirebaseClient();
+let firebaseClient = null;
 
 class User {
-    constructor() {
+    constructor(useEmulator) {
+        if (useEmulator === true) {
+            firebaseClient = new FirebaseClient(true);
+        } else {
+            firebaseClient = new FirebaseClient(false);
+        }
         console.log("Created user class");
     }
 
