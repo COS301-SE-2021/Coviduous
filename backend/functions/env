@@ -1,7 +1,0 @@
-# Used in index.js
-FirebaseDatabaseURL = https://fir-api-9a206..firebaseio.com
-
-# Used in services/user/firebase.js
-FirebaseClientAPIKey = AIzaSyAYf69-rLqgS4ryuJc1bYCJObTogVuglpo
-FirebaseClientAuthDomain = clem-bfea0.firebaseapp.com
-FirebaseClientProjectID = clem-bfea0

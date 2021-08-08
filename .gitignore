@@ -175,3 +175,4 @@ node_modules/
 .env
 
 backend/functions/node_modules
+backend/functions/.env
