@@ -1,23 +1,19 @@
 class Announcement {
-    constructor(announcementId, type, message, timestamp, companyId, adminId)
+    constructor(announcementId, type, message, timestamp, adminId, companyId)
     {
         this.announcementId = announcementId;
         this.type = type;
         this.message = message;
         this.timestamp = timestamp;
-        this.companyId = companyId;
         this.adminId = adminId;
+        this.companyId = companyId;
 
         console.log("created announcement class");
     }
 
-    createAnnouncement(announcementId, type, message, timestamp, companyId, adminId) {
-        return new Announcement(announcementId, type, message, timestamp, companyId, adminId);
+    createAnnouncement(announcementId, type, message, timestamp, adminId, companyId) {
+        return new Announcement(announcementId, type, message, timestamp, adminId, companyId);
     }
-
-    // getAnnouncementId(){
-    //     return this.announcementId;
-    // }
 }
 
-module.exports=Announcement;
+module.exports = Announcement;
