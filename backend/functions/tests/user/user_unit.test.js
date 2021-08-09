@@ -7,55 +7,65 @@ const User = require("../../models/user.model");
 let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 
 chai.use(chaiHttp);
+let userObj = new User(true);
 
-describe('User unit tests - direct interaction with auth', function(){
-    let userObj1 = new User(true);
+// This function allows tests to be delayed so that they're properly executed in order
+function delay(interval) {
+    return it('Should delay', done => {
+        setTimeout(() => done(), interval)
+    }).timeout(interval + 100)
+}
 
-    it('Create new user directly', function(){
-        userObj1.createUser("testEmail@email.com", "testPassword123")
+describe('User unit tests - direct interaction with auth', function() {
+    it('* User.createUser() function', function() {
+        userObj.createUser("testEmail@email.com", "testPassword123")
             .then((userRes) => {
                 expect(userRes).to.be.true;
             });
     });
 
-    it('Sign in directly', function(){
-        userObj1.signUserIn("testEmail@email.com", "testPassword123")
+    delay(1000);
+
+    it('* User.signUserIn(), User.getCurrentUser(), and User.getEmail() functions', function() {
+        userObj.signUserIn("testEmail@email.com", "testPassword123")
+            .then((userRes) => {
+                expect(userObj.getCurrentUser()).to.not.be.null;
+                expect(userObj.getEmail()).to.not.be.null;
+                expect(userRes).to.be.true;
+            });
+    });
+
+    delay(1000);
+
+    it('* User.createUser() function', function() {
+        userObj.createUser("testEmail2@email.com", "testPassword123")
             .then((userRes) => {
                 expect(userRes).to.be.true;
             });
     });
 
-    it('Update email directly', function(){
-        userObj1.updateUserEmail("newEmail@email.com", "testEmail@email.com", "testPassword123")
+    it('* User.updateUserEmail() function', function() {
+        userObj.updateUserEmail("newEmail@email.com", "testEmail2@email.com", "testPassword123")
             .then((userRes) => {
                 expect(userRes).to.be.true;
             });
     });
 
-    it('Get user credentials directly', function(){
-        userObj1.createUser( "yetAnotherNewEmail@email.com", "testPassword123")
+    delay(1000);
+
+    it('* User.signUserOut() function', function(){
+        userObj.signUserOut()
             .then((userRes) => {
-                expect(userObj1.getCurrentUser()).to.not.be.null;
-                expect(userObj1.getEmail()).to.not.be.null;
                 expect(userRes).to.be.true;
             });
     });
 
+    delay(1000);
 
-    it('Sign out directly', function(){
-       userObj1.signUserOut()
-           .then((userRes) => {
-              expect(userRes).to.be.true;
-           });
-    });
-
-    it('Create and send password reset email', function(){
-        userObj1.createUser("capslock.cos301@gmail.com", "123456")
-            .then(() => {
-                userObj1.sendPasswordReset("capslock.cos301@gmail.com")
-                    .then((userRes) => {
-                        expect(userRes).to.be.true;
-                    });
+    it('* User.sendPasswordReset() function', function() {
+        userObj.sendPasswordReset("testEmail@email.com")
+            .then((userRes) => {
+                expect(userRes).to.be.true;
             });
     });
 });
@@ -64,7 +74,7 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
     it('POST /api/users/signUp to create new user', () => {
         let user = {
             uid: "1",
-            email: "testemail2@email.com",
+            email: "testemail3@email.com",
             password: "123456"
         }
 
@@ -74,14 +84,17 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
             .end((err, res) => {
                 expect(err).to.be.null;
                 should.exist(res.body);
+                console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
             });
     });
 
+    delay(1000);
+
     it('GET /api/users/signIn to sign in', () => {
         let user = {
-            email: "testemail2@email.com",
+            email: "testemail3@email.com",
             password: "123456"
         }
 
@@ -91,16 +104,20 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
             .end((err, res) => {
                 expect(err).to.be.null;
                 should.exist(res.body);
+                console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
             });
     });
 
+    delay(1000);
+
     it('POST /api/users/updateDetails to update user details', () => {
         let user = {
-            currentEmail: "testemail2@email.com",
+            currentEmail: "testemail3@email.com",
             firstName: "Hello",
-            lastName: "World"
+            lastName: "World",
+            userType: "user"
         }
 
         chai.request(server)
@@ -109,14 +126,17 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
             .end((err, res) => {
                 expect(err).to.be.null;
                 should.exist(res.body);
+                console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
             });
     });
 
+    delay(1000);
+
     it('GET /api/users to retrieve user details', () => {
         let user = {
-            email: "testemail2@email.com",
+            email: "testemail3@email.com",
         }
 
         chai.request(server)
@@ -125,14 +145,17 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
             .end((err, res) => {
                 expect(err).to.be.null;
                 should.exist(res.body);
+                console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
             });
     });
 
+    delay(1000);
+
     it('POST /api/passwordReset to send password reset email', () => {
         let user = {
-            email: "testemail2@email.com",
+            email: "testemail3@email.com",
         }
 
         chai.request(server)
@@ -141,15 +164,18 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
             .end((err, res) => {
                 expect(err).to.be.null;
                 should.exist(res.body);
+                console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
             });
     });
 
+    delay(1000);
+
     it('POST /api/users/updateEmail to update user email', () => {
         let user = {
             newEmail: "updatedEmail@email.com",
-            currentEmail: "testemail2@email.com",
+            currentEmail: "testEmail3@email.com",
             password: "123456"
         }
 
@@ -159,6 +185,7 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
             .end((err, res) => {
                 expect(err).to.be.null;
                 should.exist(res.body);
+                console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
             });
