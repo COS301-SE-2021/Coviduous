@@ -17,6 +17,12 @@ class HealthCheck {
         this.shortnessOfBreadth = shortnessOfBreadth;
         this.lossOfTasteSmell = lossOfTasteSmell;
 
+        // this.6feetContact = 6feetContact;
+        // this.testedPositive = testedPositive;
+        // this.travelled = travelled;
+
         console.log("created health check class");
     }
 }
+
+module.exports = HealthCheck
