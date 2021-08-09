@@ -9,7 +9,7 @@ let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 chai.use(chaiHttp);
 let userObj = new User(true);
 
-//This function allows tests to be delayed so that they're properly executed in order
+// This function allows tests to be delayed so that they're properly executed in order
 function delay(interval) {
     return it('Should delay', done => {
         setTimeout(() => done(), interval)
