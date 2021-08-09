@@ -5,42 +5,56 @@ let database;
 //when a floorplan is created it is given the number n of floors within that floorplan 
 //this function initiates n floors under a created floorplan
 exports.createFloorPlan = async (req, res) => {
-        try {
-          let randInt = Math.floor(1000 + Math.random() * 9000);
-          let floorplanNumber = "FLP-" + randInt.toString();
-         // let timestamp = new Date().toISOString();
-          await database.createFloorPlan(floorplanNumber,req.body);
-          for (let index = 0; index < req.body.numFloors; index++) {
-            let randInt2 = Math.floor(1000 + Math.random() * 9000);
-            let floorNumber = "FLR-" + randInt2.toString();
-            let floorData = {
-              floorNumber: floorNumber,
-              numRooms: 0,
-              currentCapacity: 0,
-              maxCapacity: 0,
-              floorplanNumber: floorplanNumber,
-              adminId: req.body.adminId,
-              companyId:req.body.companyId
-            }
-            await database.createFloor(floorNumber,floorData);
-            console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+floorplanNumber);
-            
+      try {
+        let randInt = Math.floor(1000 + Math.random() * 9000);
+        let floorplanNumber = "FLP-" + randInt.toString();
+        // let timestamp = new Date().toISOString();
+        await database.createFloorPlan(floorplanNumber,req.body);
+        for (let index = 0; index < req.body.numFloors; index++) {
+          let randInt2 = Math.floor(1000 + Math.random() * 9000);
+          let floorNumber = "FLR-" + randInt2.toString();
+          let floorData = {
+            floorNumber: floorNumber,
+            numRooms: 0,
+            currentCapacity: 0,
+            maxCapacity: 0,
+            floorplanNumber: floorplanNumber,
+            adminId: req.body.adminId,
+            companyId:req.body.companyId
           }
-          console.log("Floorplan with floorplanNumber : "+floorplanNumber+" succesfully created");
-          return res.status(200).send({
-            message: 'floorplan successfully created',
-            data: req.body
-          });
-        } catch (error) {
-          console.log(error);
-          return res.status(500).send(error);
+          await database.createFloor(floorNumber,floorData);
+          console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+floorplanNumber);
+          
         }
+        console.log("Floorplan with floorplanNumber : "+floorplanNumber+" succesfully created");
+        return res.status(200).send({
+          message: 'floorplan successfully created',
+          data: req.body
+        });
+      } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+      }
 
   };
 
+
+  //This function adds a single floor to a specific floorplan
   exports.createFloor = async (req, res) => {
     try {
-      await database.createFloor(req.body.floorNumber,req.body);
+      let randInt2 = Math.floor(1000 + Math.random() * 9000);
+      let floorNumber = "FLR-" + randInt2.toString();
+      let floorData = {
+        floorNumber: floorNumber,
+        numRooms: 0,
+        currentCapacity: 0,
+        maxCapacity: 0,
+        floorplanNumber: req.body.floorplanNumber,
+        adminId: req.body.adminId,
+        companyId:req.body.companyId
+      }
+      await database.createFloor(floorNumber,floorData);
+      console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+req.body.floorplanNumber);
       
       return res.status(200).send({
         message: 'floor successfully created',
