@@ -23,7 +23,7 @@ class UserController {
 
             return res.status(200).send({
                 message: 'User successfully created',
-                data: req.body
+                data: req.body.email
             });
         } catch (error) {
             console.log("Error while creating new user: " + error);
@@ -40,7 +40,6 @@ class UserController {
 
             return res.status(200).send({
                 message: 'User successfully signed in',
-                data: req.body
             });
         } catch (error) {
             console.log("Error while signing in user: " + error);
@@ -50,11 +49,11 @@ class UserController {
 
     async getUserDetails(req, res) {
         try {
-            await database.getUserDetails(req.body.email);
+            let list = await database.getUserDetails(req.body.email);
 
             return res.status(200).send({
                message: 'User details found',
-               data: req.body
+               data: list
             });
         } catch (error) {
             console.log("Error while retrieving user details: " + error);
@@ -65,11 +64,10 @@ class UserController {
     async updateUserDetails(req, res) {
         try {
             await database.updateUserDetails(req.body.currentEmail.toLowerCase(), req.body.firstName,
-                req.body.lastName, req.body.companyID, req.body.companyName, req.body.companyAddress);
+                req.body.lastName, req.body.userType, req.body.companyID, req.body.companyName, req.body.companyAddress);
 
             return res.status(200).send({
                 message: 'User updated',
-                data: req.body
             });
         } catch (error) {
             console.log("Error while updating user details: " + error);
@@ -85,7 +83,7 @@ class UserController {
 
             return res.status(200).send({
                 message: 'User updated',
-                data: req.body
+                data: 'Email was changed from ' + req.body.currentEmail + ' to ' + req.body.newEmail
             });
         } catch (error) {
             console.log("Error while updating user details: " + error);
@@ -99,7 +97,7 @@ class UserController {
 
             return res.status(200).send({
                message: 'Password reset email sent',
-               data: req.body
+               data: 'Email was sent to ' + req.body.email
             });
         } catch (error) {
             console.log("Error while sending reset password email: " + error);

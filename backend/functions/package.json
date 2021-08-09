@@ -2,6 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
+    "postinstall": "npm install",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
@@ -38,5 +39,12 @@
     "firebase-functions-test": "^0.2.3",
     "mocha": "^9.0.3"
   },
-  "private": true
+  "private": true,
+  "version": "1.0.0",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
