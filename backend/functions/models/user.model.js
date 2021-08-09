@@ -83,9 +83,9 @@ class User {
 
     async updateUserEmail(newEmail, currentEmail, password) {
         let result = false;
-        await auth.signInWithEmailAndPassword(currentEmail, password)
+        await auth.signInWithEmailAndPassword(currentEmail.toLowerCase(), password)
             .then((userCredential) => {
-                userCredential.user.updateEmail(newEmail).then(() => {
+                userCredential.user.updateEmail(newEmail.toLowerCase()).then(() => {
                     console.log("Email update successful. Email changed to " + newEmail);
                     result = true;
                 }).catch((error) => {
