@@ -44,6 +44,17 @@ class Firestore {
       }
     }
 
+    async createDesk(deskNumber, deskData) {
+      try {
+        response=await db.collection('desks').doc(deskNumber)
+            .create(deskData); 
+            lastQuerySucceeded=true;
+      } catch (error) {
+        console.log(error);
+        lastQuerySucceeded=false;
+      }
+    }
+
     async getFloorPlans() {
       try {
         const document = db.collection('floorplans');
@@ -105,6 +116,20 @@ class Firestore {
       }
     }
 
+    async addRoom(floorNumber,currentNumRoomsInFloor) {
+      try {
+        response= await db.collection('floors').doc(floorNumber).update(
+          {
+            "numRooms": currentNumRoomsInFloor+1
+        }
+        );
+        
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
 
     async editRoom(roomNumber,roomArea,deskArea,numDesks,percentage,maxCapacity,currentCapacity) {
       try {
