@@ -27,7 +27,7 @@ exports.deleteAnnouncement = async (announcementId) => {
     }
 };
 
-exports.viewAnnouncements = async (value) => {
+exports.viewAnnouncements = async () => {
     try {
         const document = db.collection('announcements');
         const snapshot = await document.get();
