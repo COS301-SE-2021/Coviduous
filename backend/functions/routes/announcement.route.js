@@ -10,6 +10,7 @@ router.get('/', function (req, res) {
 
 // Import announcement controller
 const announcementController = require("../services/announcement/announcement.controller.js");
+// Import database
 const devDatabase = require("../config/announcement.firestore.database.js");
 
 // set database to use

@@ -1,23 +1,21 @@
-class Notification{
-    constructor(notificationId, type, message, timestamp, companyId, adminId)
+class Notification {
+    constructor(notificationId, userId, userEmail, subject, message, timestamp, adminId, companyId)
     {
         this.notificationId = notificationId;
-        this.type = type;
+        this.userId = userId;
+        this.userEmail = userEmail;
+        this.subject = subject;
         this.message = message;
         this.timestamp = timestamp;
-        this.companyId = companyId;
         this.adminId = adminId;
+        this.companyId = companyId;
 
         console.log("created notification class");
     }
 
-    createNotification(notificationId, type, message, timestamp, companyId, adminId) {
-        return new Notification(notificationId, type, message, timestamp, companyId, adminId);
-    }
-
-    getNotificationId(){
-        return this.notificationId;
-    }
+    // getNotificationId(){
+    //     return this.notificationId;
+    // }
 }
 
-module.exports=Notification;
+module.exports = Notification;
