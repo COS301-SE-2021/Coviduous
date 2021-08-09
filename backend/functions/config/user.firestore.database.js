@@ -8,7 +8,7 @@ exports.createUser = async (uid, email) => {
         await db.collection('users')
             .add({
                 uid: uid,
-                email: email
+                email: email.toLowerCase()
             });
         result = true;
     } catch (error) {
@@ -77,7 +77,7 @@ exports.getUserDetails = async (email) => {
     }
 }
 
-exports.updateUserDetails = async (currentEmail, firstName, lastName, companyID, companyName, companyAddress) => {
+exports.updateUserDetails = async (currentEmail, firstName, lastName, userType, companyID, companyName, companyAddress) => {
     let result;
     try {
         const document = db.collection('users');
@@ -99,6 +99,8 @@ exports.updateUserDetails = async (currentEmail, firstName, lastName, companyID,
                     .set({
                         ...((firstName != null && firstName !== "") && {firstName: firstName}),
                         ...((lastName != null && lastName !== "") && {lastName: lastName}),
+                        ...((userType != null && userType.toLowerCase() === "admin") && {userType: "admin"}),
+                        ...((userType != null && userType.toLowerCase() === "user") && {userType: "user"}),
                         ...((companyID != null && companyID !== "") && {companyID: companyID}),
                         ...((companyName != null && companyName !== "") && {companyName: companyName}),
                         ...((companyAddress != null && companyAddress !== "") && {companyAddress: companyAddress})
