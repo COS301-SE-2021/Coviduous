@@ -33,6 +33,7 @@ import 'package:frontend/frontend/screens/health/admin_employee_permissions.dart
 import 'package:frontend/frontend/screens/health/admin_home_permissions.dart';
 import 'package:frontend/frontend/screens/health/admin_view_access_requests.dart';
 import 'package:frontend/frontend/screens/health/admin_view_permissions.dart';
+import 'package:frontend/frontend/screens/health/admin_contact_trace.dart';
 import 'package:frontend/frontend/screens/health/user_home_health.dart';
 import 'package:frontend/frontend/screens/health/user_health_check.dart';
 import 'package:frontend/frontend/screens/health/user_view_permissions.dart';
@@ -148,6 +149,7 @@ class MyApp extends StatelessWidget{
         EmployeePermissions.routeName: (ctx)=> EmployeePermissions(),
         AdminViewAccessRequests.routeName: (ctx)=> AdminViewAccessRequests(),
         AdminViewPermissions.routeName: (ctx)=> AdminViewPermissions(),
+        AdminContactTrace.routeName: (ctx)=> AdminContactTrace(),
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
