@@ -9,10 +9,11 @@ let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 chai.use(chaiHttp);
 let userObj = new User(true);
 
+//This function allows tests to be delayed so that they're properly executed in order
 function delay(interval) {
     return it('Should delay', done => {
         setTimeout(() => done(), interval)
-    }).timeout(interval + 100) // The extra 100ms should guarantee the test will not fail due to exceeded timeout
+    }).timeout(interval + 100)
 }
 
 describe('User unit tests - direct interaction with auth', function() {
