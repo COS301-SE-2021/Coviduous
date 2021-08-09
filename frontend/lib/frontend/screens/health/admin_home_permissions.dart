@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:frontend/frontend/screens/health/admin_contact_trace.dart';
 import 'package:frontend/frontend/screens/health/admin_view_permissions.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
@@ -10,7 +11,7 @@ import 'package:frontend/frontend/screens/health/admin_view_access_requests.dart
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminPermissions extends StatefulWidget {
-  static const routeName = "/admin_PermissionsHome";
+  static const routeName = "/admin_permissions_home";
 
   @override
   _AdminPermissionsState createState() => _AdminPermissionsState();
@@ -137,6 +138,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                     ),
                     onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(AdminContactTrace.routeName);
                     }
                 ),
                 SizedBox (
