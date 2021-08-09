@@ -1,10 +1,32 @@
-//var database = require("../../config/firestore.database.js");
+//Floorplan controller handles the operations of the floorplan service with business logic and CRUD operations
 let database;
 
+//Create floorplan function will create a floorplan under the given database
+//when a floorplan is created it is given the number n of floors within that floorplan 
+//this function initiates n floors under a created floorplan
 exports.createFloorPlan = async (req, res) => {
         try {
-          await database.createFloorPlan(req.body.floorplanNumber,req.body);
-          
+          let randInt = Math.floor(1000 + Math.random() * 9000);
+          let floorplanNumber = "FLP-" + randInt.toString();
+         // let timestamp = new Date().toISOString();
+          await database.createFloorPlan(floorplanNumber,req.body);
+          for (let index = 0; index < req.body.numFloors; index++) {
+            let randInt2 = Math.floor(1000 + Math.random() * 9000);
+            let floorNumber = "FLR-" + randInt2.toString();
+            let floorData = {
+              floorNumber: floorNumber,
+              numRooms: 0,
+              currentCapacity: 0,
+              maxCapacity: 0,
+              floorplanNumber: floorplanNumber,
+              adminId: req.body.adminId,
+              companyId:req.body.companyId
+            }
+            await database.createFloor(floorNumber,floorData);
+            console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+floorplanNumber);
+            
+          }
+          console.log("Floorplan with floorplanNumber : "+floorplanNumber+" succesfully created");
           return res.status(200).send({
             message: 'floorplan successfully created',
             data: req.body
