@@ -23,6 +23,18 @@ exports.deleteShift = async (req, res) => {
       return res.status(500).send(error);
   }
 };
+exports.updateShift = async (req, res) => {
+  try {
+    await database.updateShift(req.body.shiftID);
+    return res.status(200).send({
+      data: req.body
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+
+};
 exports.viewShifts = async (req, res) => {
   try {
       let viewShifts = await database.viewShifts();  

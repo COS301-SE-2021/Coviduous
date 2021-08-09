@@ -11,34 +11,44 @@ exports.createShift = async (ShiftID,ShiftData) => {
         return false;
       }
 };
-
-exports.deleteShift = async (ShiftID) => {
-  try {
-      const document = db.collection('Shift').doc(ShiftID); 
-      await document.delete();
-      return true;
-  } catch (error) {
-      console.log(error);
-      return false;
-  }
-};
 exports.viewShift = async () => {
-  try {
-      const document = db.collection('Shift');
-      const snapshot = await document.get();
-
-      let list = [];
-      snapshot.forEach(doc => {
-          let data = doc.data();
-          list.push(data);
-      });
+    try {
+        const document = db.collection('Shift');
+        const snapshot = await document.get();
   
-      let shifts = list;
-      return shifts;
-  } catch (error) {
-      console.log(error);
-      return false;
+        let list = [];
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+  
+        return list;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+  };
+exports.deleteShift = async (ShiftID) => {
+    try {
+        const document = db.collection('Shift').doc(ShiftID); 
+        await document.delete();
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
   }
+exports.updateShift = async (shiftID) =>{
+  try{
+       const document = db.collection('Shift').doc(shiftID);
+       await document.update({
+           startTime:startTime,
+           endTime:endTime
+       }); 
+       return res.status(200).send();
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+}
 };
-
-
