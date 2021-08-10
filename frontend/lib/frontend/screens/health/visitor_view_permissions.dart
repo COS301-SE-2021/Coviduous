@@ -56,8 +56,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
          );
        } else {
          return ListView.builder(
-
-             padding: const EdgeInsets.all(8),
+             padding: const EdgeInsets.all(16),
              itemCount: numOfPermissions,
              itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
                return ListTile(
@@ -68,7 +67,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                          width: MediaQuery.of(context).size.width,
                          height: MediaQuery.of(context).size.height/24,
                          color: Theme.of(context).primaryColor,
-                         child: Text('Permission ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                         child: Text('Permission ' + (index+1).toString()),
                        ),
                        ListView(
                            shrinkWrap: true,
@@ -78,16 +77,19 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                                height: 50,
                                color: Colors.white,
                                child: Text('Type: Office access', style: TextStyle(color: Colors.black)),
+                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                              ),
                              Container(
                                height: 50,
                                color: Colors.white,
                                child: Text('Granted by: admin ID, name and surname here', style: TextStyle(color: Colors.black)),
+                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                              ),
                              Container(
                                height: 50,
                                color: Colors.white,
                                child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                              ),
                            ]
                        )
@@ -100,32 +102,22 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
        }
 
      }
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Permissions'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Permissions'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+            ]
+        )
     );
   }
 }

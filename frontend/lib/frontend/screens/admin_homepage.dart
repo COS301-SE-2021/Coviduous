@@ -40,48 +40,121 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
     return new WillPopScope(
       onWillPop: () async => false, //Prevent the back button from working
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/bg.jpg'),
-              fit: BoxFit.cover,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Admin dashboard'),
+            automaticallyImplyLeading: false, //Back button will not show up in app bar
           ),
-        ),
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              title: Text('Admin dashboard'),
-              automaticallyImplyLeading: false, //Back button will not show up in app bar
-            ),
-            body: Stack (
-                children: <Widget>[
-                  SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-                    child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container (
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container (
+                    height: 50,
+                    width: 180,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Manage account'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
+                      },
+                    )
+                ),
+                Container (
+                    height: 50,
+                    width: 110,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Log out'),
+                      onPressed: (){
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text('Warning'),
+                              content: Text('Are you sure you want to log out?'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('Yes'),
+                                  onPressed: (){
+                                    AuthClass().signOut();
+                                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+                                  },
+                                ),
+                                ElevatedButton(
+                                  child: Text('No'),
+                                  onPressed: (){
+                                    Navigator.of(ctx).pop();
+                                  },
+                                )
+                              ],
+                            ));
+                      },
+                    )
+                ),
+              ]
+            )
+          ),
+          body: Stack (
+              children: <Widget>[
+                SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+                  child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container (
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.all(20.0),
+                            child: Image(
                               alignment: Alignment.center,
-                              margin: EdgeInsets.all(20.0),
-                              child: Image(
-                                alignment: Alignment.center,
-                                image: AssetImage('assets/placeholder.com-logo1.png'),
-                                color: Colors.white,
-                                width: double.maxFinite,
-                                height: MediaQuery.of(context).size.height/8,
-                             ),
-                            ),
-                            SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
-                              width: MediaQuery.of(context).size.width,
-                            ),
-                            Container (
-                               height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                                padding: EdgeInsets.all(20),
-                                child: Column (
-                                    children: <Widget>[
-                                      ElevatedButton (
+                              image: AssetImage('assets/placeholder.com-logo1.png'),
+                              color: Colors.white,
+                              width: double.maxFinite,
+                              height: MediaQuery.of(context).size.height/8,
+                           ),
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Container (
+                             height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                              padding: EdgeInsets.all(20),
+                              child: Column (
+                                  children: <Widget>[
+                                    ElevatedButton (
+                                      style: ElevatedButton.styleFrom (
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Row (
+                                          children: <Widget>[
+                                            Expanded(child: Text('Floor plans')),
+                                            Icon(Icons.add_circle_rounded)
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                      ),
+                                      onPressed: () {
+                                       Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+                                      }
+                                  ),
+                                  SizedBox (
+                                    height: MediaQuery.of(context).size.height/48,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
+                                    ElevatedButton (
                                         style: ElevatedButton.styleFrom (
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(10),
@@ -89,195 +162,114 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         child: Row (
                                             children: <Widget>[
-                                              Expanded(child: Text('Floor plans')),
-                                              Icon(Icons.add_circle_rounded)
+                                              Expanded(child: Text('Shifts')),
+                                              Icon(Icons.alarm)
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                         ),
                                         onPressed: () {
-                                         Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+                                          Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
                                         }
                                     ),
                                     SizedBox (
                                       height: MediaQuery.of(context).size.height/48,
                                       width: MediaQuery.of(context).size.width,
                                     ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Shifts')),
-                                                Icon(Icons.alarm)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Announcements')),
+                                              Icon(Icons.add_alert)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
-                                          onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
-                                          }
-                                      ),
-                                      SizedBox (
-                                        height: MediaQuery.of(context).size.height/48,
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Notifications')),
+                                              Icon(Icons.notifications_active)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Announcements')),
-                                                Icon(Icons.add_alert)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Permissions')),
+                                              Icon(Icons.library_books)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+                                        }
+                                    ),
+                                    SizedBox (
+                                      height: MediaQuery.of(context).size.height/48,
+                                      width: MediaQuery.of(context).size.width,
+                                    ),
+                                    ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
-                                          onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-                                          }
-                                      ),
-                                      SizedBox (
-                                        height: MediaQuery.of(context).size.height/48,
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Notifications')),
-                                                Icon(Icons.notifications_active)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
-                                          }
-                                      ),
-                                      SizedBox (
-                                        height: MediaQuery.of(context).size.height/48,
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Permissions')),
-                                                Icon(Icons.library_books)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-                                          }
-                                      ),
-                                      SizedBox (
-                                        height: MediaQuery.of(context).size.height/48,
-                                        width: MediaQuery.of(context).size.width,
-                                      ),
-                                      ElevatedButton (
-                                          style: ElevatedButton.styleFrom (
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),
-                                          ),
-                                          child: Row (
-                                              children: <Widget>[
-                                                Expanded(child: Text('Reports')),
-                                                Icon(Icons.library_books)
-                                              ],
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(Reporting.routeName);
-                                          }
-                                      ),
-                                  ]
-                              )
-                          ),
-                        ],
-                      )
-                  ),
-                ),
-                Container (
-                  alignment: Alignment.bottomRight,
-                  child: Container (
-                      height: 50,
-                      width: 100,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                                        ),
+                                        child: Row (
+                                            children: <Widget>[
+                                              Expanded(child: Text('Reports')),
+                                              Icon(Icons.library_books)
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(Reporting.routeName);
+                                        }
+                                    ),
+                                ]
+                            )
                         ),
-                        child: Text('Log out'),
-                        onPressed: (){
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                title: Text('Warning'),
-                                content: Text('Are you sure you want to log out?'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('Yes'),
-                                    onPressed: (){
-                                      AuthClass().signOut();
-                                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text('No'),
-                                    onPressed: (){
-                                      Navigator.of(ctx).pop();
-                                    },
-                                  )
-                                ],
-                              ));
-                        },
-                      )
-                  ),
+                      ],
+                    )
                 ),
-                Container (
-                  alignment: Alignment.bottomLeft,
-                  child: Container (
-                      height: 50,
-                      width: 180,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text('Manage account'),
-                        onPressed: (){
-                          Navigator.of(context).pushReplacementNamed(AdminManageAccount.routeName);
-                        },
-                      )
-                  ),
-                )
-              ]
-          )
+              ),
+            ]
+        )
       ),
-    ),
     );
   }
 }

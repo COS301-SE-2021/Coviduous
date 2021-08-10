@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
-import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:pdf/widgets.dart' as pw;
@@ -34,12 +33,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
   List<List<String>> employeeList = [];
 
   Future loadPDFFonts() async {
-    var fontAssets = await Future.wait([
-      rootBundle.load("assets/OpenSans-Regular.ttf"),
-      rootBundle.load("assets/OpenSans-Bold.ttf"),
-      rootBundle.load("assets/OpenSans-Bold.ttf"),
-      rootBundle.load("assets/OpenSans-BoldItalic.ttf")
-    ]);
+    var fontAssets = await globals.loadPDFFonts();
     myTheme = pw.ThemeData.withFont(
       base: pw.Font.ttf(fontAssets[0]),
       bold: pw.Font.ttf(fontAssets[1]),
@@ -126,7 +120,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No employees found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No employees found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -153,7 +147,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Employee ID: ' + users[index].userId, style: TextStyle(color: Colors.white)),
+                        child: Text('Employee ID: ' + users[index].userId),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -163,11 +157,13 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                               height: 50,
                               color: Colors.white,
                               child: Text('Employee name: ' + users[index].first_name + ' ' + users[index].last_name, style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
                       )
@@ -180,167 +176,156 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('Contact trace'),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+          },
         ),
       ),
-      child: new Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title: Text('Contact trace'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-            },
-          ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    height: 50,
-                    color: Colors.white,
-                    child: Text(firstName + ' ' + lastName + ' (ID ' + id + ') has come into contact with the following employees over the past month:', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container (
+                height: 50,
+                width: 200,
+                padding: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                  getList(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 18,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                ],
-              ),
+                  child: Text('Notify employees'),
+                  onPressed: (){
+                    if (numberOfEmployees == 0){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("No employees found")));
+                    }
+                    else {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: Text('Warning'),
+                            content: Text('Are you sure you want to notify ' + numberOfEmployees.toString() + ' employees?'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                child: Text('Yes'),
+                                onPressed: (){
+                                  Navigator.of(ctx).pop();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(numberOfEmployees.toString() + " employees notified")));
+                                },
+                              ),
+                              ElevatedButton(
+                                child: Text('No'),
+                                onPressed: (){
+                                  Navigator.of(ctx).pop();
+                                },
+                              )
+                            ],
+                          ));
+                    }
+                  },
+                )
             ),
             Container (
-              alignment: Alignment.bottomLeft,
-              child: Container (
-                  height: 50,
-                  width: 200,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                height: 50,
+                width: 200,
+                padding: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text('Notify employees'),
-                    onPressed: (){
-                      if (numberOfEmployees == 0){
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("No employees found")));
-                      }
-                      else {
-                        showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Text('Warning'),
-                              content: Text('Are you sure you want to notify ' + numberOfEmployees.toString() + ' employees?'),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text('Yes'),
-                                  onPressed: (){
-                                    Navigator.of(ctx).pop();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text(numberOfEmployees.toString() + " employees notified")));
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text('No'),
-                                  onPressed: (){
-                                    Navigator.of(ctx).pop();
-                                  },
-                                )
-                              ],
-                            ));
-                      }
-                    },
-                  )
-              ),
-            ),
-            Container (
-              alignment: Alignment.bottomRight,
-              child: Container (
-                  height: 50,
-                  width: 200,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Save report as PDF'),
-                    onPressed: (){
-                      if (numberOfEmployees == 0){
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Cannot save an empty report")));
-                        return;
-                      }
+                  ),
+                  child: Text('Save report as PDF'),
+                  onPressed: (){
+                    if (numberOfEmployees == 0){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Cannot save an empty report")));
+                      return;
+                    }
 
-                      //Create PDF
-                      pdf.addPage(pw.MultiPage(
-                          crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          pageFormat: PdfPageFormat.a4,
-                          orientation: pw.PageOrientation.portrait,
-                          build: (pw.Context context) => <pw.Widget>[
-                            pw.Header(
-                              level: 0,
-                              title: 'Coviduous - Contact trace',
-                              child: pw.Text('Coviduous - Contact trace', textScaleFactor: 2),
-                            ),
-                            pw.Bullet(
-                                text: 'Employee name: ' + firstName + ' ' + lastName
-                            ),
-                            pw.Bullet(
-                                text: 'Employee number: 1234'
-                            ),
-                            pw.Bullet(
-                                text: 'Employee email address: email@email.com'
-                            ),
-                            pw.SizedBox(
-                              width: 500,
-                              child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
-                            ),
-                            pw.Bullet(
-                                text: 'Date: 1 August 2021'
-                            ),
-                            pw.SizedBox(
-                              width: 500,
-                              child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
-                            ),
-                            pw.Header(
-                                level: 2,
-                                text: 'Employees'
-                            ),
-                            pw.Table.fromTextArray(data: employeeList),
-                          ]
-                      ));
+                    //Create PDF
+                    pdf.addPage(pw.MultiPage(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        pageFormat: PdfPageFormat.a4,
+                        orientation: pw.PageOrientation.portrait,
+                        build: (pw.Context context) => <pw.Widget>[
+                          pw.Header(
+                            level: 0,
+                            title: 'Coviduous - Contact trace',
+                            child: pw.Text('Coviduous - Contact trace', textScaleFactor: 2),
+                          ),
+                          pw.Bullet(
+                              text: 'Employee name: ' + firstName + ' ' + lastName
+                          ),
+                          pw.Bullet(
+                              text: 'Employee number: 1234'
+                          ),
+                          pw.Bullet(
+                              text: 'Employee email address: email@email.com'
+                          ),
+                          pw.SizedBox(
+                            width: 500,
+                            child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
+                          ),
+                          pw.Bullet(
+                              text: 'Date: 1 August 2021'
+                          ),
+                          pw.SizedBox(
+                            width: 500,
+                            child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
+                          ),
+                          pw.Header(
+                              level: 2,
+                              text: 'Employees'
+                          ),
+                          pw.Table.fromTextArray(data: employeeList),
+                        ]
+                    ));
 
-                      //Save PDF
-                      if (kIsWeb) { //If web browser
-                        String platform = globals.getOSWeb();
-                        if (platform == "Android" || platform == "iOS") { //Check if mobile browser
-                          savePDFMobile();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("PDF file saved to downloads folder")));
-                        } else { //Else, PC web browser
-                          savePDFWeb();
-                        }
-                      } else { //Else, mobile app
+                    //Save PDF
+                    if (kIsWeb) { //If web browser
+                      String platform = globals.getOSWeb();
+                      if (platform == "Android" || platform == "iOS") { //Check if mobile browser
                         savePDFMobile();
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("PDF file saved to downloads folder")));
+                      } else { //Else, PC web browser
+                        savePDFWeb();
                       }
-                    },
-                  )
-              ),
+                    } else { //Else, mobile app
+                      savePDFMobile();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("PDF file saved to downloads folder")));
+                    }
+                  },
+                )
             ),
-          ],
-        ),
+          ]
+        )
+      ),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 110,
+                  color: Colors.white,
+                  child: Text(firstName + ' ' + lastName + ' (ID ' + id + ') has come into contact with the following employees over the past month:', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                  padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                ),
+                getList(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

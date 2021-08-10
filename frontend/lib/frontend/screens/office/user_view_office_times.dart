@@ -56,7 +56,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No time slots found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No time slots found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -72,7 +72,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfTimeSlots,
             itemBuilder: (context, index) { //Display a list tile FOR EACH time slot in timeSlots[]
               return ListTile(
@@ -84,8 +84,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            today.day.toString() + "/" + today.month.toString() + "/" + today.year.toString(),
-                            style: TextStyle(color: Colors.white)),
+                            today.day.toString() + "/" + today.month.toString() + "/" + today.year.toString()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -97,6 +96,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                               child: Text(
                                   '9:00 - 10:00',
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -106,6 +106,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                       (services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity *
                                           services.getRoomDetails(rooms[index].getRoomNum()).numDesks).toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -116,6 +117,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                       services.getRoomDetails(rooms[index].getRoomNum()).numDesks) -
                                       services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks).toInt().toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -143,39 +145,24 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
+            },
           ),
-          body: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                      children: [
-                        getList(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ]
-                  ),
+        ),
+        body: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: getList(),
                 ),
-              ]
-          )
-      ),
+              ),
+            ]
+        )
     );
   }
 }

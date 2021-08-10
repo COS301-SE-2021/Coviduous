@@ -41,7 +41,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
               height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
               color: Theme.of(context).primaryColor,
-              child: Text('No floor plans found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+              child: Text('No floor plans found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
             ),
             Container(
                 alignment: Alignment.center,
@@ -58,7 +58,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
           height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
           width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
           color: Colors.white,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -111,7 +111,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                           title: Text('Placeholder'),
                           content: Text('Booking successfully created.'),
                           actions: <Widget>[
-                            TextButton(
+                            ElevatedButton(
                               child: Text('Okay'),
                               onPressed: (){
                                 Navigator.of(ctx).pop();
@@ -132,7 +132,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                             title: Text('No space'),
                             content: Text('Floor has no more space available. Try a different floor or contact your administrator.'),
                             actions: <Widget>[
-                              TextButton(
+                              ElevatedButton(
                                 child: Text('Okay'),
                                 onPressed: (){
                                   Navigator.of(ctx).pop();
@@ -166,31 +166,22 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
       return Container();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
+    return new Scaffold(
+      appBar: AppBar(
+          title: Text('Book an office space'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+            },
+          ),
       ),
-      child: new Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-            title: Text('Book an office space'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
-              },
+      body: Stack (
+        children: <Widget>[
+          Center (
+            child: getList()
             ),
-        ),
-        body: Stack (
-          children: <Widget>[
-            Center (
-              child: getList()
-              ),
-          ]
-        )
-      ),
+        ]
+      )
     );
   }
 }

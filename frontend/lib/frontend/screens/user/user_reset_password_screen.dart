@@ -41,72 +41,61 @@ class _UserResetPasswordState extends State<UserResetPassword> {
       return Container();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Reset password"),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text("Reset password"),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
-            },
-          ),
-        ),
-        body: isLoading == false ? Center(
-          child: Container(
-            width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _email,
-                    decoration: InputDecoration(
-                        hintText: 'Email'
-                    ),
-                  ),
-
-                  const SizedBox(height: 30,),
-
-                  ElevatedButton(
-                      onPressed: (){
-                        setState(() {
-                          isLoading = true;
-                        });
-                        AuthClass().resetPassword(email: _email.text.trim()).then((value) {
-                          if (value == "Email sent") {
-                            setState(() {
-                              isLoading = false;
-                            });
-                            Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(builder: (context) => LoginScreen()), (
-                                    route) => false);
-                          }
-                          else {
-                            setState(() {
-                              isLoading = false;
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(value)));
-                          }
-                        });
-                      },
-                      child: Text("Reset password")
-                  ),
-                ],
+      body: isLoading == false ? Center(
+        child: Container(
+          width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+          height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
+          color: Colors.white,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _email,
+                decoration: InputDecoration(
+                    hintText: 'Email'
+                ),
               ),
-            ),
+
+              const SizedBox(height: 30,),
+
+              ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      isLoading = true;
+                    });
+                    AuthClass().resetPassword(email: _email.text.trim()).then((value) {
+                      if (value == "Email sent") {
+                        setState(() {
+                          isLoading = false;
+                        });
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) => LoginScreen()), (
+                                route) => false);
+                      }
+                      else {
+                        setState(() {
+                          isLoading = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(value)));
+                      }
+                    });
+                  },
+                  child: Text("Reset password")
+              ),
+            ],
           ),
-        ) : Center(child: CircularProgressIndicator(),
         ),
+      ) : Center(child: CircularProgressIndicator(),
       ),
     );
   }

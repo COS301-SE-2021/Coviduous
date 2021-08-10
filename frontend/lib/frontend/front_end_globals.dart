@@ -2,6 +2,7 @@ library globals;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
+import 'package:flutter/services.dart';
 import 'package:universal_html/html.dart' as html;
 
 import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
@@ -9,6 +10,7 @@ import 'package:frontend/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
 import 'package:frontend/subsystems/notification_subsystem/notification.dart';
 import 'package:frontend/subsystems/shift_subsystem/shift.dart';
+import 'package:frontend/frontend/theme-kit.dart' as theme;
 
 //============================
 //FRONT END GLOBAL VARIABLES
@@ -40,23 +42,6 @@ double getWidgetScaling() {
   }
 }
 
-//Needed to change the color of a TextField when it's selected.
-Map<int, Color> textFieldSelectedSwatch = {
-  50: Color.fromRGBO(5, 102, 118, .1),
-  100: Color.fromRGBO(5, 102, 118, .2),
-  200: Color.fromRGBO(5, 102, 118, .3),
-  300: Color.fromRGBO(5, 102, 118, .4),
-  400: Color.fromRGBO(5, 102, 118, .5),
-  500: Color.fromRGBO(5, 102, 118, .6),
-  600: Color.fromRGBO(5, 102, 118, .7),
-  700: Color.fromRGBO(5, 102, 118, .8),
-  800: Color.fromRGBO(5, 102, 118, .9),
-  900: Color.fromRGBO(5, 102, 118, 1),
-};
-
-MaterialColor textFieldSelectedColor =
-MaterialColor(0xff056676, textFieldSelectedSwatch);
-
 //Check if a string is numeric
 bool isNumeric(String s) {
   if (s == null) {
@@ -76,6 +61,31 @@ String loggedInUserId = '';
 
 //Company ID of currently logged in user
 String loggedInCompanyId = 'CID-1';
+
+//==============
+//Theme-related
+//==============
+
+Color appBarColor = theme.appBarColor;
+Color primaryColor = theme.primaryColor;
+Color secondaryColor = theme.secondaryColor;
+
+//Needed to change the color of a TextField when it's selected.
+MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;
+
+//======
+//Fonts
+//======
+
+Future loadPDFFonts() async {
+  var fontAssets = await Future.wait([
+    rootBundle.load("assets/OpenSans-Regular.ttf"),
+    rootBundle.load("assets/OpenSans-Bold.ttf"),
+    rootBundle.load("assets/OpenSans-Bold.ttf"),
+    rootBundle.load("assets/OpenSans-BoldItalic.ttf")
+  ]);
+  return fontAssets;
+}
 
 //============================
 //Used in floor plan subsystem

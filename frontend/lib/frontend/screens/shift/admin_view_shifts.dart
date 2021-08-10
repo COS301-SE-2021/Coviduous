@@ -68,7 +68,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No shifts found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No shifts found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -84,7 +84,7 @@ class _ViewShiftsState extends State<ViewShifts> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfShifts,
             itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
               return ListTile(
@@ -95,9 +95,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(
-                            'Shift ' + shifts[index].shiftId,
-                            style: TextStyle(color: Colors.white)),
+                        child: Text('Shift ' + shifts[index].shiftId),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -109,6 +107,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                               child: Text(
                                   'Floor number: ' + shifts[index].floorNumber,
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -116,6 +115,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                               child: Text(
                                   'Room number: ' + shifts[index].roomNumber,
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -123,6 +123,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                               child: Text(
                                   'Group number: ' + shifts[index].groupNumber,
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -130,6 +131,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                               child: Text(
                                   'Date: ' + shifts[index].date,
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -137,6 +139,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                               child: Text(
                                   'Start time: ' + shifts[index].startTime,
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -144,6 +147,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                               child: Text(
                                   'End time: ' + shifts[index].endTime,
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -166,7 +170,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                               title: Text('Alert'),
                                               content: Text('Are you sure you want to delete the shift?'),
                                               actions: <Widget>[
-                                                TextButton(
+                                                ElevatedButton(
                                                   child: Text("Yes"),
                                                   onPressed: () {
                                                     globals.currentShiftNum = shifts[index].shiftId;
@@ -174,7 +178,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                                     Navigator.of(context).pop();
                                                   },
                                                 ),
-                                                TextButton(
+                                                ElevatedButton(
                                                   child: Text("No"),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
@@ -197,32 +201,23 @@ class _ViewShiftsState extends State<ViewShifts> {
           );
         }
     }
-    return Container(
-        decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-          ),
-           ),
-            child: new Scaffold(
-            backgroundColor: Colors.transparent, //To show background image
-            appBar: AppBar(
-              title: Text('Shifts'),
-              leading: BackButton( //Specify back button
-                onPressed: (){
-                  Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
-                },
-              ),
-            ),
-            body: Stack (
-                children: <Widget>[
-                  SingleChildScrollView(
-                    child: Center (
-                        child: getList()
-                    ),
-                  ),
-                ]
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('Shifts'),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
+          },
         ),
+      ),
+      body: Stack (
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Center (
+                child: getList()
+            ),
+          ),
+        ]
       ),
     );
   }

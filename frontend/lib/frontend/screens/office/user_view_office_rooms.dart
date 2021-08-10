@@ -54,7 +54,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No rooms found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No rooms found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -70,7 +70,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(16),
             itemCount: numOfRooms,
             itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
               return ListTile(
@@ -82,8 +82,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            'Room ' + rooms[index].getRoomNum(),
-                            style: TextStyle(color: Colors.white)),
+                            'Room ' + rooms[index].getRoomNum()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -99,6 +98,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                           .numDesks
                                           .toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -110,6 +110,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                           services.getRoomDetails(rooms[index].getRoomNum()).numDesks) * 100)
                                           .toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -137,39 +138,24 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('View office spaces'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('View office spaces'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
+            },
           ),
-          body: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      getList(),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 18,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ],
-                  ),
+        ),
+        body: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: getList(),
                 ),
-              ]
-          )
-      ),
+              ),
+            ]
+        )
     );
   }
 }

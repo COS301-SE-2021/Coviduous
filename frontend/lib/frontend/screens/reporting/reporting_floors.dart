@@ -48,7 +48,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
               title: Text('Error'),
               content: Text('No floors have been defined for your company.'),
               actions: <Widget>[
-                TextButton(
+                ElevatedButton(
                   child: Text('Okay'),
                   onPressed: () {
                     Navigator.of(ctx).pop();
@@ -77,8 +77,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                        'Floor ' + services.getFloors()[index].getFloorNumber(),
-                        style: TextStyle(color: Colors.white)),
+                        'Floor ' + services.getFloors()[index].getFloorNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -114,39 +113,24 @@ class _ReportingFloorsState extends State<ReportingFloors> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("View office reports"),
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title: Text("View office reports"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
-            },
-          ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  getList(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 18,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                ],
-              ),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Center(
+              child: getList(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

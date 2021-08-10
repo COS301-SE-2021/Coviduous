@@ -52,7 +52,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                   height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                   color: Theme.of(context).primaryColor,
-                  child: Text('No floors found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                  child: Text('No floors found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -68,7 +68,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfFloors,
             itemBuilder: (context, index) { //Display a list tile FOR EACH floor in floors[]
               return ListTile(
@@ -80,8 +80,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            'Floor ' + services.getFloors()[index].getFloorNumber(),
-                            style: TextStyle(color: Colors.white)),
+                            'Floor ' + services.getFloors()[index].getFloorNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -94,6 +93,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                   'Number of rooms: ' +
                                       services.getFloors()[index].getNumRooms().toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -123,39 +123,24 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('View office spaces'),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(Office.routeName);
+          },
         ),
       ),
-      child: new Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text('View office spaces'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(Office.routeName);
-            },
-          ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  getList(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 18,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                ]
-              ),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Center(
+              child: getList(),
             ),
-          ]
-        )
-      ),
+          ),
+        ]
+      )
     );
   }
 }

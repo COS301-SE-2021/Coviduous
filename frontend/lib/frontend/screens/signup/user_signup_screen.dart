@@ -33,14 +33,8 @@ class _UserRegisterState extends State<UserRegister>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      color: globals.secondaryColor,
       child: isLoading == false ? Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text('Register'),
           leading: BackButton( //Specify back button
@@ -243,7 +237,7 @@ class _UserRegisterState extends State<UserRegister>{
             )
           ],
         ),
-      ) : Center( child: CircularProgressIndicator())
+      ) : Center( child: CircularProgressIndicator() )
     );
   }
 }

@@ -49,64 +49,56 @@ class _ReportingFloorPlanState extends State<ReportingFloorPlan> {
       return Container();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      backgroundColor: Colors.transparent, //To show background image
+      appBar: AppBar(
+        title: Text("View office reports"),
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(Reporting.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title: Text("View office reports"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(Reporting.routeName);
-            },
-          ),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            //So the element doesn't overflow when you open the keyboard
-            child: Container(
-              width: MediaQuery.of(context).size.width /
-                  (2 * globals.getWidgetScaling()),
-              color: Colors.white,
-              margin: EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: _buildFloors()),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+      body: Center(
+        child: SingleChildScrollView(
+          //So the element doesn't overflow when you open the keyboard
+          child: Container(
+            width: MediaQuery.of(context).size.width /
+                (2 * globals.getWidgetScaling()),
+            color: Colors.white,
+            margin: EdgeInsets.all(16),
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildFloors()),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Text('Proceed'),
-                          onPressed: () {
-                            _formKey.currentState.save();
+                        ),
+                        child: Text('Proceed'),
+                        onPressed: () {
+                          _formKey.currentState.save();
 
-                            Navigator.of(context).pushReplacementNamed(ReportingFloors.routeName);
-                          }),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ],
-                  ),
+                          Navigator.of(context).pushReplacementNamed(ReportingFloors.routeName);
+                        }),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                  ],
                 ),
               ),
             ),

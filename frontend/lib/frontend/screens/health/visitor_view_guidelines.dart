@@ -45,7 +45,7 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                  color: Theme.of(context).primaryColor,
-                 child: Text('No company guidelines found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                 child: Text('No company guidelines found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                ),
                Container(
                    alignment: Alignment.center,
@@ -72,15 +72,7 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
          }
        }
 
-      return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
+      return new Scaffold(
           appBar: AppBar(
             title: Text('Company guidelines'),
             leading: BackButton( //Specify back button
@@ -96,7 +88,6 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
                 ),
               ]
           )
-      ),
-    );
+      );
   }
 }
