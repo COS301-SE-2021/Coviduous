@@ -1,5 +1,5 @@
 class HealthCheck {
-    constructor(healthCheckId, userId, name, surname, email, phoneNumber, temperature, fever, cough, soreThroat, chills, aches, nausea, shortnessOfBreadth, lossOfTasteSmell)
+    constructor(healthCheckId, userId, name, surname, email, phoneNumber, temperature, fever, cough, soreThroat, chills, aches, nausea, shortnessOfBreath, lossOfTasteSmell)
     {
         this.healthCheckId = healthCheckId;
         this.userId = userId;
@@ -14,7 +14,7 @@ class HealthCheck {
         this.chills = chills;
         this.aches = aches;
         this.nausea = nausea;
-        this.shortnessOfBreadth = shortnessOfBreadth;
+        this.shortnessOfBreath = shortnessOfBreath;
         this.lossOfTasteSmell = lossOfTasteSmell;
 
         // this.6feetContact = 6feetContact;
