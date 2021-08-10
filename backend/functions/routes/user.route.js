@@ -21,10 +21,10 @@ userController.setDatabase(devDatabase);
 // User routes
 router.get('/users', userController.getUserDetails);
 router.post('/users/signUp', userController.createUser);
-router.get('/users/signIn', userController.signUserIn);
+router.post('/users/signIn', userController.signUserIn);
 router.post('/users/updateDetails', userController.updateUserDetails);
 router.post('/users/updateEmail', userController.updateUserEmail);
-router.get('/passwordReset', userController.sendPasswordResetEmail);
+router.post('/passwordReset', userController.sendPasswordResetEmail);
 
 // Export API routes
 module.exports = router;
