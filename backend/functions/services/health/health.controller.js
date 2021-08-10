@@ -1,6 +1,7 @@
 const HealthCheck = require("../../models/health.check.model");
 const Permission = require("../../models/permission.model");
 const PermissionRequest = require("../../models/permission.request.model");
+const uuid = require("uuid"); // npm install uuid
 
 let database;
 
@@ -12,8 +13,7 @@ exports.setDatabase = async (db) => {
 
 exports.createHealthCheck = async (req, res) => {
   try {
-    let randInt = Math.floor(1000 + Math.random() * 9000);
-    let healthCheckId = "HTH-" + randInt.toString();
+    let healthCheckId = "HTH-" + uuid.v4();
 
     let healthCheckObj = new HealthCheck(healthCheckId, req.body.userId, req.body.name, req.body.surname,
         req.body.email, req.body.phoneNumber, req.body.temperature, req.body.fever, req.body.cough,
@@ -86,8 +86,7 @@ exports.viewHealthCheckUserId = async (req, res) => {
 
 exports.createPermission = async (req, res) => {
     try {
-      let randInt = Math.floor(1000 + Math.random() * 9000);
-      let permissionId = "PRMN-" + randInt.toString();
+      let permissionId = "PRMN-" + uuid.v4();
       let timestamp = new Date().toISOString();
   
       let permissionObj = new Permission(permissionId, req.body.userId, timestamp, 
@@ -151,8 +150,7 @@ exports.viewPermissionsUserId = async (req, res) => {
 
 exports.createPermissionRequest = async (req, res) => {
     try {
-      let randInt = Math.floor(1000 + Math.random() * 9000);
-      let permissionRequestId = "PR-" + randInt.toString();
+      let permissionRequestId = "PR-" + uuid.v4();
       let timestamp = new Date().toISOString();
   
       let permissionRequestObj = new PermissionRequest(permissionRequestId, req.body.userId, req.body.shiftNumber,

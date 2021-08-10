@@ -1,4 +1,5 @@
 const Announcement = require("../../models/announcement.model");
+const uuid = require("uuid"); // npm install uuid
 
 let database;
 
@@ -8,8 +9,7 @@ exports.setDatabase = async (db) => {
 
 exports.createAnnouncement = async (req, res) => {
   try {
-    let randInt = Math.floor(1000 + Math.random() * 9000);
-    let announcementId = "ANNOUNC-" + randInt.toString();
+    let announcementId = "ANNOUNC-" + uuid.v4();
     let timestamp = new Date().toISOString();
 
     let announcementObj = new Announcement(announcementId, req.body.type,
