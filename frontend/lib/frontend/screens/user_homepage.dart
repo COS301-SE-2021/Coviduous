@@ -28,6 +28,32 @@ class _UserHomePageState extends State<UserHomePage> {
   NotificationController services = new NotificationController();
   GetNotificationsResponse response;
 
+  //This function ensures that the app doesn't just close when you press a phone's physical back button
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('Warning'),
+          content: Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text('Yes'),
+              onPressed: (){
+                AuthClass().signOut();
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+              },
+            ),
+            ElevatedButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        ))
+    );
+  }
+
   Future getNotification() async {
     await Future.wait([
       services.getNotification(GetNotificationRequest(email))
@@ -56,71 +82,137 @@ class _UserHomePageState extends State<UserHomePage> {
     }
 
     return new WillPopScope(
-      onWillPop: () async => false, //Prevent the back button from working
+      onWillPop: _onWillPop, //Pressing the back button prompts you to log out
       child: Scaffold(
         appBar: AppBar(
           title: Text('Welcome ' + email),
-          automaticallyImplyLeading: false, //Back button will not show up in app bar
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container (
-                  height: 50,
-                  width: 180,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+          drawer: Drawer(
+            child: Container(
+              color: globals.secondaryColor,
+              child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    DrawerHeader(
+                      decoration: BoxDecoration(
+                        color: globals.primaryColor,
                       ),
-                    ),
-                    child: Text('Manage account'),
-                    onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
-                    },
-                  )
-              ),
-              Container (
-                  height: 50,
-                  width: 110,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Log out'),
-                    onPressed: (){
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: Text('Warning'),
-                            content: Text('Are you sure you want to log out?'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                child: Text('Yes'),
-                                onPressed: (){
-                                  AuthClass().signOut();
-                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
-                                },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                            width: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/placeholder-profile-image.png"),
+                                fit: BoxFit.cover,
                               ),
-                              ElevatedButton(
-                                child: Text('No'),
-                                onPressed: (){
-                                  Navigator.of(ctx).pop();
-                                },
-                              )
+                            ),
+                          ),
+                          Text(globals.loggedInUserEmail,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton (
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Row (
+                            children: <Widget>[
+                              Expanded(child: Text('Announcements')),
+                              Icon(Icons.add_alert)
                             ],
-                          ));
-                    },
-                  )
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
+                        }
+                    ),
+                    ElevatedButton (
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Row (
+                            children: <Widget>[
+                              Expanded(child: Text('Notifications')),
+                              Icon(Icons.notifications_active)
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+                        }
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Row(
+                          children: <Widget>[
+                            Expanded(child: Text('Manage account')),
+                            Icon(Icons.person)
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                      ),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
+                      },
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Row(
+                          children: <Widget>[
+                            Expanded(child: Text('Log out')),
+                            Icon(Icons.logout)
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                      ),
+                      onPressed: (){
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text('Warning'),
+                              content: Text('Are you sure you want to log out?'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('Yes'),
+                                  onPressed: (){
+                                    AuthClass().signOut();
+                                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+                                  },
+                                ),
+                                ElevatedButton(
+                                  child: Text('No'),
+                                  onPressed: (){
+                                    Navigator.of(ctx).pop();
+                                  },
+                                )
+                              ],
+                            ));
+                      },
+                    ),
+                  ]
               ),
-            ]
-          )
-        ),
+            ),
+          ),
         body: Stack (
           children: <Widget>[
             Container(
@@ -174,50 +266,6 @@ class _UserHomePageState extends State<UserHomePage> {
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(Office.routeName);
                             }
-                          ),
-                          SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Announcements')),
-                                    Icon(Icons.add_alert)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
-                              }
-                          ),
-                          SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Notifications')),
-                                    Icon(Icons.notifications_active)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                getNotification();
-                              }
                           ),
                           SizedBox (
                             height: MediaQuery.of(context).size.height/48,

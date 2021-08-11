@@ -5,8 +5,8 @@ import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/backend/controllers/office_controller.dart';
 import 'package:frontend/frontend/screens/office/home_office.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_times.dart';
-import 'package:frontend/requests/office_requests/book_office_space_request.dart';
-import 'package:frontend/responses/office_reponses/book_office_space_response.dart';
+//import 'package:frontend/requests/office_requests/book_office_space_request.dart';
+//import 'package:frontend/responses/office_reponses/book_office_space_response.dart';
 import 'package:frontend/subsystems/floorplan_subsystem/desk.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
@@ -20,6 +20,11 @@ class UserViewOfficeDesks extends StatefulWidget {
 }
 
 class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -181,24 +186,27 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Book desk in room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum()),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Book desk in room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum()),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Center(
-                  child: getList(),
+          body: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                    child: getList(),
+                  ),
                 ),
-              ),
-            ]
-        )
+              ]
+          )
+      ),
     );
   }
 }

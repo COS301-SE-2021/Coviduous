@@ -7,7 +7,7 @@ import 'package:frontend/requests/floor_plan_requests/add_floor_request.dart';
 import 'package:frontend/requests/floor_plan_requests/delete_floor_request.dart';
 import 'package:frontend/responses/floor_plan_responses/add_floor_response.dart';
 import 'package:frontend/responses/floor_plan_responses/delete_floor_response.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
+//import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_view_rooms.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
@@ -23,6 +23,11 @@ class AdminViewFloors extends StatefulWidget {
 }
 
 class _AdminViewFloorsState extends State<AdminViewFloors> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -161,47 +166,50 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Manage floors"),
-        leading: BackButton(
-          //Specify back button
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
-          },
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          alignment: Alignment.bottomLeft,
-            height: 50,
-            width: 130,
-            padding: EdgeInsets.all(10),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text('Add floor'),
-              onPressed: () {
-                //Add new floor and reload page
-                AddFloorResponse response2 = services.addFloorMock(
-                    AddFloorRequest(
-                        globals.floorPlanId, globals.loggedInUserId, ""));
-                print(response2.getResponse());
-                setState(() {});
-              },
-            ))
-      ),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Center(
-              child: getList(),
-            ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Manage floors"),
+          leading: BackButton(
+            //Specify back button
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+            },
           ),
-        ],
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            alignment: Alignment.bottomLeft,
+              height: 50,
+              width: 130,
+              padding: EdgeInsets.all(10),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text('Add floor'),
+                onPressed: () {
+                  //Add new floor and reload page
+                  AddFloorResponse response2 = services.addFloorMock(
+                      AddFloorRequest(
+                          globals.floorPlanId, globals.loggedInUserId, ""));
+                  print(response2.getResponse());
+                  setState(() {});
+                },
+              ))
+        ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Center(
+                child: getList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

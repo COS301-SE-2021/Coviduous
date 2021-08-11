@@ -40,6 +40,11 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
     });
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -150,82 +155,85 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Assign employees to shift'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Assign employees to shift'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
+              },
+            ),
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                  height: 50,
-                  width: 180,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    height: 50,
+                    width: 180,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Text('Add employee'),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(AddShiftAddEmployee.routeName);
-                    },
-                  )
-              ),
-              Container(
-                  height: 50,
-                  width: 130,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Finish'),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: Text('Warning'),
-                            content: Text('Are you sure you are done creating this shift?'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                child: Text('Yes'),
-                                onPressed: (){
-                                  processShifts();
-                                },
-                              ),
-                              ElevatedButton(
-                                child: Text('No'),
-                                onPressed: (){
-                                  Navigator.of(ctx).pop();
-                                },
-                              )
-                            ],
-                          ));
-                    },
-                  )
-              ),
-            ],
-          )
-        ),
-        body: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Center(
-                  child: getList(),
+                      child: Text('Add employee'),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(AddShiftAddEmployee.routeName);
+                      },
+                    )
                 ),
-              ),
-            ]
-        )
+                Container(
+                    height: 50,
+                    width: 130,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Finish'),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text('Warning'),
+                              content: Text('Are you sure you are done creating this shift?'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('Yes'),
+                                  onPressed: (){
+                                    processShifts();
+                                  },
+                                ),
+                                ElevatedButton(
+                                  child: Text('No'),
+                                  onPressed: (){
+                                    Navigator.of(ctx).pop();
+                                  },
+                                )
+                              ],
+                            ));
+                      },
+                    )
+                ),
+              ],
+            )
+          ),
+          body: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                    child: getList(),
+                  ),
+                ),
+              ]
+          )
+      ),
     );
   }
 }

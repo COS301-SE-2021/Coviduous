@@ -21,6 +21,11 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
     document: PdfDocument.openAsset('assets/sample.pdf'),
   );
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -74,41 +79,44 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('View COVID-19 test results'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('View COVID-19 test results'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-              Container (
-                alignment: Alignment.bottomRight,
-                child: Container (
-                    height: 50,
-                    width: 200,
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text('Upload new PDF'),
-                      onPressed: (){
-                        Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
-                      },
-                    )
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
                 ),
-              ),
-            ]
-        )
+                Container (
+                  alignment: Alignment.bottomRight,
+                  child: Container (
+                      height: 50,
+                      width: 200,
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Upload new PDF'),
+                        onPressed: (){
+                          Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
+                        },
+                      )
+                  ),
+                ),
+              ]
+          )
+      ),
     );
   }
 }

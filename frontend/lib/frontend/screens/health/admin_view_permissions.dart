@@ -17,6 +17,12 @@ class AdminViewPermissions extends StatefulWidget {
 }
 class _AdminViewPermissionsState extends State<AdminViewPermissions> {
   TextEditingController _employeeId = TextEditingController();
+
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (globals.loggedInUserType != 'Admin') {
@@ -31,48 +37,51 @@ class _AdminViewPermissionsState extends State<AdminViewPermissions> {
       }
       return Container();
     }
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("View employee access"),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-            Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-          },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+        appBar: new AppBar(
+          title: new Text("View employee access"),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+            },
+          ),
         ),
-      ),
-      body: Center(
-        child: new Container(
-          color: Colors.white,
-          height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
-          width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Employee ID",
-                ),
-                obscureText: false,
-                controller: _employeeId,
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom (
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+        body: Center(
+          child: new Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Employee ID",
                   ),
+                  obscureText: false,
+                  controller: _employeeId,
                 ),
-                child: Text("Proceed"),
-                onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
-                },
-              )
+                SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text("Proceed"),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
+                  },
+                )
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

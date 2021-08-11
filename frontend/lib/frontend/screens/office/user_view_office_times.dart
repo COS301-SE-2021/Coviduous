@@ -18,6 +18,11 @@ class UserViewOfficeTimes extends StatefulWidget {
 }
 
 class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -145,24 +150,27 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Center(
-                  child: getList(),
+          body: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                    child: getList(),
+                  ),
                 ),
-              ),
-            ]
-        )
+              ]
+          )
+      ),
     );
   }
 }

@@ -20,6 +20,11 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
   NotificationController services = new NotificationController();
   List<Notification> notifications = globals.currentUserNotifications;
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -159,44 +164,47 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Your notifications'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Your notifications'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+              },
+            ),
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Container (
-              alignment: Alignment.bottomRight,
-              height: 50,
-              width: 170,
-              padding: EdgeInsets.all(10),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom (
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+          bottomNavigationBar: BottomAppBar(
+            child: Container (
+                alignment: Alignment.bottomRight,
+                height: 50,
+                width: 170,
+                padding: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text('Clear notifications'),
+                  onPressed: (){
+                    notifications.clear();
+                    setState(() {});
+                  },
+                )
+            ),
+          ),
+          body: Stack (
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                      child: getList()
                   ),
                 ),
-                child: Text('Clear notifications'),
-                onPressed: (){
-                  notifications.clear();
-                  setState(() {});
-                },
-              )
-          ),
-        ),
-        body: Stack (
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Center(
-                    child: getList()
-                ),
-              ),
-            ]
-        )
+              ]
+          )
+      ),
     );
   }
 }

@@ -44,6 +44,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isLoading = false;
 
+  //This function ensures that the app doesn't just close when you press a phone's physical back button
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+    return (await true);
+  }
+
   /*
     Function name: getUserType
     Purpose: Retrieves the user type from the database.
@@ -106,202 +112,205 @@ class _LoginScreenState extends State<LoginScreen> {
    */
 @override
   Widget build(BuildContext context) {
-    return Container(
-      color: globals.secondaryColor,
-      child: isLoading == false ? Scaffold(
-        appBar: AppBar(
-          title: Text('Login'),
-          elevation: 0,
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(HomePage.routeName);
-            },
-          ),
-          actions: <Widget>[
-          TextButton(
-            child: Row(
-                children: <Widget>[
-                  Text('Register '),
-                  Icon(Icons.person_add),
-                  Text('   '),
-                ],
-              ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Container(
+        color: globals.secondaryColor,
+        child: isLoading == false ? Scaffold(
+          appBar: AppBar(
+            title: Text('Login'),
+            elevation: 0,
+            leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(Register.routeName);
+                Navigator.of(context).pushReplacementNamed(HomePage.routeName);
               },
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-              ),
             ),
-          ],
-        ),
-        body: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/city-silhouette.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            //So the element doesn't overflow when you open the keyboard
-            SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container (
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.all(20.0),
-                      child: Image(
-                        alignment: Alignment.center,
-                        image: AssetImage('assets/images/logo.png'),
-                        color: Colors.white,
-                        width: double.maxFinite,
-                        height: MediaQuery.of(context).size.height/8,
-                      ),
-                    ),
-                    SizedBox (
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    Container(
-                      color: Colors.white,
-                      width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
-                      padding: EdgeInsets.all(16),
-                      child: Form(
-                        key: _formKey,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: <Widget>[
-                              //email
-                              TextFormField(
-                                //The "return" button becomes a "next" button when typing
-                                textInputAction: TextInputAction.next,
-                                decoration: InputDecoration(labelText: 'Email'),
-                                keyboardType: TextInputType.emailAddress,
-                                controller: _email,
-                                //validate email
-                                //should implement more functionality like check email
-                                validator: (value)
-                                {
-                                  if(value.isEmpty || !value.contains('@'))
-                                  {
-                                    return 'invalid email';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              //password
-                              TextFormField(
-                                //The "return" button becomes a "done" button when typing
-                                textInputAction: TextInputAction.done,
-                                decoration: InputDecoration(labelText:'Password'),
-                                obscureText: true,
-                                controller: _password,
-                                validator: (value)
-                                  {
-                                  if(value.isEmpty || value.length <= 5)
-                                  {
-                                    return 'invalid password';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox (
-                                height: MediaQuery.of(context).size.height/48,
-                                width: MediaQuery.of(context).size.width,
-                              ),
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
-                                },
-                                child: Text("Forgot password?"),
-                              ),
-                              SizedBox (
-                                height: MediaQuery.of(context).size.height/48,
-                                width: MediaQuery.of(context).size.width,
-                              ),
-                              ElevatedButton(
-                                child: Text(
-                                  'Submit'
-                                ),
-                                onPressed: ()
-                                {
-                                  setState(() {
-                                    isLoading = true;
-                                  });
-                                  AuthClass().signIn(email: _email.text.trim(),
-                                      password: _password.text.trim()).then((value) {
-                                    if (value == "welcome") {
-
-                                      globals.loggedInUserEmail = _email.text;
-                                      globals.loggedInUserId = userGlobals.getUserId(_email.text);
-                                      print(globals.loggedInUserId);
-
-                                      //First get company ID
-                                      getCompanyId().then((companyID) {
-                                        globals.loggedInCompanyId = companyID;
-
-                                        //Then get user type
-                                        getUserType().then((userType) {
-                                          if (userType == 'Admin') {
-                                            globals.loggedInUserType = 'Admin';
-                                            Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                          } else if (userType == 'User') {
-                                            globals.loggedInUserType = 'User';
-                                            Navigator.pushReplacementNamed(context, UserHomePage.routeName);
-                                          } else {
-                                            showDialog(
-                                                context: context,
-                                                builder: (ctx) => AlertDialog(
-                                                  title: Text('Error'),
-                                                  content: Text('Encountered error retrieving user type, please try again.'),
-                                                  actions: <Widget>[
-                                                    ElevatedButton(
-                                                      child: Text('Okay'),
-                                                      onPressed: (){
-                                                        Navigator.of(ctx).pop();
-                                                      },
-                                                    )
-                                                  ],
-                                                )
-                                            );
-                                          }
-                                          setState(() {
-                                            isLoading = false;
-                                          });
-                                        });
-                                      });
-                                    }
-                                    else {
-                                      setState(() {
-                                        isLoading = false;
-                                      });
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text(value)));
-                                    }
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        ),
-                      ),
-                    ),
+            actions: <Widget>[
+            TextButton(
+              child: Row(
+                  children: <Widget>[
+                    Text('Register '),
+                    Icon(Icons.person_add),
+                    Text('   '),
                   ],
                 ),
+                onPressed: (){
+                  Navigator.of(context).pushReplacementNamed(Register.routeName);
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
               ),
-            )
-          ],
-        ),
-      ) : Center( child: CircularProgressIndicator() )
+            ],
+          ),
+          body: Stack(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/city-silhouette.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              //So the element doesn't overflow when you open the keyboard
+              SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container (
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(20.0),
+                        child: Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/images/logo.png'),
+                          color: Colors.white,
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height/8,
+                        ),
+                      ),
+                      SizedBox (
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      Container(
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+                        padding: EdgeInsets.all(16),
+                        child: Form(
+                          key: _formKey,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                //email
+                                TextFormField(
+                                  //The "return" button becomes a "next" button when typing
+                                  textInputAction: TextInputAction.next,
+                                  decoration: InputDecoration(labelText: 'Email'),
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: _email,
+                                  //validate email
+                                  //should implement more functionality like check email
+                                  validator: (value)
+                                  {
+                                    if(value.isEmpty || !value.contains('@'))
+                                    {
+                                      return 'invalid email';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                //password
+                                TextFormField(
+                                  //The "return" button becomes a "done" button when typing
+                                  textInputAction: TextInputAction.done,
+                                  decoration: InputDecoration(labelText:'Password'),
+                                  obscureText: true,
+                                  controller: _password,
+                                  validator: (value)
+                                    {
+                                    if(value.isEmpty || value.length <= 5)
+                                    {
+                                      return 'invalid password';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+                                  },
+                                  child: Text("Forgot password?"),
+                                ),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                ElevatedButton(
+                                  child: Text(
+                                    'Submit'
+                                  ),
+                                  onPressed: ()
+                                  {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    AuthClass().signIn(email: _email.text.trim(),
+                                        password: _password.text.trim()).then((value) {
+                                      if (value == "welcome") {
+
+                                        globals.loggedInUserEmail = _email.text;
+                                        globals.loggedInUserId = userGlobals.getUserId(_email.text);
+                                        print(globals.loggedInUserId);
+
+                                        //First get company ID
+                                        getCompanyId().then((companyID) {
+                                          globals.loggedInCompanyId = companyID;
+
+                                          //Then get user type
+                                          getUserType().then((userType) {
+                                            if (userType == 'Admin') {
+                                              globals.loggedInUserType = 'Admin';
+                                              Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                            } else if (userType == 'User') {
+                                              globals.loggedInUserType = 'User';
+                                              Navigator.pushReplacementNamed(context, UserHomePage.routeName);
+                                            } else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                    title: Text('Error'),
+                                                    content: Text('Encountered error retrieving user type, please try again.'),
+                                                    actions: <Widget>[
+                                                      ElevatedButton(
+                                                        child: Text('Okay'),
+                                                        onPressed: (){
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  )
+                                              );
+                                            }
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+                                          });
+                                        });
+                                      }
+                                      else {
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text(value)));
+                                      }
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ) : Center( child: CircularProgressIndicator() )
+      ),
     );
   }
 }

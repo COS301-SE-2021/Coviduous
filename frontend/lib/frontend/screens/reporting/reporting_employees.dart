@@ -69,6 +69,11 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
     html.Url.revokeObjectUrl(url);
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -188,97 +193,100 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title:
-        Text("View office reports"),
-        leading: BackButton(
-          //Specify back button
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
-          },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          title:
+          Text("View office reports"),
+          leading: BackButton(
+            //Specify back button
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
+            },
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          alignment: Alignment.bottomCenter,
-          height: 50,
-          width: 130,
-          padding: EdgeInsets.all(10),
-          child:  ElevatedButton(
-              child: Text('Create PDF'),
-              onPressed: () {
-                //Create PDF
-                pdf.addPage(pw.MultiPage(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    pageFormat: PdfPageFormat.a4,
-                    orientation: pw.PageOrientation.portrait,
-                    build: (pw.Context context) => <pw.Widget>[
-                      pw.Header(
-                        level: 0,
-                        title: 'Coviduous - Office report',
-                        child: pw.Text('Coviduous - Office report', textScaleFactor: 2),
-                      ),
-                      pw.Bullet(
-                          text: 'Floor plan number: 1'
-                      ),
-                      pw.Bullet(
-                          text: 'Floor number: ' + globals.currentFloorNum
-                      ),
-                      pw.Bullet(
-                          text: 'Room number: ' + globals.currentRoomNum
-                      ),
-                      pw.SizedBox(
-                        width: 500,
-                        child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
-                      ),
-                      pw.Bullet(
-                          text: 'Shift number: 1'
-                      ),
-                      pw.Bullet(
-                          text: 'Date: 1 August 2021'
-                      ),
-                      pw.Bullet(
-                          text: 'Time: 3:00 PM to 4:00 PM'
-                      ),
-                      pw.SizedBox(
-                        width: 500,
-                        child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
-                      ),
-                      pw.Header(
-                          level: 2,
-                          text: 'Employees'
-                      ),
-                      pw.Table.fromTextArray(data: employeeList),
-                    ]
-                ));
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            alignment: Alignment.bottomCenter,
+            height: 50,
+            width: 130,
+            padding: EdgeInsets.all(10),
+            child:  ElevatedButton(
+                child: Text('Create PDF'),
+                onPressed: () {
+                  //Create PDF
+                  pdf.addPage(pw.MultiPage(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      pageFormat: PdfPageFormat.a4,
+                      orientation: pw.PageOrientation.portrait,
+                      build: (pw.Context context) => <pw.Widget>[
+                        pw.Header(
+                          level: 0,
+                          title: 'Coviduous - Office report',
+                          child: pw.Text('Coviduous - Office report', textScaleFactor: 2),
+                        ),
+                        pw.Bullet(
+                            text: 'Floor plan number: 1'
+                        ),
+                        pw.Bullet(
+                            text: 'Floor number: ' + globals.currentFloorNum
+                        ),
+                        pw.Bullet(
+                            text: 'Room number: ' + globals.currentRoomNum
+                        ),
+                        pw.SizedBox(
+                          width: 500,
+                          child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
+                        ),
+                        pw.Bullet(
+                            text: 'Shift number: 1'
+                        ),
+                        pw.Bullet(
+                            text: 'Date: 1 August 2021'
+                        ),
+                        pw.Bullet(
+                            text: 'Time: 3:00 PM to 4:00 PM'
+                        ),
+                        pw.SizedBox(
+                          width: 500,
+                          child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
+                        ),
+                        pw.Header(
+                            level: 2,
+                            text: 'Employees'
+                        ),
+                        pw.Table.fromTextArray(data: employeeList),
+                      ]
+                  ));
 
-                //Save PDF
-                if (kIsWeb) { //If web browser
-                  String platform = globals.getOSWeb();
-                  if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+                  //Save PDF
+                  if (kIsWeb) { //If web browser
+                    String platform = globals.getOSWeb();
+                    if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+                      savePDFMobile();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("PDF file saved to downloads folder")));
+                    } else { //Else, PC web browser
+                      savePDFWeb();
+                    }
+                  } else { //Else, mobile app
                     savePDFMobile();
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("PDF file saved to downloads folder")));
-                  } else { //Else, PC web browser
-                    savePDFWeb();
                   }
-                } else { //Else, mobile app
-                  savePDFMobile();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("PDF file saved to downloads folder")));
-                }
-              }),
-        )
-      ),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Center(
-              child: getList(),
+                }),
+          )
+        ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Center(
+                child: getList(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
