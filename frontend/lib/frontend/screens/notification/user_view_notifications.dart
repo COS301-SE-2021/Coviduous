@@ -37,8 +37,9 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
     }
 
     Widget getList() {
-      List<Notification> reverseNotifications = notifications.reversed.toList(); //To display the newest notifications first
-      int numberOfNotifications = notifications.length;
+      int numberOfNotifications = 0;
+      if (notifications != null)
+        numberOfNotifications = notifications.length;
 
       if (numberOfNotifications == 0) {
         return Column(
@@ -82,6 +83,8 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
             ]
         );
       } else {
+        List<Notification> reverseNotifications = notifications.reversed.toList(); //To display the newest notifications first
+
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
