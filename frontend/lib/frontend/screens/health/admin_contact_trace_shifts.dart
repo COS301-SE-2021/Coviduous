@@ -139,6 +139,21 @@ class _ViewShiftsState extends State<ViewShifts> {
                                 style: TextStyle(color: Colors.black)),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                ElevatedButton(
+                                    child: Text('View employees'),
+                                    onPressed: () {
+
+                                      //Navigator.of(context).pushReplacementNamed(.routeName);
+                                    }),
+                              ],
+                            ),
+                          )
 
                         ],
                       ),
