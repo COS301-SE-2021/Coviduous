@@ -1,4 +1,6 @@
 const admin = require('firebase-admin'); 
+//used to fetch shifts for contact tracing using employeeId
+let shiftDb = require("../config/shift.firestore.database.js");
 
 const db = admin.firestore();
 
@@ -195,6 +197,52 @@ exports.viewGroup = async (shiftNumber) => {
           });
         
         return group;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
+exports.viewShifts = async (userEmail) => {
+    try {
+        const document = db.collection('groups');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+        
+        let group = [];
+        list.forEach(obj => {
+            if(obj.userEmail===userEmail)
+            {
+                group.push(obj);
+            }
+            else
+            {
+            }
+          });
+
+        let shifts = await shiftDb.viewShift();
+        let userShifts=[];
+
+        group.forEach(obj => {
+            shifts.forEach(obj2 => {
+            if(obj2.shiftID===obj.shiftNumber)
+            {
+                userShifts.push(obj2);
+            }
+            else
+            {
+            }
+            
+            });
+          });
+        
+        return userShifts;
     } catch (error) {
         console.log(error);
         return error;

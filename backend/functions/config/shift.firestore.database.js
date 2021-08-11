@@ -13,7 +13,7 @@ exports.createShift = async (ShiftID,ShiftData) => {
 };
 exports.viewShift = async () => {
     try {
-        const document = db.collection('Shift');
+        const document = db.collection('shifts');
         const snapshot = await document.get();
   
         let list = [];
