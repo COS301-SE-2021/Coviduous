@@ -70,6 +70,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
           appBar: AppBar(
             title: Text('Admin dashboard'),
           ),
+            // ====================
+            // SIDEBAR STARTS HERE
+            // ====================
           drawer: Drawer(
             child: Container(
               color: globals.secondaryColor,
@@ -196,6 +199,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
               ),
             ),
           ),
+            // ====================
+            // SIDEBAR ENDS HERE
+            // ====================
           body: Stack (
               children: <Widget>[
                 Container(

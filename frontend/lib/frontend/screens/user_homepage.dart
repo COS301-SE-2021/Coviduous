@@ -87,6 +87,9 @@ class _UserHomePageState extends State<UserHomePage> {
         appBar: AppBar(
           title: Text('Welcome ' + email),
         ),
+          // ====================
+          // SIDEBAR STARTS HERE
+          // ====================
           drawer: Drawer(
             child: Container(
               color: globals.secondaryColor,
@@ -213,6 +216,9 @@ class _UserHomePageState extends State<UserHomePage> {
               ),
             ),
           ),
+          // ==================
+          // SIDEBAR ENDS HERE
+          // ==================
         body: Stack (
           children: <Widget>[
             Container(
