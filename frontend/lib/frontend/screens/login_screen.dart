@@ -137,6 +137,14 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         body: Stack(
           children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/city-silhouette.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             //So the element doesn't overflow when you open the keyboard
             SingleChildScrollView(
               child: Center(
