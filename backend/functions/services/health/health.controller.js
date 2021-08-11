@@ -210,9 +210,27 @@ exports.viewPermissionsRequestsCompanyId = async (req, res) => {
       });
   }
 };
+exports.deletePermissionsPermissionId = async (req, res)=>{
+try{
+  if ( await database.deletePermissionsPermissionId(req.body.permissionId) == true)
+    {
+      return res.status(200).send({
+        message: 'Successfully Deleted permission',
+        data: deletePermission
+      });
+    }
+}catch(error){
+  console.log(error);
+  return res.status(500).send({
+
+  });
+}
+
+};
+
 
 //////////////////////////////////// Contact Tracing ///////////////////////////
-
+///////////////
 //returns a group of employees who fall under the same shift identified by the shiftId
 exports.viewGroup = async (req, res) => {
   try {
