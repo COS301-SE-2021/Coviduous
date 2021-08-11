@@ -61,8 +61,111 @@ class _ViewShiftsState extends State<ViewShifts> {
               ),
             ]
         );
-      }
-    }
-    return new Scaffold();
+      } else {
+        return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(16),
+            itemCount: numOfShifts,
+            itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
+              return ListTile(
+                title: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height / 24,
+                        color: Theme
+                            .of(context)
+                            .primaryColor,
+                        child: Text('Shift '),
+                      ),
+                      ListView(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        //The lists within the list should not be scrollable
+                        children: <Widget>[
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Text(
+                                'Floor number: ',
+                                style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Text(
+                                'Room number: ',
+                                style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Text(
+                                'Group number: ',
+                                style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Text(
+                                'Date: ',
+                                style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Text(
+                                'Start time: ',
+                                style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.white,
+                            child: Text(
+                                'End time: ',
+                                style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+
+                        ],
+                      ),
+                    ]
+                ),
+              );
+            });
+          }
+        }
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('Shifts the employee worked'),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+
+          },
+        ),
+      ),
+      body: Stack (
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Center (
+                  child: getList()
+              ),
+            ),
+          ]
+      ),
+    );
   }
 }
