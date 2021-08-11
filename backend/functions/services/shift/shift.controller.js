@@ -1,10 +1,10 @@
 const Shift = require("../../models/shift.model");
+const uuid = require("uuid");
 
 let db;
 exports.createShift = async (req,res) => {
 try{
-  let randInt2 = Math.floor(1000 + Math.random() * 9000);
-  let shiftID = "SHI-" + randInt2.toString();
+  let shiftID = "SHI-" + uuid.v4();
   let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
   let shiftData = {
     shiftID: shift.shiftID,
@@ -26,7 +26,7 @@ try{
 };
 exports.deleteShift = async (req, res) => {
   try {
-      if (await database.deleteShift(req.body.shiftID) == true)
+      if (await db.deleteShift(req.body.shiftID) == true)
       {
           return res.status(200).send({
               message: "Shift deleted"
@@ -39,19 +39,22 @@ exports.deleteShift = async (req, res) => {
 };
 exports.updateShift = async (req, res) => {
   try {
-    await database.updateShift(req.body.shiftID);
+    
+    await db.updateShift(req.body.shiftID,req.body);
     return res.status(200).send({
       data: req.body
     });
   } catch (error) {
     console.log(error);
+    console.log(req.body.shiftID);
+    console.log(req.body);
     return res.status(500).send(error);
   }
 
 };
 exports.viewShifts = async (req, res) => {
   try {
-      let viewShifts = await database.viewShifts();  
+      let viewShifts = await db.viewShifts();  
       return res.status(200).send({
         data: viewShifts
       });
@@ -62,10 +65,6 @@ exports.viewShifts = async (req, res) => {
       });
   }
 };
-
-
-
-
 
 exports.setDatabse= async(_db)=>{
     db=_db;

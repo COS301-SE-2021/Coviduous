@@ -128,6 +128,17 @@ exports.createPermissionRequest = async (permissionRequestId, data) => {
         return false;
     }
 };
+exports.deletePermissionsPermissionId = async (permissionId) => {
+    try {
+        const document = db.collection('permissions').doc(permissionId);
+        await document.delete();
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 
 exports.viewPermissionRequests = async () => {
     try {

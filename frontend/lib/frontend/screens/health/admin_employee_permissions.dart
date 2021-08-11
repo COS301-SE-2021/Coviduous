@@ -14,6 +14,11 @@ class EmployeePermissions extends StatefulWidget {
   _EmployeePermissionsState createState() => _EmployeePermissionsState();
 }
 class _EmployeePermissionsState extends State<EmployeePermissions> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (globals.loggedInUserType != 'Admin') {
@@ -106,50 +111,53 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
       }
     }
 
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('Employee permissions'),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-            Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
-          },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+        appBar: AppBar(
+          title: Text('Employee permissions'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
+            },
+          ),
         ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                getList(),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 18,
-                  width: MediaQuery.of(context).size.width,
-                ),
-              ],
-            ),
-          ),
-          /*
-          Container (
-            alignment: Alignment.center,
-            child: Container (
-                height: 50,
-                width: 170,
-                padding: EdgeInsets.all(10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  getList(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 18,
+                    width: MediaQuery.of(context).size.width,
                   ),
-                  child: Text('Close'),
-                  onPressed: (){
-
-                  },
-                )
+                ],
+              ),
             ),
-          ),
-          */
-        ],
+            /*
+            Container (
+              alignment: Alignment.center,
+              child: Container (
+                  height: 50,
+                  width: 170,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text('Close'),
+                    onPressed: (){
+
+                    },
+                  )
+              ),
+            ),
+            */
+          ],
+        ),
       ),
     );
   }

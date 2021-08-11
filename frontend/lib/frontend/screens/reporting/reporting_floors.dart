@@ -18,6 +18,11 @@ class ReportingFloors extends StatefulWidget {
 }
 
 class _ReportingFloorsState extends State<ReportingFloors> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -113,24 +118,27 @@ class _ReportingFloorsState extends State<ReportingFloors> {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("View office reports"),
-        leading: BackButton(
-          //Specify back button
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
-          },
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Center(
-              child: getList(),
-            ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("View office reports"),
+          leading: BackButton(
+            //Specify back button
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
+            },
           ),
-        ],
+        ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Center(
+                child: getList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

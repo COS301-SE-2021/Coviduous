@@ -17,6 +17,11 @@ class UserViewOfficeFloors extends StatefulWidget {
 }
 
 class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(Office.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -123,24 +128,27 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
       }
     }
 
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('View office spaces'),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-            Navigator.of(context).pushReplacementNamed(Office.routeName);
-          },
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Center(
-              child: getList(),
-            ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+        appBar: AppBar(
+          title: Text('View office spaces'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(Office.routeName);
+            },
           ),
-        ]
-      )
+        ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Center(
+                child: getList(),
+              ),
+            ),
+          ]
+        )
+      ),
     );
   }
 }

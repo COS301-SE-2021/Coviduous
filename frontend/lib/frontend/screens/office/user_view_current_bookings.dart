@@ -19,6 +19,11 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
   int numberOfBookings = officeGlobals.globalBookings.length; //Number of bookings
   List<Booking> bookings = officeGlobals.globalBookings;
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(Office.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -118,22 +123,25 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('View current bookings'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(Office.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('View current bookings'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(Office.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack(
-            children: <Widget>[
-              Center(
-                  child: getList()
-              ),
-            ]
-        )
+          body: Stack(
+              children: <Widget>[
+                Center(
+                    child: getList()
+                ),
+              ]
+          )
+      ),
     );
   }
 }

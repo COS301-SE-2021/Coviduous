@@ -1,8 +1,27 @@
 let database;
+const uuid = require("uuid"); // npm install uuid
+// For todays date;
+Date.prototype.today = function () { 
+  return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+}
 
+// For the time now
+Date.prototype.timeNow = function () {
+   return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+}
 exports.createBooking = async (req, res) => {
         try {
-          await database.createBooking(req.body.bookingNumber,req.body);
+          let bookingNumber = "BKN-" + uuid.v4();
+          let timestamp = "Booking Placed On The : " + new Date().today() + " @ " + new Date().timeNow();
+          let bookingData = {
+            bookingNumber: bookingNumber,
+            deskNumber: req.body.deskNumber,
+            floorNumber: req.body.floorNumber,
+            roomNumber: req.body.roomNumber,
+            timestamp: timestamp,
+            userId: req.body.userId
+          }
+          await database.createBooking(bookingNumber,bookingData);
           
           return res.status(200).send({
             message: 'office booking successfully created',

@@ -38,6 +38,11 @@ class _ViewShiftsState extends State<ViewShifts> {
     });
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -201,23 +206,26 @@ class _ViewShiftsState extends State<ViewShifts> {
           );
         }
     }
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('Shifts'),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-            Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
-          },
-        ),
-      ),
-      body: Stack (
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Center (
-                child: getList()
-            ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+        appBar: AppBar(
+          title: Text('Shifts'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
+            },
           ),
-        ]
+        ),
+        body: Stack (
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Center (
+                  child: getList()
+              ),
+            ),
+          ]
+        ),
       ),
     );
   }

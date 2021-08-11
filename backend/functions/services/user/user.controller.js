@@ -1,4 +1,4 @@
-const User = require('../../models/user.model');
+/*const User = require('../../models/user.model');
 
 let database;
 let userObj = null;
@@ -106,4 +106,4 @@ class UserController {
     }
 }
 
-module.exports = UserController;
+module.exports = UserController;*/

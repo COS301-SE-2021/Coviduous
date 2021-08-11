@@ -60,6 +60,11 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
     });
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -76,95 +81,98 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
       return Container();
     }
 
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Make announcement"),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: new AppBar(
+            title: new Text("Make announcement"),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+              },
+            ),
           ),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            child: new Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-              padding: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Select announcement type"),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  DropdownButton(
-                    value: _selectedType,
-                    items: _dropdownMenuItems,
-                    onChanged: onChangeDropdownItem,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text('Selected: ${_selectedType}'),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        labelText: "Topic",
+          body: Center(
+            child: SingleChildScrollView(
+              child: new Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Select announcement type"),
+                    SizedBox(
+                      height: 20.0,
                     ),
-                    obscureText: false,
-                    maxLength: 20,
-                    controller: _topic,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        hintText: "Write your announcement",
-                        labelText: "Description",
+                    DropdownButton(
+                      value: _selectedType,
+                      items: _dropdownMenuItems,
+                      onChanged: onChangeDropdownItem,
                     ),
-                    obscureText: false,
-                    maxLines: 3,
-                    controller: _description,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text('Selected: ${_selectedType}'),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Topic",
                       ),
+                      obscureText: false,
+                      maxLength: 20,
+                      controller: _topic,
                     ),
-                    child: Text("Post"),
-                    onPressed: () {
-                      /*
-                      //get admin ID and company ID
-                      FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                        var query = FirebaseFirestore.instance.collection('Users')
-                            .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email).limit(1);
-                        query.get().then((data) {
-                          if (data.docs.length > 0) {
-                            _adminId = data.docs[0].get('uid');
-                            _companyId = data.docs[0].get('Company ID');
-                          }
+                    SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Write your announcement",
+                          labelText: "Description",
+                      ),
+                      obscureText: false,
+                      maxLines: 3,
+                      controller: _description,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("Post"),
+                      onPressed: () {
+                        /*
+                        //get admin ID and company ID
+                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+                          var query = FirebaseFirestore.instance.collection('Users')
+                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email).limit(1);
+                          query.get().then((data) {
+                            if (data.docs.length > 0) {
+                              _adminId = data.docs[0].get('uid');
+                              _companyId = data.docs[0].get('Company ID');
+                            }
+                          });
                         });
-                      });
-                       */
+                         */
 
-                      CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_selectedType, _description.text, _adminId, _companyId));
-                      print(response.getAnnouncementID() + " " + response.getResponse().toString());
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Announcement " + response.getAnnouncementID() + " successfully created.")));
-                    },
-                  )
-                ],
+                        CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_selectedType, _description.text, _adminId, _companyId));
+                        print(response.getAnnouncementID() + " " + response.getResponse().toString());
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Announcement " + response.getAnnouncementID() + " successfully created.")));
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+      ),
     );
   }
 }

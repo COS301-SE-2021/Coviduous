@@ -17,6 +17,11 @@ class ReportingShifts extends StatefulWidget {
 }
 
 class ReportingShiftsState extends State<ReportingShifts> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -139,26 +144,29 @@ class ReportingShiftsState extends State<ReportingShifts> {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title:
-        Text("View office reports"),
-        leading: BackButton(
-          //Specify back button
-          onPressed: () {
-            Navigator.of(context)
-                .pushReplacementNamed(ReportingRooms.routeName);
-          },
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Center(
-              child: getList(),
-            ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          title:
+          Text("View office reports"),
+          leading: BackButton(
+            //Specify back button
+            onPressed: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(ReportingRooms.routeName);
+            },
           ),
-        ],
+        ),
+        body: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Center(
+                child: getList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
