@@ -12,6 +12,7 @@ class ViewShifts extends StatefulWidget {
 }
 class _ViewShiftsState extends State<ViewShifts> {
   @override
+
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
     if (globals.loggedInUserType != 'Admin') {
@@ -25,6 +26,42 @@ class _ViewShiftsState extends State<ViewShifts> {
         });
       }
       return Container();
+    }
+    Widget getList() {
+      int numOfShifts;
+      if (numOfShifts == 0) {
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height /
+                    (5 * globals.getWidgetScaling()),
+              ),
+              Container(
+                alignment: Alignment.center,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width / (2 * globals.getWidgetScaling()),
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / (24 * globals.getWidgetScaling()),
+                color: Theme
+                    .of(context)
+                    .primaryColor,
+                child: Text(
+                    'No shifts found', style: TextStyle(fontSize: (MediaQuery
+                    .of(context)
+                    .size
+                    .height * 0.01) * 2.5)),
+              ),
+            ]
+        );
+      }
     }
     return new Scaffold();
   }
