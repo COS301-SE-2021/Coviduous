@@ -12,10 +12,6 @@ class Notification {
 
         console.log("created notification class");
     }
-
-    // getNotificationId(){
-    //     return this.notificationId;
-    // }
 }
 
 module.exports = Notification;
