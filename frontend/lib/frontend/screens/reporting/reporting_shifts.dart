@@ -56,7 +56,6 @@ class ReportingShiftsState extends State<ReportingShifts> {
             color: Theme.of(context).primaryColor,
             child: Text('No shifts found',
                 style: TextStyle(
-                    color: Colors.white,
                     fontSize:
                     (MediaQuery.of(context).size.height * 0.01) * 2.5)),
           ),
@@ -78,7 +77,7 @@ class ReportingShiftsState extends State<ReportingShifts> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfShifts,
             itemBuilder: (context, index) {
               //Display a list tile FOR EACH shift in shifts[]
@@ -140,41 +139,26 @@ class ReportingShiftsState extends State<ReportingShifts> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title:
+        Text("View office reports"),
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
+            Navigator.of(context)
+                .pushReplacementNamed(ReportingRooms.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title:
-          Text("View office reports"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(ReportingRooms.routeName);
-            },
-          ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  getList(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 18,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                ],
-              ),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Center(
+              child: getList(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

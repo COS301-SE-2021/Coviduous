@@ -31,57 +31,48 @@ class _AdminViewPermissionsState extends State<AdminViewPermissions> {
       }
       return Container();
     }
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("View employee access"),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+          },
         ),
       ),
-      child: new Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: new AppBar(
-          title: new Text("View employee access"),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-            },
-          ),
-        ),
-        body: Center(
-          child: new Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Employee ID",
-                  ),
-                  obscureText: false,
-                  controller: _employeeId,
+      body: Center(
+        child: new Container(
+          color: Colors.white,
+          height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+          width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Employee ID",
                 ),
-                SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                obscureText: false,
+                controller: _employeeId,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom (
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text("Proceed"),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
-                  },
-                )
+                ),
+                child: Text("Proceed"),
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
+                },
+              )
 
-              ],
-            ),
+            ],
           ),
         ),
       ),

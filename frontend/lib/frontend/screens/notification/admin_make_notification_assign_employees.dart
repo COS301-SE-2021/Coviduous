@@ -91,7 +91,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(16),
             itemCount: numOfUsers,
             itemBuilder: (context, index) { //Display a list tile FOR EACH user in users[]
               return ListTile(
@@ -103,8 +103,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            'Email: ' + tempNotifications[index].getUserEmail(),
-                            style: TextStyle(color: Colors.white)),
+                            'Email: ' + tempNotifications[index].getUserEmail()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -155,111 +154,99 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Assign employees to notification'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Assign employees'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+            },
           ),
-          body: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                      children: [
-                        getList(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ]
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Container(
-                      height: 50,
-                      width: 150,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text('Add employee'),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(MakeNotificationAddEmployee.routeName);
-                        },
-                      )),
-                ),
-                Container(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                      height: 50,
-                      width: 130,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text('Finish'),
-                        onPressed: () {
-                          if (numOfUsers <= 0) {
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Not enough employees assigned'),
-                                  content: Text('A notification must have at least one employee assigned to it.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Okay'),
-                                      onPressed: (){
-                                        Navigator.of(ctx).pop();
-                                      },
-                                    ),
-                                  ],
-                                ));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                  title: Text('Warning'),
-                                  content: Text('Are you sure you are done creating this notification?'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Yes'),
-                                      onPressed: (){
-                                        sendNotifications();
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text('No'),
-                                      onPressed: (){
-                                        Navigator.of(ctx).pop();
-                                      },
-                                    )
-                                  ],
-                                ));
-                          }
-                        },
-                      )),
-                )
-              ]
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                  height: 50,
+                  width: 170,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text('Add employee'),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(MakeNotificationAddEmployee.routeName);
+                    },
+                  )
+              ),
+              Container(
+                  height: 50,
+                  width: 130,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text('Finish'),
+                    onPressed: () {
+                      if (numOfUsers <= 0) {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text('Not enough employees assigned'),
+                              content: Text('A notification must have at least one employee assigned to it.'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('Okay'),
+                                  onPressed: (){
+                                    Navigator.of(ctx).pop();
+                                  },
+                                ),
+                              ],
+                            ));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text('Warning'),
+                              content: Text('Are you sure you are done creating this notification?'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('Yes'),
+                                  onPressed: (){
+                                    sendNotifications();
+                                  },
+                                ),
+                                ElevatedButton(
+                                  child: Text('No'),
+                                  onPressed: (){
+                                    Navigator.of(ctx).pop();
+                                  },
+                                )
+                              ],
+                            ));
+                      }
+                    },
+                  )
+              ),
+            ]
           )
-      ),
+        ),
+        body: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                    child: getList()
+                ),
+              ),
+            ]
+        )
     );
   }
 }

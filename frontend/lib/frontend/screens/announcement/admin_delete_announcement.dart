@@ -39,7 +39,7 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
               height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
               color: Theme.of(context).primaryColor,
-              child: Text('No announcements found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+              child: Text('No announcements found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
             ),
             Container(
                 alignment: Alignment.center,
@@ -56,7 +56,7 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
           height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
           width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
           color: Colors.white,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -116,31 +116,22 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
       return Container();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-        backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Delete announcement'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Delete announcement'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+            ]
+        )
     );
   }
 }

@@ -38,7 +38,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
               title: Text('No floor plans found'),
               content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
               actions: <Widget>[
-                TextButton(
+                ElevatedButton(
                   child: Text('Okay'),
                   onPressed: (){
                     Navigator.of(ctx).pop();
@@ -66,7 +66,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
               title: Text('No floor plans found'),
               content: Text('Shifts cannot be viewed at this time. Please add floor plans for your company first.'),
               actions: <Widget>[
-                TextButton(
+                ElevatedButton(
                   child: Text('Okay'),
                   onPressed: (){
                     Navigator.of(ctx).pop();
@@ -95,76 +95,67 @@ class _ShiftScreenState extends State<ShiftScreen> {
       return Container();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Manage employee shifts'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-              },
-            ),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Manage employee shifts'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+            },
           ),
-          body: Center(
-              child: Container (
-                  height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  padding: EdgeInsets.all(20),
-                  child: Column (
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+        ),
+        body: Center(
+            child: Container (
+                height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                padding: EdgeInsets.all(20),
+                child: Column (
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      ElevatedButton (
+                          style: ElevatedButton.styleFrom (
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Add shift')),
-                                  Icon(Icons.add_circle_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                          ),
+                          child: Row (
+                              children: <Widget>[
+                                Expanded(child: Text('Add shift')),
+                                Icon(Icons.add_circle_rounded)
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                          ),
+                          onPressed: () {
+                            getFloorPlansAdd();
+                          }
+                      ),
+                      SizedBox (
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      ElevatedButton (
+                          style: ElevatedButton.styleFrom (
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            onPressed: () {
-                              getFloorPlansAdd();
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View shifts')),
-                                  Icon(Icons.update_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              getFloorPlansView();
-                            }
-                        ),
-                      ]
-                  )
-              )
-          )
-      ),
+                          ),
+                          child: Row (
+                              children: <Widget>[
+                                Expanded(child: Text('View shifts')),
+                                Icon(Icons.update_rounded)
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                          ),
+                          onPressed: () {
+                            getFloorPlansView();
+                          }
+                      ),
+                    ]
+                )
+            )
+        )
     );
   }
 }

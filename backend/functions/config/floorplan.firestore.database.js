@@ -131,19 +131,10 @@ class Firestore {
       }
     }
 
-    async editRoom(roomNumber,roomArea,deskArea,numDesks,percentage,maxCapacity,currentCapacity) {
+    async editRoom(roomData) {
       try {
-        response= await db.collection('rooms').doc(roomNumber).update(
-          {
-            "roomArea": roomArea,
-            "maxCapacity": maxCapacity,
-            "roomNumber": "RMNR-test",
-            "floorNumber": "test1",
-            "deskArea": deskArea,
-            "roomPercentage": percentage,
-            "currentCapacity": currentCapacity,
-            "numDesks": numDesks
-        }
+        response= await db.collection('rooms').doc(roomData.roomNumber).update(
+        roomData
         );
         
         return true;
@@ -153,6 +144,41 @@ class Firestore {
       }
     }
     
+    async deleteRoom(roomNumber){
+      try {
+          const document = db.collection('rooms').doc(roomNumber); 
+          await document.delete();
+    
+          return true;
+      } catch (error) {
+          console.log(error);
+          return false;
+      }
+  }
+
+  async deleteFloor(floorNumber){
+    try {
+        const document = db.collection('floors').doc(floorNumber); 
+        await document.delete();
+  
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+async deleteFloorPlan(floorplanNumber){
+  try {
+      const document = db.collection('floorplans').doc(floorplanNumber); 
+      await document.delete();
+
+      return true;
+  } catch (error) {
+      console.log(error);
+      return false;
+  }
+}
     getIfLastQuerySucceeded() {
         return true;
     }

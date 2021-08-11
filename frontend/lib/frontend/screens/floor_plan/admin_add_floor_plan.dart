@@ -62,91 +62,82 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       return Container();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Add floor plan"),
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title: Text("Add floor plan"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
-            },
-          ),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            //So the element doesn't overflow when you open the keyboard
-            child: Container(
-              width: MediaQuery.of(context).size.width /
-                  (2 * globals.getWidgetScaling()),
-              color: Colors.white,
-              margin: EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: _buildFloors()),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+      body: Center(
+        child: SingleChildScrollView(
+          //So the element doesn't overflow when you open the keyboard
+          child: Container(
+            width: MediaQuery.of(context).size.width /
+                (2 * globals.getWidgetScaling()),
+            color: Colors.white,
+            margin: EdgeInsets.all(16),
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildFloors()),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Text('Proceed'),
-                          onPressed: () {
-                            if (!_formKey.currentState.validate()) {
-                              return;
-                            }
-                            _formKey.currentState.save();
+                        ),
+                        child: Text('Proceed'),
+                        onPressed: () {
+                          if (!_formKey.currentState.validate()) {
+                            return;
+                          }
+                          _formKey.currentState.save();
 
-                            floorGlobals.globalFloors.clear();
-                            CreateFloorPlanResponse response = service
-                                .createFloorPlanMock(CreateFloorPlanRequest(
-                                    globals.loggedInUserId, globals.loggedInCompanyId, int.parse(_numFloor), 0));
+                          floorGlobals.globalFloors.clear();
+                          CreateFloorPlanResponse response = service
+                              .createFloorPlanMock(CreateFloorPlanRequest(
+                                  globals.loggedInUserId, globals.loggedInCompanyId, int.parse(_numFloor), 0));
 
-                            if (response.getResponse()) {
-                              Navigator.of(context).pushReplacementNamed(
-                                  AdminViewFloors.routeName);
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                        title: Text('Creation unsuccessful'),
-                                        content: Text(
-                                            'Floor plans must have at least one floor.'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: Text('Okay'),
-                                            onPressed: () {
-                                              Navigator.of(ctx).pop();
-                                            },
-                                          )
-                                        ],
-                                      ));
-                            }
-                          }),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ],
-                  ),
+                          if (response.getResponse()) {
+                            Navigator.of(context).pushReplacementNamed(
+                                AdminViewFloors.routeName);
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                      title: Text('Creation unsuccessful'),
+                                      content: Text(
+                                          'Floor plans must have at least one floor.'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          child: Text('Okay'),
+                                          onPressed: () {
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    ));
+                          }
+                        }),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                  ],
                 ),
               ),
             ),

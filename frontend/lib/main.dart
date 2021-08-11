@@ -33,6 +33,7 @@ import 'package:frontend/frontend/screens/health/admin_employee_permissions.dart
 import 'package:frontend/frontend/screens/health/admin_home_permissions.dart';
 import 'package:frontend/frontend/screens/health/admin_view_access_requests.dart';
 import 'package:frontend/frontend/screens/health/admin_view_permissions.dart';
+import 'package:frontend/frontend/screens/health/admin_contact_trace.dart';
 import 'package:frontend/frontend/screens/health/user_home_health.dart';
 import 'package:frontend/frontend/screens/health/user_health_check.dart';
 import 'package:frontend/frontend/screens/health/user_view_permissions.dart';
@@ -119,10 +120,23 @@ class MyApp extends StatelessWidget{
       debugShowCheckedModeBanner: false, //Remove "debug" banner
       title: 'Coviduous',
       theme: ThemeData(
-        primaryColor: Color(0xff056676), //AppBar and buttons default color
-        //primaryColor: Color(0xff5E2C25), //AppBar and buttons default color
+        appBarTheme: AppBarTheme(
+          backgroundColor: globals.appBarColor,
+          iconTheme: IconThemeData(color: Colors.white), //Back button color
+        ),
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: globals.appBarColor,
+        ),
+        fontFamily: 'Poppins',
+        primaryColor: globals.primaryColor, //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
-        scaffoldBackgroundColor: Color(0xff022C33), //Scaffold background default color
+        scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
+        primaryTextTheme: TextTheme(
+          bodyText1: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(color: Colors.white),
+          button: TextStyle(color: Colors.black),
+          headline6: TextStyle(color: Colors.white),
+        ),
       ),
       home: Home(),
       routes: {
@@ -148,6 +162,7 @@ class MyApp extends StatelessWidget{
         EmployeePermissions.routeName: (ctx)=> EmployeePermissions(),
         AdminViewAccessRequests.routeName: (ctx)=> AdminViewAccessRequests(),
         AdminViewPermissions.routeName: (ctx)=> AdminViewPermissions(),
+        AdminContactTrace.routeName: (ctx)=> AdminContactTrace(),
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),

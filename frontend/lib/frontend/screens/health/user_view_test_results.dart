@@ -47,7 +47,7 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No test results found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No test results found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -74,50 +74,41 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('View COVID-19 test results'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('View COVID-19 test results'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-                Container (
-                  alignment: Alignment.bottomRight,
-                  child: Container (
-                      height: 50,
-                      width: 200,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+              Container (
+                alignment: Alignment.bottomRight,
+                child: Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Text('Upload new PDF'),
-                        onPressed: (){
-                          Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
-                        },
-                      )
-                  ),
+                      ),
+                      child: Text('Upload new PDF'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
+                      },
+                    )
                 ),
-              ]
-          )
-      ),
+              ),
+            ]
+        )
     );
   }
 }

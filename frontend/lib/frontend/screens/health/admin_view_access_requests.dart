@@ -42,7 +42,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No requests currently available', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No requests currently available', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -69,7 +69,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Request ID' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Request ID' + (index+1).toString()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -79,16 +79,46 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                               height: 50,
                               color: Colors.white,
                               child: Text('Employee name: Name and surname displayed here', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Reason: For client meeting', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom (
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text('Grant access'),
+                                      onPressed: () {
+                                      }),
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom (
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text('Deny access'),
+                                      onPressed: () {
+                                      }),
+                                ],
+                              ),
                             ),
                           ]
                       )
@@ -102,99 +132,65 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
     }
 
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Employee requests'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+            },
+          ),
         ),
-      ),
-        child: new Scaffold(
-            backgroundColor: Colors.transparent, //To show background image
-            appBar: AppBar(
-              title: Text('Employee requests'),
-              leading: BackButton( //Specify back button
-                onPressed: (){
-                  Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-                },
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container (
+                  height: 50,
+                  width: 200,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text('View employee PDFs'),
+                    onPressed: (){
+                      //notifications.clear();
+                      setState(() {});
+                    },
+                  )
               ),
-            ),
-            body: Stack (
-                children: <Widget>[
-                  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        getList(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ],
+              Container (
+                  height: 50,
+                  width: 170,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  Container (
-                    alignment: Alignment.center,
-                    child: Container (
-                        height: 50,
-                        width: 170,
-                        padding: EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom (
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: Text('Clear requests'),
-                          onPressed: (){
-                            //notifications.clear();
-                            setState(() {});
-                          },
-                        )
-                    ),
-                  ),
-                  Container (
-                    alignment: Alignment.centerLeft,
-                    child: Container (
-                        height: 50,
-                        width: 170,
-                        padding: EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom (
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: Text('Grant Access'),
-                          onPressed: (){
-                            //notifications.clear();
-                            setState(() {});
-                          },
-                        )
-                    ),
-                  ),
-                  Container (
-                    alignment: Alignment.centerRight,
-                    child: Container (
-                        height: 50,
-                        width: 170,
-                        padding: EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom (
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: Text('View Employee pdfs'),
-                          onPressed: (){
-                            //notifications.clear();
-                            setState(() {});
-                          },
-                        )
-                    ),
-                  ),
-                ]
-            )
+                    child: Text('Clear requests'),
+                    onPressed: (){
+                      //notifications.clear();
+                      setState(() {});
+                    },
+                  )
+              ),
+            ],
+          )
         ),
+        body: Stack (
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: getList(),
+                ),
+              ),
+            ]
+        )
     );
   }
 }

@@ -62,7 +62,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                     .of(context)
                     .primaryColor,
                 child: Text('No notifications found',
-                    style: TextStyle(color: Colors.white, fontSize: (MediaQuery
+                    style: TextStyle(fontSize: (MediaQuery
                         .of(context)
                         .size
                         .height * 0.01) * 2.5)),
@@ -106,21 +106,25 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                             height: 50,
                             color: Colors.white,
                             child: Text('From: ' + reverseNotifications[index].userId, style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
                             child: Text('Subject: ' + reverseNotifications[index].subject, style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
                             child: Text('Date: ' + reverseNotifications[index].timestamp, style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
                             child: Text('Message: ' + reverseNotifications[index].message, style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
@@ -141,6 +145,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                                     }),
                               ],
                             ),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                         ],
                       )
@@ -152,59 +157,44 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent, //To show background image
-          appBar: AppBar(
-            title: Text('Your notifications'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Your notifications'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                      children: [
-                        getList(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ]
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Container (
+              alignment: Alignment.bottomRight,
+              height: 50,
+              width: 170,
+              padding: EdgeInsets.all(8),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom (
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                Container (
-                  alignment: Alignment.bottomRight,
-                  child: Container (
-                      height: 50,
-                      width: 170,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text('Clear notifications'),
-                        onPressed: (){
-                          notifications.clear();
-                          setState(() {});
-                        },
-                      )
-                  ),
+                child: Text('Clear notifications'),
+                onPressed: (){
+                  notifications.clear();
+                  setState(() {});
+                },
+              )
+          ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: getList(),
                 ),
-              ]
-          )
-      ),
+              ),
+            ]
+        )
     );
   }
 }

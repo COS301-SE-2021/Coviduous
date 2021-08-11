@@ -27,10 +27,15 @@ router.post('/floorplan/room', floorplanService.createRoom);
 router.get('/floorplan', floorplanService.viewFloorPlans);
 // we retrieve our floors based on the floorplanNumber
 router.get('/floorplan/floors', floorplanService.viewFloors);
-// we retrieve our roomss based on the floorNumber
+// we retrieve our rooms based on the floorNumber
 router.get('/floorplan/floors/rooms', floorplanService.viewRooms);
 router.put('/floorplan/room',floorplanService.updateRoom);
-//router.delete('/floorplan', floorplanService.deleteAnnouncement);
+//Delete room based on roomNumber
+router.delete('/floorplan/room', floorplanService.deleteRoom);
+//Delete floor based on floorNumber
+router.delete('/floorplan/floor', floorplanService.deleteFloor);
+//Delete floorplan based on floorplanNumber
+router.delete('/floorplan', floorplanService.deleteFloorPlan);
 
 // Export API routes
 module.exports = router;

@@ -61,69 +61,56 @@ class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
       return Container();
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Add employee"),
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title: Text("Add employee"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
-            },
-          ),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            //So the element doesn't overflow when you open the keyboard
-            child: Container(
-              width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-              color: Colors.white,
-              margin: EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: _buildEmail()),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+      body: Center(
+        child: SingleChildScrollView(
+          //So the element doesn't overflow when you open the keyboard
+          child: Container(
+            width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+            color: Colors.white,
+            margin: EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: _buildEmail()),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 48,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Text('Proceed'),
-                          onPressed: () {
-                            if (!_formKey.currentState.validate()) {
-                              return;
-                            }
-                            _formKey.currentState.save();
-                            print(_employeeEmail);
+                        ),
+                        child: Text('Proceed'),
+                        onPressed: () {
+                          if (!_formKey.currentState.validate()) {
+                            return;
+                          }
+                          _formKey.currentState.save();
+                          print(_employeeEmail);
 
-                            services.addToTempGroup(globals.currentGroupNum, globals.currentGroupNum, globals.currentGroupDescription, _employeeEmail, globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId, globals.currentShiftNum);
+                          services.addToTempGroup(globals.currentGroupNum, globals.currentGroupNum, globals.currentGroupDescription, _employeeEmail, globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId, globals.currentShiftNum);
 
-                            Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
-                          }),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ],
-                  ),
+                          Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+                        }),
+                  ],
                 ),
               ),
             ),

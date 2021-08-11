@@ -92,14 +92,14 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
 
     delay(1000);
 
-    it('GET /api/users/signIn to sign in', () => {
+    it('POST /api/users/signIn to sign in', () => {
         let user = {
             email: "testemail3@email.com",
             password: "123456"
         }
 
         chai.request(server)
-            .get('/api/users/signIn')
+            .post('/api/users/signIn')
             .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
@@ -159,7 +159,7 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
         }
 
         chai.request(server)
-            .get('/api/passwordReset')
+            .post('/api/passwordReset')
             .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;
@@ -190,4 +190,6 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
                 expect(res.body).should.be.a('object');
             });
     });
+
+    delay(1000);
 });

@@ -1,7 +1,21 @@
+const Shift = require("../../models/shift.model");
+
 let db;
 exports.createShift = async (req,res) => {
 try{
-    await db.createShift(req.body.shiftID,req.body);
+  let randInt2 = Math.floor(1000 + Math.random() * 9000);
+  let shiftID = "SHI-" + randInt2.toString();
+  let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
+  let shiftData = {
+    shiftID: shift.shiftID,
+    startTime: shift.startTime,
+    endTime: shift.endTime, 
+    description: shift.description,
+    groupNo: shift.groupNo,
+    adminId: shift.adminId,
+    companyId: shift.companyId
+  }
+    await db.createShift(shiftID,shiftData);
     return res.status(200).send({
         data: req.body
     });

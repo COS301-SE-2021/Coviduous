@@ -1,4 +1,5 @@
 const Notification = require("../../models/notification.model");
+const uuid = require("uuid"); // npm install uuid
 
 let database;
 
@@ -8,8 +9,7 @@ exports.setDatabase = async (db) => {
 
 exports.createNotification = async (req, res) => {
     try {
-        let randInt = Math.floor(1000 + Math.random() * 9000);
-        let notificationId = "NTFN-" + randInt.toString();
+        let notificationId = "NTFN-" + uuid.v4();
         let timestamp = new Date().toISOString();
     
         let notificationObj = new Notification(notificationId, req.body.userId, req.body.userEmail,

@@ -74,10 +74,22 @@ flutter:
     - assets/placeholder.com-logo1.png
     - assets/sample.pdf
     - assets/bg.jpg
+  # PDF fonts
     - assets/OpenSans-Regular.ttf
     - assets/OpenSans-Bold.ttf
     - assets/OpenSans-Italic.ttf
     - assets/OpenSans-BoldItalic.ttf
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/OpenSans-Regular.ttf
+        - asset: assets/OpenSans-Bold.ttf
+        - asset: assets/OpenSans-Italic.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/Poppins-Regular.ttf
+        - asset: assets/Poppins-Bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

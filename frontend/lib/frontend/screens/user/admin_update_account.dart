@@ -95,14 +95,8 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
     });
 
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      color: globals.secondaryColor,
       child: isLoading == false ? Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text('Update account information'),
           leading: BackButton( //Specify back button
