@@ -1,67 +1,87 @@
 var chai = require("chai");
 var expect = chai.expect;
-//const { expect } = require('chai');
-let chaiHttp = require('chai-http'); // npm install chai-http
-//let server = require('../index.js');
-let server = 'http://localhost:5001/coviduous-api/us-central1/app/'
-let should = chai.should();
+var uuid = require("uuid"); // npm install uuid
+var triggers = require('../triggers.js');
+var firebasemock = require('firebase-mock'); // npm install firebase-mock --save-dev
+var mockauth = new firebasemock.MockFirebase();
+var mockfirestore = new firebasemock.MockFirestore();
 
-//const functions = require('firebase-functions');
-//const admin = require('firebase-admin');
+var mocksdk = firebasemock.MockFirebaseSdk(null, function() {
+  return mockauth;
+}, function() {
+  return mockfirestore;
+});
 
-const Notification = require("../../models/notification.model.js");
-//const notificationDB = require("../../config/notification.firestore.database.js");
+var mockapp = mocksdk.initializeApp();
 
-chai.use(chaiHttp);
+describe('Firestore Function', function () {
+  beforeEach(function() {
+    mockfirestore = new firebasemock.MockFirestore();
+    mockfirestore.autoFlush();
+    mockauth = new firebasemock.MockFirebase();
+    mockauth.autoFlush();
+  });
 
-describe('/POST notifications', () => {
-    it('it should create an notification', () => {
-        let notification = {
-            notificationId: "test-000",
-            userId: "test-000",
-            userEmail: "test-000",
-            subject: "test-000",
-            message: "test-000",
-            timestamp: "test-000",
-            adminId: "test-000",
-            companyId: "test-000"
-        }
+  
+  it('create notification', function() {
+    var notificationId = "NTFN-" + uuid.v4();
 
-        chai.request(server)
-        .post('/api/notifications/')
-        .send(notification)
-        .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('Notification successfully created');
-            //done();
-        });
-    });
+    var event = {
+      data: new firebasemock.DeltaDocumentSnapshot(mockapp, null, {
+        notificationId: notificationId,
+        userId: 'UID-test',
+        userEmail: 'test@gmail.com',
+        subject: 'test subject',
+        message: 'test message',
+        timestamp: 'test',
+        adminId: 'AID-test',
+        companyId: 'CID-test'
+      }, 'notifications/' + notificationId),
+      params: {
+        uid: notificationId
+      }
+    };
 
-    it('it should DELETE a notification', () => {
-        let notification = {
-            notificationId: "test-000"
-        }
+    expect(event.data.get('subject')).to.equal('test subject');
+    expect(event.params.uid).to.equal(notificationId);
 
-        chai.request(server).delete('/api/notifications/')
-            .send(notification)
-            .end((err, res) => {
-            expect(err).to.be.null;
-            expect(res).to.have.status(200);
-            expect(res.body).should.be.a('object');
-            //done();
-        })//.catch(done);
-    });
-}); 
+    triggers.create(event);
+  });
+
+  it('view notifications', function() {
+    var notificationId = "NTFN-" + uuid.v4();
+    var notificationId2 = "NTFN-" + uuid.v4();
     
-describe('/GET notifications', () => {
-    it('it should GET all the notifications', () => {
-  chai.request(server).get('/api/notifications/')
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).should.be.a('object');
-        //done();
-      })//.catch(done);
-    });
+    var event = {
+      data: new firebasemock.DeltaDocumentSnapshot(mockapp, {
+        notificationId: notificationId,
+        userId: 'test',
+        userEmail: 'test',
+        subject: 'test',
+        message: 'test',
+        timestamp: 'test',
+        adminId: 'test',
+        companyId: 'test'
+      }, 
+      {
+        notificationId: notificationId2,
+        userId: 'test2',
+        userEmail: 'test2',
+        subject: 'test2',
+        message: 'test2',
+        timestamp: 'test2',
+        adminId: 'test2',
+        companyId: 'test2'
+      }, 'notifications/' + notificationId),
+      params: {
+        uid: notificationId
+      }
+    };
+
+    //expect(event.data.previous.get('subject')).to.equal('test');
+    expect(event.data.get('subject')).to.equal('test2');
+    expect(event.params.uid).to.equal(notificationId);
+
+    triggers.read(event);
+  });
 });
