@@ -139,6 +139,12 @@ class MyApp extends StatelessWidget{
           button: TextStyle(color: Colors.black),
           headline6: TextStyle(color: Colors.white),
         ),
+        snackBarTheme: SnackBarThemeData(
+          actionTextColor: Colors.black,
+          backgroundColor: globals.primaryColor,
+          contentTextStyle: TextStyle(color: Colors.black),
+          disabledActionTextColor: Colors.black,
+        ),
       ),
       home: Home(),
       routes: {
