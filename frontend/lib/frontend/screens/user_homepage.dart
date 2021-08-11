@@ -123,6 +123,14 @@ class _UserHomePageState extends State<UserHomePage> {
         ),
         body: Stack (
           children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/city-silhouette.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
               child: Center(
                 child: Column(
