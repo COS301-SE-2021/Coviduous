@@ -30,7 +30,8 @@
     "firebase-functions": "^3.14.1",
     "firebase-tools": "^9.16.0",
     "jwks-rsa": "^2.0.4",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "chai": "^4.3.4",

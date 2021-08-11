@@ -38,12 +38,12 @@ exports.deleteShift = async (ShiftID) => {
         return false;
     }
   }
-exports.updateShift = async (shiftID) =>{
+exports.updateShift = async (shiftID,shiftData) =>{
   try{
        const document = db.collection('Shift').doc(shiftID);
        await document.update({
-           startTime:startTime,
-           endTime:endTime
+           startTime:shiftData.startTime,
+           endTime:shiftData.endTime
        }); 
        return res.status(200).send();
   }

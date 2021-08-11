@@ -1,10 +1,10 @@
 const Shift = require("../../models/shift.model");
+const uuid = require("uuid");
 
 let db;
 exports.createShift = async (req,res) => {
 try{
-  let randInt2 = Math.floor(1000 + Math.random() * 9000);
-  let shiftID = "SHI-" + randInt2.toString();
+  let shiftID = "SHI-" + uuid.v4();
   let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
   let shiftData = {
     shiftID: shift.shiftID,
@@ -39,7 +39,7 @@ exports.deleteShift = async (req, res) => {
 };
 exports.updateShift = async (req, res) => {
   try {
-    await database.updateShift(req.body.shiftID);
+    await database.updateShift(req.body.shiftID,req.body);
     return res.status(200).send({
       data: req.body
     });
@@ -62,10 +62,6 @@ exports.viewShifts = async (req, res) => {
       });
   }
 };
-
-
-
-
 
 exports.setDatabse= async(_db)=>{
     db=_db;
