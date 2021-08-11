@@ -13,6 +13,7 @@ import 'dart:math';
 
 import 'package:frontend/backend/backend_globals/health_globals.dart'
     as healthGlobals;
+import 'package:frontend/backend/server_connections/server.dart' as serverGlobals;
 import 'package:http/http.dart' as http;
 // import 'package:frontend/subsystems/health_subsystem/health_check.dart';
 
@@ -24,7 +25,7 @@ import 'package:http/http.dart' as http;
  * The class has both mock and concrete implementations of the service contracts.
  */
 class HealthDatabaseQueries {
-  String server = "https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com";
+  String server = serverGlobals.getServer();
 
   String healthCheckId;
   String timestamp;
