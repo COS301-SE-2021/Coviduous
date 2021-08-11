@@ -40,67 +40,79 @@ class _RegisterState extends State<Register>{
           )
         ],
       ),
-      body: Center(
-        child: Column (
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container (
-                alignment: Alignment.center,
-                margin: EdgeInsets.all(20.0),
-                child: Image(
-                  alignment: Alignment.center,
-                  image: AssetImage('assets/placeholder.com-logo1.png'),
-                  color: Colors.white,
-                  width: double.maxFinite,
-                  height: MediaQuery.of(context).size.height/8,
-                ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/city-silhouette.png"),
+                fit: BoxFit.cover,
               ),
-              SizedBox (
-                height: MediaQuery.of(context).size.height/48,
-                width: MediaQuery.of(context).size.width,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height/20,
-                width: MediaQuery.of(context).size.width/1.5,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          Center(
+            child: Column (
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container (
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(20.0),
+                    child: Image(
+                      alignment: Alignment.center,
+                      image: AssetImage('assets/images/logo.png'),
+                      color: Colors.white,
+                      width: double.maxFinite,
+                      height: MediaQuery.of(context).size.height/8,
                     ),
                   ),
-                  child:(
-                    Text('Admin signup')
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
                   ),
-                  onPressed:() {
-                    Navigator.of(context).pushReplacementNamed(
-                        AdminRegister.routeName);
-                  }
-                ),
-              ),
-              SizedBox (
-                height: MediaQuery.of(context).size.height/48,
-                width: MediaQuery.of(context).size.width,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height/20,
-                width: MediaQuery.of(context).size.width/1.5,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/20,
+                    width: MediaQuery.of(context).size.width/1.5,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
+                      child:(
+                        Text('Admin signup')
+                      ),
+                      onPressed:() {
+                        Navigator.of(context).pushReplacementNamed(
+                            AdminRegister.routeName);
+                      }
                     ),
-                    child:(
-                        Text('User signup')
+                  ),
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/20,
+                    width: MediaQuery.of(context).size.width/1.5,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child:(
+                            Text('User signup')
+                        ),
+                        onPressed:() {
+                          Navigator.of(context).pushReplacementNamed(
+                              UserRegister.routeName);
+                        }
                     ),
-                    onPressed:() {
-                      Navigator.of(context).pushReplacementNamed(
-                          UserRegister.routeName);
-                    }
-                ),
-              ),
-            ]
-        ),
+                  ),
+                ]
+            ),
+          ),
+        ],
       )
     );
   }

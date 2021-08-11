@@ -13,6 +13,8 @@ import 'dart:math';
 
 import 'package:frontend/backend/backend_globals/notification_globals.dart'
     as notificationGlobals;
+import 'package:frontend/backend/server_connections/server.dart' as serverGlobals;
+import 'package:frontend/frontend/front_end_globals.dart' as frontendGlobals;
 import 'package:http/http.dart' as http;
 import 'package:frontend/subsystems/notification_subsystem/notification.dart';
 import 'package:frontend/subsystems/notification_subsystem/tempNotification.dart';
@@ -25,7 +27,7 @@ import 'package:frontend/subsystems/notification_subsystem/tempNotification.dart
  * The class has both mock and concrete implementations of the service contracts.
  */
 class NotificationDatabaseQueries {
-  String server = "https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com";
+  String server = serverGlobals.getServer();
 
   // String body;
   String notificationId = "";
@@ -117,6 +119,12 @@ class NotificationDatabaseQueries {
 
     var request = http.Request('GET', Uri.parse(url));
     request.body = json.encode({"userEmail": userEmail});
+
+    if (frontendGlobals.getIfOnPC()) {
+      request.headers.addAll({
+        'X-Requested-With': 'XMLHttpRequest'
+      });
+    }
 
     var response = await request.send();
 
