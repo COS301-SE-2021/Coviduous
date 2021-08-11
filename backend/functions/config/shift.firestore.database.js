@@ -11,9 +11,9 @@ exports.createShift = async (ShiftID,ShiftData) => {
         return false;
       }
 };
-exports.viewShift = async () => {
+exports.viewShifts = async () => {
     try {
-        const document = db.collection('shifts');
+        const document = db.collection('Shift');
         const snapshot = await document.get();
   
         let list = [];

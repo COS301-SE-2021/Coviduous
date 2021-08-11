@@ -218,11 +218,11 @@ exports.viewPermissionsRequestsCompanyId = async (req, res) => {
 };
 exports.deletePermissionsPermissionId = async (req, res)=>{
 try{
-  if ( await database.deletePermissionsPermissionId(req.body.permissionId) == true)
-    {
-      return res.status(200).send({
+  
+    if ( await database.deletePermissionsPermissionId(req.body.permissionId) == true)
+      {
+        return res.status(200).send({
         message: 'Successfully Deleted permission',
-        data: deletePermission
       });
     }
 }catch(error){

@@ -29,6 +29,6 @@ router.get('/health/permissions/permission-request', healthController.viewPermis
 router.get('/health/permissions/permission-request/companyid', healthController.viewPermissionsRequestsCompanyId);
 router.get('/health/contact-trace/group', healthController.viewGroup);
 router.get('/health/contact-trace/shifts', healthController.viewShifts);
-router.delete('/health/permissions/',healthController.deletePermissionsPermissionId);
+router.delete('/health/permissions',healthController.deletePermissionsPermissionId);
 // Export API routes
 module.exports = router;
