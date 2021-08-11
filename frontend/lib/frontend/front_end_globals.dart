@@ -29,6 +29,21 @@ String getOSWeb() {
   return "Web";
 }
 
+bool getIfOnPC() {
+  bool getIfOnPC = false;
+  if (kIsWeb) {
+    String platform = getOSWeb();
+    if (platform == "Android" || platform == "iOS") {
+      getIfOnPC = false;
+    } else {
+      getIfOnPC = true;
+    }
+  } else {
+    getIfOnPC = false;
+  }
+  return getIfOnPC;
+}
+
 //Adjusts scaling of containers based on platform
 double getWidgetScaling() {
   if (kIsWeb) { //If web browser
@@ -79,10 +94,10 @@ MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;
 
 Future loadPDFFonts() async {
   var fontAssets = await Future.wait([
-    rootBundle.load("assets/OpenSans-Regular.ttf"),
-    rootBundle.load("assets/OpenSans-Bold.ttf"),
-    rootBundle.load("assets/OpenSans-Bold.ttf"),
-    rootBundle.load("assets/OpenSans-BoldItalic.ttf")
+    rootBundle.load("assets/fonts/OpenSans-Regular.ttf"),
+    rootBundle.load("assets/fonts/OpenSans-Bold.ttf"),
+    rootBundle.load("assets/fonts/OpenSans-Bold.ttf"),
+    rootBundle.load("assets/fonts/OpenSans-BoldItalic.ttf")
   ]);
   return fontAssets;
 }
