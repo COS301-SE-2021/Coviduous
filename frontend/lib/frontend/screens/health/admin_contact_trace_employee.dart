@@ -11,7 +11,7 @@ class AdminContactTraceName extends StatefulWidget {
   _AdminContactTraceNameState createState() => _AdminContactTraceNameState();
 }
 class _AdminContactTraceNameState extends State<AdminContactTraceName> {
- // TextEditingController _employeeId = TextEditingController();
+ TextEditingController _employeeId = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,5 +27,49 @@ class _AdminContactTraceNameState extends State<AdminContactTraceName> {
       }
       return Container();
     }
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("View employee access"),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+          },
+        ),
+      ),
+      body: Center(
+        child: new Container(
+          color: Colors.white,
+          height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+          width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Employee ID",
+                ),
+                obscureText: false,
+                controller: _employeeId,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom (
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text("Proceed"),
+                onPressed: () {
+                },
+              )
+
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
