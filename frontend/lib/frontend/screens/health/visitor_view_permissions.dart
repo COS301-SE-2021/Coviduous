@@ -15,6 +15,11 @@ class VisitorViewPermissions extends StatefulWidget {
 }
 
 class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -102,22 +107,25 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
        }
 
      }
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Permissions'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Permissions'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-            ]
-        )
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+              ]
+          )
+      ),
     );
   }
 }

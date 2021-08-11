@@ -19,6 +19,11 @@ class UserViewAnnouncements extends StatefulWidget {
 }
 
 class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -115,22 +120,25 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Announcements'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Announcements'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-            ]
-        )
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+              ]
+          )
+      ),
     );
   }
 }

@@ -73,6 +73,7 @@ flutter:
   assets:
     - assets/images/city-silhouette.png
     - assets/images/logo.png
+    - assets/images/placeholder-profile-image.png
     - assets/sample.pdf
   # PDF fonts
     - assets/fonts/OpenSans-Regular.ttf

@@ -100,6 +100,11 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
     }
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -116,22 +121,25 @@ class _AdminDeleteAnnouncementState extends State<AdminDeleteAnnouncement> {
       return Container();
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Delete announcement'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Delete announcement'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-            ]
-        )
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+              ]
+          )
+      ),
     );
   }
 }

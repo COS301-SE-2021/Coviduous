@@ -51,6 +51,11 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
     });
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -153,24 +158,27 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Create shift in floor plan ' + globals.currentFloorPlanNum),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Create shift in floor plan ' + globals.currentFloorPlanNum),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Center(
-                  child: getList(),
+          body: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                    child: getList(),
+                  ),
                 ),
-              ),
-            ]
-        )
+              ]
+          )
+      ),
     );
   }
 }

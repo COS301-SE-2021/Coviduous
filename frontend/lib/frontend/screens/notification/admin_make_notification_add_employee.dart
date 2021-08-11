@@ -44,6 +44,12 @@ class _MakeNotificationAddEmployeeState extends State<MakeNotificationAddEmploye
 
 //global key _formkey.
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -60,60 +66,63 @@ class _MakeNotificationAddEmployeeState extends State<MakeNotificationAddEmploye
       return Container();
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Add employee"),
-        leading: BackButton(
-          //Specify back button
-          onPressed: () {
-            Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
-          },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Add employee"),
+          leading: BackButton(
+            //Specify back button
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
+            },
+          ),
         ),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          //So the element doesn't overflow when you open the keyboard
-          child: Container(
-            width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-            color: Colors.white,
-            margin: EdgeInsets.all(16),
-            child: Form(
-              key: _formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                        child: _buildEmail()),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+        body: Center(
+          child: SingleChildScrollView(
+            //So the element doesn't overflow when you open the keyboard
+            child: Container(
+              width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+              color: Colors.white,
+              margin: EdgeInsets.all(16),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          child: _buildEmail()),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ),
-                        child: Text('Proceed'),
-                        onPressed: () {
-                          if (!_formKey.currentState.validate()) {
-                            return;
-                          }
-                          _formKey.currentState.save();
-                          print(_employeeEmail);
+                          child: Text('Proceed'),
+                          onPressed: () {
+                            if (!_formKey.currentState.validate()) {
+                              return;
+                            }
+                            _formKey.currentState.save();
+                            print(_employeeEmail);
 
-                          service.addToTemp("emp ID goes here", _employeeEmail, globals.currentSubjectField, globals.currentDescriptionField, globals.loggedInUserId, globals.loggedInCompanyId);
+                            service.addToTemp("emp ID goes here", _employeeEmail, globals.currentSubjectField, globals.currentDescriptionField, globals.loggedInUserId, globals.loggedInCompanyId);
 
-                          Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
-                        }),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                  ],
+                            Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
+                          }),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

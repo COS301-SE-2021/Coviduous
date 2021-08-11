@@ -40,6 +40,11 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
     });
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -154,99 +159,102 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Assign employees'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Assign employees'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+              },
+            ),
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                  height: 50,
-                  width: 170,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    height: 50,
+                    width: 170,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Text('Add employee'),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(MakeNotificationAddEmployee.routeName);
-                    },
-                  )
-              ),
-              Container(
-                  height: 50,
-                  width: 130,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Finish'),
-                    onPressed: () {
-                      if (numOfUsers <= 0) {
-                        showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Text('Not enough employees assigned'),
-                              content: Text('A notification must have at least one employee assigned to it.'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  child: Text('Okay'),
-                                  onPressed: (){
-                                    Navigator.of(ctx).pop();
-                                  },
-                                ),
-                              ],
-                            ));
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Text('Warning'),
-                              content: Text('Are you sure you are done creating this notification?'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  child: Text('Yes'),
-                                  onPressed: (){
-                                    sendNotifications();
-                                  },
-                                ),
-                                ElevatedButton(
-                                  child: Text('No'),
-                                  onPressed: (){
-                                    Navigator.of(ctx).pop();
-                                  },
-                                )
-                              ],
-                            ));
-                      }
-                    },
-                  )
-              ),
-            ]
-          )
-        ),
-        body: Stack(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Center(
-                    child: getList()
+                      child: Text('Add employee'),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(MakeNotificationAddEmployee.routeName);
+                      },
+                    )
                 ),
-              ),
-            ]
-        )
+                Container(
+                    height: 50,
+                    width: 130,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Finish'),
+                      onPressed: () {
+                        if (numOfUsers <= 0) {
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Not enough employees assigned'),
+                                content: Text('A notification must have at least one employee assigned to it.'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('Okay'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  ),
+                                ],
+                              ));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Warning'),
+                                content: Text('Are you sure you are done creating this notification?'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    child: Text('Yes'),
+                                    onPressed: (){
+                                      sendNotifications();
+                                    },
+                                  ),
+                                  ElevatedButton(
+                                    child: Text('No'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  )
+                                ],
+                              ));
+                        }
+                      },
+                    )
+                ),
+              ]
+            )
+          ),
+          body: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                      child: getList()
+                  ),
+                ),
+              ]
+          )
+      ),
     );
   }
 }

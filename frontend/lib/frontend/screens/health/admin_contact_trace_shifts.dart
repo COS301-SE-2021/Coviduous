@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
+import 'package:frontend/frontend/screens/health/admin_contact_trace.dart';
+import 'package:frontend/frontend/screens/health/admin_contact_trace_employee.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
+
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
-class ViewShifts extends StatefulWidget {
-  static const routeName = "/admin_shifts_view_shifts";
+class AdminContactTraceShifts extends StatefulWidget {
+  static const routeName = "/admin_contact_trace_shifts";
 
   @override
-  _ViewShiftsState createState() => _ViewShiftsState();
+  _AdminContactTraceShiftsState createState() => _AdminContactTraceShiftsState();
 }
-class _ViewShiftsState extends State<ViewShifts> {
-  @override
+class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
+    return (await true);
+  }
 
+  @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
     if (globals.loggedInUserType != 'Admin') {
@@ -28,7 +36,7 @@ class _ViewShiftsState extends State<ViewShifts> {
       return Container();
     }
     Widget getList() {
-      int numOfShifts;
+      int numOfShifts = 1;
       if (numOfShifts == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -148,8 +156,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                 ElevatedButton(
                                     child: Text('View employees'),
                                     onPressed: () {
-
-                                      //Navigator.of(context).pushReplacementNamed(.routeName);
+                                      Navigator.of(context).pushReplacementNamed(AdminContactTrace.routeName);
                                     }),
                               ],
                             ),
@@ -163,23 +170,26 @@ class _ViewShiftsState extends State<ViewShifts> {
             });
           }
         }
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('Shifts the employee worked'),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-
-          },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+        appBar: AppBar(
+          title: Text('Shifts the employee worked'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
+            },
+          ),
         ),
-      ),
-      body: Stack (
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Center (
-                  child: getList()
+        body: Stack (
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center (
+                    child: getList()
+                ),
               ),
-            ),
-          ]
+            ]
+        ),
       ),
     );
   }

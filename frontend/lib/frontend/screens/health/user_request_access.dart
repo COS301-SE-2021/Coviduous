@@ -56,6 +56,11 @@ class UserRequestAccessState extends State<UserRequestAccess> {
       });
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -72,94 +77,97 @@ class UserRequestAccessState extends State<UserRequestAccess> {
       return Container();
     }
 
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Request access"),
-        leading: BackButton( //Specify back button
-          onPressed: (){
-            Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-          },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Request access"),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+            },
+          ),
         ),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: new Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Company ID",
-                  ),
-                  obscureText: false,
-                  controller: _companyId,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Your company admin's ID",
-                    labelText: "Admin ID",
-                  ),
-                  obscureText: false,
-                  controller: _adminId,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Date'
-                ),
-                Text(
-                  "${_selectedDate.toLocal()}".split(' ')[0],
-                  style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+        body: Center(
+          child: SingleChildScrollView(
+            child: new Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "Company ID",
                     ),
+                    obscureText: false,
+                    controller: _companyId,
                   ),
-                  onPressed: () => _selectDate(context),
-                  child: Text('Select date'),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "The reason you want access",
-                    labelText: "Reason",
+                  SizedBox(
+                    height: 16,
                   ),
-                  obscureText: false,
-                  controller: _reason,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Your company admin's ID",
+                      labelText: "Admin ID",
                     ),
+                    obscureText: false,
+                    controller: _adminId,
                   ),
-                  child: Text("Submit"),
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Request successfully submitted.")));
-                    Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                  },
-                )
-              ],
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    'Date'
+                  ),
+                  Text(
+                    "${_selectedDate.toLocal()}".split(' ')[0],
+                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => _selectDate(context),
+                    child: Text('Select date'),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "The reason you want access",
+                      labelText: "Reason",
+                    ),
+                    obscureText: false,
+                    controller: _reason,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text("Submit"),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Request successfully submitted.")));
+                      Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),

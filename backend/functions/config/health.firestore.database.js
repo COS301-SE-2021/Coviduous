@@ -6,8 +6,6 @@ const db = admin.firestore();
 
 // generate random healthCheckId number and pass in doc('') before creation
 
-// create 'health-check', 'permissions', 'permission-requests' tables in firestore db
-
 ///////////////// HEALTH CHECK /////////////////
 
 exports.createHealthCheck = async (healthCheckId, data) => {

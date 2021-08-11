@@ -96,6 +96,11 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
     });
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -112,179 +117,182 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
       return Container();
     }
 
-    return Container(
-      color: globals.secondaryColor,
-      child: isLoading == false ? new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: new AppBar(
-          title: new Text("Edit shift"),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
-              },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Container(
+        color: globals.secondaryColor,
+        child: isLoading == false ? new Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: new AppBar(
+            title: new Text("Edit shift"),
+              leading: BackButton( //Specify back button
+                onPressed: (){
+                  Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
+                },
+              ),
             ),
-          ),
-            body: Center(
-              child: SingleChildScrollView(
-                child: new Container(
-                  color: Colors.white,
-                  height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  padding: EdgeInsets.all(10),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          _selectedStartTime.format(context),
-                          style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        ElevatedButton(
-                          onPressed: () => _selectStartTime(context),
-                          child: Text('Select start time'),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                          _selectedEndTime.format(context),
-                          style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        ElevatedButton(
-                          onPressed: () => _selectEndTime(context),
-                          child: Text('Select end time'),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Enter your email address",
-                            labelText: "Email",
+              body: Center(
+                child: SingleChildScrollView(
+                  child: new Container(
+                    color: Colors.white,
+                    height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                    padding: EdgeInsets.all(10),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            _selectedStartTime.format(context),
+                            style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                           ),
-                          obscureText: false,
-                          controller: _email,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return null;
-                            } else if (value.isNotEmpty) {
-                              if (!value.contains('@')) {
-                                return 'invalid email';
-                              }
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom (
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          ElevatedButton(
+                            onPressed: () => _selectStartTime(context),
+                            child: Text('Select start time'),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            _selectedEndTime.format(context),
+                            style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          ElevatedButton(
+                            onPressed: () => _selectEndTime(context),
+                            child: Text('Select end time'),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Enter your email address",
+                              labelText: "Email",
                             ),
+                            obscureText: false,
+                            controller: _email,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return null;
+                              } else if (value.isNotEmpty) {
+                                if (!value.contains('@')) {
+                                  return 'invalid email';
+                                }
+                              }
+                              return null;
+                            },
                           ),
-                          child: Text("Submit"),
-                          onPressed: () {
-                            FormState form = _formKey.currentState;
-                            if (form.validate()) {
-                              int selectedStartTimeInMinutes = _selectedStartTime.hour * 60 + _selectedStartTime.minute;
-                              int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
-                              //Only allow if start time is before end time
-                              if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                          title: Text('Enter your password'),
-                                          content: TextFormField(
-                                            controller: _password,
-                                            decoration: InputDecoration(hintText: 'Enter your password'),
-                                            obscureText: true,
-                                            validator: (value) {
-                                              if (value.isEmpty) {
-                                                return 'please input your password';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (String value) {
-                                              _password.text = value;
-                                            },
-                                          ),
-                                          actions: [
-                                            ElevatedButton(
-                                              child: Text('Submit'),
-                                              onPressed: () {
-                                                setState(() {
-                                                  isLoading = true;
-                                                });
-
-                                                //Only allow changes to be made if password is correct; try to sign in with it
-                                                if (_password.text.isNotEmpty) {
-                                                  AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
-                                                    if (value2 == "welcome") {
-                                                      editShift();
-                                                    } else {
-                                                      setState(() {
-                                                        isLoading = false;
-                                                      });
-                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
-                                                      Navigator.pop(context);
-                                                    }
-                                                  });
-                                                } else {
-                                                  setState(() {
-                                                    isLoading = false;
-                                                  });
-                                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
-                                                  Navigator.pop(context);
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Text("Submit"),
+                            onPressed: () {
+                              FormState form = _formKey.currentState;
+                              if (form.validate()) {
+                                int selectedStartTimeInMinutes = _selectedStartTime.hour * 60 + _selectedStartTime.minute;
+                                int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
+                                //Only allow if start time is before end time
+                                if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                            title: Text('Enter your password'),
+                                            content: TextFormField(
+                                              controller: _password,
+                                              decoration: InputDecoration(hintText: 'Enter your password'),
+                                              obscureText: true,
+                                              validator: (value) {
+                                                if (value.isEmpty) {
+                                                  return 'please input your password';
                                                 }
+                                                return null;
+                                              },
+                                              onSaved: (String value) {
+                                                _password.text = value;
                                               },
                                             ),
-                                            ElevatedButton(
-                                              child: Text('Cancel'),
-                                              onPressed: () => Navigator.pop(context),
-                                            ),
-                                          ]);
-                                    });
+                                            actions: [
+                                              ElevatedButton(
+                                                child: Text('Submit'),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    isLoading = true;
+                                                  });
+
+                                                  //Only allow changes to be made if password is correct; try to sign in with it
+                                                  if (_password.text.isNotEmpty) {
+                                                    AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
+                                                      if (value2 == "welcome") {
+                                                        editShift();
+                                                      } else {
+                                                        setState(() {
+                                                          isLoading = false;
+                                                        });
+                                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
+                                                        Navigator.pop(context);
+                                                      }
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      isLoading = false;
+                                                    });
+                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
+                                                    Navigator.pop(context);
+                                                  }
+                                                },
+                                              ),
+                                              ElevatedButton(
+                                                child: Text('Cancel'),
+                                                onPressed: () => Navigator.pop(context),
+                                              ),
+                                            ]);
+                                      });
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text('Error'),
+                                        content: Text('Shift not created. Start time must be before end time.'),
+                                        actions: <Widget>[
+                                          ElevatedButton(
+                                            child: Text('Okay'),
+                                            onPressed: (){
+                                              Navigator.of(ctx).pop();
+                                            },
+                                          )
+                                        ],
+                                      )
+                                  );
+                                }
                               } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Error'),
-                                      content: Text('Shift not created. Start time must be before end time.'),
-                                      actions: <Widget>[
-                                        ElevatedButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("Please enter required fields")));
                               }
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text("Please enter required fields")));
-                            }
-                          },
-                        )
-                      ],
+                            },
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-     ) : Center( child: CircularProgressIndicator())
+       ) : Center( child: CircularProgressIndicator())
+      ),
     );
   }
 }

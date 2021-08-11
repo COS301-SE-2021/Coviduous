@@ -15,6 +15,11 @@ class AdminViewAccessRequests extends StatefulWidget {
   _AdminViewAccessRequestsState createState() => _AdminViewAccessRequestsState();
 }
 class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -132,65 +137,68 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
     }
 
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Employee requests'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Employee requests'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+              },
+            ),
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container (
-                  height: 50,
-                  width: 200,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Text('View employee PDFs'),
-                    onPressed: (){
-                      //notifications.clear();
-                      setState(() {});
-                    },
-                  )
-              ),
-              Container (
-                  height: 50,
-                  width: 170,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Clear requests'),
-                    onPressed: (){
-                      //notifications.clear();
-                      setState(() {});
-                    },
-                  )
-              ),
-            ],
-          )
-        ),
-        body: Stack (
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Center(
-                  child: getList(),
+                      child: Text('View employee PDFs'),
+                      onPressed: (){
+                        //notifications.clear();
+                        setState(() {});
+                      },
+                    )
                 ),
-              ),
-            ]
-        )
+                Container (
+                    height: 50,
+                    width: 170,
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text('Clear requests'),
+                      onPressed: (){
+                        //notifications.clear();
+                        setState(() {});
+                      },
+                    )
+                ),
+              ],
+            )
+          ),
+          body: Stack (
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                    child: getList(),
+                  ),
+                ),
+              ]
+          )
+      ),
     );
   }
 }

@@ -23,6 +23,11 @@ class AdminViewAnnouncements extends StatefulWidget {
 class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
   String _adminId = globals.loggedInUserId;
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -139,61 +144,64 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
       }
     }
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text('Announcements'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
-            },
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+          appBar: AppBar(
+            title: Text('Announcements'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+              },
+            ),
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container (
-                  height: 50,
-                  width: 200,
-                  padding: EdgeInsets.all(3),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(3),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Text('Create announcement'),
-                    onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(MakeAnnouncement.routeName);
-                    },
-                  )
-              ),
-              Container (
-                  height: 50,
-                  width: 200,
-                  padding: EdgeInsets.all(5),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      child: Text('Create announcement'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(MakeAnnouncement.routeName);
+                      },
+                    )
+                ),
+                Container (
+                    height: 50,
+                    width: 200,
+                    padding: EdgeInsets.all(5),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Text('Delete announcement'),
-                    onPressed: (){
-                      Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName);
-                    },
-                  )
-              ),
-            ]
+                      child: Text('Delete announcement'),
+                      onPressed: (){
+                        Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName);
+                      },
+                    )
+                ),
+              ]
+            )
+          ),
+          body: Stack (
+              children: <Widget>[
+                Center (
+                    child: getList()
+                ),
+              ]
           )
-        ),
-        body: Stack (
-            children: <Widget>[
-              Center (
-                  child: getList()
-              ),
-            ]
-        )
+      ),
     );
   }
 }

@@ -11,7 +11,13 @@ exports.createFloorPlan = async (req, res) => {
   try {
   let floorplanNumber = "FLP-" + uuid.v4();
   // let timestamp = new Date().toISOString();
-  await database.createFloorPlan(floorplanNumber,req.body);
+  let floorplanData = {
+    floorplanNumber: floorplanNumber,
+    numFloors: req.body.numFloors,
+    adminId: req.body.adminId,
+    companyId: req.body.companyId
+  }
+  await database.createFloorPlan(floorplanNumber,floorplanData);
   for (let index = 0; index < req.body.numFloors; index++) {
   let floorNumber = "FLR-" + uuid.v4();
   let floorData = {

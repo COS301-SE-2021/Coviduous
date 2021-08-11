@@ -150,6 +150,11 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
     }
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -166,22 +171,25 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
       return Container();
     }
 
-    return new Scaffold(
-      appBar: AppBar(
-          title: Text('Book an office space'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
-            },
-          ),
-      ),
-      body: Stack (
-        children: <Widget>[
-          Center (
-            child: getList()
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: new Scaffold(
+        appBar: AppBar(
+            title: Text('Book an office space'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+              },
             ),
-        ]
-      )
+        ),
+        body: Stack (
+          children: <Widget>[
+            Center (
+              child: getList()
+              ),
+          ]
+        )
+      ),
     );
   }
 }
