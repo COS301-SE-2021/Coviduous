@@ -1,133 +1,90 @@
 var chai = require("chai");
 var expect = chai.expect;
-//const { expect } = require('chai');
-let chaiHttp = require('chai-http'); // npm install chai-http
-//let server = require('../index.js');
-let server = 'http://localhost:5001/coviduous-api/us-central1/app/'
-let should = chai.should();
+var uuid = require("uuid"); // npm install uuid
+var triggers = require('../triggers.js');
+var firebasemock = require('firebase-mock'); // npm install firebase-mock --save-dev
+var mockauth = new firebasemock.MockFirebase();
+var mockfirestore = new firebasemock.MockFirestore();
 
-//const functions = require('firebase-functions');
-//const admin = require('firebase-admin');
-
-const Announcement = require("../../models/announcement.model.js");
-//const announcementDB = require("../../config/announcement.firestore.database.js");
-
-chai.use(chaiHttp);
-
-describe('Announcement Unit Tests', () => {
-    it('should create an announcement', () => {
-        //let announcementList = [];
-        var obj = new Announcement();
-        announcement1 = obj.createAnnouncement("test", "test", "test", "test", "test", "test");
-
-        //announcementList.push(announcement);
-
-        expect(announcement1).to.be.not.null;
-    })
-
-    it('should get all announcements', () => {
-        let announcementList = [];
-        var obj = new Announcement();
-        announcement1 = obj.createAnnouncement("test", "test", "test", "test", "test", "test");
-
-        //console.log("id: " + announcement1.announcementId);
-
-        var obj = new Announcement();
-        announcement2 = obj.createAnnouncement("test2", "test2", "test2", "test2", "test2", "test2");
-
-        announcementList.push(announcement1);
-        announcementList.push(announcement2);
-
-        expect(announcementList).to.be.not.null;
-        expect(announcementList.length).to.be.equal(2);
-    })
-
-    it('should delete an announcement', () => {
-        let announcementList = [];
-        var obj = new Announcement();
-        announcement1 = obj.createAnnouncement("test", "test", "test", "test", "test", "test");
-
-        var obj = new Announcement();
-        announcement2 = obj.createAnnouncement("test2", "test2", "test2", "test2", "test2", "test2");
-
-        var obj = new Announcement();
-        announcement3 = obj.createAnnouncement("test3", "test3", "test3", "test3", "test3", "test3");
-
-        announcementList.push(announcement1);
-        announcementList.push(announcement2);
-        announcementList.push(announcement3);
-
-        expect(announcementList).to.be.not.null;
-        expect(announcementList.length).to.be.equal(3);
-
-        announcementList.pop();
-
-        expect(announcementList).to.be.not.null;
-        expect(announcementList.length).to.be.equal(2);
-    })
+var mocksdk = firebasemock.MockFirebaseSdk(null, function() {
+  return mockauth;
+}, function() {
+  return mockfirestore;
 });
 
-describe('/POST announcements', () => {
-    it('it should create an announcement', () => {
-        let announcement = {
-            announcementId: "test-000",
-            type: "test-000",
-            message: "test-000",
-            timestamp: "test-000",
-            adminId: "test-000",
-            companyId: "test-000",
-        }
+var mockapp = mocksdk.initializeApp();
 
-        chai.request(server)
-        .post('/api/announcements/')
-        .send(announcement)
-        .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('Announcement successfully created');
-            // res.body.announcement.should.have.property('announcementId');
-            // res.body.announcement.should.have.property('type');
-            // res.body.announcement.should.have.property('message');
-            // res.body.announcement.should.have.property('timestamp');
-            //done();
-        });
-    });
+describe('Firestore Function', function () {
+  beforeEach(function() {
+    mockfirestore = new firebasemock.MockFirestore();
+    mockfirestore.autoFlush();
+    mockauth = new firebasemock.MockFirebase();
+    mockauth.autoFlush();
+  });
 
-    it('it should DELETE an announcement', () => {
-        let announcement = {
-            announcementId: "test-000"
-        }
+  //var uid = '123';
+  var announcementId = "ANNOUNC-" + uuid.v4();
 
-        chai.request(server).delete('/api/announcements/')
-            .send(announcement)
-            .end((err, res) => {
-            expect(err).to.be.null;
-            expect(res).to.have.status(200);
-            expect(res.body).should.be.a('object');
-            //done();
-        })//.catch(done);
-    });
-}); 
-    
-describe('/GET announcements', () => {
-    it('it should GET all the announcements', () => {
-  chai.request(server).get('/api/announcements/')
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).should.be.a('object');
-        //done();
-      })//.catch(done);
-    });
+  it('create announcement', function() {
+    var event = {
+      data: new firebasemock.DeltaDocumentSnapshot(mockapp, null, {
+        announcementId: announcementId,
+        type: 'general', 
+        message: 'test', 
+        timestamp: 'test', 
+        adminId: 'test', 
+        companyId: 'test'
+      }, 'announcements/' + announcementId),
+      params: {
+        uid: announcementId
+      }
+    };
+
+    expect(event.data.get('type')).to.equal('general');
+    expect(event.params.uid).to.equal(announcementId);
+
+    triggers.create(event);
+  });
+
+//   it('update', function() {
+//     var event = {
+//       data: new firebasemock.DeltaDocumentSnapshot(mockapp, {
+//         name: 'bob',
+//         createdTime: new Date()
+//       }, {
+//         name: 'bobby'
+//       }, 'users/' + uid),
+//       params: {
+//         uid: uid
+//       }
+//     };
+
+//     expect(event.data.previous.get('name')).to.equal('bob');
+//     expect(event.data.get('name')).to.equal('bobby');
+//     expect(event.params.uid).to.equal(uid);
+
+//     triggers.update(event);
+//   });
+
+  it('delete announcement', function() {
+    var event = {
+      data: new firebasemock.DeltaDocumentSnapshot(mockapp, {
+        announcementId: announcementId,
+        type: 'general', 
+        message: 'test', 
+        timestamp: 'test', 
+        adminId: 'test', 
+        companyId: 'test'
+      }, null, 'announcements/' + announcementId),
+      params: {
+        uid: announcementId
+      }
+    };
+
+    expect(event.data.previous.get('type')).to.equal('general');
+    expect(event.params.uid).to.equal(announcementId);
+
+    triggers.remove(event);
+  });
 });
-
-// describe('Get all announcements', () => {
-//     it('it should GET all the announcements', () => {
-//         obj = announcementDB.viewAnnouncements()
-//         .then((res) => {
-//             expect(res).to.be.not.null;
-//             expect(res).to.be.a('object');
-//         });
-//     });
-// });
 
