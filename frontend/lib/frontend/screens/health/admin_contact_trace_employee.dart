@@ -29,7 +29,7 @@ class _AdminContactTraceNameState extends State<AdminContactTraceName> {
     }
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("View employee access"),
+        title: new Text("Contact trace"),
         leading: BackButton( //Specify back button
           onPressed: (){
           },
@@ -47,7 +47,7 @@ class _AdminContactTraceNameState extends State<AdminContactTraceName> {
             children: <Widget>[
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: "Employee ID",
+                  labelText: "Enter Employee ID/Number",
                 ),
                 obscureText: false,
                 controller: _employeeId,
