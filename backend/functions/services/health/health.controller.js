@@ -210,3 +210,22 @@ exports.viewPermissionsRequestsCompanyId = async (req, res) => {
       });
   }
 };
+
+//////////////////////////////////// Contact Tracing ///////////////////////////
+
+//returns a group of employees who fall under the same shift identified by the shiftId
+exports.viewGroup = async (req, res) => {
+  try {
+      let group = await database.viewGroup(req.body.shiftNumber);
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved group',
+        data: group
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message || "Some error occurred while fetching group."
+      });
+  }
+};

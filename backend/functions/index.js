@@ -26,7 +26,7 @@ app.get('/api', (req, res) => {
 const announcementRoute = require("./routes/announcement.route.js")
 const notificationRoute = require("./routes/notification.route.js")
 const floorplanRoute = require("./routes/floorplan.route.js");
-const userRoute = require("./routes/user.route.js");
+//const userRoute = require("./routes/user.route.js");
 const shiftRoute = require("./routes/shift.route.js");
 const officeRoute = require("./routes/office.route.js");
 const healthRoute = require("./routes/health.route.js");
@@ -35,7 +35,7 @@ const healthRoute = require("./routes/health.route.js");
 app.use('/api/', announcementRoute); // testing http would be '.../api/announcement' - see announcement.route.js file for routes
 app.use('/api/', notificationRoute);
 app.use('/api/', floorplanRoute);
-app.use('/api/', userRoute);
+//app.use('/api/', userRoute);
 app.use('/api/', shiftRoute);
 app.use('/api/', officeRoute);
 app.use('/api/', healthRoute);

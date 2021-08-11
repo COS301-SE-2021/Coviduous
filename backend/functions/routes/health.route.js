@@ -27,6 +27,7 @@ router.get('/health/permissions/userid', healthController.viewPermissionsUserId)
 router.post('/health/permissions/permission-request', healthController.createPermissionRequest);
 router.get('/health/permissions/permission-request', healthController.viewPermissionRequests);
 router.get('/health/permissions/permission-request/companyid', healthController.viewPermissionsRequestsCompanyId);
+router.get('/health/contact-trace/group', healthController.viewGroup);
 
 // Export API routes
 module.exports = router;

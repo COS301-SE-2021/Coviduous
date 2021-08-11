@@ -170,3 +170,33 @@ exports.viewPermissionRequestsCompanyId = async (value) => {
         return error;
     }
 };
+
+exports.viewGroup = async (shiftNumber) => {
+    try {
+        const document = db.collection('groups');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+        
+        let group = [];
+        list.forEach(obj => {
+            if(obj.shiftNumber===shiftNumber)
+            {
+                group.push(obj);
+            }
+            else
+            {
+            }
+          });
+        
+        return group;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
