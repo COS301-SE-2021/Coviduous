@@ -179,9 +179,44 @@ async deleteFloorPlan(floorplanNumber){
       return false;
   }
 }
+
+async deleteDesk(deskNumber){
+  try {
+      const document = db.collection('desks').doc(deskNumber); 
+      await document.delete();
+
+      return true;
+  } catch (error) {
+      console.log(error);
+      return false;
+  }
+}
+
+async getDesks() {
+  try {
+    const document = db.collection('desks');
+    const snapshot = await document.get();
+    
+    let list = [];
+    
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        list.push(data);
+    });
+
+    lastQuerySucceeded=true;
+    return list;
+  } catch (error) {
+    console.log(error);
+    lastQuerySucceeded=false;
+  }
+}
+
     getIfLastQuerySucceeded() {
         return true;
     }
+
+
 
 }
 
