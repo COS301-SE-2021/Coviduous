@@ -26,7 +26,7 @@ try{
 };
 exports.deleteShift = async (req, res) => {
   try {
-      if (await database.deleteShift(req.body.shiftID) == true)
+      if (await db.deleteShift(req.body.shiftID) == true)
       {
           return res.status(200).send({
               message: "Shift deleted"
