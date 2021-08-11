@@ -17,7 +17,8 @@ exports.createHealthCheck = async (req, res) => {
 
     let healthCheckObj = new HealthCheck(healthCheckId, req.body.userId, req.body.name, req.body.surname,
         req.body.email, req.body.phoneNumber, req.body.temperature, req.body.fever, req.body.cough,
-        req.body.soreThroat, req.body.chills, req.body.aches, req.body.nausea, req.body.shortnessOfBreath, req.body.lossOfTasteSmell);
+        req.body.soreThroat, req.body.chills, req.body.aches, req.body.nausea, req.body.shortnessOfBreath, 
+        req.body.lossOfTasteSmell, req.body.sixFeetContact, req.body.testedPositive, req.body.travelled);
 
     let healthCheckData = {
       healthCheckId: healthCheckObj.healthCheckId,
@@ -34,8 +35,13 @@ exports.createHealthCheck = async (req, res) => {
       aches: healthCheckObj.aches,
       nausea: healthCheckObj.nausea,
       shortnessOfBreath: healthCheckObj.shortnessOfBreath,
-      lossOfTasteSmell: healthCheckObj.lossOfTasteSmell
+      lossOfTasteSmell: healthCheckObj.lossOfTasteSmell,
+      sixFeetContact: healthCheckObj.sixFeetContact,
+      testedPositive: healthCheckObj.testedPositive,
+      travelled: healthCheckObj.travelled
     }
+
+    // health check businness logic - call database.createPermission(permissionData...)
 
     if (await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData) == true)
     {
