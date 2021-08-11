@@ -30,10 +30,10 @@ describe('Firestore Function', function () {
       data: new firebasemock.DeltaDocumentSnapshot(mockapp, null, {
         announcementId: announcementId,
         type: 'general', 
-        message: 'test', 
+        message: 'test message', 
         timestamp: 'test', 
-        adminId: 'test', 
-        companyId: 'test'
+        adminId: 'AID-test', 
+        companyId: 'CID-test'
       }, 'announcements/' + announcementId),
       params: {
         uid: announcementId
@@ -44,6 +44,27 @@ describe('Firestore Function', function () {
     expect(event.params.uid).to.equal(announcementId);
 
     triggers.create(event);
+  });
+
+  it('delete announcement', function() {
+    var event = {
+      data: new firebasemock.DeltaDocumentSnapshot(mockapp, {
+        announcementId: announcementId,
+        type: 'general', 
+        message: 'test message', 
+        timestamp: 'test', 
+        adminId: 'AID-test', 
+        companyId: 'CID-test'
+      }, null, 'announcements/' + announcementId),
+      params: {
+        uid: announcementId
+      }
+    };
+
+    expect(event.data.previous.get('type')).to.equal('general');
+    expect(event.params.uid).to.equal(announcementId);
+
+    triggers.remove(event);
   });
 
 //   it('update', function() {
@@ -65,26 +86,5 @@ describe('Firestore Function', function () {
 
 //     triggers.update(event);
 //   });
-
-  it('delete announcement', function() {
-    var event = {
-      data: new firebasemock.DeltaDocumentSnapshot(mockapp, {
-        announcementId: announcementId,
-        type: 'general', 
-        message: 'test', 
-        timestamp: 'test', 
-        adminId: 'test', 
-        companyId: 'test'
-      }, null, 'announcements/' + announcementId),
-      params: {
-        uid: announcementId
-      }
-    };
-
-    expect(event.data.previous.get('type')).to.equal('general');
-    expect(event.params.uid).to.equal(announcementId);
-
-    triggers.remove(event);
-  });
 });
 
