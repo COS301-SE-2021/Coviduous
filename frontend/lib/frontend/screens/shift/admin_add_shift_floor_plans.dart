@@ -38,7 +38,7 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
                   title: Text('No floors found'),
                   content: Text('Shifts cannot be assigned at this time. Please add floors for your company first.'),
                   actions: <Widget>[
-                    TextButton(
+                    ElevatedButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();
@@ -97,7 +97,7 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
                   color: Theme
                       .of(context)
                       .primaryColor,
-                  child: Text('No floor plans found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery
+                  child: Text('No floor plans found', style: TextStyle(fontSize: (MediaQuery
                       .of(context)
                       .size
                       .height * 0.01) * 2.5)),
@@ -125,7 +125,7 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
           return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(16),
               itemCount: numOfFloorPlans,
               itemBuilder: (context, index) { //Display a list tile FOR EACH floor plan in floorPlans[]
                 return ListTile(
@@ -144,9 +144,7 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
                           color: Theme
                               .of(context)
                               .primaryColor,
-                          child: Text(
-                              'Floor plan ' + floorPlans[index].getFloorPlanId(),
-                              style: TextStyle(color: Colors.white)),
+                          child: Text('Floor plan ' + floorPlans[index].getFloorPlanId()),
                         ),
                         ListView(
                             shrinkWrap: true,
@@ -158,6 +156,7 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
                                 child: Text(
                                     'Number of floors: ' + floorPlans[index].getNumFloors().toString(),
                                     style: TextStyle(color: Colors.black)),
+                                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                               ),
                               Container(
                                 height: 50,
@@ -185,45 +184,24 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
         }
       }
 
-      return Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: new Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              title: Text('Create shift'),
-              leading: BackButton( //Specify back button
-                onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
-                },
-              ),
+      return new Scaffold(
+          appBar: AppBar(
+            title: Text('Create shift'),
+            leading: BackButton( //Specify back button
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+              },
             ),
-            body: Stack(
-                children: <Widget>[
-                  SingleChildScrollView(
-                    child: Column(
-                        children: [
-                          getList(),
-                          SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height / 18,
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
-                          ),
-                        ]
-                    ),
+          ),
+          body: Stack(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Center(
+                    child: getList(),
                   ),
-                ]
-            )
-        ),
+                ),
+              ]
+          )
       );
     }
   }

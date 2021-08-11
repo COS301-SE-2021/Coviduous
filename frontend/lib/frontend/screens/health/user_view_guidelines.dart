@@ -46,7 +46,7 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No company guidelines found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No company guidelines found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -73,31 +73,22 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Company guidelines'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Company guidelines'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+            ]
+        )
     );
   }
 }

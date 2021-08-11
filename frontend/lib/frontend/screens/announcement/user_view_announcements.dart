@@ -52,7 +52,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No announcements found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No announcements found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -66,7 +66,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
         );
       } else { //Else create and return a list
         return ListView.builder(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numberOfAnnouncements,
             itemBuilder: (context, index) { //Display a list tile FOR EACH announcement in announcements[]
               return ListTile(
@@ -77,7 +77,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Announcement ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Announcement ' + (index+1).toString()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -88,18 +88,21 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                               color: Colors.white,
                               child: Text('Type: ' + announcements[index].getType(), style: TextStyle(color: Colors.black)),
                               //child: Text('Type: General', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Date: ' + announcements[index].getDate(), style: TextStyle(color: Colors.black)),
                               //child: Text('Date: test', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Message: ' + announcements[index].getMessage(), style: TextStyle(color: Colors.black)),
                               //child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
                       )
@@ -112,31 +115,22 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Announcements'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Announcements'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+            ]
+        )
     );
   }
 }

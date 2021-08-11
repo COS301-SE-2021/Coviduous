@@ -11,6 +11,8 @@
 import 'dart:math';
 
 import 'package:frontend/backend/backend_globals/shift_globals.dart' as shiftGlobals;
+import 'package:frontend/backend/server_connections/server.dart' as serverGlobals;
+import 'package:frontend/frontend/front_end_globals.dart' as frontendGlobals;
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -29,7 +31,7 @@ import 'package:frontend/subsystems/shift_subsystem/tempGroup.dart';
 
 class ShiftModel {
   ShiftModel() {}
-  String server = "https://hvofiy7xh6.execute-api.us-east-1.amazonaws.com";
+  String server = serverGlobals.getServer();
   String shiftId;
   String groupId;
 
@@ -236,6 +238,12 @@ class ShiftModel {
 
     var request = http.Request('GET', Uri.parse(url));
     request.body = json.encode({"roomNumber": roomNumber});
+
+    if (frontendGlobals.getIfOnPC()) {
+      request.headers.addAll({
+        'X-Requested-With': 'XMLHttpRequest'
+      });
+    }
 
     var response = await request.send();
 

@@ -57,7 +57,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No desks found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No desks found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -73,7 +73,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfDesks,
             itemBuilder: (context, index) { //Display a list tile FOR EACH desk in desks[]
               return ListTile(
@@ -99,6 +99,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                   'Maximum capacity: ' +
                                       desks[index].getMaxCapacity().toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -107,6 +108,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                   'Current capacity: ' +
                                       desks[index].getCurrentCapacity().toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -136,7 +138,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                                   title: Text('Desk not booked'),
                                                   content: Text('Please try again later or contact your administrator.'),
                                                   actions: <Widget>[
-                                                    TextButton(
+                                                    ElevatedButton(
                                                       child: Text('Okay'),
                                                       onPressed: (){
                                                         Navigator.of(ctx).pop();
@@ -153,7 +155,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                                                 title: Text('Desk not booked'),
                                                 content: Text('Desk has reached maximum capacity.'),
                                                 actions: <Widget>[
-                                                  TextButton(
+                                                  ElevatedButton(
                                                     child: Text('Okay'),
                                                     onPressed: (){
                                                       Navigator.of(ctx).pop();
@@ -179,39 +181,24 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Book desk in room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum()),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Book desk in room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum()),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
+            },
           ),
-          body: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      getList(),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 18,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ],
-                  ),
+        ),
+        body: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: getList(),
                 ),
-              ]
-          )
-      ),
+              ),
+            ]
+        )
     );
   }
 }

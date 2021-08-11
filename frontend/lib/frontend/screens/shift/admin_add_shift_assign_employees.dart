@@ -31,7 +31,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
       response = responses.first;
       if (response != null) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Notification successfully created.")));
+            SnackBar(content: Text("Shift successfully created.")));
         Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -75,7 +75,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('Shift is empty', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('Shift is empty', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -91,7 +91,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfUsers,
             itemBuilder: (context, index) { //Display a list tile FOR EACH user in users[]
               return ListTile(
@@ -102,9 +102,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(
-                            'Email: ' + tempShifts[index].getUserEmail(),
-                            style: TextStyle(color: Colors.white)),
+                        child: Text('Email: ' + tempShifts[index].getUserEmail()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -116,6 +114,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                               child: Text(
                                   'Group ID: ' + tempShifts[index].getGroupId(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -123,6 +122,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                               child: Text(
                                   'Group name: ' + tempShifts[index].getGroupName(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -150,94 +150,82 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Assign employees to shift'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Assign employees to shift'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
+            },
           ),
-          body: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                      children: [
-                        getList(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ]
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Container(
-                      height: 50,
-                      width: 150,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text('Add employee'),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(AddShiftAddEmployee.routeName);
-                        },
-                      )),
-                ),
-                Container(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                      height: 50,
-                      width: 130,
-                      padding: EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text('Finish'),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                title: Text('Warning'),
-                                content: Text('Are you sure you are done creating this shift?'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('Yes'),
-                                    onPressed: (){
-                                      processShifts();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text('No'),
-                                    onPressed: (){
-                                      Navigator.of(ctx).pop();
-                                    },
-                                  )
-                                ],
-                              ));
-                        },
-                      )),
-                )
-              ]
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                  height: 50,
+                  width: 180,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text('Add employee'),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(AddShiftAddEmployee.routeName);
+                    },
+                  )
+              ),
+              Container(
+                  height: 50,
+                  width: 130,
+                  padding: EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text('Finish'),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: Text('Warning'),
+                            content: Text('Are you sure you are done creating this shift?'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                child: Text('Yes'),
+                                onPressed: (){
+                                  processShifts();
+                                },
+                              ),
+                              ElevatedButton(
+                                child: Text('No'),
+                                onPressed: (){
+                                  Navigator.of(ctx).pop();
+                                },
+                              )
+                            ],
+                          ));
+                    },
+                  )
+              ),
+            ],
           )
-      ),
+        ),
+        body: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: getList(),
+                ),
+              ),
+            ]
+        )
     );
   }
 }

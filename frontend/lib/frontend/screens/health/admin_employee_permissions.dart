@@ -44,7 +44,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No permissions granted', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No permissions granted', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -60,7 +60,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numberOfRequests,
             itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
               return ListTile(
@@ -71,7 +71,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Permissions for UserID' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Permissions for UserID' + (index+1).toString()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -81,16 +81,19 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                               height: 50,
                               color: Colors.white,
                               child: Text('Employee name: Name and surname displayed here', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Access: True', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
                       )
@@ -103,59 +106,50 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('Employee permissions'),
+        leading: BackButton( //Specify back button
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
+          },
         ),
       ),
-      child: new Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title: Text('Employee permissions'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
-            },
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                getList(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 18,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              ],
+            ),
           ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  getList(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 18,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                ],
-              ),
-            ),
-            /*
-            Container (
-              alignment: Alignment.center,
-              child: Container (
-                  height: 50,
-                  width: 170,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+          /*
+          Container (
+            alignment: Alignment.center,
+            child: Container (
+                height: 50,
+                width: 170,
+                padding: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text('Close'),
-                    onPressed: (){
+                  ),
+                  child: Text('Close'),
+                  onPressed: (){
 
-                    },
-                  )
-              ),
+                  },
+                )
             ),
-            */
-          ],
-        ),
+          ),
+          */
+        ],
       ),
     );
   }

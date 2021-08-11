@@ -52,7 +52,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No bookings found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No bookings found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
             ),
             Container(
                 alignment: Alignment.center,
@@ -66,7 +66,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
         );
       } else { //Else create and return a list
         return ListView.builder(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numberOfBookings,
             itemBuilder: (context, index) { //Display a list tile FOR EACH booking in bookings[]
               return ListTile(
@@ -77,7 +77,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Booking ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Booking ' + (index+1).toString()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -87,21 +87,25 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                               height: 50,
                               color: Colors.white,
                               child: Text('User: ' + bookings[index].user, style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Date: ' + bookings[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Floor: ' + bookings[index].floorNum, style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Room: ' + bookings[index].roomNum, style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
                       )
@@ -114,31 +118,22 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('View current bookings'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(Office.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('View current bookings'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(Office.routeName);
+            },
           ),
-          body: Stack(
-              children: <Widget>[
-                Center(
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+        ),
+        body: Stack(
+            children: <Widget>[
+              Center(
+                  child: getList()
+              ),
+            ]
+        )
     );
   }
 }

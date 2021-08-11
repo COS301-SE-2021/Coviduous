@@ -44,7 +44,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No permissions granted', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No permissions granted', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -69,7 +69,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Permission ' + (index+1).toString(), style: TextStyle(color: Colors.white)),
+                        child: Text('Permission ' + (index+1).toString()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -79,16 +79,19 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                               height: 50,
                               color: Colors.white,
                               child: Text('Type: Office access', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Granted by: admin ID, name and surname here', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
                       )
@@ -101,31 +104,22 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Permissions'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Permissions'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+            ]
+        )
     );
   }
 }

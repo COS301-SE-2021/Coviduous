@@ -84,7 +84,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfRooms,
             itemBuilder: (context, index) {
               //Display a list tile FOR EACH room in rooms[]
@@ -95,8 +95,8 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Room ' + rooms[index].getRoomNum(),
-                        style: TextStyle(color: Colors.white)),
+                    child: Text('Room ' + rooms[index].getRoomNum()),
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -113,6 +113,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                       .dimensions
                                       .toString(),
                               style: TextStyle(color: Colors.black)),
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
                           height: 50,
@@ -124,6 +125,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                       .deskDimentions
                                       .toString(),
                               style: TextStyle(color: Colors.black)),
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
                           height: 50,
@@ -135,6 +137,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                       .numDesks
                                       .toString(),
                               style: TextStyle(color: Colors.black)),
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
                           height: 50,
@@ -146,6 +149,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                       .deskMaxCapcity
                                       .toString(),
                               style: TextStyle(color: Colors.black)),
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
                           height: 50,
@@ -157,6 +161,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                       .occupiedDesks
                                       .toString(),
                               style: TextStyle(color: Colors.black)),
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
                           height: 50,
@@ -193,7 +198,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                 content: Text(
                                                     'Floors must have at least one room. To delete a whole floor, please delete it on the previous page.'),
                                                 actions: <Widget>[
-                                                  TextButton(
+                                                  ElevatedButton(
                                                     child: Text('Okay'),
                                                     onPressed: () {
                                                       Navigator.of(ctx).pop();
@@ -214,77 +219,62 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title:
+            Text("Manage rooms for floor " + globals.currentFloorNum),
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
+            Navigator.of(context)
+                .pushReplacementNamed(AdminModifyFloors.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title:
-              Text("Manage rooms for floor " + globals.currentFloorNum),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(AdminModifyFloors.routeName);
-            },
-          ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  getList(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 18,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                ],
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+            alignment: Alignment.bottomLeft,
+            height: 50,
+            width: 130,
+            padding: EdgeInsets.all(10),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
+              child: Text('Add room'),
+              onPressed: () {
+                //Add new floor and reload page
+                AddRoomResponse response2 = services.addRoomMock(
+                    AddRoomRequest(
+                        globals.floorPlanId,
+                        globals.currentFloorNum,
+                        "",
+                        0,
+                        services.getPercentage(),
+                        0,
+                        0,
+                        0));
+                print(response2.getResponse());
+                /*
+                  floorGlobals.globalFloors[globals.currentFloorNum]
+                      .totalNumRooms++;
+                  floorGlobals.globalFloors[globals.currentFloorNum]
+                      .addRoom("", "", 0, 0, 0, 0, 0);
+                   */
+                setState(() {});
+              },
+            ))
+      ),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Center(
+              child: getList(),
             ),
-            Container(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                  height: 50,
-                  width: 130,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Add room'),
-                    onPressed: () {
-                      //Add new floor and reload page
-                      AddRoomResponse response2 = services.addRoomMock(
-                          AddRoomRequest(
-                              globals.floorPlanId,
-                              globals.currentFloorNum,
-                              "",
-                              0,
-                              services.getPercentage(),
-                              0,
-                              0,
-                              0));
-                      print(response2.getResponse());
-                      /*
-                      floorGlobals.globalFloors[globals.currentFloorNum]
-                          .totalNumRooms++;
-                      floorGlobals.globalFloors[globals.currentFloorNum]
-                          .addRoom("", "", 0, 0, 0, 0, 0);
-                       */
-                      setState(() {});
-                    },
-                  )),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

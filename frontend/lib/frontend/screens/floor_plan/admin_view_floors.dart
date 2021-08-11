@@ -56,7 +56,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                   content: Text(
                       'No floors have been defined for your company. Please return to the previous page and specify the number of floors.'),
                   actions: <Widget>[
-                    TextButton(
+                    ElevatedButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();
@@ -73,7 +73,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfFloors,
             itemBuilder: (context, index) {
               //Display a list tile FOR EACH floor in floors[]
@@ -85,8 +85,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                        'Floor ' + services.getFloors()[index].getFloorNumber(),
-                        style: TextStyle(color: Colors.white)),
+                        'Floor ' + services.getFloors()[index].getFloorNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -103,6 +102,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                       .getNumRooms()
                                       .toString(),
                               style: TextStyle(color: Colors.black)),
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
                           height: 50,
@@ -140,7 +140,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                                 content: Text(
                                                     'Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the previous page.'),
                                                 actions: <Widget>[
-                                                  TextButton(
+                                                  ElevatedButton(
                                                     child: Text('Okay'),
                                                     onPressed: () {
                                                       Navigator.of(ctx).pop();
@@ -161,62 +161,47 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Manage floors"),
+        leading: BackButton(
+          //Specify back button
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+          },
         ),
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
-        appBar: AppBar(
-          title: Text("Manage floors"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
-            },
-          ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  getList(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 18,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                ],
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          alignment: Alignment.bottomLeft,
+            height: 50,
+            width: 130,
+            padding: EdgeInsets.all(10),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
+              child: Text('Add floor'),
+              onPressed: () {
+                //Add new floor and reload page
+                AddFloorResponse response2 = services.addFloorMock(
+                    AddFloorRequest(
+                        globals.floorPlanId, globals.loggedInUserId, ""));
+                print(response2.getResponse());
+                setState(() {});
+              },
+            ))
+      ),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Center(
+              child: getList(),
             ),
-            Container(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                  height: 50,
-                  width: 130,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Add floor'),
-                    onPressed: () {
-                      //Add new floor and reload page
-                      AddFloorResponse response2 = services.addFloorMock(
-                          AddFloorRequest(
-                              globals.floorPlanId, globals.loggedInUserId, ""));
-                      print(response2.getResponse());
-                      setState(() {});
-                    },
-                  )),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

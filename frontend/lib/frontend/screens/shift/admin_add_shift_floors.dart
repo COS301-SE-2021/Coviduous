@@ -38,7 +38,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                   title: Text('No rooms found'),
                   content: Text('Shifts cannot be assigned at this time. Please add rooms for your company first.'),
                   actions: <Widget>[
-                    TextButton(
+                    ElevatedButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();
@@ -102,7 +102,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfFloors,
             itemBuilder: (context, index) { //Display a list tile FOR EACH floor in floors[]
               return ListTile(
@@ -113,9 +113,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(
-                            'Floor ' + floors[index].getFloorNumber(),
-                            style: TextStyle(color: Colors.white)),
+                        child: Text('Floor ' + floors[index].getFloorNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -127,6 +125,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                               child: Text(
                                   'Number of rooms: ' + floors[index].getNumRooms().toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -154,39 +153,24 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: Text('Create shift in floor plan ' + globals.currentFloorPlanNum),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Create shift in floor plan ' + globals.currentFloorPlanNum),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
+            },
           ),
-          body: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                      children: [
-                        getList(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 18,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ]
-                  ),
+        ),
+        body: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: getList(),
                 ),
-              ]
-          )
-      ),
+              ),
+            ]
+        )
     );
   }
 }

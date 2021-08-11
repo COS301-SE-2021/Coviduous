@@ -107,16 +107,11 @@ class _LoginScreenState extends State<LoginScreen> {
 @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      color: globals.secondaryColor,
       child: isLoading == false ? Scaffold(
-        backgroundColor: Colors.transparent, //To show background image
         appBar: AppBar(
           title: Text('Login'),
+          elevation: 0,
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(HomePage.routeName);
@@ -127,7 +122,8 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Row(
                 children: <Widget>[
                   Text('Register '),
-                  Icon(Icons.person_add)
+                  Icon(Icons.person_add),
+                  Text('   '),
                 ],
               ),
               onPressed: (){
@@ -141,6 +137,14 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         body: Stack(
           children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/city-silhouette.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             //So the element doesn't overflow when you open the keyboard
             SingleChildScrollView(
               child: Center(
@@ -152,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       margin: EdgeInsets.all(20.0),
                       child: Image(
                         alignment: Alignment.center,
-                        image: AssetImage('assets/placeholder.com-logo1.png'),
+                        image: AssetImage('assets/images/logo.png'),
                         color: Colors.white,
                         width: double.maxFinite,
                         height: MediaQuery.of(context).size.height/8,
@@ -255,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   title: Text('Error'),
                                                   content: Text('Encountered error retrieving user type, please try again.'),
                                                   actions: <Widget>[
-                                                    TextButton(
+                                                    ElevatedButton(
                                                       child: Text('Okay'),
                                                       onPressed: (){
                                                         Navigator.of(ctx).pop();
@@ -297,7 +301,7 @@ class _LoginScreenState extends State<LoginScreen> {
             )
           ],
         ),
-      ) : Center( child: CircularProgressIndicator())
+      ) : Center( child: CircularProgressIndicator() )
     );
   }
 }

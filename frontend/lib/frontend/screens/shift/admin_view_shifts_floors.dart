@@ -43,7 +43,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                   title: Text('No rooms found'),
                   content: Text('Shifts cannot be viewed at this time. Please add rooms for your company first.'),
                   actions: <Widget>[
-                    TextButton(
+                    ElevatedButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();
@@ -112,7 +112,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                 color: Theme
                     .of(context)
                     .primaryColor,
-                child: Text('No floors found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery
+                child: Text('No floors found', style: TextStyle(fontSize: (MediaQuery
                     .of(context)
                     .size
                     .height * 0.01) * 2.5)),
@@ -138,7 +138,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
         );
       } else {
         return ListView.builder(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfFloors,
             itemBuilder: (context, index){
               return ListTile(
@@ -154,8 +154,8 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                             height: MediaQuery.of(context).size.height / 24,
                             color: Theme.of(context).primaryColor,
                             child: Text(
-                                'Floor ' + floors[index].getFloorNumber(),
-                                style: TextStyle(color: Colors.white)),
+                                'Floor ' + floors[index].getFloorNumber()),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
@@ -163,6 +163,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                             child: Text(
                                 'Number of rooms: ' + floors[index].getNumRooms().toString(),
                                 style: TextStyle(color: Colors.black)),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
@@ -189,31 +190,22 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
       }
     }
 
-    return Container(
-      decoration: BoxDecoration(
-         image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent, //To show background image
-          appBar: AppBar(
-            title: Text('Floors'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Floors'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                Center (
-                    child: getList()
-                ),
-              ]
-          )
-      ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              Center (
+                  child: getList()
+              ),
+            ]
+        )
     );
 
   }

@@ -35,11 +35,21 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
   Future<Null> _selectStartTime(BuildContext context) async {
     final TimeOfDay picked_start_time = await showTimePicker(
         context: context,
-        initialTime: _selectedStartTime, builder: (BuildContext context, Widget child) {
-      return MediaQuery(
-        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
-        child: child,
-      );});
+        initialTime: _selectedStartTime,
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: globals.secondaryColor,
+              accentColor: globals.secondaryColor,
+              colorScheme: ColorScheme.light(primary: globals.secondaryColor),
+              buttonTheme: ButtonThemeData(
+                  textTheme: ButtonTextTheme.primary
+              ),
+            ),
+            child: child,
+          );
+        }
+    );
 
     if (picked_start_time != null && picked_start_time != _selectedStartTime )
       setState(() {
@@ -50,11 +60,21 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
   Future<Null> _selectEndTime(BuildContext context) async {
     final TimeOfDay picked_end_time = await showTimePicker(
         context: context,
-        initialTime: _selectedEndTime, builder: (BuildContext context, Widget child) {
-      return MediaQuery(
-        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
-        child: child,
-      );});
+        initialTime: _selectedEndTime,
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: globals.secondaryColor,
+              accentColor: globals.secondaryColor,
+              colorScheme: ColorScheme.light(primary: globals.secondaryColor),
+              buttonTheme: ButtonThemeData(
+                  textTheme: ButtonTextTheme.primary
+              ),
+            ),
+            child: child,
+          );
+        }
+    );
 
     if (picked_end_time != null && picked_end_time != _selectedEndTime )
       setState(() {
@@ -93,12 +113,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
     }
 
     return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
+      color: globals.secondaryColor,
       child: isLoading == false ? new Scaffold(
           backgroundColor: Colors.transparent,
           appBar: new AppBar(
@@ -247,7 +262,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                       title: Text('Error'),
                                       content: Text('Shift not created. Start time must be before end time.'),
                                       actions: <Widget>[
-                                        TextButton(
+                                        ElevatedButton(
                                           child: Text('Okay'),
                                           onPressed: (){
                                             Navigator.of(ctx).pop();

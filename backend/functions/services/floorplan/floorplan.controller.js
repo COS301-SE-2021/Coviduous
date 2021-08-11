@@ -1,6 +1,7 @@
 //Floorplan controller handles the operations of the floorplan service with business logic and CRUD operations
 let database; //this variable holds the database
 const Room = require("../../models/room.model");
+const uuid = require("uuid"); // npm install uuid
 
 
 //Create floorplan function will create a floorplan under the given database
@@ -8,13 +9,11 @@ const Room = require("../../models/room.model");
 //this function initiates n floors under a created floorplan
 exports.createFloorPlan = async (req, res) => {
   try {
-  let randInt = Math.floor(1000 + Math.random() * 9000);
-  let floorplanNumber = "FLP-" + randInt.toString();
+  let floorplanNumber = "FLP-" + uuid.v4();
   // let timestamp = new Date().toISOString();
   await database.createFloorPlan(floorplanNumber,req.body);
   for (let index = 0; index < req.body.numFloors; index++) {
-  let randInt2 = Math.floor(1000 + Math.random() * 9000);
-  let floorNumber = "FLR-" + randInt2.toString();
+  let floorNumber = "FLR-" + uuid.v4();
   let floorData = {
     floorNumber: floorNumber,
     numRooms: 0,
@@ -44,8 +43,7 @@ exports.createFloorPlan = async (req, res) => {
   //This function adds a single floor to a specific floorplan
   exports.createFloor = async (req, res) => {
   try {
-    let randInt2 = Math.floor(1000 + Math.random() * 9000);
-    let floorNumber = "FLR-" + randInt2.toString();
+    let floorNumber = "FLR-" + uuid.v4();
     let floorData = {
       floorNumber: floorNumber,
       numRooms: 0,
@@ -74,7 +72,7 @@ exports.createFloorPlan = async (req, res) => {
 exports.createRoom = async (req, res) => {
 try {
   let randInt2 = Math.floor(1000 + Math.random() * 9000);
-  let roomNumber = "RMN-" + randInt2.toString();
+  let roomNumber = "RMN-" + uuid.v4();
   let room =new Room(roomNumber,req.body.floorNumber,req.body.roomArea,req.body.deskArea,req.body.numberDesks,req.body.capacityPercentage);
   let roomData = {
     floorNumber:room.floorNumber,
@@ -94,8 +92,7 @@ try {
   console.log("Room with roomNumber : "+roomNumber+" succesfully created under floor : "+req.body.floorNumber);
   
   for (let index = 0; index < req.body.numberDesks; index++) {
-    let randInt = Math.floor(1000 + Math.random() * 9000);
-    let deskNumber = "DSK-" + randInt.toString();
+    let deskNumber = "DSK-" + uuid.v4();
     let deskData = {
       deskNumber: deskNumber,
       roomNumber: roomNumber,
@@ -204,6 +201,8 @@ try {
 
 };
 
+
+// This function updates the contents of a room by recalculating its capacity and other attributes
 exports.updateRoom = async (req, res) => {
 try {
   let room =new Room(req.body.roomNumber,req.body.floorNumber,req.body.roomArea,req.body.deskArea,req.body.numberDesks,req.body.capacityPercentage);
@@ -232,8 +231,22 @@ try {
 
 };
 
+
+//Deletes a single room with all its desks
 exports.deleteRoom = async (req, res) => {
   try {
+        let desks= await database.getDesks();
+        desks.forEach(obj4 =>{
+        if(obj4.roomNumber===req.body.roomNumber)
+        {
+           database.deleteDesk(obj4.deskNumber);
+        }
+        else
+        {
+  
+        }
+
+        });
     await database.deleteRoom(req.body.roomNumber);
       return res.status(200).send({
         message: 'Room successfully deleted',
@@ -244,6 +257,7 @@ exports.deleteRoom = async (req, res) => {
   }
 };
 
+//Deletes a floor with all its rooms and desks
 exports.deleteFloor = async (req, res) => {
   try {
     let filteredList=[];
@@ -259,7 +273,20 @@ exports.deleteFloor = async (req, res) => {
       }
     });
 
+    let desks= await database.getDesks();
     filteredList.forEach(obj => {
+      
+        desks.forEach(obj4 =>{
+        if(obj4.roomNumber===obj.roomNumber)
+        {
+          database.deleteDesk(obj4.deskNumber);
+        }
+        else
+        {
+  
+        }
+
+        });
 
     database.deleteRoom(obj.roomNumber);
     });
@@ -274,6 +301,8 @@ exports.deleteFloor = async (req, res) => {
   }
 };
 
+
+//Deletes a floorplan with all its floors and rooms and desks
 exports.deleteFloorPlan = async (req, res) => {
   try {
     let filteredList=[];
@@ -288,6 +317,7 @@ exports.deleteFloorPlan = async (req, res) => {
 
       }
     });
+    let desks= await database.getDesks();
     let rooms = await database.getRooms();
     filteredList.forEach(obj => {
       let filteredList2=[];
@@ -302,8 +332,20 @@ exports.deleteFloorPlan = async (req, res) => {
         }
       });
       
+     
       filteredList2.forEach(obj3 => {
-        //delete desks as well
+        
+        desks.forEach(obj4 =>{
+        if(obj4.roomNumber===obj3.roomNumber)
+        {
+           database.deleteDesk(obj4.deskNumber);
+        }
+        else
+        {
+  
+        }
+
+        });
         database.deleteRoom(obj3.roomNumber);
         });
     database.deleteFloor(obj.floorNumber);
@@ -319,6 +361,7 @@ exports.deleteFloorPlan = async (req, res) => {
   }
 };
 
+//This function allows dependency injections for production or mock databases
 exports.setDatabse= async(db)=>{
 
   database=db;

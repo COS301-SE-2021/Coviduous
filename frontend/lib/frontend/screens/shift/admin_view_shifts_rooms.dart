@@ -51,7 +51,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                   title: Text('No shifts found'),
                   content: Text('No shifts have been created for this room.'),
                   actions: <Widget>[
-                    TextButton(
+                    ElevatedButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();
@@ -96,7 +96,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No rooms found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No rooms found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -112,7 +112,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             itemCount: numOfRooms,
             itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
               return ListTile(
@@ -124,8 +124,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            'Room ' + rooms[index].getRoomNum(),
-                            style: TextStyle(color: Colors.white)),
+                            'Room ' + rooms[index].getRoomNum()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -137,6 +136,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                               child: Text(
                                   'Number of desks: ' + rooms[index].desks.length.toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
@@ -144,6 +144,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                               child: Text(
                                   'Occupied desk percentage: ' + rooms[index].getPercentage().toString(),
                                   style: TextStyle(color: Colors.black)),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             /*
                             Container(
@@ -179,33 +180,24 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
         );
       }
     }
-    return Container(
-      decoration: BoxDecoration(
-         image: DecorationImage(
-          image: AssetImage('assets/bg.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: new Scaffold(
-          backgroundColor: Colors.transparent, //To show background image
-          appBar: AppBar(
-            title: Text('Rooms'),
-            leading: BackButton( //Specify back button
-              onPressed: (){
-                Navigator.of(context).pushReplacementNamed(ViewShiftsFloors.routeName);
-              },
-            ),
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text('Rooms'),
+          leading: BackButton( //Specify back button
+            onPressed: (){
+              Navigator.of(context).pushReplacementNamed(ViewShiftsFloors.routeName);
+            },
           ),
-          body: Stack (
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Center (
-                      child: getList()
-                  ),
+        ),
+        body: Stack (
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center (
+                    child: getList()
                 ),
-              ]
-          )
-      ),
+              ),
+            ]
+        )
     );
   }
 }

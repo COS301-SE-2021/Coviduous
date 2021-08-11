@@ -73,14 +73,8 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
     getSnap();
 
     return Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
+      color: globals.secondaryColor,
       child: isLoading == false ? Scaffold(
-        backgroundColor: Colors.transparent, // To show background image
         appBar: AppBar(
           title: Text('Delete user'),
           leading: BackButton( //Specify back button
@@ -177,7 +171,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                                     title: Text('Warning'),
                                                     content: Text('Are you sure you want to delete your account? This cannot be undone.'),
                                                     actions: <Widget>[
-                                                      TextButton(
+                                                      ElevatedButton(
                                                         child: Text('Yes'),
                                                         onPressed: () {
                                                           setState(() {
@@ -212,7 +206,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                                           });
                                                         },
                                                       ),
-                                                      TextButton(
+                                                      ElevatedButton(
                                                         child: Text('No'),
                                                         onPressed: () {
                                                           Navigator.of(ctx).pop();
