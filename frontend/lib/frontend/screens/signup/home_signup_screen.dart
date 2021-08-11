@@ -49,7 +49,7 @@ class _RegisterState extends State<Register>{
                 margin: EdgeInsets.all(20.0),
                 child: Image(
                   alignment: Alignment.center,
-                  image: AssetImage('assets/placeholder.com-logo1.png'),
+                  image: AssetImage('assets/images/logo.png'),
                   color: Colors.white,
                   width: double.maxFinite,
                   height: MediaQuery.of(context).size.height/8,

@@ -20,65 +20,77 @@ class _HomePageState extends State<HomePage>{
             elevation: 0,
             automaticallyImplyLeading: false, //Back button will not show up in app bar
           ),
-          body: Center(
-            child: Column (
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container (
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(20.0),
-                    child: Image(
-                      alignment: Alignment.center,
-                      image: AssetImage('assets/placeholder.com-logo1.png'),
-                      color: Colors.white,
-                      width: double.maxFinite,
-                      height: MediaQuery.of(context).size.height/8,
+          body: Stack(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/city-silhouette.png"),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height/20,
-                    width: MediaQuery.of(context).size.width/1.5,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+              ),
+              Center(
+                child: Column (
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container (
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(20.0),
+                        child: Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/images/logo.png'),
+                          color: Colors.white,
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height/8,
                         ),
-                        child:(
-                            Text('Company member')
+                      ),
+                      SizedBox (
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/20,
+                        width: MediaQuery.of(context).size.width/1.5,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child:(
+                                Text('Company member')
+                            ),
+                            onPressed:() {
+                              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                            }
                         ),
-                        onPressed:() {
-                          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                        }
-                    ),
-                  ),
-                  SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height/20,
-                    width: MediaQuery.of(context).size.width/1.5,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                      ),
+                      SizedBox (
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/20,
+                        width: MediaQuery.of(context).size.width/1.5,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child:(
+                                Text('Visitor')
+                            ),
+                            onPressed:() {
+                              Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                            }
                         ),
-                        child:(
-                            Text('Visitor')
-                        ),
-                        onPressed:() {
-                          Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
-                        }
-                    ),
-                  ),
-                ]
-            ),
+                      ),
+                    ]
+                ),
+              ),
+            ]
           )
       ),
     );
