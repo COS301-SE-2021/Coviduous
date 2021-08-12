@@ -174,12 +174,15 @@ List<Shift> shifts = [];
 
 //Current floor plan you're working with
 String currentFloorPlanNum = '';
+List<FloorPlan> currentFloorPlans = [];
 
 //Current floor you're working with
 String currentFloorNum = '';
+List<Floor> currentFloors = [];
 
 //Current room you're working with
 String currentRoomNum = '';
+List<Room> currentRooms = [];
 
 //Current shift you're working with
 String currentShiftNum = '';
