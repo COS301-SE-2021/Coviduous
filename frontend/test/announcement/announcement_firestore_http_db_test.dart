@@ -3,8 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/controllers/announcement_controller.dart'
     as announcementController;
 import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
-// import 'package:frontend/requests/announcements_requests/create_announcement_request.dart';
-// import 'package:frontend/responses/announcement_responses/create_announcement_response.dart';
 
 void main() {
   // AnnouncementsController announcementController =
