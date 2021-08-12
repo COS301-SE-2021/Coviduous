@@ -83,8 +83,6 @@ Future<List<Announcement>> getAnnouncements() async {
         numAnnouncements++;
       }
 
-      print("DB length: " + announcementDatabaseTable.length.toString());
-
       return announcementDatabaseTable;
     }
   } catch (error) {
