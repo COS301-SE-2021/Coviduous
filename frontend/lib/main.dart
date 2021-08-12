@@ -127,30 +127,39 @@ class MyApp extends StatelessWidget{
           backgroundColor: globals.appBarColor,
           iconTheme: IconThemeData(color: Colors.white), //Back button color
         ),
-        inputDecorationTheme: InputDecorationTheme(
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: globals.secondaryColor)
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: globals.focusColor)
-          ),
-          labelStyle: TextStyle(
-            color: Colors.black,
-          )
-        ),
         bottomAppBarTheme: BottomAppBarTheme(
           color: globals.appBarColor,
         ),
         brightness: Brightness.dark,
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStateColor.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return globals.primaryColor;
+            } else {
+              return globals.secondaryColor;
+            }
+          })
+        ),
         dialogTheme: DialogTheme(
           backgroundColor: globals.secondaryColor,
           titleTextStyle: TextStyle(color: globals.primaryColor, fontSize: 20),
           contentTextStyle: TextStyle(color: Colors.white, fontSize: 15),
         ),
         fontFamily: 'Poppins',
+        hintColor: Colors.black,
+        inputDecorationTheme: InputDecorationTheme(
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: globals.secondaryColor)
+            ),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: globals.focusColor)
+            ),
+            labelStyle: TextStyle(
+              color: Colors.black,
+            )
+        ),
         primaryColor: globals.primaryColor, //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
-        scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
         primaryTextTheme: TextTheme(
           bodyText1: TextStyle(color: Colors.black),
           bodyText2: TextStyle(color: Colors.black),
@@ -166,6 +175,13 @@ class MyApp extends StatelessWidget{
           subtitle1: TextStyle(color: Colors.black),
           subtitle2: TextStyle(color: Colors.black),
         ),
+        scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
+        snackBarTheme: SnackBarThemeData(
+          actionTextColor: Colors.black,
+          backgroundColor: globals.primaryColor,
+          contentTextStyle: TextStyle(color: Colors.black),
+          disabledActionTextColor: Colors.black,
+        ),
         textTheme: TextTheme(
           bodyText1: TextStyle(color: Colors.black),
           bodyText2: TextStyle(color: Colors.black),
@@ -180,13 +196,6 @@ class MyApp extends StatelessWidget{
           overline: TextStyle(color: Colors.black),
           subtitle1: TextStyle(color: Colors.black),
           subtitle2: TextStyle(color: Colors.black),
-        ),
-        hintColor: Colors.black,
-        snackBarTheme: SnackBarThemeData(
-          actionTextColor: Colors.black,
-          backgroundColor: globals.primaryColor,
-          contentTextStyle: TextStyle(color: Colors.black),
-          disabledActionTextColor: Colors.black,
         ),
       ),
       home: Home(),
