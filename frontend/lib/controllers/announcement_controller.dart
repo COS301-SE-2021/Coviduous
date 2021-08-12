@@ -94,7 +94,7 @@ String server = 'http://localhost:5001/coviduous-api/us-central1/app/api/'; //se
   }
 
   //   Future<bool> deleteAnnouncement(String announcementId) async {
-  //   String path = '/shift/delete-shift';
+  //   String path = '/announcements';
   //   String url = server + path;
 
   //   var request = http.Request('DELETE', Uri.parse(url));
@@ -105,10 +105,10 @@ String server = 'http://localhost:5001/coviduous-api/us-central1/app/api/'; //se
   //   if (response.statusCode == 200) {
   //     print(await response.stream.bytesToString());
 
-  //     for (int i = 0; i < shiftGlobals.shiftDatabaseTable.length; i++) {
-  //       if (shiftGlobals.shiftDatabaseTable[i].shiftId == announcementId) {
-  //         shiftGlobals.shiftDatabaseTable.removeAt(i);
-  //         shiftGlobals.numShifts--;
+  //     for (int i = 0; i < announcementDatabaseTable.length; i++) {
+  //       if (announcementDatabaseTable[i].announcementId == announcementId) {
+  //         announcementDatabaseTable.removeAt(i);
+  //         numAnnouncements--;
   //       }
   //     }
 
@@ -116,10 +116,10 @@ String server = 'http://localhost:5001/coviduous-api/us-central1/app/api/'; //se
   //   }
 
   //   //Double check to make sure it isn't still being stored internally
-  //   for (int i = 0; i < shiftGlobals.numShifts; i++) {
-  //     if (shiftGlobals.shiftDatabaseTable[i].shiftId == announcementId) {
-  //       shiftGlobals.shiftDatabaseTable.removeAt(i);
-  //       shiftGlobals.numShifts--;
+  //   for (int i = 0; i < shiftGlobals.numAnnouncements; i++) {
+  //     if (announcementDatabaseTable[i].shiftId == announcementId) {
+  //       announcementDatabaseTable.removeAt(i);
+  //       numAnnouncements--;
   //     }
   //   }
 
