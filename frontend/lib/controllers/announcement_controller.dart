@@ -89,35 +89,35 @@ Future<List<Announcement>> getAnnouncements() async {
   return null;
 }
 
-  //   Future<bool> deleteAnnouncement(String announcementId) async {
-  //   String path = '/announcements';
-  //   String url = server + path;
+Future<bool> deleteAnnouncement(String announcementId) async {
+  String path = '/announcements';
+  String url = server + path;
 
-  //   var request = http.Request('DELETE', Uri.parse(url));
-  //   request.body = json.encode({"announcementId": announcementId});
+  var request = http.Request('DELETE', Uri.parse(url));
+  request.body = json.encode({"announcementId": announcementId});
 
-  //   var response = await request.send();
+  var response = await request.send();
 
-  //   if (response.statusCode == 200) {
-  //     print(await response.stream.bytesToString());
+  if (response.statusCode == 200) {
+    print(await response.stream.bytesToString());
 
-  //     for (int i = 0; i < announcementDatabaseTable.length; i++) {
-  //       if (announcementDatabaseTable[i].announcementId == announcementId) {
-  //         announcementDatabaseTable.removeAt(i);
-  //         numAnnouncements--;
-  //       }
-  //     }
+    for (int i = 0; i < announcementDatabaseTable.length; i++) {
+      if (announcementDatabaseTable[i].announcementId == announcementId) {
+        announcementDatabaseTable.removeAt(i);
+        numAnnouncements--;
+      }
+    }
 
-  //     return true;
-  //   }
+    return true;
+  }
 
-  //   //Double check to make sure it isn't still being stored internally
-  //   for (int i = 0; i < numAnnouncements; i++) {
-  //     if (announcementDatabaseTable[i].shiftId == announcementId) {
-  //       announcementDatabaseTable.removeAt(i);
-  //       numAnnouncements--;
-  //     }
-  //   }
+  //Double check to make sure it isn't still being stored internally
+  for (int i = 0; i < numAnnouncements; i++) {
+    if (announcementDatabaseTable[i].announcementId == announcementId) {
+      announcementDatabaseTable.removeAt(i);
+      numAnnouncements--;
+    }
+  }
 
-  //   return false;
-  // }
+  return false;
+}
