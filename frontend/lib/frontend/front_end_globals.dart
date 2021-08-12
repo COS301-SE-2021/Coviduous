@@ -3,7 +3,7 @@ library globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
-import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
+import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
 import 'package:universal_html/html.dart' as html;
 
 import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';

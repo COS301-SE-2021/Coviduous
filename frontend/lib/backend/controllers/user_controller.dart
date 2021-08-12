@@ -8,17 +8,10 @@
     - Peter Okumbe
     - Chaoane Malakoane
  */
-import 'package:frontend/backend/server_connections/announcement_data_base_queries.dart';
 import 'package:frontend/backend/server_connections/user_data_base_queries.dart';
-import 'package:frontend/requests/announcements_requests/create_announcement_request.dart';
-import 'package:frontend/requests/announcements_requests/delete_announcement_request.dart';
-import 'package:frontend/requests/announcements_requests/viewAdmin_announcement_request.dart';
 import 'package:frontend/requests/user_requests/DeleteAccountUserRequest.dart';
 import 'package:frontend/requests/user_requests/RegisterCompanyRequest.dart';
 import 'package:frontend/requests/user_requests/RegisterUserRequest.dart';
-import 'package:frontend/responses/announcement_responses/create_announcement_response.dart';
-import 'package:frontend/responses/announcement_responses/delete_announcement_response.dart';
-import 'package:frontend/responses/announcement_responses/viewAdmin_announcement_response.dart';
 import 'package:frontend/responses/user_responses/DeleteAccountUserResponse.dart';
 import 'package:frontend/responses/user_responses/RegisterCompanyResponse.dart';
 import 'package:frontend/responses/user_responses/RegisterUserResponse.dart';

@@ -39,7 +39,6 @@ Future getAnnouncements() async {
 
 //class make announcement
 class MakeAnnouncementState extends State<MakeAnnouncement> {
-  TextEditingController _topic = TextEditingController();
   TextEditingController _description = TextEditingController();
   String _adminId = globals.loggedInUserId;
   String _companyId = globals.loggedInCompanyId;
@@ -128,18 +127,6 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                       value: _selectedType,
                       items: _dropdownMenuItems,
                       onChanged: onChangeDropdownItem,
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Text('Selected: ${_selectedType}'),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          labelText: "Topic",
-                      ),
-                      obscureText: false,
-                      maxLength: 20,
-                      controller: _topic,
                     ),
                     SizedBox(
                       height: 16,

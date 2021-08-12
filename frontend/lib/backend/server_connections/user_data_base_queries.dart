@@ -8,15 +8,10 @@
     - Peter Okumbe
     - Chaoane Malakoane
  */
-import 'dart:math';
 
 import 'package:frontend/subsystems/user_subsystem/company.dart';
 import 'package:frontend/subsystems/user_subsystem/user.dart';
-import 'package:postgres/postgres.dart';
 
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
-import 'package:frontend/backend/backend_globals/announcements_globals.dart'
-    as announcementGlobals;
 import 'package:frontend/backend/backend_globals/user_globals.dart'
     as userGlobals;
 

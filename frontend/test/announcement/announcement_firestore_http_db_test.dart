@@ -1,13 +1,9 @@
-//import '../../lib/backend/server_connections/announcement_data_base_queries.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/controllers/announcement_controller.dart'
     as announcementController;
-import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
+import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
 
 void main() {
-  // AnnouncementsController announcementController =
-  //     new AnnouncementsController();
-
   String expectedType;
   String expectedMessage;
   String expectedAdminId;
