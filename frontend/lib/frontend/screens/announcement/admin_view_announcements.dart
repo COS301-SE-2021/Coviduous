@@ -144,7 +144,6 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       ),
                       Container(
-                        height: 50,
                         color: Colors.white,
                         child: Text('Message: ' + announcements[index].getMessage(), style: TextStyle(color: Colors.black)),
                         //child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
