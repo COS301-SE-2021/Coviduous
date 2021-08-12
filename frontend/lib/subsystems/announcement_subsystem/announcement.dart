@@ -1,9 +1,6 @@
 /**
  * This class acts as an announcement entity mimicking the announcement table attribute in the database
  */
-// To parse this JSON data, do
-//
-//     final announcement = announcementFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -22,8 +19,6 @@ String announcementToJson(Announcement data) => json.encode(data.toJson());
 // To parse this JSON data, do
 //
 //     final announcement = announcementFromJson(jsonString);
-
-//import 'dart:convert';
 
 // create any json mapping class using https://app.quicktype.io/
 class Announcement {
