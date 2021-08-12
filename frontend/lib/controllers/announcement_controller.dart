@@ -56,7 +56,7 @@ Future<bool> createAnnouncement(String announcementId, String type,
 /**
    * getAnnouncements : Returns a list of all announcements created
    */
-Future<bool> getAnnouncements() async {
+Future<List<Announcement>> getAnnouncements() async {
   String path = '/announcements';
   String url = server + path;
 
@@ -83,10 +83,10 @@ Future<bool> getAnnouncements() async {
       numAnnouncements++;
     }
 
-    return true;
+    return announcementDatabaseTable;
   }
 
-  return false;
+  return null;
 }
 
   //   Future<bool> deleteAnnouncement(String announcementId) async {
