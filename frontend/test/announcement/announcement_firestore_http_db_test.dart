@@ -8,24 +8,28 @@ void main() {
   // AnnouncementsController announcementController =
   //     new AnnouncementsController();
 
-  String expectedValue = "test";
   String expectedType;
   String expectedMessage;
   String expectedAdminId;
   String expectedCompanyId;
 
-  setUp(() async {
-    expectedValue = "test";
+  setUp(() {
+    expectedType = "test";
+    expectedMessage = "test";
+    expectedAdminId = "test";
+    expectedCompanyId = "test";
   });
 
-  tearDown(() async {});
+  tearDown(() {});
 
   // ======================HTTP SERVER TESTING======================== //
 
   test('Create announcement', () async {
-    //print(results);
+    bool value = await announcementController.createAnnouncement("",
+        expectedType, expectedMessage, "", expectedAdminId, expectedCompanyId);
 
-    //expect(results.length, isNot(0));
+    expect(value, isNot(null));
+    expect(true, value);
   });
 
   test('View announcement', () async {
@@ -34,15 +38,26 @@ void main() {
     for (var data in list) {
       print(data.announcementId);
     }
-    //print(results);
 
-    //expect(results.length, isNot(0));
+    //expect(list, isNot(null));
   });
 
-  // test('Delete announcement', () async {
+  test('Delete announcement', () async {
+    bool value = await announcementController.createAnnouncement("",
+        expectedType, expectedMessage, "", expectedAdminId, expectedCompanyId);
 
-  //   print(results);
+    List<Announcement> list = await announcementController.getAnnouncements();
 
-  //   expect(results.length, 0);
-  // });
+    // for (var data in list) {
+    //   print(data.announcementId);
+    // }
+
+    String announcementId = list[list.length - 1].announcementId;
+
+    bool value2 =
+        await announcementController.deleteAnnouncement(announcementId);
+
+    expect(value2, isNot(null));
+    expect(true, value2);
+  });
 }
