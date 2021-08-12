@@ -5,6 +5,8 @@ import 'package:frontend/frontend/screens/signup/user_signup_screen.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/main_homepage.dart';
 
+import 'package:frontend/frontend/front_end_globals.dart' as globals;
+
 class Register extends StatefulWidget {
   static const routeName = "/register";
   @override
@@ -58,65 +60,72 @@ class _RegisterState extends State<Register>{
               ),
             ),
             Center(
-              child: Column (
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container (
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.all(20.0),
-                      child: Image(
+              child: Container(
+                width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
+                child: Column (
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container (
                         alignment: Alignment.center,
-                        image: AssetImage('assets/images/logo.png'),
-                        color: Colors.white,
-                        width: double.maxFinite,
-                        height: MediaQuery.of(context).size.height/8,
-                      ),
-                    ),
-                    SizedBox (
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height/20,
-                      width: MediaQuery.of(context).size.width/1.5,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom (
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                        margin: EdgeInsets.all(20.0),
+                        child: Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/images/logo.png'),
+                          color: Colors.white,
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height/8,
                         ),
-                        child:(
-                          Text('Admin signup')
-                        ),
-                        onPressed:() {
-                          Navigator.of(context).pushReplacementNamed(
-                              AdminRegister.routeName);
-                        }
                       ),
-                    ),
-                    SizedBox (
-                      height: MediaQuery.of(context).size.height/48,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height/20,
-                      width: MediaQuery.of(context).size.width/1.5,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom (
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                      SizedBox (
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/20,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child:(
+                                Text('Admin signup')
+                              ),
+                              onPressed:() {
+                                Navigator.of(context).pushReplacementNamed(
+                                    AdminRegister.routeName);
+                              }
                             ),
                           ),
-                          child:(
-                              Text('User signup')
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
                           ),
-                          onPressed:() {
-                            Navigator.of(context).pushReplacementNamed(
-                                UserRegister.routeName);
-                          }
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/20,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child:(
+                                    Text('User signup')
+                                ),
+                                onPressed:() {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      UserRegister.routeName);
+                                }
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ]
+                    ]
+                ),
               ),
             ),
           ],

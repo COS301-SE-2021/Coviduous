@@ -37,7 +37,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         body: isLoading == false ? Center(
           child: Container(
-            width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+            width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
             height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
             color: Colors.white,
             child: Padding(
