@@ -13,6 +13,7 @@ import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/requests/notification_requests/get_notification_request.dart';
 import 'package:frontend/responses/notification_responses/get_notifications_response.dart';
 
+import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {
@@ -20,6 +21,14 @@ class UserHomePage extends StatefulWidget {
 
   @override
   _UserHomePageState createState() => _UserHomePageState();
+}
+
+Future getAnnouncements() async {
+  await Future.wait([
+    announcementController.getAnnouncements()
+  ]).then((lists) {
+    globals.currentAnnouncements = lists.first;
+  });
 }
 
 class _UserHomePageState extends State<UserHomePage> {
@@ -135,7 +144,9 @@ class _UserHomePageState extends State<UserHomePage> {
                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
+                          getAnnouncements().then((result) {
+                            Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
+                          });
                         }
                     ),
                     Divider(
