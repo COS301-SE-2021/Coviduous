@@ -12,8 +12,11 @@ exports.createAnnouncement = async (req, res) => {
     let announcementId = "ANNOUNC-" + uuid.v4();
     let timestamp = new Date().toISOString();
 
-    let announcementObj = new Announcement(announcementId, req.body.type,
-      req.body.message, timestamp, req.body.adminId, req.body.companyId)
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
+    let announcementObj = new Announcement(announcementId, reqJson.type,
+      reqJson.message, timestamp, reqJson.adminId, reqJson.companyId)
 
     let announcementData = {
       announcementId: announcementObj.announcementId,
