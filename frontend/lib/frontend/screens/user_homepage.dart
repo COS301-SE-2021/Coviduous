@@ -36,14 +36,14 @@ class _UserHomePageState extends State<UserHomePage> {
           title: Text('Warning'),
           content: Text('Are you sure you want to log out?'),
           actions: <Widget>[
-            ElevatedButton(
+            TextButton(
               child: Text('Yes'),
               onPressed: (){
                 AuthClass().signOut();
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
               },
             ),
-            ElevatedButton(
+            TextButton(
               child: Text('No'),
               onPressed: (){
                 Navigator.of(ctx).pop();
@@ -94,7 +94,7 @@ class _UserHomePageState extends State<UserHomePage> {
             child: Container(
               color: globals.secondaryColor,
               child: ListView(
-                  padding: EdgeInsets.zero,
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   children: [
                     DrawerHeader(
                       decoration: BoxDecoration(
@@ -120,7 +120,7 @@ class _UserHomePageState extends State<UserHomePage> {
                         ],
                       ),
                     ),
-                    ElevatedButton (
+                    TextButton (
                         style: ElevatedButton.styleFrom (
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -128,8 +128,8 @@ class _UserHomePageState extends State<UserHomePage> {
                         ),
                         child: Row (
                             children: <Widget>[
-                              Expanded(child: Text('Announcements')),
-                              Icon(Icons.add_alert)
+                              Expanded(child: Text('Announcements', style: TextStyle(color: Colors.white),)),
+                              Icon(Icons.add_alert, color: Colors.white,)
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -138,7 +138,10 @@ class _UserHomePageState extends State<UserHomePage> {
                           Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
                         }
                     ),
-                    ElevatedButton (
+                    Divider(
+                      color: globals.lineColor,
+                    ),
+                    TextButton (
                         style: ElevatedButton.styleFrom (
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -146,8 +149,8 @@ class _UserHomePageState extends State<UserHomePage> {
                         ),
                         child: Row (
                             children: <Widget>[
-                              Expanded(child: Text('Notifications')),
-                              Icon(Icons.notifications_active)
+                              Expanded(child: Text('Notifications', style: TextStyle(color: Colors.white),)),
+                              Icon(Icons.notifications_active, color: Colors.white,)
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -156,7 +159,10 @@ class _UserHomePageState extends State<UserHomePage> {
                           Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
                         }
                     ),
-                    ElevatedButton(
+                    Divider(
+                      color: globals.lineColor,
+                    ),
+                    TextButton(
                       style: ElevatedButton.styleFrom (
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -164,8 +170,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       ),
                       child: Row(
                           children: <Widget>[
-                            Expanded(child: Text('Manage account')),
-                            Icon(Icons.person)
+                            Expanded(child: Text('Manage account', style: TextStyle(color: Colors.white),)),
+                            Icon(Icons.person, color: Colors.white,)
                           ],
                           mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                           crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -174,7 +180,10 @@ class _UserHomePageState extends State<UserHomePage> {
                         Navigator.of(context).pushReplacementNamed(UserManageAccount.routeName);
                       },
                     ),
-                    ElevatedButton(
+                    Divider(
+                      color: globals.lineColor,
+                    ),
+                    TextButton(
                       style: ElevatedButton.styleFrom (
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -182,8 +191,8 @@ class _UserHomePageState extends State<UserHomePage> {
                       ),
                       child: Row(
                           children: <Widget>[
-                            Expanded(child: Text('Log out')),
-                            Icon(Icons.logout)
+                            Expanded(child: Text('Log out', style: TextStyle(color: Colors.white),)),
+                            Icon(Icons.logout, color: Colors.white,)
                           ],
                           mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                           crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -195,14 +204,14 @@ class _UserHomePageState extends State<UserHomePage> {
                               title: Text('Warning'),
                               content: Text('Are you sure you want to log out?'),
                               actions: <Widget>[
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('Yes'),
                                   onPressed: (){
                                     AuthClass().signOut();
                                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                                   },
                                 ),
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('No'),
                                   onPressed: (){
                                     Navigator.of(ctx).pop();
@@ -211,6 +220,9 @@ class _UserHomePageState extends State<UserHomePage> {
                               ],
                             ));
                       },
+                    ),
+                    Divider(
+                      color: globals.lineColor,
                     ),
                   ]
               ),

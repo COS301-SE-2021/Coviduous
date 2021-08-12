@@ -38,7 +38,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
               title: Text('No floor plans found'),
               content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
               actions: <Widget>[
-                ElevatedButton(
+                TextButton(
                   child: Text('Okay'),
                   onPressed: (){
                     Navigator.of(ctx).pop();
@@ -66,7 +66,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
               title: Text('No floor plans found'),
               content: Text('Shifts cannot be viewed at this time. Please add floor plans for your company first.'),
               actions: <Widget>[
-                ElevatedButton(
+                TextButton(
                   child: Text('Okay'),
                   onPressed: (){
                     Navigator.of(ctx).pop();

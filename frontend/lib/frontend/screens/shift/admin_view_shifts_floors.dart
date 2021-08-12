@@ -43,7 +43,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                   title: Text('No rooms found'),
                   content: Text('Shifts cannot be viewed at this time. Please add rooms for your company first.'),
                   actions: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();

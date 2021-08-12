@@ -303,7 +303,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                               title: Text('Error'),
                                               content: Text('Shift not created. Start time must be before end time.'),
                                               actions: <Widget>[
-                                                ElevatedButton(
+                                                TextButton(
                                                   child: Text('Okay'),
                                                   onPressed: (){
                                                     Navigator.of(ctx).pop();

@@ -116,6 +116,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget{
+  //FlutterStatusbarcolor.setStatusBarColor(Colors.white);
   @override
   Widget build(BuildContext context){
     return MaterialApp(
@@ -126,19 +127,61 @@ class MyApp extends StatelessWidget{
           backgroundColor: globals.appBarColor,
           iconTheme: IconThemeData(color: Colors.white), //Back button color
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: globals.secondaryColor)
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: globals.focusColor)
+          ),
+          labelStyle: TextStyle(
+            color: Colors.black,
+          )
+        ),
         bottomAppBarTheme: BottomAppBarTheme(
           color: globals.appBarColor,
+        ),
+        brightness: Brightness.dark,
+        dialogTheme: DialogTheme(
+          backgroundColor: globals.secondaryColor,
+          titleTextStyle: TextStyle(color: globals.primaryColor, fontSize: 20),
+          contentTextStyle: TextStyle(color: Colors.white, fontSize: 15),
         ),
         fontFamily: 'Poppins',
         primaryColor: globals.primaryColor, //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
         scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
         primaryTextTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
+          bodyText1: TextStyle(color: Colors.black),
+          bodyText2: TextStyle(color: Colors.black),
           button: TextStyle(color: Colors.black),
+          caption: TextStyle(color: Colors.black),
+          headline1: TextStyle(color: Colors.black),
+          headline2: TextStyle(color: Colors.black),
+          headline3: TextStyle(color: Colors.black),
+          headline4: TextStyle(color: Colors.black),
+          headline5: TextStyle(color: Colors.black),
           headline6: TextStyle(color: Colors.white),
+          overline: TextStyle(color: Colors.black),
+          subtitle1: TextStyle(color: Colors.black),
+          subtitle2: TextStyle(color: Colors.black),
         ),
+        textTheme: TextTheme(
+          bodyText1: TextStyle(color: Colors.black),
+          bodyText2: TextStyle(color: Colors.black),
+          button: TextStyle(color: Colors.black),
+          caption: TextStyle(color: Colors.black),
+          headline1: TextStyle(color: Colors.black),
+          headline2: TextStyle(color: Colors.black),
+          headline3: TextStyle(color: Colors.black),
+          headline4: TextStyle(color: Colors.black),
+          headline5: TextStyle(color: Colors.black),
+          headline6: TextStyle(color: Colors.white),
+          overline: TextStyle(color: Colors.black),
+          subtitle1: TextStyle(color: Colors.black),
+          subtitle2: TextStyle(color: Colors.black),
+        ),
+        hintColor: Colors.black,
         snackBarTheme: SnackBarThemeData(
           actionTextColor: Colors.black,
           backgroundColor: globals.primaryColor,

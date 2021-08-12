@@ -10,7 +10,7 @@ import 'package:frontend/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
 import 'package:frontend/subsystems/notification_subsystem/notification.dart';
 import 'package:frontend/subsystems/shift_subsystem/shift.dart';
-import 'package:frontend/frontend/theme-kit.dart' as theme;
+import 'package:frontend/frontend/theme.dart' as theme;
 
 //============================
 //FRONT END GLOBAL VARIABLES
@@ -84,6 +84,8 @@ String loggedInCompanyId = 'CID-1';
 Color appBarColor = theme.appBarColor;
 Color primaryColor = theme.primaryColor;
 Color secondaryColor = theme.secondaryColor;
+Color lineColor = theme.lineColor;
+Color focusColor = theme.focusColor;
 
 //Needed to change the color of a TextField when it's selected.
 MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;

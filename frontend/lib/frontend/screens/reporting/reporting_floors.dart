@@ -53,7 +53,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
               title: Text('Error'),
               content: Text('No floors have been defined for your company.'),
               actions: <Widget>[
-                ElevatedButton(
+                TextButton(
                   child: Text('Okay'),
                   onPressed: () {
                     Navigator.of(ctx).pop();

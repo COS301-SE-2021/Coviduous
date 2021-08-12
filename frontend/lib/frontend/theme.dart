@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 Color appBarColor = Color(0xff3B324E);
 Color primaryColor = Color(0xff14DAE2);
 Color secondaryColor = Color(0xff251F34);
+Color lineColor = Color(0xffBBACE5);
+Color focusColor = Color(0xff0D9999);
 
 Map<int, Color> textFieldSelectedSwatch = {
   50: Color.fromRGBO(20, 218, 226, .1),

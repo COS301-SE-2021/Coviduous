@@ -240,57 +240,65 @@ class _LoginScreenState extends State<LoginScreen> {
                                     setState(() {
                                       isLoading = true;
                                     });
-                                    AuthClass().signIn(email: _email.text.trim(),
-                                        password: _password.text.trim()).then((value) {
-                                      if (value == "welcome") {
 
-                                        globals.loggedInUserEmail = _email.text;
-                                        globals.loggedInUserId = userGlobals.getUserId(_email.text);
-                                        print(globals.loggedInUserId);
+                                    FormState form = _formKey.currentState;
+                                    if (form.validate()) {
+                                      AuthClass().signIn(email: _email.text.trim(),
+                                          password: _password.text.trim()).then((value) {
+                                        if (value == "welcome") {
 
-                                        //First get company ID
-                                        getCompanyId().then((companyID) {
-                                          globals.loggedInCompanyId = companyID;
+                                          globals.loggedInUserEmail = _email.text;
+                                          globals.loggedInUserId = userGlobals.getUserId(_email.text);
+                                          print(globals.loggedInUserId);
 
-                                          //Then get user type
-                                          getUserType().then((userType) {
-                                            if (userType == 'Admin') {
-                                              globals.loggedInUserType = 'Admin';
-                                              Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                            } else if (userType == 'User') {
-                                              globals.loggedInUserType = 'User';
-                                              Navigator.pushReplacementNamed(context, UserHomePage.routeName);
-                                            } else {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (ctx) => AlertDialog(
-                                                    title: Text('Error'),
-                                                    content: Text('Encountered error retrieving user type, please try again.'),
-                                                    actions: <Widget>[
-                                                      ElevatedButton(
-                                                        child: Text('Okay'),
-                                                        onPressed: (){
-                                                          Navigator.of(ctx).pop();
-                                                        },
-                                                      )
-                                                    ],
-                                                  )
-                                              );
-                                            }
-                                            setState(() {
-                                              isLoading = false;
+                                          //First get company ID
+                                          getCompanyId().then((companyID) {
+                                            globals.loggedInCompanyId = companyID;
+
+                                            //Then get user type
+                                            getUserType().then((userType) {
+                                              if (userType == 'Admin') {
+                                                globals.loggedInUserType = 'Admin';
+                                                Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                              } else if (userType == 'User') {
+                                                globals.loggedInUserType = 'User';
+                                                Navigator.pushReplacementNamed(context, UserHomePage.routeName);
+                                              } else {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (ctx) => AlertDialog(
+                                                      title: Text('Error'),
+                                                      content: Text('Encountered error retrieving user type, please try again.'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          child: Text('Okay'),
+                                                          onPressed: (){
+                                                            Navigator.of(ctx).pop();
+                                                          },
+                                                        )
+                                                      ],
+                                                    )
+                                                );
+                                              }
+                                              setState(() {
+                                                isLoading = false;
+                                              });
                                             });
                                           });
-                                        });
-                                      }
-                                      else {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text(value)));
-                                      }
-                                    });
+                                        }
+                                        else {
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text(value)));
+                                        }
+                                      });
+                                    } else {
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                    }
                                   },
                                   style: ElevatedButton.styleFrom (
                                     shape: RoundedRectangleBorder(

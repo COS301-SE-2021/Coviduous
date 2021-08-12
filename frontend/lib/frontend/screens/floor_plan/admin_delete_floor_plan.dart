@@ -152,7 +152,7 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
                                         title: Text('Warning'),
                                         content: Text("Are you sure you want to remove your company's entire floor plan? All floors will be deleted, and this operation cannot be undone."),
                                         actions: <Widget>[
-                                          ElevatedButton(
+                                          TextButton(
                                             child: Text('Yes'),
                                             onPressed: (){
                                               //Only allow floor plan to be deleted if password is correct; try to sign in with it
@@ -179,7 +179,7 @@ class DeleteFloorPlanState extends State<DeleteFloorPlan> {
                                               }
                                             },
                                           ),
-                                          ElevatedButton(
+                                          TextButton(
                                             child: Text('No'),
                                             onPressed: (){
                                               Navigator.of(ctx).pop();

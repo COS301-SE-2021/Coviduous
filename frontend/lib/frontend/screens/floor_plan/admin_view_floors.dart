@@ -61,7 +61,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                   content: Text(
                       'No floors have been defined for your company. Please return to the previous page and specify the number of floors.'),
                   actions: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();
@@ -145,7 +145,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                                 content: Text(
                                                     'Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the previous page.'),
                                                 actions: <Widget>[
-                                                  ElevatedButton(
+                                                  TextButton(
                                                     child: Text('Okay'),
                                                     onPressed: () {
                                                       Navigator.of(ctx).pop();
