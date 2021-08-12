@@ -56,6 +56,32 @@ class _LoginScreenState extends State<LoginScreen> {
     Output:
       - The user type retrieved from the database, either "Admin" or "User".
    */
+  Future getUserId() async {
+    String userId = "";
+
+    //Wait for transaction to complete.
+    await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      var query = FirebaseFirestore.instance.collection('Users')
+          .where('Email', isEqualTo: _email.text.trim()).limit(1);
+      await Future.wait([query.get().then((data) {
+        if (data.docs.length > 0) {
+          userId = data.docs[0].get('uid');
+        } else {
+          userId = "";
+        }
+      })]);
+    })]);
+
+    print("userID = " + userId);
+    return userId;
+  }
+
+  /*
+    Function name: getUserType
+    Purpose: Retrieves the user type from the database.
+    Output:
+      - The user type retrieved from the database, either "Admin" or "User".
+   */
   Future getUserType() async {
     String userType = "";
 
@@ -248,40 +274,43 @@ class _LoginScreenState extends State<LoginScreen> {
                                         if (value == "welcome") {
 
                                           globals.loggedInUserEmail = _email.text;
-                                          globals.loggedInUserId = userGlobals.getUserId(_email.text);
-                                          print(globals.loggedInUserId);
 
                                           //First get company ID
                                           getCompanyId().then((companyID) {
                                             globals.loggedInCompanyId = companyID;
 
-                                            //Then get user type
-                                            getUserType().then((userType) {
-                                              if (userType == 'Admin') {
-                                                globals.loggedInUserType = 'Admin';
-                                                Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                              } else if (userType == 'User') {
-                                                globals.loggedInUserType = 'User';
-                                                Navigator.pushReplacementNamed(context, UserHomePage.routeName);
-                                              } else {
-                                                showDialog(
-                                                    context: context,
-                                                    builder: (ctx) => AlertDialog(
-                                                      title: Text('Error'),
-                                                      content: Text('Encountered error retrieving user type, please try again.'),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          child: Text('Okay'),
-                                                          onPressed: (){
-                                                            Navigator.of(ctx).pop();
-                                                          },
-                                                        )
-                                                      ],
-                                                    )
-                                                );
-                                              }
-                                              setState(() {
-                                                isLoading = false;
+                                            //Then get UUID
+                                            getUserId().then((userID) {
+                                              globals.loggedInUserId = userID;
+
+                                              //Then get user type
+                                              getUserType().then((userType) {
+                                                if (userType == 'Admin') {
+                                                  globals.loggedInUserType = 'Admin';
+                                                  Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                                } else if (userType == 'User') {
+                                                  globals.loggedInUserType = 'User';
+                                                  Navigator.pushReplacementNamed(context, UserHomePage.routeName);
+                                                } else {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (ctx) => AlertDialog(
+                                                        title: Text('Error'),
+                                                        content: Text('Encountered error retrieving user type, please try again.'),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: Text('Okay'),
+                                                            onPressed: (){
+                                                              Navigator.of(ctx).pop();
+                                                            },
+                                                          )
+                                                        ],
+                                                      )
+                                                  );
+                                                }
+                                                setState(() {
+                                                  isLoading = false;
+                                                });
                                               });
                                             });
                                           });
