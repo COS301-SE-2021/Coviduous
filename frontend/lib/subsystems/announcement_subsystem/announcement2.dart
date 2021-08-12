@@ -7,11 +7,12 @@
 
 import 'dart:convert';
 
-Announcement announcementFromJson(String str) => Announcement.fromJson(json.decode(str));
+Announcement announcementFromJson(String str) =>
+    Announcement.fromJson(json.decode(str));
 
 String announcementToJson(Announcement data) => json.encode(data.toJson());
 
-// Announcement a = new Announcement(announcementId: 'i', type: 'i', message: 'i', ...); // constructor creation
+// Announcement a = new Announcement(announcementId: 'i', type: 'i', message: 'i', ...); // object creation
 // String str = announcementToJson(a);
 
 // str = '{announcementId: 'something'}'; //json string
@@ -22,46 +23,40 @@ String announcementToJson(Announcement data) => json.encode(data.toJson());
 //
 //     final announcement = announcementFromJson(jsonString);
 
-import 'dart:convert';
-
-Announcement announcementFromJson(String str) => Announcement.fromJson(json.decode(str));
-
-String announcementToJson(Announcement data) => json.encode(data.toJson());
+//import 'dart:convert';
 
 class Announcement {
-    String announcementId;
-    String type;
-    String message;
-    String timestamp;
-    String adminId;
-    String companyId;
+  String announcementId;
+  String type;
+  String message;
+  String timestamp;
+  String adminId;
+  String companyId;
 
-    Announcement({
-        this.announcementId,
-        this.type,
-        this.message,
-        this.timestamp,
-        this.adminId,
-        this.companyId,
-    });
+  Announcement({
+    this.announcementId,
+    this.type,
+    this.message,
+    this.timestamp,
+    this.adminId,
+    this.companyId,
+  });
 
-    factory Announcement.fromJson(Map<String, dynamic> json) => Announcement(
+  factory Announcement.fromJson(Map<String, dynamic> json) => Announcement(
         announcementId: json["announcementId"],
         type: json["type"],
         message: json["message"],
         timestamp: json["timestamp"],
         adminId: json["adminId"],
         companyId: json["companyId"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "announcementId": announcementId,
         "type": type,
         "message": message,
         "timestamp": timestamp,
         "adminId": adminId,
         "companyId": companyId,
-    };
+      };
 }
-
-
