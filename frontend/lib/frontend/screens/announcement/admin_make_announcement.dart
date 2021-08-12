@@ -112,7 +112,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
             child: SingleChildScrollView(
               child: new Container(
                 color: Colors.white,
-                height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 padding: EdgeInsets.all(16),
                 child: Column(
@@ -123,10 +123,13 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                     SizedBox(
                       height: 20.0,
                     ),
-                    DropdownButton(
-                      value: _selectedType,
-                      items: _dropdownMenuItems,
-                      onChanged: onChangeDropdownItem,
+                    Theme(
+                      data: ThemeData.light(),
+                      child: DropdownButton(
+                        value: _selectedType,
+                        items: _dropdownMenuItems,
+                        onChanged: onChangeDropdownItem,
+                      ),
                     ),
                     SizedBox(
                       height: 16,
