@@ -263,52 +263,105 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                     Container (
                       height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      padding: EdgeInsets.all(16),
-                      child: Column (
-                        children: <Widget>[
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                      //==============================
+                      // IF ON MOBILE, SHOW GRIDVIEW
+                      //==============================
+                      child: globals.getIfOnPC() == false ? GridView.count(
+                          childAspectRatio: 4/3,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 32,
+                          mainAxisSpacing: 32,
+                          children: <Widget>[
+                            ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                            child: Row (
-                              children: <Widget>[
-                                Expanded(child: Text('Bookings')),
-                                Icon(Icons.library_books)
-                              ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(Office.routeName);
-                            }
-                          ),
-                          SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Row (
+                                child: Column (
                                   children: <Widget>[
-                                    Expanded(child: Text('Health')),
-                                    Icon(Icons.medical_services)
+                                    Flexible(child: Icon(Icons.library_books, size: 42)),
+                                    SizedBox(height: 8),
+                                    Flexible(child: Text('Bookings')),
                                   ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                              }
-                          ),
-                        ]
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                }
+                            ),
+                            ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Column (
+                                  children: <Widget>[
+                                    Flexible(child: Icon(Icons.medical_services, size: 42)),
+                                    SizedBox(height: 8),
+                                    Flexible(child: Text('Health')),
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                }
+                            ),
+                          ]
+                        //=============================
+                        // ELSE IF ON PC, SHOW COLUMN
+                        //=============================
+                      ) : Column (
+                          children: <Widget>[
+                            ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Bookings')),
+                                      Icon(Icons.library_books)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                }
+                            ),
+                            SizedBox (
+                              height: MediaQuery.of(context).size.height/48,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                            ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Health')),
+                                      Icon(Icons.medical_services)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                }
+                            ),
+                          ]
                       )
+                      //============
+                      // ENDIF
+                      //============
                     ),
                   ],
                 )
