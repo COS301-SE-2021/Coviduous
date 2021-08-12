@@ -25,6 +25,7 @@ String announcementToJson(Announcement data) => json.encode(data.toJson());
 
 //import 'dart:convert';
 
+// create any json mapping class using https://app.quicktype.io/
 class Announcement {
   String announcementId;
   String type;
