@@ -302,7 +302,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         child: Column (
                                           children: <Widget>[
-                                            Flexible(child: Icon(Icons.library_books, size: 42)),
+                                            Flexible(child: Icon(Icons.sensor_door, size: 42)),
                                             SizedBox(height: 8),
                                             Flexible(child: Text('Permissions')),
                                           ],
@@ -394,7 +394,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       child: Row (
                                         children: <Widget>[
                                           Flexible(child: Text('Permissions')),
-                                          Flexible(child: Icon(Icons.library_books)),
+                                          Flexible(child: Icon(Icons.sensor_door)),
                                         ],
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.center,
