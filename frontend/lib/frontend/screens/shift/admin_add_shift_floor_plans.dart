@@ -38,7 +38,7 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
                   title: Text('No floors found'),
                   content: Text('Shifts cannot be assigned at this time. Please add floors for your company first.'),
                   actions: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();

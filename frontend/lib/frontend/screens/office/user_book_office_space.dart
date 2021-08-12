@@ -111,7 +111,7 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                           title: Text('Placeholder'),
                           content: Text('Booking successfully created.'),
                           actions: <Widget>[
-                            ElevatedButton(
+                            TextButton(
                               child: Text('Okay'),
                               onPressed: (){
                                 Navigator.of(ctx).pop();

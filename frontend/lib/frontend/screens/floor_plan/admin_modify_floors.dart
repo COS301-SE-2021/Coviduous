@@ -60,7 +60,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                   content: Text(
                       'No floors have been defined for your company. Please return to the previous page and add a new floor plan.'),
                   actions: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();
@@ -144,7 +144,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                                                 content: Text(
                                                     'Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the previous page.'),
                                                 actions: <Widget>[
-                                                  ElevatedButton(
+                                                  TextButton(
                                                     child: Text('Okay'),
                                                     onPressed: () {
                                                       Navigator.of(ctx).pop();

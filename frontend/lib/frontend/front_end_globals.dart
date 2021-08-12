@@ -3,6 +3,7 @@ library globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
+import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
 import 'package:universal_html/html.dart' as html;
 
 import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
@@ -10,7 +11,7 @@ import 'package:frontend/subsystems/floorplan_subsystem/floorplan.dart';
 import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
 import 'package:frontend/subsystems/notification_subsystem/notification.dart';
 import 'package:frontend/subsystems/shift_subsystem/shift.dart';
-import 'package:frontend/frontend/theme-kit.dart' as theme;
+import 'package:frontend/frontend/theme.dart' as theme;
 
 //============================
 //FRONT END GLOBAL VARIABLES
@@ -44,15 +45,20 @@ bool getIfOnPC() {
   return getIfOnPC;
 }
 
-//Adjusts scaling of containers based on platform
+//Adjusts scaling of container based on platform
 double getWidgetScaling() {
-  if (kIsWeb) { //If web browser
-    String platform = getOSWeb();
-    if (platform == "Android" || platform == "iOS") //Check if mobile browser
-     return 0.7;
-    else //Else, PC browser
-     return 1;
-  } else { //Else, mobile app
+  if (getIfOnPC()) { //If PC
+    return 1;
+  } else { //Else, mobile app or mobile browser
+    return 0.7;
+  }
+}
+
+//Adjusts scaling of container width based on platform
+double getWidgetWidthScaling() {
+  if (getIfOnPC()) { //If PC
+    return 1.5;
+  } else { //Else, mobile app or mobile browser
     return 0.7;
   }
 }
@@ -84,9 +90,13 @@ String loggedInCompanyId = 'CID-1';
 Color appBarColor = theme.appBarColor;
 Color primaryColor = theme.primaryColor;
 Color secondaryColor = theme.secondaryColor;
+Color lineColor = theme.lineColor;
+Color focusColor = theme.focusColor;
 
 //Needed to change the color of a TextField when it's selected.
 MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;
+
+TextTheme textTheme = theme.textTheme;
 
 //======
 //Fonts
@@ -121,6 +131,13 @@ bool testResultsExist = false;
 
 //Check if vaccine confirmation has been uploaded
 bool vaccineConfirmExists = false;
+
+//===============================
+//Used in announcement subsystem
+//===============================
+
+//Current list of announcements to show
+List<Announcement> currentAnnouncements = [];
 
 //===============================
 //Used in notifications subsystem

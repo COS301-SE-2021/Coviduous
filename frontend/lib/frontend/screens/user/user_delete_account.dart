@@ -178,7 +178,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                                       title: Text('Warning'),
                                                       content: Text('Are you sure you want to delete your account? This cannot be undone.'),
                                                       actions: <Widget>[
-                                                        ElevatedButton(
+                                                        TextButton(
                                                           child: Text('Yes'),
                                                           onPressed: () {
                                                             setState(() {
@@ -213,7 +213,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                                             });
                                                           },
                                                         ),
-                                                        ElevatedButton(
+                                                        TextButton(
                                                           child: Text('No'),
                                                           onPressed: () {
                                                             Navigator.of(ctx).pop();

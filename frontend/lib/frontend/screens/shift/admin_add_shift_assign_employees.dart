@@ -204,13 +204,13 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                               title: Text('Warning'),
                               content: Text('Are you sure you are done creating this shift?'),
                               actions: <Widget>[
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('Yes'),
                                   onPressed: (){
                                     processShifts();
                                   },
                                 ),
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('No'),
                                   onPressed: (){
                                     Navigator.of(ctx).pop();

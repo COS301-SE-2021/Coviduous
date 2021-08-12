@@ -181,7 +181,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                             controller: _email,
                             validator: (value) {
                               if (value.isEmpty) {
-                                return null;
+                                return 'please enter your email address';
                               } else if (value.isNotEmpty) {
                                 if (!value.contains('@')) {
                                   return 'invalid email';
@@ -207,61 +207,64 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                 int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
                                 //Only allow if start time is before end time
                                 if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                            title: Text('Enter your password'),
-                                            content: TextFormField(
-                                              controller: _password,
-                                              decoration: InputDecoration(hintText: 'Enter your password'),
-                                              obscureText: true,
-                                              validator: (value) {
-                                                if (value.isEmpty) {
-                                                  return 'please input your password';
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (String value) {
-                                                _password.text = value;
-                                              },
-                                            ),
-                                            actions: [
-                                              ElevatedButton(
-                                                child: Text('Submit'),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    isLoading = true;
-                                                  });
-
-                                                  //Only allow changes to be made if password is correct; try to sign in with it
-                                                  if (_password.text.isNotEmpty) {
-                                                    AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
-                                                      if (value2 == "welcome") {
-                                                        editShift();
-                                                      } else {
-                                                        setState(() {
-                                                          isLoading = false;
-                                                        });
-                                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
-                                                        Navigator.pop(context);
-                                                      }
-                                                    });
-                                                  } else {
-                                                    setState(() {
-                                                      isLoading = false;
-                                                    });
-                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
-                                                    Navigator.pop(context);
+                                  FormState form = _formKey.currentState;
+                                  if (form.validate()) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                              title: Text('Enter your password'),
+                                              content: TextFormField(
+                                                controller: _password,
+                                                decoration: InputDecoration(hintText: 'Enter your password', filled: true, fillColor: Colors.white),
+                                                obscureText: true,
+                                                validator: (value) {
+                                                  if (value.isEmpty) {
+                                                    return 'please input your password';
                                                   }
+                                                  return null;
+                                                },
+                                                onSaved: (String value) {
+                                                  _password.text = value;
                                                 },
                                               ),
-                                              ElevatedButton(
-                                                child: Text('Cancel'),
-                                                onPressed: () => Navigator.pop(context),
-                                              ),
-                                            ]);
-                                      });
+                                              actions: [
+                                                TextButton(
+                                                  child: Text('Submit'),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      isLoading = true;
+                                                    });
+
+                                                    //Only allow changes to be made if password is correct; try to sign in with it
+                                                    if (_password.text.isNotEmpty) {
+                                                      AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
+                                                        if (value2 == "welcome") {
+                                                          editShift();
+                                                        } else {
+                                                          setState(() {
+                                                            isLoading = false;
+                                                          });
+                                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
+                                                          Navigator.pop(context);
+                                                        }
+                                                      });
+                                                    } else {
+                                                      setState(() {
+                                                        isLoading = false;
+                                                      });
+                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid password')));
+                                                      Navigator.pop(context);
+                                                    }
+                                                  },
+                                                ),
+                                                TextButton(
+                                                  child: Text('Cancel'),
+                                                  onPressed: () => Navigator.pop(context),
+                                                ),
+                                              ]);
+                                        });
+                                  }
                                 } else {
                                   showDialog(
                                       context: context,
@@ -269,7 +272,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                         title: Text('Error'),
                                         content: Text('Shift not created. Start time must be before end time.'),
                                         actions: <Widget>[
-                                          ElevatedButton(
+                                          TextButton(
                                             child: Text('Okay'),
                                             onPressed: (){
                                               Navigator.of(ctx).pop();

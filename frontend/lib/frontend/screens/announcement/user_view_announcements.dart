@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/announcements_controller.dart';
-import 'package:frontend/requests/announcements_requests/viewUser_announcement_request.dart';
-import 'package:frontend/responses/announcement_responses/viewUser_announcement_response.dart';
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
+import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
@@ -17,6 +14,8 @@ class UserViewAnnouncements extends StatefulWidget {
   @override
   _UserViewAnnouncementsState createState() => _UserViewAnnouncementsState();
 }
+
+List<Announcement> announcements = globals.currentAnnouncements;
 
 class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
   Future<bool> _onWillPop() async {
@@ -41,11 +40,11 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
     }
 
     Widget getList() {
-      AnnouncementsController services = new AnnouncementsController();
-      ViewUserAnnouncementResponse response = services.viewAnnouncementsUserMock(ViewUserAnnouncementRequest(globals.loggedInUserId));
-      List<Announcement> announcements = response.announcementArrayList;
-      int numberOfAnnouncements = announcements.length;
-
+      int numberOfAnnouncements = 0;
+      if (announcements != null) {
+        numberOfAnnouncements = announcements.length;
+        print(numberOfAnnouncements);
+      }
       print(numberOfAnnouncements);
 
       if (numberOfAnnouncements == 0) {
@@ -98,7 +97,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: ' + announcements[index].getDate(), style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + announcements[index].getTimestamp(), style: TextStyle(color: Colors.black)),
                               //child: Text('Date: test', style: TextStyle(color: Colors.black)),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),

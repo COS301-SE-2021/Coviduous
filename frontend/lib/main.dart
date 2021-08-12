@@ -12,7 +12,6 @@ import 'package:frontend/frontend/screens/signup/admin_signup_screen.dart';
 import 'package:frontend/frontend/screens/signup/user_signup_screen.dart';
 
 //Announcement
-import 'package:frontend/frontend/screens/announcement/admin_delete_announcement.dart';
 import 'package:frontend/frontend/screens/announcement/admin_view_announcements.dart';
 import 'package:frontend/frontend/screens/announcement/admin_make_announcement.dart';
 import 'package:frontend/frontend/screens/announcement/user_view_announcements.dart';
@@ -116,6 +115,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget{
+  //FlutterStatusbarcolor.setStatusBarColor(Colors.white);
   @override
   Widget build(BuildContext context){
     return MaterialApp(
@@ -129,29 +129,51 @@ class MyApp extends StatelessWidget{
         bottomAppBarTheme: BottomAppBarTheme(
           color: globals.appBarColor,
         ),
+        brightness: Brightness.dark,
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStateColor.resolveWith((states) {
+            if (states.contains(MaterialState.selected)) {
+              return globals.primaryColor;
+            } else {
+              return globals.secondaryColor;
+            }
+          })
+        ),
+        dialogTheme: DialogTheme(
+          backgroundColor: globals.secondaryColor,
+          titleTextStyle: TextStyle(color: globals.primaryColor, fontSize: 20),
+          contentTextStyle: TextStyle(color: Colors.white, fontSize: 15),
+        ),
         fontFamily: 'Poppins',
+        hintColor: Colors.black,
+        inputDecorationTheme: InputDecorationTheme(
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: globals.secondaryColor)
+            ),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: globals.focusColor)
+            ),
+            labelStyle: TextStyle(
+              color: Colors.black,
+            )
+        ),
         primaryColor: globals.primaryColor, //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
+        primaryTextTheme: globals.textTheme,
         scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
-        primaryTextTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
-          button: TextStyle(color: Colors.black),
-          headline6: TextStyle(color: Colors.white),
-        ),
         snackBarTheme: SnackBarThemeData(
           actionTextColor: Colors.black,
           backgroundColor: globals.primaryColor,
           contentTextStyle: TextStyle(color: Colors.black),
           disabledActionTextColor: Colors.black,
         ),
+        textTheme: globals.textTheme,
       ),
       home: Home(),
       routes: {
         //Announcement
         MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
         AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
-        AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
 
         //Floor plan

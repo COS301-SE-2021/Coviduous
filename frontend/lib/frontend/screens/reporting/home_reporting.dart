@@ -52,7 +52,7 @@ class _ReportingState extends State<Reporting> {
           body: Center(
               child: Container (
                   height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
                   padding: EdgeInsets.all(16),
                   child: Column (
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +80,7 @@ class _ReportingState extends State<Reporting> {
                                           title: Text('No floor plans found'),
                                           content: Text('No floor plans have been created for your company yet.'),
                                           actions: <Widget>[
-                                            ElevatedButton(
+                                            TextButton(
                                               child: Text('Okay'),
                                               onPressed: () {
                                                 Navigator.of(ctx).pop();
@@ -119,7 +119,7 @@ class _ReportingState extends State<Reporting> {
                                     title: Text('Placeholder'),
                                     content: Text('Health reports.'),
                                     actions: <Widget>[
-                                      ElevatedButton(
+                                      TextButton(
                                         child: Text('Okay'),
                                         onPressed: (){
                                           Navigator.of(ctx).pop();

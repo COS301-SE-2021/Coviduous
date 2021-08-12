@@ -54,7 +54,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
           body: Center(
               child: Container (
                   height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
                   padding: EdgeInsets.all(16),
                   child: Column (
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +83,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                       title: Text('Floor plan already exists'),
                                       content: Text('A floor plan already exists for your company. Please remove the old one before creating a new one.'),
                                       actions: <Widget>[
-                                        ElevatedButton(
+                                        TextButton(
                                           child: Text('Okay'),
                                           onPressed: (){
                                             Navigator.of(ctx).pop();
@@ -123,7 +123,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                       title: Text('Floor plan does not exist'),
                                       content: Text('A floor plan has not been added for your company.'),
                                       actions: <Widget>[
-                                        ElevatedButton(
+                                        TextButton(
                                           child: Text('Okay'),
                                           onPressed: (){
                                             Navigator.of(ctx).pop();
@@ -163,7 +163,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                       title: Text('Floor plan does not exist'),
                                       content: Text('A floor plan has not been added for your company.'),
                                       actions: <Widget>[
-                                        ElevatedButton(
+                                        TextButton(
                                           child: Text('Okay'),
                                           onPressed: (){
                                             Navigator.of(ctx).pop();

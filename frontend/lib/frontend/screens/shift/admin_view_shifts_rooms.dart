@@ -51,7 +51,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                   title: Text('No shifts found'),
                   content: Text('No shifts have been created for this room.'),
                   actions: <Widget>[
-                    ElevatedButton(
+                    TextButton(
                       child: Text('Okay'),
                       onPressed: () {
                         Navigator.of(ctx).pop();

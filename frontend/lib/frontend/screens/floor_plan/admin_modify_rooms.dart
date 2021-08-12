@@ -203,7 +203,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                 content: Text(
                                                     'Floors must have at least one room. To delete a whole floor, please delete it on the previous page.'),
                                                 actions: <Widget>[
-                                                  ElevatedButton(
+                                                  TextButton(
                                                     child: Text('Okay'),
                                                     onPressed: () {
                                                       Navigator.of(ctx).pop();

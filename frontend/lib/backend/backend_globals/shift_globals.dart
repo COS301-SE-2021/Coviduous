@@ -29,19 +29,19 @@ import 'dart:convert';
 //Backend global variables
 //==========================
 /**
- * List<FloorPlan> globalFloorplans holds a list of Floorplans from the databse
- * numFloorPlans keeps track of number of floorplans 
+ * List<FloorPlan> globalFloorPlans holds a list of floor plans from the database
+ * numFloorPlans keeps track of number of floor plans
  */
 List<FloorPlan> globalFloorplans = [];
 int numFloorPlans = 0;
 /**
- * List<Floor> globalFloors holds a list of Floors from the databse
+ * List<Floor> globalFloors holds a list of Floors from the database
  * numFloors keeps track of number of floors 
  */
 List<Floor> globalFloors = [];
 int numFloors = 0;
 /**
- * List<Rooms> globalFloors holds a list of Floors from the databse
+ * List<Rooms> globalFloors holds a list of Floors from the database
  * numFloors keeps track of number of floors 
  */
 List<Room> globalRooms = [];

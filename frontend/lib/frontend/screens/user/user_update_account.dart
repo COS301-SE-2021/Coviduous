@@ -202,7 +202,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                           title: Text('Enter your password'),
                                           content: TextFormField(
                                             controller: _password,
-                                            decoration: InputDecoration(hintText: 'Enter your password'),
+                                            decoration: InputDecoration(hintText: 'Enter your password', filled: true, fillColor: Colors.white),
                                             obscureText: true,
                                             validator: (value) {
                                               if (value.isEmpty) {
@@ -215,7 +215,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                             },
                                           ),
                                           actions: [
-                                            ElevatedButton(
+                                            TextButton(
                                               child: Text('Submit'),
                                               onPressed: () {
                                                 setState(() {
@@ -308,7 +308,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                 }
                                               },
                                             ),
-                                            ElevatedButton(
+                                            TextButton(
                                               child: Text('Cancel'),
                                               onPressed: () => Navigator.pop(context),
                                             ),

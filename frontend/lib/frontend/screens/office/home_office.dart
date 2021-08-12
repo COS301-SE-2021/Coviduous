@@ -53,7 +53,7 @@ class _OfficeState extends State<Office> {
           body: Center(
               child: Container (
                   height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
                   padding: EdgeInsets.all(16),
                   child: Column (
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -82,7 +82,7 @@ class _OfficeState extends State<Office> {
                                       title: Text('No office spaces available'),
                                       content: Text('No office spaces have been registered for your company yet. Please try again later or contact your administrator.'),
                                       actions: <Widget>[
-                                        ElevatedButton(
+                                        TextButton(
                                           child: Text('Okay'),
                                           onPressed: (){
                                             Navigator.of(ctx).pop();

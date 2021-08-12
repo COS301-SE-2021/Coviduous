@@ -1,5 +1,5 @@
 /*
-  * File name: shift_controller.dart
+  * File name: floor_plan_controller.dart
   
   * Purpose: Holds the controller class for shifts, all service contracts for the shift subsystem are offered through this class.
   

@@ -56,6 +56,32 @@ class _LoginScreenState extends State<LoginScreen> {
     Output:
       - The user type retrieved from the database, either "Admin" or "User".
    */
+  Future getUserId() async {
+    String userId = "";
+
+    //Wait for transaction to complete.
+    await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
+      var query = FirebaseFirestore.instance.collection('Users')
+          .where('Email', isEqualTo: _email.text.trim()).limit(1);
+      await Future.wait([query.get().then((data) {
+        if (data.docs.length > 0) {
+          userId = data.docs[0].get('uid');
+        } else {
+          userId = "";
+        }
+      })]);
+    })]);
+
+    print("userID = " + userId);
+    return userId;
+  }
+
+  /*
+    Function name: getUserType
+    Purpose: Retrieves the user type from the database.
+    Output:
+      - The user type retrieved from the database, either "Admin" or "User".
+   */
   Future getUserType() async {
     String userType = "";
 
@@ -176,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Container(
                         color: Colors.white,
-                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
                         padding: EdgeInsets.all(16),
                         child: Form(
                           key: _formKey,
@@ -240,57 +266,68 @@ class _LoginScreenState extends State<LoginScreen> {
                                     setState(() {
                                       isLoading = true;
                                     });
-                                    AuthClass().signIn(email: _email.text.trim(),
-                                        password: _password.text.trim()).then((value) {
-                                      if (value == "welcome") {
 
-                                        globals.loggedInUserEmail = _email.text;
-                                        globals.loggedInUserId = userGlobals.getUserId(_email.text);
-                                        print(globals.loggedInUserId);
+                                    FormState form = _formKey.currentState;
+                                    if (form.validate()) {
+                                      AuthClass().signIn(email: _email.text.trim(),
+                                          password: _password.text.trim()).then((value) {
+                                        if (value == "welcome") {
 
-                                        //First get company ID
-                                        getCompanyId().then((companyID) {
-                                          globals.loggedInCompanyId = companyID;
+                                          globals.loggedInUserEmail = _email.text;
 
-                                          //Then get user type
-                                          getUserType().then((userType) {
-                                            if (userType == 'Admin') {
-                                              globals.loggedInUserType = 'Admin';
-                                              Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                            } else if (userType == 'User') {
-                                              globals.loggedInUserType = 'User';
-                                              Navigator.pushReplacementNamed(context, UserHomePage.routeName);
-                                            } else {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (ctx) => AlertDialog(
-                                                    title: Text('Error'),
-                                                    content: Text('Encountered error retrieving user type, please try again.'),
-                                                    actions: <Widget>[
-                                                      ElevatedButton(
-                                                        child: Text('Okay'),
-                                                        onPressed: (){
-                                                          Navigator.of(ctx).pop();
-                                                        },
+                                          //First get company ID
+                                          getCompanyId().then((companyID) {
+                                            globals.loggedInCompanyId = companyID;
+
+                                            //Then get UUID
+                                            getUserId().then((userID) {
+                                              globals.loggedInUserId = userID;
+
+                                              //Then get user type
+                                              getUserType().then((userType) {
+                                                if (userType == 'Admin') {
+                                                  globals.loggedInUserType = 'Admin';
+                                                  Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                                } else if (userType == 'User') {
+                                                  globals.loggedInUserType = 'User';
+                                                  Navigator.pushReplacementNamed(context, UserHomePage.routeName);
+                                                } else {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (ctx) => AlertDialog(
+                                                        title: Text('Error'),
+                                                        content: Text('Encountered error retrieving user type, please try again.'),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: Text('Okay'),
+                                                            onPressed: (){
+                                                              Navigator.of(ctx).pop();
+                                                            },
+                                                          )
+                                                        ],
                                                       )
-                                                    ],
-                                                  )
-                                              );
-                                            }
-                                            setState(() {
-                                              isLoading = false;
+                                                  );
+                                                }
+                                                setState(() {
+                                                  isLoading = false;
+                                                });
+                                              });
                                             });
                                           });
-                                        });
-                                      }
-                                      else {
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text(value)));
-                                      }
-                                    });
+                                        }
+                                        else {
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text(value)));
+                                        }
+                                      });
+                                    } else {
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                    }
                                   },
                                   style: ElevatedButton.styleFrom (
                                     shape: RoundedRectangleBorder(

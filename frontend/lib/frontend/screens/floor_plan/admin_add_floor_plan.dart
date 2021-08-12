@@ -131,7 +131,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                         content: Text(
                                             'Floor plans must have at least one floor.'),
                                         actions: <Widget>[
-                                          ElevatedButton(
+                                          TextButton(
                                             child: Text('Okay'),
                                             onPressed: () {
                                               Navigator.of(ctx).pop();

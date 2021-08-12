@@ -209,7 +209,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                                 title: Text('Not enough employees assigned'),
                                 content: Text('A notification must have at least one employee assigned to it.'),
                                 actions: <Widget>[
-                                  ElevatedButton(
+                                  TextButton(
                                     child: Text('Okay'),
                                     onPressed: (){
                                       Navigator.of(ctx).pop();
@@ -224,13 +224,13 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                                 title: Text('Warning'),
                                 content: Text('Are you sure you are done creating this notification?'),
                                 actions: <Widget>[
-                                  ElevatedButton(
+                                  TextButton(
                                     child: Text('Yes'),
                                     onPressed: (){
                                       sendNotifications();
                                     },
                                   ),
-                                  ElevatedButton(
+                                  TextButton(
                                     child: Text('No'),
                                     onPressed: (){
                                       Navigator.of(ctx).pop();
