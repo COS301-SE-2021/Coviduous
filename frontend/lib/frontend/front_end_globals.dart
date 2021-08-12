@@ -44,15 +44,20 @@ bool getIfOnPC() {
   return getIfOnPC;
 }
 
-//Adjusts scaling of containers based on platform
+//Adjusts scaling of container based on platform
 double getWidgetScaling() {
-  if (kIsWeb) { //If web browser
-    String platform = getOSWeb();
-    if (platform == "Android" || platform == "iOS") //Check if mobile browser
-     return 0.7;
-    else //Else, PC browser
-     return 1;
-  } else { //Else, mobile app
+  if (getIfOnPC()) { //If PC
+    return 1;
+  } else { //Else, mobile app or mobile browser
+    return 0.7;
+  }
+}
+
+//Adjusts scaling of container width based on platform
+double getWidgetWidthScaling() {
+  if (getIfOnPC()) { //If PC
+    return 1.5;
+  } else { //Else, mobile app or mobile browser
     return 0.7;
   }
 }
@@ -89,6 +94,8 @@ Color focusColor = theme.focusColor;
 
 //Needed to change the color of a TextField when it's selected.
 MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;
+
+TextTheme textTheme = theme.textTheme;
 
 //======
 //Fonts
