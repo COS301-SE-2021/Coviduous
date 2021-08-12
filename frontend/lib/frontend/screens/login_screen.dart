@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Container(
                         color: Colors.white,
-                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
                         padding: EdgeInsets.all(16),
                         child: Form(
                           key: _formKey,

@@ -53,7 +53,7 @@ class _OfficeState extends State<Office> {
           body: Center(
               child: Container (
                   height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
                   padding: EdgeInsets.all(16),
                   child: Column (
                       mainAxisAlignment: MainAxisAlignment.start,

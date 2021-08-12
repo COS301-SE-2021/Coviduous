@@ -160,21 +160,7 @@ class MyApp extends StatelessWidget{
         ),
         primaryColor: globals.primaryColor, //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
-        primaryTextTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.black),
-          bodyText2: TextStyle(color: Colors.black),
-          button: TextStyle(color: Colors.black),
-          caption: TextStyle(color: Colors.black),
-          headline1: TextStyle(color: Colors.black),
-          headline2: TextStyle(color: Colors.black),
-          headline3: TextStyle(color: Colors.black),
-          headline4: TextStyle(color: Colors.black),
-          headline5: TextStyle(color: Colors.black),
-          headline6: TextStyle(color: Colors.white),
-          overline: TextStyle(color: Colors.black),
-          subtitle1: TextStyle(color: Colors.black),
-          subtitle2: TextStyle(color: Colors.black),
-        ),
+        primaryTextTheme: globals.textTheme,
         scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
         snackBarTheme: SnackBarThemeData(
           actionTextColor: Colors.black,
@@ -182,21 +168,7 @@ class MyApp extends StatelessWidget{
           contentTextStyle: TextStyle(color: Colors.black),
           disabledActionTextColor: Colors.black,
         ),
-        textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.black),
-          bodyText2: TextStyle(color: Colors.black),
-          button: TextStyle(color: Colors.black),
-          caption: TextStyle(color: Colors.black),
-          headline1: TextStyle(color: Colors.black),
-          headline2: TextStyle(color: Colors.black),
-          headline3: TextStyle(color: Colors.black),
-          headline4: TextStyle(color: Colors.black),
-          headline5: TextStyle(color: Colors.black),
-          headline6: TextStyle(color: Colors.white),
-          overline: TextStyle(color: Colors.black),
-          subtitle1: TextStyle(color: Colors.black),
-          subtitle2: TextStyle(color: Colors.black),
-        ),
+        textTheme: globals.textTheme,
       ),
       home: Home(),
       routes: {

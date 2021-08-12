@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'health/visitor_home_health.dart';
 
+import 'package:frontend/frontend/front_end_globals.dart' as globals;
+
 class HomePage extends StatefulWidget {
   static const routeName = "/home";
   @override
@@ -49,42 +51,49 @@ class _HomePageState extends State<HomePage>{
                         height: MediaQuery.of(context).size.height/48,
                         width: MediaQuery.of(context).size.width,
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height/20,
-                        width: MediaQuery.of(context).size.width/1.5,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                      Container(
+                        width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/20,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  child:(
+                                      Text('Company member')
+                                  ),
+                                  onPressed:() {
+                                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                                  }
                               ),
                             ),
-                            child:(
-                                Text('Company member')
+                            SizedBox (
+                              height: MediaQuery.of(context).size.height/48,
+                              width: MediaQuery.of(context).size.width,
                             ),
-                            onPressed:() {
-                              Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                            }
-                        ),
-                      ),
-                      SizedBox (
-                        height: MediaQuery.of(context).size.height/48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height/20,
-                        width: MediaQuery.of(context).size.width/1.5,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/20,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  child:(
+                                      Text('Visitor')
+                                  ),
+                                  onPressed:() {
+                                    Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                                  }
                               ),
                             ),
-                            child:(
-                                Text('Visitor')
-                            ),
-                            onPressed:() {
-                              Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
-                            }
+                          ],
                         ),
                       ),
                     ]
