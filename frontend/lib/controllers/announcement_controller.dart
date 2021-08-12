@@ -41,6 +41,7 @@ String server = 'http://localhost:5001/coviduous-api/us-central1/app/api/'; //se
       "announcementId": announcementId,
       "type": type,
       "message": message,
+      "timestamp": timestamp,
       "adminId": adminId,
       "companyId": companyId,
     });
