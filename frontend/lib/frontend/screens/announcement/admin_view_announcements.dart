@@ -3,11 +3,11 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/announcement/admin_make_announcement.dart';
-import 'package:frontend/frontend/screens/announcement/admin_delete_announcement.dart';
 import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminViewAnnouncements extends StatefulWidget {
@@ -18,6 +18,23 @@ class AdminViewAnnouncements extends StatefulWidget {
 }
 
 List<Announcement> announcements = globals.currentAnnouncements;
+bool deletedAnnouncement = false;
+
+Future deleteAnnouncement(String announcementId) async {
+  await Future.wait([
+    announcementController.deleteAnnouncement(announcementId)
+  ]).then((results) {
+    deletedAnnouncement = results.first;
+  });
+}
+
+Future getAnnouncements() async {
+  await Future.wait([
+    announcementController.getAnnouncements()
+  ]).then((lists) {
+    globals.currentAnnouncements = lists.first;
+  });
+}
 
 class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
   Future<bool> _onWillPop() async {
@@ -133,6 +150,36 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                         //child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       ),
+                      Container(
+                        height: 50,
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Text('Delete'),
+                                onPressed: () {
+                                  deleteAnnouncement(announcements[index].getAnnouncementId()).then((result){
+                                    if (deletedAnnouncement == true) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Announcement successfully deleted.")));
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Announcement deletion unsuccessful.")));
+                                    }
+                                  });
+                                  getAnnouncements().then((result) {
+                                    setState(() {});
+                                  });
+                                }),
+                          ],
+                        ),
+                      ),
                     ],
                   )
                 ]
@@ -171,22 +218,6 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                       child: Text('Create announcement'),
                       onPressed: (){
                         Navigator.of(context).pushReplacementNamed(MakeAnnouncement.routeName);
-                      },
-                    )
-                ),
-                Container (
-                    height: 50,
-                    width: 200,
-                    padding: EdgeInsets.all(5),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text('Delete announcement'),
-                      onPressed: (){
-                        Navigator.of(context).pushReplacementNamed(AdminDeleteAnnouncement.routeName);
                       },
                     )
                 ),

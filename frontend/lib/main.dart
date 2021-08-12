@@ -12,7 +12,6 @@ import 'package:frontend/frontend/screens/signup/admin_signup_screen.dart';
 import 'package:frontend/frontend/screens/signup/user_signup_screen.dart';
 
 //Announcement
-import 'package:frontend/frontend/screens/announcement/admin_delete_announcement.dart';
 import 'package:frontend/frontend/screens/announcement/admin_view_announcements.dart';
 import 'package:frontend/frontend/screens/announcement/admin_make_announcement.dart';
 import 'package:frontend/frontend/screens/announcement/user_view_announcements.dart';
@@ -175,7 +174,6 @@ class MyApp extends StatelessWidget{
         //Announcement
         MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
         AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
-        AdminDeleteAnnouncement.routeName: (ctx)=> AdminDeleteAnnouncement(),
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
 
         //Floor plan

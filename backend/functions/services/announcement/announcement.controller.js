@@ -42,7 +42,10 @@ exports.createAnnouncement = async (req, res) => {
 
 exports.deleteAnnouncement = async (req, res) => {
   try {
-    if (await database.deleteAnnouncement(req.body.announcementId) == true)
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
+    if (await database.deleteAnnouncement(reqJson.announcementId) == true)
     {
       return res.status(200).send({
         message: 'Announcement successfully deleted',
