@@ -1,13 +1,11 @@
 // Announcement controller
-
-library globals;
+library controllers;
 
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
-//import 'package:frontend/subsystems/user_subsystem/user.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
 
 /**
