@@ -20,8 +20,6 @@ class AdminViewAnnouncements extends StatefulWidget {
 List<Announcement> announcements = globals.currentAnnouncements;
 
 class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
-  String _adminId = globals.loggedInUserId;
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
     return (await true);
