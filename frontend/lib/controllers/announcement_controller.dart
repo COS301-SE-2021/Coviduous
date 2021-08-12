@@ -1,4 +1,4 @@
-// announcement controller
+// Announcement controller
 
 library globals;
 
@@ -8,12 +8,8 @@ import 'dart:convert';
 
 import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
 //import 'package:frontend/subsystems/user_subsystem/user.dart';
+import 'package:frontend/controllers/server_info.dart' as serverInfo;
 
-//Global variables used throughout the program
-//=============================================
-
-//Backend global variables
-//==========================
 /**
  * List<Announcement> announcementDatabaseTable acts like a database table that holds announcements, this is to mock out functionality for testing
  * numAnnouncements keeps track of number of announcements in the mock announcement database table
@@ -23,31 +19,35 @@ int numAnnouncements = 0;
 
 ////////////////// FUNCTIONS ////////////////////
 
-String server =
-    'http://localhost:5001/coviduous-api/us-central1/app/api/'; //server needs to be running on firebase
+String server = serverInfo.getServer(); //server needs to be running on firebase
 
 // announcementId and timestamp fields are generated in node backend
 Future<bool> createAnnouncement(String announcementId, String type,
     String message, String timestamp, String adminId, String companyId) async {
   String path = '/announcements';
   String url = server + path;
+  var request;
 
-  var request = http.Request('POST', Uri.parse(url));
-  request.body = json.encode({
-    "announcementId": announcementId,
-    "type": type,
-    "message": message,
-    "timestamp": timestamp,
-    "adminId": adminId,
-    "companyId": companyId,
-  });
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "announcementId": announcementId,
+      "type": type,
+      "message": message,
+      "timestamp": timestamp,
+      "adminId": adminId,
+      "companyId": companyId,
+    });
 
-  var response = await request.send();
+    var response = await request.send();
 
-  if (response.statusCode == 200) {
-    print(await response.stream.bytesToString());
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
 
-    return true;
+      return true;
+    }
+  } catch (error) {
+    print(error);
   }
 
   return false;
@@ -59,31 +59,36 @@ Future<bool> createAnnouncement(String announcementId, String type,
 Future<List<Announcement>> getAnnouncements() async {
   String path = '/announcements';
   String url = server + path;
+  var response;
 
-  var response = await http.get(Uri.parse(url));
-  // http.Response response = await http
-  //     .get(Uri.https(server, path));
+  try {
+    response = await http.get(Uri.parse(url));
 
-  if (response.statusCode == 200) {
-    //print(response.body);
+    if (response.statusCode == 200) {
+      //print(response.body);
 
-    var jsonString = response.body;
-    var jsonMap = jsonDecode(jsonString);
+      var jsonString = response.body;
+      var jsonMap = jsonDecode(jsonString);
 
-    //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
-    announcementDatabaseTable.clear();
-    numAnnouncements = 0;
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      announcementDatabaseTable.clear();
+      numAnnouncements = 0;
 
-    for (var data in jsonMap["data"]) {
-      //print(data["announcementId"]);
-      var announcementData = Announcement.fromJson(data);
-      announcementDatabaseTable.add(announcementData);
-      // print(
-      //     announcementDatabaseTable[numAnnouncements].announcementId);
-      numAnnouncements++;
+      for (var data in jsonMap["data"]) {
+        //print(data["announcementId"]);
+        var announcementData = Announcement.fromJson(data);
+        announcementDatabaseTable.add(announcementData);
+        // print(
+        //     announcementDatabaseTable[numAnnouncements].announcementId);
+        numAnnouncements++;
+      }
+
+      print("DB length: " + announcementDatabaseTable.length.toString());
+
+      return announcementDatabaseTable;
     }
-
-    return announcementDatabaseTable;
+  } catch (error) {
+    print(error);
   }
 
   return null;

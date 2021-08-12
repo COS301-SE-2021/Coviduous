@@ -60,4 +60,28 @@ class Announcement {
         "adminId": adminId,
         "companyId": companyId,
       };
+
+  String getAnnouncementId() {
+    return announcementId;
+  }
+
+  String getType() {
+    return type;
+  }
+
+  String getMessage() {
+    return message;
+  }
+
+  String getTimestamp() {
+    return timestamp;
+  }
+
+  String getAdminId() {
+    return adminId;
+  }
+
+  String getCompanyId() {
+    return companyId;
+  }
 }

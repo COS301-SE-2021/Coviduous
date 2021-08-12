@@ -1,15 +1,11 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/announcements_controller.dart';
-import 'package:frontend/requests/announcements_requests/create_announcement_request.dart';
-import 'package:frontend/responses/announcement_responses/create_announcement_response.dart';
 import 'package:frontend/frontend/screens/announcement/admin_view_announcements.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 import 'package:frontend/backend/backend_globals/user_globals.dart' as userGlobals;
 
@@ -23,14 +19,31 @@ class MakeAnnouncement extends StatefulWidget {
   MakeAnnouncementState createState() => MakeAnnouncementState();
 }
 
+bool createdAnnouncement = false;
+
+Future createAnnouncement(String type, String description, String adminId, String companyId) async {
+  await Future.wait([
+    announcementController.createAnnouncement("test ID", type, description, "test timestamp", adminId, companyId)
+  ]).then((results) {
+    createdAnnouncement = results.first;
+  });
+}
+
+Future getAnnouncements() async {
+  await Future.wait([
+    announcementController.getAnnouncements()
+  ]).then((lists) {
+    globals.currentAnnouncements = lists.first;
+  });
+}
+
 //class make announcement
 class MakeAnnouncementState extends State<MakeAnnouncement> {
   TextEditingController _topic = TextEditingController();
   TextEditingController _description = TextEditingController();
   String _adminId = globals.loggedInUserId;
-  String _companyId = userGlobals.getCompanyId(globals.loggedInUserId);
+  String _companyId = globals.loggedInCompanyId;
 
-  AnnouncementsController services = new AnnouncementsController();
   List<String> _announceType = ['General', 'Emergency'];
   List<DropdownMenuItem<String>> _dropdownMenuItems;
   String _selectedType;
@@ -61,7 +74,9 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
   }
 
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+    getAnnouncements().then((result) {
+      Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+    });
     return (await true);
   }
 
@@ -88,7 +103,9 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
             title: new Text("Make announcement"),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                getAnnouncements().then((result) {
+                  Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                });
               },
             ),
           ),
@@ -147,24 +164,15 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                       ),
                       child: Text("Post"),
                       onPressed: () {
-                        /*
-                        //get admin ID and company ID
-                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                          var query = FirebaseFirestore.instance.collection('Users')
-                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email).limit(1);
-                          query.get().then((data) {
-                            if (data.docs.length > 0) {
-                              _adminId = data.docs[0].get('uid');
-                              _companyId = data.docs[0].get('Company ID');
-                            }
-                          });
+                        createAnnouncement(_selectedType, _description.text, _adminId, _companyId).then((result){
+                          if (createdAnnouncement == true) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Announcement successfully created.")));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Announcement creation unsuccessful.")));
+                          }
                         });
-                         */
-
-                        CreateAnnouncementResponse response = services.createAnnouncementMock(CreateAnnouncementRequest(_selectedType, _description.text, _adminId, _companyId));
-                        print(response.getAnnouncementID() + " " + response.getResponse().toString());
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Announcement " + response.getAnnouncementID() + " successfully created.")));
                       },
                     )
                   ],

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/announcements_controller.dart';
-import 'package:frontend/requests/announcements_requests/viewAdmin_announcement_request.dart';
-import 'package:frontend/responses/announcement_responses/viewAdmin_announcement_response.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/announcement/admin_make_announcement.dart';
 import 'package:frontend/frontend/screens/announcement/admin_delete_announcement.dart';
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
+import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
@@ -19,6 +16,8 @@ class AdminViewAnnouncements extends StatefulWidget {
   @override
   _AdminViewAnnouncementsState createState() => _AdminViewAnnouncementsState();
 }
+
+List<Announcement> announcements = globals.currentAnnouncements;
 
 class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
   String _adminId = globals.loggedInUserId;
@@ -45,10 +44,12 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
     }
 
     Widget getList() {
-      AnnouncementsController services = new AnnouncementsController();
-      ViewAdminAnnouncementResponse response = services.viewAnnouncementsAdminMock(ViewAdminAnnouncementRequest(_adminId));
-      List<Announcement> announcements = response.announcementArrayList;
-      int numberOfAnnouncements = announcements.length;
+      int numberOfAnnouncements = 0;
+      if (announcements != null) {
+        numberOfAnnouncements = announcements.length;
+        print(numberOfAnnouncements);
+      }
+      print(numberOfAnnouncements);
 
       if (numberOfAnnouncements == 0) {
         return Column(
@@ -123,7 +124,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                       Container(
                         height: 50,
                         color: Colors.white,
-                        child: Text('Date: ' + announcements[index].getDate(), style: TextStyle(color: Colors.black)),
+                        child: Text('Date: ' + announcements[index].getTimestamp(), style: TextStyle(color: Colors.black)),
                         //child: Text('Date: test', style: TextStyle(color: Colors.black)),
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       ),

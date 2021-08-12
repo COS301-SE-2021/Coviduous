@@ -12,6 +12,7 @@ import 'package:frontend/frontend/screens/announcement/admin_view_announcements.
 import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 
+import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
@@ -20,6 +21,15 @@ class AdminHomePage extends StatefulWidget {
   @override
   _AdminHomePageState createState() => _AdminHomePageState();
 }
+
+Future getAnnouncements() async {
+  await Future.wait([
+    announcementController.getAnnouncements()
+  ]).then((lists) {
+    globals.currentAnnouncements = lists.first;
+  });
+}
+
 //class admin
 class _AdminHomePageState extends State<AdminHomePage> {
   //This function ensures that the app doesn't just close when you press a phone's physical back button
@@ -118,7 +128,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                        getAnnouncements().then((result) {
+                          Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                        });
                       }
                   ),
                   Divider(

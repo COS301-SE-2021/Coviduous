@@ -3,6 +3,7 @@ library globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
+import 'package:frontend/subsystems/announcement_subsystem/announcement2.dart';
 import 'package:universal_html/html.dart' as html;
 
 import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
@@ -130,6 +131,13 @@ bool testResultsExist = false;
 
 //Check if vaccine confirmation has been uploaded
 bool vaccineConfirmExists = false;
+
+//===============================
+//Used in announcement subsystem
+//===============================
+
+//Current list of announcements to show
+List<Announcement> currentAnnouncements = [];
 
 //===============================
 //Used in notifications subsystem
