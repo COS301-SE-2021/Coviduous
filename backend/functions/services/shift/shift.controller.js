@@ -2,6 +2,12 @@ const Shift = require("../../models/shift.model");
 const uuid = require("uuid");
 
 let db;
+/**
+ * This function creates a shift for the employee.
+ * This function stores the shift in the database.
+ * @returns status which will tell if the creation of the shift was successful/unsuccessful.
+ */
+
 exports.createShift = async (req,res) => {
 try{
   let shiftID = "SHI-" + uuid.v4();
@@ -24,6 +30,8 @@ try{
     return res.status(500).send(error);
   }
 };
+
+
 exports.deleteShift = async (req, res) => {
   try {
       if (await db.deleteShift(req.body.shiftID) == true)
