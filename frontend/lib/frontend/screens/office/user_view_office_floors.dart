@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
+//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/office/home_office.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_rooms.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
@@ -38,7 +38,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
+    //FloorPlanController services = new FloorPlanController();
     Widget getList() {
       int numOfFloors = floorGlobals.globalNumFloors;
 
@@ -84,8 +84,8 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(
-                            'Floor ' + services.getFloors()[index].getFloorNumber()),
+                        //child: Text('Floor ' + services.getFloors()[index].getFloorNumber()),
+                        child: Text('Placeholder'),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -94,10 +94,11 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Number of rooms: ' +
                                       services.getFloors()[index].getNumRooms().toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -109,9 +110,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentFloorNum = services
-                                            .getFloors()[index]
-                                            .getFloorNumber();
+                                        //globals.currentFloorNum = services.getFloors()[index].getFloorNumber();
                                         Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
                                       }),
                                 ],

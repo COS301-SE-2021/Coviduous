@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
-import 'package:frontend/requests/floor_plan_requests/create_floor_plan_request.dart';
-import 'package:frontend/responses/floor_plan_responses/create_floor_plan_response.dart';
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_view_floors.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class AddFloorPlan extends StatefulWidget {
   static const routeName = "/admin_add_floor_plan";
@@ -19,11 +16,32 @@ class AddFloorPlan extends StatefulWidget {
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
 
+bool createdFloorPlan = false;
+
+Future createFloorPlan(int numFloors) async {
+  await Future.wait([
+    floorPlanController.createFloorPlan("", numFloors, globals.loggedInUserId, globals.loggedInCompanyId)
+  ]).then((results) {
+    createdFloorPlan = results.first;
+  });
+}
+
+Future getFloors(String floorPlanNumber) async {
+  await Future.wait([
+    floorPlanController.getFloors()
+  ]).then((lists) {
+    globals.currentFloors = [];
+    for (int i = 0; i < globals.currentFloorPlan.getNumFloors(); i++) {
+      if (lists.first[i].getFloorPlanNumber() == floorPlanNumber) {
+        globals.currentFloors.add(lists.first[i]);
+      }
+    }
+  });
+}
+
 //add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
-
-  FloorPlanController service = new FloorPlanController();
 
   Widget _buildFloors() {
     return TextFormField(
@@ -115,31 +133,34 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                             }
                             _formKey.currentState.save();
 
-                            floorGlobals.globalFloors.clear();
-                            CreateFloorPlanResponse response = service
-                                .createFloorPlanMock(CreateFloorPlanRequest(
-                                    globals.loggedInUserId, globals.loggedInCompanyId, int.parse(_numFloor), 0));
-
-                            if (response.getResponse()) {
-                              Navigator.of(context).pushReplacementNamed(
-                                  AdminViewFloors.routeName);
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                        title: Text('Creation unsuccessful'),
-                                        content: Text(
-                                            'Floor plans must have at least one floor.'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: Text('Okay'),
-                                            onPressed: () {
-                                              Navigator.of(ctx).pop();
-                                            },
-                                          )
-                                        ],
-                                      ));
-                            }
+                            createFloorPlan(int.parse(_numFloor)).then((result){
+                              if (createdFloorPlan == true) {
+                                for (int i = 0; i < globals.currentFloorPlans.length; i++) {
+                                  if (globals.currentFloorPlans[i].adminId == globals.loggedInUserId) {
+                                    globals.currentFloorPlanNum = globals.currentFloorPlans[i].getFloorPlanNumber();
+                                    globals.currentFloorPlan = globals.currentFloorPlans[i];
+                                  }
+                                }
+                                Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Creation unsuccessful'),
+                                      content: Text(
+                                          'Floor plans must have at least one floor.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: () {
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                );
+                              }
+                            });
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 48,

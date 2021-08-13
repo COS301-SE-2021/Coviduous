@@ -3,14 +3,15 @@ library globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
 import 'package:universal_html/html.dart' as html;
 
-import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/floorplan.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
+import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
+import 'package:frontend/subsystems/floor_plan_subsystem/floor.dart';
+import 'package:frontend/subsystems/floor_plan_subsystem/floor_plan.dart';
+import 'package:frontend/subsystems/floor_plan_subsystem/room.dart';
 import 'package:frontend/subsystems/notification_subsystem/notification.dart';
 import 'package:frontend/subsystems/shift_subsystem/shift.dart';
+
 import 'package:frontend/frontend/theme.dart' as theme;
 
 //============================
@@ -156,17 +157,8 @@ List<Notification> currentUserNotifications = [];
 //Used in shift subsystem
 //=======================
 
-//Floor plans
-List<FloorPlan> floorPlans = [];
-
-//Floors
-List<Floor> floors = [];
-
-//Rooms
-List<Room> rooms = [];
-
 //Shifts
-List<Shift> shifts = [];
+List<Shift> currentShifts = [];
 
 //===========================
 //Used in multiple subsystems
@@ -175,14 +167,17 @@ List<Shift> shifts = [];
 //Current floor plan you're working with
 String currentFloorPlanNum = '';
 List<FloorPlan> currentFloorPlans = [];
+FloorPlan currentFloorPlan;
 
 //Current floor you're working with
 String currentFloorNum = '';
 List<Floor> currentFloors = [];
+Floor currentFloor;
 
 //Current room you're working with
 String currentRoomNum = '';
 List<Room> currentRooms = [];
+Room currentRoom;
 
 //Current shift you're working with
 String currentShiftNum = '';

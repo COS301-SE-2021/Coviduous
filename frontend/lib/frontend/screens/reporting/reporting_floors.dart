@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
+//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/reporting/reporting_floor_plan.dart';
 import 'package:frontend/frontend/screens/reporting/reporting_rooms.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
@@ -39,7 +39,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
+    //FloorPlanController services = new FloorPlanController();
     Widget getList() {
       int numOfFloors = floorGlobals.globalNumFloors;
 
@@ -81,8 +81,9 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text(
-                        'Floor ' + services.getFloors()[index].getFloorNumber()),
+                    /*child: Text(
+                        'Floor ' + services.getFloors()[index].getFloorNumber()),*/
+                    child: Text('Placeholder'),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -92,9 +93,10 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Number of rooms: ' + services.getFloors()[index].getNumRooms().toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
+                          child: Text('Placeholder'),
                         ),
                         Container(
                           height: 50,
@@ -105,7 +107,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    globals.currentFloorNum = services.getFloors()[index].getFloorNumber();
+                                    //globals.currentFloorNum = services.getFloors()[index].getFloorNumber();
                                     Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
                                   }),
                             ],

@@ -28,7 +28,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
   int numOfShifts = 0;
 
   Future getRooms() async {
-    await Future.wait([
+    /*await Future.wait([
       services.getRooms(GetRoomsRequest(globals.currentFloorNum))
     ]).then((responses) {
       response = responses.first;
@@ -53,17 +53,17 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                 )
         );
       }
-    });
+    });*/
   }
 
   Future getShifts(int index) async {
-    await Future.wait([
+    /*await Future.wait([
       services.getShifts(GetShiftsRequest())
     ]).then((responses) {
       response2 = responses.first;
-      globals.shifts = response2.getShifts();
+      globals.currentShifts = response2.getShifts();
       //numOfShifts = globals.shifts.elementAt(index).;
-    });
+    });*/
   }
 
   Future<bool> _onWillPop() async {
@@ -88,8 +88,9 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
     }
 
     Widget getList() {
-      List<Floor> floors = globals.floors;
-      int numOfFloors = globals.floors.length;
+      //List<Floor> floors = globals.floors;
+      //int numOfFloors = globals.floors.length;
+      int numOfFloors = 0;
 
       print(numOfFloors);
 
@@ -158,16 +159,18 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height / 24,
                             color: Theme.of(context).primaryColor,
-                            child: Text(
-                                'Floor ' + floors[index].getFloorNumber()),
+                            /*child: Text(
+                                'Floor ' + floors[index].getFloorNumber()),*/
+                            child: Text('Placeholder'),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text(
+                            /*child: Text(
                                 'Number of rooms: ' + floors[index].getNumRooms().toString(),
-                                style: TextStyle(color: Colors.black)),
+                                style: TextStyle(color: Colors.black)),*/
+                            child: Text('Placeholder'),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
@@ -179,7 +182,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                                 ElevatedButton(
                                     child: Text('View'),
                                     onPressed: () {
-                                      globals.currentFloorNum = floors[index].getFloorNumber();
+                                      //globals.currentFloorNum = floors[index].getFloorNumber();
                                       getRooms();
                                     }),
                               ],

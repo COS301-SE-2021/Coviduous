@@ -23,7 +23,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
   GetRoomsResponse response;
 
   Future getRooms() async {
-    await Future.wait([
+    /*await Future.wait([
       services.getRooms(GetRoomsRequest(globals.currentFloorNum))
     ]).then((responses) {
       response = responses.first;
@@ -48,7 +48,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                 )
         );
       }
-    });
+    });*/
   }
 
   Future<bool> _onWillPop() async {
@@ -73,8 +73,9 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
     }
 
     Widget getList() {
-      List<Floor> floors = globals.floors;
-      int numOfFloors = globals.floors.length;
+      //List<Floor> floors = globals.floors;
+      //int numOfFloors = globals.floors.length;
+      int numOfFloors = 0;
 
       print(numOfFloors);
 
@@ -118,7 +119,8 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Floor ' + floors[index].getFloorNumber()),
+                        //child: Text('Floor ' + floors[index].getFloorNumber()),
+                        child: Text('Placeholder'),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -127,9 +129,10 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Number of rooms: ' + floors[index].getNumRooms().toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -141,7 +144,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentFloorNum = floors[index].getFloorNumber();
+                                        //globals.currentFloorNum = floors[index].getFloorNumber();
                                         getRooms();
                                       }),
                                 ],

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_edit_room_add.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_view_floors.dart';
-import 'package:frontend/requests/floor_plan_requests/add_room_request.dart';
-import 'package:frontend/requests/floor_plan_requests/delete_room_request.dart';
-import 'package:frontend/responses/floor_plan_responses/add_room_response.dart';
-import 'package:frontend/responses/floor_plan_responses/delete_room_response.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
+import 'package:frontend/subsystems/floor_plan_subsystem/room.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminViewRooms extends StatefulWidget {
@@ -21,9 +17,47 @@ class AdminViewRooms extends StatefulWidget {
   _AdminViewRoomsState createState() => _AdminViewRoomsState();
 }
 
+List<Room> rooms = globals.currentRooms;
+bool createdRoom = false;
+bool deletedRoom = false;
+
+Future getFloors(String floorPlanNumber) async {
+  await Future.wait([
+    floorPlanController.getFloors()
+  ]).then((lists) {
+    globals.currentFloors = lists.first.where((floor) => floor.getFloorPlanNumber() == floorPlanNumber);
+  });
+}
+
+Future getRooms(String floorNumber) async {
+  await Future.wait([
+    floorPlanController.getRooms()
+  ]).then((lists) {
+    globals.currentRooms = lists.first.where((room) => room.getFloorNumber() == floorNumber);
+  });
+}
+
+Future addRoom() async {
+  await Future.wait([
+    floorPlanController.createRoom(globals.currentFloor.getNumRooms(), globals.currentFloorNum, "", 0, 0, 0, 0, 0, 0, 0, 0)
+  ]).then((results) {
+    createdRoom = results.first;
+  });
+}
+
+Future deleteRoom(String roomNumber) async {
+  await Future.wait([
+    floorPlanController.deleteRoom(roomNumber)
+  ]).then((results) {
+    deletedRoom = results.first;
+  });
+}
+
 class _AdminViewRoomsState extends State<AdminViewRooms> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
+    getFloors(globals.currentFloorPlanNum).then((result){
+      Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
+    });
     return (await true);
   }
 
@@ -43,10 +77,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      List<Room> rooms =
-          services.getRoomsForFloorNum(globals.currentFloorNum);
       int numOfRooms = rooms.length;
 
       print(numOfRooms);
@@ -95,7 +126,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Room ' + rooms[index].getRoomNum()),
+                    child: Text('Room ' + rooms[index].getRoomNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -106,11 +137,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                           height: 50,
                           color: Colors.white,
                           child: Text(
-                              'Room dimensions (in meters^2): ' +
-                                  services
-                                      .getRoomDetails(rooms[index].getRoomNum())
-                                      .dimensions
-                                      .toString(),
+                              'Room dimensions (in meters^2): ' + rooms[index].getRoomArea().toString(),
                               style: TextStyle(color: Colors.black)),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
@@ -118,11 +145,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                           height: 50,
                           color: Colors.white,
                           child: Text(
-                              'Desk dimensions (in meters^2): ' +
-                                  services
-                                      .getRoomDetails(rooms[index].getRoomNum())
-                                      .deskDimentions
-                                      .toString(),
+                              'Desk dimensions (in meters^2): ' + rooms[index].getDeskArea().toString(),
                               style: TextStyle(color: Colors.black)),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
@@ -130,11 +153,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                           height: 50,
                           color: Colors.white,
                           child: Text(
-                              'Number of desks: ' +
-                                  services
-                                      .getRoomDetails(rooms[index].getRoomNum())
-                                      .numDesks
-                                      .toString(),
+                              'Number of desks: ' + rooms[index].getNumberOfDesks().toString(),
                               style: TextStyle(color: Colors.black)),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
@@ -142,23 +161,7 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                           height: 50,
                           color: Colors.white,
                           child: Text(
-                              'Maximum desk capacity (people per desk): ' +
-                                  services
-                                      .getRoomDetails(rooms[index].getRoomNum())
-                                      .deskMaxCapcity
-                                      .toString(),
-                              style: TextStyle(color: Colors.black)),
-                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                        ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text(
-                              'Occupied desk percentage: ' +
-                                  services
-                                      .getRoomDetails(rooms[index].getRoomNum())
-                                      .occupiedDesks
-                                      .toString(),
+                              'Occupied desk percentage: ' + rooms[index].getOccupiedDesks().toString(),
                               style: TextStyle(color: Colors.black)),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
@@ -171,40 +174,43 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    globals.currentRoomNum =
-                                        rooms[index].getRoomNum();
-                                    Navigator.of(context).pushReplacementNamed(
-                                        AdminEditRoomAdd.routeName);
+                                    globals.currentRoomNum = rooms[index].getRoomNumber();
+                                    globals.currentRoom = rooms[index];
+                                    Navigator.of(context).pushReplacementNamed(AdminEditRoomAdd.routeName);
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    //Temporary: remove room and reload page
+                                    //Remove a room and reload page
                                     if (numOfRooms > 1) {
                                       //Only allow deletion of rooms if there is more than one room
-                                      DeleteRoomResponse response2 = services
-                                          .deleteRoomMock(DeleteRoomRequest(
-                                              globals.currentFloorNum,
-                                              rooms[index].getRoomNum()));
-                                      print(response2.getResponse());
-
-                                      setState(() {});
+                                      deleteRoom(rooms[index].getRoomNumber()).then((result){
+                                        if (deletedRoom == true) {
+                                          getRooms(globals.currentFloorNum).then((result){
+                                            setState(() {});
+                                          });
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Room deletion unsuccessful.")));
+                                        }
+                                      });
                                     } else {
                                       showDialog(
                                           context: context,
                                           builder: (ctx) => AlertDialog(
-                                                title: Text('Error'),
-                                                content: Text(
-                                                    'Floors must have at least one room. To delete a whole floor, please delete it on the previous page.'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: Text('Okay'),
-                                                    onPressed: () {
-                                                      Navigator.of(ctx).pop();
-                                                    },
-                                                  )
-                                                ],
-                                              ));
+                                            title: Text('Error'),
+                                            content: Text(
+                                                'Floors must have at least one room. To delete a whole floor, please delete it on the previous page.'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text('Okay'),
+                                                onPressed: () {
+                                                  Navigator.of(ctx).pop();
+                                                },
+                                              )
+                                            ],
+                                          )
+                                      );
                                     }
                                   }),
                             ],
@@ -227,8 +233,9 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(AdminViewFloors.routeName);
+              getFloors(globals.currentFloorPlanNum).then((result){
+                Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
+              });
             },
           ),
         ),
@@ -246,25 +253,17 @@ class _AdminViewRoomsState extends State<AdminViewRooms> {
                 ),
                 child: Text('Add room'),
                 onPressed: () {
-                  //Add new floor and reload page
-                  AddRoomResponse response2 = services.addRoomMock(
-                      AddRoomRequest(
-                          globals.floorPlanId,
-                          globals.currentFloorNum,
-                          "",
-                          0,
-                          services.getPercentage(),
-                          0,
-                          0,
-                          0));
-                  print(response2.getResponse());
-                  /*
-                    floorGlobals.globalFloors[globals.currentFloorNum]
-                        .totalNumRooms++;
-                    floorGlobals.globalFloors[globals.currentFloorNum]
-                        .addRoom("", "", 0, 0, 0, 0, 0);
-                     */
-                  setState(() {});
+                  //Add new room and reload page
+                  addRoom().then((result){
+                    if (createdRoom == true) {
+                      getRooms(globals.currentFloorNum).then((result){
+                        setState(() {});
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Floor creation unsuccessful.")));
+                    }
+                  });
                 },
               ))
         ),

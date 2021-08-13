@@ -81,7 +81,7 @@ Future<bool> createFloor(String floorNumber, int numRooms, int currentCapacity,
   return false;
 }
 
-Future<bool> createRoom(String floorNumber, String roomNumber, double roomArea,
+Future<bool> createRoom(int currentNumRoomsInFloor, String floorNumber, String roomNumber, double roomArea,
     double capacityPercentage, int numberOfDesks, int occupiedDesks, double currentCapacity,
     double deskArea, double capacityOfPeopleForSixFtGrid, double capacityOfPeopleForSixFtCircle) async {
   String path = "/floorplan/room";
@@ -91,17 +91,20 @@ Future<bool> createRoom(String floorNumber, String roomNumber, double roomArea,
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
+      "currentNumberRoomInFloor": currentNumRoomsInFloor,
       "floorNumber": floorNumber,
       "roomNumber": roomNumber,
       "roomArea": roomArea,
       "capacityPercentage": capacityPercentage,
-      "numberOfDesks": numberOfDesks,
+      "numberDesks": numberOfDesks,
       "occupiedDesks": occupiedDesks,
       "currentCapacity": currentCapacity,
       "deskArea": deskArea,
       "capacityOfPeopleForSixFtGrid": capacityOfPeopleForSixFtGrid,
       "capacityOfPeopleForSixFtCircle": capacityOfPeopleForSixFtCircle,
     });
+
+    print(request.body);
 
     var response = await request.send();
 
@@ -124,6 +127,8 @@ Future<List<FloorPlan>> getFloorPlans() async {
 
   try {
     response = await http.get(Uri.parse(url));
+
+    print(Uri.parse(url));
 
     if (response.statusCode == 200) {
       //print(response.body);
@@ -230,7 +235,7 @@ Future<bool> updateRoom(String floorNumber, String roomNumber, double roomArea,
       "roomNumber": roomNumber,
       "roomArea": roomArea,
       "capacityPercentage": capacityPercentage,
-      "numberOfDesks": numberOfDesks,
+      "numberDesks": numberOfDesks,
       "occupiedDesks": occupiedDesks,
       "currentCapacity": currentCapacity,
       "deskArea": deskArea,
@@ -333,19 +338,10 @@ Future<bool> deleteRoom(String roomNumber) async {
     for (int i = 0; i < roomDatabaseTable.length; i++) {
       if (roomDatabaseTable[i].roomNumber == roomNumber) {
         roomDatabaseTable.removeAt(i);
-        numRooms--;
       }
     }
 
     return true;
-  }
-
-  //Double check to make sure it isn't still being stored internally
-  for (int i = 0; i < numRooms; i++) {
-    if (roomDatabaseTable[i].roomNumber == roomNumber) {
-      roomDatabaseTable.removeAt(i);
-      numRooms--;
-    }
   }
 
   return false;

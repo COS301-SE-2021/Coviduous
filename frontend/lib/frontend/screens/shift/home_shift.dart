@@ -24,6 +24,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
   GetFloorPlansResponse response;
 
   Future getFloorPlansAdd() async {
+    /*
     await Future.wait([
       services.getFloorPlans(GetFloorPlansRequest(globals.loggedInCompanyId))
     ]).then((responses) {
@@ -49,15 +50,17 @@ class _ShiftScreenState extends State<ShiftScreen> {
         );
       }
     });
+    */
   }
 
   Future getFloorPlansView() async {
+    /*
     await Future.wait([
       services.getFloorPlans(GetFloorPlansRequest(globals.loggedInCompanyId))
     ]).then((responses) {
       response = responses.first;
       if (response.getNumFloorPlan() != 0) { //Only allow shifts to be created if floor plans exist
-        globals.floorPlans = response.getFloorPlans();
+        //globals.floorPlans = response.getFloorPlans();
         Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
       } else {
         showDialog(
@@ -77,6 +80,7 @@ class _ShiftScreenState extends State<ShiftScreen> {
         );
       }
     });
+    */
   }
 
   Future<bool> _onWillPop() async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
+//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_desks.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_rooms.dart';
 import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
@@ -39,9 +39,9 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
+    //FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNum);
+      //List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNum);
       DateTime today = new DateTime.now();
       //List<DateTime> timeSlots;
       int numOfTimeSlots = 1;
@@ -106,22 +106,24 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Maximum capacity of room: ' +
                                       (services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity *
                                           services.getRoomDetails(rooms[index].getRoomNum()).numDesks).toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Number of open desks: ' +
                                       ((services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity *
                                       services.getRoomDetails(rooms[index].getRoomNum()).numDesks) -
                                       services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks).toInt().toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -133,7 +135,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentRoomNum = rooms[index].getRoomNum();
+                                        //globals.currentRoomNum = rooms[index].getRoomNum();
                                         Navigator.of(context).pushReplacementNamed(UserViewOfficeDesks.routeName);
                                       }),
                                 ],
@@ -154,7 +156,8 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: AppBar(
-            title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
+            //title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
+            title: Text('Placeholder'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);

@@ -11,14 +11,18 @@ exports.createFloorPlan = async (req, res) => {
   try {
   let floorplanNumber = "FLP-" + uuid.v4();
   // let timestamp = new Date().toISOString();
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+    
   let floorplanData = {
     floorplanNumber: floorplanNumber,
-    numFloors: req.body.numFloors,
-    adminId: req.body.adminId,
-    companyId: req.body.companyId
+    numFloors: reqJson.numFloors,
+    adminId: reqJson.adminId,
+    companyId: reqJson.companyId
   }
   await database.createFloorPlan(floorplanNumber,floorplanData);
-  for (let index = 0; index < req.body.numFloors; index++) {
+  for (let index = 0; index < reqJson.numFloors; index++) {
   let floorNumber = "FLR-" + uuid.v4();
   let floorData = {
     floorNumber: floorNumber,
@@ -26,8 +30,8 @@ exports.createFloorPlan = async (req, res) => {
     currentCapacity: 0,
     maxCapacity: 0,
     floorplanNumber: floorplanNumber,
-    adminId: req.body.adminId,
-    companyId:req.body.companyId
+    adminId: reqJson.adminId,
+    companyId:reqJson.companyId
   }
   await database.createFloor(floorNumber,floorData);
   console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+floorplanNumber);
@@ -36,7 +40,7 @@ exports.createFloorPlan = async (req, res) => {
   console.log("Floorplan with floorplanNumber : "+floorplanNumber+" succesfully created");
   return res.status(200).send({
   message: 'floorplan successfully created',
-  data: req.body
+  data: reqJson
   });
   } catch (error) {
   console.log(error);
@@ -50,17 +54,21 @@ exports.createFloorPlan = async (req, res) => {
   exports.createFloor = async (req, res) => {
   try {
     let floorNumber = "FLR-" + uuid.v4();
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+    
     let floorData = {
       floorNumber: floorNumber,
       numRooms: 0,
       currentCapacity: 0,
       maxCapacity: 0,
-      floorplanNumber: req.body.floorplanNumber,
-      adminId: req.body.adminId,
-      companyId:req.body.companyId
+      floorplanNumber: reqJson.floorplanNumber,
+      adminId: reqJson.adminId,
+      companyId:reqJson.companyId
     }
     await database.createFloor(floorNumber,floorData);
-    console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+req.body.floorplanNumber);
+    console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+reqJson.floorplanNumber);
     
     return res.status(200).send({
       message: 'floor successfully created',
@@ -74,13 +82,18 @@ exports.createFloorPlan = async (req, res) => {
 };
 
 //creating a room / adding a room to a floor 
-// when creating a room , we need to initialize desks assosiated with that room as well
+// when creating a room , we need to initialize desks associated with that room as well
 exports.createRoom = async (req, res) => {
 try {
-  let randInt2 = Math.floor(1000 + Math.random() * 9000);
   let roomNumber = "RMN-" + uuid.v4();
-  let room =new Room(roomNumber,req.body.floorNumber,req.body.roomArea,req.body.deskArea,req.body.numberDesks,req.body.capacityPercentage);
+
+  let reqJson = JSON.parse(req.body);
+  console.log(reqJson);
+  
+  let room = new Room(reqJson.currentNumberRoomInFloor, roomNumber,reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,
+      reqJson.numberDesks,reqJson.capacityPercentage);
   let roomData = {
+    currentNumberRoomInFloor:room.currentNumberRoomInFloor,
     floorNumber:room.floorNumber,
     roomNumber:room.roomNumber,
     roomArea:room.roomArea, 
@@ -94,15 +107,15 @@ try {
   }
   
   await database.createRoom(roomNumber,roomData);
-  await database.addRoom(req.body.floorNumber,req.body.currentNumberRoomInFloor);
-  console.log("Room with roomNumber : "+roomNumber+" succesfully created under floor : "+req.body.floorNumber);
+  await database.addRoom(reqJson.floorNumber,reqJson.currentNumberRoomInFloor);
+  console.log("Room with roomNumber : "+roomNumber+" succesfully created under floor : "+reqJson.floorNumber);
   
-  for (let index = 0; index < req.body.numberDesks; index++) {
+  for (let index = 0; index < reqJson.numberDesks; index++) {
     let deskNumber = "DSK-" + uuid.v4();
     let deskData = {
       deskNumber: deskNumber,
       roomNumber: roomNumber,
-      deskArea: req.body.deskArea
+      deskArea: reqJson.deskArea
     }
     await database.createDesk(deskNumber,deskData);
     console.log("Desk with deskNumber : "+deskNumber+" succesfully created under room : "+roomNumber);
@@ -124,9 +137,12 @@ try {
 //NB the spelling of companyId and companyId is very important for this function we query companyId
 exports.viewFloorPlans = async (req, res) => {
 try {
-    let filteredList=[];
+    //let filteredList=[];
     let floorplans = await database.getFloorPlans();
-    floorplans.forEach(obj => {
+
+    
+    /*floorplans.forEach(obj => {
+      console.log(req.body.companyId);
       if(obj.companyId===req.body.companyId)
       {
         filteredList.push(obj);
@@ -134,15 +150,16 @@ try {
       else
       {
       }
-    });
+    });*/
+  console.log(floorplans);
     return res.status(200).send({
       message: 'Successfully retrieved floorplans based on your company',
-      data: filteredList
+      data: floorplans
     });
 } catch (error) {
     console.log(error);
     return res.status(500).send({
-      message: err.message || "Some error occurred while fetching floorplans."
+      message: error.message || "Some error occurred while fetching floorplans."
     });
 }
 };
@@ -150,10 +167,11 @@ try {
 //This function fetches all floors under a floorplan
 exports.viewFloors = async (req, res) => {
 try {
-    let filteredList=[];
+    //let filteredList=[];
     let floors = await database.getFloors();
-    floors.forEach(obj => {
-      if(obj.floorplanNumber===req.body.floorplanNumber)
+    
+    /*floors.forEach(obj => {
+      if(obj.floorplanNumber===reqJson.floorplanNumber)
       {
         filteredList.push(obj);
       }
@@ -161,10 +179,10 @@ try {
       {
 
       }
-    });
+    });*/
     return res.status(200).send({
       message: 'Successfully retrieved floors based on your floorplan',
-      data: filteredList
+      data: floors
     });
 } catch (error) {
     console.log(error);
@@ -178,10 +196,11 @@ try {
 exports.viewRooms = async (req, res) => {
 try {
   
-    let filteredList=[];
+    //let filteredList=[];
     let rooms = await database.getRooms();
-    rooms.forEach(obj => {
-      if(obj.floorNumber===req.body.floorNumber)
+    
+    /*rooms.forEach(obj => {
+      if(obj.floorNumber===reqJson.floorNumber)
       {
         filteredList.push(obj);
       }
@@ -189,10 +208,10 @@ try {
       {
 
       }
-    });
+    });*/
     return res.status(200).send({
       message: 'Successfully retrieved rooms based on your floor number',
-      data: filteredList
+      data: rooms
     });
 } catch (error) {
     console.log(error);
@@ -210,8 +229,12 @@ try {
 
 // This function updates the contents of a room by recalculating its capacity and other attributes
 exports.updateRoom = async (req, res) => {
+
+  let reqJson = JSON.parse(req.body);
+  console.log(reqJson);
+  
 try {
-  let room =new Room(req.body.roomNumber,req.body.floorNumber,req.body.roomArea,req.body.deskArea,req.body.numberDesks,req.body.capacityPercentage);
+  let room =new Room(reqJson.roomNumber,reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,reqJson.numberDesks,reqJson.capacityPercentage);
   let roomData = {
     floorNumber:room.floorNumber,
     roomNumber:room.roomNumber,
@@ -228,7 +251,7 @@ try {
   
   return res.status(200).send({
     message: 'room successfully updated',
-    data: req.body
+    data: reqJson
   });
 } catch (error) {
   console.log(error);
@@ -242,8 +265,12 @@ try {
 exports.deleteRoom = async (req, res) => {
   try {
         let desks= await database.getDesks();
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
         desks.forEach(obj4 =>{
-        if(obj4.roomNumber===req.body.roomNumber)
+        if(obj4.roomNumber===reqJson.roomNumber)
         {
            database.deleteDesk(obj4.deskNumber);
         }
@@ -253,7 +280,7 @@ exports.deleteRoom = async (req, res) => {
         }
 
         });
-    await database.deleteRoom(req.body.roomNumber);
+    await database.deleteRoom(reqJson.roomNumber);
       return res.status(200).send({
         message: 'Room successfully deleted',
       });
@@ -268,8 +295,12 @@ exports.deleteFloor = async (req, res) => {
   try {
     let filteredList=[];
     let rooms = await database.getRooms();
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
     rooms.forEach(obj => {
-      if(obj.floorNumber===req.body.floorNumber)
+      if(obj.floorNumber===reqJson.floorNumber)
       {
         filteredList.push(obj);
       }
@@ -297,7 +328,7 @@ exports.deleteFloor = async (req, res) => {
     database.deleteRoom(obj.roomNumber);
     });
 
-    await database.deleteFloor(req.body.floorNumber);
+    await database.deleteFloor(reqJson.floorNumber);
       return res.status(200).send({
         message: 'Floor successfully deleted',
       });
@@ -313,8 +344,12 @@ exports.deleteFloorPlan = async (req, res) => {
   try {
     let filteredList=[];
     let floors = await database.getFloors();
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
     floors.forEach(obj => {
-      if(obj.floorplanNumber===req.body.floorplanNumber)
+      if(obj.floorplanNumber===reqJson.floorplanNumber)
       {
         filteredList.push(obj);
       }
@@ -357,7 +392,7 @@ exports.deleteFloorPlan = async (req, res) => {
     database.deleteFloor(obj.floorNumber);
     });
 
-    await database.deleteFloorPlan(req.body.floorplanNumber);
+    await database.deleteFloorPlan(reqJson.floorplanNumber);
       return res.status(200).send({
         message: 'Floor Plan successfully deleted',
       });

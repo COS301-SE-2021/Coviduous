@@ -22,10 +22,11 @@ class ViewShiftsRooms extends StatefulWidget {
 class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
   ShiftController services = new ShiftController();
   GetShiftsResponse response;
-  List<Room> rooms = globals.rooms;
-  int numOfRooms = globals.rooms.length;
+  //List<Room> rooms = globals.rooms;
+  //int numOfRooms = globals.rooms.length;
 
   Future<int> getNumShifts(int index) async {
+    /*
     await Future.wait([
       services.getShift(GetShiftRequest(rooms[index].roomNum))
     ]).then((responses) {
@@ -33,15 +34,17 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
       print(response.getShifts().length);
       return response.getShifts().length;
     });
+    */
   }
 
   Future getShifts(int index) async {
+    /*
     await Future.wait([
       services.getShift(GetShiftRequest(rooms[index].roomNum))
     ]).then((responses) {
       response = responses.first;
       if (response.getShifts().length != 0) { //Only allow shifts to be created if rooms exist
-        globals.shifts = response.getShifts();
+        globals.currentShifts = response.getShifts();
         Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
       } else {
         showDialog(
@@ -62,6 +65,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
         );
       }
     });
+    */
   }
 
   Future<bool> _onWillPop() async {
@@ -86,6 +90,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
     }
 
     Widget getList() {
+      int numOfRooms = 0;
       print(numOfRooms);
 
       if (numOfRooms == 0) {
@@ -128,8 +133,8 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(
-                            'Room ' + rooms[index].getRoomNum()),
+                        //child: Text('Room ' + rooms[index].getRoomNum()),
+                        child: Text('Placeholder'),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -138,28 +143,25 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
+                              /*
                               child: Text(
                                   'Number of desks: ' + rooms[index].desks.length.toString(),
                                   style: TextStyle(color: Colors.black)),
+                                  */
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
+                              /*
                               child: Text(
                                   'Occupied desk percentage: ' + rooms[index].getPercentage().toString(),
                                   style: TextStyle(color: Colors.black)),
+                                  */
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
-                            /*
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text(
-                                  'Number of shifts: ' + getNumShifts(index).toString(),
-                                  style: TextStyle(color: Colors.black)),
-                            ),
-                            */
                             Container(
                               height: 50,
                               color: Colors.white,
@@ -169,7 +171,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                                   ElevatedButton(
                                       child: Text('View shifts'),
                                       onPressed: () {
-                                        globals.currentRoomNum = rooms[index].getRoomNum();
+                                        //globals.currentRoomNum = rooms[index].getRoomNum();
                                         getShifts(index);
                                       }),
                                 ],

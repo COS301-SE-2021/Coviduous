@@ -3,13 +3,12 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_add_floor_plan.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_delete_floor_plan.dart';
+import 'package:frontend/frontend/screens/floor_plan/admin_modify_floor_plans.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class FloorPlanScreen extends StatefulWidget {
   static const routeName = "/floor_plan";
@@ -22,6 +21,14 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
     return (await true);
+  }
+
+  Future getFloorPlans() async {
+    await Future.wait([
+     floorPlanController.getFloorPlans()
+    ]).then((lists) {
+      globals.currentFloorPlans = lists.first;
+    });
   }
 
   @override
@@ -74,25 +81,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              if (floorGlobals.globalFloors.isEmpty) { //Only allow a new floor plan to be created if it does not exist already
-                                Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Floor plan already exists'),
-                                      content: Text('A floor plan already exists for your company. Please remove the old one before creating a new one.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                );
-                              }
+                              Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
                             }
                         ),
                         SizedBox (
@@ -114,65 +103,28 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              if (floorGlobals.globalFloors.isNotEmpty) { //Only allow a floor plan to be modified if it exists
-                                Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Floor plan does not exist'),
-                                      content: Text('A floor plan has not been added for your company.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                );
-                              }
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Delete floor plan')),
-                                  Icon(Icons.delete_forever_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
-                            ),
-                            onPressed: () {
-                              if (floorGlobals.globalFloors.isNotEmpty) { //Only allow a floor plan to be deleted if it exists
-                                Navigator.of(context).pushReplacementNamed(DeleteFloorPlan.routeName);
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('Floor plan does not exist'),
-                                      content: Text('A floor plan has not been added for your company.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                );
-                              }
+                              getFloorPlans().then((result){
+                                if (globals.currentFloorPlans != null && globals.currentFloorPlans.isNotEmpty) { //Only allow a floor plan to be modified if it exists
+                                  print(globals.currentFloorPlans.length);
+                                  Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text('Floor plans do not exist'),
+                                        content: Text('A floor plan has not been added for your company.'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text('Okay'),
+                                            onPressed: (){
+                                              Navigator.of(ctx).pop();
+                                            },
+                                          )
+                                        ],
+                                      )
+                                  );
+                                }
+                              });
                             }
                         ),
                       ]

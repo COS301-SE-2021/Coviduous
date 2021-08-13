@@ -167,13 +167,13 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                                     if (deletedAnnouncement == true) {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Announcement successfully deleted.")));
+                                      getAnnouncements().then((result) {
+                                        setState(() {});
+                                      });
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Announcement deletion unsuccessful.")));
                                     }
-                                  });
-                                  getAnnouncements().then((result) {
-                                    setState(() {});
                                   });
                                 }),
                           ],

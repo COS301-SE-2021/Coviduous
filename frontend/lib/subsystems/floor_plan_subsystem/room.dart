@@ -5,18 +5,20 @@ Room roomFromJson(String str) => Room.fromJson(json.decode(str));
 String roomToJson(Room data) => json.encode(data.toJson());
 
 class Room {
+  num currentNumRoomsInFloor;
   String floorNumber;
   String roomNumber;
-  double roomArea;
-  double capacityPercentage;
-  int numberOfDesks;
-  int occupiedDesks;
-  double currentCapacity;
-  double deskArea;
-  double capacityOfPeopleForSixFtGrid;
-  double capacityOfPeopleForSixFtCircle;
+  num roomArea;
+  num capacityPercentage;
+  num numberOfDesks;
+  num occupiedDesks;
+  num currentCapacity;
+  num deskArea;
+  num capacityOfPeopleForSixFtGrid;
+  num capacityOfPeopleForSixFtCircle;
 
   Room({
+    this.currentNumRoomsInFloor,
     this.floorNumber,
     this.roomNumber,
     this.roomArea,
@@ -30,11 +32,12 @@ class Room {
   });
 
   factory Room.fromJson(Map<String, dynamic> json) => Room(
+    currentNumRoomsInFloor: json["currentNumberRoomInFloor"],
     floorNumber: json["floorNumber"],
     roomNumber: json["roomNumber"],
     roomArea: json["roomArea"],
     capacityPercentage: json["capacityPercentage"],
-    numberOfDesks: json["numberOfDesks"],
+    numberOfDesks: json["numberDesks"],
     occupiedDesks: json["occupiedDesks"],
     currentCapacity: json["currentCapacity"],
     deskArea: json["deskArea"],
@@ -43,17 +46,22 @@ class Room {
   );
 
   Map<String, dynamic> toJson() => {
+    "currentNumberRoomInFloor": currentNumRoomsInFloor,
     "floorNumber": floorNumber,
     "roomNumber": roomNumber,
     "roomArea": roomArea,
     "capacityPercentage": capacityPercentage,
-    "numberOfDesks": numberOfDesks,
+    "numberDesks": numberOfDesks,
     "occupiedDesks": occupiedDesks,
     "currentCapacity": currentCapacity,
     "deskArea": deskArea,
     "capacityOfPeopleForSixFtGrid": capacityOfPeopleForSixFtGrid,
     "capacityOfPeopleForSixFtCircle": capacityOfPeopleForSixFtCircle,
   };
+
+  num getCurrentNumRooms() {
+    return currentNumRoomsInFloor;
+  }
 
   String getFloorNumber() {
     return floorNumber;
@@ -63,35 +71,35 @@ class Room {
     return roomNumber;
   }
 
-  double getRoomArea() {
+  num getRoomArea() {
     return roomArea;
   }
 
-  double getCapacityPercentage() {
+  num getCapacityPercentage() {
     return capacityPercentage;
   }
 
-  int getNumberOfDesks() {
+  num getNumberOfDesks() {
     return numberOfDesks;
   }
 
-  int getOccupiedDesks() {
+  num getOccupiedDesks() {
     return occupiedDesks;
   }
 
-  double getCurrentCapacity() {
+  num getCurrentCapacity() {
     return currentCapacity;
   }
 
-  double getDeskArea() {
+  num getDeskArea() {
     return deskArea;
   }
 
-  double getCapacityForSixFtGrid() {
+  num getCapacityForSixFtGrid() {
     return capacityOfPeopleForSixFtGrid;
   }
 
-  double getCapacityForSixFtCircle() {
+  num getCapacityForSixFtCircle() {
     return capacityOfPeopleForSixFtCircle;
   }
 }

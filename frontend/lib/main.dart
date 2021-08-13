@@ -19,9 +19,9 @@ import 'package:frontend/frontend/screens/announcement/user_view_announcements.d
 //Floor plan
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_add_floor_plan.dart';
+import 'package:frontend/frontend/screens/floor_plan/admin_modify_floor_plans.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_rooms.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_delete_floor_plan.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_view_floors.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_edit_room_add.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_edit_room_modify.dart';
@@ -183,9 +183,9 @@ class MyApp extends StatelessWidget{
         AdminViewRooms.routeName: (ctx)=> AdminViewRooms(),
         AdminEditRoomAdd.routeName: (ctx)=> AdminEditRoomAdd(),
         AdminEditRoomModify.routeName: (ctx)=> AdminEditRoomModify(),
+        AdminModifyFloorPlans.routeName: (ctx)=> AdminModifyFloorPlans(),
         AdminModifyFloors.routeName: (ctx)=> AdminModifyFloors(),
         AdminModifyRooms.routeName: (ctx)=> AdminModifyRooms(),
-        DeleteFloorPlan.routeName: (ctx)=> DeleteFloorPlan(),
 
         //Health
         AdminPermissions.routeName: (ctx)=> AdminPermissions(),
