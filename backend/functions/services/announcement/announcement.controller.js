@@ -63,7 +63,7 @@ exports.createAnnouncement = async (req, res) => {
         });
     }
 
-    if(req.body == null) {
+    if(req == null || req.body == null) {
         return res.status(400).send({
             message: '400 Bad Request: Null request object',
         });
@@ -130,6 +130,18 @@ exports.createAnnouncement = async (req, res) => {
 };
 
 exports.deleteAnnouncement = async (req, res) => {
+    if (await this.verifyRequestToken() === false) {
+        return res.status(403).send({
+            message: '403 Forbidden: Access denied',
+        });
+    }
+
+    if(req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
   try {
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
