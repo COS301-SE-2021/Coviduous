@@ -74,7 +74,7 @@ exports.verifyCredentials = async (adminId, companyId) => {
  *  adminId: string
  *  companyId: string
  * @param res The response object is sent back to the requester, containing the status code and a message.
- * @returns res An HTTP status indicating whether the request was successful or not.
+ * @returns res - An HTTP status indicating whether the request was successful or not.
  */
 exports.createAnnouncement = async (req, res) => {
     let token = '';
@@ -92,7 +92,12 @@ exports.createAnnouncement = async (req, res) => {
     }
 
     //Look into express.js middleware so that these lines are not necessary
-    let reqJson = JSON.parse(req.body);
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
     console.log(reqJson);
     //////////////////////////////////////////////////////////////////////
 
@@ -102,19 +107,19 @@ exports.createAnnouncement = async (req, res) => {
         fieldErrors.push({field: 'type', message: 'Type may not be empty'});
     }
 
-    if (reqJson.type !== 'GENERAL' || reqJson.type !== 'EMERGENCY') {
+    if (reqJson.type !== 'GENERAL' && reqJson.type !== 'EMERGENCY') {
         fieldErrors.push({field: 'type', message: 'Type must be either GENERAL or EMERGENCY'});
     }
 
-    if (reqJson.message == null || reqJson.message === "") {
+    if (reqJson.message == null || reqJson.message === '') {
         fieldErrors.push({field: 'message', message: 'Message may not be empty'})
     }
 
-    if (reqJson.adminId == null || reqJson.adminId === "") {
+    if (reqJson.adminId == null || reqJson.adminId === '') {
         fieldErrors.push({field: 'adminId', message: 'Admin ID may not be empty'})
     }
 
-    if (reqJson.companyId == null || reqJson.companyId === "") {
+    if (reqJson.companyId == null || reqJson.companyId === '') {
         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
     }
 
@@ -152,6 +157,7 @@ exports.createAnnouncement = async (req, res) => {
 
     return res.status(200).send({
        message: 'Announcement successfully created',
+       announcementId: announcementId,
     });
 };
 
@@ -161,7 +167,7 @@ exports.createAnnouncement = async (req, res) => {
  * The request object should contain the following:
  *  announcementId: string
  * @param res The response object is sent back to the requester, containing the status code and a message.
- * @returns res An HTTP status indicating whether the request was successful or not.
+ * @returns res - HTTP status indicating whether the request was successful or not.
  */
 exports.deleteAnnouncement = async (req, res) => {
     let token = '';
@@ -179,7 +185,12 @@ exports.deleteAnnouncement = async (req, res) => {
     }
 
     //Look into express.js middleware so that these lines are not necessary
-    let reqJson = JSON.parse(req.body);
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
     console.log(reqJson);
     //////////////////////////////////////////////////////////////////////
 
@@ -210,9 +221,9 @@ exports.deleteAnnouncement = async (req, res) => {
 
 /**
  * This function retrieves all announcements via an HTTP GET request.
- * @param req The request object must exist. It will be denied if not.
+ * @param req The request object may be null.
  * @param res The response object is sent back to the requester, containing the status code and retrieved data.
- * @returns res An HTTP status indicating whether the request was successful or not, and data, where applicable.
+ * @returns res - An HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
 exports.viewAnnouncements = async (req, res) => {
     let token = '';
@@ -220,13 +231,6 @@ exports.viewAnnouncements = async (req, res) => {
     if (await this.verifyRequestToken(token) === false) {
         return res.status(403).send({
             message: '403 Forbidden: Access denied',
-            data: null
-        });
-    }
-
-    if (req == null) {
-        return res.status(400).send({
-            message: '400 Bad Request: Null request object',
             data: null
         });
     }
