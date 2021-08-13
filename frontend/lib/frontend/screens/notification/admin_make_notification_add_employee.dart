@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/notification_controller.dart';
 import 'package:frontend/frontend/screens/notification/admin_make_notification_assign_employees.dart';
+import 'package:frontend/subsystems/notification_subsystem/temp_notification.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
@@ -15,10 +15,11 @@ class MakeNotificationAddEmployee extends StatefulWidget {
   _MakeNotificationAddEmployeeState createState() => _MakeNotificationAddEmployeeState();
 }
 
+List<TempNotification> tempUsers = globals.tempUsers;
+
 class _MakeNotificationAddEmployeeState extends State<MakeNotificationAddEmployee> {
   String _employeeEmail = "";
-
-  NotificationController service = new NotificationController();
+  String _employeeId = "temp";
 
   Widget _buildEmail() {
     return TextFormField(
@@ -113,7 +114,7 @@ class _MakeNotificationAddEmployeeState extends State<MakeNotificationAddEmploye
                             _formKey.currentState.save();
                             print(_employeeEmail);
 
-                            service.addToTemp("emp ID goes here", _employeeEmail, globals.currentSubjectField, globals.currentDescriptionField, globals.loggedInUserId, globals.loggedInCompanyId);
+                            tempUsers.add(new TempNotification(_employeeId, _employeeEmail));
 
                             Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
                           }),

@@ -11,9 +11,12 @@ exports.createNotification = async (req, res) => {
     try {
         let notificationId = "NTFN-" + uuid.v4();
         let timestamp = new Date().toISOString();
+
+        let reqJson = JSON.parse(req.body);
+        console.log(reqJson);
     
-        let notificationObj = new Notification(notificationId, req.body.userId, req.body.userEmail,
-            req.body.subject, req.body.message, timestamp, req.body.adminId, req.body.companyId);
+        let notificationObj = new Notification(notificationId, reqJson.userId, reqJson.userEmail,
+            reqJson.subject, reqJson.message, timestamp, reqJson.adminId, reqJson.companyId);
     
         let notificationData = {
           notificationId: notificationObj.notificationId,
@@ -70,7 +73,10 @@ exports.viewNotifications = async (req, res) => {
 
 exports.viewNotificationsUserEmail = async (req, res) => {
     try {
-        let notifications = await database.viewNotificationsUserEmail(req.body.userEmail);
+        let reqJson = JSON.parse(req.body);
+        console.log(reqJson);
+
+        let notifications = await database.viewNotificationsUserEmail(reqJson.userEmail);
         return res.status(200).send({
             message: 'Successfully retrieved notifications',
             data: notifications

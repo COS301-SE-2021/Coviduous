@@ -11,6 +11,7 @@ import 'package:frontend/subsystems/floor_plan_subsystem/floor_plan.dart';
 import 'package:frontend/subsystems/floor_plan_subsystem/room.dart';
 import 'package:frontend/subsystems/notification_subsystem/notification.dart';
 import 'package:frontend/subsystems/shift_subsystem/shift.dart';
+import 'package:frontend/subsystems/notification_subsystem/temp_notification.dart';
 
 import 'package:frontend/frontend/theme.dart' as theme;
 
@@ -151,7 +152,10 @@ String currentSubjectField = '';
 String currentDescriptionField = '';
 
 //Global list of notifications
-List<Notification> currentUserNotifications = [];
+List<Notification> currentNotifications = [];
+
+//List of users to send notifications to
+List<TempNotification> tempUsers = [];
 
 //=======================
 //Used in shift subsystem

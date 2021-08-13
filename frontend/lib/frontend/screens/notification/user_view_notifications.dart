@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/notification_controller.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
@@ -17,9 +16,6 @@ class UserViewNotifications extends StatefulWidget {
 }
 
 class _UserViewNotificationsState extends State<UserViewNotifications> {
-  NotificationController services = new NotificationController();
-  List<Notification> notifications = globals.currentUserNotifications;
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
     return (await true);
@@ -43,8 +39,10 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
 
     Widget getList() {
       int numberOfNotifications = 0;
-      if (notifications != null)
-        numberOfNotifications = notifications.length;
+      if (globals.currentNotifications != null) {
+        numberOfNotifications = globals.currentNotifications.length;
+      }
+      print(numberOfNotifications);
 
       if (numberOfNotifications == 0) {
         return Column(
@@ -88,7 +86,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
             ]
         );
       } else {
-        List<Notification> reverseNotifications = notifications.reversed.toList(); //To display the newest notifications first
+        List<Notification> reverseNotifications = globals.currentNotifications.reversed.toList(); //To display the newest notifications first
 
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
@@ -104,7 +102,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Notification ' + reverseNotifications[index].notificationId, style: TextStyle(color: Colors.white)),
+                        child: Text('Notification ' + (index+1).toString()),
                       ),
                       ListView(
                         shrinkWrap: true,
@@ -113,7 +111,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text('From: ' + reverseNotifications[index].userId, style: TextStyle(color: Colors.black)),
+                            child: Text('From: ' + reverseNotifications[index].adminId, style: TextStyle(color: Colors.black)),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
@@ -148,7 +146,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                                     ),
                                     child: Text('Dismiss'),
                                     onPressed: () {
-                                      notifications.removeAt(numberOfNotifications-index-1);
+                                      globals.currentNotifications.removeAt(numberOfNotifications-index-1);
                                       setState(() {});
                                     }),
                               ],
@@ -190,7 +188,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                   ),
                   child: Text('Clear notifications'),
                   onPressed: (){
-                    notifications.clear();
+                    globals.currentNotifications.clear();
                     setState(() {});
                   },
                 )

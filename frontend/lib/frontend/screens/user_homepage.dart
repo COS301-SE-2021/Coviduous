@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/notification_controller.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/health/user_home_health.dart';
 import 'package:frontend/frontend/screens/office/home_office.dart';
@@ -10,10 +9,9 @@ import 'package:frontend/frontend/screens/user/user_manage_account.dart';
 import 'package:frontend/frontend/screens/announcement/user_view_announcements.dart';
 import 'package:frontend/frontend/screens/notification/user_view_notifications.dart';
 import 'package:frontend/frontend/models/auth_provider.dart';
-import 'package:frontend/requests/notification_requests/get_notification_request.dart';
-import 'package:frontend/responses/notification_responses/get_notifications_response.dart';
 
 import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
+import 'package:frontend/controllers/notification_controller.dart' as notificationController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {
@@ -31,11 +29,16 @@ Future getAnnouncements() async {
   });
 }
 
+Future getNotifications() async {
+  await Future.wait([
+    notificationController.getNotificationsUserEmail(globals.loggedInUserEmail)
+  ]).then((lists) {
+    globals.currentNotifications = lists.first;
+  });
+}
+
 class _UserHomePageState extends State<UserHomePage> {
   String email = globals.loggedInUserEmail;
-
-  NotificationController services = new NotificationController();
-  GetNotificationsResponse response;
 
   //This function ensures that the app doesn't just close when you press a phone's physical back button
   Future<bool> _onWillPop() async {
@@ -61,17 +64,6 @@ class _UserHomePageState extends State<UserHomePage> {
           ],
         ))
     );
-  }
-
-  Future getNotification() async {
-    await Future.wait([
-      services.getNotification(GetNotificationRequest(email))
-    ]).then((responses) {
-      response = responses.first;
-      globals.currentUserNotifications = response.getNotifications();
-      Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
-      return;
-    });
   }
 
   @override
@@ -167,7 +159,9 @@ class _UserHomePageState extends State<UserHomePage> {
                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+                          getNotifications().then((result){
+                            Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+                          });
                         }
                     ),
                     Divider(

@@ -34,24 +34,24 @@ class Notification {
   });
 
   factory Notification.fromJson(Map<String, dynamic> json) => Notification(
-        notificationId: json["notificationID"],
-        userId: json["userID"],
+        notificationId: json["notificationId"],
+        userId: json["userId"],
         userEmail: json["userEmail"],
         subject: json["subject"],
         message: json["message"],
         timestamp: json["timestamp"],
-        adminId: json["adminID"],
-        companyId: json["companyID"],
+        adminId: json["adminId"],
+        companyId: json["companyId"],
       );
 
   Map<String, dynamic> toJson() => {
-        "notificationID": notificationId,
-        "userID": userId,
+        "notificationId": notificationId,
+        "userId": userId,
         "userEmail": userEmail,
         "subject": subject,
         "message": message,
         "timestamp": timestamp,
-        "adminID": adminId,
-        "companyID": companyId,
+        "adminId": adminId,
+        "companyId": companyId,
       };
 }

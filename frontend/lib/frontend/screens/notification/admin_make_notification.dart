@@ -7,7 +7,6 @@ import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-//import 'package:frontend/backend/backend_globals/user_globals.dart' as userGlobals;
 
 class MakeNotification extends StatefulWidget {
   static const routeName = "/admin_make_notification";
@@ -23,10 +22,6 @@ class MakeNotification extends StatefulWidget {
 class MakeNotificationState extends State<MakeNotification> {
   TextEditingController _subject = TextEditingController();
   TextEditingController _description = TextEditingController();
-  //String _adminId = globals.loggedInUserId;
-  //String _companyId = userGlobals.getCompanyId(globals.loggedInUserId);
-
-  //NotificationsController services = new NotificationsController();
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
@@ -104,8 +99,6 @@ class MakeNotificationState extends State<MakeNotification> {
                     onPressed: () {
                       globals.currentSubjectField = _subject.text;
                       globals.currentDescriptionField = _description.text;
-                      //CreateNotificationResponse response = services.createNotificationMock(CreateNotificationRequest(_subject.text, _description.text, _adminId, _companyId));
-                      //print(response.getNotificationID() + " " + response.getResponse().toString());
                       Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
                     },
                   )
