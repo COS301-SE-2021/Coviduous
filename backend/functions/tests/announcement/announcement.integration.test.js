@@ -14,7 +14,7 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('/POST announcements', () => {
+/*describe('/POST announcements', () => {
     it('it should create an announcement', () => {
         let announcement = {
             announcementId: "test-000",
@@ -77,3 +77,4 @@ describe('/GET announcements', () => {
 //         });
 //     });
 // });
+*/
