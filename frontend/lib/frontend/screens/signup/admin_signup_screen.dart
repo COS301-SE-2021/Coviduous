@@ -77,7 +77,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                         width: MediaQuery.of(context).size.width,
                       ),
                       Container(
-                        color: Colors.white,
+                        color: Color(0x00000000),
                         height: MediaQuery.of(context).size.height/(2.8*globals.getWidgetScaling()),
                         width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                         padding: EdgeInsets.all(16),
