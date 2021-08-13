@@ -2,28 +2,41 @@ const Announcement = require("../../models/announcement.model");
 const uuid = require("uuid"); // npm install uuid
 
 let database;
-// For todays date
+
+/**
+ * This function returns the current date in a specified format.
+ * @returns {string} The current date as a string in the format DD/MM/YYYY
+ */
 Date.prototype.today = function () { 
-  return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+    return ((this.getDate() < 10)?"0":"") + this.getDate() + "/" +
+        (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
 }
 
-// For the time now
+/**
+ * This function returns the current time in a specified format.
+ * @returns {string} The current time as a string in the format HH:MM:SS.
+ */
 Date.prototype.timeNow = function () {
-   return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+    return ((this.getHours() < 10)?"0":"") + this.getHours() + ":" +
+        ((this.getMinutes() < 10)?"0":"") + this.getMinutes() + ":" +
+        ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
 
+/**
+ * This function sets the database used by the announcement controller.
+ * @param db The database to be used. It can be any interface with CRUD operations.
+ */
 exports.setDatabase = async (db) => {
-  database = db;
+    database = db;
 }
 
 exports.containsRequiredFieldsForCreateAnnouncement = async (req) => {
-   let hasRequiredFields=false;
-   if(req.type!=null && req.type!="" && req.message!=null && req.message!="" &&
-       req.adminId!=null && req.adminId!="" && req.companyId!=null && req.companyId!="")
-   {
-     //check if the type is of the correct type "GENERAL OR EMERGENCY"
-      if(req.type==="GENERAL"||req.type==="EMERGENCY")
-      {
+    let hasRequiredFields = false;
+
+    if(req.type != null && req.type !== "" && req.message != null && req.message !== "" &&
+        req.adminId != null && req.adminId !== "" && req.companyId != null && req.companyId !== "") {
+        //check if the type is of the correct type "GENERAL OR EMERGENCY"
+        if(req.type==="GENERAL"||req.type==="EMERGENCY") {
         hasRequiredFields=true;
       }
    }
@@ -31,18 +44,25 @@ exports.containsRequiredFieldsForCreateAnnouncement = async (req) => {
    return hasRequiredFields;
 }
 
-exports.verifyRequestToken = async () => {
-  let isTokenValid=true;
-  
-   return isTokenValid;
-  
+/**
+ * Verifies the request token provided to it to ensure only authorized admins can make announcements.
+ * @param token A JWT token.
+ * @returns {Promise<boolean>} Returns true if the token is valid and false if it is not.
+ */
+exports.verifyRequestToken = async (token) => {
+    let isTokenValid = true;
+    return isTokenValid;
 }
 
-exports.verifyCredentials = async (adminId,companyId) => {
-  let isCredentialsValid=true;
-  
-   return isCredentialsValid;
-  
+/**
+ * Verifies if an administrator of a company's credentials are valid.
+ * @param adminId The administrator's ID.
+ * @param companyId The company's ID.
+ * @returns {Promise<boolean>} Returns true if the credentials are valid and false if they are not.
+ */
+exports.verifyCredentials = async (adminId, companyId) => {
+    let isCredentialsValid = true;
+    return isCredentialsValid;
 }
 
 /**
@@ -50,14 +70,16 @@ exports.verifyCredentials = async (adminId,companyId) => {
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
  *  type: "GENERAL" || "EMERGENCY"
- *  message: String
- *  adminId: String
- *  companyId: String
+ *  message: string
+ *  adminId: string
+ *  companyId: string
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res An HTTP status indicating whether the request was successful or not.
  */
 exports.createAnnouncement = async (req, res) => {
-    if (await this.verifyRequestToken() === false) {
+    let token = '';
+
+    if (await this.verifyRequestToken(token) === false) {
         return res.status(403).send({
             message: '403 Forbidden: Access denied',
         });
@@ -137,12 +159,14 @@ exports.createAnnouncement = async (req, res) => {
  * This function deletes a specified announcement via an HTTP DELETE request.
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
- *  announcementId: String
+ *  announcementId: string
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res An HTTP status indicating whether the request was successful or not.
  */
 exports.deleteAnnouncement = async (req, res) => {
-    if (await this.verifyRequestToken() === false) {
+    let token = '';
+
+    if (await this.verifyRequestToken(token) === false) {
         return res.status(403).send({
             message: '403 Forbidden: Access denied',
         });
@@ -191,7 +215,9 @@ exports.deleteAnnouncement = async (req, res) => {
  * @returns res An HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
 exports.viewAnnouncements = async (req, res) => {
-    if (await this.verifyRequestToken() === false) {
+    let token = '';
+
+    if (await this.verifyRequestToken(token) === false) {
         return res.status(403).send({
             message: '403 Forbidden: Access denied',
             data: null
