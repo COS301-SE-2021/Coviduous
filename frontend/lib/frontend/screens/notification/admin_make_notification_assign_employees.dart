@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/notification_controller.dart';
 import 'package:frontend/frontend/screens/notification/admin_home_notifications.dart';
 import 'package:frontend/frontend/screens/notification/admin_make_notification.dart';
 import 'package:frontend/frontend/screens/notification/admin_make_notification_add_employee.dart';
-import 'package:frontend/requests/notification_requests/send_multiple_notifications_request.dart';
-import 'package:frontend/responses/notification_responses/send_multiple_notifications_response.dart';
-import 'package:frontend/subsystems/notification_subsystem/tempNotification.dart';
+import 'package:frontend/subsystems/notification_subsystem/temp_notification.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/notification_globals.dart' as notifGlobals;
+import 'package:frontend/controllers/notification_controller.dart' as notificationController;
 
 class MakeNotificationAssignEmployees extends StatefulWidget {
   static const routeName = "/admin_make_notification_employees";
@@ -20,28 +17,39 @@ class MakeNotificationAssignEmployees extends StatefulWidget {
   _MakeNotificationAssignEmployeesState createState() => _MakeNotificationAssignEmployeesState();
 }
 
-class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssignEmployees> {
-  NotificationController services = new NotificationController();
-  SendMultipleNotificationResponse response;
+bool sentNotifications = false;
+List<TempNotification> tempUsers = globals.tempUsers;
 
-  Future sendNotifications() async {
-    await Future.wait([
-      services.sendMultipleNotifications(SendMultipleNotificationRequest(services.getTempNotifications()))
-    ]).then((responses) {
-      response = responses.first;
-      if (response != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Notification successfully created.")));
-        Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("An error occurred, please try again.")));
-      }
-    });
+Future getNotifications() async {
+  await Future.wait([
+    notificationController.getNotificationsUserEmail(globals.loggedInUserEmail)
+  ]).then((lists) {
+    globals.currentNotifications = lists.first;
+  });
+}
+
+Future createNotification(TempNotification tempUser) async {
+  bool sentNotification = false;
+  await Future.wait([
+    notificationController.createNotification("", tempUser.getUserId(), tempUser.getUserEmail(), globals.currentSubjectField,
+        globals.currentDescriptionField, "", globals.loggedInUserId, globals.loggedInCompanyId)
+  ]).then((results) {
+    sentNotification = results.first;
+  });
+  return sentNotification;
+}
+
+Future createNotifications(List<TempNotification> tempUsers) async {
+  for (int i = 0; i < tempUsers.length; i++) {
+    sentNotifications = await createNotification(tempUsers[i]);
   }
+}
 
+class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssignEmployees> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+    getNotifications().then((result){
+      Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+    });
     return (await true);
   }
 
@@ -61,10 +69,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
       return Container();
     }
 
-    NotificationController service = new NotificationController();
-    List<TempNotification> tempNotifications = service.getTempNotifications();
-
-    int numOfUsers = tempNotifications.length;
+    int numOfUsers = tempUsers.length;
 
     Widget getList() {
       if (numOfUsers == 0) { //If the number of users = 0, don't display a list
@@ -80,7 +85,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('Notification is empty', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('Notification is empty', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -108,7 +113,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                            'Email: ' + tempNotifications[index].getUserEmail()),
+                            'Employee ID: ' + tempUsers[index].getUserId()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -118,14 +123,21 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'Subject: ' + tempNotifications[index].getSubject(),
+                                  'Email: ' + tempUsers[index].getUserEmail(),
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
                               child: Text(
-                                  'Message: ' + tempNotifications[index].getMessage(),
+                                  'Subject: ' + globals.currentSubjectField,
+                                  style: TextStyle(color: Colors.black)),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text(
+                                  'Message: ' + globals.currentDescriptionField,
                                   style: TextStyle(color: Colors.black)),
                             ),
                             Container(
@@ -142,7 +154,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                                       ),
                                       child: Text('Remove'),
                                       onPressed: () {
-                                        notifGlobals.temp.removeAt(index);
+                                        tempUsers.removeAt(index);
                                         setState(() {});
                                       }),
                                 ],
@@ -166,7 +178,9 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
             title: Text('Assign employees'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+                getNotifications().then((result){
+                  Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+                });
               },
             ),
           ),
@@ -227,7 +241,16 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                                   TextButton(
                                     child: Text('Yes'),
                                     onPressed: (){
-                                      sendNotifications();
+                                      createNotifications(tempUsers).then((result){
+                                        if (sentNotifications == true) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Notification successfully sent.")));
+                                          Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Notification sending unsuccessful.")));
+                                        }
+                                      });
                                     },
                                   ),
                                   TextButton(

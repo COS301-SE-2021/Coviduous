@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/notification_controller.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/notification/admin_make_notification.dart';
 import 'package:frontend/frontend/screens/notification/admin_view_notifications.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/requests/notification_requests/get_notification_request.dart';
-import 'package:frontend/responses/notification_responses/get_notifications_response.dart';
 
+import 'package:frontend/controllers/notification_controller.dart' as notificationController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminNotifications extends StatefulWidget {
@@ -18,22 +16,17 @@ class AdminNotifications extends StatefulWidget {
   @override
   _AdminNotificationsState createState() => _AdminNotificationsState();
 }
+
+Future getNotifications() async {
+  await Future.wait([
+    notificationController.getNotificationsUserEmail(globals.loggedInUserEmail)
+  ]).then((lists) {
+    globals.currentNotifications = lists.first;
+  });
+}
+
 //class admin
 class _AdminNotificationsState extends State<AdminNotifications> {
-  NotificationController services = new NotificationController();
-  GetNotificationsResponse response;
-
-  Future getNotification() async {
-    await Future.wait([
-      services.getNotification(GetNotificationRequest("test@gmail.com"))
-    ]).then((responses) {
-      response = responses.first;
-      globals.currentUserNotifications = response.getNotifications();
-      Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
-      return;
-    });
-  }
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
     return (await true);
@@ -111,7 +104,9 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              getNotification();
+                              getNotifications().then((result){
+                                Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
+                              });
                             }
                         ),
                       ]
