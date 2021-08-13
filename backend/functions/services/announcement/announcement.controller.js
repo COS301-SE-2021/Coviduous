@@ -127,8 +127,20 @@ exports.createAnnouncement = async (req, res) => {
             message: '500 Server Error: DB error',
         });
     }
+
+    return res.status(200).send({
+       message: 'Announcement successfully created',
+    });
 };
 
+/**
+ * This function deletes a new announcement via an HTTP DELETE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  announcementId: String
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res An HTTP status indicating whether the request was successful or not.
+ */
 exports.deleteAnnouncement = async (req, res) => {
     if (await this.verifyRequestToken() === false) {
         return res.status(403).send({
@@ -142,20 +154,34 @@ exports.deleteAnnouncement = async (req, res) => {
         });
     }
 
-  try {
+    //Look into express.js middleware so that these lines are not necessary
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
 
-    if (await database.deleteAnnouncement(reqJson.announcementId) == true)
-    {
-      return res.status(200).send({
-        message: 'Announcement successfully deleted',
-      });
+    let fieldErrors = [];
+
+    if (reqJson.announcementId == null || reqJson.announcementId === "") {
+        fieldErrors.push({field: 'announcementId', message: 'Announcement ID may not be empty'});
     }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send(error);
-  }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let result = await database.deleteAnnouncement(reqJson.announcementId);
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
+
+    return res.status(200).send({
+        message: 'Announcement successfully deleted',
+    });
 };
 
 exports.viewAnnouncements = async (req, res) => {
