@@ -8,6 +8,10 @@ let db;
  * @returns status which will tell if the creation of the shift was successful/unsuccessful.
  */
 
+exports.setDatabse = async(_db) => {
+    db =_db;
+};
+
 exports.createShift = async (req,res) => {
 try{
   let shiftID = "SHI-" + uuid.v4();
@@ -33,47 +37,92 @@ try{
 
 
 exports.deleteShift = async (req, res) => {
-  try {
+  // try {
+      // data validation
+      let fieldErrors = [];
+
+      if(req.body == null) {
+          fieldErrors.push({field: null, message: 'Request object may not be null'});
+      }
+
+      if (reqJson.shiftID == null || reqJson.shiftID === '') {
+          fieldErrors.push({field: 'shiftID', message: 'Shift ID may not be empty'});
+      }
+
+      if (fieldErrors.length > 0) {
+          return res.status(400).send({
+              message: '400 Bad Request: Incorrect fields',
+              errors: fieldErrors
+          });
+      }
+
       if (await db.deleteShift(req.body.shiftID) == true)
       {
           return res.status(200).send({
-              message: "Shift deleted"
+              message: "Shift successfully deleted"
           });
       }
-  } catch (error) {
-      console.log(error);
-      return res.status(500).send(error);
-  }
+      else
+      {
+          return res.status(500).send('500 Server Error');
+      }
+  // } catch (error) {
+  //     console.log(error);
+  //     return res.status(500).send(error);
+  // }
 };
 exports.updateShift = async (req, res) => {
-  try {
+  // try {
+    // data validation
+    let fieldErrors = [];
+
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.shiftID == null || reqJson.shiftID === '') {
+        fieldErrors.push({field: 'shiftID', message: 'Shift ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    await db.updateShift(req.body.shiftID, req.body);
     
-    await db.updateShift(req.body.shiftID,req.body);
     return res.status(200).send({
       data: req.body
     });
-  } catch (error) {
-    console.log(error);
-    console.log(req.body.shiftID);
-    console.log(req.body);
-    return res.status(500).send(error);
-  }
+  // } catch (error) {
+  //   console.log(error);
+  //   console.log(req.body.shiftID);
+  //   console.log(req.body);
+  //   return res.status(500).send(error);
+  // }
 
 };
 exports.viewShifts = async (req, res) => {
-  try {
-      let viewShifts = await db.viewShifts();  
-      return res.status(200).send({
-        data: viewShifts
-      });
-  } catch (error) {
-      console.log(error);
-      return res.status(500).send({
-        message: err.message 
-      });
-  }
+  // try {
+      let viewShifts = await db.viewShifts(); 
+      
+      if (viewShifts != null)
+      {
+        return res.status(200).send({
+          message: 'Successfully retrieved shifts',
+          data: viewShifts
+        });
+      }
+      else
+      {
+        return res.status(500).send("Some error occurred while fetching shifts.");
+      }
+  // } catch (error) {
+  //     console.log(error);
+  //     return res.status(500).send({
+  //       message: err.message 
+  //     });
+  // }
 };
-
-exports.setDatabse= async(_db)=>{
-    db=_db;
-  };
