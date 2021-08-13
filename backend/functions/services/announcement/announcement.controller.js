@@ -2,7 +2,7 @@ const Announcement = require("../../models/announcement.model");
 const uuid = require("uuid"); // npm install uuid
 
 let database;
-// For todays date;
+// For todays date
 Date.prototype.today = function () { 
   return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
 }
@@ -63,7 +63,7 @@ exports.createAnnouncement = async (req, res) => {
         });
     }
 
-    if(req == null || req.body == null) {
+    if (req == null || req.body == null) {
         return res.status(400).send({
             message: '400 Bad Request: Null request object',
         });
@@ -134,7 +134,7 @@ exports.createAnnouncement = async (req, res) => {
 };
 
 /**
- * This function deletes a new announcement via an HTTP DELETE request.
+ * This function deletes a specified announcement via an HTTP DELETE request.
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
  *  announcementId: String
@@ -148,7 +148,7 @@ exports.deleteAnnouncement = async (req, res) => {
         });
     }
 
-    if(req == null || req.body == null) {
+    if (req == null || req.body == null) {
         return res.status(400).send({
             message: '400 Bad Request: Null request object',
         });
@@ -184,18 +184,37 @@ exports.deleteAnnouncement = async (req, res) => {
     });
 };
 
+/**
+ * This function retrieves all announcements via an HTTP GET request.
+ * @param req The request object must exist. It will be denied if not.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res An HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
 exports.viewAnnouncements = async (req, res) => {
-  try {
-      let announcements = await database.viewAnnouncements();
-      
-      return res.status(200).send({
+    if (await this.verifyRequestToken() === false) {
+        return res.status(403).send({
+            message: '403 Forbidden: Access denied',
+            data: null
+        });
+    }
+
+    if (req == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+            data: null
+        });
+    }
+
+    let result = await database.viewAnnouncements();
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            data: null
+        });
+    }
+
+    return res.status(200).send({
         message: 'Successfully retrieved announcements',
-        data: announcements
-      });
-  } catch (error) {
-      console.log(error);
-      return res.status(500).send({
-        message: err.message || "Some error occurred while fetching announcements."
-      });
-  }
+        data: result
+    });
 };
