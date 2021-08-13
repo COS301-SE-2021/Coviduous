@@ -13,7 +13,17 @@ exports.verifyCredentials = async (adminId, companyId) => {
     return isCredentialsValid;  
 }
 
-// doc
+/**
+ * This function creates a new notification via an HTTP POST request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  subject: string
+ *  message: string
+ *  adminId: string
+ *  companyId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res An HTTP status indicating whether the request was successful or not.
+ */
 exports.createNotification = async (req, res) => {
     // try {
         let reqJson = JSON.parse(req.body);
