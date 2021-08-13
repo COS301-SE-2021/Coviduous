@@ -17,52 +17,50 @@ exports.setDatabase = async (db) => {
 }
 
 exports.containsRequiredFieldsForCreateAnnouncement = async (req) => {
-  let hasRequiredFields=false;
-   if(req.type!=null && req.type!="" && req.message!=null && req.message!="" && req.adminId!=null && req.adminId!="" && req.companyId!=null && req.companyId!="")
+   let hasRequiredFields=false;
+   if(req.type!=null && req.type!="" && req.message!=null && req.message!="" &&
+       req.adminId!=null && req.adminId!="" && req.companyId!=null && req.companyId!="")
    {
      //check if the type is of the correct type "GENERAL OR EMERGENCY"
-      if(req.type==="GENERAL")
+      if(req.type==="GENERAL"||req.type==="EMERGENCY")
       {
         hasRequiredFields=true;
       }
-      else if(req.type==="EMERGENCY")
-      {
-        hasRequiredFields=true;
-      }
-      
    }
-  
+
    return hasRequiredFields;
-  
 }
 
 exports.verifyRequestToken = async (token) => {
-  let isTokenValid=false;
+  let isTokenValid=true;
   
    return isTokenValid;
   
 }
 
 exports.verifyCredentials = async (adminId,companyId) => {
-  let isCredentialsValid=false;
+  let isCredentialsValid=true;
   
    return isCredentialsValid;
   
 }
 
 exports.createAnnouncement = async (req, res) => {
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
   try {
-    if(await this.containsRequiredFieldsForCreateAnnouncement(req.body)==true)
+    if(await this.containsRequiredFieldsForCreateAnnouncement(reqJson)==true)
     {
       //if the req body has the fields we require we can continue to validate what is inside the the 
-      if((await this.verifyRequestToken(req.body)) && (await this.verifyCredentials(req.body.adminId,req.body.companyId)))
+      if((await this.verifyRequestToken(reqJson)) && (await this.verifyCredentials(reqJson,reqJson)))
       {
         //continue if we have a valid token and valid credentials
 
       }
       else
     {
-
+        console.log('400 Bad Request : Announcement unsuccessfully created , Invalid Token , Credentials');
       return res.status(400).send({
         message: '400 Bad Request : Announcement unsuccessfully created , Invalid Token , Credentials',
       });
@@ -72,7 +70,7 @@ exports.createAnnouncement = async (req, res) => {
     }
     else
     {
-
+        console.log('400 Bad Request : Announcement unsuccessfully created , Not all fields are correct');
       return res.status(400).send({
         message: '400 Bad Request : Announcement unsuccessfully created , Not all fields are correct',
       });
@@ -83,11 +81,11 @@ exports.createAnnouncement = async (req, res) => {
 
     let announcementData = {
       announcementId: announcementId,
-      type: req.body.type,
-      message: req.body.message,
+      type: reqJson.type,
+      message: reqJson.message,
       timestamp: timestamp,
-      adminId: req.body.adminId,
-      companyId: req.body.companyId
+      adminId: reqJson.adminId,
+      companyId: reqJson.companyId
     }
 
     if (await database.createAnnouncement(announcementData.announcementId, announcementData) == true)
@@ -135,4 +133,3 @@ exports.viewAnnouncements = async (req, res) => {
       });
   }
 };
-
