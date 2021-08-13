@@ -91,11 +91,17 @@ exports.updateShift = async (req, res) => {
         });
     }
 
-    await db.updateShift(req.body.shiftID, req.body);
+    if (await db.updateShift(req.body.shiftID, req.body) == true)
+    {
+      return res.status(200).send({
+        data: req.body
+      });
+    }
+    else
+    {
+      return res.status(500).send("Some error occurred while updating shifts.");
+    }
     
-    return res.status(200).send({
-      data: req.body
-    });
   // } catch (error) {
   //   console.log(error);
   //   console.log(req.body.shiftID);
