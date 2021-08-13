@@ -8,7 +8,7 @@ import 'package:pdf/pdf.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:pdf/widgets.dart' as pw;
 
-import 'package:frontend/subsystems/user_subsystem/user.dart';
+import 'package:frontend/models/user/user.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/health/admin_contact_trace_shifts.dart';

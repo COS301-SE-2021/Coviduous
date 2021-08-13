@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/floor.dart';
+import 'package:frontend/models/floor_plan/floor.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_view_rooms.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
@@ -16,42 +16,6 @@ class AdminViewFloors extends StatefulWidget {
 
   @override
   _AdminViewFloorsState createState() => _AdminViewFloorsState();
-}
-
-List<Floor> floors = globals.currentFloors;
-bool createdFloor = false;
-bool deletedFloor = false;
-
-Future getFloors(String floorPlanNumber) async {
-  await Future.wait([
-    floorPlanController.getFloors()
-  ]).then((lists) {
-    globals.currentFloors = lists.first.where((floor) => floor.getFloorPlanNumber() == floorPlanNumber);
-  });
-}
-
-Future getRooms(String floorNumber) async {
-  await Future.wait([
-    floorPlanController.getRooms()
-  ]).then((lists) {
-    globals.currentRooms = lists.first.where((room) => room.getFloorNumber() == floorNumber);
-  });
-}
-
-Future addFloor() async {
-  await Future.wait([
-    floorPlanController.createFloor("", 0, 0, 0, globals.currentFloorPlanNum, globals.loggedInUserId, globals.loggedInCompanyId)
-  ]).then((results) {
-    createdFloor = results.first;
-  });
-}
-
-Future deleteFloor(String floorNumber) async {
-  await Future.wait([
-    floorPlanController.deleteFloor(floorNumber)
-  ]).then((results) {
-    deletedFloor = results.first;
-  });
 }
 
 class _AdminViewFloorsState extends State<AdminViewFloors> {
@@ -77,7 +41,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
     }
 
     Widget getList() {
-      int numOfFloors = floors.length;
+      int numOfFloors = 0;
 
       print(numOfFloors);
 
@@ -118,8 +82,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text(
-                        'Floor ' + floors[index].getFloorPlanNumber()),
+                    //child: Text('Floor ' + floors[index].getFloorPlanNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -129,9 +92,9 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Number of rooms: ' + floors[index].getNumRooms().toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
@@ -143,15 +106,15 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    getRooms(floors[index].getFloorNumber()).then((result){
+                                    /*getRooms(floors[index].getFloorNumber()).then((result){
                                       globals.currentFloorNum = floors[index].getFloorNumber();
                                       Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
-                                    });
+                                    });*/
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
+                                    /*if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
                                       deleteFloor(floors[index].getFloorNumber()).then((result){
                                         if (deletedFloor == true) {
                                           getFloors(globals.currentFloorPlanNum).then((result){
@@ -179,7 +142,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                                             ],
                                           )
                                       );
-                                    }
+                                    }*/
                                   }),
                             ],
                           ),
@@ -219,7 +182,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                 child: Text('Add floor'),
                 onPressed: () {
                   //Add new floor and reload page
-                  addFloor().then((result){
+                  /*addFloor().then((result){
                     if (createdFloor == true) {
                       getFloors(globals.currentFloorPlanNum).then((result){
                         setState(() {});
@@ -228,7 +191,7 @@ class _AdminViewFloorsState extends State<AdminViewFloors> {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Floor creation unsuccessful.")));
                     }
-                  });
+                  });*/
                 },
               ))
         ),

@@ -16,29 +16,6 @@ class AddFloorPlan extends StatefulWidget {
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
 
-bool createdFloorPlan = false;
-
-Future createFloorPlan(int numFloors) async {
-  await Future.wait([
-    floorPlanController.createFloorPlan("", numFloors, globals.loggedInUserId, globals.loggedInCompanyId)
-  ]).then((results) {
-    createdFloorPlan = results.first;
-  });
-}
-
-Future getFloors(String floorPlanNumber) async {
-  await Future.wait([
-    floorPlanController.getFloors()
-  ]).then((lists) {
-    globals.currentFloors = [];
-    for (int i = 0; i < globals.currentFloorPlan.getNumFloors(); i++) {
-      if (lists.first[i].getFloorPlanNumber() == floorPlanNumber) {
-        globals.currentFloors.add(lists.first[i]);
-      }
-    }
-  });
-}
-
 //add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
@@ -128,7 +105,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                           ),
                           child: Text('Proceed'),
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
+                            /*if (!_formKey.currentState.validate()) {
                               return;
                             }
                             _formKey.currentState.save();
@@ -160,7 +137,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                     )
                                 );
                               }
-                            });
+                            });*/
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 48,

@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:frontend/frontend/screens/notification/admin_home_notifications.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/subsystems/notification_subsystem/notification.dart';
+import 'package:frontend/models/notification/notification.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 

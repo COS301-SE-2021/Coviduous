@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/shift_controller.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_rooms.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_add_employee.dart';
-import 'package:frontend/requests/shift_requests/process_shifts_request.dart';
-import 'package:frontend/responses/shift_responses/process_shifts_response.dart';
-import 'package:frontend/subsystems/shift_subsystem/tempGroup.dart';
 import 'package:frontend/frontend/screens/shift/home_shift.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/shift_globals.dart' as shiftGlobals;
 
 class AddShiftAssignEmployees extends StatefulWidget {
   static const routeName = "/admin_add_shift_employees";
@@ -21,25 +16,6 @@ class AddShiftAssignEmployees extends StatefulWidget {
 }
 
 class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
-  ShiftController services = new ShiftController();
-  ProcessShiftsResponse response;
-
-  Future processShifts() async {
-    await Future.wait([
-      services.processShifts(ProcessShiftsRequest(services.getTempGroup()))
-    ]).then((responses) {
-      response = responses.first;
-      if (response != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Shift successfully created.")));
-        Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("An error occurred, please try again.")));
-      }
-    });
-  }
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
     return (await true);
@@ -62,9 +38,9 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
     }
 
     Widget getList() {
-      List<TempGroup> tempShifts = services.getTempGroup();
+      //List<TempGroup> tempShifts = services.getTempGroup();
 
-      int numOfUsers = tempShifts.length;
+      int numOfUsers = 0;
       print(numOfUsers);
 
       if (numOfUsers == 0) { //If the number of users = 0, don't display a list
@@ -107,7 +83,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Email: ' + tempShifts[index].getUserEmail()),
+                        //child: Text('Email: ' + tempShifts[index].getUserEmail()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -116,17 +92,17 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Group ID: ' + tempShifts[index].getGroupId(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Group name: ' + tempShifts[index].getGroupName(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -138,7 +114,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                   ElevatedButton(
                                       child: Text('Remove'),
                                       onPressed: () {
-                                        shiftGlobals.tempGroup.removeAt(index);
+                                        //shiftGlobals.tempGroup.removeAt(index);
                                         setState(() {});
                                       }),
                                 ],
@@ -207,7 +183,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                 TextButton(
                                   child: Text('Yes'),
                                   onPressed: (){
-                                    processShifts();
+                                    //processShifts();
                                   },
                                 ),
                                 TextButton(

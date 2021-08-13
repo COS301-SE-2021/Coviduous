@@ -5,13 +5,13 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
 import 'package:universal_html/html.dart' as html;
 
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/floor.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/floor_plan.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/room.dart';
-import 'package:frontend/subsystems/notification_subsystem/notification.dart';
-import 'package:frontend/subsystems/shift_subsystem/shift.dart';
-import 'package:frontend/subsystems/notification_subsystem/temp_notification.dart';
+import 'package:frontend/models/announcement/announcement.dart';
+import 'package:frontend/models/floor_plan/floor.dart';
+import 'package:frontend/models/floor_plan/floor_plan.dart';
+import 'package:frontend/models/floor_plan/room.dart';
+import 'package:frontend/models/notification/notification.dart';
+import 'package:frontend/models/shift/shift.dart';
+import 'package:frontend/models/notification/temp_notification.dart';
 
 import 'package:frontend/frontend/theme.dart' as theme;
 

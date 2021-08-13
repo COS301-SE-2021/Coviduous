@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
-import 'package:frontend/backend/controllers/office_controller.dart';
 import 'package:frontend/frontend/screens/office/home_office.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_times.dart';
-//import 'package:frontend/requests/office_requests/book_office_space_request.dart';
-//import 'package:frontend/responses/office_reponses/book_office_space_response.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/desk.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
@@ -41,11 +36,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
       return Container();
     }
 
-    //FloorPlanController services = new FloorPlanController();
-    //OfficeController services2 = new OfficeController();
     Widget getList() {
-      //List<Desk> desks = services.getRoomDetails(globals.currentRoomNum).desks;
-      //int numOfDesks = services.getRoomDetails(globals.currentRoomNum).numDesks;
       int numOfDesks = 0;
 
       print(numOfDesks);

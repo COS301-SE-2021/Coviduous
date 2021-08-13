@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/floor_plan.dart';
+import 'package:frontend/models/floor_plan/floor_plan.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
@@ -17,38 +17,6 @@ class AdminModifyFloorPlans extends StatefulWidget {
 
   @override
   _AdminModifyFloorPlansState createState() => _AdminModifyFloorPlansState();
-}
-
-bool deletedFloorPlan = false;
-TextEditingController _password = TextEditingController();
-
-Future getFloorPlans() async {
-  await Future.wait([
-    floorPlanController.getFloorPlans()
-  ]).then((lists) {
-    globals.currentFloorPlans = lists.first;
-  });
-}
-
-Future getFloors(String floorPlanNumber) async {
-  await Future.wait([
-    floorPlanController.getFloors()
-  ]).then((lists) {
-    globals.currentFloors.clear();
-    for (int i = 0; i < globals.currentFloorPlan.getNumFloors(); i++) {
-      if (lists.first[i].getFloorPlanNumber() == floorPlanNumber) {
-        globals.currentFloors.add(lists.first[i]);
-      }
-    }
-  });
-}
-
-Future deleteFloorPlan(String floorPlanNumber) async {
-  await Future.wait([
-    floorPlanController.deleteFloorPlan(floorPlanNumber)
-  ]).then((results){
-    deletedFloorPlan = results.first;
-  });
 }
 
 class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
@@ -74,7 +42,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
     }
 
     Widget getList() {
-      int numOfFloorPlans = globals.currentFloorPlans.length;
+      int numOfFloorPlans = 0;
 
       print(numOfFloorPlans);
 
@@ -114,8 +82,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    child: Text(
-                        'Floor plan ' + globals.currentFloorPlans[index].getFloorPlanNumber()),
+                    //child: Text('Floor plan ' + globals.currentFloorPlans[index].getFloorPlanNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -125,9 +92,9 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
@@ -139,16 +106,16 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    globals.currentFloorPlan = globals.currentFloorPlans[index];
+                                    /*globals.currentFloorPlan = globals.currentFloorPlans[index];
                                     globals.currentFloorPlanNum = globals.currentFloorPlans[index].getFloorPlanNumber();
                                     getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
                                       Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-                                    });
+                                    });*/
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    showDialog(
+                                    /*showDialog(
                                         context: context,
                                         builder: (ctx) => AlertDialog(
                                           title: Text('Warning'),
@@ -224,7 +191,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                               },
                                             )
                                           ],
-                                        ));
+                                        ));*/
                                   }),
                             ],
                           ),

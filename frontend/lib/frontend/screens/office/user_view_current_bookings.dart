@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/office/home_office.dart';
-import 'package:frontend/subsystems/office_subsystem/booking.dart';
+import 'package:frontend/models/office/booking.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/office_globals.dart' as officeGlobals;
 
 class UserViewCurrentBookings extends StatefulWidget {
   static const routeName = "/user_view_bookings";
@@ -16,8 +15,8 @@ class UserViewCurrentBookings extends StatefulWidget {
 }
 
 class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
-  int numberOfBookings = officeGlobals.globalBookings.length; //Number of bookings
-  List<Booking> bookings = officeGlobals.globalBookings;
+  int numberOfBookings = 0; //Number of bookings
+  //List<Booking> bookings = officeGlobals.globalBookings;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(Office.routeName);
@@ -41,13 +40,6 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
     }
 
     Widget getList() {
-      //For demo 1
-      //================================================================
-      officeGlobals.globalBookings.add(new Booking("test user", "2", "3", 6));
-      numberOfBookings = officeGlobals.globalBookings.length;
-      bookings = officeGlobals.globalBookings;
-      //================================================================
-
       if (numberOfBookings == 0) { //If the number of bookings = 0, don't display a list
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,25 +83,25 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('User: ' + bookings[index].user, style: TextStyle(color: Colors.black)),
+                              //child: Text('User: ' + bookings[index].user, style: TextStyle(color: Colors.black)),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: ' + bookings[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
+                              //child: Text('Date: ' + bookings[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Floor: ' + bookings[index].floorNum, style: TextStyle(color: Colors.black)),
+                              //child: Text('Floor: ' + bookings[index].floorNum, style: TextStyle(color: Colors.black)),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Room: ' + bookings[index].roomNum, style: TextStyle(color: Colors.black)),
+                              //child: Text('Room: ' + bookings[index].roomNum, style: TextStyle(color: Colors.black)),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]

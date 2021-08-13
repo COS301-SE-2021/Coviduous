@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/shift_controller.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_rooms.dart';
-import 'package:frontend/requests/shift_requests/create_shift_request.dart';
+import 'package:frontend/frontend/screens/shift/admin_add_shift_assign_employees.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/responses/shift_responses/create_shift_response.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-
-import 'admin_add_shift_assign_employees.dart';
 
 class AddShiftCreateShift extends StatefulWidget {
   static const routeName = "/admin_add_shift";
@@ -30,24 +26,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
   TextEditingController _groupDescription = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey();
-
-  ShiftController services = new ShiftController();
-  CreateShiftResponse response;
-
-  Future createShift() async {
-    await Future.wait([
-      services.createShift(CreateShiftRequest(_selectedDate.toString(), _selectedStartTime.toString(), _selectedEndTime.toString(), _groupDescription.text, globals.currentFloorNum, globals.currentRoomNum, globals.currentGroupNum, globals.loggedInUserId, globals.loggedInCompanyId))
-    ]).then((responses) {
-      response = responses.first;
-      globals.currentGroupNum = _groupName.text;
-      globals.currentGroupDescription = _groupDescription.text;
-      globals.currentShiftNum = response.getShiftID();
-      print(response.getResponseMessage());
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Shift created")));
-      Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
-    });
-  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked_date = await showDatePicker(
@@ -295,7 +273,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                       int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
                                       //Only allow if start time is before end time
                                       if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
-                                        createShift();
+                                        //createShift();
                                       } else {
                                         showDialog(
                                             context: context,

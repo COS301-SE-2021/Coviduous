@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/shift_controller.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_assign_employees.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
@@ -18,7 +17,7 @@ class AddShiftAddEmployee extends StatefulWidget {
 class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
   String _employeeEmail = "";
 
-  ShiftController services = new ShiftController();
+  //ShiftController services = new ShiftController();
 
   Widget _buildEmail() {
     return TextFormField(
@@ -107,7 +106,7 @@ class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
                           ),
                           child: Text('Proceed'),
                           onPressed: () {
-                            if (!_formKey.currentState.validate()) {
+                            /*if (!_formKey.currentState.validate()) {
                               return;
                             }
                             _formKey.currentState.save();
@@ -115,7 +114,7 @@ class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
 
                             services.addToTempGroup(globals.currentGroupNum, globals.currentGroupNum, globals.currentGroupDescription, _employeeEmail, globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId, globals.currentShiftNum);
 
-                            Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+                            Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);*/
                           }),
                     ],
                   ),

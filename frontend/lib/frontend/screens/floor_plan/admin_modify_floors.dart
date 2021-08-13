@@ -16,59 +16,14 @@ class AdminModifyFloors extends StatefulWidget {
   _AdminModifyFloorsState createState() => _AdminModifyFloorsState();
 }
 
-bool createdFloor = false;
-bool deletedFloor = false;
-
-Future getFloors(String floorPlanNumber) async {
-  await Future.wait([
-    floorPlanController.getFloors()
-  ]).then((lists) {
-    globals.currentFloors.clear();
-    for (int i = 0; i < globals.currentFloorPlan.getNumFloors(); i++) {
-      if (lists.first[i].getFloorPlanNumber() == floorPlanNumber) {
-        globals.currentFloors.add(lists.first[i]);
-      }
-    }
-  });
-}
-
-Future getRooms(String floorNumber) async {
-  await Future.wait([
-    floorPlanController.getRooms()
-  ]).then((lists) {
-    globals.currentRooms.clear();
-    for (int i = 0; i < globals.currentFloor.getNumRooms(); i++) {
-      if (lists.first[i].getFloorNumber() == floorNumber) {
-        globals.currentRooms.add(lists.first[i]);
-      }
-    }
-  });
-}
-
-Future addFloor() async {
-  await Future.wait([
-    floorPlanController.createFloor(globals.currentFloorNum, 0, 0, 0, globals.currentFloorPlanNum, globals.loggedInUserId, globals.loggedInCompanyId)
-  ]).then((results) {
-    createdFloor = results.first;
-  });
-}
-
-Future deleteFloor(String floorNumber) async {
-  await Future.wait([
-    floorPlanController.deleteFloor(floorNumber)
-  ]).then((results) {
-    deletedFloor = results.first;
-  });
-}
-
 class _AdminModifyFloorsState extends State<AdminModifyFloors> {
   Future<bool> _onWillPop() async {
-    for (int i = 0; i < globals.currentFloorPlans.length; i++) {
+    /*for (int i = 0; i < globals.currentFloorPlans.length; i++) {
       if (globals.currentFloorPlans[i].getFloorPlanNumber() == globals.currentFloorPlanNum) {
         globals.currentFloorPlan = globals.currentFloorPlans[i];
       }
     }
-    Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
+    Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);*/
     return (await true);
   }
 
@@ -89,7 +44,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
     }
 
     Widget getList() {
-      int numOfFloors = globals.currentFloors.length;
+      int numOfFloors = 0;
 
       print(numOfFloors);
 
@@ -139,8 +94,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    child: Text(
-                        'Floor ' + globals.currentFloors[index].getFloorNumber()),
+                    //child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -150,9 +104,9 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Number of rooms: ' + globals.currentFloors[index].getNumRooms().toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
@@ -164,16 +118,16 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    globals.currentFloor = globals.currentFloors[index];
+                                    /*globals.currentFloor = globals.currentFloors[index];
                                     globals.currentFloorNum = globals.currentFloors[index].getFloorNumber();
                                     getRooms(globals.currentFloors[index].getFloorNumber()).then((result){
                                       Navigator.of(context).pushReplacementNamed(AdminModifyRooms.routeName);
-                                    });
+                                    });*/
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
+                                    /*if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
                                       deleteFloor(globals.currentFloors[index].getFloorNumber()).then((result){
                                         if (deletedFloor == true) {
                                           getFloors(globals.currentFloorPlanNum).then((result){
@@ -201,7 +155,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                                             ],
                                           )
                                       );
-                                    }
+                                    }*/
                                   }),
                             ],
                           ),
@@ -222,12 +176,12 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              for (int i = 0; i < globals.currentFloorPlans.length; i++) {
+              /*for (int i = 0; i < globals.currentFloorPlans.length; i++) {
                 if (globals.currentFloorPlans[i].getFloorPlanNumber() == globals.currentFloorPlanNum) {
                   globals.currentFloorPlan = globals.currentFloorPlans[i];
                 }
               }
-              Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);*/
             },
           ),
         ),
@@ -246,7 +200,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                 child: Text('Add floor'),
                 onPressed: () {
                   //Add new floor and reload page
-                  addFloor().then((result){
+                  /*addFloor().then((result){
                     if (createdFloor == true) {
                       getFloors(globals.currentFloorPlanNum).then((result){
                         setState(() {});
@@ -255,7 +209,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Floor creation unsuccessful.")));
                     }
-                  });
+                  });*/
                 },
               ))
         ),

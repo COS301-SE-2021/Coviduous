@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
+import 'package:frontend/models/announcement/announcement.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';

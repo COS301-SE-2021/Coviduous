@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/controllers/announcement_controller.dart'
     as announcementController;
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
+import 'package:frontend/models/announcement/announcement.dart';
 
 void main() {
   String expectedType;

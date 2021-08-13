@@ -17,58 +17,11 @@ class AdminModifyRooms extends StatefulWidget {
   }
 }
 
-int numOfRooms = globals.currentRooms.length;
-
-bool createdRoom = false;
-bool deletedRoom = false;
-
-Future getFloors(String floorPlanNumber) async {
-  await Future.wait([
-    floorPlanController.getFloors()
-  ]).then((lists) {
-    globals.currentFloors.clear();
-    for (int i = 0; i < globals.currentFloorPlan.getNumFloors(); i++) {
-      if (lists.first[i].getFloorPlanNumber() == floorPlanNumber) {
-        globals.currentFloors.add(lists.first[i]);
-      }
-    }
-  });
-}
-
-Future getRooms(String floorNumber) async {
-  await Future.wait([
-    floorPlanController.getRooms()
-  ]).then((lists) {
-    globals.currentRooms.clear();
-    for (int i = 0; i < globals.currentFloor.getNumRooms(); i++) {
-      if (lists.first[i].getFloorNumber() == floorNumber) {
-        globals.currentRooms.add(lists.first[i]);
-      }
-    }
-  });
-}
-
-Future addRoom() async {
-  await Future.wait([
-    floorPlanController.createRoom(globals.currentFloor.getNumRooms(), globals.currentFloorNum, "", 0, 0, 0, 0, 0, 0, 0, 0)
-  ]).then((results) {
-    createdRoom = results.first;
-  });
-}
-
-Future deleteRoom(String roomNumber) async {
-  await Future.wait([
-    floorPlanController.deleteRoom(roomNumber)
-  ]).then((results) {
-    deletedRoom = results.first;
-  });
-}
-
 class AdminModifyRoomsState extends State<AdminModifyRooms> {
   Future<bool> _onWillPop() async {
-    getFloors(globals.currentFloorPlanNum).then((result){
+    /*getFloors(globals.currentFloorPlanNum).then((result){
       Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-    });
+    });*/
     return (await true);
   }
 
@@ -89,6 +42,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
     }
 
     Widget getList() {
+      int numOfRooms = 0;
       print(numOfRooms);
 
       if (numOfRooms == 0) {
@@ -137,7 +91,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
+                    //child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                   ),
                   ListView(
@@ -194,7 +148,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                   child: Text('Delete'),
                                   onPressed: () {
                                     //Remove a room and reload page
-                                    if (numOfRooms > 1) {
+                                    /*if (numOfRooms > 1) {
                                       //Only allow deletion of rooms if there is more than one room
                                       deleteRoom(globals.currentRooms[index].getRoomNumber()).then((result){
                                         if (deletedRoom == true) {
@@ -223,7 +177,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                             ],
                                           )
                                       );
-                                    }
+                                    }*/
                                   }),
                             ],
                           ),
@@ -245,9 +199,9 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              getFloors(globals.currentFloorPlanNum).then((result){
+              /*getFloors(globals.currentFloorPlanNum).then((result){
                 Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-              });
+              });*/
             },
           ),
         ),
@@ -266,7 +220,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                 child: Text('Add room'),
                 onPressed: () {
                   //Add new room and reload page
-                  addRoom().then((result){
+                  /*addRoom().then((result){
                     if (createdRoom == true) {
                       getRooms(globals.currentFloorNum).then((result){
                         setState(() {});
@@ -275,7 +229,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Floor creation unsuccessful.")));
                     }
-                  });
+                  });*/
                 },
               ))
         ),

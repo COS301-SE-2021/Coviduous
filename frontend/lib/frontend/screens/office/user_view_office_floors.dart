@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/office/home_office.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_rooms.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class UserViewOfficeFloors extends StatefulWidget {
   static const routeName = "/user_office_floors";
@@ -38,9 +36,8 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
       return Container();
     }
 
-    //FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      int numOfFloors = floorGlobals.globalNumFloors;
+      int numOfFloors = 0;
 
       print(numOfFloors);
 

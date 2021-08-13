@@ -7,7 +7,6 @@ import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class Reporting extends StatefulWidget {
   static const routeName = "/reporting";
@@ -72,7 +71,7 @@ class _ReportingState extends State<Reporting> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              if (floorGlobals.globalNumFloorPlans == 0) {
+                              /*if (floorGlobals.globalNumFloorPlans == 0) {
                                 showDialog(
                                     context: context,
                                     builder: (ctx) =>
@@ -91,7 +90,7 @@ class _ReportingState extends State<Reporting> {
                                 );
                               } else {
                                 Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
-                              }
+                              }*/
                             }
                         ),
                         SizedBox (

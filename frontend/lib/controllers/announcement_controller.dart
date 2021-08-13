@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:frontend/subsystems/announcement_subsystem/announcement.dart';
+import 'package:frontend/models/announcement/announcement.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
 
 /**
@@ -30,7 +30,7 @@ Future<bool> createAnnouncement(String announcementId, String type,
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "announcementId": announcementId,
-      "type": type,
+      "type": type.toUpperCase(),
       "message": message,
       "timestamp": timestamp,
       "adminId": adminId,

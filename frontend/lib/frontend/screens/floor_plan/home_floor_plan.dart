@@ -23,14 +23,6 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
     return (await true);
   }
 
-  Future getFloorPlans() async {
-    await Future.wait([
-     floorPlanController.getFloorPlans()
-    ]).then((lists) {
-      globals.currentFloorPlans = lists.first;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -81,7 +73,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
+                              //Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
                             }
                         ),
                         SizedBox (
@@ -103,7 +95,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              getFloorPlans().then((result){
+                              /*getFloorPlans().then((result){
                                 if (globals.currentFloorPlans != null && globals.currentFloorPlans.isNotEmpty) { //Only allow a floor plan to be modified if it exists
                                   print(globals.currentFloorPlans.length);
                                   Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
@@ -124,7 +116,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                       )
                                   );
                                 }
-                              });
+                              });*/
                             }
                         ),
                       ]

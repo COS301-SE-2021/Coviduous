@@ -10,7 +10,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 import 'package:frontend/frontend/screens/reporting/reporting_shifts.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
-import 'package:frontend/subsystems/user_subsystem/user.dart';
+import 'package:frontend/models/user/user.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;

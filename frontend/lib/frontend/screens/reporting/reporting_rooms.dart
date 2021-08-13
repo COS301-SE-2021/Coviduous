@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/reporting/reporting_floors.dart';
 import 'package:frontend/frontend/screens/reporting/reporting_shifts.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 

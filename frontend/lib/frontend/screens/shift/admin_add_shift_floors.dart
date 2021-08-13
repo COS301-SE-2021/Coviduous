@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/shift_controller.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_floor_plans.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_rooms.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/requests/shift_requests/get_rooms_request.dart';
-import 'package:frontend/responses/shift_responses/get_rooms_response.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
@@ -19,9 +15,6 @@ class AddShiftFloors extends StatefulWidget {
 }
 
 class _AddShiftFloorsState extends State<AddShiftFloors> {
-  ShiftController services = new ShiftController();
-  GetRoomsResponse response;
-
   Future getRooms() async {
     /*await Future.wait([
       services.getRooms(GetRoomsRequest(globals.currentFloorNum))

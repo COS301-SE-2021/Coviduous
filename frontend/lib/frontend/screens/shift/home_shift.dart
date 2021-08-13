@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/shift_controller.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_floor_plans.dart';
 import 'package:frontend/frontend/screens/shift/admin_view_shifts_floor_plans.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/requests/shift_requests/get_floor_plan_request.dart';
-import 'package:frontend/responses/shift_responses/get_floor_plan_response.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
@@ -20,9 +17,6 @@ class ShiftScreen extends StatefulWidget {
 }
 
 class _ShiftScreenState extends State<ShiftScreen> {
-  ShiftController services = new ShiftController();
-  GetFloorPlansResponse response;
-
   Future getFloorPlansAdd() async {
     /*
     await Future.wait([

@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:frontend/subsystems/floor_plan_subsystem/floor_plan.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/floor.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/room.dart';
+import 'package:frontend/models/floor_plan/floor_plan.dart';
+import 'package:frontend/models/floor_plan/floor.dart';
+import 'package:frontend/models/floor_plan/room.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
 
 List<FloorPlan> floorPlanDatabaseTable = [];

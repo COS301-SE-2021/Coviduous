@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/shift/admin_add_shift_floors.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
 import 'package:frontend/frontend/screens/shift/admin_add_shift_create_shift.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';

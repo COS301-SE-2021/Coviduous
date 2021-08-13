@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/notification/admin_make_notification_assign_employees.dart';
-import 'package:frontend/subsystems/notification_subsystem/temp_notification.dart';
+import 'package:frontend/models/notification/temp_notification.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 

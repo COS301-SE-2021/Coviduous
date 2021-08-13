@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../user_homepage.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
-//import 'package:frontend/backend/controllers/office_controller.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class UserBookOfficeSpace extends StatefulWidget {
   static const routeName = "/user_book_space";
@@ -19,19 +16,11 @@ class UserBookOfficeSpace extends StatefulWidget {
 class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
   String dropdownFloorValue = '1';
   String dropdownFloorInfo = ' ';
-  List<Floor> listOfFloors = floorGlobals.globalFloors;
   List<String> floorNumbers = ['1', '2'];
   //int numberOfFloors = globals.globalNumFloors;
   int numberOfFloors = 2;
 
-  //OfficeController services = new OfficeController();
-
   Widget getList() {
-    /*
-    for (int i = 0; i <= numberOfFloors; i++) {
-        floorNumbers.add((i+1).toString());
-    }
-     */
     if (numberOfFloors == 0) {
       return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -80,11 +69,6 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                       onChanged: (String newValue) {
                         setState(() {
                           dropdownFloorValue = newValue;
-                          /*
-                          dropdownFloorInfo = 'Number of rooms: ' + listOfFloors[int.parse(dropdownFloorValue)].numOfRooms.toString() +
-                                              '\nMaximum capacity: ' + listOfFloors[int.parse(dropdownFloorValue)].maxCapacity.toString() +
-                                              '\nCurrent capacity: ' + listOfFloors[int.parse(dropdownFloorValue)].currentCapacity.toString();
-                           */
                         });
                       },
                       items: <String>['1', '2'].map<DropdownMenuItem<String>>((String value) {
@@ -121,28 +105,6 @@ class _UserBookOfficeSpaceState extends State<UserBookOfficeSpace> {
                         )
                     );
                   }
-                    /*
-                    if (listOfFloors[int.parse(dropdownFloorValue)].currentCapacity < listOfFloors[int.parse(dropdownFloorValue)].maxCapacity) { //Check if floor has space
-
-                    }
-                    else {
-                      showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: Text('No space'),
-                            content: Text('Floor has no more space available. Try a different floor or contact your administrator.'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                child: Text('Okay'),
-                                onPressed: (){
-                                  Navigator.of(ctx).pop();
-                                },
-                              )
-                            ],
-                          )
-                      );
-                    }
-                  } */
               )
             ],
           )

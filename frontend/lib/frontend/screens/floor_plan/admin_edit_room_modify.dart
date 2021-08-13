@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_rooms.dart';
-import 'package:frontend/subsystems/floor_plan_subsystem/room.dart';
+import 'package:frontend/models/floor_plan/room.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
@@ -16,28 +16,6 @@ class AdminEditRoomModify extends StatefulWidget {
   _AdminEditRoomModifyState createState() => _AdminEditRoomModifyState();
 }
 
-bool editedRoom;
-
-Future editRoom(String roomNumber, double roomArea, double capacityPercentage, int numberOfDesks,
-    int occupiedDesks, double currentCapacity, double deskArea, double capacityOfPeopleForSixFtGrid,
-    double capacityOfPeopleForSixFtCircle) async {
-  await Future.wait([
-    floorPlanController.updateRoom(globals.currentFloorNum, roomNumber,
-        roomArea, capacityPercentage, numberOfDesks, occupiedDesks, currentCapacity,
-        deskArea, capacityOfPeopleForSixFtGrid, capacityOfPeopleForSixFtCircle)
-  ]).then((results) {
-    editedRoom = results.first;
-  });
-}
-
-Future getRooms(String floorNumber) async {
-  await Future.wait([
-    floorPlanController.getRooms()
-  ]).then((lists) {
-    globals.currentRooms = lists.first.where((room) => room.getFloorNumber() == floorNumber);
-  });
-}
-
 class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
   TextEditingController _roomNumber = TextEditingController();
   TextEditingController _roomArea = TextEditingController();
@@ -47,9 +25,9 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   Future<bool> _onWillPop() async {
-    getRooms(globals.currentFloorNum).then((result){
+    /*getRooms(globals.currentFloorNum).then((result){
       Navigator.of(context).pushReplacementNamed(AdminModifyRooms.routeName);
-    });
+    });*/
     return (await true);
   }
 
@@ -86,9 +64,9 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
             title: Text('Manage room ' + globals.currentRoomNum),
             leading: BackButton( //Specify back button
               onPressed: (){
-                getRooms(globals.currentFloorNum).then((result){
+                /*getRooms(globals.currentFloorNum).then((result){
                   Navigator.of(context).pushReplacementNamed(AdminModifyRooms.routeName);
-                });
+                });*/
               },
             ),
           ),
@@ -213,7 +191,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                       'Submit'
                                   ),
                                   onPressed: () {
-                                    FormState form = _formKey.currentState;
+                                    /*FormState form = _formKey.currentState;
                                     if (form.validate()) {
                                       editRoom(_roomNumber.text, double.parse(_roomArea.text), room.getCapacityPercentage(), int.parse(_numOfDesks.text),
                                       room.getOccupiedDesks(), room.getCurrentCapacity(), double.parse(_deskArea.text), room.getCapacityForSixFtGrid(),
@@ -229,7 +207,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Please enter required fields")));
-                                    }
+                                    }*/
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(

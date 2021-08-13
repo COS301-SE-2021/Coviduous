@@ -8,7 +8,6 @@ import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/floor_globals.dart' as floorGlobals;
 
 class Office extends StatefulWidget {
   static const routeName = "/office";
@@ -73,7 +72,7 @@ class _OfficeState extends State<Office> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              if (floorGlobals.globalFloors.isNotEmpty && floorGlobals.globalRooms.isNotEmpty) { //Only allow a user to book if there are floors and rooms registered
+                              /*if (floorGlobals.globalFloors.isNotEmpty && floorGlobals.globalRooms.isNotEmpty) { //Only allow a user to book if there are floors and rooms registered
                                 Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
                               } else {
                                 showDialog(
@@ -91,7 +90,7 @@ class _OfficeState extends State<Office> {
                                       ],
                                     )
                                 );
-                              }
+                              }*/
                             }
                         ),
                         SizedBox (

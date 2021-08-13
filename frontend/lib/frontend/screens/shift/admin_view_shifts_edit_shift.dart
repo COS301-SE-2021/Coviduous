@@ -3,14 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/shift_controller.dart';
 import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/frontend/screens/shift/admin_view_shifts.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/shift/home_shift.dart';
-import 'package:frontend/requests/shift_requests/update_shift_request.dart';
-import 'package:frontend/responses/shift_responses/update_shift_response.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
@@ -21,9 +18,6 @@ class ViewShiftsEditShift extends StatefulWidget {
 }
 
 class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
-  ShiftController services = new ShiftController();
-  UpdateShiftResponse response;
-
   TimeOfDay _selectedStartTime = TimeOfDay.now();
   TimeOfDay _selectedEndTime = TimeOfDay.now();
 
@@ -80,20 +74,6 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
       setState(() {
         _selectedEndTime = picked_end_time;
       });
-  }
-
-  Future editShift() async {
-    await Future.wait([
-      services.updateShift(UpdateShiftRequest(globals.currentShiftNum, _selectedStartTime.toString(), _selectedEndTime.toString()))
-    ]).then((responses) {
-      response = responses.first;
-      setState(() {
-        isLoading = false;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.getResponseMessage())));
-      Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
-    });
   }
 
   Future<bool> _onWillPop() async {
@@ -240,7 +220,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                                     if (_password.text.isNotEmpty) {
                                                       AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
                                                         if (value2 == "welcome") {
-                                                          editShift();
+                                                          //editShift();
                                                         } else {
                                                           setState(() {
                                                             isLoading = false;

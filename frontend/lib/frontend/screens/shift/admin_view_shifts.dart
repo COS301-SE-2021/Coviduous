@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/shift_controller.dart';
 import 'package:frontend/frontend/screens/shift/admin_view_shifts_edit_shift.dart';
 import 'package:frontend/frontend/screens/shift/admin_view_shifts_rooms.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/requests/shift_requests/delete_shift_request.dart';
-import 'package:frontend/responses/shift_responses/delete_shift_response.dart';
-import 'package:frontend/responses/shift_responses/get_shifts_response.dart';
-import 'package:frontend/subsystems/shift_subsystem/shift.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
@@ -20,23 +15,7 @@ class ViewShifts extends StatefulWidget {
   _ViewShiftsState createState() => _ViewShiftsState();
 }
 class _ViewShiftsState extends State<ViewShifts> {
-  ShiftController services = new ShiftController();
-  GetShiftsResponse response;
-  DeleteShiftResponse response2;
-  List<Shift> shifts = globals.currentShifts;
-  int numOfShifts = globals.currentShifts.length;
-
-  Future deleteShift() async {
-    await Future.wait([
-      services.deleteShift(DeleteShiftRequest(globals.currentShiftNum))
-    ]).then((responses) {
-      response2 = responses.first;
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response2.getResponseMessage())));
-      numOfShifts--;
-      setState(() {});
-    });
-  }
+  int numOfShifts = 0;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
@@ -100,7 +79,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Shift ' + shifts[index].shiftId),
+                        //child: Text('Shift ' + shifts[index].shiftId),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -109,49 +88,49 @@ class _ViewShiftsState extends State<ViewShifts> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Floor number: ' + shifts[index].floorNumber,
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Room number: ' + shifts[index].roomNumber,
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Group number: ' + shifts[index].groupNumber,
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Date: ' + shifts[index].date,
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Start time: ' + shifts[index].startTime,
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'End time: ' + shifts[index].endTime,
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -163,7 +142,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                   ElevatedButton(
                                       child: Text('Edit'),
                                       onPressed: () {
-                                        globals.currentShiftNum = shifts[index].shiftId;
+                                        //globals.currentShiftNum = shifts[index].shiftId;
                                         Navigator.of(context).pushReplacementNamed(ViewShiftsEditShift.routeName);
                                       }),
                                   ElevatedButton(
@@ -178,8 +157,8 @@ class _ViewShiftsState extends State<ViewShifts> {
                                                 ElevatedButton(
                                                   child: Text("Yes"),
                                                   onPressed: () {
-                                                    globals.currentShiftNum = shifts[index].shiftId;
-                                                    deleteShift();
+                                                    //globals.currentShiftNum = shifts[index].shiftId;
+                                                    //deleteShift();
                                                     Navigator.of(context).pop();
                                                   },
                                                 ),

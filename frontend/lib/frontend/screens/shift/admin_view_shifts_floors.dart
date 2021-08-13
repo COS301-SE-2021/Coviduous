@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:frontend/backend/controllers/shift_controller.dart';
 
 import 'package:frontend/frontend/screens/shift/admin_view_shifts_rooms.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/requests/shift_requests/get_rooms_request.dart';
-import 'package:frontend/requests/shift_requests/get_shifts_request.dart';
-import 'package:frontend/responses/shift_responses/get_rooms_response.dart';
-import 'package:frontend/responses/shift_responses/get_shifts_response.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/floor.dart';
 import 'package:frontend/frontend/screens/shift/admin_view_shifts_floor_plans.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
@@ -22,9 +16,6 @@ class ViewShiftsFloors extends StatefulWidget {
 }
 
 class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
-  ShiftController services = new ShiftController();
-  GetRoomsResponse response;
-  GetShiftsResponse response2;
   int numOfShifts = 0;
 
   Future getRooms() async {

@@ -9,8 +9,8 @@
     - Chaoane Malakoane
  */
 
-import 'package:frontend/subsystems/user_subsystem/company.dart';
-import 'package:frontend/subsystems/user_subsystem/user.dart';
+import 'package:frontend/models/user/company.dart';
+import 'package:frontend/models/user/user.dart';
 
 import 'package:frontend/backend/backend_globals/user_globals.dart'
     as userGlobals;
