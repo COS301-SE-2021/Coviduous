@@ -31,7 +31,7 @@ exports.containsRequiredFieldsForCreateAnnouncement = async (req) => {
    return hasRequiredFields;
 }
 
-exports.verifyRequestToken = async (token) => {
+exports.verifyRequestToken = async () => {
   let isTokenValid=true;
   
    return isTokenValid;
@@ -45,60 +45,86 @@ exports.verifyCredentials = async (adminId,companyId) => {
   
 }
 
+/**
+ * This function creates a new announcement via an HTTP POST request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  type: "GENERAL" || "EMERGENCY"
+ *  message: String
+ *  adminId: String
+ *  companyId: String
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res An HTTP status indicating whether the request was successful or not.
+ */
 exports.createAnnouncement = async (req, res) => {
+    if (await this.verifyRequestToken() === false) {
+        return res.status(403).send({
+            message: '403 Forbidden: Access denied',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
 
-  try {
-    if(await this.containsRequiredFieldsForCreateAnnouncement(reqJson)==true)
-    {
-      //if the req body has the fields we require we can continue to validate what is inside the the 
-      if((await this.verifyRequestToken(reqJson)) && (await this.verifyCredentials(reqJson,reqJson)))
-      {
-        //continue if we have a valid token and valid credentials
+    let fieldErrors = [];
 
-      }
-      else
-    {
-        console.log('400 Bad Request : Announcement unsuccessfully created , Invalid Token , Credentials');
-      return res.status(400).send({
-        message: '400 Bad Request : Announcement unsuccessfully created , Invalid Token , Credentials',
-      });
-
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
 
+    if (reqJson.type == null || reqJson.type === '') {
+        fieldErrors.push({field: 'type', message: 'Type may not be empty'});
     }
-    else
-    {
-        console.log('400 Bad Request : Announcement unsuccessfully created , Not all fields are correct');
-      return res.status(400).send({
-        message: '400 Bad Request : Announcement unsuccessfully created , Not all fields are correct',
-      });
 
+    if (reqJson.type !== 'GENERAL' || reqJson.type !== 'EMERGENCY') {
+        fieldErrors.push({field: 'type', message: 'Type must be either GENERAL or EMERGENCY'});
     }
+
+    if (reqJson.message == null || reqJson.message === "") {
+        fieldErrors.push({field: 'message', message: 'Message may not be empty'})
+    }
+
+    if (reqJson.adminId == null || reqJson.adminId === "") {
+        fieldErrors.push({field: 'adminId', message: 'Admin ID may not be empty'})
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    if (await this.verifyCredentials(reqJson.adminId, reqJson.companyId) === false) {
+        return res.status(403).send({
+            message: '403 Forbidden: Access denied',
+        });
+    }
+
     let announcementId = "ANNOUNC-" + uuid.v4();
     let timestamp = new Date().today() + " @ " + new Date().timeNow();
 
     let announcementData = {
-      announcementId: announcementId,
-      type: reqJson.type,
-      message: reqJson.message,
-      timestamp: timestamp,
-      adminId: reqJson.adminId,
-      companyId: reqJson.companyId
+        announcementId: announcementId,
+        type: reqJson.type,
+        message: reqJson.message,
+        timestamp: timestamp,
+        adminId: reqJson.adminId,
+        companyId: reqJson.companyId
     }
 
-    if (await database.createAnnouncement(announcementData.announcementId, announcementData) == true)
-    {
-      return res.status(200).send({
-        message: 'Announcement successfully created',
-        data: announcementData
-      });
+    let result = await database.createAnnouncement(announcementData.announcementId, announcementData);
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
     }
-  } catch (error) {
-      console.log(error);
-      return res.status(500).send(error);
-  }
 };
 
 exports.deleteAnnouncement = async (req, res) => {
