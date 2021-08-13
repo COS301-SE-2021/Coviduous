@@ -54,22 +54,11 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
               ),
               Container(
                 alignment: Alignment.center,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width / (2 * globals.getWidgetScaling()),
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height / (24 * globals.getWidgetScaling()),
-                color: Theme
-                    .of(context)
-                    .primaryColor,
+                width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                color: Theme.of(context).primaryColor,
                 child: Text('No notifications found',
-                    style: TextStyle(fontSize: (MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.01) * 2.5)),
+                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -78,10 +67,7 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                   color: Colors.white,
                   padding: EdgeInsets.all(12),
                   child: Text('You have no notifications.',
-                      style: TextStyle(fontSize: (MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.01) * 2.5))
+                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
               )
             ]
         );
@@ -100,7 +86,6 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
                         child: Text('Notification ' + reverseNotifications[index].notificationId),
                       ),
@@ -111,25 +96,25 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text('From: ' + reverseNotifications[index].adminId, style: TextStyle(color: Colors.black)),
+                            child: Text('From: ' + reverseNotifications[index].adminId),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text('Subject: ' + reverseNotifications[index].subject, style: TextStyle(color: Colors.black)),
+                            child: Text('Subject: ' + reverseNotifications[index].subject),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text('Date: ' + reverseNotifications[index].timestamp, style: TextStyle(color: Colors.black)),
+                            child: Text('Date: ' + reverseNotifications[index].timestamp),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text('Message: ' + reverseNotifications[index].message, style: TextStyle(color: Colors.black)),
+                            child: Text('Message: ' + reverseNotifications[index].message),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(

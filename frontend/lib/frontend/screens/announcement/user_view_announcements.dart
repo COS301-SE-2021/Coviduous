@@ -79,7 +79,6 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
                         child: Text('Announcement ' + (index+1).toString()),
                       ),
@@ -90,22 +89,19 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Type: ' + announcements[index].getType(), style: TextStyle(color: Colors.black)),
-                              //child: Text('Type: General', style: TextStyle(color: Colors.black)),
+                              child: Text('Type: ' + announcements[index].getType()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: ' + announcements[index].getTimestamp(), style: TextStyle(color: Colors.black)),
-                              //child: Text('Date: test', style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + announcements[index].getTimestamp()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Message: ' + announcements[index].getMessage(), style: TextStyle(color: Colors.black)),
-                              //child: Text('Message: Hello World', style: TextStyle(color: Colors.black)),
+                              child: Text('Message: ' + announcements[index].getMessage()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
