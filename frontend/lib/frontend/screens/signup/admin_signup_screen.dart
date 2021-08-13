@@ -117,7 +117,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   //email
                                   TextFormField(
                                     textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                    decoration: InputDecoration(labelText: 'Email:'),
+                                    decoration: InputDecoration(labelText: 'Email'),
                                     keyboardType: TextInputType.emailAddress,
                                     controller: _email,
                                     validator: (value) {
