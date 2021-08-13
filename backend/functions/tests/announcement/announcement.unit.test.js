@@ -46,7 +46,7 @@ describe('Testing create announcement units', function () {
 
   
 
-  it('Test to identify if the the function can identify if the request has the incorrect type , The type should be GENERAL or EMERGENCY',async function() {
+  it('Throw exception if type is not set to GENERAL or EMERGENCY',async function() {
     var reqBodyData = {
         announcementId: "mock",
         type: "mock", 
