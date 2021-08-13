@@ -63,16 +63,18 @@ exports.createAnnouncement = async (req, res) => {
         });
     }
 
+    if(req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
     //Look into express.js middleware so that these lines are not necessary
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
     //////////////////////////////////////////////////////////////////////
 
     let fieldErrors = [];
-
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
 
     if (reqJson.type == null || reqJson.type === '') {
         fieldErrors.push({field: 'type', message: 'Type may not be empty'});
