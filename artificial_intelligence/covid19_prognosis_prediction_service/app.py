@@ -5,18 +5,15 @@ import pandas as pd
 
 
 # list of attributes
-#l1=['O-blood-group','child-adult','medical-complication','international-travel','contact-with-covid','covid-symptoms']
 l1=['cough','fever','sore_throat','shortness_of_breath','head_ache']
 
 # classes
-#disease=['Very-high','Pretty-High','High','Pretty-low','low']
 disease=['negative','positive']
 # TESTING DATA df 
 df=pd.read_csv("dataset/test.csv")
 
 df.replace({'prognosis':{'negative':0,'positive':1}},inplace=True)
 
-# print(df.head())
 
 X= df[l1]
 y = df[["prognosis"]]
