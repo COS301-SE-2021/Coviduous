@@ -152,6 +152,7 @@ exports.createAnnouncement = async (req, res) => {
 
     return res.status(200).send({
        message: 'Announcement successfully created',
+       data: announcementData
     });
 };
 
@@ -232,6 +233,7 @@ exports.viewAnnouncements = async (req, res) => {
     }
 
     let result = await database.viewAnnouncements();
+    
     if (!result) {
         return res.status(500).send({
             message: '500 Server Error: DB error',
