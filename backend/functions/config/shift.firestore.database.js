@@ -45,10 +45,12 @@ exports.updateShift = async (shiftID,shiftData) =>{
            startTime:shiftData.startTime,
            endTime:shiftData.endTime
        }); 
-       return res.status(200).send();
+       return true;
+       //return res.status(200).send();
   }
   catch (error) {
     console.log(error);
-    return res.status(500).send(error);
+    return false;
+    //return res.status(500).send(error);
 }
 };
