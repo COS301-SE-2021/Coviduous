@@ -89,7 +89,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                   //first name
                                   TextFormField(
                                     textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                    decoration: InputDecoration(labelText: 'First name:'),
+                                    decoration: InputDecoration(labelText: 'First name'),
                                     keyboardType: TextInputType.text,
                                     controller: _firstName,
                                     validator: (value) {
