@@ -1,5 +1,8 @@
 var chai = require("chai");
+var chaiHttp = require("chai-http");
+chai.use(chaiHttp);
 var expect = chai.expect;
+var should = chai.should();
 var uuid = require("uuid"); // npm install uuid
 var triggers = require('../triggers.js');
 var firebasemock = require('firebase-mock'); // npm install firebase-mock --save-dev
@@ -14,110 +17,191 @@ var mocksdk = firebasemock.MockFirebaseSdk(null, function() {
 });
 
 var mockapp = mocksdk.initializeApp();
-//we have 3 main units create,delete and update for announcements
+let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 
-describe('Testing create announcement units', function () {
-  //NOTE: you cannot check if credientials are vaild before checking if they were added to the request body or header first
-  // This test is to check if the request contains the nessessery fields before we can check if they are vaild
-  it('Test to identify if the the function can identify if the request has null fields, we will leave out the admin field from the request body',async function() {
-    var reqBodyData = {
-        announcementId: "mock",
-        type: "mock", 
-        message: "mock", 
-        timestamp: "mock", 
-        companyId: "mock"
-      }
-      var result= await announcementService.containsRequiredFieldsForCreateAnnouncement(reqBodyData);
-    expect(result).to.be.false;
-  });
+describe('Create announcement unit tests', function() {
+   it('Return 400 if request is empty', function (done) {
+       chai.request(server)
+           .post('/api/announcements')
+           .send(null)
+           .end((err, res) => {
+               should.exist(res);
+               res.should.have.status(400);
+               console.log(res.body);
+               done();
+           });
+   });
 
-  it('Test to identify if the the function can identify if the request has all fields but some have empty inputs, we will leave out the admin and message field from the request body',async function() {
-    var reqBodyData = {
-        announcementId: "mock",
-        type: "mock", 
-        message: "", 
-        timestamp: "mock", 
-        adminId:"",
-        companyId: "mock"
-      }
-      var result= await announcementService.containsRequiredFieldsForCreateAnnouncement(reqBodyData);
-    expect(result).to.be.false;
-  });
+    it('Return 400 if empty type', function(done) {
+        let req = {
+            type: '',
+            message: 'message',
+            adminId: 'ADMIN-ID',
+            companyId: 'COMPANY-ID',
+        };
 
-  
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
-  it('Throw exception if type is not set to GENERAL or EMERGENCY',async function() {
-    var reqBodyData = {
-        announcementId: "mock",
-        type: "mock", 
-        message: "mock", 
-        timestamp: "mock", 
-        adminId:"mock",
-        companyId: "mock"
-      }
-      var result= await announcementService.containsRequiredFieldsForCreateAnnouncement(reqBodyData);
-    expect(result).to.be.false;
-  });
+   it('Return 400 if incorrect type', function(done) {
+      let req = {
+          type: 'NOT A REAL TYPE',
+          message: 'message',
+          adminId: 'ADMIN-ID',
+          companyId: 'COMPANY-ID',
+      };
 
-  it('Test to identify if the the function can identify if the request has the correct type, we will set the type to GENERAL',async function() {
-    var reqBodyData = {
-        announcementId: "mock",
-        type: "GENERAL", 
-        message: "mock", 
-        timestamp: "mock", 
-        adminId:"mock",
-        companyId: "mock"
-      }
-      var result= await announcementService.containsRequiredFieldsForCreateAnnouncement(reqBodyData);
-    expect(result).to.be.true;
-  });
+      chai.request(server)
+          .post('/api/announcements')
+          .send(req)
+          .end((err, res) => {
+              should.exist(res);
+              res.should.have.status(400);
+              console.log(res.body);
+              done();
+          });
+   });
 
-  it('Test to identify if the the function can identify if the request has the correct type, we will set the type to EMERGENCY',async function() {
-    var reqBodyData = {
-        announcementId: "mock",
-        type: "EMERGENCY", 
-        message: "mock", 
-        timestamp: "mock", 
-        adminId:"mock",
-        companyId: "mock"
-      }
-      var result= await announcementService.containsRequiredFieldsForCreateAnnouncement(reqBodyData);
-    expect(result).to.be.true;
-  });
+    it('Return 400 if empty message', function(done) {
+        let req = {
+            type: 'GENERAL',
+            message: '',
+            adminId: 'ADMIN-ID',
+            companyId: 'COMPANY-ID',
+        };
 
-  it('Test to identify if the the function can identify if the request has the valid jwt token',async function() {
-    //functionality for token needs to be added
-    let token="";
-      var result= await announcementService.verifyRequestToken(token);
-    expect(result).to.be.true;
-  });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
-  it('Test to identify if the the function can identify if the request has the invalid jwt token',async function() {
-    //functionality for token needs to be added
-    let token="";
-      var result= await announcementService.verifyRequestToken(token);
-    expect(result).to.be.true;
-  });
+    it('Return 400 if empty admin ID', function(done) {
+        let req = {
+            type: 'GENERAL',
+            message: 'message',
+            adminId: '',
+            companyId: 'COMPANY-ID',
+        };
 
-  it('Test to identify if the the function can identify if the request has the valid user credientials',async function() {
-    //functionality needs a user to be registered then we validate their credentials
-    //validate their companyId and AdminId
-    let adminId="";
-    let companyId="";
-      var result= await announcementService.verifyCredentials(adminId,companyId);
-    expect(result).to.be.true;
-  });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
-  it('Test to identify if the the function can identify if the request has the invalid user credientials',async function() {
+    it('Return 400 if empty company ID', function(done) {
+        let req = {
+            type: 'GENERAL',
+            message: 'message',
+            adminId: 'ADMIN-ID',
+            companyId: '',
+        };
 
-    let adminId="Mock";
-    let companyId="Mock";
-      var result= await announcementService.verifyCredentials(adminId,companyId);
-    expect(result).to.be.true;
-  });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
+   it('Return 200 if creation successful', function(done) {
+       let req = {
+           type: 'GENERAL',
+           message: 'New announcement',
+           adminId: 'ADMIN-ID',
+           companyId: 'COMPANY-ID',
+       };
+
+       chai.request(server)
+           .post('/api/announcements')
+           .send(req)
+           .end((err, res) => {
+               should.exist(res);
+               res.should.have.status(200);
+               console.log(res.body);
+               done();
+           });
+   })
 });
 
+describe('Delete announcement unit tests', function() {
+   it('Return 400 if request is empty', function(done) {
+       chai.request(server)
+           .delete('/api/announcements')
+           .send(null)
+           .end((err, res) => {
+               should.exist(res);
+               res.should.have.status(400);
+               console.log(res.body);
+               done();
+           });
+   });
+
+   it('Return 200 if deletion is successful', function(done) {
+      let req = {
+          type: 'GENERAL',
+          message: 'Announcement to be deleted',
+          adminId: 'ADMIN-ID',
+          companyId: 'COMPANY-ID',
+      };
+
+       chai.request(server)
+           .post('/api/announcements')
+           .send(req)
+           .end((err, res) => {
+               console.log(res.body);
+               let req2 = {
+                   announcementId: res.body.announcementId,
+               };
+
+               chai.request(server)
+                   .delete('/api/announcements')
+                   .send(req2).end((err, res) => {
+                        should.exist(res);
+                        res.should.have.status(200);
+                        console.log(res.body);
+                        done();
+                   });
+           });
+   });
+});
+
+describe('Get announcement unit tests', function() {
+   it('Return 200 if retrieval is successful', function(done) {
+       chai.request(server)
+           .get('/api/announcements')
+           .send()
+           .end((err, res) => {
+               should.exist(res);
+               res.should.have.status(200);
+               console.log(res.body);
+               done();
+           });
+   });
+});
 
 /*describe('Firestore Function', function () {
   beforeEach(function() {
@@ -134,10 +218,10 @@ describe('Testing create announcement units', function () {
     var event = {
       data: new firebasemock.DeltaDocumentSnapshot(mockapp, null, {
         announcementId: announcementId,
-        type: 'general', 
-        message: 'test message', 
-        timestamp: 'test', 
-        adminId: 'AID-test', 
+        type: 'general',
+        message: 'test message',
+        timestamp: 'test',
+        adminId: 'AID-test',
         companyId: 'CID-test'
       }, 'announcements/' + announcementId),
       params: {
@@ -155,10 +239,10 @@ describe('Testing create announcement units', function () {
     var event = {
       data: new firebasemock.DeltaDocumentSnapshot(mockapp, {
         announcementId: announcementId,
-        type: 'general', 
-        message: 'test message', 
-        timestamp: 'test', 
-        adminId: 'AID-test', 
+        type: 'general',
+        message: 'test message',
+        timestamp: 'test',
+        adminId: 'AID-test',
         companyId: 'CID-test'
       }, null, 'announcements/' + announcementId),
       params: {
