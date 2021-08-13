@@ -42,7 +42,7 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
       if (globals.currentNotifications != null) {
         numberOfNotifications = globals.currentNotifications.length;
       }
-      print(globals.currentNotifications.length);
+      print(numberOfNotifications);
 
       if (numberOfNotifications == 0) {
         return Column(
