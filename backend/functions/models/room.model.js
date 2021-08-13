@@ -1,7 +1,8 @@
 
 class Room {
-    constructor(roomNum, floorNum, dimensions, deskDimentions, numDesks, percentage)
+    constructor(numOfRoomsInFloor, roomNum, floorNum, dimensions, deskDimentions, numDesks, percentage)
     {
+        this.currentNumberRoomInFloor = numOfRoomsInFloor;
         this.floorNumber = floorNum;
         this.roomNumber = roomNum;
         this.roomArea = dimensions; //The dimensions of a room are determined by the square ft of the room which the admin can calculate or fetch from the buildings architectural documentation.

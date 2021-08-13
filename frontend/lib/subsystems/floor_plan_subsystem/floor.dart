@@ -28,7 +28,7 @@ class Floor {
       numRooms: json["numRooms"],
       currentCapacity: json["currentCapacity"],
       maxCapacity: json["maxCapacity"],
-      floorPlanNumber: json["floorPlanNumber"],
+      floorPlanNumber: json["floorplanNumber"],
       adminId: json["adminId"],
       companyId: json["companyId"]
   );
@@ -38,7 +38,7 @@ class Floor {
     "numRooms": numRooms,
     "currentCapacity": currentCapacity,
     "maxCapacity": maxCapacity,
-    "floorPlanNumber": floorPlanNumber,
+    "floorplanNumber": floorPlanNumber,
     "adminId" : adminId,
     "companyId": companyId
   };

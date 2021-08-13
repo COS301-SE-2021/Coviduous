@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
-import 'package:frontend/requests/floor_plan_requests/edit_room_request.dart';
-import 'package:frontend/responses/floor_plan_responses/edit_room_response.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_view_rooms.dart';
-import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
+import 'package:frontend/subsystems/floor_plan_subsystem/room.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminEditRoomAdd extends StatefulWidget {
@@ -18,16 +16,42 @@ class AdminEditRoomAdd extends StatefulWidget {
   _AdminEditRoomAddState createState() => _AdminEditRoomAddState();
 }
 
+bool editedRoom;
+
+Future editRoom(String roomNumber, double roomArea, double capacityPercentage, int numberOfDesks,
+    int occupiedDesks, double currentCapacity, double deskArea, double capacityOfPeopleForSixFtGrid,
+    double capacityOfPeopleForSixFtCircle) async {
+  await Future.wait([
+    floorPlanController.updateRoom(globals.currentFloorNum, roomNumber,
+        roomArea, capacityPercentage, numberOfDesks, occupiedDesks, currentCapacity,
+        deskArea, capacityOfPeopleForSixFtGrid, capacityOfPeopleForSixFtCircle)
+  ]).then((results) {
+    editedRoom = results.first;
+  });
+}
+
+Future getRooms(String floorNumber) async {
+  await Future.wait([
+    floorPlanController.getRooms()
+  ]).then((lists) {
+    globals.currentRooms = lists.first.where((room) => room.getFloorNumber() == floorNumber);
+  });
+}
+
 class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
   TextEditingController _roomNumber = TextEditingController();
   TextEditingController _roomArea = TextEditingController();
   TextEditingController _deskArea = TextEditingController();
   TextEditingController _numOfDesks = TextEditingController();
-  TextEditingController _deskMaxCapacity = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-  FloorPlanController services = new FloorPlanController();
+  Future<bool> _onWillPop() async {
+    getRooms(globals.currentFloorNum).then((result){
+      Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
+    });
+    return (await true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +69,15 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
       return Container();
     }
 
-    Room room = services.getRoomDetails(globals.currentRoomNum);
+    Room room = globals.currentRoom;
     if (_roomNumber.text.isEmpty)
-      _roomNumber.text = room.getRoomNum();
+      _roomNumber.text = room.getRoomNumber();
     if (_roomArea.text.isEmpty)
-      _roomArea.text = room.dimensions.toString();
+      _roomArea.text = room.getRoomArea().toString();
     if (_deskArea.text.isEmpty)
-      _deskArea.text = room.deskDimentions.toString();
+      _deskArea.text = room.getDeskArea().toString();
     if (_numOfDesks.text.isEmpty)
-      _numOfDesks.text = room.numDesks.toString();
-    if (_deskMaxCapacity.text.isEmpty)
-      _deskMaxCapacity.text = room.deskMaxCapcity.toString();
-
-    Future<bool> _onWillPop() async {
-      Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
-      return (await true);
-    }
+      _numOfDesks.text = room.getNumberOfDesks().toString();
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -69,7 +86,9 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
             title: Text('Manage room ' + globals.currentRoomNum),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
+                getRooms(globals.currentFloorNum).then((result){
+                  Navigator.of(context).pushReplacementNamed(AdminViewRooms.routeName);
+                });
               },
             ),
           ),
@@ -92,13 +111,13 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(
                                     labelText: 'Room number or name (optional)',
-                                    hintText: room.getRoomNum(),
+                                    hintText: room.getRoomNumber(),
                                 ),
                                 keyboardType: TextInputType.text,
                                 controller: _roomNumber,
                                 validator: (value) {
                                   if (value.isNotEmpty) {
-                                    print(room.getRoomNum());
+                                    print(room.getRoomNumber());
                                     if(!(RegExp(r"^[a-zA-Z0-9 ,.'-]+$")).hasMatch(value)) //Check if valid name format
                                         {
                                       return 'Invalid room number or name';
@@ -112,7 +131,7 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(
                                     labelText: 'Room area (in meters squared)',
-                                    hintText: room.dimensions.toString(),
+                                    hintText: room.getRoomArea().toString(),
                                 ),
                                 keyboardType: TextInputType.text,
                                 controller: _roomArea,
@@ -126,7 +145,7 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                       return null;
                                     }
                                   } else {
-                                    if (room.dimensions <= 0.0) {
+                                    if (room.getRoomArea() <= 0.0) {
                                       return "Room area must be greater than zero";
                                     }
                                   }
@@ -138,7 +157,7 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(
                                     labelText: 'Desk area (in meters squared)',
-                                    hintText: room.deskDimentions.toString(),
+                                    hintText: room.getDeskArea().toString(),
                                 ),
                                 keyboardType: TextInputType.text,
                                 controller: _deskArea,
@@ -152,7 +171,7 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                       return null;
                                     }
                                   } else {
-                                    if (room.deskDimentions <= 0.0) {
+                                    if (room.getDeskArea() <= 0.0) {
                                       return "Desk area must be greater than zero";
                                     }
                                   }
@@ -164,7 +183,7 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                 textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                 decoration: InputDecoration(
                                     labelText: 'Number of desks',
-                                    hintText: room.numDesks.toString(),
+                                    hintText: room.getNumberOfDesks().toString(),
                                 ),
                                 keyboardType: TextInputType.text,
                                 controller: _numOfDesks,
@@ -178,33 +197,8 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                       return null;
                                     }
                                   } else {
-                                    if (room.numDesks <= 0) {
+                                    if (room.getNumberOfDesks() <= 0) {
                                       return "Number of desks must be greater than zero";
-                                    }
-                                  }
-                                  return null;
-                                },
-                              ),
-                              TextFormField(
-                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
-                                decoration: InputDecoration(
-                                  labelText: 'Maximum capacity per desk',
-                                  hintText: room.deskMaxCapcity.toString(),
-                                ),
-                                keyboardType: TextInputType.text,
-                                controller: _deskMaxCapacity,
-                                validator: (value) {
-                                  if (value.isNotEmpty) {
-                                    if (!globals.isNumeric(value)) {
-                                      return "Maximum capacity must be a number";
-                                    } else if (int.parse(value) <= 0) {
-                                      return "Maximum capacity must be greater than zero";
-                                    } else {
-                                      return null;
-                                    }
-                                  } else {
-                                    if (room.deskMaxCapcity <= 0) {
-                                      return "Maximum capacity must be greater than zero";
                                     }
                                   }
                                   return null;
@@ -221,10 +215,17 @@ class _AdminEditRoomAddState extends State<AdminEditRoomAdd> {
                                 onPressed: () {
                                   FormState form = _formKey.currentState;
                                   if (form.validate()) {
-                                    EditRoomResponse response = services.editRoomMock(EditRoomRequest(globals.currentFloorNum, _roomNumber.text, globals.currentRoomNum, double.parse(_roomArea.text), services.getPercentage(), int.parse(_numOfDesks.text), double.parse(_deskArea.text), int.parse(_deskMaxCapacity.text)));
-                                    print(response.getResponse());
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Room information updated")));
+                                    editRoom(_roomNumber.text, double.parse(_roomArea.text), room.getCapacityPercentage(), int.parse(_numOfDesks.text),
+                                        room.getOccupiedDesks(), room.getCurrentCapacity(), double.parse(_deskArea.text), room.getCapacityForSixFtGrid(),
+                                        room.capacityOfPeopleForSixFtCircle).then((result){
+                                      if (editedRoom == true) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("Room information updated")));
+                                      } else {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("Room update unsuccessful.")));
+                                      }
+                                    });
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(content: Text("Please enter required fields")));

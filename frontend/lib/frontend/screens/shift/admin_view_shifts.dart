@@ -23,8 +23,8 @@ class _ViewShiftsState extends State<ViewShifts> {
   ShiftController services = new ShiftController();
   GetShiftsResponse response;
   DeleteShiftResponse response2;
-  List<Shift> shifts = globals.shifts;
-  int numOfShifts = globals.shifts.length;
+  List<Shift> shifts = globals.currentShifts;
+  int numOfShifts = globals.currentShifts.length;
 
   Future deleteShift() async {
     await Future.wait([

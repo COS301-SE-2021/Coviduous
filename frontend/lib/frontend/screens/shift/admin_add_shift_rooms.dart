@@ -39,8 +39,9 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
     }
 
     Widget getList() {
-      List<Room> rooms = globals.rooms;
-      int numOfRooms = globals.rooms.length;
+      //List<Room> rooms = globals.rooms;
+      //int numOfRooms = globals.rooms.length;
+      int numOfRooms = 0;
 
       print(numOfRooms);
 
@@ -84,7 +85,8 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Room ' + rooms[index].getRoomNum()),
+                        //child: Text('Room ' + rooms[index].getRoomNum()),
+                        child: Text('Placeholder'),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -93,17 +95,19 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Number of desks: ' + rooms[index].desks.length.toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Occupied desk percentage: ' + rooms[index].getPercentage().toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -115,7 +119,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                   ElevatedButton(
                                       child: Text('Create shift'),
                                       onPressed: () {
-                                        globals.currentRoomNum = rooms[index].getRoomNum();
+                                        //globals.currentRoomNum = rooms[index].getRoomNum();
                                         Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
                                       }),
                                 ],

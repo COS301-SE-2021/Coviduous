@@ -23,7 +23,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
   GetFloorsResponse response;
 
   Future getFloors() async {
-    await Future.wait([
+    /*await Future.wait([
       services.getFloors(GetFloorsRequest(globals.currentFloorPlanNum))
     ]).then((responses) {
       response = responses.first;
@@ -48,7 +48,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                 )
         );
       }
-    });
+    });*/
   }
 
   Future<bool> _onWillPop() async {
@@ -73,8 +73,9 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
     }
 
     Widget getList() {
-      List<FloorPlan> floorPlans = globals.floorPlans;
-      int numOfFloorPlans = floorPlans.length;
+      //List<FloorPlan> floorPlans = globals.floorPlans;
+      //int numOfFloorPlans = floorPlans.length;
+      int numOfFloorPlans = 0;
 
       print(numOfFloorPlans);
 
@@ -149,8 +150,8 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                         color: Theme
                             .of(context)
                             .primaryColor,
-                        child: Text(
-                            'Floor plan ' + floorPlans[index].getFloorPlanId()),
+                        //child: Text('Floor plan ' + floorPlans[index].getFloorPlanId()),
+                        child: Text('Placeholder'),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -159,9 +160,10 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Number of floors: ' + floorPlans[index].getNumFloors().toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -173,7 +175,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentFloorPlanNum = floorPlans[index].getFloorPlanId();
+                                        //globals.currentFloorPlanNum = floorPlans[index].getFloorPlanId();
                                         getFloors();
                                       }),
                                 ],

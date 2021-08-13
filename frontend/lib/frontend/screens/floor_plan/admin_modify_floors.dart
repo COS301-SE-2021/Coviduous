@@ -2,19 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
+import 'package:frontend/frontend/screens/floor_plan/admin_modify_floor_plans.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_rooms.dart';
-import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
-import 'package:frontend/requests/floor_plan_requests/add_floor_request.dart';
-import 'package:frontend/requests/floor_plan_requests/delete_floor_request.dart';
-import 'package:frontend/responses/floor_plan_responses/add_floor_response.dart';
-import 'package:frontend/responses/floor_plan_responses/delete_floor_response.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/floor_globals.dart'
-    as floorGlobals;
 
 class AdminModifyFloors extends StatefulWidget {
   static const routeName = "/admin_modify_floors";
@@ -22,11 +16,59 @@ class AdminModifyFloors extends StatefulWidget {
   _AdminModifyFloorsState createState() => _AdminModifyFloorsState();
 }
 
-class _AdminModifyFloorsState extends State<AdminModifyFloors> {
-  String _chosenValue;
+bool createdFloor = false;
+bool deletedFloor = false;
 
+Future getFloors(String floorPlanNumber) async {
+  await Future.wait([
+    floorPlanController.getFloors()
+  ]).then((lists) {
+    globals.currentFloors.clear();
+    for (int i = 0; i < globals.currentFloorPlan.getNumFloors(); i++) {
+      if (lists.first[i].getFloorPlanNumber() == floorPlanNumber) {
+        globals.currentFloors.add(lists.first[i]);
+      }
+    }
+  });
+}
+
+Future getRooms(String floorNumber) async {
+  await Future.wait([
+    floorPlanController.getRooms()
+  ]).then((lists) {
+    globals.currentRooms.clear();
+    for (int i = 0; i < globals.currentFloor.getNumRooms(); i++) {
+      if (lists.first[i].getFloorNumber() == floorNumber) {
+        globals.currentRooms.add(lists.first[i]);
+      }
+    }
+  });
+}
+
+Future addFloor() async {
+  await Future.wait([
+    floorPlanController.createFloor(globals.currentFloorNum, 0, 0, 0, globals.currentFloorPlanNum, globals.loggedInUserId, globals.loggedInCompanyId)
+  ]).then((results) {
+    createdFloor = results.first;
+  });
+}
+
+Future deleteFloor(String floorNumber) async {
+  await Future.wait([
+    floorPlanController.deleteFloor(floorNumber)
+  ]).then((results) {
+    deletedFloor = results.first;
+  });
+}
+
+class _AdminModifyFloorsState extends State<AdminModifyFloors> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+    for (int i = 0; i < globals.currentFloorPlans.length; i++) {
+      if (globals.currentFloorPlans[i].getFloorPlanNumber() == globals.currentFloorPlanNum) {
+        globals.currentFloorPlan = globals.currentFloorPlans[i];
+      }
+    }
+    Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
     return (await true);
   }
 
@@ -46,32 +88,42 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      int numOfFloors = floorGlobals.globalNumFloors;
+      int numOfFloors = globals.currentFloors.length;
 
       print(numOfFloors);
 
       if (numOfFloors == 0) {
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-                  title: Text('Error'),
-                  content: Text(
-                      'No floors have been defined for your company. Please return to the previous page and add a new floor plan.'),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('Okay'),
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                    )
-                  ],
-                ));
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.pushReplacementNamed(context, FloorPlanScreen.routeName);
-        });
-        return Container();
+        return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height /
+                (5 * globals.getWidgetScaling()),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: MediaQuery.of(context).size.width /
+                (2 * globals.getWidgetScaling()),
+            height: MediaQuery.of(context).size.height /
+                (24 * globals.getWidgetScaling()),
+            color: Theme.of(context).primaryColor,
+            child: Text('No plans found',
+                style: TextStyle(
+                    fontSize:
+                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+          ),
+          Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width /
+                  (2 * globals.getWidgetScaling()),
+              height: MediaQuery.of(context).size.height /
+                  (12 * globals.getWidgetScaling()),
+              color: Colors.white,
+              padding: EdgeInsets.all(12),
+              child: Text('No floors have been registered for this floor plan.',
+                  style: TextStyle(
+                      fontSize:
+                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+        ]);
       } else {
         //Else create and return a list
         return ListView.builder(
@@ -86,10 +138,9 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
                     child: Text(
-                        'Floor ' + services.getFloors()[index].getFloorNumber()),
+                        'Floor ' + globals.currentFloors[index].getFloorNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -100,11 +151,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                           height: 50,
                           color: Colors.white,
                           child: Text(
-                              'Number of rooms: ' +
-                                  services
-                                      .getFloors()[index]
-                                      .getNumRooms()
-                                      .toString(),
+                              'Number of rooms: ' + globals.currentFloors[index].getNumRooms().toString(),
                               style: TextStyle(color: Colors.black)),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
@@ -117,41 +164,43 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    globals.currentFloorNum = services
-                                        .getFloors()[index]
-                                        .getFloorNumber();
-                                    Navigator.of(context).pushReplacementNamed(
-                                        AdminModifyRooms.routeName);
+                                    globals.currentFloor = globals.currentFloors[index];
+                                    globals.currentFloorNum = globals.currentFloors[index].getFloorNumber();
+                                    getRooms(globals.currentFloors[index].getFloorNumber()).then((result){
+                                      Navigator.of(context).pushReplacementNamed(AdminModifyRooms.routeName);
+                                    });
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    if (floorGlobals.globalNumFloors > 1) {
-                                      //Only allow deletion of floors if there is more than one floor
-                                      DeleteFloorResponse response3 =
-                                          services.deleteFloorMock(
-                                              DeleteFloorRequest(services
-                                                  .getFloors()[index]
-                                                  .getFloorNumber()));
-                                      print(response3.getResponse());
-
-                                      setState(() {});
+                                    if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
+                                      deleteFloor(globals.currentFloors[index].getFloorNumber()).then((result){
+                                        if (deletedFloor == true) {
+                                          getFloors(globals.currentFloorPlanNum).then((result){
+                                            setState(() {});
+                                          });
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Floor deletion unsuccessful.")));
+                                        }
+                                      });
                                     } else {
                                       showDialog(
                                           context: context,
                                           builder: (ctx) => AlertDialog(
-                                                title: Text('Error'),
-                                                content: Text(
-                                                    'Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the previous page.'),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    child: Text('Okay'),
-                                                    onPressed: () {
-                                                      Navigator.of(ctx).pop();
-                                                    },
-                                                  )
-                                                ],
-                                              ));
+                                            title: Text('Error'),
+                                            content: Text(
+                                                'Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the floor plan homepage.'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text('Okay'),
+                                                onPressed: () {
+                                                  Navigator.of(ctx).pop();
+                                                },
+                                              )
+                                            ],
+                                          )
+                                      );
                                     }
                                   }),
                             ],
@@ -169,11 +218,16 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Manage floors"),
+          title: Text("Manage floors for floor plan " + globals.currentFloorPlanNum),
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+              for (int i = 0; i < globals.currentFloorPlans.length; i++) {
+                if (globals.currentFloorPlans[i].getFloorPlanNumber() == globals.currentFloorPlanNum) {
+                  globals.currentFloorPlan = globals.currentFloorPlans[i];
+                }
+              }
+              Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
             },
           ),
         ),
@@ -192,15 +246,16 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                 child: Text('Add floor'),
                 onPressed: () {
                   //Add new floor and reload page
-                  AddFloorResponse response2 = services.addFloorMock(
-                      AddFloorRequest(
-                          globals.floorPlanId, globals.loggedInUserId, ""));
-                  print(response2.getResponse());
-                  /*
-                      floorGlobals.globalNumFloors++;
-                      floorGlobals.globalFloors.add(new Floor(globals.email, "", 0));
-                       */
-                  setState(() {});
+                  addFloor().then((result){
+                    if (createdFloor == true) {
+                      getFloors(globals.currentFloorPlanNum).then((result){
+                        setState(() {});
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Floor creation unsuccessful.")));
+                    }
+                  });
                 },
               ))
         ),

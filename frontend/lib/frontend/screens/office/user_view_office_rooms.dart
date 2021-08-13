@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
+//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_floors.dart';
 import 'package:frontend/frontend/screens/office/user_view_office_times.dart';
 import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
@@ -38,11 +38,11 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
+    //FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      List<Room> rooms =
-      services.getRoomsForFloorNum(globals.currentFloorNum);
-      int numOfRooms = rooms.length;
+      //List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNum);
+      //int numOfRooms = rooms.length;
+      int numOfRooms = 0;
 
       print(numOfRooms);
 
@@ -86,8 +86,8 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(
-                            'Room ' + rooms[index].getRoomNum()),
+                        //child: Text('Room ' + rooms[index].getRoomNum()),
+                        child: Text('Placeholder'),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -96,25 +96,27 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Number of desks: ' +
                                       services
                                           .getRoomDetails(rooms[index].getRoomNum())
                                           .numDesks
                                           .toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
+                              /*child: Text(
                                   'Available desk percentage: ' +
                                       (((services.getRoomDetails(rooms[index].getRoomNum()).numDesks -
                                           services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks) /
                                           services.getRoomDetails(rooms[index].getRoomNum()).numDesks) * 100)
                                           .toString(),
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Placeholder'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -126,7 +128,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        globals.currentRoomNum = rooms[index].getRoomNum();
+                                        //globals.currentRoomNum = rooms[index].getRoomNum();
                                         Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
                                       }),
                                 ],

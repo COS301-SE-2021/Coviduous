@@ -18,17 +18,17 @@ class FloorPlan {
   });
 
   factory FloorPlan.fromJson(Map<String, dynamic> json) => FloorPlan(
-    floorPlanNumber: json["floorPlanNumber"],
+    floorPlanNumber: json["floorplanNumber"],
     numFloors: json["numFloors"],
     adminId: json["adminId"],
-    companyId: json["companyId"]
+    companyId: json["companyId"],
   );
 
   Map<String, dynamic> toJson() => {
-    "floorPlanNumber": floorPlanNumber,
+    "floorplanNumber": floorPlanNumber,
     "numFloors": numFloors,
     "adminId" : adminId,
-    "companyId": companyId
+    "companyId": companyId,
   };
 
   String getFloorPlanNumber() {

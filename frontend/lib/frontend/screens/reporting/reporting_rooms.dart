@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/floor_plan_controller.dart';
+//import 'package:frontend/backend/controllers/floor_plan_controller.dart';
 import 'package:frontend/frontend/screens/reporting/reporting_floors.dart';
 import 'package:frontend/frontend/screens/reporting/reporting_shifts.dart';
 import 'package:frontend/subsystems/floorplan_subsystem/room.dart';
@@ -40,11 +40,11 @@ class ReportingRoomsState extends State<ReportingRooms> {
       return Container();
     }
 
-    FloorPlanController services = new FloorPlanController();
+    //FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      List<Room> rooms =
-      services.getRoomsForFloorNum(globals.currentFloorNum);
-      int numOfRooms = rooms.length;
+      //List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNum);
+      //int numOfRooms = rooms.length;
+      int numOfRooms = 0;
 
       print(numOfRooms);
 
@@ -95,8 +95,9 @@ class ReportingRoomsState extends State<ReportingRooms> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Room ' + rooms[index].getRoomNum(),
-                        style: TextStyle(color: Colors.white)),
+                    /*child: Text('Room ' + rooms[index].getRoomNum(),
+                        style: TextStyle(color: Colors.white)),*/
+                    child: Text('Placeholder'),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -106,57 +107,62 @@ class ReportingRoomsState extends State<ReportingRooms> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Room dimensions (in meters^2): ' +
                                   services
                                       .getRoomDetails(rooms[index].getRoomNum())
                                       .dimensions
                                       .toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
+                          child: Text('Placeholder'),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                         /*child: Text(
                               'Desk dimensions (in meters^2): ' +
                                   services
                                       .getRoomDetails(rooms[index].getRoomNum())
                                       .deskDimentions
                                       .toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
+                          child: Text('Placeholder'),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Number of desks: ' +
                                   services
                                       .getRoomDetails(rooms[index].getRoomNum())
                                       .numDesks
                                       .toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
+                          child: Text('Placeholder'),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Maximum desk capacity (people per desk): ' +
                                   services
                                       .getRoomDetails(rooms[index].getRoomNum())
                                       .deskMaxCapcity
                                       .toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
+                          child: Text('Placeholder'),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
+                          /*child: Text(
                               'Occupied desk percentage: ' +
                                   services
                                       .getRoomDetails(rooms[index].getRoomNum())
                                       .occupiedDesks
                                       .toString(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: Colors.black)),*/
+                          child: Text('Placeholder'),
                         ),
                         Container(
                           height: 50,
@@ -167,7 +173,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    globals.currentRoomNum = rooms[index].getRoomNum();
+                                    //globals.currentRoomNum = rooms[index].getRoomNum();
                                     Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
                                   }),
                             ],
