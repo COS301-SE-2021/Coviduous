@@ -198,6 +198,9 @@ exports.viewNotificationsUserEmail = async (req, res) => {
             fieldErrors.push({field: null, message: 'Request object may not be null'});
         }
 
+        let reqJson = JSON.parse(req.body);
+        console.log(reqJson);
+
         if (reqJson.userEmail == null || reqJson.userEmail === '') {
             fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
         }
@@ -208,9 +211,6 @@ exports.viewNotificationsUserEmail = async (req, res) => {
                 errors: fieldErrors
             });
         }
-
-        let reqJson = JSON.parse(req.body);
-        console.log(reqJson);
 
         let notifications = await database.viewNotificationsUserEmail(reqJson.userEmail);
 
