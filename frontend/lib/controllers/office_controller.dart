@@ -75,3 +75,35 @@ Future<bool> deleteBooking(int  bookingNumber) async {
 
   return false;
 }
+
+
+Future<List<Booking>> viewBookings() async {
+  String path = '/notifications';
+  String url = server + path;
+  var response;
+
+  try {
+    response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonString = response.body;
+      var jsonMap = jsonDecode(jsonString);
+
+      bookingDatabaseTable.clear();
+      numBookings = 0;
+
+      //
+      // for (var data in jsonMap["data"]) {
+      //   var announcementData = Booking.fromJson(data);
+      //   bookingDatabaseTable.add(announcementData);
+      //   numBookings++;
+      // }
+
+      return bookingDatabaseTable;
+    }
+  } catch (error) {
+    print(error);
+  }
+
+  return null;
+}
