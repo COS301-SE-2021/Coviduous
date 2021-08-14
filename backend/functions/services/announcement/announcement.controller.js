@@ -30,20 +30,6 @@ exports.setDatabase = async (db) => {
     database = db;
 }
 
-exports.containsRequiredFieldsForCreateAnnouncement = async (req) => {
-    let hasRequiredFields = false; 
-
-    if(req.type != null && req.type !== "" && req.message != null && req.message !== "" &&
-        req.adminId != null && req.adminId !== "" && req.companyId != null && req.companyId !== "") {
-        //check if the type is of the correct type "GENERAL OR EMERGENCY"
-        if(req.type==="GENERAL"||req.type==="EMERGENCY") {
-        hasRequiredFields=true;
-      }
-   }
-
-   return hasRequiredFields;
-}
-
 /**
  * Verifies the request token provided to it to ensure only authorized admins can make announcements.
  * @param token A JWT token.
