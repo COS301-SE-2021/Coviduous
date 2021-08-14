@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/signup/home_signup_screen.dart';
-import 'package:frontend/frontend/models/auth_provider.dart';
+import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/frontend/screens/forgot_password_screen.dart';
 import 'package:frontend/frontend/screens/main_homepage.dart';
 

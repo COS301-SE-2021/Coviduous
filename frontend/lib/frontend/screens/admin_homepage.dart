@@ -9,7 +9,7 @@ import 'package:frontend/frontend/screens/shift/home_shift.dart';
 import 'package:frontend/frontend/screens/user/admin_manage_account.dart';
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:frontend/frontend/screens/announcement/admin_view_announcements.dart';
-import 'package:frontend/frontend/models/auth_provider.dart';
+import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 
 import 'package:frontend/controllers/announcement_controller.dart' as announcementController;

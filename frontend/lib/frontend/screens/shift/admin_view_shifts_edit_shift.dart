@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/frontend/models/auth_provider.dart';
+import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/frontend/screens/shift/admin_view_shifts.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';

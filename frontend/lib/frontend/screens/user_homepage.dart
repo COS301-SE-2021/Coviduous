@@ -8,7 +8,7 @@ import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/user/user_manage_account.dart';
 import 'package:frontend/frontend/screens/announcement/user_view_announcements.dart';
 import 'package:frontend/frontend/screens/notification/user_view_notifications.dart';
-import 'package:frontend/frontend/models/auth_provider.dart';
+import 'package:frontend/auth/auth_provider.dart';
 
 import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
 import 'package:frontend/controllers/notification_controller.dart' as notificationController;

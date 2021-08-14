@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/user/admin_manage_account.dart';
-import 'package:frontend/frontend/models/auth_provider.dart';
+import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 

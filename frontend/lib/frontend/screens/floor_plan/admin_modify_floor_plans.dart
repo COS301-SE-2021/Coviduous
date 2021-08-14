@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/frontend/models/auth_provider.dart';
+import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';

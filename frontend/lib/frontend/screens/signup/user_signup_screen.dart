@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:frontend/frontend/models/auth_provider.dart';
-import 'package:frontend/frontend/models/firestore_cloud.dart';
+import 'package:frontend/auth/auth_provider.dart';
+import 'package:frontend/auth/firestore_cloud.dart';
 import 'package:frontend/frontend/screens/signup/home_signup_screen.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 

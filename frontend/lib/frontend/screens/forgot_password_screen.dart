@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
-import '../models/auth_provider.dart';
+import '../../auth/auth_provider.dart';
 
 import 'package:frontend/globals.dart' as globals;
 
