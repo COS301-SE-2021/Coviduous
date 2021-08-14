@@ -118,13 +118,91 @@ class Firestore {
 
     async addRoom(floorNumber,currentNumRoomsInFloor) {
       try {
+        console.log(currentNumRoomsInFloor);
+        let rooms = parseInt(currentNumRoomsInFloor)+1;
         response= await db.collection('floors').doc(floorNumber).update(
           {
-            "numRooms": currentNumRoomsInFloor+1
+            "numRooms": rooms
         }
         );
         
         return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+
+    async addFloor(floorplanNumber,currentNumFloorsInFloorplan) {
+      try {
+        let numFloors=parseInt(currentNumFloorsInFloorplan)+1;
+        response= await db.collection('floorplans').doc(floorplanNumber).update(
+          {
+            "numFloors": numFloors
+        }
+        );
+        
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+
+    async removeRoom(floorNumber,currentNumRoomsInFloor) {
+      try {
+        let numRooms=parseInt(currentNumRoomsInFloor)-1;
+        response= await db.collection('floors').doc(floorNumber).update(
+          {
+            "numRooms": numRooms
+        }
+        );
+        
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+
+    async removeFloor(floorplanNumber,currentNumFloorsInFloorplan) {
+      try {
+        let numFloors=parseInt(currentNumFloorsInFloorplan)-1;
+        response= await db.collection('floorplans').doc(floorplanNumber).update(
+          {
+            "numRooms": numFloors
+        }
+        );
+        
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+
+    async getFloor(floorNumber) {
+      try {
+        //response= await db.collection('floors').doc(floorNumber).get();
+        let response = db.collection('floors').doc(floorNumber);
+        let doc = await response.get();
+        let res=doc.data()
+        
+        return res;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+
+    async getFloorPlan(floorplanNumber) {
+      try {
+  
+        let response = db.collection('floorplans').doc(floorplanNumber);
+        let doc = await response.get();
+        let res=doc.data()
+        
+        return res;
       } catch (error) {
         console.log(error);
         return false;
