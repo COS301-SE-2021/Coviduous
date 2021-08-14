@@ -21,7 +21,7 @@ int numRooms = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on firebase
 
-Future<bool> createFloorPlan(String floorPlanNumber, int numFloors, String adminId, String companyId) async {
+Future<bool> createFloorPlan(int numFloors, String adminId, String companyId) async {
   String path = "/floorplan";
   String url = server + path;
   var request;
@@ -29,7 +29,6 @@ Future<bool> createFloorPlan(String floorPlanNumber, int numFloors, String admin
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
-      "floorPlanNumber": floorPlanNumber,
       "numFloors": numFloors,
       "adminId": adminId,
       "companyId": companyId,
@@ -49,8 +48,7 @@ Future<bool> createFloorPlan(String floorPlanNumber, int numFloors, String admin
   return false;
 }
 
-Future<bool> createFloor(String floorNumber, int numRooms, int currentCapacity,
-    int maxCapacity, String floorPlanNumber, String adminId, String companyId) async {
+Future<bool> createFloor(String floorPlanNumber, String adminId, String companyId) async {
   String path = "/floorplan/floor";
   String url = server + path;
   var request;
@@ -58,10 +56,6 @@ Future<bool> createFloor(String floorNumber, int numRooms, int currentCapacity,
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
-      "floorNumber": floorNumber,
-      "numRooms": numRooms,
-      "currentCapacity": currentCapacity,
-      "maxCapacity": maxCapacity,
       "floorPlanNumber": floorPlanNumber,
       "adminId": adminId,
       "companyId": companyId,
@@ -120,20 +114,21 @@ Future<bool> createRoom(int currentNumRoomsInFloor, String floorNumber, String r
   return false;
 }
 
-Future<List<FloorPlan>> getFloorPlans() async {
+Future<List<FloorPlan>> getFloorPlans(String companyId) async {
   String path = '/floorplan';
   String url = server + path;
-  var response;
+  var request;
 
   try {
-    response = await http.get(Uri.parse(url));
+    request = http.Request('GET', Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId
+    });
 
-    print(Uri.parse(url));
+    var response = await request.send();
 
     if (response.statusCode == 200) {
-      //print(response.body);
-
-      var jsonString = response.body;
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
@@ -155,18 +150,21 @@ Future<List<FloorPlan>> getFloorPlans() async {
   return null;
 }
 
-Future<List<Floor>> getFloors() async {
+Future<List<Floor>> getFloors(String floorPlanNumber) async {
   String path = '/floorplan/floors';
   String url = server + path;
-  var response;
+  var request;
 
   try {
-    response = await http.get(Uri.parse(url));
+    request = http.Request('GET', Uri.parse(url));
+    request.body = json.encode({
+      "floorplanNumber": floorPlanNumber
+    });
+
+    var response = await request.send();
 
     if (response.statusCode == 200) {
-      //print(response.body);
-
-      var jsonString = response.body;
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
@@ -188,18 +186,21 @@ Future<List<Floor>> getFloors() async {
   return null;
 }
 
-Future<List<Room>> getRooms() async {
+Future<List<Room>> getRooms(String floorNumber) async {
   String path = '/floorplan/floors/rooms';
   String url = server + path;
-  var response;
+  var request;
 
   try {
-    response = await http.get(Uri.parse(url));
+    request = http.Request('GET', Uri.parse(url));
+    request.body = json.encode({
+      "floorNumber": floorNumber
+    });
+
+    var response = await request.send();
 
     if (response.statusCode == 200) {
-      //print(response.body);
-
-      var jsonString = response.body;
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
@@ -262,7 +263,7 @@ Future<bool> deleteFloorPlan(String floorPlanNumber) async {
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
-  request.body = json.encode({"floorNumber": floorPlanNumber});
+  request.body = json.encode({"floorplanNumber": floorPlanNumber});
 
   var response = await request.send();
 

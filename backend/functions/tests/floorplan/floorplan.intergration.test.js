@@ -15,7 +15,7 @@ var should = chai.should();
 let devDatabase = require("../../config/floorplan.firestore.database.js");
 const floorplanService = require("../../services/floorplan/floorplan.controller.js");
 // Set the database you want to work with the test or production database
-floorplanService.setDatabse(devDatabase);
+floorplanService.setDatabase(devDatabase);
 let db= new devDatabase();
 
 
