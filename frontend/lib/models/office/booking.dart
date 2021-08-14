@@ -1,33 +1,59 @@
-/**
- * This class acts as an booking entity mimicking the booking table attribute in the database
- */
+import 'dart:convert';
+
+Booking bookingFromJson(String str) => Booking.fromJson(json.decode(str));
+
+String bookingToJson(Booking data) => json.encode(data.toJson());
+
 class Booking {
   DateTime dateTime;
-  String floorNum = "";
-  String roomNum = "";
-  String user = "";
-  int deskNum = 0;
-//Booking constructor
+  String floorNumber;
+  String roomNumber;
+  String userId;
+  num deskNumber;
 
-  Booking(String user, String floorNum, String roomNum, int deskNum) {
-    this.dateTime = DateTime.now();
-    this.floorNum = floorNum;
-    this.user = user;
-    this.roomNum = roomNum;
-    this.deskNum = deskNum;
+  Booking({
+    this.dateTime,
+    this.floorNumber,
+    this.roomNumber,
+    this.userId,
+    this.deskNumber
+  });
+
+  factory Booking.fromJson(Map<String, dynamic> json) =>
+      Booking(
+        dateTime: json["dateTime"],
+        floorNumber: json["floorNumber"],
+        roomNumber: json["roomNumber"],
+        userId: json["userId"],
+        deskNumber: json["deskNumber"]
+      );
+
+  Map<String, dynamic> toJson() =>
+      {
+        "dateTime": dateTime,
+        "floorNumber": floorNumber,
+        "roomNumber": roomNumber,
+        "userId": userId,
+        "deskNumber": deskNumber
+      };
+
+  DateTime getDateTime() {
+    return dateTime;
   }
-//function display booking
-  // displays booking details..
-  void displayBooking() {
-    print(
-        "***************************************************************************************");
-    print("Displaying Booking Information");
-    print("User : " + this.user);
-    print("Date : " + this.dateTime.toString());
-    print("Floor Number : " + this.floorNum.toString());
-    print("Room Number : " + this.roomNum.toString());
-    print("Desk Number : " + this.deskNum.toString());
-    print(
-        "***************************************************************************************");
+
+  String getFloorNumber() {
+    return floorNumber;
+  }
+
+  String getRoomNumber() {
+    return roomNumber;
+  }
+
+  String getUserId() {
+    return userId;
+  }
+
+  num getDeskNumber() {
+    return deskNumber;
   }
 }
