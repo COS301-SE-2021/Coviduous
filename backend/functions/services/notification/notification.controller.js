@@ -17,7 +17,10 @@ exports.verifyCredentials = async (adminId, companyId) => {
  * This function creates a new notification via an HTTP POST request.
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
+ *  userId: string
+ *  userEmail: string
  *  subject: string
+ *  timestamp: string
  *  message: string
  *  adminId: string
  *  companyId: string
@@ -103,7 +106,7 @@ exports.createNotification = async (req, res) => {
         }
         else
         {
-            return res.status(500).send('500 Server Error');
+            return res.status(500).send({message: "500 server error."});
         }
     //   } catch (error) {
     //       console.log(error);
@@ -111,6 +114,14 @@ exports.createNotification = async (req, res) => {
     //   }
 };
 
+/**
+ * This function deletes a specified notification via an HTTP DELETE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  notificationId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
 exports.deleteNotification = async (req, res) => {
     // try {
         // data validation
@@ -139,7 +150,7 @@ exports.deleteNotification = async (req, res) => {
         }
         else
         {
-            return res.status(500).send('500 Server Error');
+            return res.status(500).send({message: "500 server error."});
         }
     // } catch (error) {
     //     console.log(error);
@@ -147,6 +158,12 @@ exports.deleteNotification = async (req, res) => {
     // }
 };
 
+/**
+ * This function retrieves all notifications via an HTTP GET request.
+ * @param req The request object may be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
 exports.viewNotifications = async (req, res) => {
     // try {
         let notifications = await database.viewNotifications();
@@ -161,7 +178,7 @@ exports.viewNotifications = async (req, res) => {
         }
         else
         {
-            return res.status(500).send("Some error occurred while fetching notifications.");
+            return res.status(500).send({message: "Some error occurred while fetching notifications."});
         }
     // } catch (error) {
     //     console.log(error);
@@ -171,6 +188,12 @@ exports.viewNotifications = async (req, res) => {
     // }
 };
 
+/**
+ * This function retrieves all notifications based on user email via an HTTP GET request.
+ * @param req The request object may be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
 exports.viewNotificationsUserEmail = async (req, res) => {
     // try {
         let fieldErrors = [];
@@ -204,7 +227,7 @@ exports.viewNotificationsUserEmail = async (req, res) => {
         }
         else
         {
-            return res.status(500).send("Some error occurred while fetching notifications.");
+            return res.status(500).send({message: "Some error occurred while fetching notifications."});
         }
     // } catch (error) {
     //     console.log(error);
