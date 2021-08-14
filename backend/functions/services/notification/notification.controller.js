@@ -43,7 +43,7 @@ exports.createNotification = async (req, res) => {
             fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
         }
 
-        if (reqJson.C == null || reqJson.userEmail === "") {
+        if (reqJson.userEmail == null || reqJson.userEmail === "") {
             fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
         }
 
