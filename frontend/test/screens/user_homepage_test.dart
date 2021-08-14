@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:frontend/frontend/screens/user_homepage.dart';
+import 'package:frontend/views/user_homepage.dart';
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);
