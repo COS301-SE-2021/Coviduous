@@ -162,7 +162,7 @@ describe('Delete announcement unit tests', function() {
            .end((err, res) => {
                console.log(res.body);
                let req2 = {
-                   announcementId: res.body.announcementId,
+                   announcementId: res.body.data.announcementId
                };
 
                chai.request(server)
