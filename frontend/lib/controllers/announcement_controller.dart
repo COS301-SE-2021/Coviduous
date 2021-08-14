@@ -19,8 +19,7 @@ int numAnnouncements = 0;
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 // announcementId and timestamp fields are generated in node backend
-Future<bool> createAnnouncement(String announcementId, String type,
-    String message, String timestamp, String adminId, String companyId) async {
+Future<bool> createAnnouncement(String announcementId, String type, String message, String timestamp) async {
   String path = '/announcements';
   String url = server + path;
   var request;
@@ -32,8 +31,8 @@ Future<bool> createAnnouncement(String announcementId, String type,
       "type": type.toUpperCase(),
       "message": message,
       "timestamp": timestamp,
-      "adminId": adminId,
-      "companyId": companyId,
+      "adminId": globals.loggedInUserId,
+      "companyId": globals.loggedInCompanyId,
     });
     request.headers.addAll(globals.requestHeaders);
 
@@ -63,7 +62,6 @@ Future<List<Announcement>> getAnnouncements() async {
 
   try {
     response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
-    response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       //print(response.body);

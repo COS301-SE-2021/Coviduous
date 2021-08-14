@@ -20,9 +20,9 @@ class MakeAnnouncement extends StatefulWidget {
 
 bool createdAnnouncement = false;
 
-Future createAnnouncement(String type, String description, String adminId, String companyId) async {
+Future createAnnouncement(String type, String description) async {
   await Future.wait([
-    announcementController.createAnnouncement("test ID", type, description, "test timestamp", adminId, companyId)
+    announcementController.createAnnouncement("test ID", type, description, "test timestamp")
   ]).then((results) {
     createdAnnouncement = results.first;
   });
@@ -39,8 +39,6 @@ Future getAnnouncements() async {
 //class make announcement
 class MakeAnnouncementState extends State<MakeAnnouncement> {
   TextEditingController _description = TextEditingController();
-  String _adminId = globals.loggedInUserId;
-  String _companyId = globals.loggedInCompanyId;
 
   List<String> _announceType = ['General', 'Emergency'];
   List<DropdownMenuItem<String>> _dropdownMenuItems;
@@ -153,7 +151,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                       ),
                       child: Text("Post"),
                       onPressed: () {
-                        createAnnouncement(_selectedType, _description.text, _adminId, _companyId).then((result){
+                        createAnnouncement(_selectedType, _description.text).then((result){
                           if (createdAnnouncement == true) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Announcement successfully created.")));

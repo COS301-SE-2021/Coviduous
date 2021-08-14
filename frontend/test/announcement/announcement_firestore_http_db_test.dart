@@ -22,7 +22,7 @@ void main() {
 
   test('Create announcement', () async {
     bool value = await announcementController.createAnnouncement("",
-        expectedType, expectedMessage, "", expectedAdminId, expectedCompanyId);
+        expectedType, expectedMessage, "");
 
     expect(value, isNot(null));
     expect(true, value);
@@ -40,7 +40,7 @@ void main() {
 
   test('Delete announcement', () async {
     bool value = await announcementController.createAnnouncement("",
-        expectedType, expectedMessage, "", expectedAdminId, expectedCompanyId);
+        expectedType, expectedMessage, "");
 
     List<Announcement> list = await announcementController.getAnnouncements();
 
