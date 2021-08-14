@@ -215,7 +215,7 @@ try {
     });
     return res.status(200).send({
       message: 'Successfully retrieved rooms based on your floor number',
-      data: rooms
+      data: filteredList
     });
 } catch (error) {
     console.log(error);
