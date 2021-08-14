@@ -1,4 +1,4 @@
-/*require('dotenv').config(); //Dependency for environment variables
+require('dotenv').config(); //Dependency for environment variables
 
 const Firebase = require('firebase');
 let auth = null;
@@ -120,4 +120,4 @@ class User {
     }
 }
 
-module.exports = User;*/
+module.exports = User;

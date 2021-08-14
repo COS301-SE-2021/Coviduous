@@ -3,6 +3,7 @@ var expect = chai.expect;
 var uuid = require("uuid"); // npm install uuid
 var triggers = require('../triggers.js');
 var firebasemock = require('firebase-mock'); // npm install firebase-mock --save-dev
+const { viewNotificationsUserEmail } = require("../../services/notification/notification.controller.js");
 var mockauth = new firebasemock.MockFirebase();
 var mockfirestore = new firebasemock.MockFirestore();
 
@@ -13,17 +14,82 @@ var mocksdk = firebasemock.MockFirebaseSdk(null, function() {
 });
 
 var mockapp = mocksdk.initializeApp();
+let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 
-describe('Firestore Function', function () {
-  beforeEach(function() {
-    mockfirestore = new firebasemock.MockFirestore();
-    mockfirestore.autoFlush();
-    mockauth = new firebasemock.MockFirebase();
-    mockauth.autoFlush();
+
+describe('Create notification unit test', function() {
+  it('Return 400 if request is empty', function (done) {
+      chai.request(server)
+          .post('/api/notification')
+          .send(null)
+          .end((err, res) => {
+              should.exist(res);
+              res.should.have.status(400);
+              console.log(res.body);
+              done();
+          });
   });
+  it('Return 400 if empty subject', function(done) {
+    let req = {
+      subject:'', 
+      message:'Check the covid update',  
+      userEmail:'nku@gmail.com', 
+      adminId: 'ADMIN-ID',
+      companyId: 'COMPANY-ID',
+    };
+
+    chai.request(server)
+        .post('/api/notification')
+        .send(req)
+        .end((err, res) => {
+            should.exist(res);
+            res.should.have.status(400);
+            console.log(res.body);
+            done();
+        });
+
+      });
+      it('Return 400 if empty userEmail', function(done) {
+        let req = {
+          subject:'Covid TEST', 
+          message:'',  
+          userEmail:'nku@gmail.com', 
+          adminId: 'ADMIN-ID',
+          companyId: 'COMPANY-ID',
+        };
+        chai.request(server)
+            .post('/api/notification')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+     });
+  
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
 
   
-  it('create notification', function() {
+
+
+
+
+  /*it('create notification', function() {
     var notificationId = "NTFN-" + uuid.v4();
 
     var event = {
@@ -84,4 +150,4 @@ describe('Firestore Function', function () {
 
     triggers.read(event);
   });
-});
+});*/
