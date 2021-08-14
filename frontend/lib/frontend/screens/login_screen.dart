@@ -20,7 +20,6 @@ import 'package:frontend/frontend/screens/forgot_password_screen.dart';
 import 'package:frontend/frontend/screens/main_homepage.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-import 'package:frontend/backend/backend_globals/user_globals.dart' as userGlobals;
 
 /*
   Class name: LoginScreen

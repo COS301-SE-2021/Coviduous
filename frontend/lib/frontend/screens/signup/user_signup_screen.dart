@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/backend/controllers/user_controller.dart';
 
 import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/frontend/models/firestore_cloud.dart';
 import 'package:frontend/frontend/screens/signup/home_signup_screen.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
-import 'package:frontend/requests/user_requests/RegisterUserRequest.dart';
-import 'package:frontend/responses/user_responses/RegisterUserResponse.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
@@ -17,8 +14,6 @@ class UserRegister extends StatefulWidget {
 }
 
 class _UserRegisterState extends State<UserRegister>{
-  UserController services = new UserController();
-
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _email = TextEditingController();
@@ -210,9 +205,6 @@ class _UserRegisterState extends State<UserRegister>{
                                             });
 
                                             userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
-                                            RegisterUserResponse response = services.registerUserMock(RegisterUserRequest("User", _firstName.text, _lastName.text, _userName.text, _email.text, _password.text, _companyId.text));
-                                            print(response.getResponse());
-                                            globals.loggedInUserId = response.getId();
                                             Navigator.pushAndRemoveUntil(context,
                                                 MaterialPageRoute(builder: (context) => LoginScreen()), (
                                                     route) => false);

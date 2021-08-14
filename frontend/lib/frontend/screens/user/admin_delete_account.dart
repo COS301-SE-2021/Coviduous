@@ -3,15 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/backend/controllers/user_controller.dart';
 import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/frontend/screens/user/admin_manage_account.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
-//import 'package:frontend/requests/user_requests/DeleteAccountUserRequest.dart';
-//import 'package:frontend/responses/user_responses/DeleteAccountUserResponse.dart';
 
 class AdminDeleteAccount extends StatefulWidget {
   static const routeName = "/admin_delete_account";
@@ -43,8 +40,6 @@ Future getSnap() async {
 }
 
 class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
-  UserController services = new UserController();
-
   TextEditingController _userEmail = TextEditingController();
   TextEditingController _userPassword = TextEditingController();
   TextEditingController _confirmUserPassword = TextEditingController();
