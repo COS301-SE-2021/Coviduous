@@ -2,106 +2,106 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 //Splash screen, main homepage, and login
-import 'package:frontend/frontend/screens/splash_screen.dart';
-import 'package:frontend/frontend/screens/main_homepage.dart';
-import 'package:frontend/frontend/screens/login_screen.dart';
+import 'package:frontend/views/splash_screen.dart';
+import 'package:frontend/views/main_homepage.dart';
+import 'package:frontend/views/login_screen.dart';
 
 //Signup screens
-import 'package:frontend/frontend/screens/signup/home_signup_screen.dart';
-import 'package:frontend/frontend/screens/signup/admin_signup_screen.dart';
-import 'package:frontend/frontend/screens/signup/user_signup_screen.dart';
+import 'package:frontend/views/signup/home_signup_screen.dart';
+import 'package:frontend/views/signup/admin_signup_screen.dart';
+import 'package:frontend/views/signup/user_signup_screen.dart';
 
 //Announcement
-import 'package:frontend/frontend/screens/announcement/admin_view_announcements.dart';
-import 'package:frontend/frontend/screens/announcement/admin_make_announcement.dart';
-import 'package:frontend/frontend/screens/announcement/user_view_announcements.dart';
+import 'package:frontend/views/announcement/admin_view_announcements.dart';
+import 'package:frontend/views/announcement/admin_make_announcement.dart';
+import 'package:frontend/views/announcement/user_view_announcements.dart';
 
 //Floor plan
-import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_add_floor_plan.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_modify_floor_plans.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_modify_rooms.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_edit_room.dart';
+import 'package:frontend/views/floor_plan/home_floor_plan.dart';
+import 'package:frontend/views/floor_plan/admin_add_floor_plan.dart';
+import 'package:frontend/views/floor_plan/admin_modify_floor_plans.dart';
+import 'package:frontend/views/floor_plan/admin_modify_floors.dart';
+import 'package:frontend/views/floor_plan/admin_modify_rooms.dart';
+import 'package:frontend/views/floor_plan/admin_edit_room.dart';
 
 //Health
-import 'package:frontend/frontend/screens/health/admin_employee_permissions.dart';
-import 'package:frontend/frontend/screens/health/admin_home_permissions.dart';
-import 'package:frontend/frontend/screens/health/admin_view_access_requests.dart';
-import 'package:frontend/frontend/screens/health/admin_view_permissions.dart';
-import 'package:frontend/frontend/screens/health/admin_contact_trace.dart';
-import 'package:frontend/frontend/screens/health/admin_contact_trace_employee.dart';
-import 'package:frontend/frontend/screens/health/admin_contact_trace_shifts.dart';
-import 'package:frontend/frontend/screens/health/user_home_health.dart';
-import 'package:frontend/frontend/screens/health/user_health_check.dart';
-import 'package:frontend/frontend/screens/health/user_view_permissions.dart';
-import 'package:frontend/frontend/screens/health/user_view_guidelines.dart';
-import 'package:frontend/frontend/screens/health/user_upload_test_results.dart';
-import 'package:frontend/frontend/screens/health/user_upload_vaccine_confirm.dart';
-import 'package:frontend/frontend/screens/health/user_view_test_results.dart';
-import 'package:frontend/frontend/screens/health/user_view_vaccine_confirm.dart';
-import 'package:frontend/frontend/screens/health/user_report_infection.dart';
-import 'package:frontend/frontend/screens/health/user_request_access.dart';
-import 'package:frontend/frontend/screens/health/visitor_health_check.dart';
-import 'package:frontend/frontend/screens/health/visitor_home_health.dart';
-import 'package:frontend/frontend/screens/health/visitor_view_guidelines.dart';
-import 'package:frontend/frontend/screens/health/visitor_view_permissions.dart';
+import 'package:frontend/views/health/admin_employee_permissions.dart';
+import 'package:frontend/views/health/admin_home_permissions.dart';
+import 'package:frontend/views/health/admin_view_access_requests.dart';
+import 'package:frontend/views/health/admin_view_permissions.dart';
+import 'package:frontend/views/health/admin_contact_trace.dart';
+import 'package:frontend/views/health/admin_contact_trace_employee.dart';
+import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
+import 'package:frontend/views/health/user_home_health.dart';
+import 'package:frontend/views/health/user_health_check.dart';
+import 'package:frontend/views/health/user_view_permissions.dart';
+import 'package:frontend/views/health/user_view_guidelines.dart';
+import 'package:frontend/views/health/user_upload_test_results.dart';
+import 'package:frontend/views/health/user_upload_vaccine_confirm.dart';
+import 'package:frontend/views/health/user_view_test_results.dart';
+import 'package:frontend/views/health/user_view_vaccine_confirm.dart';
+import 'package:frontend/views/health/user_report_infection.dart';
+import 'package:frontend/views/health/user_request_access.dart';
+import 'package:frontend/views/health/visitor_health_check.dart';
+import 'package:frontend/views/health/visitor_home_health.dart';
+import 'package:frontend/views/health/visitor_view_guidelines.dart';
+import 'package:frontend/views/health/visitor_view_permissions.dart';
 
 //Shift
-import 'package:frontend/frontend/screens/shift/home_shift.dart';
-import 'package:frontend/frontend/screens/shift/admin_add_shift_floor_plans.dart';
-import 'package:frontend/frontend/screens/shift/admin_add_shift_floors.dart';
-import 'package:frontend/frontend/screens/shift/admin_add_shift_rooms.dart';
-import 'package:frontend/frontend/screens/shift/admin_add_shift_create_shift.dart';
-import 'package:frontend/frontend/screens/shift/admin_add_shift_assign_employees.dart';
-import 'package:frontend/frontend/screens/shift/admin_add_shift_add_employee.dart';
-import 'package:frontend/frontend/screens/shift/admin_view_shifts_edit_shift.dart';
-import 'package:frontend/frontend/screens/shift/admin_view_shifts.dart';
-import 'package:frontend/frontend/screens/shift/admin_view_shifts_floor_plans.dart';
-import 'package:frontend/frontend/screens/shift/admin_view_shifts_floors.dart';
-import 'package:frontend/frontend/screens/shift/admin_view_shifts_rooms.dart';
+import 'package:frontend/views/shift/home_shift.dart';
+import 'package:frontend/views/shift/admin_add_shift_floor_plans.dart';
+import 'package:frontend/views/shift/admin_add_shift_floors.dart';
+import 'package:frontend/views/shift/admin_add_shift_rooms.dart';
+import 'package:frontend/views/shift/admin_add_shift_create_shift.dart';
+import 'package:frontend/views/shift/admin_add_shift_assign_employees.dart';
+import 'package:frontend/views/shift/admin_add_shift_add_employee.dart';
+import 'package:frontend/views/shift/admin_view_shifts_edit_shift.dart';
+import 'package:frontend/views/shift/admin_view_shifts.dart';
+import 'package:frontend/views/shift/admin_view_shifts_floor_plans.dart';
+import 'package:frontend/views/shift/admin_view_shifts_floors.dart';
+import 'package:frontend/views/shift/admin_view_shifts_rooms.dart';
 
 //Office
-import 'package:frontend/frontend/screens/office/home_office.dart';
-import 'package:frontend/frontend/screens/office/user_view_office_floors.dart';
-import 'package:frontend/frontend/screens/office/user_view_office_rooms.dart';
-import 'package:frontend/frontend/screens/office/user_view_office_times.dart';
-import 'package:frontend/frontend/screens/office/user_view_office_desks.dart';
-import 'package:frontend/frontend/screens/office/user_view_current_bookings.dart';
-import 'package:frontend/frontend/screens/office/user_book_office_space.dart';
+import 'package:frontend/views/office/home_office.dart';
+import 'package:frontend/views/office/user_view_office_floors.dart';
+import 'package:frontend/views/office/user_view_office_rooms.dart';
+import 'package:frontend/views/office/user_view_office_times.dart';
+import 'package:frontend/views/office/user_view_office_desks.dart';
+import 'package:frontend/views/office/user_view_current_bookings.dart';
+import 'package:frontend/views/office/user_book_office_space.dart';
 
 //Notification
-import 'package:frontend/frontend/screens/notification/admin_home_notifications.dart';
-import 'package:frontend/frontend/screens/notification/admin_view_notifications.dart';
-import 'package:frontend/frontend/screens/notification/admin_make_notification.dart';
-import 'package:frontend/frontend/screens/notification/admin_make_notification_add_employee.dart';
-import 'package:frontend/frontend/screens/notification/admin_make_notification_assign_employees.dart';
-import 'package:frontend/frontend/screens/notification/user_view_notifications.dart';
+import 'package:frontend/views/notification/admin_home_notifications.dart';
+import 'package:frontend/views/notification/admin_view_notifications.dart';
+import 'package:frontend/views/notification/admin_make_notification.dart';
+import 'package:frontend/views/notification/admin_make_notification_add_employee.dart';
+import 'package:frontend/views/notification/admin_make_notification_assign_employees.dart';
+import 'package:frontend/views/notification/user_view_notifications.dart';
 
 //Reporting
-import 'package:frontend/frontend/screens/reporting/home_reporting.dart';
-import 'package:frontend/frontend/screens/reporting/reporting_floor_plan.dart';
-import 'package:frontend/frontend/screens/reporting/reporting_floors.dart';
-import 'package:frontend/frontend/screens/reporting/reporting_rooms.dart';
-import 'package:frontend/frontend/screens/reporting/reporting_shifts.dart';
-import 'package:frontend/frontend/screens/reporting/reporting_employees.dart';
+import 'package:frontend/views/reporting/home_reporting.dart';
+import 'package:frontend/views/reporting/reporting_floor_plan.dart';
+import 'package:frontend/views/reporting/reporting_floors.dart';
+import 'package:frontend/views/reporting/reporting_rooms.dart';
+import 'package:frontend/views/reporting/reporting_shifts.dart';
+import 'package:frontend/views/reporting/reporting_employees.dart';
 
 //User
-import 'package:frontend/frontend/screens/admin_homepage.dart';
-import 'package:frontend/frontend/screens/user/admin_manage_account.dart';
-import 'package:frontend/frontend/screens/user/admin_update_account.dart';
-import 'package:frontend/frontend/screens/user_homepage.dart';
-import 'package:frontend/frontend/screens/user/user_manage_account.dart';
-import 'package:frontend/frontend/screens/user/user_update_account.dart';
+import 'package:frontend/views/admin_homepage.dart';
+import 'package:frontend/views/user/admin_manage_account.dart';
+import 'package:frontend/views/user/admin_update_account.dart';
+import 'package:frontend/views/user_homepage.dart';
+import 'package:frontend/views/user/user_manage_account.dart';
+import 'package:frontend/views/user/user_update_account.dart';
 
 //Reset password screens
-import 'package:frontend/frontend/screens/forgot_password_screen.dart';
-import 'package:frontend/frontend/screens/user/admin_reset_password_screen.dart';
-import 'package:frontend/frontend/screens/user/user_reset_password_screen.dart';
+import 'package:frontend/views/forgot_password_screen.dart';
+import 'package:frontend/views/user/admin_reset_password_screen.dart';
+import 'package:frontend/views/user/user_reset_password_screen.dart';
 
 //Delete account screen
-import 'package:frontend/frontend/screens/user/admin_delete_account.dart';
-import 'package:frontend/frontend/screens/user/user_delete_account.dart';
+import 'package:frontend/views/user/admin_delete_account.dart';
+import 'package:frontend/views/user/user_delete_account.dart';
 
 import 'package:frontend/globals.dart' as globals;
 

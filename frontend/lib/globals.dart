@@ -13,7 +13,7 @@ import 'package:frontend/models/notification/notification.dart';
 import 'package:frontend/models/shift/shift.dart';
 import 'package:frontend/models/notification/temp_notification.dart';
 
-import 'package:frontend/frontend/theme.dart' as theme;
+import 'package:frontend/theme.dart' as theme;
 
 //============================
 //FRONT END GLOBAL VARIABLES

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_add_floor_plan.dart';
+import 'package:frontend/views/floor_plan/admin_add_floor_plan.dart';
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);
