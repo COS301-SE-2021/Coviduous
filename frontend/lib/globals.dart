@@ -15,10 +15,6 @@ import 'package:frontend/models/notification/temp_notification.dart';
 
 import 'package:frontend/theme.dart' as theme;
 
-//============================
-//FRONT END GLOBAL VARIABLES
-//============================
-
 //========================================
 //Generic global functions and variables
 //========================================
@@ -193,3 +189,11 @@ String currentGroupNum = '';
 
 //Current group description you're working with
 String currentGroupDescription = '';
+
+//============================
+// Controller request headers
+//============================
+
+Map<String, String> requestHeaders = {
+  'Authorization': 'Bearer $token'
+};
