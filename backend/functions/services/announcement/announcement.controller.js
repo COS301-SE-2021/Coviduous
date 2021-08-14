@@ -93,7 +93,7 @@ exports.createAnnouncement = async (req, res) => {
         fieldErrors.push({field: 'type', message: 'Type may not be empty'});
     }
 
-    if (reqJson.type !== 'GENERAL' || reqJson.type !== 'EMERGENCY') {
+    if (reqJson.type !== 'GENERAL' && reqJson.type !== 'EMERGENCY') {
         fieldErrors.push({field: 'type', message: 'Type must be either GENERAL or EMERGENCY'});
     }
 
