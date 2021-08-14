@@ -409,7 +409,7 @@ exports.deleteFloorPlan = async (req, res) => {
 };
 
 //This function allows dependency injections for production or mock databases
-exports.setDatabse= async(db)=>{
+exports.setDatabase= async(db)=>{
 
   database=db;
 }

@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
 // Import floorplan service
 const floorplanService = require("../services/floorplan/floorplan.controller.js");
 // Set the database you want to work with the test or production database
-floorplanService.setDatabse(db);
+floorplanService.setDatabase(db);
 
 // Floorplan routes
 // N.B. paths for a subsystem can all be the same
