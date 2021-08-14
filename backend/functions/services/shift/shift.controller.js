@@ -35,7 +35,14 @@ try{
   }
 };
 
-
+/**
+ * This function deletes a specified shift via an HTTP DELETE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  shiftId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
 exports.deleteShift = async (req, res) => {
   // try {
       // data validation
@@ -64,13 +71,22 @@ exports.deleteShift = async (req, res) => {
       }
       else
       {
-          return res.status(500).send('500 Server Error');
+          return res.status(500).send({message: "500 server error."});
       }
   // } catch (error) {
   //     console.log(error);
   //     return res.status(500).send(error);
   // }
 };
+
+/**
+ * This function updates a specified shift via an HTTP UPDATE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  shiftId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
 exports.updateShift = async (req, res) => {
   // try {
     // data validation
@@ -99,7 +115,7 @@ exports.updateShift = async (req, res) => {
     }
     else
     {
-      return res.status(500).send("Some error occurred while updating shifts.");
+      return res.status(500).send({message: "Some error occurred while updating shifts."});
     }
     
   // } catch (error) {
@@ -110,6 +126,13 @@ exports.updateShift = async (req, res) => {
   // }
 
 };
+
+/**
+ * This function retrieves all shifts via an HTTP GET request.
+ * @param req The request object may be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
 exports.viewShifts = async (req, res) => {
   // try {
       let viewShifts = await db.viewShifts(); 
@@ -123,7 +146,7 @@ exports.viewShifts = async (req, res) => {
       }
       else
       {
-        return res.status(500).send("Some error occurred while fetching shifts.");
+        return res.status(500).send({message: "Some error occurred while fetching shifts."});
       }
   // } catch (error) {
   //     console.log(error);
