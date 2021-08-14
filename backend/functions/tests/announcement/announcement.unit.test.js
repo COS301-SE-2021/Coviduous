@@ -1,23 +1,11 @@
 var chai = require("chai");
 var chaiHttp = require("chai-http");
-chai.use(chaiHttp);
 var expect = chai.expect;
 var should = chai.should();
-// var uuid = require("uuid"); // npm install uuid
-// var triggers = require('../triggers.js');
-// var firebasemock = require('firebase-mock'); // npm install firebase-mock --save-dev
-// var mockauth = new firebasemock.MockFirebase();
-// var mockfirestore = new firebasemock.MockFirestore();
-// var announcementService= require("../../services/announcement/announcement.controller.js");
 
-// var mocksdk = firebasemock.MockFirebaseSdk(null, function() {
-//   return mockauth;
-// }, function() {
-//   return mockfirestore;
-// });
-
-// var mockapp = mocksdk.initializeApp();
 let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
+
+chai.use(chaiHttp);
 
 describe('Create announcement unit tests', function() {
    it('Return 400 if request is empty', function (done) {
@@ -51,24 +39,24 @@ describe('Create announcement unit tests', function() {
             });
     });
 
-   it('Return 400 if incorrect type', function(done) {
-      let req = {
-          type: 'NOT A REAL TYPE',
-          message: 'message',
-          adminId: 'ADMIN-ID',
-          companyId: 'COMPANY-ID',
-      };
+    it('Return 400 if incorrect type', function(done) {
+        let req = {
+            type: 'NOT A REAL TYPE',
+            message: 'message',
+            adminId: 'ADMIN-ID',
+            companyId: 'COMPANY-ID',
+        };
 
-      chai.request(server)
-          .post('/api/announcements')
-          .send(req)
-          .end((err, res) => {
-              should.exist(res);
-              res.should.have.status(400);
-              console.log(res.body);
-              done();
-          });
-   });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
     it('Return 400 if empty message', function(done) {
         let req = {
