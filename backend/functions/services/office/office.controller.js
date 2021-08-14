@@ -1,8 +1,15 @@
 let database;
-const uuid = require("uuid"); // npm install uuid
-// For todays date;
+
+// npm install uuid
+const uuid = require("uuid");
+
+/**
+ * This function returns the current date in a specified format.
+ * @returns {string} The current date as a string in the format DD/MM/YYYY
+ */
 Date.prototype.today = function () { 
-  return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+  return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"
+      +(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
 }
 
 // For the time now
