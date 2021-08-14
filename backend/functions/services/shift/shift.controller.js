@@ -35,6 +35,7 @@ exports.createShift = async (req,res) => {
         let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
         let shiftData = { shiftID: shift.shiftID, startTime: shift.startTime, endTime: shift.endTime, description: shift.description, groupNo: shift.groupNo, adminId: shift.adminId,
             companyId: shift.companyId }
+
         if(await db.createShift(shiftID,shiftData)==true){
             return res.status(200).send({
                 data: req.body
