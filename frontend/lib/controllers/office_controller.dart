@@ -43,3 +43,35 @@ Future<bool> createBooking(String bookingNumber, String deskNumber, String floor
 
   return false;
 }
+
+Future<bool> deleteBooking(int  bookingNumber) async {
+  String path = '/office';
+  String url = server + path;
+
+  var request = http.Request('DELETE', Uri.parse(url));
+  request.body = json.encode({"bookingNumber": bookingNumber});
+
+  var response = await request.send();
+
+  if (response.statusCode == 200) {
+    print(await response.stream.bytesToString());
+
+    for (int i = 0; i < bookingDatabaseTable.length; i++) {
+      if (bookingDatabaseTable[i].deskNum == bookingNumber) {
+        bookingDatabaseTable.removeAt(i);
+        numBookings--;
+      }
+    }
+
+    return true;
+  }
+
+  for (int i = 0; i < numBookings; i++) {
+    if (bookingDatabaseTable[i].deskNum == bookingNumber) {
+      bookingDatabaseTable.removeAt(i);
+      numBookings--;
+    }
+  }
+
+  return false;
+}
