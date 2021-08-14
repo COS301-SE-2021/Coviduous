@@ -26,9 +26,9 @@ import 'package:frontend/frontend/theme.dart' as theme;
 //Get OS if on web browser
 String getOSWeb() {
   final userAgent = html.window.navigator.userAgent.toString().toLowerCase();
-  if( userAgent.contains("iphone"))  return "iOS";
-  if( userAgent.contains("ipad")) return "iOS";
-  if( userAgent.contains("android"))  return "Android";
+  if(userAgent.contains("iphone"))  return "iOS";
+  if(userAgent.contains("ipad")) return "iOS";
+  if(userAgent.contains("android"))  return "Android";
   return "Web";
 }
 
@@ -85,6 +85,9 @@ String loggedInUserId = '';
 //Company ID of currently logged in user
 String loggedInCompanyId = 'CID-1';
 
+//JWT the user receives after logging in
+String token = '';
+
 //==============
 //Theme-related
 //==============
@@ -98,6 +101,7 @@ Color focusColor = theme.focusColor;
 //Needed to change the color of a TextField when it's selected.
 MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;
 
+//Text theme
 TextTheme textTheme = theme.textTheme;
 
 //======
@@ -171,12 +175,10 @@ List<Shift> currentShifts = [];
 //Current floor plan you're working with
 String currentFloorPlanNum = '';
 List<FloorPlan> currentFloorPlans = [];
-FloorPlan currentFloorPlan;
 
 //Current floor you're working with
 String currentFloorNum = '';
 List<Floor> currentFloors = [];
-Floor currentFloor;
 
 //Current room you're working with
 String currentRoomNum = '';
