@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import 'package:frontend/models/announcement/announcement.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
+import 'package:frontend/globals.dart' as globals;
 
 /**
  * List<Announcement> announcementDatabaseTable acts like a database table that holds announcements, this is to mock out functionality for testing
@@ -15,9 +16,7 @@ import 'package:frontend/controllers/server_info.dart' as serverInfo;
 List<Announcement> announcementDatabaseTable = [];
 int numAnnouncements = 0;
 
-////////////////// FUNCTIONS ////////////////////
-
-String server = serverInfo.getServer(); //server needs to be running on firebase
+String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 // announcementId and timestamp fields are generated in node backend
 Future<bool> createAnnouncement(String announcementId, String type,
@@ -36,8 +35,11 @@ Future<bool> createAnnouncement(String announcementId, String type,
       "adminId": adminId,
       "companyId": companyId,
     });
+    request.headers.addAll(globals.requestHeaders);
 
     var response = await request.send();
+
+    print(await response.statusCode);
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
@@ -60,6 +62,7 @@ Future<List<Announcement>> getAnnouncements() async {
   var response;
 
   try {
+    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
     response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -73,11 +76,8 @@ Future<List<Announcement>> getAnnouncements() async {
       numAnnouncements = 0;
 
       for (var data in jsonMap["data"]) {
-        //print(data["announcementId"]);
         var announcementData = Announcement.fromJson(data);
         announcementDatabaseTable.add(announcementData);
-        // print(
-        //     announcementDatabaseTable[numAnnouncements].announcementId);
         numAnnouncements++;
       }
 
@@ -96,6 +96,7 @@ Future<bool> deleteAnnouncement(String announcementId) async {
 
   var request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"announcementId": announcementId});
+  request.headers.addAll(globals.requestHeaders);
 
   var response = await request.send();
 
