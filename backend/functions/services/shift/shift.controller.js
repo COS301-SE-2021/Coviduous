@@ -12,32 +12,39 @@ exports.setDatabse = async(_db) => {
     db =_db;
 };
 
+/**
+ * This function create a specified shift via an HTTP CREATE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  shiftId: string
+ *   startTime: Date
+ *   endTime: Date
+ *   description: string
+ *   groupNo: int
+ *   adminId: String
+ *   companyId: String
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
 exports.createShift = async (req,res) => {
 
     if(req.shiftID != null && req.startTime !== "" && req.endTime != null && req.description !== "" &&
-        req.groupNo != null && req.adminId !== "" && req.adminId != null && req.companyId !== "") {
+        req.groupNo != null && req.adminId != null && req.companyId !== "") {
+
+        let shiftID = "SHI-" + uuid.v4();
+        let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
+        let shiftData = { shiftID: shift.shiftID, startTime: shift.startTime, endTime: shift.endTime, description: shift.description, groupNo: shift.groupNo, adminId: shift.adminId,
+            companyId: shift.companyId }
+        if(await db.createShift(shiftID,shiftData)==true){
+            return res.status(200).send({
+                data: req.body
+            });
+        }
+        else {
+            return res.status(500).send({message: "500 server error."});
+        }
     }
 
-    try{
-      let shiftID = "SHI-" + uuid.v4();
-      let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
-      let shiftData = {
-        shiftID: shift.shiftID,
-        startTime: shift.startTime,
-        endTime: shift.endTime,
-        description: shift.description,
-        groupNo: shift.groupNo,
-        adminId: shift.adminId,
-        companyId: shift.companyId
-      }
-    await db.createShift(shiftID,shiftData);
-    return res.status(200).send({
-        data: req.body
-    });
-} catch (error) {
-    console.log(error);
-    return res.status(500).send(error);
-  }
 };
 
 /**
