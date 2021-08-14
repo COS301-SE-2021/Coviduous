@@ -17,61 +17,67 @@ function delay(interval) {
 }
 
 describe('User unit tests - direct interaction with auth', function() {
-    it('* User.createUser() function', function() {
+    it('* User.createUser() function 1', function(done) {
         userObj.createUser("testEmail@email.com", "testPassword123")
             .then((userRes) => {
                 expect(userRes).to.be.true;
+                done();
             });
     });
 
     delay(1000);
 
-    it('* User.signUserIn(), User.getCurrentUser(), and User.getEmail() functions', function() {
+    it('* User.signUserIn(), User.getCurrentUser(), and User.getEmail() functions', function(done) {
         userObj.signUserIn("testEmail@email.com", "testPassword123")
             .then((userRes) => {
                 expect(userObj.getCurrentUser()).to.not.be.null;
                 expect(userObj.getEmail()).to.not.be.null;
                 expect(userRes).to.be.true;
+                done();
             });
     });
 
     delay(1000);
 
-    it('* User.createUser() function', function() {
+    it('* User.createUser() function 2', function(done) {
         userObj.createUser("testEmail2@email.com", "testPassword123")
             .then((userRes) => {
                 expect(userRes).to.be.true;
+                done();
             });
     });
 
-    it('* User.updateUserEmail() function', function() {
+    it('* User.updateUserEmail() function', function (done) {
         userObj.updateUserEmail("newEmail@email.com", "testEmail2@email.com", "testPassword123")
             .then((userRes) => {
-                expect(userRes).to.be.true;
+                expect(userRes).to.not.be.null;
+                done();
             });
     });
 
     delay(1000);
 
-    it('* User.signUserOut() function', function(){
+    it('* User.signUserOut() function', function(done){
         userObj.signUserOut()
             .then((userRes) => {
                 expect(userRes).to.be.true;
+                done();
             });
     });
 
     delay(1000);
 
-    it('* User.sendPasswordReset() function', function() {
+    it('* User.sendPasswordReset() function', function(done) {
         userObj.sendPasswordReset("testEmail@email.com")
             .then((userRes) => {
                 expect(userRes).to.be.true;
+                done();
             });
     });
 });
 
 describe('User unit tests - interaction with auth and database over HTTP', function(){
-    it('POST /api/users/signUp to create new user', () => {
+    it('POST /api/users/signUp to create new user', (done) => {
         let user = {
             uid: "1",
             email: "testemail3@email.com",
@@ -87,12 +93,13 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
                 console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
+                done();
             });
     });
 
     delay(1000);
 
-    it('POST /api/users/signIn to sign in', () => {
+    it('POST /api/users/signIn to sign in', (done) => {
         let user = {
             email: "testemail3@email.com",
             password: "123456"
@@ -107,12 +114,13 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
                 console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
+                done();
             });
     });
 
     delay(1000);
 
-    it('POST /api/users/updateDetails to update user details', () => {
+    it('POST /api/users/updateDetails to update user details', (done) => {
         let user = {
             currentEmail: "testemail3@email.com",
             firstName: "Hello",
@@ -129,12 +137,13 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
                 console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
+                done();
             });
     });
 
     delay(1000);
 
-    it('GET /api/users to retrieve user details', () => {
+    it('GET /api/users to retrieve user details', (done) => {
         let user = {
             email: "testemail3@email.com",
         }
@@ -148,12 +157,13 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
                 console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
+                done();
             });
     });
 
     delay(1000);
 
-    it('POST /api/passwordReset to send password reset email', () => {
+    it('POST /api/passwordReset to send password reset email', (done) => {
         let user = {
             email: "testemail3@email.com",
         }
@@ -167,12 +177,13 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
                 console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
+                done();
             });
     });
 
     delay(1000);
 
-    it('POST /api/users/updateEmail to update user email', () => {
+    it('POST /api/users/updateEmail to update user email', (done) => {
         let user = {
             newEmail: "updatedEmail@email.com",
             currentEmail: "testEmail3@email.com",
@@ -188,6 +199,7 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
                 console.log(res.body);
                 res.should.have.status(200);
                 expect(res.body).should.be.a('object');
+                done();
             });
     });
 
