@@ -6,6 +6,7 @@ import 'package:frontend/frontend/screens/shift/admin_add_shift_create_shift.dar
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AddShiftRooms extends StatefulWidget {
@@ -38,9 +39,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
     }
 
     Widget getList() {
-      //List<Room> rooms = globals.rooms;
-      //int numOfRooms = globals.rooms.length;
-      int numOfRooms = 0;
+      int numOfRooms = globals.currentRooms.length;
 
       print(numOfRooms);
 
@@ -84,8 +83,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        //child: Text('Room ' + rooms[index].getRoomNum()),
-                        child: Text('Placeholder'),
+                        child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -94,19 +92,13 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Number of desks: ' + rooms[index].desks.length.toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
+                              child: Text('Number of desks: ' + globals.currentRooms[index].getNumberOfDesks().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Occupied desk percentage: ' + rooms[index].getPercentage().toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
+                              child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -118,8 +110,25 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                   ElevatedButton(
                                       child: Text('Create shift'),
                                       onPressed: () {
-                                        //globals.currentRoomNum = rooms[index].getRoomNum();
-                                        Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
+                                        if (globals.currentRooms[index].getNumberOfDesks() > 0) {
+                                          //Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('No desks found'),
+                                                content: Text('A shift may not be created when a room has no desks.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
                                       }),
                                 ],
                               ),

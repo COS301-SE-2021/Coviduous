@@ -7,6 +7,7 @@ import 'package:frontend/frontend/screens/shift/admin_view_shifts_floor_plans.da
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class ShiftScreen extends StatefulWidget {
@@ -17,66 +18,6 @@ class ShiftScreen extends StatefulWidget {
 }
 
 class _ShiftScreenState extends State<ShiftScreen> {
-  Future getFloorPlansAdd() async {
-    /*
-    await Future.wait([
-      services.getFloorPlans(GetFloorPlansRequest(globals.loggedInCompanyId))
-    ]).then((responses) {
-      response = responses.first;
-      if (response.getNumFloorPlan() != 0) { //Only allow shifts to be created if floor plans exist
-        globals.floorPlans = response.getFloorPlans();
-        Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
-      } else {
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: Text('No floor plans found'),
-              content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Okay'),
-                  onPressed: (){
-                    Navigator.of(ctx).pop();
-                  },
-                )
-              ],
-            )
-        );
-      }
-    });
-    */
-  }
-
-  Future getFloorPlansView() async {
-    /*
-    await Future.wait([
-      services.getFloorPlans(GetFloorPlansRequest(globals.loggedInCompanyId))
-    ]).then((responses) {
-      response = responses.first;
-      if (response.getNumFloorPlan() != 0) { //Only allow shifts to be created if floor plans exist
-        //globals.floorPlans = response.getFloorPlans();
-        Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
-      } else {
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: Text('No floor plans found'),
-              content: Text('Shifts cannot be viewed at this time. Please add floor plans for your company first.'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Okay'),
-                  onPressed: (){
-                    Navigator.of(ctx).pop();
-                  },
-                )
-              ],
-            )
-        );
-      }
-    });
-    */
-  }
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
     return (await true);
@@ -132,7 +73,28 @@ class _ShiftScreenState extends State<ShiftScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              getFloorPlansAdd();
+                              floorPlanHelpers.getFloorPlans().then((result) {
+                                //Only allow shifts to be created if floor plans exist
+                                if (result == true && globals.currentFloorPlans.isNotEmpty) {
+                                  Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text('No floor plans found'),
+                                        content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text('Okay'),
+                                            onPressed: (){
+                                              Navigator.of(ctx).pop();
+                                            },
+                                          )
+                                        ],
+                                      )
+                                  );
+                                }
+                              });
                             }
                         ),
                         SizedBox (
@@ -154,7 +116,28 @@ class _ShiftScreenState extends State<ShiftScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              getFloorPlansView();
+                              floorPlanHelpers.getFloorPlans().then((result) {
+                                //Only allow shifts to be created if floor plans exist
+                                if (result == true && globals.currentFloorPlans.isNotEmpty) {
+                                  Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text('No floor plans found'),
+                                        content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text('Okay'),
+                                            onPressed: (){
+                                              Navigator.of(ctx).pop();
+                                            },
+                                          )
+                                        ],
+                                      )
+                                  );
+                                }
+                              });
                             }
                         ),
                       ]
