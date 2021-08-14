@@ -29,11 +29,17 @@ exports.verifyCredentials = async (adminId, companyId) => {
  */
 exports.createNotification = async (req, res) => {
     // try {
-        let reqJson = JSON.parse(req.body);
-        console.log(reqJson);
-
         // data validation
         let fieldErrors = [];
+        
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+
 
         if(req.body == null) {
             fieldErrors.push({field: null, message: 'Request object may not be null'});
@@ -123,6 +129,14 @@ exports.deleteNotification = async (req, res) => {
         // data validation
         let fieldErrors = [];
 
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+
         if(req.body == null) {
             fieldErrors.push({field: null, message: 'Request object may not be null'});
         }
@@ -194,12 +208,17 @@ exports.viewNotificationsUserEmail = async (req, res) => {
     // try {
         let fieldErrors = [];
 
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+
         if(req.body == null) {
             fieldErrors.push({field: null, message: 'Request object may not be null'});
         }
-
-        let reqJson = JSON.parse(req.body);
-        console.log(reqJson);
 
         if (reqJson.userEmail == null || reqJson.userEmail === '') {
             fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
