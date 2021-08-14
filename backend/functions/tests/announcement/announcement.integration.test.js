@@ -48,25 +48,25 @@ describe('/POST announcements', () => {
             companyId: 'COMPANY-ID',
         };
   
-         chai.request(server)
-             .post('/api/announcements')
-             .send(req)
-             .end((err, res) => {
-                 console.log(res.body);
-                 let req2 = {
-                     announcementId: res.body.announcementId,
-                 };
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                console.log(res.body);
+                let req2 = {
+                    announcementId: res.body.announcementId,
+                };
   
-                 chai.request(server)
-                     .delete('/api/announcements')
-                     .send(req2).end((err, res) => {
-                          should.exist(res);
-                          res.should.have.status(200);
-                          console.log(res.body);
-                          done();
-                     });
-             });
-     });
+                chai.request(server)
+                    .delete('/api/announcements')
+                    .send(req2).end((err, res) => {
+                        should.exist(res);
+                        res.should.have.status(200);
+                        console.log(res.body);
+                        done();
+                    });
+            });
+    });
 }); 
     
 describe('/GET announcements', () => {
