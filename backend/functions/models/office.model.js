@@ -3,7 +3,7 @@ class booking {
     {
         this.dateTime = dateTime;
         this.numFloors = floorNum;
-        this.numRooms = roomNum;
+        this.roomNumber = roomNum;
         this.user = user;
         this.numDesk = deskNum;
 
