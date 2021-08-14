@@ -28,7 +28,7 @@ exports.verifyCredentials = async (adminId, companyId) => {
  * @returns res An HTTP status indicating whether the request was successful or not.
  */
 exports.createNotification = async (req, res) => {
-    // try {
+
         let reqJson = JSON.parse(req.body);
         console.log(reqJson);
 
