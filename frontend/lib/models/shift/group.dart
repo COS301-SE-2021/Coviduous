@@ -1,21 +1,3 @@
-// class Group {
-//   String email;
-//   String groupName;
-
-//   Group(String email, String groupName) {
-//     this.email = email;
-//     this.groupName = groupName;
-//   }
-
-//   String getEmail() {
-//     return email;
-//   }
-
-//   String getGroupName() {
-//     return groupName;
-//   }
-// }
-
 /**
  * This class acts as a group entity mimicking the group table attribute in the database
  */
@@ -34,8 +16,6 @@ class Group {
   String groupName;
   String userEmail;
   String shiftNumber;
-  String floorNumber;
-  String roomNumber;
   String adminId;
 
   Group({
@@ -43,8 +23,6 @@ class Group {
     this.groupName,
     this.userEmail,
     this.shiftNumber,
-    this.floorNumber,
-    this.roomNumber,
     this.adminId,
   });
 
@@ -53,8 +31,6 @@ class Group {
         groupName: json["groupName"],
         userEmail: json["userEmail"],
         shiftNumber: json["shiftNumber"],
-        floorNumber: json["floorNumber"],
-        roomNumber: json["roomNumber"],
         adminId: json["adminID"],
       );
 
@@ -63,8 +39,6 @@ class Group {
         "groupName": groupName,
         "userEmail": userEmail,
         "shiftNumber": shiftNumber,
-        "floorNumber": floorNumber,
-        "roomNumber": roomNumber,
         "adminID": adminId,
       };
 }
