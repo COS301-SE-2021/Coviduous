@@ -22,43 +22,60 @@ Date.prototype.timeNow = function () {
        + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
 
-exports.createBooking = async (req, res) => {
-        try {
-          let bookingNumber = "BKN-" + uuid.v4();
-          let timestamp = "Booking Placed On The : " + new Date().today() + " @ " + new Date().timeNow();
-          let bookingData = {
-            bookingNumber: bookingNumber,
-            deskNumber: req.body.deskNumber,
-            floorNumber: req.body.floorNumber,
-            roomNumber: req.body.roomNumber,
-            timestamp: timestamp,
-            userId: req.body.userId
-          }
-          await database.createBooking(bookingNumber,bookingData);
-          
-          return res.status(200).send({
-            message: 'office booking successfully created',
-            data: req.body
-          });
-        } catch (error) {
-          console.log(error);
-          return res.status(500).send(error);
-        }
-    };
 
-exports.deleteBooking = async (req, res) => {
-      try {
-        if (await database.deleteBooking(req.body.bookingNumber) == true)
-        {
-          return res.status(200).send({
-            message: 'Booking successfully deleted',
-          });
+/**
+ * This function create a specified booking via an HTTP CREATE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  bookingNumber: int
+ *   deskNumber: int
+ *   floorNumber: int
+ *   roomNumber: int
+ *   timestamp: Date
+ *   userId: String
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+exports.createBooking = async (req, res) => {
+    if(req.bookingNumber != null && req.deskNumber !== "" && req.floorNumber != null && req.roomNumber !== "" &&
+        req.timestamp != null && req.userId != null) {
+        let bookingNumber = "BKN-" + uuid.v4();
+        let timestamp = "Booking Placed On The : " + new Date().today() + " @ " + new Date().timeNow();
+        let bookingData = { bookingNumber: bookingNumber, deskNumber: req.body.deskNumber, floorNumber: req.body.floorNumber,
+            roomNumber: req.body.roomNumber, timestamp: timestamp, userId: req.body.userId
         }
-      } catch (error) {
-        console.log(error);
-        return res.status(500).send(error);
-      }
-    };
+        if (await database.createBooking(bookingNumber,bookingData)==true){
+            return res.status(200).send({
+                message: 'office booking successfully created',
+                data: req.body
+            });
+        }
+        else {
+            return res.status(500).send({message: "500 server error."});
+        }
+    }
+};
+
+/**
+ * This function deletes a specified booking via an HTTP DELETE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  bookingNumber: number
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+exports.deleteBooking = async (req, res) => {
+    if(req!=null) {
+        if (await database.deleteBooking(req.body.bookingNumber) == true) {
+            return res.status(200).send({
+                message: 'Booking successfully deleted',
+            });
+        } else {
+            return res.status(500).send(error);
+        }
+    }
+}
+
 
     //get bookings using companyid
     exports.viewBookings = async (req, res) => {
