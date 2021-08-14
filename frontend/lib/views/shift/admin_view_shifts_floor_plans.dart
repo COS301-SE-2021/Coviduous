@@ -6,6 +6,7 @@ import 'package:frontend/views/shift/home_shift.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ViewShiftsFloorPlans extends StatefulWidget {
@@ -15,35 +16,6 @@ class ViewShiftsFloorPlans extends StatefulWidget {
 }
 
 class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
-  Future getFloors() async {
-    /*await Future.wait([
-      services.getFloors(GetFloorsRequest(globals.currentFloorPlanNum))
-    ]).then((responses) {
-      response = responses.first;
-      if (response.getNumFloors() != 0) { //Only allow shifts to be created if floor plans exist
-        globals.floors = response.getFloors();
-        Navigator.of(context).pushReplacementNamed(ViewShiftsFloors.routeName);
-      } else {
-        showDialog(
-            context: context,
-            builder: (ctx) =>
-                AlertDialog(
-                  title: Text('No floors found'),
-                  content: Text('Shifts cannot be viewed at this time. Please add floors for your company first.'),
-                  actions: <Widget>[
-                    ElevatedButton(
-                      child: Text('Okay'),
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                    )
-                  ],
-                )
-        );
-      }
-    });*/
-  }
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
     return (await true);
@@ -66,9 +38,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
     }
 
     Widget getList() {
-      //List<FloorPlan> floorPlans = globals.floorPlans;
-      //int numOfFloorPlans = floorPlans.length;
-      int numOfFloorPlans = 0;
+      int numOfFloorPlans = globals.currentFloorPlans.length;
 
       print(numOfFloorPlans);
 
@@ -143,8 +113,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                         color: Theme
                             .of(context)
                             .primaryColor,
-                        //child: Text('Floor plan ' + floorPlans[index].getFloorPlanId()),
-                        child: Text('Placeholder'),
+                        child: Text('Floor plan ' + globals.currentFloorPlans[index].getFloorPlanNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -153,10 +122,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Number of floors: ' + floorPlans[index].getNumFloors().toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
+                              child: Text('Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -168,8 +134,14 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        //globals.currentFloorPlanNum = floorPlans[index].getFloorPlanId();
-                                        getFloors();
+                                        floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
+                                          if (result == true) {
+                                            Navigator.of(context).pushReplacementNamed(ViewShiftsFloors.routeName);
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text("There was an error. Please try again later.")));
+                                          }
+                                        });
                                       }),
                                 ],
                               ),

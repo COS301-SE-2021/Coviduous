@@ -6,6 +6,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/shift/admin_view_shifts_floor_plans.dart';
 
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ViewShiftsFloors extends StatefulWidget {
@@ -16,47 +17,6 @@ class ViewShiftsFloors extends StatefulWidget {
 }
 
 class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
-  int numOfShifts = 0;
-
-  Future getRooms() async {
-    /*await Future.wait([
-      services.getRooms(GetRoomsRequest(globals.currentFloorNum))
-    ]).then((responses) {
-      response = responses.first;
-      if (response.getNumRooms() != 0) {
-        globals.rooms = response.getRooms();
-        Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
-      } else {
-        showDialog(
-            context: context,
-            builder: (ctx) =>
-                AlertDialog(
-                  title: Text('No rooms found'),
-                  content: Text('Shifts cannot be viewed at this time. Please add rooms for your company first.'),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('Okay'),
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                    )
-                  ],
-                )
-        );
-      }
-    });*/
-  }
-
-  Future getShifts(int index) async {
-    /*await Future.wait([
-      services.getShifts(GetShiftsRequest())
-    ]).then((responses) {
-      response2 = responses.first;
-      globals.currentShifts = response2.getShifts();
-      //numOfShifts = globals.shifts.elementAt(index).;
-    });*/
-  }
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
     return (await true);
@@ -79,9 +39,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
     }
 
     Widget getList() {
-      //List<Floor> floors = globals.floors;
-      //int numOfFloors = globals.floors.length;
-      int numOfFloors = 0;
+      int numOfFloors = globals.currentFloors.length;
 
       print(numOfFloors);
 
@@ -150,18 +108,13 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height / 24,
                             color: Theme.of(context).primaryColor,
-                            /*child: Text(
-                                'Floor ' + floors[index].getFloorNumber()),*/
-                            child: Text('Placeholder'),
+                            child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            /*child: Text(
-                                'Number of rooms: ' + floors[index].getNumRooms().toString(),
-                                style: TextStyle(color: Colors.black)),*/
-                            child: Text('Placeholder'),
+                            child: Text('Number of rooms: ' + globals.currentFloors[index].getNumRooms().toString()),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
@@ -173,8 +126,14 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                                 ElevatedButton(
                                     child: Text('View'),
                                     onPressed: () {
-                                      //globals.currentFloorNum = floors[index].getFloorNumber();
-                                      getRooms();
+                                      floorPlanHelpers.getRooms(globals.currentFloors[index].getFloorNumber()).then((result) {
+                                        if (result == true) {
+                                          Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("There was an error. Please try again later.")));
+                                        }
+                                      });
                                     }),
                               ],
                             ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/views/shift/admin_view_shifts.dart';
+//import 'package:frontend/views/shift/admin_view_shifts.dart';
 import 'package:frontend/views/shift/admin_view_shifts_floors.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+//import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ViewShiftsRooms extends StatefulWidget {
@@ -16,52 +17,6 @@ class ViewShiftsRooms extends StatefulWidget {
 }
 
 class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
-  //List<Room> rooms = globals.rooms;
-  //int numOfRooms = globals.rooms.length;
-
-  Future<int> getNumShifts(int index) async {
-    /*
-    await Future.wait([
-      services.getShift(GetShiftRequest(rooms[index].roomNum))
-    ]).then((responses) {
-      response = responses.first;
-      print(response.getShifts().length);
-      return response.getShifts().length;
-    });
-    */
-  }
-
-  Future getShifts(int index) async {
-    /*
-    await Future.wait([
-      services.getShift(GetShiftRequest(rooms[index].roomNum))
-    ]).then((responses) {
-      response = responses.first;
-      if (response.getShifts().length != 0) { //Only allow shifts to be created if rooms exist
-        globals.currentShifts = response.getShifts();
-        Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
-      } else {
-        showDialog(
-            context: context,
-            builder: (ctx) =>
-                AlertDialog(
-                  title: Text('No shifts found'),
-                  content: Text('No shifts have been created for this room.'),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('Okay'),
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                    )
-                  ],
-                )
-        );
-      }
-    });
-    */
-  }
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ViewShiftsFloors.routeName);
     return (await true);
@@ -84,7 +39,8 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
     }
 
     Widget getList() {
-      int numOfRooms = 0;
+      int numOfRooms = globals.currentRooms.length;
+
       print(numOfRooms);
 
       if (numOfRooms == 0) {
@@ -127,8 +83,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        //child: Text('Room ' + rooms[index].getRoomNum()),
-                        child: Text('Placeholder'),
+                        child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -137,23 +92,13 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*
-                              child: Text(
-                                  'Number of desks: ' + rooms[index].desks.length.toString(),
-                                  style: TextStyle(color: Colors.black)),
-                                  */
-                              child: Text('Placeholder'),
+                              child: Text('Number of desks: ' + globals.currentRooms[index].getNumberOfDesks().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*
-                              child: Text(
-                                  'Occupied desk percentage: ' + rooms[index].getPercentage().toString(),
-                                  style: TextStyle(color: Colors.black)),
-                                  */
-                              child: Text('Placeholder'),
+                              child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -165,8 +110,25 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                                   ElevatedButton(
                                       child: Text('View shifts'),
                                       onPressed: () {
-                                        //globals.currentRoomNum = rooms[index].getRoomNum();
-                                        getShifts(index);
+                                        if (globals.currentRooms[index].getNumberOfDesks() > 0) {
+                                          //Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('No desks found'),
+                                                content: Text('Shifts are assigned based on desks. A room with no desks cannot have any shifts.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
                                       }),
                                 ],
                               ),
