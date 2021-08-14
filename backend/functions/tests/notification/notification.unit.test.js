@@ -142,7 +142,79 @@ it('Return 200 if creation successful', function(done) {
       });
 });
 
+
+
+
+
+
 });
+describe('Delete notification unit tests', function() {
+  it('Return 400 if request is empty', function(done) {
+      chai.request(server)
+          .delete('/api/notification')
+          .send(null)
+          .end((err, res) => {
+              should.exist(res);
+              res.should.have.status(400);
+              console.log(res.body);
+              done();
+          });
+  });
+
+  it('Return 400 if empty notificationId', function(done) {
+    let req = {
+      notificationId:''
+    };
+    chai.request(server)
+        .delete('/api/notification')
+        .send(req)
+        .end((err, res) => {
+            should.exist(res);
+            res.should.have.status(400);
+            console.log(res.body);
+            done();
+        });
+  });
+  it('Return 200 if deletion is successful', function(done) {
+    let req = {
+      subject:'Covid TEST', 
+      message:'Check the covid update',  
+      userEmail:'nku@gmail.com', 
+      adminId: 'ADMIN-ID',
+      companyId: 'COM-ID'
+    };
+
+     chai.request(server)
+         .post('/api/notification')
+         .send(req)
+         .end((err, res) => {
+             console.log(res.body);
+             let req2 = {
+              notificationId: res.body.notificationId,
+             };
+
+             chai.request(server)
+                 .delete('/api/notification')
+                 .send(req2).end((err, res) => {
+                      should.exist(res);
+                      res.should.have.status(200);
+                      console.log(res.body);
+                      done();
+                 });
+         });
+ });
+});
+
+  
+
+
+
+
+
+
+
+
+
 
    
 
