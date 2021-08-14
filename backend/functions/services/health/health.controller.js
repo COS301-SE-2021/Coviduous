@@ -9,11 +9,27 @@ exports.setDatabase = async (db) => {
   database = db;
 }
 
+exports.hasHighTemperature = async (temparature) => {
+  //temperature is 36-37 degrees celsius
+  //we use celsius because most screening instuments available in south africa are available in celsius temperature measure
+  let temp=parseFloat(temparature);
+  let acceptableTemp=parseFloat('37.5');
+  if(temp>acceptableTemp)
+  {
+      return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 ///////////////// HEALTH CHECK /////////////////
 
 exports.createHealthCheck = async (req, res) => {
   try {
     let healthCheckId = "HTH-" + uuid.v4();
+    //add a time attribute
 
     let healthCheckObj = new HealthCheck(healthCheckId, req.body.userId, req.body.name, req.body.surname,
         req.body.email, req.body.phoneNumber, req.body.temperature, req.body.fever, req.body.cough,
@@ -40,8 +56,15 @@ exports.createHealthCheck = async (req, res) => {
       testedPositive: healthCheckObj.testedPositive,
       travelled: healthCheckObj.travelled
     }
+    //assess temparature first and if temparature is above covid19 threshold issue a permission not granted
 
-    // health check businness logic - call database.createPermission(permissionData...)
+    // if temparature is less than threshold evaluate the AI prediction and accuracy score
+
+    //if prediction is positive issue out a permission denied
+
+    //if prediction is negative and temparature is low we can offer a permissions granted badge
+
+    // all healthchecks are saved into the database for reporting
 
     if (await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData) == true)
     {
@@ -56,6 +79,8 @@ exports.createHealthCheck = async (req, res) => {
   }
 };
 
+
+//admin can view health checks of users
 exports.viewHealthChecks = async (req, res) => {
     try {
         let healthChecks = await database.viewHealthChecks();
@@ -71,6 +96,7 @@ exports.viewHealthChecks = async (req, res) => {
         });
     }
 };
+
 
 exports.viewHealthCheckUserId = async (req, res) => {
     try {
