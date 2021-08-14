@@ -8,7 +8,7 @@ import 'package:frontend/frontend/screens/user/user_manage_account.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class UserUpdateAccount extends StatefulWidget {
   static const routeName = "/userUpdateAccount";

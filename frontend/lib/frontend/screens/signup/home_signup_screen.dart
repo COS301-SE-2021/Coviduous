@@ -5,7 +5,7 @@ import 'package:frontend/frontend/screens/signup/user_signup_screen.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/main_homepage.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class Register extends StatefulWidget {
   static const routeName = "/register";

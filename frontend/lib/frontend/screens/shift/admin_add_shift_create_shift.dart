@@ -6,7 +6,7 @@ import 'package:frontend/frontend/screens/shift/admin_add_shift_assign_employees
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class AddShiftCreateShift extends StatefulWidget {
   static const routeName = "/admin_add_shift";

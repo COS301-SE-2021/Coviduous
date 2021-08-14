@@ -7,7 +7,7 @@ import 'package:frontend/frontend/screens/health/user_upload_vaccine_confirm.dar
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class UserViewVaccineConfirm extends StatefulWidget {
   static const routeName = "/user_view_vaccine_confirm";

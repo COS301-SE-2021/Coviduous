@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import '../models/auth_provider.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class ForgotPassword extends StatefulWidget {
   static const routeName = "/forgotPassword";

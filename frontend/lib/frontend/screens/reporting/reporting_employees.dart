@@ -13,7 +13,7 @@ import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/models/user/user.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class ReportingEmployees extends StatefulWidget {
   static const routeName = "/reporting_employees";

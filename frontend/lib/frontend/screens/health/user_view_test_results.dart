@@ -7,7 +7,7 @@ import 'package:frontend/frontend/screens/health/user_upload_test_results.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class UserViewTestResults extends StatefulWidget {
   static const routeName = "/user_view_test_results";

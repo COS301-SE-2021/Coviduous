@@ -5,7 +5,7 @@ import 'package:frontend/frontend/models/firestore_cloud.dart';
 import 'package:frontend/frontend/screens/signup/home_signup_screen.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class AdminRegister extends StatefulWidget {
   static const routeName = "/adminRegister";

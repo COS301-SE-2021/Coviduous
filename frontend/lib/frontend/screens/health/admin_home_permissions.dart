@@ -8,7 +8,7 @@ import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/health/admin_view_access_requests.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class AdminPermissions extends StatefulWidget {
   static const routeName = "/admin_permissions_home";

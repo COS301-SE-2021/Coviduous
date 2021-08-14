@@ -9,7 +9,7 @@ import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
 import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class AdminModifyFloors extends StatefulWidget {
   static const routeName = "/admin_modify_floors";

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'health/visitor_home_health.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";

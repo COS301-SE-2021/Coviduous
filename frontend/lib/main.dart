@@ -103,7 +103,7 @@ import 'package:frontend/frontend/screens/user/user_reset_password_screen.dart';
 import 'package:frontend/frontend/screens/user/admin_delete_account.dart';
 import 'package:frontend/frontend/screens/user/user_delete_account.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

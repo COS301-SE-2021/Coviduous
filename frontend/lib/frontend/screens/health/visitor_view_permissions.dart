@@ -5,7 +5,7 @@ import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/health/visitor_home_health.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class VisitorViewPermissions extends StatefulWidget {
   static const routeName = "/visitor_view_permissions";

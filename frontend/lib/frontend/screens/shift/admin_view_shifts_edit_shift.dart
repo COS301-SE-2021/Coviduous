@@ -9,7 +9,7 @@ import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 import 'package:frontend/frontend/screens/shift/home_shift.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class ViewShiftsEditShift extends StatefulWidget {
   static const routeName = "/admin_edit_shifts";

@@ -6,7 +6,7 @@ import 'package:native_pdf_view/native_pdf_view.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class VisitorViewGuidelines extends StatefulWidget {
   static const routeName = "/visitor_view_guidelines";

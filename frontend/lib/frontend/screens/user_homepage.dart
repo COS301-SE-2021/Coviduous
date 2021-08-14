@@ -12,7 +12,7 @@ import 'package:frontend/frontend/models/auth_provider.dart';
 
 import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
 import 'package:frontend/controllers/notification_controller.dart' as notificationController;
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {
   static const routeName = "/user";

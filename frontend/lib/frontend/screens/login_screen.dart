@@ -19,7 +19,7 @@ import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/frontend/screens/forgot_password_screen.dart';
 import 'package:frontend/frontend/screens/main_homepage.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 /*
   Class name: LoginScreen

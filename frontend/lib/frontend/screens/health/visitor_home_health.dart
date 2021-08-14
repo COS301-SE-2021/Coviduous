@@ -8,7 +8,7 @@ import 'package:frontend/frontend/screens/health/visitor_view_guidelines.dart';
 import 'package:frontend/frontend/screens/health/visitor_view_permissions.dart';
 import 'package:frontend/frontend/screens/main_homepage.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class VisitorHealth extends StatefulWidget {
   static const routeName = "/visitor_health";

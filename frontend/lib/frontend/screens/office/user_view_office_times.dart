@@ -6,7 +6,7 @@ import 'package:frontend/frontend/screens/office/user_view_office_rooms.dart';
 import 'package:frontend/frontend/screens/admin_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/frontend/front_end_globals.dart' as globals;
+import 'package:frontend/globals.dart' as globals;
 
 class UserViewOfficeTimes extends StatefulWidget {
   static const routeName = "/user_office_times";
