@@ -14,10 +14,10 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-/*describe('/POST announcements', () => {
+describe('/POST announcements', () => {
     it('it should create an announcement', () => {
         let announcement = {
-            announcementId: "test-000",
+            // announcementId: "test-000",
             type: "test-000",
             message: "test-000",
             timestamp: "test-000",
@@ -40,19 +40,32 @@ chai.use(chaiHttp);
         });
     });
 
-    it('it should DELETE an announcement', () => {
-        let announcement = {
-            announcementId: "test-000"
-        }
-
-        chai.request(server).delete('/api/announcements/')
-            .send(announcement)
+    it('should DELETE an announcement', function(done) {
+        let req = {
+            type: 'GENERAL',
+            message: 'Announcement to be deleted',
+            adminId: 'ADMIN-ID',
+            companyId: 'COMPANY-ID',
+        };
+  
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
             .end((err, res) => {
-            expect(err).to.be.null;
-            expect(res).to.have.status(200);
-            expect(res.body).should.be.a('object');
-            //done();
-        })//.catch(done);
+                console.log(res.body);
+                let req2 = {
+                    announcementId: res.body.data.announcementId
+                };
+  
+                chai.request(server)
+                    .delete('/api/announcements')
+                    .send(req2).end((err, res) => {
+                        should.exist(res);
+                        res.should.have.status(200);
+                        console.log(res.body);
+                        done();
+                    });
+            });
     });
 }); 
     
@@ -77,4 +90,3 @@ describe('/GET announcements', () => {
 //         });
 //     });
 // });
-*/
