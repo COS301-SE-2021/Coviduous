@@ -83,14 +83,14 @@ exports.createNotification = async (req, res) => {
             reqJson.subject, reqJson.message, timestamp, reqJson.adminId, reqJson.companyId);
     
         let notificationData = {
-          notificationId: notificationObj.notificationId,
-          userId: notificationObj.userId,
-          userEmail: notificationObj.userEmail,
-          subject: notificationObj.subject,
-          message: notificationObj.message,
-          timestamp: notificationObj.timestamp,
-          adminId: notificationObj.adminId,
-          companyId: notificationObj.companyId
+          notificationId: notificationId,
+          userId: reqJson.userId,
+          userEmail: reqJson.userEmail,
+          subject: reqJson.subject,
+          message: reqJson.message,
+          timestamp: timestamp,
+          adminId: reqJson.adminId,
+          companyId: reqJson.companyId
         }
     
         if (await database.createNotification(notificationData.notificationId, notificationData) == true)
