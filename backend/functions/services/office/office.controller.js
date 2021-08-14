@@ -74,31 +74,38 @@ exports.deleteBooking = async (req, res) => {
             return res.status(500).send(error);
         }
     }
-}
+};
 
 
     //get bookings using companyid
-    exports.viewBookings = async (req, res) => {
-      try {
-        
-          let filteredList=[];
-          let bookings = await database.getBookings();
-          bookings.forEach(obj => {
-            if(obj.userId===req.body.userId)
-             {
-              filteredList.push(obj);
-             }
-          });
+/**
+ * This function views a specified booking via an HTTP VIEW request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  companyid: number
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+exports.viewBookings = async (req, res) => {
 
-          return res.status(200).send({
-            message: 'Successfully retrieved bookings based on your userId',
-            data: filteredList
-          });
-      } catch (error) {
-          console.log(error);
-          return res.status(500).send({
-            message: err.message || "Some error occurred while fetching bookings."
-          });
+        if(req.companyid!=null){
+            let filteredList=[];
+            let bookings = await database.getBookings();
+            bookings.forEach(obj => {
+                if(obj.userId===req.body.userId)
+                {
+                    filteredList.push(obj);
+                }
+            });
+            return res.status(200).send({
+                message: 'Successfully retrieved bookings based on your userId',
+                data: filteredList
+            });
+        }
+        else {
+            return res.status(500).send({
+                message: err.message || "Some error occurred while fetching bookings."
+            });
       }
     };
 
