@@ -26,7 +26,7 @@ Future getSnap() async {
   User admin = FirebaseAuth.instance.currentUser;
   await Future.wait([
     FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('Users')
+      var query = FirebaseFirestore.instance.collection('users')
           .where('uid', isEqualTo: admin.uid).limit(1);
       await Future.wait([query.get().then((data) {
         if (data.docs.length > 0) {
@@ -195,10 +195,10 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
 
                                                             //If delete was successful, delete from Firestore as well
                                                             FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                                  var query = FirebaseFirestore.instance.collection('Users').where("Email", isEqualTo: oldEmail);
+                                                                  var query = FirebaseFirestore.instance.collection('users').where("Email", isEqualTo: oldEmail);
                                                                   var querySnapshot = await query.get();
                                                                   String id = querySnapshot.docs.first.id;
-                                                                  FirebaseFirestore.instance.collection('Users').doc(id).delete();
+                                                                  FirebaseFirestore.instance.collection('users').doc(id).delete();
                                                                 });
 
                                                             //DeleteAccountUserResponse response = services.deleteAccountUserMock(DeleteAccountUserRequest(globals.loggedInUserId));

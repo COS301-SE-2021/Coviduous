@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/frontend/screens/floor_plan/admin_edit_room_modify.dart';
+import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
+import 'package:frontend/frontend/screens/floor_plan/admin_edit_room.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminModifyRooms extends StatefulWidget {
@@ -19,9 +20,13 @@ class AdminModifyRooms extends StatefulWidget {
 
 class AdminModifyRoomsState extends State<AdminModifyRooms> {
   Future<bool> _onWillPop() async {
-    /*getFloors(globals.currentFloorPlanNum).then((result){
-      Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-    });*/
+    floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
+      if (result == true) {
+        Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
+      } else { //If there is an error, return to the main floor plan screen to avoid getting stuck
+        Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+      }
+    });
     return (await true);
   }
 
@@ -42,7 +47,8 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
     }
 
     Widget getList() {
-      int numOfRooms = 0;
+      int numOfRooms = globals.currentRooms.length;
+
       print(numOfRooms);
 
       if (numOfRooms == 0) {
@@ -91,7 +97,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    //child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
+                    child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                   ),
                   ListView(
@@ -99,36 +105,29 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                       physics:
                           NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                       children: <Widget>[
-                        Container(
-                          height: 50,
+                        (globals.currentRooms[index].getRoomName() != "") ? Container(
                           color: Colors.white,
-                          child: Text(
-                              'Room dimensions (in meters^2): ' + globals.currentRooms[index].getRoomArea().toString(),
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Room name: ' + globals.currentRooms[index].getRoomName()),
+                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                        ) : Container(),
+                        Container(
+                          color: Colors.white,
+                          child: Text('Room dimensions (in meters squared): ' + globals.currentRooms[index].getRoomArea().toString()),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
-                          height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Desk dimensions (in meters^2): ' + globals.currentRooms[index].getDeskArea().toString(),
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Desk dimensions (in meters squared): ' + globals.currentRooms[index].getDeskArea().toString()),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
-                          height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Number of desks: ' + globals.currentRooms[index].getNumberOfDesks().toString(),
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Number of desks: ' + globals.currentRooms[index].getNumberOfDesks().toString()),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
-                          height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString(),
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString()),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
@@ -147,17 +146,21 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    //Remove a room and reload page
-                                    /*if (numOfRooms > 1) {
-                                      //Only allow deletion of rooms if there is more than one room
-                                      deleteRoom(globals.currentRooms[index].getRoomNumber()).then((result){
-                                        if (deletedRoom == true) {
-                                          getRooms(globals.currentFloorNum).then((result){
-                                            setState(() {});
+                                    //Delete room and reload the page
+                                    if (numOfRooms > 1) { //Only allow deletion of rooms if there is more than one room
+                                      floorPlanHelpers.deleteRoom(globals.currentRooms[index].getRoomNumber()).then((result) {
+                                        if (result == true) {
+                                          floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
+                                            if (result == true) {
+                                              setState(() {});
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("Could not retrieve updated rooms at this time.")));
+                                            }
                                           });
                                         } else {
                                           ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Room deletion unsuccessful.")));
+                                              SnackBar(content: Text("Room deletion unsuccessful. Please try again later.")));
                                         }
                                       });
                                     } else {
@@ -177,7 +180,7 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                             ],
                                           )
                                       );
-                                    }*/
+                                    }
                                   }),
                             ],
                           ),
@@ -199,9 +202,13 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              /*getFloors(globals.currentFloorPlanNum).then((result){
-                Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-              });*/
+              floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
+                if (result == true) {
+                  Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
+                } else { //If there is an error, return to the main floor plan screen to avoid getting stuck
+                  Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+                }
+              });
             },
           ),
         ),
@@ -220,16 +227,21 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                 child: Text('Add room'),
                 onPressed: () {
                   //Add new room and reload page
-                  /*addRoom().then((result){
-                    if (createdRoom == true) {
-                      getRooms(globals.currentFloorNum).then((result){
-                        setState(() {});
+                  floorPlanHelpers.createRoom(globals.currentFloorNum).then((result) {
+                    if (result == true) {
+                      floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
+                        if (result == true) {
+                          setState(() {});
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Could not retrieve updated rooms at this time.")));
+                        }
                       });
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Floor creation unsuccessful.")));
+                          SnackBar(content: Text("Room creation unsuccessful. Please try again later.")));
                     }
-                  });*/
+                  });
                 },
               ))
         ),

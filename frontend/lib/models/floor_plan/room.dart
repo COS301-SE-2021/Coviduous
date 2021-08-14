@@ -8,6 +8,7 @@ class Room {
   num currentNumRoomsInFloor;
   String floorNumber;
   String roomNumber;
+  String roomName;
   num roomArea;
   num capacityPercentage;
   num numberOfDesks;
@@ -21,6 +22,7 @@ class Room {
     this.currentNumRoomsInFloor,
     this.floorNumber,
     this.roomNumber,
+    this.roomName,
     this.roomArea,
     this.capacityPercentage,
     this.numberOfDesks,
@@ -35,6 +37,7 @@ class Room {
     currentNumRoomsInFloor: json["currentNumberRoomInFloor"],
     floorNumber: json["floorNumber"],
     roomNumber: json["roomNumber"],
+    roomName: json["roomName"],
     roomArea: json["roomArea"],
     capacityPercentage: json["capacityPercentage"],
     numberOfDesks: json["numberDesks"],
@@ -49,6 +52,7 @@ class Room {
     "currentNumberRoomInFloor": currentNumRoomsInFloor,
     "floorNumber": floorNumber,
     "roomNumber": roomNumber,
+    "roomName": roomName,
     "roomArea": roomArea,
     "capacityPercentage": capacityPercentage,
     "numberDesks": numberOfDesks,
@@ -69,6 +73,10 @@ class Room {
 
   String getRoomNumber() {
     return roomNumber;
+  }
+
+  String getRoomName() {
+    return roomName;
   }
 
   num getRoomArea() {

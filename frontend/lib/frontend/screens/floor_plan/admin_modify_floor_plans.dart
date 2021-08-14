@@ -4,12 +4,11 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/models/auth_provider.dart';
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
-import 'package:frontend/models/floor_plan/floor_plan.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AdminModifyFloorPlans extends StatefulWidget {
@@ -24,6 +23,8 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
     Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
     return (await true);
   }
+
+  TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,31 +43,41 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
     }
 
     Widget getList() {
-      int numOfFloorPlans = 0;
+      int numOfFloorPlans = globals.currentFloorPlans.length;
 
       print(numOfFloorPlans);
 
       if (numOfFloorPlans == 0) {
-        //This should not happen, but checking just in case.
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: Text('Error'),
-              content: Text(
-                  'No floor plans have been defined for your company. Please return to the floor plan homepage and add a new floor plan.'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Okay'),
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                )
-              ],
-            ));
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.pushReplacementNamed(context, FloorPlanScreen.routeName);
-        });
-        return Container();
+        return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height /
+                (5 * globals.getWidgetScaling()),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: MediaQuery.of(context).size.width /
+                (2 * globals.getWidgetScaling()),
+            height: MediaQuery.of(context).size.height /
+                (24 * globals.getWidgetScaling()),
+            color: Theme.of(context).primaryColor,
+            child: Text('No floor plans found',
+                style: TextStyle(
+                    fontSize:
+                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+          ),
+          Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width /
+                  (2 * globals.getWidgetScaling()),
+              height: MediaQuery.of(context).size.height /
+                  (12 * globals.getWidgetScaling()),
+              color: Colors.white,
+              padding: EdgeInsets.all(12),
+              child: Text('No floor plans have been registered for your company.',
+                  style: TextStyle(
+                      fontSize:
+                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+        ]);
       } else {
         //Else create and return a list
         return ListView.builder(
@@ -82,7 +93,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    //child: Text('Floor plan ' + globals.currentFloorPlans[index].getFloorPlanNumber()),
+                    child: Text('Floor plan ' + globals.currentFloorPlans[index].getFloorPlanNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -92,9 +103,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          /*child: Text(
-                              'Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString(),
-                              style: TextStyle(color: Colors.black)),*/
+                          child: Text('Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString()),
                           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         ),
                         Container(
@@ -106,16 +115,19 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                               ElevatedButton(
                                   child: Text('Edit'),
                                   onPressed: () {
-                                    /*globals.currentFloorPlan = globals.currentFloorPlans[index];
-                                    globals.currentFloorPlanNum = globals.currentFloorPlans[index].getFloorPlanNumber();
-                                    getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
-                                      Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-                                    });*/
+                                    floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
+                                      if (result == true) {
+                                        Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
+                                      } else {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("There was an error. Please try again later.")));
+                                      }
+                                    });
                                   }),
                               ElevatedButton(
                                   child: Text('Delete'),
                                   onPressed: () {
-                                    /*showDialog(
+                                    showDialog(
                                         context: context,
                                         builder: (ctx) => AlertDialog(
                                           title: Text('Warning'),
@@ -124,6 +136,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                             TextButton(
                                               child: Text('Yes'),
                                               onPressed: (){
+                                                Navigator.pop(context);
                                                 //Only allow floor plan to be deleted if password is correct; try to sign in with it
                                                 showDialog(context: context,
                                                     builder: (context) {
@@ -147,19 +160,27 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                                           TextButton(
                                                             child: Text('Submit'),
                                                             onPressed: () {
-                                                              //Only allow floor plan to be deleted if password is correct; try to sign in with it
                                                               if (_password.text.isNotEmpty) {
                                                                 AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
+                                                                  _password.clear();
                                                                   if (value2 == "welcome") {
-                                                                    deleteFloorPlan(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result){
-                                                                      //If successfully deleted, reload the page
-                                                                      if (deletedFloorPlan == true) {
-                                                                        getFloorPlans().then((result){
-                                                                          setState(() {});
+                                                                    floorPlanHelpers.deleteFloorPlan(globals.currentFloorPlans[index].getFloorPlanNumber())
+                                                                        .then((result) {
+                                                                      if (result == true) {
+                                                                        floorPlanHelpers.getFloorPlans().then((result) {
+                                                                          if (result == true) {
+                                                                            Navigator.pop(context);
+                                                                            setState(() {});
+                                                                          } else {
+                                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                                SnackBar(content: Text("Could not retrieve updated floor plans at this time.")));
+                                                                            Navigator.pop(context);
+                                                                          }
                                                                         });
                                                                       } else {
                                                                         ScaffoldMessenger.of(context).showSnackBar(
-                                                                            SnackBar(content: Text("Floor plan deletion unsuccessful.")));
+                                                                            SnackBar(content: Text('Floor plan deletion unsuccessful. Please try again later.')));
+                                                                        Navigator.pop(context);
                                                                       }
                                                                     });
                                                                   } else {
@@ -177,7 +198,10 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                                           ),
                                                           TextButton(
                                                             child: Text('Cancel'),
-                                                            onPressed: () => Navigator.pop(context),
+                                                            onPressed: () {
+                                                              _password.clear();
+                                                              Navigator.pop(context);
+                                                            },
                                                           ),
                                                         ],
                                                       );
@@ -191,7 +215,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                               },
                                             )
                                           ],
-                                        ));*/
+                                        ));
                                   }),
                             ],
                           ),

@@ -18,7 +18,7 @@ class AdminResetPassword extends StatefulWidget {
 }
 FirebaseAuth auth = FirebaseAuth.instance;
 User user = FirebaseAuth.instance.currentUser;
-DocumentSnapshot snap = FirebaseFirestore.instance.collection('Users').doc(user.uid).get() as DocumentSnapshot;
+DocumentSnapshot snap = FirebaseFirestore.instance.collection('users').doc(user.uid).get() as DocumentSnapshot;
 String type = snap['Type'];
 
 class _AdminResetPasswordState extends State<AdminResetPassword> {

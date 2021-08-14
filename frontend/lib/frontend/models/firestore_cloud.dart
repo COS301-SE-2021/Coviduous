@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> userSetup(String firstName, String lastName, String username, String companyId)
 async {
-  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser.uid.toString();
   String email = auth.currentUser.email.toString();
@@ -24,7 +24,7 @@ async {
 
 Future<void> adminSetup(String firstName, String lastName, String username, String companyId, String companyName, String companyLocation)
 async {
-  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser.uid.toString();
   String email = auth.currentUser.email.toString();

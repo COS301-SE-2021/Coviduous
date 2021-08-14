@@ -22,10 +22,7 @@ import 'package:frontend/frontend/screens/floor_plan/admin_add_floor_plan.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_floor_plans.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_floors.dart';
 import 'package:frontend/frontend/screens/floor_plan/admin_modify_rooms.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_view_floors.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_edit_room_add.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_edit_room_modify.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_view_rooms.dart';
+import 'package:frontend/frontend/screens/floor_plan/admin_edit_room.dart';
 
 //Health
 import 'package:frontend/frontend/screens/health/admin_employee_permissions.dart';
@@ -179,9 +176,6 @@ class MyApp extends StatelessWidget{
         //Floor plan
         FloorPlanScreen.routeName: (ctx)=> FloorPlanScreen(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
-        AdminViewFloors.routeName: (ctx)=> AdminViewFloors(),
-        AdminViewRooms.routeName: (ctx)=> AdminViewRooms(),
-        AdminEditRoomAdd.routeName: (ctx)=> AdminEditRoomAdd(),
         AdminEditRoomModify.routeName: (ctx)=> AdminEditRoomModify(),
         AdminModifyFloorPlans.routeName: (ctx)=> AdminModifyFloorPlans(),
         AdminModifyFloors.routeName: (ctx)=> AdminModifyFloors(),

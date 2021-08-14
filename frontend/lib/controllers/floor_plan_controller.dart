@@ -21,7 +21,7 @@ int numRooms = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on firebase
 
-Future<bool> createFloorPlan(int numFloors, String adminId, String companyId) async {
+Future<bool> createFloorPlan(num numFloors, String adminId, String companyId) async {
   String path = "/floorplan";
   String url = server + path;
   var request;
@@ -56,7 +56,7 @@ Future<bool> createFloor(String floorPlanNumber, String adminId, String companyI
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
-      "floorPlanNumber": floorPlanNumber,
+      "floorplanNumber": floorPlanNumber,
       "adminId": adminId,
       "companyId": companyId,
     });
@@ -75,9 +75,7 @@ Future<bool> createFloor(String floorPlanNumber, String adminId, String companyI
   return false;
 }
 
-Future<bool> createRoom(int currentNumRoomsInFloor, String floorNumber, String roomNumber, double roomArea,
-    double capacityPercentage, int numberOfDesks, int occupiedDesks, double currentCapacity,
-    double deskArea, double capacityOfPeopleForSixFtGrid, double capacityOfPeopleForSixFtCircle) async {
+Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber) async {
   String path = "/floorplan/room";
   String url = server + path;
   var request;
@@ -87,15 +85,14 @@ Future<bool> createRoom(int currentNumRoomsInFloor, String floorNumber, String r
     request.body = json.encode({
       "currentNumberRoomInFloor": currentNumRoomsInFloor,
       "floorNumber": floorNumber,
-      "roomNumber": roomNumber,
-      "roomArea": roomArea,
-      "capacityPercentage": capacityPercentage,
-      "numberDesks": numberOfDesks,
-      "occupiedDesks": occupiedDesks,
-      "currentCapacity": currentCapacity,
-      "deskArea": deskArea,
-      "capacityOfPeopleForSixFtGrid": capacityOfPeopleForSixFtGrid,
-      "capacityOfPeopleForSixFtCircle": capacityOfPeopleForSixFtCircle,
+      "roomArea": 0,
+      "capacityPercentage": 0,
+      "numberDesks": 0,
+      "occupiedDesks": 0,
+      "currentCapacity": 0,
+      "deskArea": 0,
+      "capacityOfPeopleForSixFtGrid": 0,
+      "capacityOfPeopleForSixFtCircle": 0,
     });
 
     print(request.body);
@@ -222,9 +219,8 @@ Future<List<Room>> getRooms(String floorNumber) async {
   return null;
 }
 
-Future<bool> updateRoom(String floorNumber, String roomNumber, double roomArea,
-    double capacityPercentage, int numberOfDesks, int occupiedDesks, double currentCapacity,
-    double deskArea, double capacityOfPeopleForSixFtGrid, double capacityOfPeopleForSixFtCircle) async {
+Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName,
+    num roomArea, num numberOfDesks, num deskArea, num capacityPercentage) async {
   String path = '/floorplan/room';
   String url = server + path;
   var request;
@@ -234,14 +230,11 @@ Future<bool> updateRoom(String floorNumber, String roomNumber, double roomArea,
     request.body = json.encode({
       "floorNumber": floorNumber,
       "roomNumber": roomNumber,
+      "roomName": roomName,
       "roomArea": roomArea,
-      "capacityPercentage": capacityPercentage,
       "numberDesks": numberOfDesks,
-      "occupiedDesks": occupiedDesks,
-      "currentCapacity": currentCapacity,
       "deskArea": deskArea,
-      "capacityOfPeopleForSixFtGrid": capacityOfPeopleForSixFtGrid,
-      "capacityOfPeopleForSixFtCircle": capacityOfPeopleForSixFtCircle,
+      "capacityPercentage": capacityPercentage,
     });
 
     var response = await request.send();

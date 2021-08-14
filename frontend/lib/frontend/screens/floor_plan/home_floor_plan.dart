@@ -7,7 +7,7 @@ import 'package:frontend/frontend/screens/floor_plan/admin_modify_floor_plans.da
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class FloorPlanScreen extends StatefulWidget {
@@ -16,6 +16,7 @@ class FloorPlanScreen extends StatefulWidget {
   @override
   _FloorPlanScreenState createState() => _FloorPlanScreenState();
 }
+
 //class admin
 class _FloorPlanScreenState extends State<FloorPlanScreen> {
   Future<bool> _onWillPop() async {
@@ -73,7 +74,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              //Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
+                              Navigator.of(context).pushReplacementNamed(AddFloorPlan.routeName);
                             }
                         ),
                         SizedBox (
@@ -95,9 +96,9 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              /*getFloorPlans().then((result){
-                                if (globals.currentFloorPlans != null && globals.currentFloorPlans.isNotEmpty) { //Only allow a floor plan to be modified if it exists
-                                  print(globals.currentFloorPlans.length);
+                              floorPlanHelpers.getFloorPlans().then((result) {
+                                //Only allow floor plans to be modified if they exist
+                                if (result == true && globals.currentFloorPlans.isNotEmpty) {
                                   Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
                                 } else {
                                   showDialog(
@@ -116,7 +117,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                                       )
                                   );
                                 }
-                              });*/
+                              });
                             }
                         ),
                       ]

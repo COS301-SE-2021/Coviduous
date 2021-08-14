@@ -25,7 +25,7 @@ Future getSnap() async {
   User admin = FirebaseAuth.instance.currentUser;
   await Future.wait([
     FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('Users')
+      var query = FirebaseFirestore.instance.collection('users')
           .where('uid', isEqualTo: admin.uid).limit(1);
       await Future.wait([query.get().then((data) {
         if (data.docs.length > 0) {
@@ -232,11 +232,11 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                           if (value == "Success") {
                                                             //If update was successful, update in Firestore document as well
                                                             FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                              var query = FirebaseFirestore.instance.collection('Users')
+                                                              var query = FirebaseFirestore.instance.collection('users')
                                                                   .where("Email", isEqualTo: oldEmail);
                                                               var querySnapshot = await query.get();
                                                               String id = querySnapshot.docs.first.id;
-                                                              FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                              FirebaseFirestore.instance.collection('users').doc(id).update(
                                                                   {
                                                                     'Email' : _email.text.trim()
                                                                   });
@@ -249,11 +249,11 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                       }
                                                       if (_firstName.text.isNotEmpty) {
                                                         FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('Users')
+                                                          var query = FirebaseFirestore.instance.collection('users')
                                                               .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
                                                           var querySnapshot = await query.get();
                                                           String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
                                                               {
                                                                 'Firstname' : _firstName.text.trim()
                                                               });
@@ -261,11 +261,11 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                       }
                                                       if (_lastName.text.isNotEmpty) {
                                                         FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('Users')
+                                                          var query = FirebaseFirestore.instance.collection('users')
                                                               .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
                                                           var querySnapshot = await query.get();
                                                           String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
                                                               {
                                                                 'Lastname' : _lastName.text.trim()
                                                               });
@@ -273,11 +273,11 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                       }
                                                       if (_userName.text.isNotEmpty) {
                                                         FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('Users')
+                                                          var query = FirebaseFirestore.instance.collection('users')
                                                               .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
                                                           var querySnapshot = await query.get();
                                                           String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('Users').doc(id).update(
+                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
                                                               {
                                                                 'Username' : _userName.text.trim()
                                                               });

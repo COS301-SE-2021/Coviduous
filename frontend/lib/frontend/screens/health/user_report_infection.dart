@@ -22,7 +22,7 @@ Future getSnap() async {
   User admin = FirebaseAuth.instance.currentUser;
   await Future.wait([
     FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('Users')
+      var query = FirebaseFirestore.instance.collection('users')
           .where('uid', isEqualTo: admin.uid).limit(1);
       await Future.wait([query.get().then((data) {
         if (data.docs.length > 0) {

@@ -91,12 +91,13 @@ try {
   let reqJson = JSON.parse(req.body);
   console.log(reqJson);
   
-  let room = new Room(reqJson.currentNumberRoomInFloor, roomNumber,reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,
-      reqJson.numberDesks,reqJson.capacityPercentage);
+  let room = new Room(reqJson.currentNumberRoomInFloor,roomNumber,"",reqJson.floorNumber,
+      reqJson.roomArea,reqJson.deskArea, reqJson.numberDesks,reqJson.capacityPercentage);
   let roomData = {
     currentNumberRoomInFloor:room.currentNumberRoomInFloor,
     floorNumber:room.floorNumber,
     roomNumber:room.roomNumber,
+    roomName:room.roomName,
     roomArea:room.roomArea, 
     capacityPercentage:room.capacityPercentage,
     numberDesks: room.numberDesks,
@@ -237,16 +238,17 @@ exports.updateRoom = async (req, res) => {
   console.log(reqJson);
   
 try {
-  let room =new Room(reqJson.roomNumber,reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,reqJson.numberDesks,reqJson.capacityPercentage);
+  let room =new Room(0,reqJson.roomNumber, reqJson.roomName, reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,reqJson.numberDesks,reqJson.capacityPercentage);
   let roomData = {
     floorNumber:room.floorNumber,
     roomNumber:room.roomNumber,
-    roomArea:room.roomArea, 
+    roomName:room.roomName,
+    roomArea:room.roomArea,
     capacityPercentage:room.capacityPercentage,
     numberDesks: room.numberDesks,
     occupiedDesks:room.occupiedDesks,
     currentCapacity:room.currentCapacity,
-    deskArea:room.deskArea, 
+    deskArea:room.deskArea,
     capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
     capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle
   }

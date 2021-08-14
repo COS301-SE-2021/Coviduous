@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     //Wait for transaction to complete.
     await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('Users')
+      var query = FirebaseFirestore.instance.collection('users')
           .where('Email', isEqualTo: _email.text.trim()).limit(1);
       await Future.wait([query.get().then((data) {
         if (data.docs.length > 0) {
@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     //Wait for transaction to complete.
     await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('Users')
+      var query = FirebaseFirestore.instance.collection('users')
           .where('Email', isEqualTo: _email.text.trim()).limit(1);
       await Future.wait([query.get().then((data) {
         if (data.docs.length > 0) {
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     //Wait for transaction to complete.
     await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('Users')
+      var query = FirebaseFirestore.instance.collection('users')
           .where('Email', isEqualTo: _email.text.trim()).limit(1);
       await Future.wait([query.get().then((data) {
         if (data.docs.length > 0) {

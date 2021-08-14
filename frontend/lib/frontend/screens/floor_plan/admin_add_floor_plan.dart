@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/frontend/screens/floor_plan/home_floor_plan.dart';
-import 'package:frontend/frontend/screens/floor_plan/admin_view_floors.dart';
+import 'package:frontend/frontend/screens/floor_plan/admin_modify_floor_plans.dart';
 import 'package:frontend/frontend/screens/user_homepage.dart';
 import 'package:frontend/frontend/screens/login_screen.dart';
 
-import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
+import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/frontend/front_end_globals.dart' as globals;
 
 class AddFloorPlan extends StatefulWidget {
@@ -105,20 +105,20 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                           ),
                           child: Text('Proceed'),
                           onPressed: () {
-                            /*if (!_formKey.currentState.validate()) {
+                            if (!_formKey.currentState.validate()) {
                               return;
                             }
                             _formKey.currentState.save();
 
-                            createFloorPlan(int.parse(_numFloor)).then((result){
-                              if (createdFloorPlan == true) {
-                                for (int i = 0; i < globals.currentFloorPlans.length; i++) {
-                                  if (globals.currentFloorPlans[i].adminId == globals.loggedInUserId) {
-                                    globals.currentFloorPlanNum = globals.currentFloorPlans[i].getFloorPlanNumber();
-                                    globals.currentFloorPlan = globals.currentFloorPlans[i];
+                            floorPlanHelpers.createFloorPlan(num.parse(_numFloor)).then((result) {
+                              if (result == true) {
+                                floorPlanHelpers.getFloorPlans().then((result) {
+                                  if (result == true) {
+                                    Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);
+                                  } else {
+                                    Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
                                   }
-                                }
-                                Navigator.of(context).pushReplacementNamed(AdminViewFloors.routeName);
+                                });
                               } else {
                                 showDialog(
                                     context: context,
@@ -137,7 +137,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                     )
                                 );
                               }
-                            });*/
+                            });
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 48,
