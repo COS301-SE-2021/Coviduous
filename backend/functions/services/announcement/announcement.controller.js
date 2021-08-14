@@ -31,7 +31,7 @@ exports.setDatabase = async (db) => {
 }
 
 exports.containsRequiredFieldsForCreateAnnouncement = async (req) => {
-    let hasRequiredFields = false;
+    let hasRequiredFields = false; 
 
     if(req.type != null && req.type !== "" && req.message != null && req.message !== "" &&
         req.adminId != null && req.adminId !== "" && req.companyId != null && req.companyId !== "") {

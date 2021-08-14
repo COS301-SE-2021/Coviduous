@@ -33,7 +33,7 @@ exports.createBooking = async (req, res) => {
         }
     };
 
-    exports.deleteBooking = async (req, res) => {
+exports.deleteBooking = async (req, res) => {
       try {
         if (await database.deleteBooking(req.body.bookingNumber) == true)
         {
@@ -55,14 +55,11 @@ exports.createBooking = async (req, res) => {
           let bookings = await database.getBookings();
           bookings.forEach(obj => {
             if(obj.userId===req.body.userId)
-            {
+             {
               filteredList.push(obj);
-            }
-            else
-            {
-    
-            }
+             }
           });
+
           return res.status(200).send({
             message: 'Successfully retrieved bookings based on your userId',
             data: filteredList

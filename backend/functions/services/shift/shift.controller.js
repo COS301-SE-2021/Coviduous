@@ -13,18 +13,23 @@ exports.setDatabse = async(_db) => {
 };
 
 exports.createShift = async (req,res) => {
-try{
-  let shiftID = "SHI-" + uuid.v4();
-  let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
-  let shiftData = {
-    shiftID: shift.shiftID,
-    startTime: shift.startTime,
-    endTime: shift.endTime, 
-    description: shift.description,
-    groupNo: shift.groupNo,
-    adminId: shift.adminId,
-    companyId: shift.companyId
-  }
+
+    if(req.shiftID != null && req.startTime !== "" && req.endTime != null && req.description !== "" &&
+        req.groupNo != null && req.adminId !== "" && req.adminId != null && req.companyId !== "") {
+    }
+
+    try{
+      let shiftID = "SHI-" + uuid.v4();
+      let shift =new Shift(shiftID,req.body.startTime,req.body.endTime,req.body.description,req.body.groupNo,req.body.adminId,req.body.companyId);
+      let shiftData = {
+        shiftID: shift.shiftID,
+        startTime: shift.startTime,
+        endTime: shift.endTime,
+        description: shift.description,
+        groupNo: shift.groupNo,
+        adminId: shift.adminId,
+        companyId: shift.companyId
+      }
     await db.createShift(shiftID,shiftData);
     return res.status(200).send({
         data: req.body
