@@ -45,6 +45,7 @@ class User {
                 // Signed in
                 _userCredential = userCredential;
                 let user = userCredential.user;
+
                 console.log("Sign in successful: " + user.email + " has signed in");
                 result = true;
             })
@@ -82,7 +83,7 @@ class User {
     }
 
     async updateUserEmail(newEmail, currentEmail, password) {
-        let result = false;
+        let result;
         await auth.signInWithEmailAndPassword(currentEmail.toLowerCase(), password)
             .then((userCredential) => {
                 userCredential.user.updateEmail(newEmail.toLowerCase()).then(() => {
@@ -104,7 +105,7 @@ class User {
     }
 
     async sendPasswordReset(email) {
-        let result = false;
+        let result;
         await auth.sendPasswordResetEmail(email)
             .then(() => {
                 console.log("Reset password email sent to " + email);
