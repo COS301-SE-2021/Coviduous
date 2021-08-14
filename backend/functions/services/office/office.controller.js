@@ -85,7 +85,10 @@ exports.deleteBooking = async (req, res) => {
       }
     };
 
-    exports.setDatabse= async(db)=>{
-
-        database=db;
-      }
+/**
+ * This function sets the database used by the announcement controller.
+ * @param db The database to be used. It can be any interface with CRUD operations.
+ */
+exports.setDatabse= async(db)=>{
+    database=db;
+}
