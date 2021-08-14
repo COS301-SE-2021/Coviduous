@@ -43,16 +43,12 @@ exports.createNotification = async (req, res) => {
             fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
         }
 
-        if (reqJson.userEmail == null || reqJson.userEmail === "") {
+        if (reqJson.C == null || reqJson.userEmail === "") {
             fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
         }
 
         if (reqJson.subject == null || reqJson.subject === "") {
             fieldErrors.push({field: 'subject', message: 'Subject may not be empty'});
-        }
-
-        if (reqJson.timestamp == null || reqJson.timestamp === "") {
-            fieldErrors.push({field: 'timestamp', message: 'Timestamp may not be empty'});
         }
 
         if (reqJson.message == null || reqJson.message === "") {
