@@ -148,7 +148,7 @@ describe('Delete announcement unit tests', function() {
            });
    });
 
-   it('Return 200 if deletion is successful', function(done) {
+   it('Return 200 if deletion is successful', function() {
       let req = {
           type: 'GENERAL',
           message: 'Announcement to be deleted',
@@ -171,7 +171,7 @@ describe('Delete announcement unit tests', function() {
                         should.exist(res);
                         res.should.have.status(200);
                         console.log(res.body);
-                        done();
+                        //done();
                    });
            });
    });
