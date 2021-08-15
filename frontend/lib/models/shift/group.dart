@@ -12,33 +12,53 @@ Group groupFromJson(String str) => Group.fromJson(json.decode(str));
 String groupToJson(Group data) => json.encode(data.toJson());
 
 class Group {
-  String groupId;
+  String groupNumber;
   String groupName;
-  String userEmail;
+  List<String> userEmails;
   String shiftNumber;
   String adminId;
 
   Group({
-    this.groupId,
+    this.groupNumber,
     this.groupName,
-    this.userEmail,
+    this.userEmails,
     this.shiftNumber,
     this.adminId,
   });
 
   factory Group.fromJson(Map<String, dynamic> json) => Group(
-        groupId: json["groupID"],
+        groupNumber: json["groupNumber"],
         groupName: json["groupName"],
-        userEmail: json["userEmail"],
+        userEmails: json["userEmails"],
         shiftNumber: json["shiftNumber"],
-        adminId: json["adminID"],
+        adminId: json["adminId"],
       );
 
   Map<String, dynamic> toJson() => {
-        "groupID": groupId,
+        "groupNumber": groupNumber,
         "groupName": groupName,
-        "userEmail": userEmail,
+        "userEmails": userEmails,
         "shiftNumber": shiftNumber,
-        "adminID": adminId,
+        "adminId": adminId,
       };
+
+  String getGroupNumber() {
+    return groupNumber;
+  }
+
+  String getGroupName() {
+    return groupName;
+  }
+
+  List<String> getUserEmails() {
+    return userEmails;
+  }
+
+  String getShiftNumber() {
+    return shiftNumber;
+  }
+
+  String getAdminId() {
+    return adminId;
+  }
 }

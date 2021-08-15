@@ -22,6 +22,10 @@ router.post('/shift',Shift.createShift);
 router.delete('/shift',Shift.deleteShift);
 router.get('/shift',Shift.viewShifts);
 router.put('/shift',Shift.updateShift);
+/**
+ * Group Routes
+ */
+router.get('/group',);
 
 // Export API routes
 module.exports = router
