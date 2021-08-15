@@ -32,10 +32,11 @@ exports.getUsers = async () => {
 
 exports.getUserDetails = async (userId) => {
     try {
-        const document = await db.collection('users').doc(userId);
+        let document = db.collection('users').where("userId", "==", userId);
         const snapshot = await document.get();
 
         let list = [];
+
         snapshot.forEach(doc => {
             let data = doc.data();
             list.push(data);

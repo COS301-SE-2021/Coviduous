@@ -26,6 +26,7 @@ exports.verifyRequestToken = async (token) => {
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
  * (
+ *  userId: string,
  *  type: "ADMIN" || "USER",
  *  firstName: string,
  *  lastName: string,
@@ -67,6 +68,10 @@ exports.createUser = async (req, res) => {
     //////////////////////////////////////////////////////////////////////
 
     let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
 
     if (reqJson.type == null || reqJson.type === '') {
         fieldErrors.push({field: 'type', message: 'Type may not be empty'});
@@ -113,14 +118,11 @@ exports.createUser = async (req, res) => {
         });
     }
 
-    let userId;
     let userData;
 
     if (reqJson.type === 'ADMIN') {
-        userId = "AMN-" + uuid.v4();
-
         userData = {
-            userId: userId,
+            userId: reqJson.userId,
             type: reqJson.type,
             firstName: reqJson.firstName,
             lastName: reqJson.lastName,
@@ -133,10 +135,8 @@ exports.createUser = async (req, res) => {
     }
 
     if (reqJson.type === 'USER') {
-        userId = "USR-" + uuid.v4();
-
         userData = {
-            userId: userId,
+            userId: reqJson.userId,
             type: reqJson.type,
             firstName: reqJson.firstName,
             lastName: reqJson.lastName,
@@ -329,7 +329,7 @@ exports.getUserDetails = async (req, res) => {
     let fieldErrors = [];
 
     if (reqJson.userId == null || reqJson.userId === '') {
-        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+        fieldErrors.push({field: 'email', message: 'Email may not be empty'});
     }
 
     if (fieldErrors.length > 0) {
@@ -339,7 +339,7 @@ exports.getUserDetails = async (req, res) => {
         });
     }
 
-    let result = await database.getUserDetails();
+    let result = await database.getUserDetails(reqJson.userId);
 
     if (!result) {
         return res.status(500).send({
