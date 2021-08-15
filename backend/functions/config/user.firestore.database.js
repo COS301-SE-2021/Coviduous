@@ -1,75 +1,28 @@
-const admin = require('firebase-admin');
+let admin = require('firebase-admin');
+let db = admin.firestore();
 
-const db = admin.firestore();
-
-exports.createUser = async (uid, email) => {
-    let result;
+exports.createUser = async (userId, userData) => {
     try {
-        await db.collection('users')
-            .add({
-                uid: uid,
-                email: email.toLowerCase()
-            });
-        result = true;
+        await db.collection('users').doc(userId)
+            .create(userData);
+        return true;
     } catch (error) {
         console.log(error);
-        result = false;
+        return false;
     }
-    return result;
 }
 
-exports.updateEmail = async (newEmail, currentEmail) => {
-    let result;
+exports.getUsers = async () => {
     try {
-        const document = db.collection('users');
-        const snapshot = await document.get();
-
-        let id = null;
-
-        snapshot.forEach(doc => {
-            let data = doc.data();
-            if (data.email === currentEmail) {
-                id = doc.id;
-            }
-        });
-
-        if (id != null) {
-            try {
-                await db.collection('users')
-                    .doc(id)
-                    .set({
-                        email: newEmail
-                    }, { merge: true });
-                console.log("User table updated");
-                result = true;
-            } catch (error) {
-                console.log("Error while updating user info: " + error);
-                result = false;
-            }
-        } else {
-            console.log("Error while updating user info, could not find user with email: " + currentEmail);
-            result = false;
-        }
-    } catch (error) {
-        console.log("Error while accessing user table: " + error);
-        result = false;
-    }
-    return result;
-}
-
-exports.getUserDetails = async (email) => {
-    try {
-        const document = db.collection('users');
+        const document = await db.collection('users');
         const snapshot = await document.get();
 
         let list = [];
-
         snapshot.forEach(doc => {
             let data = doc.data();
-            if (data.email === email) {
-                list.push(data);
-            }
+            list.push(data);
         });
+
         return list;
     } catch (error) {
         console.log(error);
@@ -77,47 +30,52 @@ exports.getUserDetails = async (email) => {
     }
 }
 
-exports.updateUserDetails = async (currentEmail, firstName, lastName, userType, companyID, companyName, companyAddress) => {
-    let result;
+exports.getUserDetails = async (userId) => {
     try {
-        const document = db.collection('users');
+        let document = db.collection('users').where("userId", "==", userId);
         const snapshot = await document.get();
 
-        let id = null;
+        let list = [];
 
         snapshot.forEach(doc => {
-           let data = doc.data();
-           if (data.email === currentEmail) {
-               id = doc.id;
-           }
+            let data = doc.data();
+            console.log(data);
+            list.push(data);
         });
 
-        if (id != null) {
-            try {
-                await db.collection('users')
-                    .doc(id)
-                    .set({
-                        ...((firstName != null && firstName !== "") && {firstName: firstName}),
-                        ...((lastName != null && lastName !== "") && {lastName: lastName}),
-                        ...((userType != null && userType.toLowerCase() === "admin") && {userType: "admin"}),
-                        ...((userType != null && userType.toLowerCase() === "user") && {userType: "user"}),
-                        ...((companyID != null && companyID !== "") && {companyID: companyID}),
-                        ...((companyName != null && companyName !== "") && {companyName: companyName}),
-                        ...((companyAddress != null && companyAddress !== "") && {companyAddress: companyAddress})
-                    }, { merge: true });
-                console.log("User table updated")
-                result = true;
-            } catch (error) {
-                console.log("Error while updating user info: " + error);
-                result = false;
-            }
-        } else {
-            console.log("Error while updating user info, could not find user with email: " + currentEmail);
-            result = false;
-        }
+        return list;
     } catch (error) {
-        console.log("Error while accessing user table: " + error);
-        result = false;
+        console.log(error);
+        return null;
     }
-    return result;
+}
+
+exports.updateUser = async (userId, userData) => {
+    try {
+        const document = await db.collection('users').doc(userId);
+        await document.update({
+            ...((userData.firstName != null && userData.firstName !== "") && {firstName: userData.firstName}),
+            ...((userData.lastName != null && userData.lastName !== "") && {lastName: userData.lastName}),
+            ...((userData.email != null && userData.email !== "") && {email: userData.email}),
+            ...((userData.userName != null && userData.userName !== "") && {userName: userData.userName}),
+            ...((userData.companyName != null && userData.companyName !== "") && {companyName: userData.companyName}),
+            ...((userData.companyAddress != null && userData.companyAddress !== "") && {companyAddress: userData.companyAddress}),
+        });
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+exports.deleteUser = async (userId) => {
+    try {
+        const document = db.collection('users').doc(userId);
+        await document.delete();
+
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
 }

@@ -5,7 +5,7 @@ import 'package:frontend/views/announcement/admin_view_announcements.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
+import 'package:frontend/controllers/announcement/announcement_controller.dart' as announcementController;
 import 'package:frontend/globals.dart' as globals;
 
 class MakeAnnouncement extends StatefulWidget {
@@ -79,8 +79,8 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });

@@ -9,7 +9,6 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
@@ -19,6 +18,7 @@ import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/forgot_password_screen.dart';
 import 'package:frontend/views/main_homepage.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 /*
@@ -47,84 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(HomePage.routeName);
     return (await true);
-  }
-
-  /*
-    Function name: getUserType
-    Purpose: Retrieves the user type from the database.
-    Output:
-      - The user type retrieved from the database, either "Admin" or "User".
-   */
-  Future getUserId() async {
-    String userId = "";
-
-    //Wait for transaction to complete.
-    await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('users')
-          .where('Email', isEqualTo: _email.text.trim()).limit(1);
-      await Future.wait([query.get().then((data) {
-        if (data.docs.length > 0) {
-          userId = data.docs[0].get('uid');
-        } else {
-          userId = "";
-        }
-      })]);
-    })]);
-
-    print("userID = " + userId);
-    return userId;
-  }
-
-  /*
-    Function name: getUserType
-    Purpose: Retrieves the user type from the database.
-    Output:
-      - The user type retrieved from the database, either "Admin" or "User".
-   */
-  Future getUserType() async {
-    String userType = "";
-
-    //Wait for transaction to complete.
-    await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('users')
-          .where('Email', isEqualTo: _email.text.trim()).limit(1);
-      await Future.wait([query.get().then((data) {
-        if (data.docs.length > 0) {
-          userType = data.docs[0].get('Type');
-        } else {
-          userType = "";
-        }
-      })]);
-    })]);
-
-    print("userType = " + userType);
-    return userType;
-  }
-
-  /*
-    Function name: getCompanyId
-    Purpose: Retrieves the user's company ID from the database.
-    Output:
-      - The user's company ID, for example "CID-1".
-   */
-  Future getCompanyId() async {
-    String companyID = "";
-
-    //Wait for transaction to complete.
-    await Future.wait([FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('users')
-          .where('Email', isEqualTo: _email.text.trim()).limit(1);
-      await Future.wait([query.get().then((data) {
-        if (data.docs.length > 0) {
-          companyID = data.docs[0].get('Company ID');
-        } else {
-          companyID = "";
-        }
-      })]);
-    })]);
-
-    print("company ID = " + companyID);
-    return companyID;
   }
 
   /*
@@ -271,50 +193,63 @@ class _LoginScreenState extends State<LoginScreen> {
                                       AuthClass().signIn(email: _email.text.trim(),
                                           password: _password.text.trim()).then((value) {
                                         if (value == "welcome") {
+                                          //Get user details
+                                          userHelpers.getUserDetails().then((result) {
+                                            if (result == true) {
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+                                              // print(globals.loggedInUserEmail);
+                                              // print(globals.loggedInCompanyId);
+                                              // print(globals.loggedInUserId);
+                                              // print(globals.loggedInUserType);
 
-                                          globals.loggedInUserEmail = _email.text;
-
-                                          //First get company ID
-                                          getCompanyId().then((companyID) {
-                                            globals.loggedInCompanyId = companyID;
-
-                                            //Then get UUID
-                                            getUserId().then((userID) {
-                                              globals.loggedInUserId = userID;
-
-                                              //Then get user type
-                                              getUserType().then((userType) {
-                                                if (userType == 'Admin') {
-                                                  globals.loggedInUserType = 'Admin';
-                                                  Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
-                                                } else if (userType == 'User') {
-                                                  globals.loggedInUserType = 'User';
-                                                  Navigator.pushReplacementNamed(context, UserHomePage.routeName);
-                                                } else {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder: (ctx) => AlertDialog(
-                                                        title: Text('Error'),
-                                                        content: Text('Encountered error retrieving user type, please try again.'),
-                                                        actions: <Widget>[
-                                                          TextButton(
-                                                            child: Text('Okay'),
-                                                            onPressed: (){
-                                                              Navigator.of(ctx).pop();
-                                                            },
-                                                          )
-                                                        ],
-                                                      )
-                                                  );
-                                                }
+                                              if (globals.loggedInUserType == 'ADMIN') {
+                                                Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
+                                              } else if (globals.loggedInUserType == 'USER') {
+                                                Navigator.pushReplacementNamed(context, UserHomePage.routeName);
+                                              } else {
                                                 setState(() {
                                                   isLoading = false;
                                                 });
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (ctx) => AlertDialog(
+                                                      title: Text('Error'),
+                                                      content: Text('Encountered error retrieving user type, please try again.'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          child: Text('Okay'),
+                                                          onPressed: (){
+                                                            Navigator.of(ctx).pop();
+                                                          },
+                                                        )
+                                                      ],
+                                                    )
+                                                );
+                                              }
+                                            } else {
+                                              setState(() {
+                                                isLoading = false;
                                               });
-                                            });
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                    title: Text('Error'),
+                                                    content: Text('Encountered error retrieving user details, please try again.'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('Okay'),
+                                                        onPressed: (){
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  )
+                                              );
+                                            }
                                           });
-                                        }
-                                        else {
+                                        } else {
                                           setState(() {
                                             isLoading = false;
                                           });

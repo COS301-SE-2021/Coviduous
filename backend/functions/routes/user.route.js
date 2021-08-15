@@ -9,22 +9,19 @@ router.get('/', function (req, res) {
 });
 
 // Import user controller
-const UserController = require("../services/user/user.controller");
+const userController = require("../services/user/user.controller");
+// import database
 const devDatabase = require("../config/user.firestore.database.js");
-
-// Optionally use emulator instead of actual Firebase Auth service
-const userController = new UserController(true);
 
 // Set database
 userController.setDatabase(devDatabase);
 
 // User routes
-router.get('/users', userController.getUserDetails);
-router.post('/users/signUp', userController.createUser);
-router.post('/users/signIn', userController.signUserIn);
-router.post('/users/updateDetails', userController.updateUserDetails);
-router.post('/users/updateEmail', userController.updateUserEmail);
-router.post('/passwordReset', userController.sendPasswordResetEmail);
+router.delete('/users', userController.deleteUser);
+router.get('/users', userController.getUsers);
+router.get('/users/user-id', userController.getUserDetails);
+router.post('/users', userController.createUser);
+router.put('/users', userController.updateUser);
 
 // Export API routes
 module.exports = router;

@@ -6,7 +6,7 @@ import 'package:frontend/views/shift/admin_add_shift_rooms.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AddShiftFloors extends StatefulWidget {
@@ -24,8 +24,8 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });
@@ -80,7 +80,6 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
                       ),
@@ -130,7 +129,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: AppBar(
-            title: Text('Create shift in floor plan ' + globals.currentFloorPlanNum),
+            title: Text('Create shift'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);

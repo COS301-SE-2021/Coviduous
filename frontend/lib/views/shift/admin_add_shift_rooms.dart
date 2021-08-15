@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/shift/admin_add_shift_floors.dart';
-//import 'package:frontend/views/shift/admin_add_shift_create_shift.dart';
+import 'package:frontend/views/shift/admin_add_shift_create_shift.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
@@ -25,8 +25,8 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });
@@ -81,7 +81,6 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
                       ),
@@ -111,7 +110,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                       child: Text('Create shift'),
                                       onPressed: () {
                                         if (globals.currentRooms[index].getNumberOfDesks() > 0) {
-                                          //Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
+                                          Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
                                         } else {
                                           showDialog(
                                               context: context,
@@ -148,7 +147,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: AppBar(
-            title: Text('Create shift in floor ' + globals.currentFloorNum),
+            title: Text('Create shift'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AddShiftFloors.routeName);

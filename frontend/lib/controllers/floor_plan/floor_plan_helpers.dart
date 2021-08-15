@@ -1,4 +1,4 @@
-import 'package:frontend/controllers/floor_plan_controller.dart' as floorPlanController;
+import 'package:frontend/controllers/floor_plan/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/globals.dart' as globals;
 
 Future<bool> createFloorPlan(num numFloors) async {

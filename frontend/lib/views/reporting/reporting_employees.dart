@@ -77,8 +77,8 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });
@@ -103,13 +103,13 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
       //int numOfUsers = users.length;
       int numOfUsers = 1;
       List<User> users = [
-        new User("User", "John", "Smith", "smithj", "john.smith@email.com", "123456", "1"),
+        new User(userId: "User", firstName: "John", lastName: "Smith", userName: "smithj", email: "john.smith@email.com", companyId: "1"),
       ];
 
       employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email']);
       for (int i = 0; i < users.length; i++) {
         List<String> employeeInfo = <String>[
-          users[i].getId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail()
+          users[i].getUserId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail()
         ];
         employeeList.add(employeeInfo);
       }

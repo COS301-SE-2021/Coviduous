@@ -9,7 +9,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/globals.dart' as globals;
-import 'package:frontend/controllers/notification_controller.dart' as notificationController;
+import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
 
 class MakeNotificationAssignEmployees extends StatefulWidget {
   static const routeName = "/admin_make_notification_employees";
@@ -32,7 +32,7 @@ Future createNotification(TempNotification tempUser) async {
   bool sentNotification = false;
   await Future.wait([
     notificationController.createNotification("", tempUser.getUserId(), tempUser.getUserEmail(), globals.currentSubjectField,
-        globals.currentDescriptionField, "", globals.loggedInUserId, globals.loggedInCompanyId)
+        globals.currentDescriptionField, "", globals.loggedInUser.getFirstName() + " " + globals.loggedInUser.getLastName(), globals.loggedInCompanyId)
   ]).then((results) {
     sentNotification = results.first;
   });
@@ -56,8 +56,8 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });

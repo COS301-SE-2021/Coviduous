@@ -109,8 +109,8 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });
@@ -152,7 +152,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   alignment: Alignment.centerLeft,
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
                                     "Floor plan: " + globals.currentFloorPlanNum,
@@ -163,7 +162,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   alignment: Alignment.centerLeft,
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
                                     "Floor: " + globals.currentFloorNum,
@@ -174,7 +172,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   alignment: Alignment.centerLeft,
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
                                     "Room: " + globals.currentRoomNum,
@@ -273,7 +270,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                       int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
                                       //Only allow if start time is before end time
                                       if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
-                                        //createShift();
+                                        Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
                                       } else {
                                         showDialog(
                                             context: context,

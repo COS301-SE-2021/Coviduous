@@ -7,7 +7,7 @@ import 'package:frontend/views/notification/admin_view_notifications.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/notification_controller.dart' as notificationController;
+import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminNotifications extends StatefulWidget {
@@ -35,8 +35,8 @@ class _AdminNotificationsState extends State<AdminNotifications> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });

@@ -6,7 +6,7 @@ import 'package:frontend/views/shift/admin_add_shift_floors.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AddShiftFloorPlans extends StatefulWidget {
@@ -24,8 +24,8 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
     @override
     Widget build(BuildContext context) {
       //If incorrect type of user, don't allow them to view this page.
-      if (globals.loggedInUserType != 'Admin') {
-        if (globals.loggedInUserType == 'User') {
+      if (globals.loggedInUserType != 'ADMIN') {
+        if (globals.loggedInUserType == 'USER') {
           SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
             Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
           });
@@ -106,10 +106,6 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
                               .of(context)
                               .size
                               .width,
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 24,
                           color: Theme
                               .of(context)
                               .primaryColor,

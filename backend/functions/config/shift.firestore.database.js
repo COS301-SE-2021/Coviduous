@@ -3,7 +3,7 @@ let db = admin.firestore();
 
 exports.createShift = async (ShiftID,ShiftData) => { 
     try {
-        await db.collection('Shift').doc(ShiftID)
+        await db.collection('shift').doc(ShiftID)
             .create(ShiftData); 
             return true;
       } catch (error) {
@@ -11,9 +11,36 @@ exports.createShift = async (ShiftID,ShiftData) => {
         return false;
       }
 };
+exports.createGroup = async (groupId, groupData) =>{
+    try{
+        await db.collection('group').doc(groupId)
+        .create(groupData);
+        return true;
+    }
+    catch(error){
+        console.log(error);
+        return false;
+    }
+}
+exports.getGroup = async () =>{
+    try{
+        const document = db.collection('group');
+        const snapshot = await document.get();
+    
+        let list =[];
+       snapshot.forEach(doc => {
+          let data = doc.data();
+            list.push(data);
+        });
+    return list;
+    }catch(error){
+        console.log(error);
+        return false;
+    }
+}
 exports.viewShifts = async () => {
     try {
-        const document = db.collection('Shift');
+        const document = db.collection('shift');
         const snapshot = await document.get();
   
         let list = [];
@@ -21,7 +48,6 @@ exports.viewShifts = async () => {
             let data = doc.data();
             list.push(data);
         });
-  
         return list;
     } catch (error) {
         console.log(error);
@@ -30,7 +56,7 @@ exports.viewShifts = async () => {
   };
 exports.deleteShift = async (ShiftID) => {
     try {
-        const document = db.collection('Shift').doc(ShiftID); 
+        const document = db.collection('shift').doc(ShiftID); 
         await document.delete();
         return true;
     } catch (error) {
@@ -40,7 +66,8 @@ exports.deleteShift = async (ShiftID) => {
   }
 exports.updateShift = async (shiftID,shiftData) =>{
   try{
-       const document = db.collection('Shift').doc(shiftID);
+
+       const document = db.collection('shift').doc(shiftID);
        await document.update({
            startTime:shiftData.startTime,
            endTime:shiftData.endTime

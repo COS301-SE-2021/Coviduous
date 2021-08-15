@@ -34,8 +34,10 @@ class AuthClass {
            email: email,
            password: password
        ).then((userCredential) async {
-          globals.token = await userCredential.user.getIdToken();
-          print(globals.token);
+         globals.loggedInUserId = userCredential.user.uid;
+         globals.loggedInUserEmail = userCredential.user.email;
+         globals.token = await userCredential.user.getIdToken();
+         //print(globals.token);
        });
        return "welcome";
      } on FirebaseAuthException catch (e) {
@@ -86,11 +88,13 @@ class AuthClass {
 
   //Sign out
   void signOut() {
-     //Clear currently signed in user data first
-     globals.loggedInUserType = '';
-     globals.loggedInUserEmail = '';
-     globals.loggedInUserId = '';
+    //Clear currently signed in user data first
+    globals.loggedInUser = null;
+    globals.loggedInUserType = '';
+    globals.loggedInUserEmail = '';
+    globals.loggedInUserId = '';
+    globals.loggedInCompanyId = '';
 
-     auth.signOut();
+    auth.signOut();
   }
 }

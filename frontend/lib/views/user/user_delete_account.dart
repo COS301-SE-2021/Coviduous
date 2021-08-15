@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -8,35 +7,13 @@ import 'package:frontend/views/user/user_manage_account.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserDeleteAccount extends StatefulWidget {
   static const routeName = "/user_delete_account";
   @override
   _UserDeleteAccountState createState() => _UserDeleteAccountState();
-}
-
-String _snapCompanyId;
-String _snapEmail;
-
-Future getSnap() async {
-  User admin = FirebaseAuth.instance.currentUser;
-  await Future.wait([
-    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('users')
-          .where('uid', isEqualTo: admin.uid).limit(1);
-      await Future.wait([query.get().then((data) {
-        if (data.docs.length > 0) {
-          _snapEmail = data.docs[0].get('Email');
-          _snapCompanyId = data.docs[0].get('Company ID');
-        } else {
-          _snapEmail = "";
-          _snapCompanyId = "";
-        }
-      })]);
-    })
-  ]);
-  return;
 }
 
 class _UserDeleteAccountState extends State<UserDeleteAccount>{
@@ -56,8 +33,8 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'User') {
-      if (globals.loggedInUserType == 'Admin') {
+    if (globals.loggedInUserType != 'USER') {
+      if (globals.loggedInUserType == 'ADMIN') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });
@@ -68,8 +45,6 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
       }
       return Container();
     }
-
-    getSnap();
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -107,8 +82,8 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                 validator: (value) {
                                   if(value.isEmpty || !value.contains('@')) {
                                     return 'invalid email';
-                                  } else if (value != _snapEmail) {
-                                    return 'email does not exist in database';
+                                  } else if (value != globals.loggedInUserEmail) {
+                                    return 'this is not your email';
                                   }
                                   return null;
                                 },
@@ -147,7 +122,7 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                 decoration: InputDecoration(labelText:'Company ID'),
                                 controller: _userCompanyId,
                                 validator: (value) {
-                                  if (value.isEmpty || value != _snapCompanyId) {
+                                  if (value.isEmpty || value != globals.loggedInCompanyId) {
                                     return 'incorrect company ID';
                                   }
                                   return null;
@@ -178,7 +153,6 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                                             setState(() {
                                                               isLoading = true;
                                                             });
-                                                            String oldEmail = FirebaseAuth.instance.currentUser.email;
                                                             AuthClass().deleteAccount().then((value) {
                                                               if (value == "Success") {
                                                                 setState(() {
@@ -186,15 +160,15 @@ class _UserDeleteAccountState extends State<UserDeleteAccount>{
                                                                 });
 
                                                                 //If delete was successful, delete from Firestore as well
-                                                                FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                                  var query = FirebaseFirestore.instance.collection('users').where("Email", isEqualTo: oldEmail);
-                                                                  var querySnapshot = await query.get();
-                                                                  String id = querySnapshot.docs.first.id;
-                                                                  FirebaseFirestore.instance.collection('users').doc(id).delete();
+                                                                userHelpers.deleteUser().then((result) {
+                                                                  if (result == true) {
+                                                                    AuthClass().signOut();
+                                                                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+                                                                  } else {
+                                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                                        SnackBar(content: Text('Error occurred while deleting account. Please try again later.')));
+                                                                  }
                                                                 });
-
-                                                                AuthClass().signOut();
-                                                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                                                               } else {
                                                                 setState(() {
                                                                   isLoading = false;

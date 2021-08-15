@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -17,11 +15,6 @@ class UserResetPassword extends StatefulWidget {
   _UserResetPasswordState createState() => _UserResetPasswordState();
 }
 
-FirebaseAuth auth = FirebaseAuth.instance;
-User user = FirebaseAuth.instance.currentUser;
-DocumentSnapshot snap = FirebaseFirestore.instance.collection('users').doc(user.uid).get() as DocumentSnapshot;
-String type = snap['Type'];
-
 class _UserResetPasswordState extends State<UserResetPassword> {
   TextEditingController _email = TextEditingController();
   bool isLoading = false;
@@ -34,8 +27,8 @@ class _UserResetPasswordState extends State<UserResetPassword> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'User') {
-      if (globals.loggedInUserType == 'Admin') {
+    if (globals.loggedInUserType != 'USER') {
+      if (globals.loggedInUserType == 'ADMIN') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });

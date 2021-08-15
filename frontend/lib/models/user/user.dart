@@ -1,74 +1,99 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart';
-
 /**
- * This class acts as an user entity mimicking the user table attribute in the database
+ * This class acts as a user entity mimicking the user table attribute in the database
  */
+
+import 'dart:convert';
+
+User userFromJson(String str) => User.fromJson(json.decode(str));
+
+String userToJson(User data) => json.encode(data.toJson());
+
 class User {
   String userId;
-  String adminId;
   String type;
-  String first_name;
-  String last_name;
-  String username;
+  String firstName;
+  String lastName;
   String email;
-  String password;
-  String activation_code;
+  String userName;
   String companyId;
+  String companyName;
+  String companyAddress;
 
-  User(String type, String FirstName, String LastName, String Username,
-      String Email, String Password, String companyID) {
-    int randomInt = new Random().nextInt((9999 - 100) + 1) + 10;
-    int randomInt2 = new Random().nextInt((9999 - 100) + 1) + 10;
+  User({
+    this.userId,
+    this.type,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.userName,
+    this.companyId,
+    this.companyName = "N/A",
+    this.companyAddress = "N/A",
+  });
 
-    if (type == "Admin" || type == "admin" || type == "ADMIN") {
-      this.adminId = "USRAD-" + randomInt.toString();
-      this.userId = "";
-    } else {
-      this.userId = "USR-" + randomInt.toString();
-      this.adminId = "";
-    }
-    this.type = type;
-    this.first_name = FirstName;
-    this.last_name = LastName;
-    this.email = Email;
-    this.password = Password;
-    this.activation_code = "ACTIV-" + randomInt2.toString();
-    this.companyId = companyID;
+  factory User.fromJson(Map<String, dynamic> json) => User(
+    userId: json["userId"],
+    type: json["type"],
+    firstName: json["firstName"],
+    lastName: json["lastName"],
+    email: json["email"],
+    userName: json["userName"],
+    companyId: json["companyId"],
+    companyName: json["companyName"],
+    companyAddress: json["companyAddress"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "userId": userId,
+    "type": type,
+    "firstName": firstName,
+    "lastName": lastName,
+    "email": email,
+    "userName": userName,
+    "companyId": companyId,
+    "companyName": companyName,
+    "companyAddress": companyAddress,
+  };
+
+  String getUserId() {
+    return userId;
+  }
+
+  String getType() {
+    return type;
   }
 
   String getFirstName() {
-    return first_name;
+    return firstName;
   }
 
   String getLastName() {
-    return last_name;
+    return lastName;
+  }
+
+  String getEmail() {
+    return email;
+  }
+
+  String getUserName() {
+    return userName;
   }
 
   String getCompanyId() {
     return companyId;
   }
 
-  String getUserId() {
-    return userId;
+  String getCompanyName() {
+    return companyName;
   }
 
-  String getAdminId() {
-    return adminId;
+  String getCompanyAddress() {
+    return companyAddress;
   }
 
-  String getId() {
-    if (adminId == "") {
-      return userId;
-    } else if (userId == "") {
-      return adminId;
-    } else {
-      return null;
-    }
-  }
-
-  String getEmail() {
-    return email;
+  String toString() {
+    return "User ID: " + userId + "\nType: " + type + "\nFirst name: " + firstName +
+        "\nLast name: " + lastName + "\nEmail: " + email + "\nUsername: " + userName +
+        "\nCompany ID: " + companyId + "\nCompany name: " + companyName + "\nCompany address: " + companyAddress;
   }
 }

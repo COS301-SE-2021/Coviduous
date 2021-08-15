@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:frontend/auth/auth_provider.dart';
-import 'package:frontend/auth/firestore_cloud.dart';
 import 'package:frontend/views/signup/home_signup_screen.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminRegister extends StatefulWidget {
@@ -40,7 +40,7 @@ class _AdminRegisterState extends State<AdminRegister>{
         color: globals.secondaryColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
-            title: Text('Register'),
+            title: Text('Register admin'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(Register.routeName);
@@ -190,7 +190,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                     decoration: InputDecoration(labelText:'Company name'),
                                     controller: _companyName,
                                     validator: (value) {
-                                      if(value.isEmpty || !value.contains(RegExp(r"^[A-Za-z ,.'-]+$"))) //Check if valid name format
+                                      if(value.isEmpty || !value.contains(RegExp(r"^[0-9A-Za-z ,.'-]+$"))) //Check if valid name format
                                           {
                                         return 'please input a valid company name';
                                       }
@@ -232,7 +232,8 @@ class _AdminRegisterState extends State<AdminRegister>{
                                               isLoading = false;
                                             });
 
-                                            adminSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text, _companyName.text, _companyLocation.text);
+                                            userHelpers.createAdmin(_firstName.text, _lastName.text, _userName.text,
+                                                _companyId.text, _companyName.text, _companyLocation.text);
                                             Navigator.pushAndRemoveUntil(context,
                                                 MaterialPageRoute(builder: (context) => LoginScreen()), (
                                                     route) => false);

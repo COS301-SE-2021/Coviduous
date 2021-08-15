@@ -200,7 +200,7 @@ exports.viewNotifications = async (req, res) => {
 
 /**
  * This function retrieves all notifications based on user email via an HTTP GET request.
- * @param req The request object may be null.
+ * @param req The request object may not be null.
  * @param res The response object is sent back to the requester, containing the status code and retrieved data.
  * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
