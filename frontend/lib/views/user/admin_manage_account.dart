@@ -8,6 +8,7 @@ import 'package:frontend/views/user/admin_update_account.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminManageAccount extends StatefulWidget {
@@ -77,7 +78,14 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                     ),
                                     onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(AdminUpdateAccount.routeName);
+                                      userHelpers.getUserDetails().then((result) {
+                                        if (result == true) {
+                                          Navigator.of(context).pushReplacementNamed(AdminUpdateAccount.routeName);
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text('Error occurred while retrieving user details. Please try again later.')));
+                                        }
+                                      });
                                     }
                                 ),
                                 SizedBox (

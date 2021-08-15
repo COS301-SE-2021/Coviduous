@@ -159,8 +159,6 @@ Future<bool> updateUser(String type, String firstName, String lastName, String e
 
     var response = await request.send();
 
-    print(await response.statusCode);
-
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
 

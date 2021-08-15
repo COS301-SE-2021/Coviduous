@@ -59,6 +59,10 @@ Future<bool> getUserDetails() async {
     userController.getUserDetails(globals.loggedInUserId)
   ]).then((results) {
     globals.loggedInUser = results.first;
+    globals.loggedInUserId = globals.loggedInUser.getUserId();
+    globals.loggedInUserEmail = globals.loggedInUser.getEmail();
+    globals.loggedInCompanyId = globals.loggedInUser.getCompanyId();
+    globals.loggedInUserType = globals.loggedInUser.getType();
     result = true;
   });
   return result;

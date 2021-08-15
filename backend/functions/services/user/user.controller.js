@@ -220,6 +220,7 @@ exports.updateUser = async (req, res) => {
     }
 
     if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
             errors: fieldErrors
@@ -250,6 +251,7 @@ exports.updateUser = async (req, res) => {
     }
 
     let result = await database.updateUser(userData.userId, userData);
+
     if (!result) {
         return res.status(500).send({
             message: '500 Server Error: DB error',
@@ -279,7 +281,7 @@ exports.getUsers = async (req, res) => {
 
     let result = await database.getUsers();
 
-    if (!result) {
+    if (result == null) {
         return res.status(500).send({
             message: '500 Server Error: DB error',
             data: null
@@ -343,6 +345,7 @@ exports.getUserDetails = async (req, res) => {
     let result = await database.getUserDetails(reqJson.userId);
 
     if (result == null) {
+        console.log("500 server error");
         return res.status(500).send({
             message: '500 Server Error: DB error',
             data: null

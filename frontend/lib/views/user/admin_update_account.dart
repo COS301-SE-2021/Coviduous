@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -8,47 +7,13 @@ import 'package:frontend/views/user/admin_manage_account.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminUpdateAccount extends StatefulWidget {
   static const routeName = "/admin_update_account";
   @override
   _AdminUpdateAccountState createState() => _AdminUpdateAccountState();
-}
-
-String _snapFirstName;
-String _snapLastName;
-String _snapEmail;
-String _snapUserName;
-String _snapCompanyName;
-String _snapCompanyLocation;
-
-Future getSnap() async {
-  User admin = FirebaseAuth.instance.currentUser;
-  await Future.wait([
-    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('users')
-          .where('uid', isEqualTo: admin.uid).limit(1);
-      await Future.wait([query.get().then((data) {
-        if (data.docs.length > 0) {
-          _snapFirstName = data.docs[0].get('Firstname');
-          _snapLastName = data.docs[0].get('Lastname');
-          _snapEmail = data.docs[0].get('Email');
-          _snapUserName = data.docs[0].get('Username');
-          _snapCompanyName = data.docs[0].get('Company Name');
-          _snapCompanyLocation = data.docs[0].get('Company Location');
-        } else {
-          _snapFirstName = "";
-          _snapLastName = "";
-          _snapEmail = "";
-          _snapUserName = "";
-          _snapCompanyName = "";
-          _snapCompanyLocation = "";
-        }
-      })]);
-    })
-  ]);
-  return;
 }
 
 class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
@@ -84,20 +49,18 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
       return Container();
     }
 
-    getSnap().then((value) {
-      if (_firstName.text.isEmpty)
-        _firstName.text = _snapFirstName;
-      if (_lastName.text.isEmpty)
-        _lastName.text = _snapLastName;
-      if (_email.text.isEmpty)
-        _email.text = _snapEmail;
-      if (_userName.text.isEmpty)
-        _userName.text = _snapUserName;
-      if (_companyName.text.isEmpty)
-        _companyName.text = _snapCompanyName;
-      if (_companyLocation.text.isEmpty)
-        _companyLocation.text = _snapCompanyLocation;
-    });
+    if (_firstName.text.isEmpty)
+      _firstName.text = globals.loggedInUser.getFirstName();
+    if (_lastName.text.isEmpty)
+      _lastName.text = globals.loggedInUser.getLastName();
+    if (_email.text.isEmpty)
+      _email.text = globals.loggedInUserEmail;
+    if (_userName.text.isEmpty)
+      _userName.text = globals.loggedInUser.getUserName();
+    if (_companyName.text.isEmpty)
+      _companyName.text = globals.loggedInUser.getCompanyName();
+    if (_companyLocation.text.isEmpty)
+      _companyLocation.text = globals.loggedInUser.getCompanyAddress();
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -272,100 +235,65 @@ class _AdminUpdateAccountState extends State<AdminUpdateAccount>{
                                                 if (_password.text.isNotEmpty) {
                                                   AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
                                                     if (value2 == "welcome") {
-                                                      if (_email.text.isNotEmpty && _email.text != _snapEmail) {
-                                                        String oldEmail = FirebaseAuth.instance.currentUser.email;
-                                                        AuthClass().updateEmail(newEmail: _email.text.trim()).then((value) {
-                                                          if (value == "Success") {
-                                                            setState(() {
-                                                              isLoading = false;
-                                                            });
-
-                                                            //If update was successful, update in Firestore document as well
-                                                            FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                              var query = FirebaseFirestore.instance.collection('users')
-                                                                  .where("Email", isEqualTo: oldEmail);
-                                                              var querySnapshot = await query.get();
-                                                              String id = querySnapshot.docs.first.id;
-                                                              FirebaseFirestore.instance.collection('users').doc(id).update(
-                                                                  {
-                                                                    'Email' : _email.text.trim()
-                                                                  });
+                                                      //If updating email
+                                                      if (globals.loggedInUserEmail != _email.text) {
+                                                        AuthClass().updateEmail(newEmail: _email.text).then((value3) {
+                                                          if (value3 == "Success") {
+                                                            userHelpers.updateAdmin(_firstName.text, _lastName.text, _email.text,
+                                                                _userName.text, _companyName.text, _companyLocation.text)
+                                                                .then((result) {
+                                                              if (result == true) {
+                                                                setState(() {
+                                                                  isLoading = false;
+                                                                });
+                                                                userHelpers.getUserDetails();
+                                                                Navigator.pushAndRemoveUntil(context,
+                                                                    MaterialPageRoute(builder: (context) => AdminManageAccount()), (
+                                                                        route) => false);
+                                                              } else {
+                                                                setState(() {
+                                                                  isLoading = false;
+                                                                });
+                                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                                    SnackBar(content: Text('Error occurred while updating user details. Please try again later.')));
+                                                              }
                                                             });
                                                           } else {
                                                             setState(() {
                                                               isLoading = false;
                                                             });
                                                             ScaffoldMessenger.of(context).showSnackBar(
-                                                                SnackBar(content: Text(value)));
+                                                                SnackBar(content: Text('Error occurred while updating email: ' + value3)));
                                                           }
                                                         });
-                                                      }
-                                                      if (_firstName.text.isNotEmpty && _firstName.text != _snapFirstName) {
-                                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('users')
-                                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                                          var querySnapshot = await query.get();
-                                                          String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
-                                                              {
-                                                                'Firstname' : _firstName.text.trim()
-                                                              });
+                                                        setState(() {
+                                                          isLoading = false;
+                                                        });
+                                                      //If not updating email
+                                                      } else {
+                                                        userHelpers.updateAdmin(_firstName.text, _lastName.text, _email.text,
+                                                            _userName.text, _companyName.text, _companyLocation.text)
+                                                            .then((result) {
+                                                          if (result == true) {
+                                                            setState(() {
+                                                              isLoading = false;
+                                                            });
+                                                            userHelpers.getUserDetails();
+                                                            Navigator.pushAndRemoveUntil(context,
+                                                                MaterialPageRoute(builder: (context) => AdminManageAccount()), (
+                                                                    route) => false);
+                                                          } else {
+                                                            setState(() {
+                                                              isLoading = false;
+                                                            });
+                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                SnackBar(content: Text('Error occurred while updating user details. Please try again later.')));
+                                                          }
+                                                        });
+                                                        setState(() {
+                                                          isLoading = false;
                                                         });
                                                       }
-                                                      if (_lastName.text.isNotEmpty && _lastName.text != _snapLastName) {
-                                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('users')
-                                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                                          var querySnapshot = await query.get();
-                                                          String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
-                                                              {
-                                                                'Lastname' : _lastName.text.trim()
-                                                              });
-                                                        });
-                                                      }
-                                                      if (_userName.text.isNotEmpty && _userName.text != _snapUserName) {
-                                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('users')
-                                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                                          var querySnapshot = await query.get();
-                                                          String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
-                                                              {
-                                                                'Username' : _userName.text.trim()
-                                                              });
-                                                        });
-                                                      }
-                                                      if (_companyName.text.isNotEmpty && _companyName.text != _snapCompanyName) {
-                                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('users')
-                                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                                          var querySnapshot = await query.get();
-                                                          String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
-                                                              {
-                                                                'Company Name' : _companyName.text.trim()
-                                                              });
-                                                        });
-                                                      }
-                                                      if (_companyLocation.text.isNotEmpty && _companyLocation.text != _snapCompanyLocation) {
-                                                        FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-                                                          var query = FirebaseFirestore.instance.collection('users')
-                                                              .where("Email", isEqualTo: FirebaseAuth.instance.currentUser.email);
-                                                          var querySnapshot = await query.get();
-                                                          String id = querySnapshot.docs.first.id;
-                                                          FirebaseFirestore.instance.collection('users').doc(id).update(
-                                                              {
-                                                                'Company Location' : _companyLocation.text.trim()
-                                                              });
-                                                        });
-                                                      }
-                                                      setState(() {
-                                                        isLoading = false;
-                                                      });
-                                                      Navigator.pushAndRemoveUntil(context,
-                                                          MaterialPageRoute(builder: (context) => AdminManageAccount()), (
-                                                              route) => false);
                                                     } else {
                                                       setState(() {
                                                         isLoading = false;

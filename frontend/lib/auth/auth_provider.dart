@@ -88,11 +88,13 @@ class AuthClass {
 
   //Sign out
   void signOut() {
-     //Clear currently signed in user data first
-     globals.loggedInUserType = '';
-     globals.loggedInUserEmail = '';
-     globals.loggedInUserId = '';
+    //Clear currently signed in user data first
+    globals.loggedInUser = null;
+    globals.loggedInUserType = '';
+    globals.loggedInUserEmail = '';
+    globals.loggedInUserId = '';
+    globals.loggedInCompanyId = '';
 
-     auth.signOut();
+    auth.signOut();
   }
 }
