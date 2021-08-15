@@ -131,7 +131,7 @@ describe('Create notification unit tests', function() {
             });
     });
  
-    it('Return 200 if creation successful', function(done) {
+    it('Return 200 if creation successful', function() {
         let req = {
             userId: "test-000",
             userEmail: "test-000",
@@ -149,7 +149,7 @@ describe('Create notification unit tests', function() {
                 should.exist(res);
                 res.should.have.status(200);
                 console.log(res.body);
-                done();
+                //done();
             });
     })
  });
