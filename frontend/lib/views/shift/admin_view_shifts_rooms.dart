@@ -81,7 +81,6 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
                       ),
