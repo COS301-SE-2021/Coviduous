@@ -17,6 +17,7 @@ const devDatabase = require("../config/user.firestore.database.js");
 userController.setDatabase(devDatabase);
 
 // User routes
+router.delete('/users', userController.deleteUser);
 router.get('/users', userController.getUsers);
 router.get('/users/user-id', userController.getUserDetails);
 router.post('/users', userController.createUser);

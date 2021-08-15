@@ -8,7 +8,7 @@ import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserRegister extends StatefulWidget {
-  static const routeName = "/userRegister";
+  static const routeName = "/user_register";
   @override
   _UserRegisterState createState() => _UserRegisterState();
 }
@@ -38,7 +38,7 @@ class _UserRegisterState extends State<UserRegister>{
         color: globals.secondaryColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
-            title: Text('Register'),
+            title: Text('Register user'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(Register.routeName);

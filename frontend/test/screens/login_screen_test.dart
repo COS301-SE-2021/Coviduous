@@ -21,8 +21,7 @@ void main() {
     //Verify that the correct widgets appear in the correct order
     expect(find.text('Email'), findsOneWidget); //Find one widget containing 'Email'
     expect(find.text('Password'), findsOneWidget); //Find one widget containing 'Password'
-    expect(find.text('Admin'), findsOneWidget); //Find one widget containing 'Admin'
-    expect(find.text('User'), findsOneWidget); //Find one widget containing 'User'
+    expect(find.text('Forgot password?'), findsOneWidget); //Find one widget containing 'Forgot password?'
     expect(find.text('Submit'), findsOneWidget); //Find one widget containing 'Submit'
   });
 }

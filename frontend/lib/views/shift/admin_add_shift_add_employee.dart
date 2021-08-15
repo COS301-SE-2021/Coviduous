@@ -17,8 +17,6 @@ class AddShiftAddEmployee extends StatefulWidget {
 class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
   String _employeeEmail = "";
 
-  //ShiftController services = new ShiftController();
-
   Widget _buildEmail() {
     return TextFormField(
       textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing

@@ -80,7 +80,6 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
                       ),
@@ -130,7 +129,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: AppBar(
-            title: Text('Create shift in floor plan ' + globals.currentFloorPlanNum),
+            title: Text('Create shift'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);

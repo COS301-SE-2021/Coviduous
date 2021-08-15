@@ -46,14 +46,14 @@ exports.getUserDetails = async (userId) => {
         return list;
     } catch (error) {
         console.log(error);
-        return error;
+        return null;
     }
 }
 
 exports.updateUser = async (userId, userData) => {
     try {
         const document = await db.collection('users').doc(userId);
-        await document.set({
+        await document.update({
             ...((userData.firstName != null && userData.firstName !== "") && {firstName: userData.firstName}),
             ...((userData.lastName != null && userData.lastName !== "") && {lastName: userData.lastName}),
             ...((userData.email != null && userData.email !== "") && {email: userData.email}),
@@ -61,6 +61,7 @@ exports.updateUser = async (userId, userData) => {
             ...((userData.companyName != null && userData.companyName !== "") && {companyName: userData.companyName}),
             ...((userData.companyAddress != null && userData.companyAddress !== "") && {companyAddress: userData.companyAddress}),
         });
+        return true;
     } catch (error) {
         console.log(error);
         return false;
