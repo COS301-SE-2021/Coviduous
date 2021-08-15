@@ -8,8 +8,8 @@ let db;
  * This function sets the database used by the shift controller.
  * @param db The database to be used. It can be any interface with CRUD operations.
  */
-exports.setDatabase = async (db) => {
-    database = db;
+exports.setDatabase = async (_db) => {
+    db = _db;
 }
 
 /**
@@ -113,7 +113,7 @@ exports.createShift = async (req,res) => {
     let shiftID = "SHI-" + uuid.v4();
     let shift = new Shift(shiftID, reqJson.date, reqJson.startTime, reqJson.endTime,
         reqJson.description, reqJson.adminId, reqJson.companyId);
-    let shiftData = { shiftID: shift.shiftID, startTime: shift.startTime, endTime: shift.endTime,
+    let shiftData = { shiftID: shift.shiftID,date: shift.date,startTime: shift.startTime, endTime: shift.endTime,
         description: shift.description, adminId: shift.adminId, companyId: shift.companyId };
 
     let result = await db.createShift(shiftID, shiftData);
@@ -186,6 +186,7 @@ exports.createGroup = async (req, res) => {
         });
     }
 
+    
     let groupId = "GRP-" + uuid.v4();
     let group = new Group(groupId, reqJson.groupName, reqJson.userEmails, reqJson.shiftNumber, reqJson.adminId);
     let groupData = { groupId: group.groupNumber, groupName: group.groupName,
@@ -193,6 +194,7 @@ exports.createGroup = async (req, res) => {
 
     let result = await db.createGroup(groupId, groupData);
 
+        
     if (!result) {
         return res.status(500).send({
             message: '500 Server Error: DB error',
@@ -273,7 +275,7 @@ exports.updateShift = async (req, res) => {
     console.log(reqJson);
     //////////////////////////////////////////////////////////////////////
 
-
+       
     if(req.body == null) {
         fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
@@ -281,6 +283,14 @@ exports.updateShift = async (req, res) => {
     if (reqJson.shiftID == null || reqJson.shiftID === '') {
         fieldErrors.push({field: 'shiftID', message: 'Shift ID may not be empty'});
     }
+    if(reqJson.endTime == null || reqJson.endTime===''){
+        fieldErrors.push({field: 'endTime', message: 'endTime may not be empty'});
+    }
+    if(reqJson.startTime == null || reqJson.startTime===''){
+        fieldErrors.push({field: 'startTime', message: 'startTime may not be empty'});
+    }
+
+   
 
     if (fieldErrors.length > 0) {
         return res.status(400).send({
@@ -288,7 +298,7 @@ exports.updateShift = async (req, res) => {
             errors: fieldErrors
         });
     }
-
+  
     if (await db.updateShift(reqJson.shiftID, reqJson) == true) {
       return res.status(200).send({
         data: req.body
@@ -311,6 +321,25 @@ exports.viewShifts = async (req, res) => {
       return res.status(200).send({
         message: 'Successfully retrieved shifts',
         data: viewShifts
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching shifts."});
+    }
+};
+/**
+ * This function retrieves all groups via an HTTP GET request.
+ * @param req The request object may be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
+
+ exports.getGroup = async (req, res) => {
+    let getGroups = await db.getGroup();
+      
+    if (getGroups != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved groups',
+        data: getGroups
       });
     } else {
       return res.status(500).send({message: "Some error occurred while fetching shifts."});

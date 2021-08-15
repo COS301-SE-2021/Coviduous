@@ -66,6 +66,7 @@ exports.deleteShift = async (ShiftID) => {
   }
 exports.updateShift = async (shiftID,shiftData) =>{
   try{
+
        const document = db.collection('shift').doc(shiftID);
        await document.update({
            startTime:shiftData.startTime,
