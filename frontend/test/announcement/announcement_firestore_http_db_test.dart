@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/controllers/announcement_controller.dart'
+import 'package:frontend/controllers/announcement/announcement_controller.dart'
     as announcementController;
 import 'package:frontend/models/announcement/announcement.dart';
 

@@ -10,8 +10,8 @@ import 'package:frontend/views/announcement/user_view_announcements.dart';
 import 'package:frontend/views/notification/user_view_notifications.dart';
 import 'package:frontend/auth/auth_provider.dart';
 
-import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
-import 'package:frontend/controllers/notification_controller.dart' as notificationController;
+import 'package:frontend/controllers/announcement/announcement_controller.dart' as announcementController;
+import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
 import 'package:frontend/globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {

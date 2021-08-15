@@ -7,7 +7,7 @@ import 'package:frontend/views/notification/admin_view_notifications.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/notification_controller.dart' as notificationController;
+import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminNotifications extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:frontend/views/shift/admin_add_shift_floors.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AddShiftFloorPlans extends StatefulWidget {

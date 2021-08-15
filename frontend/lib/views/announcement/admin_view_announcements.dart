@@ -7,7 +7,7 @@ import 'package:frontend/models/announcement/announcement.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/announcement_controller.dart' as announcementController;
+import 'package:frontend/controllers/announcement/announcement_controller.dart' as announcementController;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminViewAnnouncements extends StatefulWidget {

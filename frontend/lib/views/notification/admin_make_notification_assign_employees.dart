@@ -9,7 +9,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/globals.dart' as globals;
-import 'package:frontend/controllers/notification_controller.dart' as notificationController;
+import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
 
 class MakeNotificationAssignEmployees extends StatefulWidget {
   static const routeName = "/admin_make_notification_employees";
