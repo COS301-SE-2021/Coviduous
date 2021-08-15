@@ -106,7 +106,6 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                           Container(
                             alignment: Alignment.center,
                             width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height / 24,
                             color: Theme.of(context).primaryColor,
                             child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),

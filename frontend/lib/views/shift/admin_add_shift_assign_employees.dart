@@ -38,9 +38,8 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
     }
 
     Widget getList() {
-      //List<TempGroup> tempShifts = services.getTempGroup();
+      int numOfUsers = 1;
 
-      int numOfUsers = 0;
       print(numOfUsers);
 
       if (numOfUsers == 0) { //If the number of users = 0, don't display a list
@@ -84,6 +83,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         //child: Text('Email: ' + tempShifts[index].getUserEmail()),
+                        child: Text('Email: email address of assigned user')
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -95,6 +95,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                               /*child: Text(
                                   'Group ID: ' + tempShifts[index].getGroupId(),
                                   style: TextStyle(color: Colors.black)),*/
+                              child: Text('Group ID: group ID here'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -103,6 +104,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                               /*child: Text(
                                   'Group name: ' + tempShifts[index].getGroupName(),
                                   style: TextStyle(color: Colors.black)),*/
+                              child: Text('Group name: group name here'),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(

@@ -106,10 +106,6 @@ class _AddShiftFloorPlansState extends State<AddShiftFloorPlans> {
                               .of(context)
                               .size
                               .width,
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height / 24,
                           color: Theme
                               .of(context)
                               .primaryColor,

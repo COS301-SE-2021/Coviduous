@@ -159,7 +159,34 @@ Future<bool> updateUser(String type, String firstName, String lastName, String e
 
     var response = await request.send();
 
-    print(await response.statusCode);
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+  } catch (error) {
+    print(error);
+  }
+
+  return false;
+}
+
+/**
+ * deleteUser() : Deletes a user based on their user ID.
+ */
+Future<bool> deleteUser() async {
+  String path = 'users';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('DELETE', Uri.parse(url));
+    request.body = json.encode({
+      "userId": globals.loggedInUserId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
