@@ -19,8 +19,10 @@ Shift.setDatabase(db);
  * Shift Routes
  *  */
 router.post('/shift',Shift.createShift);
+router.post('shift/group',Shift.createGroup);
 router.delete('/shift',Shift.deleteShift);
 router.get('/shift',Shift.viewShifts);
+router.get('/shift/group',Shift.getGroup)
 router.put('/shift',Shift.updateShift);
 /**
  * Group Routes
