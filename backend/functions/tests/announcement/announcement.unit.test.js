@@ -77,43 +77,43 @@ describe('Create announcement unit tests', function() {
             });
     });
 
-//     it('Return 400 if empty admin ID', function(done) {
-//         let req = {
-//             type: 'GENERAL',
-//             message: 'message',
-//             adminId: '',
-//             companyId: 'COMPANY-ID',
-//         };
+    it('Return 400 if empty admin ID', function(done) {
+        let req = {
+            type: 'GENERAL',
+            message: 'message',
+            adminId: '',
+            companyId: 'COMPANY-ID',
+        };
 
-//         chai.request(server)
-//             .post('/api/announcements')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
-//     it('Return 400 if empty company ID', function(done) {
-//         let req = {
-//             type: 'GENERAL',
-//             message: 'message',
-//             adminId: 'ADMIN-ID',
-//             companyId: '',
-//         };
+    it('Return 400 if empty company ID', function(done) {
+        let req = {
+            type: 'GENERAL',
+            message: 'message',
+            adminId: 'ADMIN-ID',
+            companyId: '',
+        };
 
-//         chai.request(server)
-//             .post('/api/announcements')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
 //    it('Return 200 if creation successful', function() {
 //        let req = {
