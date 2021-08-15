@@ -199,8 +199,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                               setState(() {
                                                 isLoading = false;
                                               });
-                                              globals.loggedInCompanyId = globals.loggedInUser.getCompanyId();
-                                              globals.loggedInUserType = globals.loggedInUser.getType();
                                               // print(globals.loggedInUserEmail);
                                               // print(globals.loggedInCompanyId);
                                               // print(globals.loggedInUserId);
