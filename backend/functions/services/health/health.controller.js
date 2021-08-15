@@ -33,9 +33,59 @@ exports.hasHighTemperature = async (temparature) => {
   }
 }
 
-exports.getPredictionResult = async ()=>{
-  //if pognosis is positive we return true else return false
-  return false;
+exports.getPredictionResult = async (d_t_prediction,dt_accuracy,naive_prediction,nb_accuracy)=>{
+  //in this case we are using 2 models for predictions and we should weigh their results
+  if((d_t_prediction==="positve") && (nb_accuracy==="positve"))// if the models both predicted the same then we can return the results
+  {
+    return true;
+  }
+  else if((d_t_prediction==="negative") && (nb_accuracy==="negative"))
+  {
+    return false;
+  }
+  else if((d_t_prediction==="negative") && (nb_accuracy==="positive"))
+  {
+      let dtAccuracy=parseFloat(dt_accuracy);
+      let nbAccuracy=parseFloat(naive_prediction);
+      if(dtAccuracy>nbAccuracy)
+      {
+        return false;
+      }
+      else if(dtAccuracy<nbAccuracy)
+      {
+        return true;
+      }
+      else if(dtAccuracy===nbAccuracy)
+      {
+        //favour decision tree algorith over naive bais
+          return false;
+      }
+
+  }
+  else if((d_t_prediction==="positive") && (nb_accuracy==="negative"))
+  {
+      let dtAccuracy=parseFloat(dt_accuracy);
+      let nbAccuracy=parseFloat(naive_prediction);
+      if(dtAccuracy>nbAccuracy)
+      {
+        return true;
+      }
+      else if(dtAccuracy<nbAccuracy)
+      {
+        return false;
+      }
+      else if(dtAccuracy===nbAccuracy)
+      {
+        //favour decision tree algorith over naive bais
+          return true;
+      }
+
+  }
+  else
+  {
+    return false;
+  }
+  
 
 
 }
@@ -97,7 +147,7 @@ exports.createHealthCheck = async (req, res) => {
     //add a time attribute
 
     let healthCheckObj = new HealthCheck(healthCheckId, req.body.userId, req.body.name, req.body.surname,
-        req.body.email, req.body.phoneNumber, req.body.temperature, req.body.fever, req.body.cough,
+        req.body.userEmail, req.body.phoneNumber, req.body.temperature, req.body.fever, req.body.cough,
         req.body.soreThroat, req.body.chills, req.body.aches, req.body.nausea, req.body.shortnessOfBreath, 
         req.body.lossOfTasteSmell, req.body.sixFeetContact, req.body.testedPositive, req.body.travelled);
 
@@ -127,7 +177,7 @@ exports.createHealthCheck = async (req, res) => {
     // personal information eg. name,surname,phone numbers are not sent but only symptoms and and history of contact 
     //is used to make a prediction
      // if temparature is less than threshold evaluate the AI prediction and accuracy score
-    let AIprediction=await this.getPredictionResult();
+    let AIprediction=await this.getPredictionResult(req.body.d_t_prediction,req.body.dt_accuracy,req.body.naive_prediction,req.body.nb_accuracy);
     if(highTemp)
     {
       await this.permissionDeniedBadge(req.body.userId,req.body.userEmail);
