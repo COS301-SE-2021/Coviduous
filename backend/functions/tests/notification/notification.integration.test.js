@@ -9,7 +9,7 @@ let should = chai.should();
 //const functions = require('firebase-functions');
 //const admin = require('firebase-admin');
 
-const Notification = require("../../models/notification.model.js");
+//const Notification = require("../../models/notification.model.js");
 //const notificationDB = require("../../config/notification.firestore.database.js");
 
 chai.use(chaiHttp);
@@ -38,7 +38,7 @@ describe('/POST notifications', () => {
         });
     });
 
-    it('should DELETE a notification', function(done) {
+    it('should DELETE a notification', function() {
         let req = {
             userId: "test-000",
             userEmail: "test-000",
@@ -49,24 +49,24 @@ describe('/POST notifications', () => {
             companyId: "test-000"
         };
   
-         chai.request(server)
-             .post('/api/notifications')
-             .send(req)
-             .end((err, res) => {
-                 console.log(res.body);
-                 let req2 = {
-                     notificationId: res.body.notificationId,
-                 };
-  
-                 chai.request(server)
-                     .delete('/api/notifications')
-                     .send(req2).end((err, res) => {
-                          should.exist(res);
-                          res.should.have.status(200);
-                          console.log(res.body);
-                          done();
-                     });
-             });
+        chai.request(server)
+            .post('/api/notifications')
+            .send(req)
+            .end((err, res) => {
+                console.log(res.body);
+                let req2 = {
+                    notificationId: res.body.data.notificationId
+                };
+
+                chai.request(server)
+                    .delete('/api/notifications')
+                    .send(req2).end((err, res) => {
+                        should.exist(res);
+                        res.should.have.status(200);
+                        console.log(res.body);
+                        //done();
+                    });
+            });
     });
 }); 
     
