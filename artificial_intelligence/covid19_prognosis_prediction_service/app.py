@@ -99,10 +99,23 @@ def NaiveBayes(psymptoms):
 def home():
     return render_template('index.html')
 
-@app.route('/api/prognosis')
+@app.route('/api/prognosis', methods=['POST'])
 def prognosis():
-    person = {'name': 'Alice', 'birth-year': 1986}
-    return jsonify(person)
+    data = request.get_json()
+    cough = data.get('cough', '')
+    fever = data.get('fever', '')
+    sore_throat = data.get('sore_throat', '')
+    shortness_of_breath = data.get('shortness_of_breath', '')
+    head_ache = data.get('head_ache', '')
+    psymptoms = [cough, fever, sore_throat, shortness_of_breath, head_ache]
+    naive_prediction , nb_accuracy = NaiveBayes(psymptoms)
+    d_t_prediction, dt_accuracy = DecisionTree(psymptoms)
+    responseData={"naive_prediction":naive_prediction,
+    "nb_accuracy":nb_accuracy,
+    "d_t_prediction":d_t_prediction,
+    "dt_accuracy":dt_accuracy
+    }
+    return jsonify(responseData)
 
 @app.route('/predict', methods=['POST'])
 def predict():
