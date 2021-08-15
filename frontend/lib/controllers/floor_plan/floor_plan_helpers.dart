@@ -35,9 +35,9 @@ Future<bool> getFloorPlans() async {
   bool result = false;
   await Future.wait([
     floorPlanController.getFloorPlans(globals.loggedInCompanyId)
-  ]).then((lists) {
-    if (lists != null) {
-      globals.currentFloorPlans = lists.first;
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentFloorPlans = results.first;
       result = true;
     }
   });
@@ -48,10 +48,10 @@ Future<bool> getFloors(String floorPlanNumber) async {
   bool result = false;
   await Future.wait([
     floorPlanController.getFloors(floorPlanNumber)
-  ]).then((lists) {
-    if (lists != null) {
+  ]).then((results) {
+    if (results.first != null) {
       globals.currentFloorPlanNum = floorPlanNumber;
-      globals.currentFloors = lists.first;
+      globals.currentFloors = results.first;
       result = true;
     }
   });
@@ -62,10 +62,10 @@ Future<bool> getRooms(String floorNumber) async {
   bool result = false;
   await Future.wait([
     floorPlanController.getRooms(floorNumber)
-  ]).then((lists) {
-    if (lists != null) {
+  ]).then((results) {
+    if (results.first != null) {
       globals.currentFloorNum = floorNumber;
-      globals.currentRooms = lists.first;
+      globals.currentRooms = results.first;
       result = true;
     }
   });
