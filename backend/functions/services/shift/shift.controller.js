@@ -342,6 +342,49 @@ exports.viewShifts = async (req, res) => {
         data: getGroups
       });
     } else {
+      return res.status(500).send({message: "Some error occurred while fetching groups."});
+    }
+};
+
+exports.getGroupForShift = async (req, res) => {
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.shiftNumber == null || reqJson.shiftNumber === '') {
+        fieldErrors.push({field: 'shiftID', message: 'shiftNumber may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+
+    let getGroupForShifts = await db.getGroupForShift(reqJson.shiftNumber);
+      
+    if (getGroupForShifts != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved groups',
+        data: getGroupForShifts
+      });
+    } else {
       return res.status(500).send({message: "Some error occurred while fetching shifts."});
     }
 };

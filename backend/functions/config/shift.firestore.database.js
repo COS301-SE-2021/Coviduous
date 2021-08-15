@@ -21,7 +21,26 @@ exports.createGroup = async (groupId, groupData) =>{
         console.log(error);
         return false;
     }
-}
+};
+exports.getGroupForShift = async (shiftNumber) =>{
+    try{
+        const document = db.collection('group').where("shiftNumber","==",shiftNumber);
+        const snapshot = await document.get();
+ 
+        let list =[];
+ 
+         snapshot.forEach(doc => {
+             let data = doc.data();
+             list.push(data);
+         });
+
+         return list;
+    }
+    catch(error){
+        console.log(error);
+        return false;
+    }
+};
 exports.getGroup = async () =>{
     try{
         const document = db.collection('group');
