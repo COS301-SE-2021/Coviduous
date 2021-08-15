@@ -39,7 +39,7 @@ exports.getPredictionResult = async ()=>{
 
 
 }
-exports.permissionDeniedBadge = async (userId) => {
+exports.permissionDeniedBadge = async (userId,userEmail) => {
       let permissionId = "PRMN-" + uuid.v4();
       let timestamp =new Date().today() + " @ " + new Date().timeNow();
       let acessPermission=false;
@@ -48,6 +48,7 @@ exports.permissionDeniedBadge = async (userId) => {
       let permissionData = {
         permissionId: permissionId,
         userId:userId,
+        userEmail:userEmail,
         timestamp: timestamp,
         officeAccess: acessPermission,
         grantedBy:authorizedBy
@@ -63,7 +64,7 @@ exports.permissionDeniedBadge = async (userId) => {
       }
 }
 
-exports.permissionAcceptedBadge = async (userId) => {
+exports.permissionAcceptedBadge = async (userId,userEmail) => {
   let permissionId = "PRMN-" + uuid.v4();
   let timestamp =new Date().today() + " @ " + new Date().timeNow();
   let acessPermission=true;
@@ -72,6 +73,7 @@ exports.permissionAcceptedBadge = async (userId) => {
   let permissionData = {
     permissionId: permissionId,
     userId:userId,
+    userEmail:userEmail,
     timestamp: timestamp,
     officeAccess: acessPermission,
     grantedBy:authorizedBy
@@ -128,7 +130,7 @@ exports.createHealthCheck = async (req, res) => {
     let AIprediction=await this.getPredictionResult();
     if(highTemp)
     {
-      await this.permissionDeniedBadge(req.body.userId);
+      await this.permissionDeniedBadge(req.body.userId,req.body.userEmail);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
@@ -138,7 +140,7 @@ exports.createHealthCheck = async (req, res) => {
     else if(AIprediction)
     {
       //if prediction is positive issue out a permission denied
-      await this.permissionDeniedBadge(req.body.userId);
+      await this.permissionDeniedBadge(req.body.userId,req.body.userEmail);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
@@ -150,7 +152,7 @@ exports.createHealthCheck = async (req, res) => {
     {
       //if prediction is negative and temparature is low we can offer a permissions granted badge
       // all healthchecks are saved into the database for reporting
-      await this.permissionAcceptedBadge(req.body.userId);
+      await this.permissionAcceptedBadge(req.body.userId,req.body.userEmail);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , Access Granted',
@@ -271,13 +273,14 @@ exports.viewPermissions = async (req, res) => {
 exports.createPermissionRequest = async (req, res) => {
     try {
       let permissionRequestId = "PR-" + uuid.v4();
-      let timestamp = new Date().toISOString();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
   
-      let permissionRequestObj = new PermissionRequest(permissionRequestId, req.body.userId, req.body.shiftNumber,
+      let permissionRequestObj = new PermissionRequest(permissionRequestId,req.body.permissionId, req.body.userId, req.body.shiftNumber,
         timestamp, req.body.reason, req.body.adminId, req.body.companyId)
   
       let permissionRequestData = {
         permissionRequestId: permissionRequestObj.permissionRequestId,
+        permissionId:permissionRequestObj.permissionRequestId,
         userId: permissionRequestObj.userId,
         shiftNumber: permissionRequestObj.shiftNumber,
         timestamp: timestamp,
@@ -331,6 +334,26 @@ exports.viewPermissionsRequestsCompanyId = async (req, res) => {
       });
   }
 };
+
+exports.grantPermission = async (req, res) => {
+  try {
+
+      let permissionRequests = await database.updatePermission(req.body.permissionId);
+      //need to notify employee when permission is updated
+      
+      return res.status(200).send({
+        message: 'Successfully updated the permission requests',
+        data: permissionRequests
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message || "Some error occurred while fetching permission requests."
+      });
+  }
+};
+
+/*
 exports.deletePermissionsPermissionId = async (req, res)=>{
 try{
   
@@ -348,7 +371,7 @@ try{
 }
 
 };
-
+*/
 
 //////////////////////////////////// Contact Tracing ///////////////////////////
 ///////////////

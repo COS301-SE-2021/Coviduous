@@ -116,6 +116,27 @@ exports.viewPermissionsUserEmail = async (value) => {
     }
 };
 
+exports.viewPermissionsUserId = async (value) => {
+    try {
+        const document = db.collection('permissions').where("userId", "==", value);
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+    
+        let permissions = list;
+        
+        return permissions;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
 ///////////////// PERMISSION REQUEST /////////////////
 
 exports.createPermissionRequest = async (permissionRequestId, data) => {
@@ -128,6 +149,22 @@ exports.createPermissionRequest = async (permissionRequestId, data) => {
         return false;
     }
 };
+exports.updatePermission = async (permissionId) =>{
+    try {
+      response= await db.collection('permissions').doc(permissionId).update(
+      {
+          grantedBy:"ADMIN",
+          officeAccess:true
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
 exports.deletePermissionsPermissionId = async (permissionId) => {
     try {
         const document = db.collection('permissions').doc(permissionId);

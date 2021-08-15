@@ -25,10 +25,10 @@ router.post('/health/health-check', healthController.createHealthCheck);
 router.get('/health/permissions', healthController.viewPermissions);
 //router.get('/health/permissions/userid', healthController.viewPermissionsUserId);
 router.post('/health/permissions/permission-request', healthController.createPermissionRequest);
-router.get('/health/permissions/permission-request', healthController.viewPermissionRequests);
-router.get('/health/permissions/permission-request/companyid', healthController.viewPermissionsRequestsCompanyId);
+router.post('/health/permissions/permission-request/grant', healthController.grantPermission);
+router.get('/health/permissions/permission-request', healthController.viewPermissionsRequestsCompanyId);
 router.get('/health/contact-trace/group', healthController.viewGroup);
 router.get('/health/contact-trace/shifts', healthController.viewShifts);
-router.delete('/health/permissions',healthController.deletePermissionsPermissionId);
+//router.delete('/health/permissions',healthController.deletePermissionsPermissionId);
 // Export API routes
 module.exports = router;
