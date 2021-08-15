@@ -91,6 +91,7 @@ class User {
     return companyAddress;
   }
 
+  @override
   String toString() {
     return "User ID: " + userId + "\nType: " + type + "\nFirst name: " + firstName +
         "\nLast name: " + lastName + "\nEmail: " + email + "\nUsername: " + userName +
