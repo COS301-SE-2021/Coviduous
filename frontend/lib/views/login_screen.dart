@@ -202,10 +202,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                               });
                                               globals.loggedInCompanyId = globals.loggedInUser.getCompanyId();
                                               globals.loggedInUserType = globals.loggedInUser.getType();
-                                              print(globals.loggedInUserEmail);
-                                              print(globals.loggedInCompanyId);
-                                              print(globals.loggedInUserId);
-                                              print(globals.loggedInUserType);
+                                              // print(globals.loggedInUserEmail);
+                                              // print(globals.loggedInCompanyId);
+                                              // print(globals.loggedInUserId);
+                                              // print(globals.loggedInUserType);
 
                                               if (globals.loggedInUserType == 'ADMIN') {
                                                 Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
