@@ -57,7 +57,7 @@ Future<bool> deleteBooking(int  bookingNumber) async {
     print(await response.stream.bytesToString());
 
     for (int i = 0; i < bookingDatabaseTable.length; i++) {
-      if (bookingDatabaseTable[i].deskNum == bookingNumber) {
+      if (bookingDatabaseTable[i].getDeskNumber() == bookingNumber) {
         bookingDatabaseTable.removeAt(i);
         numBookings--;
       }
@@ -67,7 +67,7 @@ Future<bool> deleteBooking(int  bookingNumber) async {
   }
 
   for (int i = 0; i < numBookings; i++) {
-    if (bookingDatabaseTable[i].deskNum == bookingNumber) {
+    if (bookingDatabaseTable[i].getDeskNumber() == bookingNumber) {
       bookingDatabaseTable.removeAt(i);
       numBookings--;
     }
@@ -92,12 +92,11 @@ Future<List<Booking>> viewBookings() async {
       bookingDatabaseTable.clear();
       numBookings = 0;
 
-      //
-      // for (var data in jsonMap["data"]) {
-      //   var announcementData = Booking.fromJson(data);
-      //   bookingDatabaseTable.add(announcementData);
-      //   numBookings++;
-      // }
+      for (var data in jsonMap["data"]) {
+        var announcementData = Booking.fromJson(data);
+        bookingDatabaseTable.add(announcementData);
+        numBookings++;
+      }
 
       return bookingDatabaseTable;
     }

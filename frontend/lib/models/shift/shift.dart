@@ -68,4 +68,44 @@ class Shift {
         "adminID": adminId,
         "companyID": companyId,
       };
+
+  String getShiftId() {
+    return shiftId;
+  }
+
+  String getDate() {
+    return date;
+  }
+
+  String getStartTime() {
+    return startTime;
+  }
+
+  String getEndTime() {
+    return endTime;
+  }
+
+  String getDescription() {
+    return description;
+  }
+
+  String getFloorNumber() {
+    return floorNumber;
+  }
+
+  String getRoomNumber() {
+    return roomNumber;
+  }
+
+  String getGroupNumber() {
+    return groupNumber;
+  }
+
+  String getAdminId() {
+    return adminId;
+  }
+
+  String getCompanyId() {
+    return companyId;
+  }
 }
