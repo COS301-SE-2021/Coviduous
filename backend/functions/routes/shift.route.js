@@ -19,15 +19,15 @@ Shift.setDatabase(db);
  * Shift Routes
  *  */
 router.post('/shift',Shift.createShift);
-router.post('shift/group',Shift.createGroup);
 router.delete('/shift',Shift.deleteShift);
 router.get('/shift',Shift.viewShifts);
-router.get('/shift/group',Shift.getGroup)
 router.put('/shift',Shift.updateShift);
 /**
  * Group Routes
  */
-router.get('/group',);
+router.get('/group',Shift.getGroup);
+router.get('/group/shift-id',Shift.getGroupForShift);
+router.post('/group',Shift.createGroup);
 
 // Export API routes
 module.exports = router
