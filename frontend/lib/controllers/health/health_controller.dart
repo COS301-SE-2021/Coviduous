@@ -110,16 +110,47 @@ Future<List<Permission>> getPermissions() async {
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
-      permissionDatabaseTable.clear();
+      healthDatabaseTable.clear();
       numPermissions = 0;
 
       for (var data in jsonMap["data"]) {
-        var announcementData = permissionFromJson(data);
-        permissionDatabaseTable.add(announcementData);
+        var permissionData = permissionFromJson(data);
+        permissionDatabaseTable.add(permissionData);
         numPermissions++;
       }
 
       return permissionDatabaseTable;
+    }
+  } catch (error) {
+    print(error);
+  }
+  return null;
+}
+Future<List<HealthCheck>> getHealthCheck() async {
+  String path = '/permissions';
+  String url = server + path;
+  var response;
+
+  try {
+    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+
+    if (response.statusCode == 200) {
+      //print(response.body);
+
+      var jsonString = response.body;
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      healthDatabaseTable.clear();
+      numHealthChecks = 0;
+
+      for (var data in jsonMap["data"]) {
+        var healthData = healthCheckFromJson(data);
+        healthDatabaseTable.add(healthData);
+        numHealthChecks++;
+      }
+
+      return healthDatabaseTable;
     }
   } catch (error) {
     print(error);
