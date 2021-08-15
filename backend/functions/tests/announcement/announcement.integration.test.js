@@ -18,7 +18,7 @@ describe('/POST announcements', () => {
     it('it should create an announcement', () => {
         let announcement = {
             // announcementId: "test-000",
-            type: "test-000",
+            type: "GENERAL",
             message: "test-000",
             timestamp: "test-000",
             adminId: "test-000",
@@ -40,7 +40,7 @@ describe('/POST announcements', () => {
         });
     });
 
-    it('should DELETE an announcement', function(done) {
+    it('should DELETE an announcement', function() {
         let req = {
             type: 'GENERAL',
             message: 'Announcement to be deleted',
@@ -52,7 +52,7 @@ describe('/POST announcements', () => {
             .post('/api/announcements')
             .send(req)
             .end((err, res) => {
-                console.log(res.body);
+                //console.log(res.body);
                 let req2 = {
                     announcementId: res.body.data.announcementId
                 };
@@ -62,8 +62,8 @@ describe('/POST announcements', () => {
                     .send(req2).end((err, res) => {
                         should.exist(res);
                         res.should.have.status(200);
-                        console.log(res.body);
-                        done();
+                        //console.log(res.body);
+                        //done();
                     });
             });
     });
