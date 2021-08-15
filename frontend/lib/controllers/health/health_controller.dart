@@ -16,7 +16,7 @@ List<Permission> permissionDatabaseTable = [];
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 // healthCheckId and userId fields are generated in node backend
-Future<bool> createHealthCheck(healthCheckId, userId, name, surname, email, phoneNumber, temperature, fever, cough, soreThroat, chills, aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled) async {
+Future<bool> createHealthCheck(String healthCheckId,String userId,String name,String surname,String email,String phoneNumber,String temperature,String fever,String cough,String soreThroat,String chills,String aches,String nausea,String shortnessOfBreath,String lossOfTasteSmell,String sixFeetContact,String testedPositive,String travelled) async {
   String path = '/health-check';
   String url = server + path;
   var request;
