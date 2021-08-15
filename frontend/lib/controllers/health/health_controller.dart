@@ -12,6 +12,8 @@ import 'package:frontend/globals.dart' as globals;
 
 List<HealthCheck> healthDatabaseTable = [];
 List<Permission> permissionDatabaseTable = [];
+int numPermissions = 0;
+int numHealthChecks = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
@@ -61,7 +63,7 @@ Future<bool> createHealthCheck(String healthCheckId,String userId,String name,St
 }
 // permissionId, timestamp and userId fields are generated in node backend
 Future<bool> createPermissions(String permissionId,String userId, String timestamp, String officeAccess, String grantedBy) async {
-  String path = '/health-check';
+  String path = '/permissions';
   String url = server + path;
   var request;
 
@@ -91,4 +93,36 @@ Future<bool> createPermissions(String permissionId,String userId, String timesta
   }
 
   return false;
+}
+
+Future<List<Permission>> getPermissions() async {
+  String path = '/permissions';
+  String url = server + path;
+  var response;
+
+  try {
+    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+
+    if (response.statusCode == 200) {
+      //print(response.body);
+
+      var jsonString = response.body;
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      permissionDatabaseTable.clear();
+      numPermissions = 0;
+
+      for (var data in jsonMap["data"]) {
+        var announcementData = permissionFromJson(data);
+        permissionDatabaseTable.add(announcementData);
+        numPermissions++;
+      }
+
+      return permissionDatabaseTable;
+    }
+  } catch (error) {
+    print(error);
+  }
+  return null;
 }
