@@ -8,36 +8,36 @@ let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 chai.use(chaiHttp);
 
 describe('Create announcement unit tests', function() {
-//    it('Return 400 if request is empty', function (done) {
-//        chai.request(server)
-//            .post('/api/announcements')
-//            .send(null)
-//            .end((err, res) => {
-//                should.exist(res);
-//                res.should.have.status(400);
-//                console.log(res.body);
-//                done();
-//            });
-//    });
+   it('Return 400 if request is empty', function (done) {
+       chai.request(server)
+           .post('/api/announcements')
+           .send(null)
+           .end((err, res) => {
+               should.exist(res);
+               res.should.have.status(400);
+               console.log(res.body);
+               done();
+           });
+   });
 
-//     it('Return 400 if empty type', function(done) {
-//         let req = {
-//             type: '',
-//             message: 'message',
-//             adminId: 'ADMIN-ID',
-//             companyId: 'COMPANY-ID',
-//         };
+    it('Return 400 if empty type', function(done) {
+        let req = {
+            type: '',
+            message: 'message',
+            adminId: 'ADMIN-ID',
+            companyId: 'COMPANY-ID',
+        };
 
-//         chai.request(server)
-//             .post('/api/announcements')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
 //     it('Return 400 if incorrect type', function(done) {
 //         let req = {
@@ -170,7 +170,7 @@ describe('Delete announcement unit tests', function() {
                    .send(req2).end((err, res) => {
                         should.exist(res);
                         res.should.have.status(200);
-                        console.log(res.body);
+                        //console.log(res.body);
                         //done();
                    });
            });
@@ -178,15 +178,15 @@ describe('Delete announcement unit tests', function() {
 });
 
 describe('Get announcement unit tests', function() {
-   it('Return 200 if retrieval is successful', function(done) {
+   it('Return 200 if retrieval is successful', function() {
        chai.request(server)
            .get('/api/announcements')
            .send()
            .end((err, res) => {
                should.exist(res);
                res.should.have.status(200);
-               console.log(res.body);
-               done();
+               //console.log(res.body);
+               //done();
            });
    });
 });
