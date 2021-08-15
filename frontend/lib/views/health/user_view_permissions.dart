@@ -23,8 +23,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType != 'User') {
-      if (globals.loggedInUserType == 'Admin') {
+    if (globals.loggedInUserType != 'USER') {
+      if (globals.loggedInUserType == 'ADMIN') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
         });

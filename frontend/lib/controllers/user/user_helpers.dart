@@ -1,8 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:frontend/controllers/user/user_controller.dart' as userController;
 import 'package:frontend/globals.dart' as globals;
 
-Future<bool> createAdmin(String uid, String firstName, String lastName, String email,
-    String userName, String companyId, String companyName, String companyAddress) async {
+Future<bool> createAdmin(String firstName, String lastName, String userName,
+    String companyId, String companyName, String companyAddress) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String uid = auth.currentUser.uid.toString();
+  String email = auth.currentUser.email.toString();
+
   bool result = false;
   await Future.wait([
     userController.createUser(uid, "ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress)
@@ -12,8 +18,11 @@ Future<bool> createAdmin(String uid, String firstName, String lastName, String e
   return result;
 }
 
-Future<bool> createUser(String uid, String firstName, String lastName,
-    String email, String userName, String companyId) async {
+Future<bool> createUser(String firstName, String lastName, String userName, String companyId) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String uid = auth.currentUser.uid.toString();
+  String email = auth.currentUser.email.toString();
+
   bool result = false;
   await Future.wait([
   userController.createUser(uid, "USER", firstName, lastName, email, userName, companyId, null, null)

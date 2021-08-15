@@ -329,10 +329,11 @@ exports.getUserDetails = async (req, res) => {
     let fieldErrors = [];
 
     if (reqJson.userId == null || reqJson.userId === '') {
-        fieldErrors.push({field: 'email', message: 'Email may not be empty'});
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
     }
 
     if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
             errors: fieldErrors
@@ -341,7 +342,7 @@ exports.getUserDetails = async (req, res) => {
 
     let result = await database.getUserDetails(reqJson.userId);
 
-    if (!result) {
+    if (result == null) {
         return res.status(500).send({
             message: '500 Server Error: DB error',
             data: null

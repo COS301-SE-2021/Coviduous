@@ -79,8 +79,8 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
 
   @override
   Widget build(BuildContext context) {
-    if (globals.loggedInUserType != 'Admin') {
-      if (globals.loggedInUserType == 'User') {
+    if (globals.loggedInUserType != 'ADMIN') {
+      if (globals.loggedInUserType == 'USER') {
         SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
           Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
         });

@@ -34,8 +34,10 @@ class AuthClass {
            email: email,
            password: password
        ).then((userCredential) async {
-          globals.token = await userCredential.user.getIdToken();
-          print(globals.token);
+         globals.loggedInUserId = userCredential.user.uid;
+         globals.loggedInUserEmail = userCredential.user.email;
+         globals.token = await userCredential.user.getIdToken();
+         //print(globals.token);
        });
        return "welcome";
      } on FirebaseAuthException catch (e) {

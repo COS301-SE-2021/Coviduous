@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-User announcementFromJson(String str) => User.fromJson(json.decode(str));
+User userFromJson(String str) => User.fromJson(json.decode(str));
 
-String announcementToJson(User data) => json.encode(data.toJson());
+String userToJson(User data) => json.encode(data.toJson());
 
 class User {
   String userId;
@@ -33,7 +33,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     userId: json["userId"],
-    type: json["userType"],
+    type: json["type"],
     firstName: json["firstName"],
     lastName: json["lastName"],
     email: json["email"],
@@ -55,6 +55,10 @@ class User {
     "companyAddress": companyAddress,
   };
 
+  String getUserId() {
+    return userId;
+  }
+
   String getType() {
     return type;
   }
@@ -65,10 +69,6 @@ class User {
 
   String getLastName() {
     return lastName;
-  }
-
-  String getUserId() {
-    return userId;
   }
 
   String getEmail() {
@@ -89,5 +89,11 @@ class User {
 
   String getCompanyAddress() {
     return companyAddress;
+  }
+
+  String toString() {
+    return "User ID: " + userId + "\nType: " + type + "\nFirst name: " + firstName +
+        "\nLast name: " + lastName + "\nEmail: " + email + "\nUsername: " + userName +
+        "\nCompany ID: " + companyId + "\nCompany name: " + companyName + "\nCompany address: " + companyAddress;
   }
 }

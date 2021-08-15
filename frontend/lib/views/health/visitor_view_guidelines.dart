@@ -28,12 +28,12 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
-    if (globals.loggedInUserType == 'Admin') {
+    if (globals.loggedInUserType == 'ADMIN') {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
       });
       return Container();
-    } else if (globals.loggedInUserType == 'User') {
+    } else if (globals.loggedInUserType == 'USER') {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
       });

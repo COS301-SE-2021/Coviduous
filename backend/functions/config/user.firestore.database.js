@@ -39,6 +39,7 @@ exports.getUserDetails = async (userId) => {
 
         snapshot.forEach(doc => {
             let data = doc.data();
+            console.log(data);
             list.push(data);
         });
 

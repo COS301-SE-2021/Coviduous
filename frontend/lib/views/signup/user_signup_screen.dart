@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:frontend/auth/auth_provider.dart';
-import 'package:frontend/auth/firestore_cloud.dart';
 import 'package:frontend/views/signup/home_signup_screen.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserRegister extends StatefulWidget {
@@ -204,7 +204,7 @@ class _UserRegisterState extends State<UserRegister>{
                                               isLoading = false;
                                             });
 
-                                            userSetup(_firstName.text, _lastName.text, _userName.text, _companyId.text);
+                                            userHelpers.createUser(_firstName.text, _lastName.text, _userName.text, _companyId.text);
                                             Navigator.pushAndRemoveUntil(context,
                                                 MaterialPageRoute(builder: (context) => LoginScreen()), (
                                                     route) => false);
