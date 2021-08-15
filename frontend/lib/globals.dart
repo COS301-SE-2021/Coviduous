@@ -10,6 +10,7 @@ import 'package:frontend/models/floor_plan/floor.dart';
 import 'package:frontend/models/floor_plan/floor_plan.dart';
 import 'package:frontend/models/floor_plan/room.dart';
 import 'package:frontend/models/notification/notification.dart';
+import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
 import 'package:frontend/models/notification/temp_notification.dart';
 import 'package:frontend/models/user/user.dart';
@@ -161,35 +162,36 @@ List<Notification> currentNotifications = [];
 //List of users to send notifications to
 List<TempNotification> tempUsers = [];
 
-//=======================
-//Used in shift subsystem
-//=======================
-
-//Shifts
-List<Shift> currentShifts = [];
-
 //===========================
 //Used in multiple subsystems
 //===========================
 
-//Current floor plan you're working with
+//Current floor plan/floor plans you're working with
 String currentFloorPlanNum = '';
 List<FloorPlan> currentFloorPlans = [];
 
-//Current floor you're working with
+//Current floor/floors you're working with
 String currentFloorNum = '';
 List<Floor> currentFloors = [];
 
-//Current room you're working with
+//Current room/rooms you're working with
 String currentRoomNum = '';
 List<Room> currentRooms = [];
 Room currentRoom;
 
-//Current shift you're working with
+//Current shift/shifts you're working with
 String currentShiftNum = '';
+String selectedShiftDate = '';
+String selectedShiftStartTime = '';
+String selectedShiftEndTime = '';
+Shift tempShift;
+List<Shift> currentShifts = [];
+Shift currentShift;
 
-//Current group you're working with
+//Current group/groups you're working with
 String currentGroupNum = '';
+Group tempGroup;
+List<Group> currentGroups = [];
 
 //Current group description you're working with
 String currentGroupDescription = '';

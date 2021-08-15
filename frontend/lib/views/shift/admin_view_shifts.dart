@@ -3,9 +3,11 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/shift/admin_view_shifts_edit_shift.dart';
 import 'package:frontend/views/shift/admin_view_shifts_rooms.dart';
+import 'package:frontend/views/shift/home_shift.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ViewShifts extends StatefulWidget {
@@ -15,7 +17,7 @@ class ViewShifts extends StatefulWidget {
   _ViewShiftsState createState() => _ViewShiftsState();
 }
 class _ViewShiftsState extends State<ViewShifts> {
-  int numOfShifts = 0;
+  int numOfGroups = globals.currentGroups.length;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
@@ -39,7 +41,7 @@ class _ViewShiftsState extends State<ViewShifts> {
     }
 
     Widget getList() {
-      if (numOfShifts == 0) {
+      if (numOfGroups == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -69,7 +71,7 @@ class _ViewShiftsState extends State<ViewShifts> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.all(16),
-            itemCount: numOfShifts,
+            itemCount: numOfGroups,
             itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
               return ListTile(
                 title: Column(
@@ -77,60 +79,50 @@ class _ViewShiftsState extends State<ViewShifts> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        //child: Text('Shift ' + shifts[index].shiftId),
+                        child: Text('Shift ' + globals.currentShift.getShiftId()),
                       ),
                       ListView(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                           children: <Widget>[
                             Container(
-                              height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Floor number: ' + shifts[index].floorNumber,
-                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Floor plan number: ' + globals.currentShift.getFloorPlanNumber()),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            ),
+                            Container(
+                              color: Colors.white,
+                              child: Text('Floor number: ' + globals.currentShift.getFloorNumber()),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            ),
+                            Container(
+                              color: Colors.white,
+                              child: Text('Room number: ' + globals.currentShift.getRoomNumber()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Room number: ' + shifts[index].roomNumber,
-                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Group number: ' + globals.currentGroups[index].getGroupName()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Group number: ' + shifts[index].groupNumber,
-                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Date: ' + globals.currentShift.getDate()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Date: ' + shifts[index].date,
-                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('Start time: ' + globals.currentShift.getStartTime()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Start time: ' + shifts[index].startTime,
-                                  style: TextStyle(color: Colors.black)),*/
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              /*child: Text(
-                                  'End time: ' + shifts[index].endTime,
-                                  style: TextStyle(color: Colors.black)),*/
+                              child: Text('End time: ' + globals.currentShift.getEndTime()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -142,7 +134,6 @@ class _ViewShiftsState extends State<ViewShifts> {
                                   ElevatedButton(
                                       child: Text('Edit'),
                                       onPressed: () {
-                                        //globals.currentShiftNum = shifts[index].shiftId;
                                         Navigator.of(context).pushReplacementNamed(ViewShiftsEditShift.routeName);
                                       }),
                                   ElevatedButton(
@@ -152,14 +143,21 @@ class _ViewShiftsState extends State<ViewShifts> {
                                             context: context,
                                             builder: (ctx) => AlertDialog(
                                               title: Text('Alert'),
-                                              content: Text('Are you sure you want to delete the shift?'),
+                                              content: Text('Are you sure you want to delete this shift?'),
                                               actions: <Widget>[
                                                 ElevatedButton(
                                                   child: Text("Yes"),
                                                   onPressed: () {
-                                                    //globals.currentShiftNum = shifts[index].shiftId;
-                                                    //deleteShift();
-                                                    Navigator.of(context).pop();
+                                                    shiftHelpers.deleteShift(globals.currentShiftNum).then((result) {
+                                                      if (result == true) {
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(content: Text('Shift successfully deleted.')));
+                                                        Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+                                                      } else {
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(content: Text('Error occurred while deleting shift. Please try again later.')));
+                                                      }
+                                                    });
                                                   },
                                                 ),
                                                 ElevatedButton(

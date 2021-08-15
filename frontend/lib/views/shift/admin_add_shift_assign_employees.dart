@@ -7,6 +7,7 @@ import 'package:frontend/views/shift/home_shift.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AddShiftAssignEmployees extends StatefulWidget {
@@ -38,7 +39,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
     }
 
     Widget getList() {
-      int numOfUsers = 1;
+      int numOfUsers = globals.tempGroup.getUserEmails().length;
 
       print(numOfUsers);
 
@@ -82,8 +83,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        //child: Text('Email: ' + tempShifts[index].getUserEmail()),
-                        child: Text('Email: email address of assigned user')
+                        child: Text('Employee ' + (index+1).toString()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -92,19 +92,13 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Group ID: ' + tempShifts[index].getGroupId(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Group ID: group ID here'),
+                              child: Text('Email: ' + globals.tempGroup.getUserEmails()[index]),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Group name: ' + tempShifts[index].getGroupName(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Group name: group name here'),
+                              child: Text('Group name: ' + globals.tempGroup.getGroupName()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -116,7 +110,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                   ElevatedButton(
                                       child: Text('Remove'),
                                       onPressed: () {
-                                        //shiftGlobals.tempGroup.removeAt(index);
+                                        globals.tempGroup.getUserEmails().removeAt(index);
                                         setState(() {});
                                       }),
                                 ],
@@ -185,7 +179,42 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                 TextButton(
                                   child: Text('Yes'),
                                   onPressed: (){
-                                    //processShifts();
+                                    shiftHelpers.createShift(globals.selectedShiftDate, globals.selectedShiftStartTime,
+                                        globals.selectedShiftEndTime, globals.currentGroupDescription).then((result) {
+                                          if (result == true) {
+                                            shiftHelpers.getShifts().then((result) {
+                                              if (result == true) {
+                                                for (int i = 0; i < globals.currentShifts.length; i ++) {
+                                                  if (globals.currentShifts[i].getFloorPlanNumber() == globals.currentFloorPlanNum &&
+                                                      globals.currentShifts[i].getFloorNumber() == globals.currentFloorNum &&
+                                                      globals.currentShifts[i].getRoomNumber() == globals.currentRoomNum &&
+                                                      globals.currentShifts[i].getDate() == globals.selectedShiftDate &&
+                                                      globals.currentShifts[i].getStartTime() == globals.selectedShiftStartTime &&
+                                                      globals.currentShifts[i].getEndTime() == globals.selectedShiftEndTime) {
+                                                    globals.currentShiftNum = globals.currentShifts[i].getShiftId();
+                                                    shiftHelpers.createGroup(globals.currentGroupDescription, globals.tempGroup.getUserEmails(), globals.currentShiftNum).then((result) {
+                                                      if (result == true) {
+                                                        Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+                                                      } else {
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                                      }
+                                                    });
+                                                  } else {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                                  }
+                                                }
+                                              } else {
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                    SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                              }
+                                            });
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                          }
+                                    });
                                   },
                                 ),
                                 TextButton(

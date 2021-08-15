@@ -97,7 +97,20 @@ exports.createShift = async (req,res) => {
         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
     }
 
+    if (reqJson.floorPlanNumber == null || reqJson.floorPlanNumber === '') {
+        fieldErrors.push({field: 'floorPlanNumber', message: 'Floor plan number may not be empty'});
+    }
+
+    if (reqJson.floorNumber == null || reqJson.floorNumber === '') {
+        fieldErrors.push({field: 'floorNumber', message: 'Floor number may not be empty'});
+    }
+
+    if (reqJson.roomNumber == null || reqJson.roomNumber === '') {
+        fieldErrors.push({field: 'roomNumber', message: 'Room number may not be empty'});
+    }
+
     if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
             errors: fieldErrors
@@ -112,9 +125,10 @@ exports.createShift = async (req,res) => {
 
     let shiftID = "SHI-" + uuid.v4();
     let shift = new Shift(shiftID, reqJson.date, reqJson.startTime, reqJson.endTime,
-        reqJson.description, reqJson.adminId, reqJson.companyId);
+        reqJson.description, reqJson.adminId, reqJson.companyId, reqJson.floorPlanNumber, reqJson.floorNumber, reqJson.roomNumber);
     let shiftData = { shiftID: shift.shiftID,date: shift.date,startTime: shift.startTime, endTime: shift.endTime,
-        description: shift.description, adminId: shift.adminId, companyId: shift.companyId };
+        description: shift.description, adminId: shift.adminId, companyId: shift.companyId, floorPlanNumber: shift.floorPlanNumber,
+        floorNumber: shift.floorNumber, roomNumber: shift.roomNumber };
 
     let result = await db.createShift(shiftID, shiftData);
 
@@ -174,6 +188,7 @@ exports.createGroup = async (req, res) => {
     }
 
     if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
             errors: fieldErrors
@@ -185,7 +200,6 @@ exports.createGroup = async (req, res) => {
             message: '403 Forbidden: Access denied',
         });
     }
-
     
     let groupId = "GRP-" + uuid.v4();
     let group = new Group(groupId, reqJson.groupName, reqJson.userEmails, reqJson.shiftNumber, reqJson.adminId);
@@ -233,18 +247,22 @@ exports.deleteShift = async (req, res) => {
         fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
 
-    if (reqJson.shiftID == null || reqJson.shiftID === '') {
-        fieldErrors.push({field: 'shiftID', message: 'Shift ID may not be empty'});
+    if (reqJson.shiftId == null || reqJson.shiftId === '') {
+        fieldErrors.push({field: 'shiftId', message: 'Shift ID may not be empty'});
     }
 
     if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
             errors: fieldErrors
         });
     }
 
-    if (await db.deleteShift(reqJson.shiftID) == true) {
+    let group = await db.getGroupForShift(reqJson.shiftId);
+    await db.deleteGroup(group.groupId);
+
+    if (await db.deleteShift(reqJson.shiftId) == true) {
         return res.status(200).send({
             message: "Shift successfully deleted"
         });
@@ -274,32 +292,30 @@ exports.updateShift = async (req, res) => {
     }
     console.log(reqJson);
     //////////////////////////////////////////////////////////////////////
-
        
     if(req.body == null) {
         fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
 
-    if (reqJson.shiftID == null || reqJson.shiftID === '') {
-        fieldErrors.push({field: 'shiftID', message: 'Shift ID may not be empty'});
+    if (reqJson.shiftId == null || reqJson.shiftId === '') {
+        fieldErrors.push({field: 'shiftId', message: 'Shift ID may not be empty'});
     }
-    if(reqJson.endTime == null || reqJson.endTime===''){
-        fieldErrors.push({field: 'endTime', message: 'endTime may not be empty'});
+    if(reqJson.endTime == null || reqJson.endTime === ''){
+        fieldErrors.push({field: 'endTime', message: 'End time may not be empty'});
     }
-    if(reqJson.startTime == null || reqJson.startTime===''){
-        fieldErrors.push({field: 'startTime', message: 'startTime may not be empty'});
+    if(reqJson.startTime == null || reqJson.startTime === ''){
+        fieldErrors.push({field: 'startTime', message: 'Start time may not be empty'});
     }
-
-   
 
     if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
             errors: fieldErrors
         });
     }
   
-    if (await db.updateShift(reqJson.shiftID, reqJson) == true) {
+    if (await db.updateShift(reqJson.shiftId, reqJson) == true) {
       return res.status(200).send({
         data: req.body
       });
@@ -375,7 +391,6 @@ exports.getGroupForShift = async (req, res) => {
             errors: fieldErrors
         });
     }
-
 
     let getGroupForShifts = await db.getGroupForShift(reqJson.shiftNumber);
       

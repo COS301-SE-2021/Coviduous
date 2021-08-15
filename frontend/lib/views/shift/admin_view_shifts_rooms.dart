@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-//import 'package:frontend/views/shift/admin_view_shifts.dart';
+import 'package:frontend/views/shift/admin_view_shifts.dart';
 import 'package:frontend/views/shift/admin_view_shifts_floors.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-//import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ViewShiftsRooms extends StatefulWidget {
@@ -110,7 +110,41 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                                       child: Text('View shifts'),
                                       onPressed: () {
                                         if (globals.currentRooms[index].getNumberOfDesks() > 0) {
-                                          //Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
+                                          shiftHelpers.getShifts().then((result) {
+                                            if (result == true) {
+                                              if (globals.currentShifts.isNotEmpty) {
+                                                shiftHelpers.getGroupForShift(globals.currentShifts[index].getShiftId()).then((result) {
+                                                  if (result == true) {
+                                                    globals.currentShift = globals.currentShifts[index];
+                                                    globals.currentShiftNum = globals.currentShift.getShiftId();
+                                                    Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
+                                                  } else {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text('Error occurred while retrieving shift. Please try again later.')));
+                                                  }
+                                                });
+                                              } else {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (ctx) => AlertDialog(
+                                                      title: Text('No shifts found'),
+                                                      content: Text('No shifts have been assigned to this room.'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          child: Text('Okay'),
+                                                          onPressed: (){
+                                                            Navigator.of(ctx).pop();
+                                                          },
+                                                        )
+                                                      ],
+                                                    )
+                                                );
+                                              }
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text('Error occurred while retrieving shift. Please try again later.')));
+                                            }
+                                          });
                                         } else {
                                           showDialog(
                                               context: context,

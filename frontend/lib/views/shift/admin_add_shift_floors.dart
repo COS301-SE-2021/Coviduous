@@ -104,6 +104,7 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                                       onPressed: () {
                                         floorPlanHelpers.getRooms(globals.currentFloors[index].getFloorNumber()).then((result) {
                                           if (result == true) {
+                                            globals.currentFloorNum = globals.currentFloors[index].getFloorNumber();
                                             Navigator.of(context).pushReplacementNamed(AddShiftRooms.routeName);
                                           } else {
                                             ScaffoldMessenger.of(context).showSnackBar(

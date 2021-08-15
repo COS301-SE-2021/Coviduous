@@ -34,10 +34,15 @@ Future<bool> createShift(String date, String startTime, String endTime, String d
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
+      "adminId": globals.loggedInUserId,
+      "companyId": globals.loggedInCompanyId,
       "date": date,
       "startTime": startTime,
       "endTime": endTime,
       "description": description,
+      "floorPlanNumber": globals.currentFloorPlanNum,
+      "floorNumber": globals.currentFloorNum,
+      "roomNumber": globals.currentRoomNum,
     });
     request.headers.addAll(globals.requestHeaders);
 
@@ -56,7 +61,7 @@ Future<bool> createShift(String date, String startTime, String endTime, String d
   return false;
 }
 
-Future<bool> createGroup(String groupName, List<String> userEmails, String shiftNumber, String adminId) async {
+Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, String adminId) async {
   String path = '/group';
   String url = server + path;
   var request;
@@ -77,10 +82,13 @@ Future<bool> createGroup(String groupName, List<String> userEmails, String shift
 
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
+      return true;
     }
   } catch (error) {
     print(error);
   }
+
+  return false;
 }
 
 Future<List<Shift>> getShifts() async {
@@ -158,7 +166,7 @@ Future<List<Group>> getGroupForShift(String shiftId) async {
   try {
     request = http.Request('GET', Uri.parse(url));
     request.body = json.encode({
-      "shiftId": shiftId,
+      "shiftNumber": shiftId,
     });
     request.headers.addAll(globals.requestHeaders);
 

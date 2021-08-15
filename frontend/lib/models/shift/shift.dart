@@ -24,9 +24,9 @@ class Shift {
   String startTime;
   String endTime;
   String description;
+  String floorPlanNumber;
   String floorNumber;
   String roomNumber;
-  String groupNumber;
   String adminId;
   String companyId;
 
@@ -36,9 +36,9 @@ class Shift {
     this.startTime,
     this.endTime,
     this.description,
+    this.floorPlanNumber,
     this.floorNumber,
     this.roomNumber,
-    this.groupNumber,
     this.adminId,
     this.companyId,
   });
@@ -49,9 +49,9 @@ class Shift {
         startTime: json["startTime"],
         endTime: json["endTime"],
         description: json["description"],
+        floorPlanNumber: json["floorPlanNumber"],
         floorNumber: json["floorNumber"],
         roomNumber: json["roomNumber"],
-        groupNumber: json["groupNumber"],
         adminId: json["adminID"],
         companyId: json["companyID"],
       );
@@ -62,9 +62,9 @@ class Shift {
         "startTime": startTime,
         "endTime": endTime,
         "description": description,
+        "floorPlanNumber": floorPlanNumber,
         "floorNumber": floorNumber,
         "roomNumber": roomNumber,
-        "groupNumber": groupNumber,
         "adminID": adminId,
         "companyID": companyId,
       };
@@ -89,16 +89,16 @@ class Shift {
     return description;
   }
 
+  String getFloorPlanNumber() {
+    return floorPlanNumber;
+  }
+
   String getFloorNumber() {
     return floorNumber;
   }
 
   String getRoomNumber() {
     return roomNumber;
-  }
-
-  String getGroupNumber() {
-    return groupNumber;
   }
 
   String getAdminId() {

@@ -6,7 +6,7 @@ import 'package:frontend/views/shift/admin_add_shift_create_shift.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-//import 'package:frontend/controllers/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AddShiftRooms extends StatefulWidget {
@@ -110,7 +110,15 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                       child: Text('Create shift'),
                                       onPressed: () {
                                         if (globals.currentRooms[index].getNumberOfDesks() > 0) {
-                                          Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
+                                          shiftHelpers.getShifts().then((result) {
+                                            if (result == true) {
+                                              globals.currentRoomNum = globals.currentRooms[index].getRoomNumber();
+                                              Navigator.of(context).pushReplacementNamed(AddShiftCreateShift.routeName);
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text('Error occurred while creating shift. Please try again later.')));
+                                            }
+                                          });
                                         } else {
                                           showDialog(
                                               context: context,

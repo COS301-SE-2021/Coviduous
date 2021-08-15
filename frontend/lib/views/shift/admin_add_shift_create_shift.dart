@@ -5,6 +5,7 @@ import 'package:frontend/views/shift/admin_add_shift_rooms.dart';
 import 'package:frontend/views/shift/admin_add_shift_assign_employees.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
+import 'package:frontend/models/shift/group.dart';
 
 import 'package:frontend/globals.dart' as globals;
 
@@ -270,6 +271,12 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                       int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
                                       //Only allow if start time is before end time
                                       if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
+                                        globals.selectedShiftDate = _selectedDate.toString();
+                                        globals.selectedShiftStartTime = _selectedStartTime.toString();
+                                        globals.selectedShiftEndTime = _selectedEndTime.toString();
+                                        globals.currentGroupDescription = _groupDescription.text;
+                                        globals.tempGroup = new Group(groupNumber: "", groupName: globals.currentGroupDescription,
+                                            userEmails: [], shiftNumber: "", adminId: globals.loggedInUserId);
                                         Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
                                       } else {
                                         showDialog(

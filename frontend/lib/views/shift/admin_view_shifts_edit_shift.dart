@@ -9,6 +9,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/shift/home_shift.dart';
 
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ViewShiftsEditShift extends StatefulWidget {
@@ -220,7 +221,25 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                                     if (_password.text.isNotEmpty) {
                                                       AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
                                                         if (value2 == "welcome") {
-                                                          //editShift();
+                                                          shiftHelpers.updateShift(globals.currentShiftNum, _selectedStartTime.toString(), _selectedEndTime.toString()).then((result) {
+                                                            if (result == true) {
+                                                              setState(() {
+                                                                isLoading = false;
+                                                              });
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(content: Text('Shift successfully updated.')));
+                                                              Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+                                                            } else {
+                                                              setState(() {
+                                                                isLoading = false;
+                                                              });
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(content: Text('Error occurred while updating shift. Please try again later.')));
+                                                            }
+                                                          });
+                                                          setState(() {
+                                                            isLoading = false;
+                                                          });
                                                         } else {
                                                           setState(() {
                                                             isLoading = false;

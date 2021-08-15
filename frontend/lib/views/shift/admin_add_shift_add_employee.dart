@@ -104,15 +104,15 @@ class _AddShiftAddEmployeeState extends State<AddShiftAddEmployee> {
                           ),
                           child: Text('Proceed'),
                           onPressed: () {
-                            /*if (!_formKey.currentState.validate()) {
+                            if (!_formKey.currentState.validate()) {
                               return;
                             }
                             _formKey.currentState.save();
                             print(_employeeEmail);
 
-                            services.addToTempGroup(globals.currentGroupNum, globals.currentGroupNum, globals.currentGroupDescription, _employeeEmail, globals.currentFloorNum, globals.currentRoomNum, globals.loggedInUserId, globals.currentShiftNum);
+                            globals.tempGroup.getUserEmails().add(_employeeEmail);
 
-                            Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);*/
+                            Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
                           }),
                     ],
                   ),

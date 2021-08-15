@@ -14,7 +14,7 @@ String groupToJson(Group data) => json.encode(data.toJson());
 class Group {
   String groupNumber;
   String groupName;
-  List<String> userEmails;
+  List userEmails;
   String shiftNumber;
   String adminId;
 
@@ -27,7 +27,7 @@ class Group {
   });
 
   factory Group.fromJson(Map<String, dynamic> json) => Group(
-        groupNumber: json["groupNumber"],
+        groupNumber: json["groupId"],
         groupName: json["groupName"],
         userEmails: json["userEmails"],
         shiftNumber: json["shiftNumber"],
@@ -35,7 +35,7 @@ class Group {
       );
 
   Map<String, dynamic> toJson() => {
-        "groupNumber": groupNumber,
+        "groupId": groupNumber,
         "groupName": groupName,
         "userEmails": userEmails,
         "shiftNumber": shiftNumber,
@@ -50,7 +50,7 @@ class Group {
     return groupName;
   }
 
-  List<String> getUserEmails() {
+  List getUserEmails() {
     return userEmails;
   }
 

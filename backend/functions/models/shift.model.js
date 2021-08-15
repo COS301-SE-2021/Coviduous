@@ -1,6 +1,6 @@
 class Shift {
-    constructor(shiftID, date, startTime, endTime, description, adminId, companyId)
-    {
+    constructor(shiftID, date, startTime, endTime, description, adminId,
+                companyId, floorPlanNumber, floorNumber, roomNumber) {
         this.shiftID = shiftID;
         this.description = description;
         this.date = date;
@@ -8,12 +8,17 @@ class Shift {
         this.endTime = endTime;
         this.companyId = companyId;
         this.adminId = adminId;
+        this.floorPlanNumber = floorPlanNumber;
+        this.floorNumber = floorNumber;
+        this.roomNumber = roomNumber;
 
         console.log("Created shift class")
     }
 
-    Shift(shiftID, date, startTime, endTime, description, adminId, companyId) {
-        return new Shift(shiftID, date, startTime, endTime, description, adminId, companyId);
+    Shift(shiftID, date, startTime, endTime, description, adminId,
+          companyId, floorPlanNumber, floorNumber, roomNumber) {
+        return new Shift(shiftID, date, startTime, endTime, description,
+            adminId, companyId, floorPlanNumber, floorNumber, roomNumber);
     }
 
     getShiftID() {

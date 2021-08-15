@@ -11,6 +11,7 @@ exports.createShift = async (ShiftID,ShiftData) => {
         return false;
       }
 };
+
 exports.createGroup = async (groupId, groupData) =>{
     try{
         await db.collection('group').doc(groupId)
@@ -22,6 +23,7 @@ exports.createGroup = async (groupId, groupData) =>{
         return false;
     }
 };
+
 exports.getGroupForShift = async (shiftNumber) =>{
     try{
         const document = db.collection('group').where("shiftNumber","==",shiftNumber);
@@ -41,6 +43,7 @@ exports.getGroupForShift = async (shiftNumber) =>{
         return false;
     }
 };
+
 exports.getGroup = async () =>{
     try{
         const document = db.collection('group');
@@ -56,7 +59,8 @@ exports.getGroup = async () =>{
         console.log(error);
         return false;
     }
-}
+};
+
 exports.viewShifts = async () => {
     try {
         const document = db.collection('shift');
@@ -69,34 +73,46 @@ exports.viewShifts = async () => {
         });
         return list;
     } catch (error) {
-        console.log(error);
-        return false;
+            console.log(error);
+            return false;
     }
-  };
+};
+
 exports.deleteShift = async (ShiftID) => {
     try {
-        const document = db.collection('shift').doc(ShiftID); 
+        const document = db.collection('shift').doc(ShiftID);
         await document.delete();
         return true;
     } catch (error) {
         console.log(error);
         return false;
     }
-  }
-exports.updateShift = async (shiftID,shiftData) =>{
-  try{
+};
 
-       const document = db.collection('shift').doc(shiftID);
-       await document.update({
-           startTime:shiftData.startTime,
-           endTime:shiftData.endTime
-       }); 
-       return true;
-       //return res.status(200).send();
-  }
-  catch (error) {
-    console.log(error);
-    return false;
-    //return res.status(500).send(error);
-}
+exports.deleteGroup = async (groupId) => {
+    try {
+        const document = db.collection('group').doc(groupId);
+        await document.delete();
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.updateShift = async (shiftId,shiftData) => {
+    try {
+        const document = db.collection('shift').doc(shiftId);
+        await document.update({
+            startTime:shiftData.startTime,
+            endTime:shiftData.endTime
+        });
+        return true;
+        //return res.status(200).send();
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+        //return res.status(500).send(error);
+    }
 };
