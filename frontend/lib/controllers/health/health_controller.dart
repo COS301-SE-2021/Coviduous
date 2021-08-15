@@ -15,7 +15,7 @@ List<Permission> permissionDatabaseTable = [];
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
-// announcementId and timestamp fields are generated in node backend
+// healthCheckId and userId fields are generated in node backend
 Future<bool> createHealthCheck(healthCheckId, userId, name, surname, email, phoneNumber, temperature, fever, cough, soreThroat, chills, aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled) async {
   String path = '/health-check';
   String url = server + path;
@@ -59,6 +59,7 @@ Future<bool> createHealthCheck(healthCheckId, userId, name, surname, email, phon
 
   return false;
 }
+// permissionId, timestamp and userId fields are generated in node backend
 Future<bool> createPermissions(String permissionId,String userId, String timestamp, String officeAccess, String grantedBy) async {
   String path = '/health-check';
   String url = server + path;
