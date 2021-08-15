@@ -40,7 +40,7 @@ class _AdminRegisterState extends State<AdminRegister>{
         color: globals.secondaryColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
-            title: Text('Register'),
+            title: Text('Register admin'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(Register.routeName);
