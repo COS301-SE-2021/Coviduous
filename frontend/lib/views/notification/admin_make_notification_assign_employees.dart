@@ -8,8 +8,8 @@ import 'package:frontend/models/notification/temp_notification.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
 import 'package:frontend/globals.dart' as globals;
-import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
 
 class MakeNotificationAssignEmployees extends StatefulWidget {
   static const routeName = "/admin_make_notification_employees";
@@ -17,38 +17,18 @@ class MakeNotificationAssignEmployees extends StatefulWidget {
   _MakeNotificationAssignEmployeesState createState() => _MakeNotificationAssignEmployeesState();
 }
 
-bool sentNotifications = false;
 List<TempNotification> tempUsers = globals.tempUsers;
-
-Future getNotifications() async {
-  await Future.wait([
-    notificationController.getNotificationsUserEmail(globals.loggedInUserEmail)
-  ]).then((lists) {
-    globals.currentNotifications = lists.first;
-  });
-}
-
-Future createNotification(TempNotification tempUser) async {
-  bool sentNotification = false;
-  await Future.wait([
-    notificationController.createNotification("", tempUser.getUserId(), tempUser.getUserEmail(), globals.currentSubjectField,
-        globals.currentDescriptionField, "", globals.loggedInUser.getFirstName() + " " + globals.loggedInUser.getLastName(), globals.loggedInCompanyId)
-  ]).then((results) {
-    sentNotification = results.first;
-  });
-  return sentNotification;
-}
-
-Future createNotifications(List<TempNotification> tempUsers) async {
-  for (int i = 0; i < tempUsers.length; i++) {
-    sentNotifications = await createNotification(tempUsers[i]);
-  }
-}
 
 class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssignEmployees> {
   Future<bool> _onWillPop() async {
-    getNotifications().then((result){
-      Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+    notificationHelpers.getNotifications().then((result){
+      if (result == true) {
+        Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error occurred while retrieving notifications.')));
+        Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+      }
     });
     return (await true);
   }
@@ -178,8 +158,14 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
             title: Text('Assign employees'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                getNotifications().then((result){
-                  Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+                notificationHelpers.getNotifications().then((result){
+                  if (result == true) {
+                    Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error occurred while retrieving notifications.')));
+                    Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
+                  }
                 });
               },
             ),
@@ -241,8 +227,8 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                                   TextButton(
                                     child: Text('Yes'),
                                     onPressed: (){
-                                      createNotifications(tempUsers).then((result){
-                                        if (sentNotifications == true) {
+                                      notificationHelpers.createNotifications(tempUsers).then((result){
+                                        if (result == true) {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                               SnackBar(content: Text("Notification successfully sent.")));
                                           Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);

@@ -10,8 +10,8 @@ import 'package:frontend/views/announcement/user_view_announcements.dart';
 import 'package:frontend/views/notification/user_view_notifications.dart';
 import 'package:frontend/auth/auth_provider.dart';
 
-import 'package:frontend/controllers/announcement/announcement_controller.dart' as announcementController;
-import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
+import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
+import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {
@@ -19,22 +19,6 @@ class UserHomePage extends StatefulWidget {
 
   @override
   _UserHomePageState createState() => _UserHomePageState();
-}
-
-Future getAnnouncements() async {
-  await Future.wait([
-    announcementController.getAnnouncements()
-  ]).then((lists) {
-    globals.currentAnnouncements = lists.first;
-  });
-}
-
-Future getNotifications() async {
-  await Future.wait([
-    notificationController.getNotificationsUserEmail(globals.loggedInUserEmail)
-  ]).then((lists) {
-    globals.currentNotifications = lists.first;
-  });
 }
 
 class _UserHomePageState extends State<UserHomePage> {
@@ -136,8 +120,13 @@ class _UserHomePageState extends State<UserHomePage> {
                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                         ),
                         onPressed: () {
-                          getAnnouncements().then((result) {
-                            Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
+                          announcementHelpers.getAnnouncements().then((result) {
+                            if (result == true) {
+                              Navigator.of(context).pushReplacementNamed(UserViewAnnouncements.routeName);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Error occurred while retrieving announcements. Please try again later.')));
+                            }
                           });
                         }
                     ),
@@ -159,8 +148,13 @@ class _UserHomePageState extends State<UserHomePage> {
                             crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                         ),
                         onPressed: () {
-                          getNotifications().then((result){
-                            Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+                          notificationHelpers.getNotifications().then((result){
+                            if (result == true) {
+                              Navigator.of(context).pushReplacementNamed(UserViewNotifications.routeName);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Error occurred while retrieving notifications. Please try again later.')));
+                            }
                           });
                         }
                     ),

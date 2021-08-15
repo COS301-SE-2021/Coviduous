@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/announcement/admin_view_announcements.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/announcement/announcement_controller.dart' as announcementController;
+import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class MakeAnnouncement extends StatefulWidget {
@@ -16,24 +17,6 @@ class MakeAnnouncement extends StatefulWidget {
 
   @override
   MakeAnnouncementState createState() => MakeAnnouncementState();
-}
-
-bool createdAnnouncement = false;
-
-Future createAnnouncement(String type, String description) async {
-  await Future.wait([
-    announcementController.createAnnouncement("test ID", type, description, "test timestamp")
-  ]).then((results) {
-    createdAnnouncement = results.first;
-  });
-}
-
-Future getAnnouncements() async {
-  await Future.wait([
-    announcementController.getAnnouncements()
-  ]).then((lists) {
-    globals.currentAnnouncements = lists.first;
-  });
 }
 
 //class make announcement
@@ -70,8 +53,14 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
   }
 
   Future<bool> _onWillPop() async {
-    getAnnouncements().then((result) {
-      Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+    announcementHelpers.getAnnouncements().then((result) {
+      if (result == true) {
+        Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error occurred while retrieving announcements. Please try again later.')));
+        Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+      }
     });
     return (await true);
   }
@@ -99,8 +88,14 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
             title: new Text("Make announcement"),
             leading: BackButton( //Specify back button
               onPressed: (){
-                getAnnouncements().then((result) {
-                  Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                announcementHelpers.getAnnouncements().then((result) {
+                  if (result == true) {
+                    Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error occurred while retrieving announcements. Please try again later.')));
+                    Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+                  }
                 });
               },
             ),
@@ -151,8 +146,8 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                       ),
                       child: Text("Post"),
                       onPressed: () {
-                        createAnnouncement(_selectedType, _description.text).then((result){
-                          if (createdAnnouncement == true) {
+                        announcementHelpers.createAnnouncement(_selectedType, _description.text).then((result) {
+                          if (result == true) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Announcement successfully created.")));
                           } else {

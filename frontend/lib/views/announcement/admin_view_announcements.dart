@@ -3,11 +3,10 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/announcement/admin_make_announcement.dart';
-import 'package:frontend/models/announcement/announcement.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/announcement/announcement_controller.dart' as announcementController;
+import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminViewAnnouncements extends StatefulWidget {
@@ -15,25 +14,6 @@ class AdminViewAnnouncements extends StatefulWidget {
 
   @override
   _AdminViewAnnouncementsState createState() => _AdminViewAnnouncementsState();
-}
-
-List<Announcement> announcements = globals.currentAnnouncements;
-bool deletedAnnouncement = false;
-
-Future deleteAnnouncement(String announcementId) async {
-  await Future.wait([
-    announcementController.deleteAnnouncement(announcementId)
-  ]).then((results) {
-    deletedAnnouncement = results.first;
-  });
-}
-
-Future getAnnouncements() async {
-  await Future.wait([
-    announcementController.getAnnouncements()
-  ]).then((lists) {
-    globals.currentAnnouncements = lists.first;
-  });
 }
 
 class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
@@ -60,8 +40,8 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
 
     Widget getList() {
       int numberOfAnnouncements = 0;
-      if (announcements != null) {
-        numberOfAnnouncements = announcements.length;
+      if (globals.currentAnnouncements != null) {
+        numberOfAnnouncements = globals.currentAnnouncements.length;
         print(numberOfAnnouncements);
       }
       print(numberOfAnnouncements);
@@ -110,24 +90,24 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                       Container(
                         height: 50,
                         color: Colors.white,
-                        child: Text('ID: ' + announcements[index].getAnnouncementId()),
+                        child: Text('ID: ' + globals.currentAnnouncements[index].getAnnouncementId()),
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       ),
                       Container(
                         height: 50,
                         color: Colors.white,
-                        child: Text('Type: ' + announcements[index].getType()),
+                        child: Text('Type: ' + globals.currentAnnouncements[index].getType()),
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       ),
                       Container(
                         height: 50,
                         color: Colors.white,
-                        child: Text('Date: ' + announcements[index].getTimestamp()),
+                        child: Text('Date: ' + globals.currentAnnouncements[index].getTimestamp()),
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       ),
                       Container(
                         color: Colors.white,
-                        child: Text('Message: ' + announcements[index].getMessage()),
+                        child: Text('Message: ' + globals.currentAnnouncements[index].getMessage()),
                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       ),
                       Container(
@@ -144,12 +124,17 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                                 ),
                                 child: Text('Delete'),
                                 onPressed: () {
-                                  deleteAnnouncement(announcements[index].getAnnouncementId()).then((result){
-                                    if (deletedAnnouncement == true) {
+                                  announcementHelpers.deleteAnnouncement(globals.currentAnnouncements[index].getAnnouncementId()).then((result) {
+                                    if (result == true) {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Announcement successfully deleted.")));
-                                      getAnnouncements().then((result) {
-                                        setState(() {});
+                                      announcementHelpers.getAnnouncements().then((result) {
+                                        if (result == true) {
+                                          setState(() {});
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text('Error occurred while retrieving announcements. Please try again later.')));
+                                        }
                                       });
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(

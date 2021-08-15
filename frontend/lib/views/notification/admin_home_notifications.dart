@@ -7,7 +7,7 @@ import 'package:frontend/views/notification/admin_view_notifications.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/notification/notification_controller.dart' as notificationController;
+import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminNotifications extends StatefulWidget {
@@ -15,14 +15,6 @@ class AdminNotifications extends StatefulWidget {
 
   @override
   _AdminNotificationsState createState() => _AdminNotificationsState();
-}
-
-Future getNotifications() async {
-  await Future.wait([
-    notificationController.getNotificationsUserEmail(globals.loggedInUserEmail)
-  ]).then((lists) {
-    globals.currentNotifications = lists.first;
-  });
 }
 
 //class admin
@@ -104,8 +96,13 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              getNotifications().then((result){
-                                Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
+                              notificationHelpers.getNotifications().then((result){
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Error occurred while retrieving notifications. Please try again later.')));
+                                }
                               });
                             }
                         ),

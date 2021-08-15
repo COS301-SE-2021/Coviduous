@@ -12,7 +12,7 @@ import 'package:frontend/views/announcement/admin_view_announcements.dart';
 import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/user_homepage.dart';
 
-import 'package:frontend/controllers/announcement/announcement_controller.dart' as announcementController;
+import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
@@ -20,14 +20,6 @@ class AdminHomePage extends StatefulWidget {
 
   @override
   _AdminHomePageState createState() => _AdminHomePageState();
-}
-
-Future getAnnouncements() async {
-  await Future.wait([
-    announcementController.getAnnouncements()
-  ]).then((lists) {
-    globals.currentAnnouncements = lists.first;
-  });
 }
 
 //class admin
@@ -128,8 +120,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                       ),
                       onPressed: () {
-                        getAnnouncements().then((result) {
-                          Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                        announcementHelpers.getAnnouncements().then((result) {
+                          if (result == true) {
+                            Navigator.of(context).pushReplacementNamed(AdminViewAnnouncements.routeName);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Error occurred while retrieving announcements. Please try again later.')));
+                          }
                         });
                       }
                   ),

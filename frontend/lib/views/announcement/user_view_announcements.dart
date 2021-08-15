@@ -15,8 +15,6 @@ class UserViewAnnouncements extends StatefulWidget {
   _UserViewAnnouncementsState createState() => _UserViewAnnouncementsState();
 }
 
-List<Announcement> announcements = globals.currentAnnouncements;
-
 class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
@@ -41,8 +39,8 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
 
     Widget getList() {
       int numberOfAnnouncements = 0;
-      if (announcements != null) {
-        numberOfAnnouncements = announcements.length;
+      if (globals.currentAnnouncements != null) {
+        numberOfAnnouncements = globals.currentAnnouncements.length;
         print(numberOfAnnouncements);
       }
       print(numberOfAnnouncements);
@@ -89,19 +87,19 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Type: ' + announcements[index].getType()),
+                              child: Text('Type: ' + globals.currentAnnouncements[index].getType()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: ' + announcements[index].getTimestamp()),
+                              child: Text('Date: ' + globals.currentAnnouncements[index].getTimestamp()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Message: ' + announcements[index].getMessage()),
+                              child: Text('Message: ' + globals.currentAnnouncements[index].getMessage()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
