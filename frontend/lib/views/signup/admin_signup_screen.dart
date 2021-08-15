@@ -190,7 +190,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                     decoration: InputDecoration(labelText:'Company name'),
                                     controller: _companyName,
                                     validator: (value) {
-                                      if(value.isEmpty || !value.contains(RegExp(r"^[A-Za-z ,.'-]+$"))) //Check if valid name format
+                                      if(value.isEmpty || !value.contains(RegExp(r"^[0-9A-Za-z ,.'-]+$"))) //Check if valid name format
                                           {
                                         return 'please input a valid company name';
                                       }
