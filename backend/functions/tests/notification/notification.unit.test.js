@@ -131,27 +131,27 @@ describe('Create notification unit tests', function() {
             });
     });
  
-//     it('Return 200 if creation successful', function(done) {
-//         let req = {
-//             userId: "test-000",
-//             userEmail: "test-000",
-//             subject: "test-000",
-//             message: "test-000",
-//             timestamp: "test-000",
-//             adminId: "test-000",
-//             companyId: "test-000"
-//         };
+    it('Return 200 if creation successful', function(done) {
+        let req = {
+            userId: "test-000",
+            userEmail: "test-000",
+            subject: "test-000",
+            message: "test-000",
+            timestamp: "test-000",
+            adminId: "test-000",
+            companyId: "test-000"
+        };
  
-//         chai.request(server)
-//             .post('/api/notifications')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(200);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     })
+        chai.request(server)
+            .post('/api/notifications')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(200);
+                console.log(res.body);
+                done();
+            });
+    })
  });
  
 //  describe('Delete notification unit tests', function() {
