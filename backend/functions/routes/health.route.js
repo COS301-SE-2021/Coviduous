@@ -19,11 +19,11 @@ healthController.setDatabase(devDatabase);
 // Health routes
 // N.B. paths for a subsystem can all be the same
 router.post('/health/health-check', healthController.createHealthCheck);
-router.get('/health/health-check', healthController.viewHealthChecks);
-router.get('/health/health-check/userid', healthController.viewHealthCheckUserId);
-router.post('/health/permissions', healthController.createPermission);
+//router.get('/health/health-check', healthController.viewHealthChecks);
+//router.get('/health/health-check/userid', healthController.viewHealthCheckUserId);
+//router.post('/health/permissions', healthController.createPermission);
 router.get('/health/permissions', healthController.viewPermissions);
-router.get('/health/permissions/userid', healthController.viewPermissionsUserId);
+//router.get('/health/permissions/userid', healthController.viewPermissionsUserId);
 router.post('/health/permissions/permission-request', healthController.createPermissionRequest);
 router.get('/health/permissions/permission-request', healthController.viewPermissionRequests);
 router.get('/health/permissions/permission-request/companyid', healthController.viewPermissionsRequestsCompanyId);

@@ -95,9 +95,9 @@ exports.viewPermissions = async () => {
     }
 };
 
-exports.viewPermissionsUserId = async (value) => {
+exports.viewPermissionsUserEmail = async (value) => {
     try {
-        const document = db.collection('permissions').where("userId", "==", value);
+        const document = db.collection('permissions').where("userEmail", "==", value);
         const snapshot = await document.get();
         
         let list = [];
