@@ -67,3 +67,18 @@ Future<bool> getUserDetails() async {
   });
   return result;
 }
+
+Future<bool> deleteUser() async {
+  bool result = false;
+  await Future.wait([
+    userController.deleteUser()
+  ]).then((results) {
+    globals.loggedInUser = null;
+    globals.loggedInUserId = '';
+    globals.loggedInUserEmail = '';
+    globals.loggedInCompanyId = '';
+    globals.loggedInUserType = '';
+    result = results.first;
+  });
+  return result;
+}
