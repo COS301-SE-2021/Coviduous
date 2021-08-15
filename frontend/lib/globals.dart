@@ -12,6 +12,7 @@ import 'package:frontend/models/floor_plan/room.dart';
 import 'package:frontend/models/notification/notification.dart';
 import 'package:frontend/models/shift/shift.dart';
 import 'package:frontend/models/notification/temp_notification.dart';
+import 'package:frontend/models/user/user.dart';
 
 import 'package:frontend/theme.dart' as theme;
 
@@ -68,6 +69,9 @@ bool isNumeric(String s) {
   }
   return double.tryParse(s) != null;
 }
+
+//Currently logged in user
+User loggedInUser;
 
 //User type of currently logged in user
 String loggedInUserType = '';

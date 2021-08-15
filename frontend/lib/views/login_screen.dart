@@ -19,6 +19,7 @@ import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/forgot_password_screen.dart';
 import 'package:frontend/views/main_homepage.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 /*
@@ -282,6 +283,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                             getUserId().then((userID) {
                                               globals.loggedInUserId = userID;
 
+                                              userHelpers.getUserDetails().then((result) {
+                                                if (result == true) {
+                                                  print(globals.loggedInUser.getUserId());
+                                                  print(globals.loggedInUser.getType());
+                                                  print(globals.loggedInUser.getCompanyId());
+                                                } else {
+                                                  print("something went wrong");
+                                                }
+                                              });
+
                                               //Then get user type
                                               getUserType().then((userType) {
                                                 if (userType == 'Admin') {
@@ -319,7 +330,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             isLoading = false;
                                           });
                                           ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text(value)));
+                                              SnackBar(content: Text("Error: could not sign in")));
                                         }
                                       });
                                     } else {

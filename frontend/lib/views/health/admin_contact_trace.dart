@@ -100,14 +100,14 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
 
     Widget getList() {
       List<User> users = [
-        new User("User", "Beyonce", "Knowles", "knowlesb", "b.knowles@email.com", "123456", "1"),
-        new User("User", "Janet", "Jackson", "jacksonj", "j.jackson@email.com", "789012", "1"),
+        new User(userId: "User", firstName: "Beyonce", lastName: "Knowles", userName: "knowlesb", email: "b.knowles@email.com", companyId: "CID-1"),
+        new User(userId: "User", firstName: "Janet", lastName: "Jackson", userName: "jacksonj", email: "j.jackson@email.com", companyId: "CID-1"),
       ];
 
       employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email', 'Date']);
       for (int i = 0; i < users.length; i++) {
         List<String> employeeInfo = <String>[
-          users[i].getId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail(), "15 July 2021"
+          users[i].getUserId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail(), "15 July 2021"
         ];
         employeeList.add(employeeInfo);
       }
@@ -161,7 +161,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Employee name: ' + users[index].first_name + ' ' + users[index].last_name, style: TextStyle(color: Colors.black)),
+                              child: Text('Employee name: ' + users[index].firstName + ' ' + users[index].lastName, style: TextStyle(color: Colors.black)),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
