@@ -9,7 +9,6 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
