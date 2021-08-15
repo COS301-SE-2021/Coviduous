@@ -21,7 +21,7 @@ String server = serverInfo.getServer(); //server needs to be running on Firebase
 /**
  * createUser() : Creates a user and returns whether the operation was successful or not.
  */
-Future<bool> createUser(String type, String firstName, String lastName, String email,
+Future<bool> createUser(String uid, String type, String firstName, String lastName, String email,
     String userName, String companyId, String companyName, String companyAddress) async {
   String path = 'users';
   String url = server + path;
@@ -30,6 +30,7 @@ Future<bool> createUser(String type, String firstName, String lastName, String e
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
+      "userId": uid,
       "type": type.toUpperCase(),
       "firstName": firstName,
       "lastName": lastName,
@@ -117,8 +118,6 @@ Future<User> getUserDetails(String userId) async {
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
       userDatabaseTable.clear();
       numUsers = 0;
-
-      print(jsonMap);
 
       for (var data in jsonMap["data"]) {
         var userData = User.fromJson(data);

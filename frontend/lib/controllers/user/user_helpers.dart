@@ -1,22 +1,22 @@
 import 'package:frontend/controllers/user/user_controller.dart' as userController;
 import 'package:frontend/globals.dart' as globals;
 
-Future<bool> createAdmin(String firstName, String lastName, String email,
+Future<bool> createAdmin(String uid, String firstName, String lastName, String email,
     String userName, String companyId, String companyName, String companyAddress) async {
   bool result = false;
   await Future.wait([
-    userController.createUser("ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress)
+    userController.createUser(uid, "ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress)
   ]).then((results) {
     result = results.first;
   });
   return result;
 }
 
-Future<bool> createUser(String firstName, String lastName,
+Future<bool> createUser(String uid, String firstName, String lastName,
     String email, String userName, String companyId) async {
   bool result = false;
   await Future.wait([
-  userController.createUser("USER", firstName, lastName, email, userName, companyId, null, null)
+  userController.createUser(uid, "USER", firstName, lastName, email, userName, companyId, null, null)
   ]).then((results) {
   result = results.first;
   });

@@ -285,9 +285,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                               userHelpers.getUserDetails().then((result) {
                                                 if (result == true) {
-                                                  print(globals.loggedInUser.getUserId());
-                                                  print(globals.loggedInUser.getType());
-                                                  print(globals.loggedInUser.getCompanyId());
+                                                  //print(globals.loggedInUser.getUserId());
+                                                  //print(globals.loggedInUser.getType());
+                                                  //print(globals.loggedInUser.getCompanyId());
                                                 } else {
                                                   print("something went wrong");
                                                 }
@@ -330,7 +330,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             isLoading = false;
                                           });
                                           ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Error: could not sign in")));
+                                              SnackBar(content: Text(value)));
                                         }
                                       });
                                     } else {

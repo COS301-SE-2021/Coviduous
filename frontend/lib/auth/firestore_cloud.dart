@@ -17,7 +17,8 @@ Future<void> userSetup(String firstName, String lastName, String username, Strin
     'Username' : username,
     'Company ID' :companyId
   });
-  userHelpers.createUser(firstName, lastName, email, username, companyId);
+  userHelpers.createUser(auth.currentUser.uid.toString(), firstName,
+      lastName, auth.currentUser.email.toString(), username, companyId);
   return;
 }
 
@@ -38,7 +39,7 @@ Future<void> adminSetup(String firstName, String lastName, String username,
     'Company Name' :companyName,
     'Company Location' : companyLocation
   });
-  userHelpers.createAdmin(firstName, lastName, email,
-      username, companyId, companyName, companyLocation);
+  userHelpers.createAdmin(auth.currentUser.uid.toString(), firstName, lastName,
+      auth.currentUser.email.toString(), username, companyId, companyName, companyLocation);
   return;
 }
