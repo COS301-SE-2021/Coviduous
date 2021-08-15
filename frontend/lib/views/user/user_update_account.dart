@@ -31,6 +31,28 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
     return (await true);
   }
 
+  updateUser() {
+    userHelpers.updateUser(_firstName.text, _lastName.text, _email.text,
+        _userName.text)
+        .then((result) {
+      if (result == true) {
+        setState(() {
+          isLoading = false;
+        });
+        userHelpers.getUserDetails();
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => UserManageAccount()), (
+                route) => false);
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error occurred while updating user details. Please try again later.')));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -199,24 +221,9 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                       if (globals.loggedInUserEmail != _email.text) {
                                                         AuthClass().updateEmail(newEmail: _email.text).then((value3) {
                                                           if (value3 == "Success") {
-                                                            userHelpers.updateUser(_firstName.text, _lastName.text, _email.text,
-                                                                _userName.text)
-                                                                .then((result) {
-                                                              if (result == true) {
-                                                                setState(() {
-                                                                  isLoading = false;
-                                                                });
-                                                                userHelpers.getUserDetails();
-                                                                Navigator.pushAndRemoveUntil(context,
-                                                                    MaterialPageRoute(builder: (context) => UserManageAccount()), (
-                                                                        route) => false);
-                                                              } else {
-                                                                setState(() {
-                                                                  isLoading = false;
-                                                                });
-                                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                                    SnackBar(content: Text('Error occurred while updating user details. Please try again later.')));
-                                                              }
+                                                            updateUser();
+                                                            setState(() {
+                                                              isLoading = false;
                                                             });
                                                           } else {
                                                             setState(() {
@@ -231,25 +238,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                                         });
                                                         //If not updating email
                                                       } else {
-                                                        userHelpers.updateUser(_firstName.text, _lastName.text, _email.text,
-                                                            _userName.text)
-                                                            .then((result) {
-                                                          if (result == true) {
-                                                            setState(() {
-                                                              isLoading = false;
-                                                            });
-                                                            userHelpers.getUserDetails();
-                                                            Navigator.pushAndRemoveUntil(context,
-                                                                MaterialPageRoute(builder: (context) => UserManageAccount()), (
-                                                                    route) => false);
-                                                          } else {
-                                                            setState(() {
-                                                              isLoading = false;
-                                                            });
-                                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                                SnackBar(content: Text('Error occurred while updating user details. Please try again later.')));
-                                                          }
-                                                        });
+                                                        updateUser();
                                                         setState(() {
                                                           isLoading = false;
                                                         });
