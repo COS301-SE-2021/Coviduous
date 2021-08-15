@@ -39,43 +39,43 @@ describe('Create announcement unit tests', function() {
             });
     });
 
-//     it('Return 400 if incorrect type', function(done) {
-//         let req = {
-//             type: 'NOT A REAL TYPE',
-//             message: 'message',
-//             adminId: 'ADMIN-ID',
-//             companyId: 'COMPANY-ID',
-//         };
+    it('Return 400 if incorrect type', function(done) {
+        let req = {
+            type: 'NOT A REAL TYPE',
+            message: 'message',
+            adminId: 'ADMIN-ID',
+            companyId: 'COMPANY-ID',
+        };
 
-//         chai.request(server)
-//             .post('/api/announcements')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
-//     it('Return 400 if empty message', function(done) {
-//         let req = {
-//             type: 'GENERAL',
-//             message: '',
-//             adminId: 'ADMIN-ID',
-//             companyId: 'COMPANY-ID',
-//         };
+    it('Return 400 if empty message', function(done) {
+        let req = {
+            type: 'GENERAL',
+            message: '',
+            adminId: 'ADMIN-ID',
+            companyId: 'COMPANY-ID',
+        };
 
-//         chai.request(server)
-//             .post('/api/announcements')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/announcements')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
 //     it('Return 400 if empty admin ID', function(done) {
 //         let req = {
