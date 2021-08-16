@@ -56,10 +56,10 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
     print(await response2.statusCode);
 
     if (response2.statusCode == 200) {
-      //print(response.body);
-
       var jsonString2 = (await response2.stream.bytesToString());
       var jsonMap2 = jsonDecode(jsonString2);
+
+      print(jsonMap2);
 
       request = http.Request('POST', Uri.parse(url));
       request.body = json.encode({
