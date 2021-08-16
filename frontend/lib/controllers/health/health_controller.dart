@@ -7,11 +7,14 @@ import 'dart:convert';
 
 import 'package:frontend/models/health/health_check.dart';
 import 'package:frontend/models/health/permission.dart';
+import 'package:frontend/models/health/permission_request.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
 import 'package:frontend/globals.dart' as globals;
 
 List<HealthCheck> healthDatabaseTable = [];
 List<Permission> permissionDatabaseTable = [];
+List<PermissionRequest> permission_requestDatabaseTable = [];
+int numPermission_request=0;
 int numPermissions = 0;
 int numHealthChecks = 0;
 
@@ -137,6 +140,37 @@ Future<List<HealthCheck>> getHealthCheck() async {
       }
 
       return healthDatabaseTable;
+    }
+  } catch (error) {
+    print(error);
+  }
+  return null;
+}
+Future<List<PermissionRequest>> getPermissionRequest() async {
+  String path = '/permission-request';
+  String url = server + path;
+  var response;
+
+  try {
+    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+
+    if (response.statusCode == 200) {
+      //print(response.body);
+
+      var jsonString = response.body;
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      permission_requestDatabaseTable.clear();
+      numPermission_request = 0;
+
+      for (var data in jsonMap["data"]) {
+        var healthData = permissionRequestFromJson(data);
+        permission_requestDatabaseTable.add(healthData);
+        numPermission_request++;
+      }
+
+      return permission_requestDatabaseTable;
     }
   } catch (error) {
     print(error);
