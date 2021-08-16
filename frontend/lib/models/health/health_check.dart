@@ -27,15 +27,14 @@ class HealthCheck {
   String email;
   String phoneNumber;
   String temperature;
-  String fever;
-  String cough;
-  String soreThroat;
-  String chills;
-  String aches;
-  String nausea;
-  String shortnessOfBreath;
-  String lossOfTasteSmell;
-
+  bool fever;
+  bool cough;
+  bool soreThroat;
+  bool chills;
+  bool aches;
+  bool nausea;
+  bool shortnessOfBreath;
+  bool lossOfTasteSmell;
 
   // constructor
   HealthCheck({

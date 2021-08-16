@@ -17,24 +17,23 @@ int numHealthChecks = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
-// healthCheckId and userId fields are generated in node backend
-Future<bool> createHealthCheck(String healthCheckId,String userId,String name,String surname,String email,String phoneNumber,String temperature,String fever,String cough,String soreThroat,String chills,String aches,String nausea,String shortnessOfBreath,String lossOfTasteSmell,String sixFeetContact,String testedPositive,String travelled, String headache) async {
+Future<bool> createHealthCheck(String healthCheckId, String userId, String name, String surname, String email, String phoneNumber, 
+    String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath, 
+    bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
   String path = '/health-check';
   String url = server + path;
   var request;
   var request2;
 
   try {
-
     request2 = http.Request('POST', Uri.parse("http://127.0.0.1:5000/api/prognosis"));
     request2.body = json.encode({
     // should be 1 or 0.
-      "fever": fever,
-      "cough": cough,
-      "sore_throat": soreThroat,
-      "shortness_of_breath": shortnessOfBreath,
-      "head_ache": headache,
-
+      "fever": globals.toInt(fever),
+      "cough": globals.toInt(cough),
+      "sore_throat": globals.toInt(soreThroat),
+      "shortness_of_breath": globals.toInt(shortnessOfBreath),
+      "head_ache": globals.toInt(headache),
     });
     //how to add application jason request headers.
     request2.headers.addAll(globals.requestHeaders);
@@ -64,7 +63,6 @@ Future<bool> createHealthCheck(String healthCheckId,String userId,String name,St
       "d_t_accuracy": response2.d_t_accuracy,
       "naive_prediction": response2.naive_prediction,
       "nb_accuracy":response2.nb_accuracy,
-
     });
     request.headers.addAll(globals.requestHeaders);
 
