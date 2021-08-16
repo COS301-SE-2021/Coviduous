@@ -242,7 +242,7 @@ exports.viewPermissions = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while fetching permissions."
+        message: error.message || "Some error occurred while fetching permissions."
       });
   }
 };
@@ -308,7 +308,7 @@ exports.viewPermissionsRequestsCompanyId = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while fetching permission requests."
+        message: error.message || "Some error occurred while fetching permission requests."
       });
   }
 };
@@ -340,7 +340,7 @@ exports.grantPermission = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while fetching permission requests."
+        message: error.message || "Some error occurred while fetching permission requests."
       });
   }
 };
@@ -381,7 +381,7 @@ exports.reportInfection = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while reporting infection."
+        message: error.message || "Some error occurred while reporting infection."
       });
   }
 };
@@ -438,7 +438,7 @@ exports.viewShifts = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while fetching shifts."
+        message: error.message || "Some error occurred while fetching shifts."
       });
   }
 };
