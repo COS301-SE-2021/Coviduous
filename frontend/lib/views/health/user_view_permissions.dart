@@ -3,8 +3,10 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_home_health.dart';
+import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewPermissions extends StatefulWidget {
@@ -71,12 +73,18 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
               return ListTile(
                 title: Column(
                     children:[
-                      Container(
+                      (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
                         alignment: Alignment.center,
+                        height: 50,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Permission ' + globals.currentPermissions[index].getPermissionId()),
+                        color: Colors.green,
+                        child: Text('Access granted', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                      ) : Container(
+                        alignment: Alignment.center,
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.redAccent,
+                        child: Text('Access denied', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -100,6 +108,33 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                               child: Text('Date: ' + globals.currentPermissions[index].getTimestamp()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
+                            (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom (
+                                        primary: Colors.redAccent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text('Request access'),
+                                      onPressed: () {
+                                        healthHelpers.viewShifts(globals.loggedInUserEmail).then((result) {
+                                          if (result == true) {
+                                            Navigator.of(context).pushReplacementNamed(UserRequestAccessShifts.routeName);
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
+                                          }
+                                        });
+                                      }),
+                                ],
+                              ),
+                            ) : Container(),
                           ]
                       )
                     ]

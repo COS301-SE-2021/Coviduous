@@ -12,7 +12,6 @@ import 'package:frontend/views/health/user_view_vaccine_confirm.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-import 'package:frontend/views/health/user_request_access.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -133,28 +132,6 @@ class _UserHealthState extends State<UserHealth> {
                               ),
                               onPressed: () {
                                 Navigator.of(context).pushReplacementNamed(UserViewGuidelines.routeName);
-                              }
-                          ),
-                          SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Request access')),
-                                    Icon(Icons.help)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(UserRequestAccess.routeName);
                               }
                           ),
                           SizedBox (

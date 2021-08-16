@@ -3,10 +3,11 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_home_health.dart';
+import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
-//import 'package:frontend/backend/backend_globals/user_globals.dart' as userGlobals;
 
 class UserRequestAccess extends StatefulWidget {
   static const routeName = "/user_request_access";
@@ -21,14 +22,12 @@ class UserRequestAccess extends StatefulWidget {
 //class make notification
 class UserRequestAccessState extends State<UserRequestAccess> {
   TextEditingController _companyId = TextEditingController();
-  TextEditingController _adminId = TextEditingController();
+  TextEditingController _email = TextEditingController();
   TextEditingController _reason = TextEditingController();
 
   DateTime _currentDate = DateTime.now();
   DateTime _tomorrowDate = DateTime.now().add(Duration(days: 1));
   DateTime _selectedDate = DateTime.now();
-
-  //NotificationsController services = new NotificationsController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked_date = await showDatePicker(
@@ -57,7 +56,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
   }
 
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+    Navigator.of(context).pushReplacementNamed(UserRequestAccessShifts.routeName);
     return (await true);
   }
 
@@ -84,7 +83,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
           title: new Text("Request access"),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+              Navigator.of(context).pushReplacementNamed(UserRequestAccessShifts.routeName);
             },
           ),
         ),
@@ -112,11 +111,11 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                      hintText: "Your company admin's ID",
-                      labelText: "Admin ID",
+                      hintText: "Your company admin's email",
+                      labelText: "Admin email",
                     ),
                     obscureText: false,
-                    controller: _adminId,
+                    controller: _email,
                   ),
                   SizedBox(
                     height: 16,
@@ -162,9 +161,16 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                     ),
                     child: Text("Submit"),
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Request successfully submitted.")));
-                      Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                      healthHelpers.createPermissionRequest(_email.text, _reason.text).then((result) {
+                        if (result == true) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Request successfully submitted.")));
+                          Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
+                        }
+                      });
                     },
                   )
                 ],
