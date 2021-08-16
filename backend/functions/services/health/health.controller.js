@@ -421,7 +421,7 @@ exports.viewGroup = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while fetching group."
+        message: error.message || "Some error occurred while fetching group."
       });
   }
 };
@@ -461,7 +461,7 @@ exports.notifyGroup = async (req, res) => {
           adminId: obj.adminId,
           companyId: ""
         }
-        await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
+        notificationDatabase.createNotification(notificationData.notificationId, notificationData);
       });
       
       return res.status(200).send({
@@ -471,7 +471,7 @@ exports.notifyGroup = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while fetching group."
+        message: error.message || "Some error occurred while fetching group."
       });
   }
 };
