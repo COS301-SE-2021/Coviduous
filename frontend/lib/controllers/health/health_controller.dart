@@ -165,8 +165,8 @@ Future<List<PermissionRequest>> getPermissionRequest() async {
       numPermission_request = 0;
 
       for (var data in jsonMap["data"]) {
-        var healthData = permissionRequestFromJson(data);
-        permission_requestDatabaseTable.add(healthData);
+        var permissionRequestData = permissionRequestFromJson(data);
+        permission_requestDatabaseTable.add(permissionRequestData);
         numPermission_request++;
       }
 
