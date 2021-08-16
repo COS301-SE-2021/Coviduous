@@ -80,5 +80,5 @@ describe('/GET office', () => {
                 expect(res.body).should.be.a('object');
                 //done();
             })//.catch(done);
-        });
+    });
 });
