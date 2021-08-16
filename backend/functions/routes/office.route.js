@@ -18,7 +18,7 @@ officeService.setDatabase(db);
 // Office routes
 // N.B. paths for a subsystem can all be the same
 router.post('/office', officeService.createBooking);
-router.get('/office', officeService.viewBookings);
+router.post('/office/view', officeService.viewBookings);
 router.delete('/office', officeService.deleteBooking);
 
 // Export API routes

@@ -143,13 +143,13 @@ describe('User unit tests - interaction with auth and database over HTTP', funct
 
     delay(1000);
 
-    it('GET /api/users to retrieve user details', (done) => {
+    it('POST /api/users to retrieve user details', (done) => {
         let user = {
             email: "testemail3@email.com",
         }
 
         chai.request(server)
-            .get('/api/users')
+            .post('/api/users')
             .send(user)
             .end((err, res) => {
                 expect(err).to.be.null;

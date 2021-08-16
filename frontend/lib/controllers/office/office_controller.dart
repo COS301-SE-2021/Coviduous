@@ -79,12 +79,12 @@ Future<bool> deleteBooking(String bookingNumber) async {
 }
 
 Future<List<Booking>> viewBookings(String userId) async {
-  String path = '/office';
+  String path = '/office/view';
   String url = server + path;
   var request;
 
   try {
-    request = http.Request('GET', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "userId": userId,
     });

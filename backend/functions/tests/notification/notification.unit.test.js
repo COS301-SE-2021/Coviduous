@@ -202,7 +202,7 @@ describe('Create notification unit tests', function() {
  describe('Get notification unit tests', function() {
     it('Return 200 if retrieval is successful', function() {
         chai.request(server)
-            .get('/api/notifications')
+            .post('/api/notifications')
             .send()
             .end((err, res) => {
                 should.exist(res);

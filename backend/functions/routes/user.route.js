@@ -19,7 +19,7 @@ userController.setDatabase(devDatabase);
 // User routes
 router.delete('/users', userController.deleteUser);
 router.get('/users', userController.getUsers);
-router.get('/users/user-id', userController.getUserDetails);
+router.post('/users/user-id', userController.getUserDetails);
 router.post('/users', userController.createUser);
 router.put('/users', userController.updateUser);
 

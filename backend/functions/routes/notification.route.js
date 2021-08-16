@@ -18,7 +18,7 @@ notificationController.setDatabase(devDatabase);
 
 // Notification routes
 router.get('/notifications', notificationController.viewNotifications);
-router.get('/notifications/user-email', notificationController.viewNotificationsUserEmail);
+router.post('/notifications/user-email', notificationController.viewNotificationsUserEmail);
 router.post('/notifications', notificationController.createNotification);
 router.delete('/notifications', notificationController.deleteNotification);
 
