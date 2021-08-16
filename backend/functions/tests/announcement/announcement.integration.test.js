@@ -32,14 +32,16 @@ describe('/POST announcements', () => {
             res.should.have.status(200);
             res.body.should.be.a('object');
             res.body.should.have.property('message').eql('Announcement successfully created');
-            // res.body.announcement.should.have.property('announcementId');
-            // res.body.announcement.should.have.property('type');
-            // res.body.announcement.should.have.property('message');
-            // res.body.announcement.should.have.property('timestamp');
+            // res.body.data.should.have.property('announcementId');
+            // res.body.data.should.have.property('type');
+            // res.body.data.should.have.property('message');
+            // res.body.data.should.have.property('timestamp');
             //done();
         });
     });
+}); 
 
+describe('/DELETE announcements', () => {
     it('should DELETE an announcement', function() {
         let req = {
             type: 'GENERAL',
@@ -47,7 +49,7 @@ describe('/POST announcements', () => {
             adminId: 'ADMIN-ID',
             companyId: 'COMPANY-ID',
         };
-  
+    
         chai.request(server)
             .post('/api/announcements')
             .send(req)
@@ -56,7 +58,7 @@ describe('/POST announcements', () => {
                 let req2 = {
                     announcementId: res.body.data.announcementId
                 };
-  
+    
                 chai.request(server)
                     .delete('/api/announcements')
                     .send(req2).end((err, res) => {
