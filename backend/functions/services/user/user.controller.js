@@ -359,6 +359,70 @@ exports.getUserDetails = async (req, res) => {
 }
 
 /**
+ * This function retrieves a specific user's details using their email, via an HTTP GET request.
+ * @param req The request object must exist, and it should contain the following field:
+ * (
+ *  email: string
+ * )
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
+exports.getUserDetailsByEmail = async (req, res) => {
+    let token = req.headers;
+
+    if (await this.verifyRequestToken(token) === false) {
+        return res.status(403).send({
+            message: '403 Forbidden: Access denied',
+        });
+    }
+
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.email == null || reqJson.email === '') {
+        fieldErrors.push({field: 'email', message: 'User email may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let result = await database.getUserDetailsByEmail(reqJson.email);
+
+    if (result == null) {
+        console.log("500 server error");
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            data: null
+        });
+    }
+
+    return res.status(200).send({
+        message: 'Successfully retrieved user details',
+        data: result
+    });
+}
+
+/**
  * This function deletes a specific user via an HTTP DELETE request.
  * @param req The request object must exist, and it should contain the following field:
  * (

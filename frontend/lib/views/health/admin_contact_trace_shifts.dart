@@ -6,6 +6,8 @@ import 'package:frontend/views/health/admin_contact_trace_employee.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminContactTraceShifts extends StatefulWidget {
@@ -36,7 +38,11 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
       return Container();
     }
     Widget getList() {
-      int numOfShifts = 1;
+      int numOfShifts = 0;
+      if (globals.currentShifts != null) {
+        numOfShifts = globals.currentShifts.length;
+      }
+
       if (numOfShifts == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,23 +56,19 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
               ),
               Container(
                 alignment: Alignment.center,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width / (2 * globals.getWidgetScaling()),
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height / (24 * globals.getWidgetScaling()),
-                color: Theme
-                    .of(context)
-                    .primaryColor,
-                child: Text(
-                    'No shifts found', style: TextStyle(fontSize: (MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.01) * 2.5)),
+                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                color: Theme.of(context).primaryColor,
+                child: Text('No shifts found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
+              Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                  color: Colors.white,
+                  padding: EdgeInsets.all(12),
+                  child: Text('Employee has not been assigned to any shifts.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+              )
             ]
         );
       } else {
@@ -81,18 +83,9 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                     children: [
                       Container(
                         alignment: Alignment.center,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height / 24,
-                        color: Theme
-                            .of(context)
-                            .primaryColor,
-                        child: Text('Shift '),
+                        width: MediaQuery.of(context).size.width,
+                        color: Theme.of(context).primaryColor,
+                        child: Text('Shift ' + globals.currentShifts[index].getShiftId()),
                       ),
                       ListView(
                         shrinkWrap: true,
@@ -100,51 +93,36 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                         //The lists within the list should not be scrollable
                         children: <Widget>[
                           Container(
-                            height: 50,
                             color: Colors.white,
-                            child: Text(
-                                'Floor number: ',
-                                style: TextStyle(color: Colors.black)),
+                            child: Text('Floor plan number: ' + globals.currentShifts[index].getFloorPlanNumber()),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+                          Container(
+                            color: Colors.white,
+                            child: Text('Floor number: ' + globals.currentShifts[index].getFloorNumber()),
+                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          ),
+                          Container(
+                            color: Colors.white,
+                            child: Text('Room number: ' + globals.currentShifts[index].getRoomNumber()),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text(
-                                'Room number: ',
-                                style: TextStyle(color: Colors.black)),
+                            child: Text('Date: ' + globals.currentShifts[index].getDate()),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text(
-                                'Group number: ',
-                                style: TextStyle(color: Colors.black)),
+                            child: Text('Start time: ' + globals.currentShifts[index].getStartTime()),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
                             height: 50,
                             color: Colors.white,
-                            child: Text(
-                                'Date: ',
-                                style: TextStyle(color: Colors.black)),
-                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                          ),
-                          Container(
-                            height: 50,
-                            color: Colors.white,
-                            child: Text(
-                                'Start time: ',
-                                style: TextStyle(color: Colors.black)),
-                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                          ),
-                          Container(
-                            height: 50,
-                            color: Colors.white,
-                            child: Text(
-                                'End time: ',
-                                style: TextStyle(color: Colors.black)),
+                            child: Text('End time: ' + globals.currentShifts[index].getEndTime()),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
@@ -156,7 +134,21 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                                 ElevatedButton(
                                     child: Text('View employees'),
                                     onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(AdminContactTrace.routeName);
+                                      healthHelpers.viewGroup().then((result) {
+                                        if (result == true) {
+                                          userHelpers.getUsersForGroup(globals.currentGroup).then((result) {
+                                            if (result == true) {
+                                              Navigator.of(context).pushReplacementNamed(AdminContactTrace.routeName);
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("An error occurred while retrieving employees. Please try again later.")));
+                                            }
+                                          });
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("An error occurred while retrieving employees. Please try again later.")));
+                                        }
+                                      });
                                     }),
                               ],
                             ),
@@ -174,7 +166,7 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
       onWillPop: _onWillPop,
       child: new Scaffold(
         appBar: AppBar(
-          title: Text('Shifts the employee worked'),
+          title: Text('Shifts for employee'),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);

@@ -8,13 +8,12 @@ import 'package:pdf/pdf.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:pdf/widgets.dart' as pw;
 
-import 'package:frontend/models/user/user.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
-
 
 class AdminContactTrace extends StatefulWidget {
   static const routeName = "/admin_contact_trace";
@@ -23,13 +22,10 @@ class AdminContactTrace extends StatefulWidget {
   _AdminContactTraceState createState() => _AdminContactTraceState();
 }
 class _AdminContactTraceState extends State<AdminContactTrace> {
-  String firstName = "Kanye";
-  String lastName = "West";
-  String id = '10';
-  int numberOfEmployees = 2;
   var myTheme;
   var pdf;
 
+  int numberOfEmployees = 0;
   List<List<String>> employeeList = [];
 
   Future loadPDFFonts() async {
@@ -52,7 +48,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
     Directory output = outputs.first;
     print(output.path);
 
-    File file = File("${output.path}/report_contact_trace_1234.pdf");
+    File file = File('${output.path}/report_contact_trace_' + globals.currentShift.getShiftId() + '.pdf');
     await file.writeAsBytes(await pdf.save());
   }
 
@@ -65,7 +61,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
     html.document.createElement('a') as html.AnchorElement
       ..href = url
       ..style.display = 'none'
-      ..download = 'report_contact_trace_1234.pdf';
+      ..download = 'report_contact_trace_' + globals.currentShift.getShiftId() + '.pdf';
     html.document.body.children.add(anchor);
     anchor.click();
     html.document.body.children.remove(anchor);
@@ -92,6 +88,10 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
       return Container();
     }
 
+    if (globals.selectedUsers != null) {
+      numberOfEmployees = globals.selectedUsers.length;
+    }
+
     //Load fonts from assets and initialize PDF
     loadPDFFonts();
     pdf = pw.Document(
@@ -99,15 +99,11 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
     );
 
     Widget getList() {
-      List<User> users = [
-        new User(userId: "User", firstName: "Beyonce", lastName: "Knowles", userName: "knowlesb", email: "b.knowles@email.com", companyId: "CID-1"),
-        new User(userId: "User", firstName: "Janet", lastName: "Jackson", userName: "jacksonj", email: "j.jackson@email.com", companyId: "CID-1"),
-      ];
-
       employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email', 'Date']);
-      for (int i = 0; i < users.length; i++) {
+      for (int i = 0; i < globals.selectedUsers.length; i++) {
         List<String> employeeInfo = <String>[
-          users[i].getUserId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail(), "15 July 2021"
+          globals.selectedUsers[i].getUserId(), globals.selectedUsers[i].getFirstName(),
+          globals.selectedUsers[i].getLastName(), globals.selectedUsers[i].getEmail(), globals.currentShift.getDate()
         ];
         employeeList.add(employeeInfo);
       }
@@ -152,7 +148,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Employee ID: ' + users[index].userId),
+                        child: Text('Employee ID: ' + globals.selectedUsers[index].getUserId()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -161,13 +157,13 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Employee name: ' + users[index].firstName + ' ' + users[index].lastName, style: TextStyle(color: Colors.black)),
+                              child: Text('Employee name: ' + globals.selectedUsers[index].getFirstName() + ' ' + globals.selectedUsers[index].getLastName()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + globals.currentShift.getDate()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
@@ -208,11 +204,10 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                     ),
                     child: Text('Notify employees'),
                     onPressed: (){
-                      if (numberOfEmployees == 0){
+                      if (numberOfEmployees == 0) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("No employees found")));
-                      }
-                      else {
+                      } else {
                         showDialog(
                             context: context,
                             builder: (ctx) => AlertDialog(
@@ -222,9 +217,17 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                                 ElevatedButton(
                                   child: Text('Yes'),
                                   onPressed: (){
-                                    Navigator.of(ctx).pop();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text(numberOfEmployees.toString() + " employees notified")));
+                                    healthHelpers.notifyGroup().then((result) {
+                                      if (result == true) {
+                                        Navigator.of(ctx).pop();
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text(numberOfEmployees.toString() + " employees notified")));
+                                      } else {
+                                        Navigator.of(ctx).pop();
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("An error occurred. Please try again later.")));
+                                      }
+                                    });
                                   },
                                 ),
                                 ElevatedButton(
@@ -269,20 +272,20 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                               child: pw.Text('Coviduous - Contact trace', textScaleFactor: 2),
                             ),
                             pw.Bullet(
-                                text: 'Employee name: ' + firstName + ' ' + lastName
+                                text: 'Employee name: ' + globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName()
                             ),
                             pw.Bullet(
-                                text: 'Employee number: 1234'
+                                text: 'Employee number: ' + globals.selectedUser.getUserId()
                             ),
                             pw.Bullet(
-                                text: 'Employee email address: email@email.com'
+                                text: 'Employee email address: ' + globals.selectedUser.getEmail()
                             ),
                             pw.SizedBox(
                               width: 500,
                               child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
                             ),
                             pw.Bullet(
-                                text: 'Date: 1 August 2021'
+                                text: 'Date: ' + globals.currentShift.getDate()
                             ),
                             pw.SizedBox(
                               width: 500,
@@ -323,9 +326,8 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
               child: Column(
                 children: [
                   Container(
-                    height: 110,
                     color: Colors.white,
-                    child: Text(firstName + ' ' + lastName + ' (ID ' + id + ') has come into contact with the following employees over the past month:', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                    child: Text(globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' (ID ' + globals.selectedUser.getUserId() + ') has come into contact with the following employees over the past month:', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                     padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
                   ),
                   getList(),

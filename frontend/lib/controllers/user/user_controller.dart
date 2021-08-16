@@ -136,6 +136,47 @@ Future<User> getUserDetails(String userId) async {
 }
 
 /**
+ * getUserDetailsByEmail() : Returns a single user using their email.
+ */
+Future<User> getUserDetailsByEmail(String email) async {
+  String path = '/users/email';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "email": email,
+    });
+    request.headers.addAll(globals.requestHeaders);
+    print(request.body);
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      userDatabaseTable.clear();
+      numUsers = 0;
+
+      for (var data in jsonMap["data"]) {
+        var userData = User.fromJson(data);
+        userDatabaseTable.add(userData);
+        numUsers++;
+      }
+
+      return userDatabaseTable.first;
+    }
+  } catch (error) {
+    print(error);
+  }
+
+  return null;
+}
+
+/**
  * updateUser() : Updates a user's details in the database.
  */
 Future<bool> updateUser(String type, String firstName, String lastName, String email,

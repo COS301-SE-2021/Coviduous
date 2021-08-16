@@ -517,7 +517,7 @@ exports.notifyGroup = async (req, res) => {
               let notificationData = {
                   notificationId: notificationId,
                   userId: "",
-                  userEmail:obj.getUserEmail(i),
+                  userEmail:obj.userEmails[i],
                   subject: "COVID-19 CONTACT RISK",
                   message: "YOU MAY HAVE BEEN IN CLOSE CONTACT WITH SOMEONE WHO HAS COVID-19, PLEASE CONTACT THE HEALTH SERVICES AND YOUR ADMINISTRATOR",
                   timestamp: timestamp,

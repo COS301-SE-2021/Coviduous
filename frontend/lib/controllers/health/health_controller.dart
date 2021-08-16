@@ -382,10 +382,7 @@ Future<List<Shift>> viewShifts(String userEmail) async {
 
     var response = await request.send();
 
-    print(await response.statusCode);
     if (response.statusCode == 200) {
-      //print(response.body);
-
       var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 

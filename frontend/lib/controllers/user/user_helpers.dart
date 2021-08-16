@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:frontend/models/shift/group.dart';
 
 import 'package:frontend/controllers/user/user_controller.dart' as userController;
 import 'package:frontend/globals.dart' as globals;
@@ -95,5 +96,19 @@ Future<bool> getOtherUser(String userId) async {
       result = true;
     }
   });
+  return result;
+}
+
+Future<bool> getUsersForGroup(Group group) async {
+  bool result = false;
+  globals.selectedUsers.clear();
+  for (int i = 0; i < group.getUserEmails().length; i++) {
+    await Future.wait([
+      userController.getUserDetailsByEmail(group.getUserEmails()[i].toString())
+    ]).then((results) {
+      globals.selectedUsers.add(results.first);
+      result = true;
+    });
+  }
   return result;
 }

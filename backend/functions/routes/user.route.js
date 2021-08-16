@@ -20,6 +20,7 @@ userController.setDatabase(devDatabase);
 router.delete('/users', userController.deleteUser);
 router.get('/users', userController.getUsers);
 router.post('/users/user-id', userController.getUserDetails);
+router.post('/users/email', userController.getUserDetailsByEmail);
 router.post('/users', userController.createUser);
 router.put('/users', userController.updateUser);
 

@@ -266,39 +266,30 @@ exports.viewShifts = async (userEmail) => {
         const snapshot = await document.get();
         
         let list = [];
-        
         snapshot.forEach(doc => {
             let data = doc.data();
+            console.log(data);
             list.push(data);
         });
         
         let group = [];
         list.forEach(obj => {
-            if(obj.userEmail===userEmail)
-            {
-                group.push(obj);
+            for (var i = 0; i < obj.userEmails.length; i++) {
+                if (obj.userEmails[i] === userEmail) {
+                    group.push(obj);
+                }
             }
-            else
-            {
-            }
-          });
+        });
 
         let shifts = await shiftDb.viewShifts();
         let userShifts=[];
-
         group.forEach(obj => {
             shifts.forEach(obj2 => {
-            if(obj2.shiftID===obj.shiftNumber)
-            {
+            if(obj2.shiftID===obj.shiftNumber) {
                 userShifts.push(obj2);
-            }
-            else
-            {
-            }
-            
-            });
-          });
-        
+            }});
+        });
+
         return userShifts;
     } catch (error) {
         console.log(error);

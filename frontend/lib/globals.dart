@@ -164,6 +164,7 @@ List<PermissionRequest> currentPermissionRequests;
 
 //Current user
 User selectedUser;
+List<User> selectedUsers = [];
 
 //===============================
 //Used in announcement subsystem

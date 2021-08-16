@@ -50,6 +50,26 @@ exports.getUserDetails = async (userId) => {
     }
 }
 
+exports.getUserDetailsByEmail = async (email) => {
+    try {
+        let document = db.collection('users').where("email", "==", email);
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            console.log(data);
+            list.push(data);
+        });
+
+        return list;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
 exports.updateUser = async (userId, userData) => {
     try {
         const document = await db.collection('users').doc(userId);

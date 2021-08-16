@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 
 import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
 import 'package:frontend/views/health/admin_home_permissions.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminContactTraceEmployee extends StatefulWidget {
@@ -15,7 +17,7 @@ class AdminContactTraceEmployee extends StatefulWidget {
   _AdminContactTraceEmployeeState createState() => _AdminContactTraceEmployeeState();
 }
 class _AdminContactTraceEmployeeState extends State<AdminContactTraceEmployee> {
- TextEditingController _employeeId = TextEditingController();
+ TextEditingController _employeeEmail = TextEditingController();
 
  Future<bool> _onWillPop() async {
    Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
@@ -59,10 +61,11 @@ class _AdminContactTraceEmployeeState extends State<AdminContactTraceEmployee> {
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: "Enter Employee Email Address",
+                    labelText: "Enter employee email address",
                   ),
+                  keyboardType: TextInputType.emailAddress,
                   obscureText: false,
-                  controller: _employeeId,
+                  controller: _employeeEmail,
                 ),
                 SizedBox(
                   height: 16,
@@ -75,7 +78,14 @@ class _AdminContactTraceEmployeeState extends State<AdminContactTraceEmployee> {
                   ),
                   child: Text("Proceed"),
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(AdminContactTraceShifts.routeName);
+                    healthHelpers.viewShifts(_employeeEmail.text).then((result) {
+                      if (result == true) {
+                        Navigator.of(context).pushReplacementNamed(AdminContactTraceShifts.routeName);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("An error occurred while retrieving employee shifts. Please try again later.")));
+                      }
+                    });
                   },
                 )
 
