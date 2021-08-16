@@ -81,7 +81,7 @@ import 'package:frontend/views/notification/user_view_notifications.dart';
 
 //Reporting
 import 'package:frontend/views/reporting/home_reporting.dart';
-import 'package:frontend/views/reporting/reporting_floor_plan.dart';
+import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/reporting/reporting_floors.dart';
 import 'package:frontend/views/reporting/reporting_rooms.dart';
 import 'package:frontend/views/reporting/reporting_shifts.dart';
@@ -239,7 +239,7 @@ class MyApp extends StatelessWidget{
 
         //Reporting
         Reporting.routeName: (ctx)=> Reporting(),
-        ReportingFloorPlan.routeName: (ctx)=> ReportingFloorPlan(),
+        ReportingFloorPlans.routeName: (ctx)=> ReportingFloorPlans(),
         ReportingFloors.routeName: (ctx)=> ReportingFloors(),
         ReportingRooms.routeName: (ctx)=> ReportingRooms(),
         ReportingShifts.routeName: (ctx)=> ReportingShifts(),

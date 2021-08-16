@@ -49,7 +49,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
     Directory output = outputs.first;
     print(output.path);
 
-    File file = File("${output.path}/report_shift_1234.pdf");
+    File file = File('${output.path}/report_shift_' + globals.currentShiftNum + '.pdf');
     await file.writeAsBytes(await pdf.save());
   }
 
@@ -62,7 +62,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
     html.document.createElement('a') as html.AnchorElement
       ..href = url
       ..style.display = 'none'
-      ..download = 'report_shift_1234.pdf';
+      ..download = 'report_shift_' + globals.currentShiftNum + '.pdf';
     html.document.body.children.add(anchor);
     anchor.click();
     html.document.body.children.remove(anchor);
@@ -96,15 +96,9 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
     theme: myTheme,
     );
 
-    //ShiftController services = new ShiftController();
     Widget getList() {
-      //List<Shift> shifts = services.getShiftsForRoomNum(globals.currentRoomNumString);
-      //List<User> users = shifts.getShift(globals.currentShiftNumString).getUsers();
-      //int numOfUsers = users.length;
-      int numOfUsers = 1;
-      List<User> users = [
-        new User(userId: "User", firstName: "John", lastName: "Smith", userName: "smithj", email: "john.smith@email.com", companyId: "1"),
-      ];
+      List<User> users = globals.selectedUsers;
+      int numOfUsers = users.length;
 
       employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email']);
       for (int i = 0; i < users.length; i++) {
@@ -130,10 +124,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                 (24 * globals.getWidgetScaling()),
             color: Theme.of(context).primaryColor,
             child: Text('No employees found',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize:
-                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
           ),
           Container(
               alignment: Alignment.center,
@@ -144,9 +135,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
               color: Colors.white,
               padding: EdgeInsets.all(12),
               child: Text('No employees have been assigned to this shift.',
-                  style: TextStyle(
-                      fontSize:
-                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+                  style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)))
         ]);
       } else {
         //Else create and return a list
@@ -162,10 +151,8 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text('User ' + (index + 1).toString(),
-                        style: TextStyle(color: Colors.white)),
+                    child: Text('User ' + users[index].getUserId()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -175,16 +162,12 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Name: ' + users[index].getFirstName() + ' ' + users[index].getLastName(),
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Name: ' + users[index].getFirstName() + ' ' + users[index].getLastName()),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Email: ' + users[index].getEmail(),
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Email: ' + users[index].getEmail()),
                         ),
                       ])
                 ]),
@@ -227,7 +210,7 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                           child: pw.Text('Coviduous - Office report', textScaleFactor: 2),
                         ),
                         pw.Bullet(
-                            text: 'Floor plan number: 1'
+                            text: 'Floor plan number: ' + globals.currentFloorPlanNum
                         ),
                         pw.Bullet(
                             text: 'Floor number: ' + globals.currentFloorNum
@@ -240,13 +223,16 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                           child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
                         ),
                         pw.Bullet(
-                            text: 'Shift number: 1'
+                            text: 'Shift number: ' + globals.currentShiftNum
                         ),
                         pw.Bullet(
-                            text: 'Date: 1 August 2021'
+                            text: 'Date: ' + globals.currentShift.getDate()
                         ),
                         pw.Bullet(
-                            text: 'Time: 3:00 PM to 4:00 PM'
+                            text: 'Start time: ' + globals.currentShift.getStartTime()
+                        ),
+                        pw.Bullet(
+                            text: 'End time: ' + globals.currentShift.getEndTime()
                         ),
                         pw.SizedBox(
                           width: 500,

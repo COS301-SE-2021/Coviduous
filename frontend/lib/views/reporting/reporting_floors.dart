@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/views/reporting/reporting_floor_plan.dart';
+import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/reporting/reporting_rooms.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingFloors extends StatefulWidget {
@@ -17,7 +18,7 @@ class ReportingFloors extends StatefulWidget {
 
 class _ReportingFloorsState extends State<ReportingFloors> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
+    Navigator.of(context).pushReplacementNamed(ReportingFloorPlans.routeName);
     return (await true);
   }
 
@@ -37,32 +38,42 @@ class _ReportingFloorsState extends State<ReportingFloors> {
       return Container();
     }
 
-    //FloorPlanController services = new FloorPlanController();
     Widget getList() {
-      int numOfFloors = 0;
+      int numOfFloors = globals.currentFloors.length;
 
       print(numOfFloors);
 
       if (numOfFloors == 0) {
-        //This should not happen, but checking just in case.
-        showDialog(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: Text('Error'),
-              content: Text('No floors have been defined for your company.'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Okay'),
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                )
-              ],
-            ));
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-          Navigator.pushReplacementNamed(context, ReportingFloorPlan.routeName);
-        });
-        return Container();
+        return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height /
+                (5 * globals.getWidgetScaling()),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: MediaQuery.of(context).size.width /
+                (2 * globals.getWidgetScaling()),
+            height: MediaQuery.of(context).size.height /
+                (24 * globals.getWidgetScaling()),
+            color: Theme.of(context).primaryColor,
+            child: Text('No floors found',
+                style: TextStyle(
+                    fontSize:
+                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+          ),
+          Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width /
+                  (2 * globals.getWidgetScaling()),
+              height: MediaQuery.of(context).size.height /
+                  (12 * globals.getWidgetScaling()),
+              color: Colors.white,
+              padding: EdgeInsets.all(12),
+              child: Text('No floors have been registered for this floor plan.',
+                  style: TextStyle(
+                      fontSize:
+                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+        ]);
       } else {
         //Else create and return a list
         return ListView.builder(
@@ -77,11 +88,8 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    /*child: Text(
-                        'Floor ' + services.getFloors()[index].getFloorNumber()),*/
-                    child: Text('Placeholder'),
+                    child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -91,10 +99,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          /*child: Text(
-                              'Number of rooms: ' + services.getFloors()[index].getNumRooms().toString(),
-                              style: TextStyle(color: Colors.black)),*/
-                          child: Text('Placeholder'),
+                          child: Text('Number of rooms: ' + globals.currentFloors[index].getNumRooms().toString()),
                         ),
                         Container(
                           height: 50,
@@ -105,8 +110,14 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    //globals.currentFloorNum = services.getFloors()[index].getFloorNumber();
-                                    Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
+                                    floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
+                                      if (result == true) {
+                                        Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
+                                      } else {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("An error occurred while retrieving rooms. Please try again later.")));
+                                      }
+                                    });
                                   }),
                             ],
                           ),
@@ -126,7 +137,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
+              Navigator.of(context).pushReplacementNamed(ReportingFloorPlans.routeName);
             },
           ),
         ),

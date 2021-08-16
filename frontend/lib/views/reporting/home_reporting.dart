@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
-import 'package:frontend/views/reporting/reporting_floor_plan.dart';
+import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class Reporting extends StatefulWidget {
@@ -71,26 +72,14 @@ class _ReportingState extends State<Reporting> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              /*if (floorGlobals.globalNumFloorPlans == 0) {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) =>
-                                        AlertDialog(
-                                          title: Text('No floor plans found'),
-                                          content: Text('No floor plans have been created for your company yet.'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: () {
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                );
-                              } else {
-                                Navigator.of(context).pushReplacementNamed(ReportingFloorPlan.routeName);
-                              }*/
+                              floorPlanHelpers.getFloorPlans().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(ReportingFloorPlans.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("An error occurred while retrieving floor plans. Please try again later.")));
+                                }
+                              });
                             }
                         ),
                         SizedBox (

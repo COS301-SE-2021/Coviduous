@@ -6,6 +6,8 @@ import 'package:frontend/views/reporting/reporting_rooms.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingShifts extends StatefulWidget {
@@ -38,11 +40,8 @@ class ReportingShiftsState extends State<ReportingShifts> {
       return Container();
     }
 
-    //ShiftController services = new ShiftController();
     Widget getList() {
-      //List<Shift> shifts = services.getShiftsForRoomNum(globals.currentRoomNumString);
-      //int numOfShifts = shifts.length;
-      int numOfShifts = 1;
+      int numOfShifts = globals.currentShifts.length;
 
       print(numOfShifts);
 
@@ -93,8 +92,7 @@ class ReportingShiftsState extends State<ReportingShifts> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height / 24,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Shift ' + (index + 1).toString(),
-                        style: TextStyle(color: Colors.white)),
+                    child: Text('Shift ' + globals.currentShifts[index].getShiftId()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -104,23 +102,17 @@ class ReportingShiftsState extends State<ReportingShifts> {
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Date: 1 August 2021',
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Date: ' + globals.currentShifts[index].getDate()),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Time: 9:00 AM to 10:00 AM',
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('Start time: ' + globals.currentShifts[index].getStartTime()),
                         ),
                         Container(
                           height: 50,
                           color: Colors.white,
-                          child: Text(
-                              'Number of employees: test',
-                              style: TextStyle(color: Colors.black)),
+                          child: Text('End time: ' + globals.currentShifts[index].getEndTime()),
                         ),
                         Container(
                           height: 50,
@@ -131,8 +123,23 @@ class ReportingShiftsState extends State<ReportingShifts> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    //globals.currentShiftString = shifts[index].getShiftNum();
-                                    Navigator.of(context).pushReplacementNamed(ReportingEmployees.routeName);
+                                    globals.currentShift = globals.currentShifts[index];
+                                    globals.currentShiftNum = globals.currentShift.getShiftId();
+                                    shiftHelpers.getGroupForShift(globals.currentShift.getShiftId()).then((result) {
+                                      if (result == true) {
+                                        userHelpers.getUsersForGroup(globals.currentGroup).then((result) {
+                                          if (result == true) {
+                                            Navigator.of(context).pushReplacementNamed(ReportingEmployees.routeName);
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text("An error occurred while retrieving employees. Please try again later.")));
+                                          }
+                                        });
+                                      } else {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("An error occurred while retrieving employees. Please try again later.")));
+                                      }
+                                    });
                                   }),
                             ],
                           ),

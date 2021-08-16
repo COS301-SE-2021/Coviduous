@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:frontend/views/reporting/home_reporting.dart';
 import 'package:frontend/views/reporting/reporting_floors.dart';
-import 'package:frontend/views/reporting/reporting_shifts.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
-class ReportingRooms extends StatefulWidget {
-  static const routeName = "/reporting_rooms";
+class ReportingFloorPlans extends StatefulWidget {
+  static const routeName = "/reporting_floor_plans";
+
   @override
-  ReportingRoomsState createState() {
-    return ReportingRoomsState();
-  }
+  _ReportingFloorPlansState createState() => _ReportingFloorPlansState();
 }
 
-class ReportingRoomsState extends State<ReportingRooms> {
+class _ReportingFloorPlansState extends State<ReportingFloorPlans> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(ReportingFloors.routeName);
+    Navigator.of(context).pushReplacementNamed(Reporting.routeName);
     return (await true);
   }
 
@@ -40,11 +39,11 @@ class ReportingRoomsState extends State<ReportingRooms> {
     }
 
     Widget getList() {
-      int numOfRooms = globals.currentRooms.length;
+      int numOfFloorPlans = globals.currentFloorPlans.length;
 
-      print(numOfRooms);
+      print(numOfFloorPlans);
 
-      if (numOfRooms == 0) {
+      if (numOfFloorPlans == 0) {
         return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
             height: MediaQuery.of(context).size.height /
@@ -57,7 +56,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
             height: MediaQuery.of(context).size.height /
                 (24 * globals.getWidgetScaling()),
             color: Theme.of(context).primaryColor,
-            child: Text('No rooms found',
+            child: Text('No floor plans found',
                 style: TextStyle(
                     fontSize:
                     (MediaQuery.of(context).size.height * 0.01) * 2.5)),
@@ -70,7 +69,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                   (12 * globals.getWidgetScaling()),
               color: Colors.white,
               padding: EdgeInsets.all(12),
-              child: Text('No rooms have been registered for this floor.',
+              child: Text('No floor plans have been registered for your company.',
                   style: TextStyle(
                       fontSize:
                       (MediaQuery.of(context).size.height * 0.01) * 2.5)))
@@ -80,17 +79,17 @@ class ReportingRoomsState extends State<ReportingRooms> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: EdgeInsets.all(16),
-            itemCount: numOfRooms,
+            padding: const EdgeInsets.all(8),
+            itemCount: numOfFloorPlans,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH room in rooms[]
+              //Display a list tile FOR EACH floor in floors[]
               return ListTile(
                 title: Column(children: [
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
+                    child: Text('Floor ' + globals.currentFloorPlans[index].getFloorPlanNumber()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -98,23 +97,9 @@ class ReportingRoomsState extends State<ReportingRooms> {
                       NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                       children: <Widget>[
                         Container(
-                          color: Colors.white,
-                          child: Text('Room dimensions (in meters squared): ' + globals.currentRooms[index].getRoomArea().toString()),
-                        ),
-                        Container(
                           height: 50,
                           color: Colors.white,
-                         child: Text('Desk dimensions (in meters squared): ' + globals.currentRooms[index].getDeskArea().toString()),
-                        ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Number of desks: ' + globals.currentRooms[index].getNumberOfDesks().toString()),
-                        ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString()),
+                          child: Text('Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString()),
                         ),
                         Container(
                           height: 50,
@@ -125,12 +110,12 @@ class ReportingRoomsState extends State<ReportingRooms> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    shiftHelpers.getShifts().then((result) {
+                                    floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
                                       if (result == true) {
-                                        Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
+                                        Navigator.of(context).pushReplacementNamed(ReportingFloors.routeName);
                                       } else {
                                         ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("An error occurred while retrieving shifts. Please try again later.")));
+                                            SnackBar(content: Text("An error occurred while retrieving floors. Please try again later.")));
                                       }
                                     });
                                   }),
@@ -148,12 +133,11 @@ class ReportingRoomsState extends State<ReportingRooms> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          title:
-          Text("View office reports"),
+          title: Text("View office reports"),
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(ReportingFloors.routeName);
+              Navigator.of(context).pushReplacementNamed(Reporting.routeName);
             },
           ),
         ),
