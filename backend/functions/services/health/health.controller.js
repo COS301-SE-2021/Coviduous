@@ -13,9 +13,14 @@ Date.prototype.timeNow = function () {
 }
 
 let database;
+let notificationDatabase;
 
 exports.setDatabase = async (db) => {
   database = db;
+}
+
+exports.setNotificationDatabase = async (db) => {
+  notificationDatabase = db;
 }
 
 exports.hasHighTemperature = async (temparature) => {
@@ -35,15 +40,15 @@ exports.hasHighTemperature = async (temparature) => {
 
 exports.getPredictionResult = async (d_t_prediction,dt_accuracy,naive_prediction,nb_accuracy)=>{
   //in this case we are using 2 models for predictions and we should weigh their results
-  if((d_t_prediction==="positve") && (nb_accuracy==="positve"))// if the models both predicted the same then we can return the results
+  if((d_t_prediction==="positive") && (naive_prediction==="positive"))// if the models both predicted the same then we can return the results
   {
     return true;
   }
-  else if((d_t_prediction==="negative") && (nb_accuracy==="negative"))
+  else if((d_t_prediction==="negative") && (naive_prediction==="negative"))
   {
     return false;
   }
-  else if((d_t_prediction==="negative") && (nb_accuracy==="positive"))
+  else if((d_t_prediction==="negative") && (naive_prediction==="positive"))
   {
       let dtAccuracy=parseFloat(dt_accuracy);
       let nbAccuracy=parseFloat(naive_prediction);
@@ -62,7 +67,7 @@ exports.getPredictionResult = async (d_t_prediction,dt_accuracy,naive_prediction
       }
 
   }
-  else if((d_t_prediction==="positive") && (nb_accuracy==="negative"))
+  else if((d_t_prediction==="positive") && (naive_prediction==="negative"))
   {
       let dtAccuracy=parseFloat(dt_accuracy);
       let nbAccuracy=parseFloat(naive_prediction);
@@ -106,6 +111,7 @@ exports.permissionDeniedBadge = async (userId,userEmail) => {
   
       if (await database.createPermission(permissionId, permissionData) == true)
       {
+        console.log(permissionData);
         return true;
       }
       else
@@ -131,6 +137,7 @@ exports.permissionAcceptedBadge = async (userId,userEmail) => {
 
   if (await database.createPermission(permissionId, permissionData) == true)
   {
+    console.log(permissionData);
     return true;
   }
   else
@@ -148,8 +155,8 @@ exports.createHealthCheck = async (req, res) => {
 
     let healthCheckObj = new HealthCheck(healthCheckId, req.body.userId, req.body.name, req.body.surname,
         req.body.userEmail, req.body.phoneNumber, req.body.temperature, req.body.fever, req.body.cough,
-        req.body.soreThroat, req.body.chills, req.body.aches, req.body.nausea, req.body.shortnessOfBreath, 
-        req.body.lossOfTasteSmell, req.body.sixFeetContact, req.body.testedPositive, req.body.travelled);
+        req.body.sore_throat, req.body.chills, req.body.aches, req.body.nausea, req.body.shortness_of_breath, 
+        req.body.loss_of_taste, req.body.sixFeetContact, req.body.testedPositive, req.body.travelled);
 
     let healthCheckData = {
       healthCheckId: healthCheckObj.healthCheckId,
@@ -173,12 +180,14 @@ exports.createHealthCheck = async (req, res) => {
     }
     //assess temparature first and if temparature is above covid19 threshold issue a permission not granted
     let highTemp= await this.hasHighTemperature(healthCheckObj.temperature);
+    console.log(highTemp);
     // Prediction to external AI service is anonymous, we donot send out personal infromation to the external service
     // personal information eg. name,surname,phone numbers are not sent but only symptoms and and history of contact 
     //is used to make a prediction
      // if temparature is less than threshold evaluate the AI prediction and accuracy score
     let AIprediction=await this.getPredictionResult(req.body.d_t_prediction,req.body.dt_accuracy,req.body.naive_prediction,req.body.nb_accuracy);
-    if(highTemp)
+    console.log(AIprediction);
+    if(highTemp==true)
     {
       await this.permissionDeniedBadge(req.body.userId,req.body.userEmail);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
@@ -187,7 +196,7 @@ exports.createHealthCheck = async (req, res) => {
         data: healthCheckData
       });
     }
-    else if(AIprediction)
+    else if(AIprediction==true)
     {
       //if prediction is positive issue out a permission denied
       await this.permissionDeniedBadge(req.body.userId,req.body.userEmail);
@@ -325,13 +334,14 @@ exports.createPermissionRequest = async (req, res) => {
       let permissionRequestId = "PR-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
   
-      let permissionRequestObj = new PermissionRequest(permissionRequestId,req.body.permissionId, req.body.userId, req.body.shiftNumber,
+      let permissionRequestObj = new PermissionRequest(permissionRequestId,req.body.permissionId, req.body.userId, req.body.userEmail,req.body.shiftNumber,
         timestamp, req.body.reason, req.body.adminId, req.body.companyId)
   
       let permissionRequestData = {
         permissionRequestId: permissionRequestObj.permissionRequestId,
-        permissionId:permissionRequestObj.permissionRequestId,
+        permissionId:permissionRequestObj.permissionId,
         userId: permissionRequestObj.userId,
+        userEmail:permissionRequestObj.userEmail,
         shiftNumber: permissionRequestObj.shiftNumber,
         timestamp: timestamp,
         reason: permissionRequestObj.reason,
@@ -341,6 +351,21 @@ exports.createPermissionRequest = async (req, res) => {
   
       if (await database.createPermissionRequest(permissionRequestData.permissionRequestId, permissionRequestData) == true)
       {
+        let notificationId = "NTFN-" + uuid.v4();
+        let timestamp = new Date().today() + " @ " + new Date().timeNow();
+  
+        let notificationData = {
+          notificationId: notificationId,
+          userId: req.body.userId,
+          userEmail:req.body.userEmail,
+          subject: "PERMISSION REQUEST",
+          message: "EMPLOYEE : "+req.body.userId+" WITH EMAIL : "+req.body.userEmail+" REQUESTS OFFICE ACCESS",
+          timestamp: timestamp,
+          adminId: req.body.adminId,
+          companyId: req.body.companyId
+        }
+    
+        await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
         return res.status(200).send({
           message: 'Permission request successfully created',
           data: permissionRequestData
@@ -388,8 +413,22 @@ exports.viewPermissionsRequestsCompanyId = async (req, res) => {
 exports.grantPermission = async (req, res) => {
   try {
 
+      let notificationId = "NTFN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
       let permissionRequests = await database.updatePermission(req.body.permissionId);
-      //need to notify employee when permission is updated
+      let notificationData = {
+        notificationId: notificationId,
+        userId: req.body.userId,
+        userEmail:req.body.userEmail,
+        subject: "ACCESS PERMISSION",
+        message: "OFFICE ACCESS PERMISSION UPDATED, PERMISSION GRANTED",
+        timestamp: timestamp,
+        adminId: req.body.adminId,
+        companyId: req.body.companyId
+      }
+  
+      await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
       
       return res.status(200).send({
         message: 'Successfully updated the permission requests',
@@ -399,6 +438,47 @@ exports.grantPermission = async (req, res) => {
       console.log(error);
       return res.status(500).send({
         message: err.message || "Some error occurred while fetching permission requests."
+      });
+  }
+};
+
+exports.reportInfection = async (req, res) => {
+  try {
+      let infectionId = "INF-" + uuid.v4();
+      let notificationId = "NTFN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+    let reportedInfectionData = {
+      infectionId: infectionId,
+      userId: req.body.userId,
+      userEmail:req.body.userEmail,
+      timestamp: timestamp,
+      adminId:req.body.adminId,
+      companyId: req.body.companyId
+    }
+
+    let notificationData = {
+      notificationId: notificationId,
+      userId: req.body.userId,
+      userEmail:req.body.userEmail,
+      subject: "COVID-19 INFECTION",
+      message: "EMPLOYEE  ID :"+req.body.userId+" EMAIL: "+req.body.userEmail+" REPORTED A POSITIVE COVID-19 CASE",
+      timestamp: timestamp,
+      adminId: req.body.adminId,
+      companyId: req.body.companyId
+    }
+
+    await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
+
+    await database.reportInfection(notificationId,reportedInfectionData);
+      
+      return res.status(200).send({
+        message: 'Successfully reported infection',
+        data: true
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message || "Some error occurred while reporting infection."
       });
   }
 };
@@ -422,6 +502,7 @@ try{
 
 };
 */
+
 
 //////////////////////////////////// Contact Tracing ///////////////////////////
 ///////////////
@@ -455,6 +536,39 @@ exports.viewShifts = async (req, res) => {
       console.log(error);
       return res.status(500).send({
         message: err.message || "Some error occurred while fetching shifts."
+      });
+  }
+};
+
+
+exports.notifyGroup = async (req, res) => {
+  try {
+      let group = await database.viewGroup(req.body.shiftNumber);
+      group.forEach(obj => {
+        let notificationId = "NTFN-" + uuid.v4();
+        let timestamp = new Date().today() + " @ " + new Date().timeNow();
+  
+        let notificationData = {
+          notificationId: notificationId,
+          userId: "",
+          userEmail:obj.userEmail,
+          subject: "COVID-19 CONTACT RISK",
+          message: "YOU MAY HAVE BEEN IN CLOSE CONTACT WITH SOMEONE WHO HAS COVID-19, PLEASE CONTACT THE HEALTH SERVICES AND YOUR ADMINISTRATOR",
+          timestamp: timestamp,
+          adminId: obj.adminId,
+          companyId: ""
+        }
+        await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
+      });
+      
+      return res.status(200).send({
+        message: 'Successfully notified group members',
+        data: group
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message || "Some error occurred while fetching group."
       });
   }
 };
