@@ -59,7 +59,7 @@ class _AdminContactTraceEmployeeState extends State<AdminContactTraceEmployee> {
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: "Enter employee ID",
+                    labelText: "Enter Employee Email Address",
                   ),
                   obscureText: false,
                   controller: _employeeId,
