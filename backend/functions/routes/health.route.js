@@ -12,13 +12,16 @@ router.get('/', function (req, res) {
 const healthController = require("../services/health/health.controller.js");
 // Import database
 const devDatabase = require("../config/health.firestore.database.js");
+const devDatabase2 = require("../config/notification.firestore.database.js");
 
 // set database to use
 healthController.setDatabase(devDatabase);
+healthController.setNotificationDatabase(devDatabase2);
 
 // Health routes
 // N.B. paths for a subsystem can all be the same
 router.post('/health/health-check', healthController.createHealthCheck);
+router.post('/health/report-infection', healthController.reportInfection);
 //router.get('/health/health-check', healthController.viewHealthChecks);
 //router.get('/health/health-check/userid', healthController.viewHealthCheckUserId);
 //router.post('/health/permissions', healthController.createPermission);
