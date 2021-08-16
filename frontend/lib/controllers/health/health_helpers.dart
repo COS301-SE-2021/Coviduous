@@ -64,7 +64,7 @@ Future<bool> reportInfection(String adminEmail) async {
   bool result = false;
   await Future.wait([
     healthController.reportInfection((globals.loggedInUser.getFirstName() + " " + globals.loggedInUser.getLastName()),
-        adminEmail, "Company admin", globals.loggedInCompanyId)
+        adminEmail, "SYSTEM", globals.loggedInCompanyId)
   ]).then((results) {
     result = results.first;
   });
@@ -75,7 +75,7 @@ Future<bool> createPermissionRequest(String adminEmail, String reason) async {
   bool result = false;
   await Future.wait([
     healthController.createPermissionRequest(globals.currentPermissionId, (globals.loggedInUser.getFirstName() + " " +
-        globals.loggedInUser.getLastName()), adminEmail, globals.currentShiftNum, reason, "Company admin", globals.loggedInCompanyId)
+        globals.loggedInUser.getLastName()), adminEmail, globals.currentShiftNum, reason, "SYSTEM", globals.loggedInCompanyId)
   ]).then((results) {
     result = results.first;
   });
