@@ -176,9 +176,9 @@ exports.updatePermission = async (permissionId) =>{
     }
   };
 
-exports.deletePermissionsPermissionId = async (permissionId) => {
+exports.deletePermissionRequest = async (permissionRequestId) => {
     try {
-        const document = db.collection('permissions').doc(permissionId);
+        const document = db.collection('permission-requests').doc(permissionRequestId);
         await document.delete();
         return true;
     } catch (error) {

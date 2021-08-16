@@ -228,88 +228,9 @@ exports.createHealthCheck = async (req, res) => {
 };
 
 
-/*admin can view health checks of users
-exports.viewHealthChecks = async (req, res) => {
-    try {
-        let healthChecks = await database.viewHealthChecks();
-        
-        return res.status(200).send({
-          message: 'Successfully retrieved health checks',
-          data: healthChecks
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send({
-          message: err.message || "Some error occurred while fetching health checks."
-        });
-    }
-};
-
-
-exports.viewHealthCheckUserId = async (req, res) => {
-    try {
-        let healthChecks = await database.viewHealthCheckUserId(req.body.userId);
-        
-        return res.status(200).send({
-          message: 'Successfully retrieved health checks',
-          data: healthChecks
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send({
-          message: err.message || "Some error occurred while fetching health checks."
-        });
-    }
-};
-
 ///////////////// PERMISSION /////////////////
 
-/*
-exports.createPermission = async (req, res) => {
-    try {
-      let permissionId = "PRMN-" + uuid.v4();
-      let timestamp = new Date().toISOString();
-  
-      let permissionObj = new Permission(permissionId, req.body.userId, timestamp, 
-        req.body.officeAccess, req.body.grantedBy)
-  
-      let permissionData = {
-        permissionId: permissionObj.permissionId,
-        userId: permissionObj.userId,
-        timestamp: timestamp,
-        officeAccess: permissionObj.officeAccess,
-        grantedBy: permissionObj.grantedBy,
-      }
-  
-      if (await database.createPermission(permissionData.permissionId, permissionData) == true)
-      {
-        return res.status(200).send({
-          message: 'Permission successfully created',
-          data: permissionData
-        });
-      }
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send(error);
-    }
-};
-  
-exports.viewPermissions = async (req, res) => {
-    try {
-        let permissions = await database.viewPermissions();
-        
-        return res.status(200).send({
-        message: 'Successfully retrieved permissions',
-        data: permissions
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send({
-        message: err.message || "Some error occurred while fetching permissions."
-        });
-    }
-};
-*/
+
 exports.viewPermissions = async (req, res) => {
   try {
       let permissions = await database.viewPermissionsUserEmail(req.body.userEmail);
@@ -376,24 +297,6 @@ exports.createPermissionRequest = async (req, res) => {
         return res.status(500).send(error);
     }
 };
-  
-/*
-exports.viewPermissionRequests = async (req, res) => {
-    try {
-        let permissionRequests = await database.viewPermissionRequests();
-        
-        return res.status(200).send({
-        message: 'Successfully retrieved permission requests',
-        data: permissionRequests
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send({
-        message: err.message || "Some error occurred while fetching permission requests."
-        });
-    }
-};
-*/
 exports.viewPermissionsRequestsCompanyId = async (req, res) => {
   try {
       let permissionRequests = await database.viewPermissionRequestsCompanyId(req.body.companyId);
@@ -483,14 +386,14 @@ exports.reportInfection = async (req, res) => {
   }
 };
 
-/*
-exports.deletePermissionsPermissionId = async (req, res)=>{
+
+exports.deletePermissionRequest = async (req, res)=>{
 try{
   
-    if ( await database.deletePermissionsPermissionId(req.body.permissionId) == true)
+    if ( await database.deletePermissionRequest(req.body.permissionRequestId) == true)
       {
         return res.status(200).send({
-        message: 'Successfully Deleted permission',
+        message: 'Successfully Deleted permissionRequest',
       });
     }
 }catch(error){
@@ -501,7 +404,7 @@ try{
 }
 
 };
-*/
+
 
 
 //////////////////////////////////// Contact Tracing ///////////////////////////
