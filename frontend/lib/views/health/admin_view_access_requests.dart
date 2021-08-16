@@ -140,18 +140,18 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                                                                   setState(() {}); //Reload the page to show changes
                                                                 } else {
                                                                   ScaffoldMessenger.of(context).showSnackBar(
-                                                                      SnackBar(content: Text("There was an error while retrieving employee permissions. Please try again later. 1")));
+                                                                      SnackBar(content: Text("An error occurred while retrieving employee permissions. Please try again later.")));
                                                                   Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
                                                                 }
                                                               });
                                                             } else {
                                                               ScaffoldMessenger.of(context).showSnackBar(
-                                                                  SnackBar(content: Text("There was an error while granting employee permission. Please try again later. 2")));
+                                                                  SnackBar(content: Text("An error occurred while granting employee permission. Please try again later.")));
                                                             }
                                                           });
                                                         } else {
                                                           ScaffoldMessenger.of(context).showSnackBar(
-                                                              SnackBar(content: Text("There was an error while granting employee permission. Please try again later. 3")));
+                                                              SnackBar(content: Text("An error occurred while granting employee permission. Please try again later.")));
                                                         }
                                                       });
                                                     }
