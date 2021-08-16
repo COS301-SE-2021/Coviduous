@@ -60,21 +60,21 @@ Future<bool> getPermissionsVisitor(String email) async {
   return result;
 }
 
-Future<bool> reportInfection() async {
+Future<bool> reportInfection(String adminEmail) async {
   bool result = false;
   Future.wait([
-    healthController.reportInfection(globals.loggedInUserId, globals.loggedInUserEmail, "adminId", globals.loggedInCompanyId)
+    healthController.reportInfection("Company admin", adminEmail, globals.loggedInUserId, globals.loggedInCompanyId)
   ]).then((results) {
     result = results.first;
   });
   return result;
 }
 
-Future<bool> createPermissionRequest(String reason) async {
+Future<bool> createPermissionRequest(String adminEmail, String reason) async {
   bool result = false;
   Future.wait([
-    healthController.createPermissionRequest(globals.currentPermissionId, globals.loggedInUserId,
-        globals.loggedInUserEmail, globals.currentShiftNum, reason, "adminId", globals.loggedInCompanyId)
+    healthController.createPermissionRequest(globals.currentPermissionId, "Company admin",
+        adminEmail, globals.currentShiftNum, reason, globals.loggedInUserId, globals.loggedInCompanyId)
   ]).then((results) {
     result = results.first;
   });
