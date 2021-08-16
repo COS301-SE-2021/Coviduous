@@ -41,7 +41,6 @@ Future<bool> createHealthCheck(String healthCheckId,String userId,String name,St
 
     var response2 = await request2.send();
 
-
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "healthCheckId": healthCheckId,
@@ -52,14 +51,15 @@ Future<bool> createHealthCheck(String healthCheckId,String userId,String name,St
       "temperature": temperature,
       "fever": fever,
       "cough": cough,
-      "soreThroat": soreThroat,
+      "sore_throat": soreThroat,
       "chills": chills,
       "aches": aches,
       "nausea": nausea,
-      "lossOfTasteSmell": lossOfTasteSmell,
-      "shortnessOfBreath": shortnessOfBreath,
+      "loss_of_taste": lossOfTasteSmell,
+      "shortness_of_breath": shortnessOfBreath,
       "testedPositive": testedPositive,
       "travelled": travelled,
+      "head_ache": headache,
       "d_t_prediction": response2.d_t_prediction,
       "d_t_accuracy": response2.d_t_accuracy,
       "naive_prediction": response2.naive_prediction,
