@@ -37,8 +37,10 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
     }
 
     Widget getList() {
-      //Permission permissions[];
-      int numOfPermissions = 1;
+      int numOfPermissions = 0;
+      if (globals.currentPermissions != null) {
+        numOfPermissions = globals.currentPermissions.length;
+      }
 
       if (numOfPermissions == 0) {
         return Column(
@@ -74,7 +76,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Permission ' + (index+1).toString()),
+                        child: Text('Permission ' + globals.currentPermissions[index].getPermissionId()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -83,19 +85,19 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Type: Office access', style: TextStyle(color: Colors.black)),
+                              child: Text('Office access: ' + globals.currentPermissions[index].getOfficeAccess().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Granted by: admin ID, name and surname here', style: TextStyle(color: Colors.black)),
+                              child: Text('Granted by: ' + globals.currentPermissions[index].getGrantedBy()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + globals.currentPermissions[index].getTimestamp()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]

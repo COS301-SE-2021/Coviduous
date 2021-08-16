@@ -13,6 +13,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/user_request_access.dart';
+
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
@@ -103,7 +104,12 @@ class _UserHealthState extends State<UserHealth> {
                               ),
                               onPressed: () {
                                 healthHelpers.getPermissionsUser().then((result) {
-                                  Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
+                                  if (result == true) {
+                                    Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text('An error occurred while retrieving permissions. Please try again later.')));
+                                  }
                                 });
                               }
                           ),

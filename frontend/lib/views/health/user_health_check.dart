@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
+
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
@@ -244,11 +245,11 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                           _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
                                         if (result == true) {
                                           ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Health check successfully completed, permission granted.")));
+                                              SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
                                           Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
                                         } else {
                                           ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Health check successfully completed, but permission was denied. Please contact the company's admins or try again later.")));
+                                              SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
                                         }
                                       });
                                     } else {
