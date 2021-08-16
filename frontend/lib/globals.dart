@@ -9,6 +9,9 @@ import 'package:frontend/models/announcement/announcement.dart';
 import 'package:frontend/models/floor_plan/floor.dart';
 import 'package:frontend/models/floor_plan/floor_plan.dart';
 import 'package:frontend/models/floor_plan/room.dart';
+import 'package:frontend/models/health/health_check.dart';
+import 'package:frontend/models/health/permission.dart';
+import 'package:frontend/models/health/permission_request.dart';
 import 'package:frontend/models/notification/notification.dart';
 import 'package:frontend/models/office/booking.dart';
 import 'package:frontend/models/shift/group.dart';
@@ -148,6 +151,17 @@ bool testResultsExist = false;
 //Check if vaccine confirmation has been uploaded
 bool vaccineConfirmExists = false;
 
+//Current user completed health check
+HealthCheck currentHealthCheck;
+
+//Current user permissions/permission
+String currentPermissionId = '';
+List<Permission> currentPermissions;
+
+//Current user permission requests/permission request
+String currentPermissionRequestId = '';
+List<PermissionRequest> currentPermissionRequests;
+
 //===============================
 //Used in announcement subsystem
 //===============================
@@ -200,6 +214,7 @@ Shift currentShift;
 //Current group/groups you're working with
 String currentGroupNum = '';
 Group tempGroup;
+Group currentGroup;
 List<Group> currentGroups = [];
 
 //Current group description you're working with
