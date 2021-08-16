@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserHealthCheck extends StatefulWidget {
@@ -242,21 +242,17 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                   onPressed: () {
                                     FormState form = _formKey.currentState;
                                     if (form.validate()) {
-                                      //UserHealthCheckResponse response = services.userCompleteHealthCheckMock(parameters go here);
-                                      //print(response.getResponse());
-                                      /*
-                                      if (response.getResponse()) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Health check successfully completed, permission granted")));
-                                        Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Health check denied, please try again or contact your admin")));
-                                      }
-                                       */
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Health check successfully completed, permission granted")));
-                                      Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                      healthHelpers.createHealthCheckUser(_temperature.text, _hasFever, _hasDryCough, _hadSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
+                                          _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
+                                        if (result == true) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Health check successfully completed, permission granted.")));
+                                          Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Health check successfully completed, but permission was denied. Please contact the company's admins or try again later.")));
+                                        }
+                                      });
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text("Please enter required fields")));
