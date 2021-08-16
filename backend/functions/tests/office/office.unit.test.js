@@ -152,82 +152,82 @@ describe('Create office booking unit tests', function() {
             });
     });
  
-//     it('Return 200 if creation successful', function() {
-//         let req = {
-//             deskNumber: "test-000",
-//             floorPlanNumber: "test-000", 
-//             floorNumber: "test-000",
-//             roomNumber: "test-000", 
-//             timestamp: "test-000", 
-//             userId: "test-000", 
-//             companyId: "test-000"
-//         };
+    it('Return 200 if creation successful', function() {
+        let req = {
+            deskNumber: "test-000",
+            floorPlanNumber: "test-000", 
+            floorNumber: "test-000",
+            roomNumber: "test-000", 
+            timestamp: "test-000", 
+            userId: "test-000", 
+            companyId: "test-000"
+        };
  
-//         chai.request(server)
-//             .post('/api/office')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(200);
-//                 console.log(res.body);
-//                 //done();
-//             });
-//     })
-//  });
- 
-//  describe('Delete office booking unit tests', function() {
-//     it('Return 400 if request is empty', function(done) {
-//         chai.request(server)
-//             .delete('/api/office')
-//             .send(null)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 //console.log(res.body);
-//                 done();
-//             });
-//     });
- 
-//     it('Return 200 if deletion is successful', function() {
-//         let req = {
-//             deskNumber: "test-000",
-//             floorPlanNumber: "test-000", 
-//             floorNumber: "test-000",
-//             roomNumber: "test-000", 
-//             timestamp: "test-000", 
-//             userId: "test-000", 
-//             companyId: "test-000"
-//         };
- 
-//         chai.request(server)
-//             .post('/api/office')
-//             .send(req)
-//             .end((err, res) => {
-//                 console.log(res.body);
-//                 let req2 = {
-//                     bookingNumber: res.body.data.bookingNumber
-//                 };
- 
-//                 chai.request(server)
-//                     .delete('/api/office')
-//                     .send(req2).end((err, res) => {
-//                          should.exist(res);
-//                          res.should.have.status(200);
-//                          //console.log(res.body);
-//                          //done();
-//                     });
-//             });
-//     });
+        chai.request(server)
+            .post('/api/office')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(200);
+                console.log(res.body);
+                //done();
+            });
+    })
  });
  
-//  describe('Get office booking unit tests', function() {
+ describe('Delete office booking unit tests', function() {
+    it('Return 400 if request is empty', function(done) {
+        chai.request(server)
+            .delete('/api/office')
+            .send(null)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                //console.log(res.body);
+                done();
+            });
+    });
+ 
+    it('Return 200 if deletion is successful', function() {
+        let req = {
+            deskNumber: "test-000",
+            floorPlanNumber: "test-000", 
+            floorNumber: "test-000",
+            roomNumber: "test-000", 
+            timestamp: "test-000", 
+            userId: "test-000", 
+            companyId: "test-000"
+        };
+ 
+        chai.request(server)
+            .post('/api/office')
+            .send(req)
+            .end((err, res) => {
+                console.log(res.body);
+                let req2 = {
+                    bookingNumber: res.body.data.bookingNumber
+                };
+ 
+                chai.request(server)
+                    .delete('/api/office')
+                    .send(req2).end((err, res) => {
+                         should.exist(res);
+                         res.should.have.status(200);
+                         //console.log(res.body);
+                         //done();
+                    });
+            });
+    });
+ });
+ 
+//  describe('Get office bookings unit tests', function() {
 //     it('Return 200 if retrieval is successful', function() {
 //         let req = {
 //             userId: 'test-000'
 //         };
 
 //         chai.request(server)
-//             .get('/api/office')
+//             .get('/api/office/view')
 //             .send(req)
 //             .end((err, res) => {
 //                 should.exist(res);
