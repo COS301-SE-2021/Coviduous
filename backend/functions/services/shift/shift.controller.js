@@ -377,7 +377,7 @@ exports.getGroupForShift = async (req, res) => {
     console.log(reqJson);
     //////////////////////////////////////////////////////////////////////
 
-    if(req.body == null) {
+    if (req.body == null) {
         fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
 
