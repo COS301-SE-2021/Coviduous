@@ -19,6 +19,17 @@ exports.createHealthCheck = async (healthCheckId, data) => {
     }
 };
 
+exports.reportInfection = async (infectionId, data) => {
+    try {
+        await db.collection('reported-infections').doc(infectionId)
+          .create(data); // .add - auto generates document id
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 exports.viewHealthChecks = async () => {
     try {
         const document = db.collection('health-check');
@@ -272,7 +283,7 @@ exports.viewShifts = async (userEmail) => {
             }
           });
 
-        let shifts = await shiftDb.viewShift();
+        let shifts = await shiftDb.viewShifts();
         let userShifts=[];
 
         group.forEach(obj => {
