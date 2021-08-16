@@ -1,5 +1,5 @@
 const uuid = require("uuid");
-
+let admin = require('firebase-admin');
 let database;
 
 /**
@@ -19,6 +19,19 @@ exports.verifyRequestToken = async (token) => {
     console.log(token);
     let isTokenValid = true;
     return isTokenValid;
+}
+exports.verifyToken = async(idToken) =>{
+   admin
+  .auth()
+  .verifyIdToken(idToken)
+  .then((decodedToken) => {
+    const uid = decodedToken.uid;
+    return true;
+  })
+  .catch((error) => {
+    return false;
+  });
+
 }
 
 /**
@@ -277,6 +290,15 @@ exports.getUsers = async (req, res) => {
         return res.status(403).send({
             message: '403 Forbidden: Access denied',
         });
+    }
+
+      
+    if(await this.verifyToken(token["postman-token"])==false)
+    {
+        return res.status(403).send({
+            message: '403 Forbidden: Access denied',
+        });
+
     }
 
     let result = await database.getUsers();
