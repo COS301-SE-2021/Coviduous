@@ -60,6 +60,19 @@ Future<bool> getPermissionsVisitor(String email) async {
   return result;
 }
 
+Future<bool> getPermissionsForEmployee(String employeeEmail) async {
+  bool result = false;
+  await Future.wait([
+    healthController.getPermissions(employeeEmail)
+  ]).then((results) {
+    if (results != null) {
+      globals.currentPermissions = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
 Future<bool> reportInfection(String adminEmail) async {
   bool result = false;
   await Future.wait([
