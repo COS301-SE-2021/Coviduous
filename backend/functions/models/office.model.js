@@ -1,15 +1,17 @@
-class booking {
-    constructor(dateTime, floorNum, roomNum, user, deskNum)
-    {
-        this.dateTime = dateTime;
-        this.numFloors = floorNum;
-        this.roomNumber = roomNum;
-        this.user = user;
-        this.numDesk = deskNum;
+class Booking {
+    constructor(bookingNumber, deskNumber, floorPlanNumber, floorNumber, roomNumber, timestamp, userId, companyId) {
+        this.bookingNumber = bookingNumber;
+        this.deskNumber = deskNumber;
+        this.floorPlanNumber = floorPlanNumber;
+        this.floorNumber = floorNumber;
+        this.roomNumber = roomNumber;
+        this.timestamp = timestamp;
+        this.userId = userId;
+        this.companyId = companyId;
 
-        console.log("created booking class");
+        console.log("Created booking class");
     }
 }
 
-module.exports = booking;
+module.exports = Booking;
 

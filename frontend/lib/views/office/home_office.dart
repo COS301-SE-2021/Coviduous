@@ -3,10 +3,12 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/office/user_view_current_bookings.dart';
-import 'package:frontend/views/office/user_view_office_floors.dart';
+import 'package:frontend/views/office/user_view_office_floor_plans.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class Office extends StatefulWidget {
@@ -15,7 +17,7 @@ class Office extends StatefulWidget {
   @override
   _OfficeState createState() => _OfficeState();
 }
-//class admin
+
 class _OfficeState extends State<Office> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
@@ -72,25 +74,14 @@ class _OfficeState extends State<Office> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              /*if (floorGlobals.globalFloors.isNotEmpty && floorGlobals.globalRooms.isNotEmpty) { //Only allow a user to book if there are floors and rooms registered
-                                Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title: Text('No office spaces available'),
-                                      content: Text('No office spaces have been registered for your company yet. Please try again later or contact your administrator.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text('Okay'),
-                                          onPressed: (){
-                                            Navigator.of(ctx).pop();
-                                          },
-                                        )
-                                      ],
-                                    )
-                                );
-                              }*/
+                              floorPlanHelpers.getFloorPlans().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(UserViewOfficeFloorPlans.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Error occurred while retrieving floor plans. Please try again later.')));
+                                }
+                              });
                             }
                         ),
                         SizedBox (
@@ -112,7 +103,14 @@ class _OfficeState extends State<Office> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                              officeHelpers.getBookings().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Error occurred while retrieving bookings. Please try again later.')));
+                                }
+                              });
                             }
                         ),
                       ]

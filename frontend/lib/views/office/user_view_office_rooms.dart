@@ -6,6 +6,7 @@ import 'package:frontend/views/office/user_view_office_times.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewOfficeRooms extends StatefulWidget {
@@ -37,7 +38,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
     }
 
     Widget getList() {
-      int numOfRooms = 0;
+      int numOfRooms = globals.currentRooms.length;
 
       print(numOfRooms);
 
@@ -79,10 +80,9 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
                         //child: Text('Room ' + rooms[index].getRoomNum()),
-                        child: Text('Placeholder'),
+                        child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -91,27 +91,17 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Number of desks: ' +
-                                      services
-                                          .getRoomDetails(rooms[index].getRoomNum())
-                                          .numDesks
-                                          .toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
+                              child: Text('Number of desks: ' + globals.currentRooms[index].getNumberOfDesks().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Available desk percentage: ' +
-                                      (((services.getRoomDetails(rooms[index].getRoomNum()).numDesks -
-                                          services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks) /
-                                          services.getRoomDetails(rooms[index].getRoomNum()).numDesks) * 100)
-                                          .toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
+                              child: Text('Available desk percentage: ' +
+                                      (((globals.currentRooms[index].getNumberOfDesks() -
+                                          globals.currentRooms[index].getOccupiedDesks()) /
+                                          globals.currentRooms[index].getNumberOfDesks()) * 100)
+                                          .toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -123,8 +113,21 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        //globals.currentRoomNum = rooms[index].getRoomNum();
-                                        Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
+                                        globals.currentRoomNum = globals.currentRooms[index].getRoomNumber();
+                                        globals.currentRoom = globals.currentRooms[index];
+                                        shiftHelpers.getShifts().then((result) {
+                                          if (result == true) {
+                                            for (int i = 0; i < globals.currentShifts.length; i++) {
+                                              if (globals.currentShifts[i].getRoomNumber() != globals.currentRoomNum) {
+                                                globals.currentShifts.removeAt(i);
+                                              }
+                                            }
+                                            Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text('Error occurred while retrieving time slots. Please try again later.')));
+                                          }
+                                        });
                                       }),
                                 ],
                               ),

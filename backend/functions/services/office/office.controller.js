@@ -22,62 +22,143 @@ Date.prototype.timeNow = function () {
        + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
 
-
 /**
  * This function create a specified booking via an HTTP CREATE request.
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
- *  bookingNumber: int
- *   deskNumber: int
- *   floorNumber: int
- *   roomNumber: int
- *   timestamp: Date
- *   userId: String
+ *  bookingNumber: string
+ *   deskNumber: string
+ *   floorPlanNumber: string
+ *   floorNumber: string
+ *   roomNumber: string
+ *   timestamp: string
+ *   userId: string
+ *   companyId: string
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
 exports.createBooking = async (req, res) => {
-    if(req.bookingNumber != null && req.deskNumber !== "" && req.floorNumber != null && req.roomNumber !== "" &&
-        req.timestamp != null && req.userId != null) {
-        let bookingNumber = "BKN-" + uuid.v4();
-        let timestamp = "Booking Placed On The : " + new Date().today() + " @ " + new Date().timeNow();
-        let bookingData = { bookingNumber: bookingNumber, deskNumber: req.body.deskNumber, floorNumber: req.body.floorNumber,
-            roomNumber: req.body.roomNumber, timestamp: timestamp, userId: req.body.userId
-        }
-        if (await database.createBooking(bookingNumber,bookingData)==true){
-            return res.status(200).send({
-                message: 'office booking successfully created',
-                data: req.body
-            });
-        }
-        else {
-            return res.status(500).send({message: "500 server error."});
-        }
+    let fieldErrors = [];
+
+    if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (reqJson.deskNumber == null || reqJson.deskNumber === '') {
+        fieldErrors.push({field: 'deskNumber', message: 'Desk number may not be empty'});
+    }
+
+    if (reqJson.floorPlanNumber == null || reqJson.floorPlanNumber === '') {
+        fieldErrors.push({field: 'floorPlanNumber', message: 'Floor plan number may not be empty'});
+    }
+
+    if (reqJson.floorNumber == null || reqJson.floorNumber === '') {
+        fieldErrors.push({field: 'floorNumber', message: 'Floor number may not be empty'});
+    }
+
+    if (reqJson.roomNumber == null || reqJson.roomNumber === '') {
+        fieldErrors.push({field: 'roomNumber', message: 'Room number may not be empty'});
+    }
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let bookingNumber = "BKN-" + uuid.v4();
+    let timestamp = "Booking Placed On The : " + new Date().today() + " @ " + new Date().timeNow();
+    let bookingData = { bookingNumber: bookingNumber, deskNumber: reqJson.deskNumber,
+        floorPlanNumber: reqJson.floorPlanNumber, floorNumber: reqJson.floorNumber,
+        roomNumber: reqJson.roomNumber, timestamp: timestamp, userId: reqJson.userId, companyId: reqJson.companyId
+    }
+
+    let result = await database.createBooking(bookingNumber, bookingData);
+
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
+
+    return res.status(200).send({
+        message: 'Office booking successfully created',
+        data: bookingData
+    });
 };
 
 /**
  * This function deletes a specified booking via an HTTP DELETE request.
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
- *  bookingNumber: number
+ *  bookingNumber: string
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
 exports.deleteBooking = async (req, res) => {
-    if(req!=null) {
-        if (await database.deleteBooking(req.body.bookingNumber) == true) {
-            return res.status(200).send({
-                message: 'Booking successfully deleted',
-            });
-        } else {
-            return res.status(500).send(error);
-        }
+    let fieldErrors = [];
+
+    if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (reqJson.bookingNumber == null || reqJson.bookingNumber === '') {
+        fieldErrors.push({field: 'bookingNumber', message: 'Booking number may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let result = await database.deleteBooking(reqJson.bookingNumber);
+
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
+
+    return res.status(200).send({
+        message: 'Booking successfully deleted',
+    });
 };
 
 
-    //get bookings using companyid
+//get bookings using user ID
 /**
  * This function views a specified booking via an HTTP VIEW request.
  * @param req The request object must exist and have the correct fields. It will be denied if not.
@@ -87,32 +168,51 @@ exports.deleteBooking = async (req, res) => {
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
 exports.viewBookings = async (req, res) => {
+    let fieldErrors = [];
 
-        if(req.companyid!=null){
-            let filteredList=[];
-            let bookings = await database.getBookings();
-            bookings.forEach(obj => {
-                if(obj.userId===req.body.userId)
-                {
-                    filteredList.push(obj);
-                }
-            });
-            return res.status(200).send({
-                message: 'Successfully retrieved bookings based on your userId',
-                data: filteredList
-            });
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let filteredList = [];
+    let bookings = await database.getBookings(reqJson.userId);
+    bookings.forEach(obj => {
+        if(obj.userId === reqJson.userId) {
+            filteredList.push(obj);
         }
-        else {
-            return res.status(500).send({
-                message: err.message || "Some error occurred while fetching bookings."
-            });
-      }
-    };
+    });
+
+    return res.status(200).send({
+        message: 'Successfully retrieved bookings based on your user ID',
+        data: filteredList
+    });
+};
 
 /**
- * This function sets the database used by the announcement controller.
+ * This function sets the database used by the office controller.
  * @param db The database to be used. It can be any interface with CRUD operations.
  */
-exports.setDatabse= async(db)=>{
-    database=db;
+exports.setDatabase = async(db) => {
+    database = db;
 }

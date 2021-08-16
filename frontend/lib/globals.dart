@@ -10,6 +10,7 @@ import 'package:frontend/models/floor_plan/floor.dart';
 import 'package:frontend/models/floor_plan/floor_plan.dart';
 import 'package:frontend/models/floor_plan/room.dart';
 import 'package:frontend/models/notification/notification.dart';
+import 'package:frontend/models/office/booking.dart';
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
 import 'package:frontend/models/notification/temp_notification.dart';
@@ -118,6 +119,11 @@ Future loadPDFFonts() async {
   ]);
   return fontAssets;
 }
+
+//===========================
+//Used in booking subsystem
+//===========================
+List<Booking> currentBookings;
 
 //============================
 //Used in floor plan subsystem

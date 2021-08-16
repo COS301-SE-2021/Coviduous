@@ -6,15 +6,15 @@ import 'dart:convert';
 
 import 'package:frontend/models/office/booking.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
+import 'package:frontend/globals.dart' as globals;
 
 List<Booking> bookingDatabaseTable = [];
 int numBookings = 0;
 
-
 String server = serverInfo.getServer();
 
-Future<bool> createBooking(String bookingNumber, String deskNumber, String floorNumber,
-    String roomNumber, String timestamp, String userId) async {
+Future<bool> createBooking(String deskNumber, String floorPlanNumber,
+    String floorNumber, String roomNumber, String userId, String companyId) async {
   String path = '/office';
   String url = server + path;
   var request;
@@ -22,12 +22,12 @@ Future<bool> createBooking(String bookingNumber, String deskNumber, String floor
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
-      "bookingNumber": bookingNumber,
-      "userId": userId,
       "deskNumber": deskNumber,
+      "floorPlanNumber": floorPlanNumber,
       "floorNumber": floorNumber,
       "roomNumber": roomNumber,
-      "timestamp": timestamp,
+      "userId": userId,
+      "companyId": companyId
     });
 
     var response = await request.send();
@@ -44,11 +44,12 @@ Future<bool> createBooking(String bookingNumber, String deskNumber, String floor
   return false;
 }
 
-Future<bool> deleteBooking(int  bookingNumber) async {
+Future<bool> deleteBooking(String bookingNumber) async {
   String path = '/office';
   String url = server + path;
+  var request;
 
-  var request = http.Request('DELETE', Uri.parse(url));
+  request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"bookingNumber": bookingNumber});
 
   var response = await request.send();
@@ -66,6 +67,7 @@ Future<bool> deleteBooking(int  bookingNumber) async {
     return true;
   }
 
+  //Double check to make sure it isn't still being stored internally
   for (int i = 0; i < numBookings; i++) {
     if (bookingDatabaseTable[i].getDeskNumber() == bookingNumber) {
       bookingDatabaseTable.removeAt(i);
@@ -76,17 +78,24 @@ Future<bool> deleteBooking(int  bookingNumber) async {
   return false;
 }
 
-
-Future<List<Booking>> viewBookings() async {
-  String path = '/notifications';
+Future<List<Booking>> viewBookings(String userId) async {
+  String path = '/office';
   String url = server + path;
-  var response;
+  var request;
 
   try {
-    response = await http.get(Uri.parse(url));
+    request = http.Request('GET', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+
+    print(await response.statusCode);
 
     if (response.statusCode == 200) {
-      var jsonString = response.body;
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       bookingDatabaseTable.clear();
@@ -100,7 +109,7 @@ Future<List<Booking>> viewBookings() async {
 
       return bookingDatabaseTable;
     }
-  } catch (error) {
+  } catch(error) {
     print(error);
   }
 

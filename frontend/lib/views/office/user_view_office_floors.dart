@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/views/office/home_office.dart';
+import 'package:frontend/views/office/user_view_office_floor_plans.dart';
 import 'package:frontend/views/office/user_view_office_rooms.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewOfficeFloors extends StatefulWidget {
@@ -16,7 +17,7 @@ class UserViewOfficeFloors extends StatefulWidget {
 
 class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(Office.routeName);
+    Navigator.of(context).pushReplacementNamed(UserViewOfficeFloorPlans.routeName);
     return (await true);
   }
 
@@ -37,7 +38,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
     }
 
     Widget getList() {
-      int numOfFloors = 0;
+      int numOfFloors = globals.currentFloors.length;
 
       print(numOfFloors);
 
@@ -81,8 +82,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        //child: Text('Floor ' + services.getFloors()[index].getFloorNumber()),
-                        child: Text('Placeholder'),
+                        child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -91,11 +91,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Number of rooms: ' +
-                                      services.getFloors()[index].getNumRooms().toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
+                              child: Text('Number of rooms: ' + globals.currentFloors[index].getNumRooms().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -107,8 +103,14 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        //globals.currentFloorNum = services.getFloors()[index].getFloorNumber();
-                                        Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
+                                        floorPlanHelpers.getRooms(globals.currentFloors[index].getFloorNumber()).then((result) {
+                                          if (result == true) {
+                                            Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text('Error occurred while retrieving rooms. Please try again later.')));
+                                          }
+                                        });
                                       }),
                                 ],
                               ),
@@ -131,7 +133,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
           title: Text('View office spaces'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(Office.routeName);
+              Navigator.of(context).pushReplacementNamed(UserViewOfficeFloorPlans.routeName);
             },
           ),
         ),

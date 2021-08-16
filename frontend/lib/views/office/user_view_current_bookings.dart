@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/office/home_office.dart';
-import 'package:frontend/models/office/booking.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewCurrentBookings extends StatefulWidget {
@@ -15,8 +15,7 @@ class UserViewCurrentBookings extends StatefulWidget {
 }
 
 class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
-  int numberOfBookings = 0; //Number of bookings
-  //List<Booking> bookings = officeGlobals.globalBookings;
+  int numberOfBookings = globals.currentBookings.length; //Number of bookings
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(Office.routeName);
@@ -72,9 +71,8 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Booking ' + (index+1).toString()),
+                        child: Text('Booking ' + globals.currentBookings[index].getBookingNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -83,26 +81,74 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('User: ' + bookings[index].user, style: TextStyle(color: Colors.black)),
+                              child: Text('User: ' + globals.currentBookings[index].getUserId()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('Date: ' + bookings[index].dateTime.toString(), style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + globals.currentBookings[index].getTimestamp()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('Floor: ' + bookings[index].floorNum, style: TextStyle(color: Colors.black)),
+                              child: Text('Floor: ' + globals.currentBookings[index].getFloorNumber()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              //child: Text('Room: ' + bookings[index].roomNum, style: TextStyle(color: Colors.black)),
+                              child: Text('Room: ' + globals.currentBookings[index].getRoomNumber()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom (
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text('Cancel'),
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: Text('Warning'),
+                                              content: Text('Are you sure you want to cancel this booking?'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: Text('Yes'),
+                                                  onPressed: (){
+                                                    officeHelpers.cancelBooking(globals.currentBookings[index].getBookingNumber()).then((result) {
+                                                      if (result == true) {
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(content: Text("Booking successfully cancelled.")));
+                                                        Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                                      } else {
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(content: Text('Error occurred while cancelling booking. Please try again later.')));
+                                                      }
+                                                    });
+                                                  },
+                                                ),
+                                                TextButton(
+                                                  child: Text('No'),
+                                                  onPressed: (){
+                                                    Navigator.of(ctx).pop();
+                                                  },
+                                                )
+                                              ],
+                                            ));
+                                        setState(() {});
+                                      }),
+                                ],
+                              ),
                             ),
                           ]
                       )

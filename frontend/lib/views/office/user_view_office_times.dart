@@ -37,10 +37,8 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
     }
 
     Widget getList() {
-      //List<Room> rooms = services.getRoomsForFloorNum(globals.currentFloorNum);
       DateTime today = new DateTime.now();
-      //List<DateTime> timeSlots;
-      int numOfTimeSlots = 1;
+      int numOfTimeSlots = globals.currentShifts.length;
 
       print(numOfTimeSlots);
 
@@ -84,8 +82,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text(
-                            today.day.toString() + "/" + today.month.toString() + "/" + today.year.toString()),
+                        child: Text(globals.currentShifts[index].getDate()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -94,32 +91,13 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text(
-                                  '9:00 - 10:00',
-                                  style: TextStyle(color: Colors.black)),
+                              child: Text(globals.currentShifts[index].getStartTime() + " - " + globals.currentShifts[index].getEndTime()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              /*child: Text(
-                                  'Maximum capacity of room: ' +
-                                      (services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity *
-                                          services.getRoomDetails(rooms[index].getRoomNum()).numDesks).toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              /*child: Text(
-                                  'Number of open desks: ' +
-                                      ((services.getRoomDetails(rooms[index].getRoomNum()).deskMaxCapcity *
-                                      services.getRoomDetails(rooms[index].getRoomNum()).numDesks) -
-                                      services.getRoomDetails(rooms[index].getRoomNum()).occupiedDesks).toInt().toString(),
-                                  style: TextStyle(color: Colors.black)),*/
-                              child: Text('Placeholder'),
+                              child: Text('Current capacity of room: ' + (globals.currentRoom.getCapacityPercentage().toString())),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -131,7 +109,9 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                   ElevatedButton(
                                       child: Text('View'),
                                       onPressed: () {
-                                        //globals.currentRoomNum = rooms[index].getRoomNum();
+                                        globals.selectedShiftDate = globals.currentShifts[index].getDate();
+                                        globals.selectedShiftStartTime = globals.currentShifts[index].getStartTime();
+                                        globals.selectedShiftEndTime = globals.currentShifts[index].getEndTime();
                                         Navigator.of(context).pushReplacementNamed(UserViewOfficeDesks.routeName);
                                       }),
                                 ],
@@ -152,8 +132,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: AppBar(
-            //title: Text('Time slots for room ' + services.getRoomDetails(globals.currentRoomNum).getRoomNum().toString()),
-            title: Text('Placeholder'),
+            title: Text('Time slots for room'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);

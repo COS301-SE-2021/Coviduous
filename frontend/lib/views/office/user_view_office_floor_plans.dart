@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/office/home_office.dart';
-import 'package:frontend/views/office/user_view_office_times.dart';
+import 'package:frontend/views/office/user_view_office_floors.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
-class UserViewOfficeDesks extends StatefulWidget {
-  static const routeName = "/user_office_desks";
+class UserViewOfficeFloorPlans extends StatefulWidget {
+  static const routeName = "/user_office_floor_plans";
   @override
-  _UserViewOfficeDesksState createState() => _UserViewOfficeDesksState();
+  _UserViewOfficeFloorPlansState createState() => _UserViewOfficeFloorPlansState();
 }
 
-class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
+class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
+    Navigator.of(context).pushReplacementNamed(Office.routeName);
     return (await true);
   }
 
@@ -38,11 +38,11 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
     }
 
     Widget getList() {
-      int numOfDesks = globals.currentRoom.getNumberOfDesks();
+      int numOfFloorPlans = globals.currentFloorPlans.length;
 
-      print(numOfDesks);
+      print(numOfFloorPlans);
 
-      if (numOfDesks == 0) { //If the number of desks = 0, don't display a list
+      if (numOfFloorPlans == 0) { //If the number of floor plans = 0, don't display a list
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -55,7 +55,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No desks found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No floor plans found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -63,7 +63,7 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                   height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
                   color: Colors.white,
                   padding: EdgeInsets.all(12),
-                  child: Text('No desks have been registered for this room.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                  child: Text('No floor plans have been registered for your company.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
               )
             ]
         );
@@ -72,17 +72,16 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.all(16),
-            itemCount: numOfDesks,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH desk in desks[]
+            itemCount: numOfFloorPlans,
+            itemBuilder: (context, index) { //Display a list tile FOR EACH floor plan in floorplans[]
               return ListTile(
                 title: Column(
                     children:[
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Desk ' + (index+1).toString()),
+                        child: Text('Floor plan' + globals.currentFloorPlans[index].getFloorPlanNumber()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -91,20 +90,24 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
                             Container(
                               height: 50,
                               color: Colors.white,
+                              child: Text('Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString()),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ElevatedButton(
-                                      child: Text('Book'),
+                                      child: Text('View'),
                                       onPressed: () {
-                                        officeHelpers.createBooking(index.toString()).then((result) {
+                                        floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
                                           if (result == true) {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text("Desk successfully booked")));
-                                            Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                            Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
                                           } else {
                                             ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text('Error occurred while booking the desk. Please try again later.')));
+                                                SnackBar(content: Text('Error occurred while retrieving floors. Please try again later.')));
                                           }
                                         });
                                       }),
@@ -126,10 +129,10 @@ class _UserViewOfficeDesksState extends State<UserViewOfficeDesks> {
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: AppBar(
-            title: Text('Book desk in room'),
+            title: Text('View office spaces'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
+                Navigator.of(context).pushReplacementNamed(Office.routeName);
               },
             ),
           ),

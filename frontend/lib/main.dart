@@ -63,12 +63,12 @@ import 'package:frontend/views/shift/admin_view_shifts_rooms.dart';
 
 //Office
 import 'package:frontend/views/office/home_office.dart';
+import 'package:frontend/views/office/user_view_office_floor_plans.dart';
 import 'package:frontend/views/office/user_view_office_floors.dart';
 import 'package:frontend/views/office/user_view_office_rooms.dart';
 import 'package:frontend/views/office/user_view_office_times.dart';
 import 'package:frontend/views/office/user_view_office_desks.dart';
 import 'package:frontend/views/office/user_view_current_bookings.dart';
-import 'package:frontend/views/office/user_book_office_space.dart';
 
 //Notification
 import 'package:frontend/views/notification/admin_home_notifications.dart';
@@ -220,11 +220,11 @@ class MyApp extends StatelessWidget{
 
         //Office
         Office.routeName: (ctx)=> Office(),
+        UserViewOfficeFloorPlans.routeName: (ctx)=> UserViewOfficeFloorPlans(),
         UserViewOfficeFloors.routeName: (ctx)=> UserViewOfficeFloors(),
         UserViewOfficeRooms.routeName: (ctx)=> UserViewOfficeRooms(),
         UserViewOfficeTimes.routeName: (ctx)=> UserViewOfficeTimes(),
         UserViewOfficeDesks.routeName: (ctx)=> UserViewOfficeDesks(),
-        UserBookOfficeSpace.routeName: (ctx)=> UserBookOfficeSpace(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
 
         //Notification
