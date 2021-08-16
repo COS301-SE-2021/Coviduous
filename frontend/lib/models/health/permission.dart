@@ -16,7 +16,7 @@ class Permission {
   String permissionId;
   String userId;
   String timestamp;
-  String officeAccess;
+  bool officeAccess;
   String grantedBy;
 
   // constructor
@@ -56,7 +56,7 @@ class Permission {
     return timestamp;
   }
 
-  String getOfficeAccess() {
+  bool getOfficeAccess() {
     return officeAccess;
   }
 

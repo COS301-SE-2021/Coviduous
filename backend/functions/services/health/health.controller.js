@@ -160,7 +160,7 @@ exports.createHealthCheck = async (req, res) => {
     //add a time attribute
 
     let healthCheckObj = new HealthCheck(healthCheckId, reqJson.userId, reqJson.name, reqJson.surname,
-      reqJson.userEmail, reqJson.phoneNumber, reqJson.temperature, reqJson.fever, reqJson.cough,
+      reqJson.email, reqJson.phoneNumber, reqJson.temperature, reqJson.fever, reqJson.cough,
       reqJson.sore_throat, reqJson.chills, reqJson.aches, reqJson.nausea, reqJson.shortness_of_breath, 
       reqJson.loss_of_taste, reqJson.sixFeetContact, reqJson.testedPositive, reqJson.travelled);
 
@@ -195,7 +195,7 @@ exports.createHealthCheck = async (req, res) => {
     console.log(AIprediction);
     if(highTemp==true)
     {
-      await this.permissionDeniedBadge(reqJson.userId,reqJson.userEmail);
+      await this.permissionDeniedBadge(reqJson.userId,reqJson.email);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
@@ -205,7 +205,7 @@ exports.createHealthCheck = async (req, res) => {
     else if(AIprediction==true)
     {
       //if prediction is positive issue out a permission denied
-      await this.permissionDeniedBadge(reqJson.userId,reqJson.userEmail);
+      await this.permissionDeniedBadge(reqJson.userId,reqJson.email);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
@@ -217,7 +217,7 @@ exports.createHealthCheck = async (req, res) => {
     {
       //if prediction is negative and temparature is low we can offer a permissions granted badge
       // all healthchecks are saved into the database for reporting
-      await this.permissionAcceptedBadge(reqJson.userId,reqJson.userEmail);
+      await this.permissionAcceptedBadge(reqJson.userId,reqJson.email);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , Access Granted',

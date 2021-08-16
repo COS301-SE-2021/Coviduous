@@ -74,7 +74,6 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                        Container(
                          alignment: Alignment.center,
                          width: MediaQuery.of(context).size.width,
-                         height: MediaQuery.of(context).size.height/24,
                          color: Theme.of(context).primaryColor,
                          child: Text('Permission ' + globals.currentPermissions[index].getPermissionId()),
                        ),
@@ -85,7 +84,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                              Container(
                                height: 50,
                                color: Colors.white,
-                               child: Text('Type: ' + globals.currentPermissions[index].getOfficeAccess()),
+                               child: Text('Office access: ' + globals.currentPermissions[index].getOfficeAccess().toString()),
                                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                              ),
                              Container(

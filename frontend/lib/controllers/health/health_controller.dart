@@ -66,6 +66,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
         "userId": userId,
         "name": name,
         "surname": surname,
+        "email": email,
         "phoneNumber": phoneNumber,
         "temperature": temperature,
         "fever": fever,
@@ -76,6 +77,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
         "nausea": nausea,
         "loss_of_taste": lossOfTasteSmell,
         "shortness_of_breath": shortnessOfBreath,
+        "sixFeetContact": sixFeetContact,
         "testedPositive": testedPositive,
         "travelled": travelled,
         "head_ache": headache,
@@ -138,12 +140,14 @@ Future<List<Permission>> getPermissions(String userEmail) async {
       var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
+      print(jsonMap);
+
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
       permissionDatabaseTable.clear();
       numPermissions = 0;
 
       for (var data in jsonMap["data"]) {
-        var permissionData = permissionFromJson(data);
+        var permissionData = Permission.fromJson(data);
         permissionDatabaseTable.add(permissionData);
         numPermissions++;
       }
@@ -248,7 +252,7 @@ Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
       numPermission_request = 0;
 
       for (var data in jsonMap["data"]) {
-        var permissionRequest = permissionRequestFromJson(data);
+        var permissionRequest = PermissionRequest.fromJson(data);
         permission_requestDatabaseTable.add(permissionRequest);
         numPermissions++;
       }
@@ -346,7 +350,7 @@ Future<Group> viewGroup(String shiftNumber) async {
       numGroups = 0;
 
       for (var data in jsonMap["data"]) {
-        var group = groupFromJson(data);
+        var group = Group.fromJson(data);
         groupDatabaseTable.add(group);
         numGroups++;
       }
@@ -387,7 +391,7 @@ Future<List<Shift>> viewShifts(String userEmail) async {
       numShifts = 0;
 
       for (var data in jsonMap["data"]) {
-        var shiftRequest = shiftFromJson(data);
+        var shiftRequest = Shift.fromJson(data);
         shiftDatabaseTable.add(shiftRequest);
         numShifts++;
       }

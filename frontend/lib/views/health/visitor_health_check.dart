@@ -311,11 +311,11 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                                     _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
                                   if (result == true) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Health check successfully completed, permission granted.")));
+                                        SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
                                     Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Health check successfully completed, but permission was denied. Please contact the company's admins or try again later.")));
+                                        SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
                                   }
                                 });
                               } else {
