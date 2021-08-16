@@ -62,6 +62,7 @@ class MakeNotificationState extends State<MakeNotification> {
               height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
               padding: EdgeInsets.all(16),
+              child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -103,6 +104,7 @@ class MakeNotificationState extends State<MakeNotification> {
                     },
                   )
                 ],
+              ),
               ),
             ),
           ),
