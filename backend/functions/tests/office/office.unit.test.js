@@ -20,27 +20,27 @@ describe('Create office booking unit tests', function() {
             });
     });
  
-//     it('Return 400 if empty desk number', function(done) {
-//         let req = {
-//             deskNumber: "",
-//             floorPlanNumber: "test-000", 
-//             floorNumber: "test-000",
-//             roomNumber: "test-000", 
-//             timestamp: "test-000", 
-//             userId: "test-000", 
-//             companyId: "test-000"
-//         };
+    it('Return 400 if empty desk number', function(done) {
+        let req = {
+            deskNumber: "",
+            floorPlanNumber: "test-000", 
+            floorNumber: "test-000",
+            roomNumber: "test-000", 
+            timestamp: "test-000", 
+            userId: "test-000", 
+            companyId: "test-000"
+        };
 
-//         chai.request(server)
-//             .post('/api/office')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/office')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                //console.log(res.body);
+                done();
+            });
+    });
  
 //     it('Return 400 if empty floorplan number', function(done) {
 //         let req = {
