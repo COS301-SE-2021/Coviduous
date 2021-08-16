@@ -37,7 +37,9 @@ describe('/POST notifications', () => {
             //done();
         });
     });
+});
 
+describe('/DELETE notifications', () => {
     it('should DELETE a notification', function() {
         let req = {
             userId: "test-000",
@@ -48,7 +50,7 @@ describe('/POST notifications', () => {
             adminId: "test-000",
             companyId: "test-000"
         };
-  
+    
         chai.request(server)
             .post('/api/notifications')
             .send(req)
@@ -57,7 +59,7 @@ describe('/POST notifications', () => {
                 let req2 = {
                     notificationId: res.body.data.notificationId
                 };
-
+    
                 chai.request(server)
                     .delete('/api/notifications')
                     .send(req2).end((err, res) => {
