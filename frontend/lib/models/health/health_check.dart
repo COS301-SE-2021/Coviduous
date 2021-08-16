@@ -36,6 +36,7 @@ class HealthCheck {
   String shortnessOfBreath;
   String lossOfTasteSmell;
 
+
   // constructor
   HealthCheck({
     this.healthCheckId,
