@@ -8,7 +8,7 @@ let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 chai.use(chaiHttp);
 
 describe('Create notification unit tests', function() {
-    it('Return 400 if request is empty', function (done) {
+    it('Return 400 if request is empty', function(done) {
         chai.request(server)
             .post('/api/notifications')
             .send(null)
@@ -202,8 +202,7 @@ describe('Create notification unit tests', function() {
  describe('Get notification unit tests', function() {
     it('Return 200 if retrieval is successful', function() {
         chai.request(server)
-            .post('/api/notifications')
-            .send()
+            .get('/api/notifications')
             .end((err, res) => {
                 should.exist(res);
                 res.should.have.status(200);
