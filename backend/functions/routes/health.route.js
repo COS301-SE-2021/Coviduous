@@ -14,7 +14,7 @@ healthController.setNotificationDatabase(devDatabase2);
 router.post('/health/health-check', healthController.createHealthCheck);
 router.post('/health/report-infection', healthController.reportInfection);
 router.post('/health/permissions/view', healthController.viewPermissions);
-router.delete('/health/permissions',healthController.deletePermissionRequest);
+router.delete('/health/permissions', healthController.deletePermissionRequest);
 
 router.post('/health/permissions/permission-request', healthController.createPermissionRequest);
 router.post('/health/permissions/permission-request/grant', healthController.grantPermission);
