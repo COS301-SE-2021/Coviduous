@@ -19,7 +19,7 @@ int numPermissions = 0;
 int numHealthChecks = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
-
+//create the health check
 Future<bool> createHealthCheck(String userId, String name, String surname, String email, String phoneNumber, String temperature,
     bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
     bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
@@ -83,7 +83,7 @@ Future<bool> createHealthCheck(String userId, String name, String surname, Strin
 
   return false;
 }
-
+//get list of permissions granted
 Future<List<Permission>> getPermissions() async {
   String path = '/permissions';
   String url = server + path;
@@ -115,6 +115,7 @@ Future<List<Permission>> getPermissions() async {
   }
   return null;
 }
+//get list of health checks performed.
 Future<List<HealthCheck>> getHealthCheck() async {
   String path = '/permissions';
   String url = server + path;
@@ -146,6 +147,7 @@ Future<List<HealthCheck>> getHealthCheck() async {
   }
   return null;
 }
+//get permission request function.
 Future<List<PermissionRequest>> getPermissionRequest() async {
   String path = '/permission-request';
   String url = server + path;
