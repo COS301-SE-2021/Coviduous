@@ -36,8 +36,12 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
     }
 
      Widget getList(){
-       int numOfPermissions = 1;
-       if(numOfPermissions == 0){
+      int numOfPermissions = 0;
+      if (globals.currentPermissions != null) {
+        numOfPermissions = globals.currentPermissions.length;
+      }
+
+       if(numOfPermissions == 0) {
          return Column(
              mainAxisAlignment: MainAxisAlignment.center,
              children: [
@@ -46,7 +50,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                   height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                  color: Theme.of(context).primaryColor,
-                 child: Text('No permissions granted', style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                 child: Text('No permissions granted', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                ),
                Container(
                    alignment: Alignment.center,
@@ -70,9 +74,8 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                        Container(
                          alignment: Alignment.center,
                          width: MediaQuery.of(context).size.width,
-                         height: MediaQuery.of(context).size.height/24,
                          color: Theme.of(context).primaryColor,
-                         child: Text('Permission ' + (index+1).toString()),
+                         child: Text('Permission ' + globals.currentPermissions[index].getPermissionId()),
                        ),
                        ListView(
                            shrinkWrap: true,
@@ -81,19 +84,19 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                              Container(
                                height: 50,
                                color: Colors.white,
-                               child: Text('Type: Office access', style: TextStyle(color: Colors.black)),
+                               child: Text('Office access: ' + globals.currentPermissions[index].getOfficeAccess().toString()),
                                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                              ),
                              Container(
                                height: 50,
                                color: Colors.white,
-                               child: Text('Granted by: admin ID, name and surname here', style: TextStyle(color: Colors.black)),
+                               child: Text('Granted by: ' + globals.currentPermissions[index].getGrantedBy()),
                                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                              ),
                              Container(
                                height: 50,
                                color: Colors.white,
-                               child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                               child: Text('Date: ' + globals.currentPermissions[index].getTimestamp()),
                                padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                              ),
                            ]

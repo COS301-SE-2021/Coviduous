@@ -6,6 +6,7 @@ import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/health/visitor_home_health.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class VisitorHealthCheck extends StatefulWidget {
@@ -19,11 +20,12 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
   TextEditingController _name = TextEditingController();
   TextEditingController _surname = TextEditingController();
   TextEditingController _email = TextEditingController();
+  TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _temperature = TextEditingController();
   bool _hasFever = false;
    bool _hasDryCough = false;
    bool _hasShortnessOfBreath = false;
-   bool _hadSoreThroat = false;
+   bool _hasSoreThroat = false;
    bool _hasChills = false;
    bool _hasTasteSmellLoss = false;
    bool _hasHeadMusclePain = false;
@@ -33,8 +35,6 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
    bool _hasTraveled = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
-
-//HealthController services = new HealthController();
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
@@ -126,6 +126,21 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                               return null;
                             },
                           ),
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'Your phone number',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _phoneNumber,
+                            validator: (value) {
+                              if(value.isEmpty || !globals.isNumeric(value))
+                              {
+                                return 'invalid number';
+                              }
+                              return null;
+                            },
+                          ),
                           SizedBox (
                             height: MediaQuery.of(context).size.height/48,
                             width: MediaQuery.of(context).size.width,
@@ -188,10 +203,10 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                           CheckboxListTile(
                             //secondary: const Icon(Icons.alarm),
                             title: const Text('4. Sore throat'),
-                            value: this._hadSoreThroat,
+                            value: this._hasSoreThroat,
                             onChanged: (bool value) {
                               setState(() {
-                                this._hadSoreThroat = value;
+                                this._hasSoreThroat = value;
                               });
                             },
                           ),
@@ -291,21 +306,18 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                             onPressed: () {
                               FormState form = _formKey.currentState;
                               if (form.validate()) {
-                                //UserHealthCheckResponse response = services.userCompleteHealthCheckMock(parameters go here);
-                                //print(response.getResponse());
-                                /*
-                                      if (response.getResponse()) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Health check successfully completed, permission granted")));
-                                        Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Health check denied, please try again or contact your admin")));
-                                      }
-                                       */
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Health check successfully completed, permission granted")));
-                                Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                                healthHelpers.createHealthCheckVisitor(_name.text, _surname.text, _email.text, _phoneNumber.text,
+                                    _temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
+                                    _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
+                                  if (result == true) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
+                                    Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
+                                  }
+                                });
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text("Please enter required fields")));

@@ -16,7 +16,7 @@ class Permission {
   String permissionId;
   String userId;
   String timestamp;
-  String officeAccess;
+  bool officeAccess;
   String grantedBy;
 
   // constructor
@@ -29,18 +29,38 @@ class Permission {
   });
 
   factory Permission.fromJson(Map<String, dynamic> json) => Permission(
-        permissionId: json["permissionID"],
-        userId: json["userID"],
+        permissionId: json["permissionId"],
+        userId: json["userId"],
         timestamp: json["timestamp"],
         officeAccess: json["officeAccess"],
         grantedBy: json["grantedBy"],
       );
 
   Map<String, dynamic> toJson() => {
-        "permissionID": permissionId,
-        "userID": userId,
+        "permissionId": permissionId,
+        "userId": userId,
         "timestamp": timestamp,
         "officeAccess": officeAccess,
         "grantedBy": grantedBy,
       };
+
+  String getPermissionId() {
+    return permissionId;
+  }
+
+  String getUserId() {
+    return userId;
+  }
+
+  String getTimestamp() {
+    return timestamp;
+  }
+
+  bool getOfficeAccess() {
+    return officeAccess;
+  }
+
+  String getGrantedBy() {
+    return grantedBy;
+  }
 }

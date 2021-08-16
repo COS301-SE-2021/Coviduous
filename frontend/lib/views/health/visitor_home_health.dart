@@ -8,6 +8,7 @@ import 'package:frontend/views/health/visitor_view_guidelines.dart';
 import 'package:frontend/views/health/visitor_view_permissions.dart';
 import 'package:frontend/views/main_homepage.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class VisitorHealth extends StatefulWidget {
@@ -16,6 +17,10 @@ class VisitorHealth extends StatefulWidget {
   @override
   _VisitorHealthState createState() => _VisitorHealthState();
 }
+
+TextEditingController _email = TextEditingController();
+final GlobalKey<FormState> _formKey = GlobalKey();
+
 class _VisitorHealthState extends State<VisitorHealth> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(HomePage.routeName);
@@ -103,7 +108,51 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                     crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(VisitorViewPermissions.routeName);
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                            title: Text('Enter your email'),
+                                            content: Form(
+                                              key: _formKey,
+                                              child: TextFormField(
+                                                controller: _email,
+                                                decoration: InputDecoration(hintText: 'Enter your email address', filled: true, fillColor: Colors.white),
+                                                validator: (value) {
+                                                  if (value.isEmpty) {
+                                                    return 'please enter your email address';
+                                                  } else if (value.isNotEmpty) {
+                                                    if (!value.contains('@')) {
+                                                      return 'invalid email';
+                                                    }
+                                                  }
+                                                  return null;
+                                                },
+                                                onSaved: (String value) {
+                                                  _email.text = value;
+                                                },
+                                              ),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                child: Text('Submit'),
+                                                onPressed: () {
+                                                  FormState form = _formKey.currentState;
+                                                  if (form.validate()) {
+                                                    healthHelpers.getPermissionsVisitor(_email.text).then((result) {
+                                                      Navigator.of(context).pushReplacementNamed(VisitorViewPermissions.routeName);
+                                                    });
+                                                  } else {
+                                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid email')));
+                                                  }
+                                                },
+                                              ),
+                                              TextButton(
+                                                child: Text('Cancel'),
+                                                onPressed: () => Navigator.pop(context),
+                                              ),
+                                            ]);
+                                      });
                                 }
                             ),
                             SizedBox (

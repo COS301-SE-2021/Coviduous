@@ -31,22 +31,50 @@ class PermissionRequest {
 
   factory PermissionRequest.fromJson(Map<String, dynamic> json) =>
       PermissionRequest(
-        permissionRequestId: json["permissionRequestID"],
-        userId: json["userID"],
+        permissionRequestId: json["permissionRequestId"],
+        userId: json["userId"],
         shiftNumber: json["shiftNumber"],
         timestamp: json["timestamp"],
         reason: json["reason"],
-        adminId: json["adminID"],
-        companyId: json["companyID"],
+        adminId: json["adminId"],
+        companyId: json["companyId"],
       );
 
   Map<String, dynamic> toJson() => {
-        "permissionRequestID": permissionRequestId,
-        "userID": userId,
+        "permissionRequestId": permissionRequestId,
+        "userId": userId,
         "shiftNumber": shiftNumber,
         "timestamp": timestamp,
         "reason": reason,
-        "adminID": adminId,
-        "companyID": companyId,
+        "adminId": adminId,
+        "companyId": companyId,
       };
+
+  String getPermissionRequestId() {
+    return permissionRequestId;
+  }
+
+  String getUserId() {
+    return userId;
+  }
+
+  String getShiftNumber() {
+    return shiftNumber;
+  }
+
+  String getTimestamp() {
+    return timestamp;
+  }
+
+  String getReason() {
+    return reason;
+  }
+
+  String getAdminId() {
+    return adminId;
+  }
+
+  String getCompanyId() {
+    return companyId;
+  }
 }
