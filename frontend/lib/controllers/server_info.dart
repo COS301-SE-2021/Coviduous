@@ -7,3 +7,11 @@ String getServer() {
     return 'http://10.0.2.2:5001/coviduous-api/us-central1/app/api/';
   }
 }
+
+String getAIserver() {
+  if (globals.getIfOnPC()) { //If on PC
+    return 'http://localhost:5000/api/prognosis';
+  } else { //Else, on mobile
+    return 'http://10.0.2.2:5000/api/prognosis';
+  }
+}

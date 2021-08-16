@@ -43,7 +43,7 @@ class HealthCheck {
     this.name,
     this.surname,
     this.email,
-    this.phoneNumber,
+    this.phoneNumber = "N/A",
     this.temperature,
     this.fever,
     this.cough,
@@ -56,8 +56,8 @@ class HealthCheck {
   });
 
   factory HealthCheck.fromJson(Map<String, dynamic> json) => HealthCheck(
-        healthCheckId: json["healthCheckID"],
-        userId: json["userID"],
+        healthCheckId: json["healthCheckId"],
+        userId: json["userId"],
         name: json["name"],
         surname: json["surname"],
         email: json["email"],
@@ -74,8 +74,8 @@ class HealthCheck {
       );
 
   Map<String, dynamic> toJson() => {
-        "healthCheckID": healthCheckId,
-        "userID": userId,
+        "healthCheckId": healthCheckId,
+        "userId": userId,
         "name": name,
         "surname": surname,
         "email": email,
@@ -90,4 +90,64 @@ class HealthCheck {
         "shortnessOfBreath": shortnessOfBreath,
         "lossOfTasteSmell": lossOfTasteSmell,
       };
+
+  String getHealthCheckID() {
+    return healthCheckId;
+  }
+
+  String getUserId() {
+    return userId;
+  }
+
+  String getName() {
+    return name;
+  }
+
+  String getSurname() {
+    return surname;
+  }
+
+  String getEmail() {
+    return email;
+  }
+
+  String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  String getTemperature() {
+    return temperature;
+  }
+
+  bool getFever() {
+    return fever;
+  }
+
+  bool getCough() {
+    return cough;
+  }
+
+  bool getSoreThroat() {
+    return soreThroat;
+  }
+
+  bool getChills() {
+    return chills;
+  }
+
+  bool getAches() {
+    return aches;
+  }
+
+  bool getNausea() {
+    return nausea;
+  }
+
+  bool getShortnessOfBreath() {
+    return shortnessOfBreath;
+  }
+
+  bool getLossOfTasteSmell() {
+    return lossOfTasteSmell;
+  }
 }

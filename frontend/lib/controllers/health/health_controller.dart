@@ -26,6 +26,7 @@ int numGroups = 0;
 int numShifts = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
+String AIserver = serverInfo.getAIserver();
 
 //Health check
 
@@ -39,7 +40,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
   var request2;
 
   try {
-    request2 = http.Request('POST', Uri.parse("http://127.0.0.1:5000/api/prognosis"));
+    request2 = http.Request('POST', Uri.parse(AIserver));
     request2.body = json.encode({
     // should be 1 or 0.
       "fever": globals.toInt(fever),
@@ -48,57 +49,63 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
       "shortness_of_breath": globals.toInt(shortnessOfBreath),
       "head_ache": globals.toInt(headache),
     });
-    //how to add application jason request headers.
     request2.headers.addAll(globals.requestHeaders);
 
     var response2 = await request2.send();
 
-    request = http.Request('POST', Uri.parse(url));
-    request.body = json.encode({
-      "userId": userId,
-      "name": name,
-      "surname": surname,
-      "phoneNumber": phoneNumber,
-      "temperature": temperature,
-      "fever": fever,
-      "cough": cough,
-      "sore_throat": soreThroat,
-      "chills": chills,
-      "aches": aches,
-      "nausea": nausea,
-      "loss_of_taste": lossOfTasteSmell,
-      "shortness_of_breath": shortnessOfBreath,
-      "testedPositive": testedPositive,
-      "travelled": travelled,
-      "head_ache": headache,
-      "d_t_prediction": response2.d_t_prediction,
-      "d_t_accuracy": response2.d_t_accuracy,
-      "naive_prediction": response2.naive_prediction,
-      "nb_accuracy":response2.nb_accuracy,
-    });
-    request.headers.addAll(globals.requestHeaders);
+    print(await response2.statusCode);
 
-    var response = await request.send();
-
-    print(await response.statusCode);
-
-    if (response.statusCode == 200) {
+    if (response2.statusCode == 200) {
       //print(response.body);
 
-      var jsonString = (await response.stream.bytesToString());
-      var jsonMap = jsonDecode(jsonString);
+      var jsonString2 = (await response2.stream.bytesToString());
+      var jsonMap2 = jsonDecode(jsonString2);
 
-      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
-      healthCheckDatabaseTable.clear();
-      numHealthChecks = 0;
+      request = http.Request('POST', Uri.parse(url));
+      request.body = json.encode({
+        "userId": userId,
+        "name": name,
+        "surname": surname,
+        "phoneNumber": phoneNumber,
+        "temperature": temperature,
+        "fever": fever,
+        "cough": cough,
+        "sore_throat": soreThroat,
+        "chills": chills,
+        "aches": aches,
+        "nausea": nausea,
+        "loss_of_taste": lossOfTasteSmell,
+        "shortness_of_breath": shortnessOfBreath,
+        "testedPositive": testedPositive,
+        "travelled": travelled,
+        "head_ache": headache,
+        "d_t_prediction": jsonMap2["d_t_prediction"],
+        "d_t_accuracy": jsonMap2["dt_accuracy"],
+        "naive_prediction": jsonMap2["naive_prediction"],
+        "nb_accuracy":jsonMap2["nb_accuracy"],
+      });
+      request.headers.addAll(globals.requestHeaders);
 
-      for (var data in jsonMap["data"]) {
-        var healthCheckData = healthCheckFromJson(data);
+      var response = await request.send();
+
+      print(await response.statusCode);
+
+      if (response.statusCode == 200) {
+        //print(response.body);
+
+        var jsonString = (await response.stream.bytesToString());
+        var jsonMap = jsonDecode(jsonString);
+
+        //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+        healthCheckDatabaseTable.clear();
+        numHealthChecks = 0;
+
+        var healthCheckData = HealthCheck.fromJson(jsonMap["data"]);
         healthCheckDatabaseTable.add(healthCheckData);
-        numPermissions++;
-      }
+        numHealthChecks++;
 
-      return healthCheckDatabaseTable.first;
+        return healthCheckDatabaseTable.first;
+      }
     }
   } catch (error) {
     print(error);
