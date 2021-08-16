@@ -31,8 +31,6 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-  //HealthController services = new HealthController();
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
     return (await true);
