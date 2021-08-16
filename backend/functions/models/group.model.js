@@ -12,6 +12,10 @@ class Group {
     Group(groupNumber, groupName, userEmails, shiftNumber, adminId) {
         return new Group(groupNumber, groupName, userEmails, shiftNumber, adminId)
     }
+
+    getUserEmail(index) {
+        return this.userEmails[index];
+    }
 }
 
 module.exports = Group;

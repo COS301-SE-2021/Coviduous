@@ -510,20 +510,22 @@ exports.notifyGroup = async (req, res) => {
     console.log(reqJson);
       let group = await database.viewGroup(reqJson.shiftNumber);
       group.forEach(obj => {
-        let notificationId = "NTFN-" + uuid.v4();
-        let timestamp = new Date().today() + " @ " + new Date().timeNow();
-  
-        let notificationData = {
-          notificationId: notificationId,
-          userId: "",
-          userEmail:obj.userEmail,
-          subject: "COVID-19 CONTACT RISK",
-          message: "YOU MAY HAVE BEEN IN CLOSE CONTACT WITH SOMEONE WHO HAS COVID-19, PLEASE CONTACT THE HEALTH SERVICES AND YOUR ADMINISTRATOR",
-          timestamp: timestamp,
-          adminId: obj.adminId,
-          companyId: ""
+          for (let i = 0; i < obj.userEmails.length; i++) {
+              let notificationId = "NTFN-" + uuid.v4();
+              let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+              let notificationData = {
+                  notificationId: notificationId,
+                  userId: "",
+                  userEmail:obj.getUserEmail(i),
+                  subject: "COVID-19 CONTACT RISK",
+                  message: "YOU MAY HAVE BEEN IN CLOSE CONTACT WITH SOMEONE WHO HAS COVID-19, PLEASE CONTACT THE HEALTH SERVICES AND YOUR ADMINISTRATOR",
+                  timestamp: timestamp,
+                  adminId: obj.adminId,
+                  companyId: ""
+          }
+          notificationDatabase.createNotification(notificationData.notificationId, notificationData);
         }
-        notificationDatabase.createNotification(notificationData.notificationId, notificationData);
       });
       
       return res.status(200).send({
