@@ -220,20 +220,20 @@ describe('Create office booking unit tests', function() {
     });
  });
  
-//  describe('Get office bookings unit tests', function() {
-//     it('Return 200 if retrieval is successful', function() {
-//         let req = {
-//             userId: 'test-000'
-//         };
+ describe('Get office bookings unit tests', function() {
+    it('Return 200 if retrieval is successful', function() {
+        let req = {
+            userId: 'test-000'
+        };
 
-//         chai.request(server)
-//             .get('/api/office/view')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(200);
-//                 //console.log(res.body);
-//                 //done();
-//             });
-//     });
-//  });
+        chai.request(server)
+            .post('/api/office/view')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(200);
+                //console.log(res.body);
+                //done();
+            });
+    });
+ });
