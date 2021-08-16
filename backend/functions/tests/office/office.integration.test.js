@@ -65,20 +65,20 @@ describe('/DELETE office', () => {
     });
 }); 
     
-describe('/GET office', () => {
-    it('it should GET all the bookings in the office based on userId', () => {
-        let req = {
-            userId: 'test-000'
-        };
+// describe('/GET office', () => {
+//     it('it should GET all the bookings in the office based on userId', () => {
+//         let req = {
+//             userId: 'test-000'
+//         };
 
-        chai.request(server)
-            .get('/api/office')
-            .send(req)
-            .end((err, res) => {
-                expect(err).to.be.null;
-                expect(res).to.have.status(200);
-                expect(res.body).should.be.a('object');
-                //done();
-            })//.catch(done);
-    });
-});
+//         chai.request(server)
+//             .get('/api/office/view')
+//             .send(req)
+//             .end((err, res) => {
+//                 expect(err).to.be.null;
+//                 expect(res).to.have.status(200);
+//                 expect(res.body).should.be.a('object');
+//                 //done();
+//             })//.catch(done);
+//     });
+// });
