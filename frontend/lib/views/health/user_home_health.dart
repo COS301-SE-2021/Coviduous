@@ -60,167 +60,169 @@ class _UserHealthState extends State<UserHealth> {
               child: Container (
                   height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
-                  padding: EdgeInsets.all(16),
-                  child: Column (
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                  padding: EdgeInsets.all(20),
+                  child: SingleChildScrollView(
+                    child: Column (
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Complete health check')),
-                                  Icon(Icons.check_circle)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserHealthCheck.routeName);
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Complete health check')),
+                                    Icon(Icons.check_circle)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View permissions')),
-                                  Icon(Icons.zoom_in)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserHealthCheck.routeName);
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View company guidelines')),
-                                  Icon(Icons.zoom_in)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserViewGuidelines.routeName);
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('View permissions')),
+                                    Icon(Icons.zoom_in)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Request access')),
-                                  Icon(Icons.help)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserRequestAccess.routeName);
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Upload COVID-19 test results')),
-                                  Icon(Icons.file_upload)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              if (globals.testResultsExist)
-                                Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                              else
-                                Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('View company guidelines')),
+                                    Icon(Icons.zoom_in)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Upload COVID-19 vaccine confirmation')),
-                                  Icon(Icons.file_upload)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              if (globals.testResultsExist)
-                                Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
-                              else
-                                Navigator.of(context).pushReplacementNamed(UserUploadVaccineConfirm.routeName);
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserViewGuidelines.routeName);
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Report COVID-19 infection')),
-                                  Icon(Icons.notifications_active)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(UserReportInfection.routeName);
-                            }
-                        ),
-                      ]
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Request access')),
+                                    Icon(Icons.help)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserRequestAccess.routeName);
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Upload COVID-19 test results')),
+                                    Icon(Icons.file_upload)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                if (globals.testResultsExist)
+                                  Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                else
+                                  Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Upload COVID-19 vaccine confirmation')),
+                                    Icon(Icons.file_upload)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                if (globals.testResultsExist)
+                                  Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                                else
+                                  Navigator.of(context).pushReplacementNamed(UserUploadVaccineConfirm.routeName);
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Report COVID-19 infection')),
+                                    Icon(Icons.notifications_active)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserReportInfection.routeName);
+                              }
+                          ),
+                        ]
+                    ),
                   )
               )
           )

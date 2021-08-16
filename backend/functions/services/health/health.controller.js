@@ -150,13 +150,19 @@ exports.permissionAcceptedBadge = async (userId,userEmail) => {
 
 exports.createHealthCheck = async (req, res) => {
   try {
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
     let healthCheckId = "HTH-" + uuid.v4();
     //add a time attribute
 
-    let healthCheckObj = new HealthCheck(healthCheckId, req.body.userId, req.body.name, req.body.surname,
-        req.body.userEmail, req.body.phoneNumber, req.body.temperature, req.body.fever, req.body.cough,
-        req.body.sore_throat, req.body.chills, req.body.aches, req.body.nausea, req.body.shortness_of_breath, 
-        req.body.loss_of_taste, req.body.sixFeetContact, req.body.testedPositive, req.body.travelled);
+    let healthCheckObj = new HealthCheck(healthCheckId, reqJson.userId, reqJson.name, reqJson.surname,
+      reqJson.userEmail, reqJson.phoneNumber, reqJson.temperature, reqJson.fever, reqJson.cough,
+      reqJson.sore_throat, reqJson.chills, reqJson.aches, reqJson.nausea, reqJson.shortness_of_breath, 
+      reqJson.loss_of_taste, reqJson.sixFeetContact, reqJson.testedPositive, reqJson.travelled);
 
     let healthCheckData = {
       healthCheckId: healthCheckObj.healthCheckId,
@@ -185,11 +191,11 @@ exports.createHealthCheck = async (req, res) => {
     // personal information eg. name,surname,phone numbers are not sent but only symptoms and and history of contact 
     //is used to make a prediction
      // if temparature is less than threshold evaluate the AI prediction and accuracy score
-    let AIprediction=await this.getPredictionResult(req.body.d_t_prediction,req.body.dt_accuracy,req.body.naive_prediction,req.body.nb_accuracy);
+    let AIprediction=await this.getPredictionResult(reqJson.d_t_prediction,reqJson.dt_accuracy,reqJson.naive_prediction,reqJson.nb_accuracy);
     console.log(AIprediction);
     if(highTemp==true)
     {
-      await this.permissionDeniedBadge(req.body.userId,req.body.userEmail);
+      await this.permissionDeniedBadge(reqJson.userId,reqJson.userEmail);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
@@ -199,7 +205,7 @@ exports.createHealthCheck = async (req, res) => {
     else if(AIprediction==true)
     {
       //if prediction is positive issue out a permission denied
-      await this.permissionDeniedBadge(req.body.userId,req.body.userEmail);
+      await this.permissionDeniedBadge(reqJson.userId,reqJson.userEmail);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
@@ -211,7 +217,7 @@ exports.createHealthCheck = async (req, res) => {
     {
       //if prediction is negative and temparature is low we can offer a permissions granted badge
       // all healthchecks are saved into the database for reporting
-      await this.permissionAcceptedBadge(req.body.userId,req.body.userEmail);
+      await this.permissionAcceptedBadge(reqJson.userId,reqJson.userEmail);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       return res.status(200).send({
         message: 'Health Check Successfully Created , Access Granted',
@@ -233,7 +239,13 @@ exports.createHealthCheck = async (req, res) => {
 
 exports.viewPermissions = async (req, res) => {
   try {
-      let permissions = await database.viewPermissionsUserEmail(req.body.userEmail);
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let permissions = await database.viewPermissionsUserEmail(reqJson.userEmail);
       
       return res.status(200).send({
         message: 'Successfully retrieved permissions',
@@ -252,11 +264,17 @@ exports.viewPermissions = async (req, res) => {
 
 exports.createPermissionRequest = async (req, res) => {
     try {
+      let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
       let permissionRequestId = "PR-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
   
-      let permissionRequestObj = new PermissionRequest(permissionRequestId,req.body.permissionId, req.body.userId, req.body.userEmail,req.body.shiftNumber,
-        timestamp, req.body.reason, req.body.adminId, req.body.companyId)
+      let permissionRequestObj = new PermissionRequest(permissionRequestId,reqJson.permissionId, reqJson.userId, reqJson.userEmail,reqJson.shiftNumber,
+        timestamp, reqJson.reason, reqJson.adminId, reqJson.companyId)
   
       let permissionRequestData = {
         permissionRequestId: permissionRequestObj.permissionRequestId,
@@ -277,13 +295,13 @@ exports.createPermissionRequest = async (req, res) => {
   
         let notificationData = {
           notificationId: notificationId,
-          userId: req.body.userId,
-          userEmail:req.body.userEmail,
+          userId: reqJson.userId,
+          userEmail:reqJson.userEmail,
           subject: "PERMISSION REQUEST",
-          message: "EMPLOYEE : "+req.body.userId+" WITH EMAIL : "+req.body.userEmail+" REQUESTS OFFICE ACCESS",
+          message: "EMPLOYEE : "+reqJson.userId+" WITH EMAIL : "+reqJson.userEmail+" REQUESTS OFFICE ACCESS",
           timestamp: timestamp,
-          adminId: req.body.adminId,
-          companyId: req.body.companyId
+          adminId: reqJson.adminId,
+          companyId: reqJson.companyId
         }
     
         await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
@@ -299,7 +317,13 @@ exports.createPermissionRequest = async (req, res) => {
 };
 exports.viewPermissionsRequestsCompanyId = async (req, res) => {
   try {
-      let permissionRequests = await database.viewPermissionRequestsCompanyId(req.body.companyId);
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let permissionRequests = await database.viewPermissionRequestsCompanyId(reqJson.companyId);
       
       return res.status(200).send({
         message: 'Successfully retrieved permission requests',
@@ -316,19 +340,25 @@ exports.viewPermissionsRequestsCompanyId = async (req, res) => {
 exports.grantPermission = async (req, res) => {
   try {
 
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
       let notificationId = "NTFN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
 
-      let permissionRequests = await database.updatePermission(req.body.permissionId);
+      let permissionRequests = await database.updatePermission(reqJson.permissionId);
       let notificationData = {
         notificationId: notificationId,
-        userId: req.body.userId,
-        userEmail:req.body.userEmail,
+        userId: reqJson.userId,
+        userEmail:reqJson.userEmail,
         subject: "ACCESS PERMISSION",
         message: "OFFICE ACCESS PERMISSION UPDATED, PERMISSION GRANTED",
         timestamp: timestamp,
-        adminId: req.body.adminId,
-        companyId: req.body.companyId
+        adminId: reqJson.adminId,
+        companyId: reqJson.companyId
       }
   
       await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
@@ -347,27 +377,34 @@ exports.grantPermission = async (req, res) => {
 
 exports.reportInfection = async (req, res) => {
   try {
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
       let infectionId = "INF-" + uuid.v4();
       let notificationId = "NTFN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
     let reportedInfectionData = {
       infectionId: infectionId,
-      userId: req.body.userId,
-      userEmail:req.body.userEmail,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
       timestamp: timestamp,
-      adminId:req.body.adminId,
-      companyId: req.body.companyId
+      adminId:reqJson.adminId,
+      companyId: reqJson.companyId
     }
 
     let notificationData = {
       notificationId: notificationId,
-      userId: req.body.userId,
-      userEmail:req.body.userEmail,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
       subject: "COVID-19 INFECTION",
-      message: "EMPLOYEE  ID :"+req.body.userId+" EMAIL: "+req.body.userEmail+" REPORTED A POSITIVE COVID-19 CASE",
+      message: "EMPLOYEE  ID :"+reqJson.userId+" EMAIL: "+reqJson.userEmail+" REPORTED A POSITIVE COVID-19 CASE",
       timestamp: timestamp,
-      adminId: req.body.adminId,
-      companyId: req.body.companyId
+      adminId: reqJson.adminId,
+      companyId: reqJson.companyId
     }
 
     await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
@@ -389,8 +426,14 @@ exports.reportInfection = async (req, res) => {
 
 exports.deletePermissionRequest = async (req, res)=>{
 try{
+  let reqJson;
+  try {
+      reqJson = JSON.parse(req.body);
+  } catch (e) {
+      reqJson = req.body;
+  }
   
-    if ( await database.deletePermissionRequest(req.body.permissionRequestId) == true)
+    if ( await database.deletePermissionRequest(reqJson.permissionRequestId) == true)
       {
         return res.status(200).send({
         message: 'Successfully Deleted permissionRequest',
@@ -412,7 +455,13 @@ try{
 //returns a group of employees who fall under the same shift identified by the shiftId
 exports.viewGroup = async (req, res) => {
   try {
-      let group = await database.viewGroup(req.body.shiftNumber);
+      let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      let group = await database.viewGroup(reqJson.shiftNumber);
       
       return res.status(200).send({
         message: 'Successfully retrieved group',
@@ -429,7 +478,13 @@ exports.viewGroup = async (req, res) => {
 //returns a shifts an employee was in based on the employee email
 exports.viewShifts = async (req, res) => {
   try {
-      let shifts = await database.viewShifts(req.body.userEmail);
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      let shifts = await database.viewShifts(reqJson.userEmail);
       
       return res.status(200).send({
         message: 'Successfully retrieved shifts',
@@ -443,10 +498,17 @@ exports.viewShifts = async (req, res) => {
   }
 };
 
-
+//uses the shiftid
 exports.notifyGroup = async (req, res) => {
   try {
-      let group = await database.viewGroup(req.body.shiftNumber);
+      let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    console.log(reqJson);
+      let group = await database.viewGroup(reqJson.shiftNumber);
       group.forEach(obj => {
         let notificationId = "NTFN-" + uuid.v4();
         let timestamp = new Date().today() + " @ " + new Date().timeNow();

@@ -95,6 +95,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
               height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
               width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
               padding: EdgeInsets.all(16),
+              child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -167,6 +168,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                     },
                   )
                 ],
+              ),
               ),
             ),
           ),

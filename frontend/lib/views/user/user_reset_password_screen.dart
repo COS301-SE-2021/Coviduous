@@ -57,6 +57,7 @@ class _UserResetPasswordState extends State<UserResetPassword> {
             height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
             color: Colors.white,
             padding: EdgeInsets.all(16),
+            child: SingleChildScrollView(
             child: Column(
               children: [
                 TextFormField(
@@ -94,6 +95,7 @@ class _UserResetPasswordState extends State<UserResetPassword> {
                     child: Text("Reset password")
                 ),
               ],
+            ),
             ),
           ),
         ) : Center(child: CircularProgressIndicator(),
