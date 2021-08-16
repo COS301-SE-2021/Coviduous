@@ -13,7 +13,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/user_request_access.dart';
-
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserHealth extends StatefulWidget {
@@ -102,7 +102,11 @@ class _UserHealthState extends State<UserHealth> {
                                   crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                               ),
                               onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
+                                healthHelpers.getPermissionsUser().then((result) {
+                                  Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
+                                });
+
+
                               }
                           ),
                           SizedBox (
