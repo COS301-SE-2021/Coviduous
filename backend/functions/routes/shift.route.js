@@ -26,7 +26,7 @@ router.put('/shift',Shift.updateShift);
  * Group Routes
  */
 router.get('/group',Shift.getGroup);
-router.get('/group/shift-id',Shift.getGroupForShift);
+router.post('/group/shift-id',Shift.getGroupForShift);
 router.post('/group',Shift.createGroup);
 
 // Export API routes

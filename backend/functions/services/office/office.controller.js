@@ -23,7 +23,7 @@ Date.prototype.timeNow = function () {
 }
 
 /**
- * This function create a specified booking via an HTTP CREATE request.
+ * This function creates a specified booking via an HTTP CREATE request.
  * @param req The request object must exist and have the correct fields. It will be denied if not.
  * The request object should contain the following:
  *  bookingNumber: string

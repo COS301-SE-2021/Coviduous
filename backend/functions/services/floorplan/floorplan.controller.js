@@ -1,18 +1,57 @@
-//Floorplan controller handles the operations of the floorplan service with business logic and CRUD operations
+//Floor plan controller handles the operations of the floor plan service with business logic and CRUD operations
 let database; //this variable holds the database
 const Room = require("../../models/room.model");
 const uuid = require("uuid"); // npm install uuid
 
-
-//Create floorplan function will create a floorplan under the given database
-//when a floorplan is created it is given the number n of floors within that floorplan 
-//this function initiates n floors under a created floorplan
+/**
+ * This function creates a specified floor plan via an HTTP CREATE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   numFloors: num
+ *   adminId: string
+ *   companyId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
 exports.createFloorPlan = async (req, res) => {
+  let fieldErrors = [];
+
+  if (req == null) {
+    fieldErrors.push({field: null, message: 'Request object may not be null'});
+  }
+
+  //Look into express.js middleware so that these lines are not necessary
+  let reqJson;
+  try {
+    reqJson = JSON.parse(req.body);
+  } catch (e) {
+    reqJson = req.body;
+  }
+  console.log(reqJson);
+  //////////////////////////////////////////////////////////////////////
+
+  if (reqJson.numFloors == null || reqJson.numFloors === '') {
+    fieldErrors.push({field: 'numFloors', message: 'Number of floors may not be empty'});
+  }
+
+  if (reqJson.adminId == null || reqJson.adminId === '') {
+    fieldErrors.push({field: 'adminId', message: 'Admin ID may not be empty'});
+  }
+
+  if (reqJson.companyId == null || reqJson.companyId === '') {
+    fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+  }
+
+  if (fieldErrors.length > 0) {
+    console.log(fieldErrors);
+    return res.status(400).send({
+      message: '400 Bad Request: Incorrect fields',
+      errors: fieldErrors
+    });
+  }
+
   try {
   let floorplanNumber = "FLP-" + uuid.v4();
-
-    let reqJson = JSON.parse(req.body);
-    console.log(reqJson);
     
   let floorplanData = {
     floorplanNumber: floorplanNumber,

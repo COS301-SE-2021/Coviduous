@@ -321,7 +321,7 @@ exports.getUserDetails = async (req, res) => {
     //Look into express.js middleware so that these lines are not necessary
     let reqJson;
     try {
-        reqJson = JSON.parse(req.body);
+        reqJson = JSON.parse(req);
     } catch (e) {
         reqJson = req.body;
     }

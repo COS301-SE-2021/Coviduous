@@ -87,7 +87,7 @@ Future<List<Notification>> getNotificationsUserEmail(String email) async {
   var request;
 
   try {
-    request = http.Request('GET', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "userEmail": email,
     });

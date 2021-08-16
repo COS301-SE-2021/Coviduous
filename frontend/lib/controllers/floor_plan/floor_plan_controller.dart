@@ -112,12 +112,12 @@ Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber) async {
 }
 
 Future<List<FloorPlan>> getFloorPlans(String companyId) async {
-  String path = '/floorplan';
+  String path = '/floorplan/view';
   String url = server + path;
   var request;
 
   try {
-    request = http.Request('GET', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "companyId": companyId
     });
@@ -153,7 +153,7 @@ Future<List<Floor>> getFloors(String floorPlanNumber) async {
   var request;
 
   try {
-    request = http.Request('GET', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "floorplanNumber": floorPlanNumber
     });
@@ -189,7 +189,7 @@ Future<List<Room>> getRooms(String floorNumber) async {
   var request;
 
   try {
-    request = http.Request('GET', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "floorNumber": floorNumber
     });

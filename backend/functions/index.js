@@ -9,6 +9,7 @@ const app = express();
 var serviceAccount = require("./permissions.json");
 
 app.use(cors({ origin: true }));
+app.use(express.urlencoded({ extended: true }));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

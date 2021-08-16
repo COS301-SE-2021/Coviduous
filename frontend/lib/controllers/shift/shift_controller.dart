@@ -164,7 +164,7 @@ Future<List<Group>> getGroupForShift(String shiftId) async {
   var request;
 
   try {
-    request = http.Request('GET', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "shiftNumber": shiftId,
     });

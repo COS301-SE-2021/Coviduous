@@ -103,11 +103,12 @@ Future<User> getUserDetails(String userId) async {
   var request;
 
   try {
-    request = http.Request('GET', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "userId": userId,
     });
     request.headers.addAll(globals.requestHeaders);
+    print(request.body);
 
     var response = await request.send();
 
