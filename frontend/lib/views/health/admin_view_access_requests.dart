@@ -5,8 +5,8 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/admin_home_permissions.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
-
 
 class AdminViewAccessRequests extends StatefulWidget {
   static const routeName = "/admin_view_access-requests";
@@ -36,18 +36,25 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
       return Container();
     }
     Widget getList() {
-      int numberOfRequests = 1;
+      int numberOfRequests = 0;
+      if (globals.currentPermissionRequests != null) {
+        numberOfRequests = globals.currentPermissionRequests.length;
+      }
 
       if (numberOfRequests == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (5 * globals.getWidgetScaling()),
+              ),
               Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No requests currently available', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No requests available', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,
@@ -55,7 +62,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                   height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
                   color: Colors.white,
                   padding: EdgeInsets.all(12),
-                  child: Text('No access requests currently made.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                  child: Text('No access requests have currently been made.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
               )
             ]
         );
@@ -72,9 +79,8 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Request ID' + (index+1).toString()),
+                        child: Text('Request ID' + globals.currentPermissionRequests[index].getPermissionRequestId()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -83,19 +89,19 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Employee name: Name and surname displayed here', style: TextStyle(color: Colors.black)),
+                              child: Text('Employee ID: ' + globals.currentPermissionRequests[index].getUserId()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Reason: For client meeting', style: TextStyle(color: Colors.black)),
+                              child: Text('Reason: ' + globals.currentPermissionRequests[index].getReason()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + globals.currentPermissionRequests[index].getTimestamp()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
@@ -112,6 +118,52 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                                       ),
                                       child: Text('Grant access'),
                                       onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: Text('Warning'),
+                                              content: Text('Are you sure you want to accept this request?'),
+                                              actions: <Widget>[
+                                                ElevatedButton(
+                                                    child: Text('Yes'),
+                                                    onPressed: () {
+                                                      globals.currentPermissionRequestId = globals.currentPermissionRequests[index].getPermissionRequestId();
+                                                      healthHelpers.grantPermission(globals.currentPermissionRequests[index].getUserId()).then((result) {
+                                                        if (result == true) {
+                                                          healthHelpers.deletePermissionRequest().then((result) {
+                                                            if (result == true) {
+                                                              healthHelpers.getPermissionRequests().then((result) {
+                                                                if (result == true) {
+                                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                                      SnackBar(content: Text("Permission granted.")));
+                                                                  Navigator.of(ctx).pop();
+                                                                  setState(() {}); //Reload the page to show changes
+                                                                } else {
+                                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                                      SnackBar(content: Text("There was an error while retrieving employee permissions. Please try again later. 1")));
+                                                                  Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+                                                                }
+                                                              });
+                                                            } else {
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(content: Text("There was an error while granting employee permission. Please try again later. 2")));
+                                                            }
+                                                          });
+                                                        } else {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                              SnackBar(content: Text("There was an error while granting employee permission. Please try again later. 3")));
+                                                        }
+                                                      });
+                                                    }
+                                                ),
+                                                ElevatedButton(
+                                                  child: Text('No'),
+                                                  onPressed: () {
+                                                    Navigator.of(ctx).pop();
+                                                  },
+                                                )
+                                              ],
+                                            ));
                                       }),
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
@@ -121,6 +173,45 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                                       ),
                                       child: Text('Deny access'),
                                       onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: Text('Warning'),
+                                              content: Text('Are you sure you want to deny this request?'),
+                                              actions: <Widget>[
+                                                ElevatedButton(
+                                                    child: Text('Yes'),
+                                                    onPressed: () {
+                                                      globals.currentPermissionRequestId = globals.currentPermissionRequests[index].getPermissionRequestId();
+                                                      healthHelpers.deletePermissionRequest().then((result) {
+                                                        if (result == true) {
+                                                          healthHelpers.getPermissionRequests().then((result) {
+                                                            if (result == true) {
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(content: Text("Permission denied.")));
+                                                              Navigator.of(ctx).pop();
+                                                              setState(() {}); //Reload the page to show changes
+                                                            } else {
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(content: Text("There was an error while retrieving employee permissions. Please try again later.")));
+                                                              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+                                                            }
+                                                          });
+                                                        } else {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                              SnackBar(content: Text("There was an error while granting employee permission. Please try again later.")));
+                                                        }
+                                                      });
+                                                    }
+                                                ),
+                                                ElevatedButton(
+                                                  child: Text('No'),
+                                                  onPressed: () {
+                                                    Navigator.of(ctx).pop();
+                                                  },
+                                                )
+                                              ],
+                                            ));
                                       }),
                                 ],
                               ),

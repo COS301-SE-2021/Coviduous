@@ -226,7 +226,7 @@ Future<bool> createPermissionRequest(String permissionId, String userId, String 
 
 //Get permission requests for a company
 Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
-  String path = '/health/permission-request/view';
+  String path = '/health/permissions/permission-request/view';
   String url = server + path;
   var request;
 
@@ -242,10 +242,10 @@ Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
 
     print(await response.statusCode);
     if (response.statusCode == 200) {
-      //print(response.body);
-
       var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
+
+      print(jsonMap);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
       permission_requestDatabaseTable.clear();
@@ -293,19 +293,22 @@ Future<bool> deletePermissionRequest(String permissionRequestId) async {
 
 //Grant permission to a specified user
 Future<bool> grantPermission(String userId, String userEmail, String adminId, String companyId) async {
-  String path = '/health/permission-request/grant';
+  String path = '/health/permissions/permission-request/grant';
   String url = server + path;
   var request;
 
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
+      "permissionRequestId": globals.currentPermissionRequestId,
       "userId": userId,
       "userEmail": userEmail,
       "adminId": adminId,
       "companyId": companyId,
+      "permissionId": globals.currentPermissionId,
     });
     request.headers.addAll(globals.requestHeaders);
+    print(request.body);
 
     var response = await request.send();
     if (response.statusCode == 200) {

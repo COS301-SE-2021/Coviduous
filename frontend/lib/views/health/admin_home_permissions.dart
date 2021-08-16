@@ -8,6 +8,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/admin_view_access_requests.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminPermissions extends StatefulWidget {
@@ -93,7 +94,14 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(AdminViewAccessRequests.routeName);
+                      healthHelpers.getPermissionRequests().then((result) {
+                        if (result == true) {
+                          Navigator.of(context).pushReplacementNamed(AdminViewAccessRequests.routeName);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("There was an error while retrieving permission requests. Please try again later.")));
+                        }
+                      });
                     }
                 ),
                 SizedBox (

@@ -123,6 +123,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       ),
                                       child: Text('Request access'),
                                       onPressed: () {
+                                        globals.currentPermissionId = globals.currentPermissions[index].getPermissionId();
                                         healthHelpers.viewShifts(globals.loggedInUserEmail).then((result) {
                                           if (result == true) {
                                             Navigator.of(context).pushReplacementNamed(UserRequestAccessShifts.routeName);
