@@ -18,6 +18,7 @@ class PermissionRequest {
   String reason;
   String adminId;
   String companyId;
+  String permissionId;
 
   PermissionRequest({
     this.permissionRequestId,
@@ -27,6 +28,7 @@ class PermissionRequest {
     this.reason,
     this.adminId,
     this.companyId,
+    this.permissionId,
   });
 
   factory PermissionRequest.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +40,7 @@ class PermissionRequest {
         reason: json["reason"],
         adminId: json["adminId"],
         companyId: json["companyId"],
+        permissionId: json["permissionId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -48,6 +51,7 @@ class PermissionRequest {
         "reason": reason,
         "adminId": adminId,
         "companyId": companyId,
+        "permissionId": permissionId,
       };
 
   String getPermissionRequestId() {
@@ -76,5 +80,9 @@ class PermissionRequest {
 
   String getCompanyId() {
     return companyId;
+  }
+
+  String getPermissionId() {
+    return permissionId;
   }
 }

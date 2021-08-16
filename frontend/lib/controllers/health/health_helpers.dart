@@ -1,4 +1,5 @@
 import 'package:frontend/controllers/health/health_controller.dart' as healthController;
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 Future<bool> createHealthCheckUser(String temperature, bool fever, bool cough, bool soreThroat,
@@ -87,8 +88,8 @@ Future<bool> reportInfection(String adminEmail) async {
 Future<bool> createPermissionRequest(String adminEmail, String reason) async {
   bool result = false;
   await Future.wait([
-    healthController.createPermissionRequest(globals.currentPermissionId, (globals.loggedInUser.getFirstName() + " " +
-        globals.loggedInUser.getLastName()), adminEmail, globals.currentShiftNum, reason, "SYSTEM", globals.loggedInCompanyId)
+    healthController.createPermissionRequest(globals.currentPermissionId, globals.loggedInUserId,
+        adminEmail, globals.currentShiftNum, reason, "SYSTEM", globals.loggedInCompanyId)
   ]).then((results) {
     result = results.first;
   });
@@ -118,12 +119,21 @@ Future<bool> deletePermissionRequest() async {
   return result;
 }
 
-Future<bool> grantPermission(String userId, String userEmail) async {
+Future<bool> grantPermission(String userId) async {
   bool result = false;
   await Future.wait([
-    healthController.grantPermission(userId, userEmail, globals.loggedInUserId, globals.loggedInCompanyId)
-  ]).then((results) {
-    result = results.first;
+    userHelpers.getOtherUser(userId)
+  ]).then((results1) async {
+    if (results1.first == true) {
+      result = await Future.wait([
+      healthController.grantPermission(userId, globals.selectedUser.getEmail(), globals.loggedInUserId, globals.loggedInCompanyId)
+      ]).then((results2) {
+        if (results2.first == true) {
+          return results2.first;
+        }
+        return false;
+      });
+    }
   });
   return result;
 }
