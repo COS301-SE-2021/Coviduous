@@ -34,7 +34,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
       return Container();
     }
     Widget getList() {
-      int numberOfRequests = 1;
+      int numberOfRequests = globals.currentPermissions.length;
 
       if (numberOfRequests == 0) {
         return Column(
@@ -57,7 +57,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                   height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
                   color: Colors.white,
                   padding: EdgeInsets.all(12),
-                  child: Text('Employee has no access to the building.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                  child: Text('Employee has no access records.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
               )
             ]
         );
@@ -74,9 +74,8 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                       Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Permissions for UserID' + (index+1).toString()),
+                        child: Text('Permissions for User ' + globals.currentPermissions[index].getUserId()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -85,19 +84,19 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Employee name: Name and surname displayed here', style: TextStyle(color: Colors.black)),
+                              child: Text('Employee name: ' + globals.selectedUser.getFirstName() + " " + globals.selectedUser.getLastName()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Access: True', style: TextStyle(color: Colors.black)),
+                              child: Text('Office access: ' + globals.currentPermissions[index].getOfficeAccess().toString()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: 1 August 2021', style: TextStyle(color: Colors.black)),
+                              child: Text('Date: ' + globals.currentPermissions[index].getTimestamp()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                           ]
@@ -135,27 +134,6 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                 ],
               ),
             ),
-            /*
-            Container (
-              alignment: Alignment.center,
-              child: Container (
-                  height: 50,
-                  width: 170,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Close'),
-                    onPressed: (){
-
-                    },
-                  )
-              ),
-            ),
-            */
           ],
         ),
       ),

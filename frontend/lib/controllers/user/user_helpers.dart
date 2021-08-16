@@ -84,3 +84,16 @@ Future<bool> deleteUser() async {
   });
   return result;
 }
+
+Future<bool> getOtherUser(String userId) async {
+  bool result = false;
+  await Future.wait([
+    userController.getUserDetails(userId)
+  ]).then((results) {
+    if (results != null) {
+      globals.selectedUser = results.first;
+      result = true;
+    }
+  });
+  return result;
+}

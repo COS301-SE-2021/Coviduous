@@ -162,6 +162,9 @@ List<Permission> currentPermissions;
 String currentPermissionRequestId = '';
 List<PermissionRequest> currentPermissionRequests;
 
+//Current user
+User selectedUser;
+
 //===============================
 //Used in announcement subsystem
 //===============================

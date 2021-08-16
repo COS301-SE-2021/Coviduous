@@ -140,6 +140,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                                   FormState form = _formKey.currentState;
                                                   if (form.validate()) {
                                                     healthHelpers.getPermissionsVisitor(_email.text).then((result) {
+                                                      _email.clear();
                                                       Navigator.of(context).pushReplacementNamed(VisitorViewPermissions.routeName);
                                                     });
                                                   } else {

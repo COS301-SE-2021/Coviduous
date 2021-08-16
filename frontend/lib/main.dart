@@ -41,6 +41,7 @@ import 'package:frontend/views/health/user_upload_vaccine_confirm.dart';
 import 'package:frontend/views/health/user_view_test_results.dart';
 import 'package:frontend/views/health/user_view_vaccine_confirm.dart';
 import 'package:frontend/views/health/user_report_infection.dart';
+import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/health/user_request_access.dart';
 import 'package:frontend/views/health/visitor_health_check.dart';
 import 'package:frontend/views/health/visitor_home_health.dart';
@@ -199,6 +200,7 @@ class MyApp extends StatelessWidget{
         UserViewVaccineConfirm.routeName: (ctx)=> UserViewVaccineConfirm(),
         UserReportInfection.routeName: (ctx)=> UserReportInfection(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
+        UserRequestAccessShifts.routeName: (ctx)=> UserRequestAccessShifts(),
         VisitorHealth.routeName: (ctx)=> VisitorHealth(),
         VisitorHealthCheck.routeName: (ctx)=> VisitorHealthCheck(),
         VisitorViewPermissions.routeName: (ctx)=> VisitorViewPermissions(),

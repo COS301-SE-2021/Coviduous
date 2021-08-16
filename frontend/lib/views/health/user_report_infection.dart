@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -8,6 +7,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserReportInfection extends StatefulWidget {
@@ -16,27 +16,8 @@ class UserReportInfection extends StatefulWidget {
   _UserReportInfectionState createState() => _UserReportInfectionState();
 }
 
-String _snapEmail;
-
-Future getSnap() async {
-  User admin = FirebaseAuth.instance.currentUser;
-  await Future.wait([
-    FirebaseFirestore.instance.runTransaction((Transaction transaction) async {
-      var query = FirebaseFirestore.instance.collection('users')
-          .where('uid', isEqualTo: admin.uid).limit(1);
-      await Future.wait([query.get().then((data) {
-        if (data.docs.length > 0) {
-          _snapEmail = data.docs[0].get('Email');
-        } else {
-          _snapEmail = "";
-        }
-      })]);
-    })
-  ]);
-  return;
-}
-
 class _UserReportInfectionState extends State<UserReportInfection>{
+  TextEditingController _adminEmail = TextEditingController();
   TextEditingController _userEmail = TextEditingController();
   TextEditingController _userPassword = TextEditingController();
   TextEditingController _confirmUserPassword = TextEditingController();
@@ -64,8 +45,6 @@ class _UserReportInfectionState extends State<UserReportInfection>{
       }
       return Container();
     }
-
-    getSnap();
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -95,14 +74,14 @@ class _UserReportInfectionState extends State<UserReportInfection>{
                             //email
                             TextFormField(
                               textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                              decoration: InputDecoration(labelText: 'Email'),
+                              decoration: InputDecoration(labelText: 'Your email'),
                               keyboardType: TextInputType.emailAddress,
                               controller: _userEmail,
                               validator: (value) {
                                 if(value.isEmpty || !value.contains('@')) {
                                   return 'invalid email';
-                                } else if (value != _snapEmail) {
-                                  return 'email does not exist in database';
+                                } else if (value != globals.loggedInUserEmail) {
+                                  return 'this is not your email';
                                 }
                                 return null;
                               },
@@ -135,6 +114,19 @@ class _UserReportInfectionState extends State<UserReportInfection>{
                                 return null;
                               },
                             ),
+                            //admin email
+                            TextFormField(
+                              textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                              decoration: InputDecoration(labelText: 'Your admin\'s email'),
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _adminEmail,
+                              validator: (value) {
+                                if(value.isEmpty || !value.contains('@')) {
+                                  return 'invalid email';
+                                }
+                                return null;
+                              },
+                            ),
                             SizedBox (
                               height: MediaQuery.of(context).size.height/48,
                               width: MediaQuery.of(context).size.width,
@@ -160,11 +152,22 @@ class _UserReportInfectionState extends State<UserReportInfection>{
                                                   setState(() {
                                                     isLoading = true;
                                                   });
-                                                  setState(() {
-                                                    isLoading = false;
+                                                  healthHelpers.reportInfection(_adminEmail.text).then((result) {
+                                                    if (result == true) {
+                                                      setState(() {
+                                                        isLoading = false;
+                                                      });
+                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                          content: Text('Infection successfully reported.')));
+                                                      Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                                    } else {
+                                                      setState(() {
+                                                        isLoading = false;
+                                                      });
+                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
+                                                          'An error occurred while reporting infection. Please try again later.')));
+                                                    }
                                                   });
-                                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Infection successfully reported')));
-                                                  Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
                                                 }
                                               ),
                                               ElevatedButton(

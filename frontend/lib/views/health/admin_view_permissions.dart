@@ -6,8 +6,9 @@ import 'package:frontend/views/health/admin_employee_permissions.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
-
 
 class AdminViewPermissions extends StatefulWidget {
   static const routeName = "/admin_view_employeeAccess";
@@ -16,7 +17,7 @@ class AdminViewPermissions extends StatefulWidget {
   _AdminViewPermissionsState createState() => _AdminViewPermissionsState();
 }
 class _AdminViewPermissionsState extends State<AdminViewPermissions> {
-  TextEditingController _employeeId = TextEditingController();
+  TextEditingController _employeeEmail = TextEditingController();
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
@@ -60,10 +61,10 @@ class _AdminViewPermissionsState extends State<AdminViewPermissions> {
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: "Employee ID",
+                    labelText: "Employee email",
                   ),
                   obscureText: false,
-                  controller: _employeeId,
+                  controller: _employeeEmail,
                 ),
                 SizedBox(
                   height: 16,
@@ -76,7 +77,21 @@ class _AdminViewPermissionsState extends State<AdminViewPermissions> {
                   ),
                   child: Text("Proceed"),
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
+                    healthHelpers.getPermissionsForEmployee(_employeeEmail.text).then((result) {
+                      if (result == true) {
+                        userHelpers.getOtherUser(globals.currentPermissions[0].getUserId()).then((result) {
+                          if (result == true) {
+                            Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("No permissions found for this user.")));
+                          }
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("There was an error while retrieving user permissions. Please try again later.")));
+                      }
+                    });
                   },
                 )
 

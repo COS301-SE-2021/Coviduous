@@ -16,7 +16,7 @@ class AdminPermissions extends StatefulWidget {
   @override
   _AdminPermissionsState createState() => _AdminPermissionsState();
 }
-//class admin
+
 class _AdminPermissionsState extends State<AdminPermissions> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
