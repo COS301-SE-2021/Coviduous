@@ -3,7 +3,7 @@ let db = admin.firestore();
 
 exports.createShift = async (ShiftID,ShiftData) => { 
     try {
-        await db.collection('shift').doc(ShiftID)
+        await db.collection('shifts').doc(ShiftID)
             .create(ShiftData); 
             return true;
       } catch (error) {
@@ -14,7 +14,7 @@ exports.createShift = async (ShiftID,ShiftData) => {
 
 exports.createGroup = async (groupId, groupData) =>{
     try{
-        await db.collection('group').doc(groupId)
+        await db.collection('groups').doc(groupId)
         .create(groupData);
         return true;
     }
@@ -26,7 +26,7 @@ exports.createGroup = async (groupId, groupData) =>{
 
 exports.getGroupForShift = async (shiftNumber) =>{
     try{
-        const document = db.collection('group').where("shiftNumber","==",shiftNumber);
+        const document = db.collection('groups').where("shiftNumber","==",shiftNumber);
         const snapshot = await document.get();
  
         let list =[];
@@ -46,7 +46,7 @@ exports.getGroupForShift = async (shiftNumber) =>{
 
 exports.getGroup = async () =>{
     try{
-        const document = db.collection('group');
+        const document = db.collection('groups');
         const snapshot = await document.get();
     
         let list =[];
@@ -63,7 +63,7 @@ exports.getGroup = async () =>{
 
 exports.viewShifts = async () => {
     try {
-        const document = db.collection('shift');
+        const document = db.collection('shifts');
         const snapshot = await document.get();
   
         let list = [];
@@ -80,7 +80,7 @@ exports.viewShifts = async () => {
 
 exports.deleteShift = async (ShiftID) => {
     try {
-        const document = db.collection('shift').doc(ShiftID);
+        const document = db.collection('shifts').doc(ShiftID);
         await document.delete();
         return true;
     } catch (error) {
@@ -91,7 +91,7 @@ exports.deleteShift = async (ShiftID) => {
 
 exports.deleteGroup = async (groupId) => {
     try {
-        const document = db.collection('group').doc(groupId);
+        const document = db.collection('groups').doc(groupId);
         await document.delete();
         return true;
     } catch (error) {
@@ -102,7 +102,7 @@ exports.deleteGroup = async (groupId) => {
 
 exports.updateShift = async (shiftId,shiftData) => {
     try {
-        const document = db.collection('shift').doc(shiftId);
+        const document = db.collection('shifts').doc(shiftId);
         await document.update({
             startTime:shiftData.startTime,
             endTime:shiftData.endTime
