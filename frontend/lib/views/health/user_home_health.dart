@@ -105,8 +105,6 @@ class _UserHealthState extends State<UserHealth> {
                                 healthHelpers.getPermissionsUser().then((result) {
                                   Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
                                 });
-
-
                               }
                           ),
                           SizedBox (
