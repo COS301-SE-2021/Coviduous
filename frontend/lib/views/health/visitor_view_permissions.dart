@@ -71,11 +71,18 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                return ListTile(
                  title: Column(
                      children:[
-                       Container(
+                       (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
                          alignment: Alignment.center,
+                         height: 50,
                          width: MediaQuery.of(context).size.width,
-                         color: Theme.of(context).primaryColor,
-                         child: Text('Permission ' + globals.currentPermissions[index].getPermissionId()),
+                         color: Colors.green,
+                         child: Text('Access granted', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                       ) : Container(
+                         alignment: Alignment.center,
+                         height: 50,
+                         width: MediaQuery.of(context).size.width,
+                         color: Colors.redAccent,
+                         child: Text('Access denied', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                        ),
                        ListView(
                            shrinkWrap: true,
@@ -103,7 +110,6 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                        )
                      ]
                  ),
-                 //title: floors[index].floor()
                );
              }
          );
