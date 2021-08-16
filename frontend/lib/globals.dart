@@ -72,6 +72,9 @@ bool isNumeric(String s) {
   return double.tryParse(s) != null;
 }
 
+//Cast a bool to an int - 1 for true and 0 for false
+int toInt(bool val) => val ? 1 : 0;
+
 //Currently logged in user
 User loggedInUser;
 
