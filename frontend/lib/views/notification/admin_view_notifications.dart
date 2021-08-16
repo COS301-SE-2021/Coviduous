@@ -112,7 +112,6 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                           ),
                           Container(
-                            height: 50,
                             color: Colors.white,
                             child: Text('Message: ' + reverseNotifications[index].message),
                             padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
