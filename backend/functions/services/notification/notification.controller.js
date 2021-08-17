@@ -1,5 +1,6 @@
 const Notification = require("../../models/notification.model");
 const uuid = require("uuid"); // npm install uuid
+var nodemailer = require('nodemailer');
 
 let database;
 
@@ -251,3 +252,37 @@ exports.viewNotificationsUserEmail = async (req, res) => {
     //     });
     // }
 };
+
+
+/**
+ * This function sends an email to a user using the users email address
+ * The function is used as an internal service to other functions 
+ * @param req The request object may not be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
+ exports.sendUserEmail = async (receiver,subject,message) => {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'capslock.cos301@gmail.com',
+          pass: 'Coviduous.COS301'
+        }
+      });
+      
+      var mailOptions = {
+        from: 'capslock.cos301@gmail.com',
+        to: receiver,
+        subject: subject,
+        text: message
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+          return true;
+        }
+      }); 
+ };
