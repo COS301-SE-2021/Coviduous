@@ -5,6 +5,7 @@ let chaiHttp = require('chai-http'); // npm install chai-http
 //let server = require('../index.js');
 let server = 'http://localhost:5001/coviduous-api/us-central1/app/'
 let should = chai.should();
+const NotificationService = require("../../services/notification/notification.controller.js");
 
 //const functions = require('firebase-functions');
 //const admin = require('firebase-admin');
@@ -13,6 +14,17 @@ let should = chai.should();
 //const notificationDB = require("../../config/notification.firestore.database.js");
 
 chai.use(chaiHttp);
+
+describe('Notification Sending Email Notification', function() {
+    it('Send User Email', async function() {
+        let message="Hey There!";
+        let subject="Test Email";
+        let userEmail = "njabuloskosana24@gmail.com";
+        expect(await NotificationService.sendUserEmail(userEmail,subject,message)).to.equal(true);
+        
+
+    });
+});
 
 describe('/POST notifications', () => {
     it('it should create an notification', () => {
