@@ -55,7 +55,8 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No floor plans found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('No floor plans found', style: TextStyle(color: Colors.white,
+                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,

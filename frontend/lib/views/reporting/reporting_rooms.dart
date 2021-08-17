@@ -58,7 +58,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                 (24 * globals.getWidgetScaling()),
             color: Theme.of(context).primaryColor,
             child: Text('No rooms found',
-                style: TextStyle(
+                style: TextStyle(color: Colors.white,
                     fontSize:
                     (MediaQuery.of(context).size.height * 0.01) * 2.5)),
           ),

@@ -56,7 +56,8 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('Shift is empty', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                child: Text('Shift is empty', style: TextStyle(color: Colors.white,
+                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
                   alignment: Alignment.center,

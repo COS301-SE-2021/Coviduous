@@ -59,7 +59,7 @@ class ReportingShiftsState extends State<ReportingShifts> {
                 (24 * globals.getWidgetScaling()),
             color: Theme.of(context).primaryColor,
             child: Text('No shifts found',
-                style: TextStyle(
+                style: TextStyle(color: Colors.white,
                     fontSize:
                     (MediaQuery.of(context).size.height * 0.01) * 2.5)),
           ),

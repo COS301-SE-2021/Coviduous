@@ -66,7 +66,7 @@ class _ViewShiftsFloorPlansState extends State<ViewShiftsFloorPlans> {
                 color: Theme
                     .of(context)
                     .primaryColor,
-                child: Text('No floor plans found', style: TextStyle(fontSize: (MediaQuery
+                child: Text('No floor plans found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery
                     .of(context)
                     .size
                     .height * 0.01) * 2.5)),

@@ -67,7 +67,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                 color: Theme
                     .of(context)
                     .primaryColor,
-                child: Text('No floors found', style: TextStyle(fontSize: (MediaQuery
+                child: Text('No floors found', style: TextStyle(color: Colors.white, fontSize: (MediaQuery
                     .of(context)
                     .size
                     .height * 0.01) * 2.5)),

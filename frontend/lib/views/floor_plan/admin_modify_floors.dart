@@ -64,9 +64,8 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                 (24 * globals.getWidgetScaling()),
             color: Theme.of(context).primaryColor,
             child: Text('No floors found',
-                style: TextStyle(
-                    fontSize:
-                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                style: TextStyle(color: Colors.white,
+                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
           ),
           Container(
               alignment: Alignment.center,

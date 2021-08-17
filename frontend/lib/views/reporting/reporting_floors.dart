@@ -57,7 +57,7 @@ class _ReportingFloorsState extends State<ReportingFloors> {
                 (24 * globals.getWidgetScaling()),
             color: Theme.of(context).primaryColor,
             child: Text('No floors found',
-                style: TextStyle(
+                style: TextStyle(color: Colors.white,
                     fontSize:
                     (MediaQuery.of(context).size.height * 0.01) * 2.5)),
           ),
