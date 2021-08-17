@@ -157,6 +157,14 @@ exports.createHealthCheck = async (req, res) => {
   if (req == null) {
     fieldErrors.push({field: null, message: 'Request object may not be null'});
   }
+
+  let reqJson;
+  try {
+      reqJson = JSON.parse(req.body);
+  } catch (e) {
+      reqJson = req.body;
+  }
+
   if (reqJson.name == null || reqJson.name === '') {
     fieldErrors.push({field: 'name', message: 'Name of individual may not be empty'});
   }
@@ -186,12 +194,6 @@ exports.createHealthCheck = async (req, res) => {
   }
 
   try {
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
     let healthCheckId = "HTH-" + uuid.v4();
     //add a time attribute
 

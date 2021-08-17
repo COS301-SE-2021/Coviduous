@@ -21,7 +21,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
   TextEditingController _email = TextEditingController();
   TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _temperature = TextEditingController();
-  bool _hasFever = false;
+   bool _hasFever = false;
    bool _hasDryCough = false;
    bool _hasShortnessOfBreath = false;
    bool _hasSoreThroat = false;
@@ -29,6 +29,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
    bool _hasTasteSmellLoss = false;
    bool _hasHeadMusclePain = false;
    bool _hasNauseaDiarrheaVomiting = false;
+
    bool _hasComeIntoContact = false;
    bool _hasTestedPositive = false;
    bool _hasTraveled = false;

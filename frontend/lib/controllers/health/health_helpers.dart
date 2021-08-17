@@ -8,7 +8,7 @@ Future<bool> createHealthCheckUser(String temperature, bool fever, bool cough, b
   bool result = false;
   await Future.wait([
     healthController.createHealthCheck(globals.loggedInUserId, globals.loggedInUser.getFirstName(), globals.loggedInUser.getLastName(),
-        globals.loggedInUserEmail, "", temperature, fever, cough, soreThroat, chills, aches, nausea,
+        globals.loggedInUserEmail, "N/A", temperature, fever, cough, soreThroat, chills, aches, nausea,
         shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache)
   ]).then((results) {
     if (results != null) {
