@@ -1,6 +1,7 @@
 const HealthCheck = require("../../models/health.check.model");
 const Permission = require("../../models/permission.model");
 const PermissionRequest = require("../../models/permission.request.model");
+const notificationService = require("../../services/notification/notification.controller.js");
 const uuid = require("uuid"); // npm install uuid
 // For todays date;
 Date.prototype.today = function () { 
@@ -111,6 +112,7 @@ exports.permissionDeniedBadge = async (userId,userEmail) => {
   
       if (await database.createPermission(permissionId, permissionData) == true)
       {
+        notificationService.sendUserEmail(userEmail,"ACCESS TO OFFICE DENIED","BASED ON YOUR HEALTH ASSESSMENT YOU HAVE BEEN DENIED OFFICE ACCESS PLEASE CONTACT YOUR ADMINISTRATOR FOR A REVIEW");
         console.log(permissionData);
         return true;
       }
@@ -137,6 +139,7 @@ exports.permissionAcceptedBadge = async (userId,userEmail) => {
 
   if (await database.createPermission(permissionId, permissionData) == true)
   {
+    notificationService.sendUserEmail(userEmail,"ACCESS TO OFFICE GRANTED","BASED ON YOUR HEALTH ASSESSMENT YOU HAVE BEEN GRANTED OFFICE ACCESS.");
     console.log(permissionData);
     return true;
   }
@@ -149,6 +152,39 @@ exports.permissionAcceptedBadge = async (userId,userEmail) => {
 ///////////////// HEALTH CHECK /////////////////
 
 exports.createHealthCheck = async (req, res) => {
+  let fieldErrors = [];
+
+  if (req == null) {
+    fieldErrors.push({field: null, message: 'Request object may not be null'});
+  }
+  if (reqJson.name == null || reqJson.name === '') {
+    fieldErrors.push({field: 'name', message: 'Name of individual may not be empty'});
+  }
+
+  if (reqJson.surname == null || reqJson.surname === '') {
+    fieldErrors.push({field: 'surname', message: 'Surname of individual may not be empty'});
+  }
+
+  if (reqJson.email == null || reqJson.email === '') {
+    fieldErrors.push({field: 'email', message: 'email of individual may not be empty'});
+  }
+
+  if (reqJson.phoneNumber == null || reqJson.phoneNumber === '') {
+    fieldErrors.push({field: 'phone number', message: 'phone number may not be empty'});
+  }
+  
+  if (reqJson.temperature == null || reqJson.temperature === '') {
+    fieldErrors.push({field: 'temperature', message: 'temperature number may not be empty'});
+  }
+
+  if (fieldErrors.length > 0) {
+    console.log(fieldErrors);
+    return res.status(400).send({
+      message: '400 Bad Request: Incorrect fields',
+      errors: fieldErrors
+    });
+  }
+
   try {
     let reqJson;
     try {
@@ -305,6 +341,7 @@ exports.createPermissionRequest = async (req, res) => {
         }
     
         await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
+        await notificationService.sendUserEmail(reqJson.adminEmail,notificationData.subject,notificationData.message);
         return res.status(200).send({
           message: 'Permission request successfully created',
           data: permissionRequestData
@@ -362,7 +399,7 @@ exports.grantPermission = async (req, res) => {
       }
   
       await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
-      
+      await notificationService.sendUserEmail(notificationData.userEmail,notificationData.subject,notificationData.message);
       return res.status(200).send({
         message: 'Successfully updated the permission requests',
         data: permissionRequests
@@ -408,8 +445,10 @@ exports.reportInfection = async (req, res) => {
     }
 
     await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
+    
 
     await database.reportInfection(notificationId,reportedInfectionData);
+    await notificationService.sendUserEmail(reqJson.adminEmail,notificationData.subject,notificationData.message);
       
       return res.status(200).send({
         message: 'Successfully reported infection',
@@ -525,6 +564,7 @@ exports.notifyGroup = async (req, res) => {
                   companyId: ""
           }
           notificationDatabase.createNotification(notificationData.notificationId, notificationData);
+          notificationService.sendUserEmail(notificationData.userEmailEmail,notificationData.subject,notificationData.message);
         }
       });
       

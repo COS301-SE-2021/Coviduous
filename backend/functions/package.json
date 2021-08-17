@@ -33,6 +33,7 @@
     "firebase-tools": "^9.16.0",
     "jwks-rsa": "^2.0.4",
     "node-fetch": "^2.6.1",
+    "nodemailer": "^6.6.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
