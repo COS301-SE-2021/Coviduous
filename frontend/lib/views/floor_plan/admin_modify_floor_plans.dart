@@ -141,7 +141,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                                 showDialog(context: context,
                                                     builder: (context) {
                                                       return AlertDialog(
-                                                        title: Text('Enter your password', style: TextStyle(color: Colors.white)),
+                                                        title: Text('Enter your password'),
                                                         content: TextFormField(
                                                           controller: _password,
                                                           decoration: InputDecoration(hintText: 'Enter your password', filled: true, fillColor: Colors.white),
@@ -158,7 +158,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                                         ),
                                                         actions: [
                                                           TextButton(
-                                                            child: Text('Submit', style: TextStyle(color: Colors.white)),
+                                                            child: Text('Submit'),
                                                             onPressed: () {
                                                               if (_password.text.isNotEmpty) {
                                                                 AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
@@ -197,7 +197,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                                             },
                                                           ),
                                                           TextButton(
-                                                            child: Text('Cancel', style: TextStyle(color: Colors.white)),
+                                                            child: Text('Cancel'),
                                                             onPressed: () {
                                                               _password.clear();
                                                               Navigator.pop(context);

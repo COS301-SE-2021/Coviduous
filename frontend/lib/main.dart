@@ -139,7 +139,7 @@ class MyApp extends StatelessWidget{
         ),
         dialogTheme: DialogTheme(
           backgroundColor: globals.secondaryColor,
-          titleTextStyle: TextStyle(color: globals.primaryColor, fontSize: 20),
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
           contentTextStyle: TextStyle(color: Colors.white, fontSize: 15),
         ),
         fontFamily: 'Poppins',
@@ -164,6 +164,11 @@ class MyApp extends StatelessWidget{
           backgroundColor: globals.primaryColor,
           contentTextStyle: TextStyle(color: Colors.black),
           disabledActionTextColor: Colors.black,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Colors.white,
+          ),
         ),
         textTheme: globals.textTheme,
       ),

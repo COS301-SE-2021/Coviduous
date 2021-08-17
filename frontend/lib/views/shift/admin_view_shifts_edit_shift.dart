@@ -194,7 +194,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
-                                              title: Text('Enter your password', style: TextStyle(color: Colors.white)),
+                                              title: Text('Enter your password'),
                                               content: TextFormField(
                                                 controller: _password,
                                                 decoration: InputDecoration(hintText: 'Enter your password', filled: true, fillColor: Colors.white),
@@ -211,7 +211,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                               ),
                                               actions: [
                                                 TextButton(
-                                                  child: Text('Submit', style: TextStyle(color: Colors.white)),
+                                                  child: Text('Submit'),
                                                   onPressed: () {
                                                     setState(() {
                                                       isLoading = true;
@@ -258,7 +258,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                                                   },
                                                 ),
                                                 TextButton(
-                                                  child: Text('Cancel', style: TextStyle(color: Colors.white)),
+                                                  child: Text('Cancel'),
                                                   onPressed: () => Navigator.pop(context),
                                                 ),
                                               ]);
