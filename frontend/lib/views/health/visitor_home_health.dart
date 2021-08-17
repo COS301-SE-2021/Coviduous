@@ -112,7 +112,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                            title: Text('Enter your email'),
+                                            title: Text('Enter your email', style: TextStyle(color: Colors.white)),
                                             content: Form(
                                               key: _formKey,
                                               child: TextFormField(
@@ -135,7 +135,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                             ),
                                             actions: [
                                               TextButton(
-                                                child: Text('Submit'),
+                                                child: Text('Submit', style: TextStyle(color: Colors.white)),
                                                 onPressed: () {
                                                   FormState form = _formKey.currentState;
                                                   if (form.validate()) {
@@ -149,7 +149,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                                 },
                                               ),
                                               TextButton(
-                                                child: Text('Cancel'),
+                                                child: Text('Cancel', style: TextStyle(color: Colors.white)),
                                                 onPressed: () => Navigator.pop(context),
                                               ),
                                             ]);

@@ -190,7 +190,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                   showDialog(context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          title: Text('Enter your password'),
+                                          title: Text('Enter your password', style: TextStyle(color: Colors.white)),
                                           content: TextFormField(
                                             controller: _password,
                                             decoration: InputDecoration(hintText: 'Enter your password', filled: true, fillColor: Colors.white),
@@ -207,7 +207,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                           ),
                                           actions: [
                                             TextButton(
-                                              child: Text('Submit'),
+                                              child: Text('Submit', style: TextStyle(color: Colors.white)),
                                               onPressed: () {
                                                 setState(() {
                                                   isLoading = true;
@@ -263,7 +263,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
                                               },
                                             ),
                                             TextButton(
-                                              child: Text('Cancel'),
+                                              child: Text('Cancel', style: TextStyle(color: Colors.white)),
                                               onPressed: () => Navigator.pop(context),
                                             ),
                                           ]
