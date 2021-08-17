@@ -173,6 +173,7 @@ Future<bool> reportInfection(String userId, String userEmail, String adminId, St
       "userEmail": userEmail,
       "adminId": adminId,
       "companyId": companyId,
+      "adminEmail": "capslock.cos301@gmail.com"
     });
     request.headers.addAll(globals.requestHeaders);
 
