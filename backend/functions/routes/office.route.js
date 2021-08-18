@@ -13,11 +13,11 @@ router.get('/', function (req, res) {
 
 // Import office service
 const officeService = require("../services/office/office.controller.js");
-const officeServiceMock = require("../services/office/office.controller.js");
+//const officeServiceMock = require("../services/office/office.controller.js");
 
 // Set the database you want to work with the test or production database
 officeService.setDatabase(db);
-officeServiceMock.setDatabase(database);
+//officeServiceMock.setDatabase(database);
 
 // Office routes
 // N.B. paths for a subsystem can all be the same
@@ -25,16 +25,11 @@ router.post('/office', officeService.createBooking);
 router.post('/office/view', officeService.viewBookings);
 router.delete('/office', officeService.deleteBooking);
 
-
 // Office routes Mock 
 // N.B. paths for a subsystem can all be the same
-router.post('/mock/office', officeServiceMock.createBooking);
-router.post('/mock/office/view', officeServiceMock.viewBookings);
-router.delete('/mock/office', officeServiceMock.deleteBooking);
-
-
-
-
+//router.post('/mock/office', officeServiceMock.createBooking);
+//router.post('/mock/office/view', officeServiceMock.viewBookings);
+//router.delete('/mock/office', officeServiceMock.deleteBooking);
 
 // Export API routes
 module.exports = router;

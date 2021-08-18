@@ -566,7 +566,7 @@ exports.notifyGroup = async (req, res) => {
                   companyId: ""
           }
           notificationDatabase.createNotification(notificationData.notificationId, notificationData);
-          notificationService.sendUserEmail(notificationData.userEmailEmail,notificationData.subject,notificationData.message);
+          notificationService.sendUserEmail(notificationData.userEmail,notificationData.subject,notificationData.message);
         }
       });
       

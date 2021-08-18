@@ -12,11 +12,10 @@ let database = require("../config/mock_database/shift.firestore.mock.database");
 });
 
 const Shift = require("../services/shift/shift.controller.js");
-const ShiftMock = require("../services/shift/shift.controller.js");
-
+//const ShiftMock = require("../services/shift/shift.controller.js");
 
 Shift.setDatabase(db);
-ShiftMock.setDatabase(database);
+//ShiftMock.setDatabase(database);
 
 /**
  * Shift Routes
@@ -32,22 +31,20 @@ router.get('/group',Shift.getGroup);
 router.post('/group/shift-id',Shift.getGroupForShift);
 router.post('/group',Shift.createGroup);
 
-
 /**
  * shift mock routes 
  */
- router.post('/mock/shift',ShiftMock.createShift);
- router.delete('/mock/shift',ShiftMock.deleteShift);
- router.get('/mock/shift',ShiftMock.viewShifts);
- router.put('/mock/shift',ShiftMock.updateShift);
+// router.post('/mock/shift',ShiftMock.createShift);
+// router.delete('/mock/shift',ShiftMock.deleteShift);
+// router.get('/mock/shift',ShiftMock.viewShifts);
+// router.put('/mock/shift',ShiftMock.updateShift);
 
 /**
  * group mock routes 
  */
- router.get('/mock/group',ShiftMock.getGroup);
- router.post('/mock/group/shift-id',ShiftMock.getGroupForShift);
- router.post('/mock/group',ShiftMock.createGroup);
- 
+// router.get('/mock/group',ShiftMock.getGroup);
+// router.post('/mock/group/shift-id',ShiftMock.getGroupForShift);
+// router.post('/mock/group',ShiftMock.createGroup);
 
 // Export API routes
 module.exports = router

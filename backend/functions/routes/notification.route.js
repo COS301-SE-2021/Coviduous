@@ -9,8 +9,8 @@ router.get('/', function (req, res) {
 });
 
 // import notification controller
-const notificationController= require("../services/notification/notification.controller.js");
-//const notificationMockService=require("../services/notification/notification.controller.js");
+const notificationController = require("../services/notification/notification.controller.js");
+//const notificationMockService = require("../services/notification/notification.controller.js");
 // import database
 const devDatabase = require("../config/notification.firestore.database.js");
 //const mockDatabase = require("../config/mock_database/notification.firestore.mock.database.js");
