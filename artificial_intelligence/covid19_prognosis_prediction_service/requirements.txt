@@ -1,0 +1,13 @@
+install python on your local machine
+open a new terminal on your ide and run the following commands under the covid19_prognosis_service directory
+cd artificial_intelligence/covid19_prognosis_prediction_service
+py -m pip install flask
+py -m pip install gunicorn
+py -m pip install matplotlib
+py -m pip install seaborn
+py -m pip install pandas
+py -m pip install numpy
+py -m pip install scikit_learn
+
+to run the app use the ffg command:
+py app.py
