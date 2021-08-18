@@ -10,11 +10,12 @@
     "test": "mocha './tests/*/*.test.js'",
     "testUser": "mocha './tests/user/*.test.js' --timeout 5000",
     "testUserWithExit": "mocha './tests/user/*.test.js' --timeout 5000 --exit",
-    "testAnnouncement": "mocha './tests/announcement/*.test.js'",
+    "testAnnouncement": "mocha './tests/announcement/*.test.js' --timeout 30000",
     "testNotification": "mocha './tests/notification/*.test.js' --timeout 10000",
-    "testOffice": "mocha './tests/office/*.test.js'",
-    "testShift": "mocha './tests/shift/*.test.js'",
-    "testFloorPlan": "mocha './tests/floorplan/*.test.js'"
+    "testOffice": "mocha './tests/office/*.test.js' --timeout 30000",
+    "testShift": "mocha './tests/shift/*.test.js' --timeout 30000",
+    "testFloorPlan": "mocha './tests/floorplan/*.test.js' --timeout 30000",
+    "testHealth": "mocha './tests/health/*.test.js' --timeout 30000"
   },
   "engines": {
     "node": "14"

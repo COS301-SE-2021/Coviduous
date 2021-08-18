@@ -12,6 +12,9 @@ admin.initializeApp({
 var chai = require("chai");
 var expect = chai.expect;
 var should = chai.should();
+var chaiHttp = require("chai-http");
+chai.use(chaiHttp);
+let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
 let devDatabase = require("../../config/floorplan.firestore.database.js");
 const floorplanService = require("../../services/floorplan/floorplan.controller.js");
 // Set the database you want to work with the test or production database
@@ -21,6 +24,23 @@ let db= new devDatabase();
 
 //Tests to check if database queries / database file for firestore perform therequested operations
 describe('Floorplan intergration tests', function(){
+  it('Create Floorplan', function(done) {
+    let req = {
+      numFloors: "3",
+      adminId: "ADMIN-1",
+      companyId: "CID-1"
+      };
+    chai.request(server)
+        .post('/api/floorplan') 
+        .send(req)
+        .end((err, res) => {
+            should.exist(res);
+            res.should.have.status(200);
+            console.log(res.body);
+            done();
+        });
+});
+
     it('Create Floor Plan', function(){
        db.createFloorPlan('test-000',{
         adminId: "test-000",
