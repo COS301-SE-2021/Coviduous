@@ -167,7 +167,8 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
                                     "Floor: " + globals.currentFloorNum,
-                                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                    style: TextStyle(color: Colors.white,
+                                        fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                   ),
                                 ),
                                 Container(
@@ -177,7 +178,8 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
                                     "Room: " + globals.currentRoomNum,
-                                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                    style: TextStyle(color: Colors.white,
+                                        fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                   ),
                                 ),
                                 SizedBox(
