@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/views/floor_plan/admin_add_floor_plan.dart';
 
+import 'package:frontend/globals.dart' as globals;
+
 void main() {
   setUpAll(() => HttpOverrides.global = null);
 
@@ -14,6 +16,8 @@ void main() {
           home: child
       );
     }
+
+    globals.loggedInUserType = "ADMIN";
 
     //Build add floor plan screen
     await tester.pumpWidget(createWidgetForTesting(child: new AddFloorPlan()));

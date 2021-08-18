@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/views/user/user_delete_account.dart';
 
+import 'package:frontend/globals.dart' as globals;
+
 void main() {
   setUpAll(() => HttpOverrides.global = null);
 
@@ -14,6 +16,8 @@ void main() {
           home: child
       );
     }
+
+    globals.loggedInUserType = "USER";
 
     //Build user delete account screen
     await tester.pumpWidget(createWidgetForTesting(child: new UserDeleteAccount()));

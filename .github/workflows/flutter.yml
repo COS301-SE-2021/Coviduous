@@ -42,10 +42,10 @@ jobs:
     #  working-directory: login_app
     #  run: flutter analyze .
     
-    # Run tests for our flutter project.
-    # - name: Run tests
-    #  working-directory: frontend
-    #  run: flutter test test/
+     Run tests for our flutter project.
+     - name: Run tests
+      working-directory: frontend
+      run: flutter test test/
     
     # Build apk.
     # - run: flutter build apk
