@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 describe('Create announcement unit tests', function() {
    it('Return 400 if request is empty', function (done) {
        chai.request(server)
-           .post('/api/announcements')
+           .post('/api/mock/announcements')
            .send(null)
            .end((err, res) => {
                should.exist(res);
@@ -29,7 +29,7 @@ describe('Create announcement unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/announcements')
+            .post('/api/mock/announcements')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -48,7 +48,7 @@ describe('Create announcement unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/announcements')
+            .post('/api/mock/announcements')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -67,7 +67,7 @@ describe('Create announcement unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/announcements')
+            .post('/api/mock/announcements')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -86,7 +86,7 @@ describe('Create announcement unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/announcements')
+            .post('/api/mock/announcements')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -105,7 +105,7 @@ describe('Create announcement unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/announcements')
+            .post('/api//mock/announcements')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -124,7 +124,7 @@ describe('Create announcement unit tests', function() {
        };
 
        chai.request(server)
-           .post('/api/announcements')
+           .post('/api/mock/announcements')
            .send(req)
            .end((err, res) => {
                should.exist(res);
@@ -138,7 +138,7 @@ describe('Create announcement unit tests', function() {
 describe('Delete announcement unit tests', function() {
    it('Return 400 if request is empty', function(done) {
        chai.request(server)
-           .delete('/api/announcements')
+           .delete('/api/mock/announcements')
            .send(null)
            .end((err, res) => {
                should.exist(res);
@@ -157,7 +157,7 @@ describe('Delete announcement unit tests', function() {
       };
 
        chai.request(server)
-           .post('/api/announcements')
+           .post('/api/mock/announcements')
            .send(req)
            .end((err, res) => {
                console.log(res.body);
@@ -166,7 +166,7 @@ describe('Delete announcement unit tests', function() {
                };
 
                chai.request(server)
-                   .delete('/api/announcements')
+                   .delete('/api/mock/announcements')
                    .send(req2).end((err, res) => {
                         should.exist(res);
                         res.should.have.status(200);
@@ -180,7 +180,7 @@ describe('Delete announcement unit tests', function() {
 describe('Get announcement unit tests', function() {
    it('Return 200 if retrieval is successful', function() {
        chai.request(server)
-           .get('/api/announcements')
+           .get('/api/mock/announcements')
            .send()
            .end((err, res) => {
                should.exist(res);
