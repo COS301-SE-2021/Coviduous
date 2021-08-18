@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 describe('Create office booking unit tests', function() {
     it('Return 400 if request is empty', function (done) {
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(null)
             .end((err, res) => {
                 should.exist(res);
@@ -32,7 +32,7 @@ describe('Create office booking unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -54,7 +54,7 @@ describe('Create office booking unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -76,7 +76,7 @@ describe('Create office booking unit tests', function() {
         };
 
       chai.request(server)
-          .post('/api/office')
+          .post('/api/mock/office')
           .send(req)
           .end((err, res) => {
               should.exist(res);
@@ -98,7 +98,7 @@ describe('Create office booking unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -120,7 +120,7 @@ describe('Create office booking unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -142,7 +142,7 @@ describe('Create office booking unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -164,7 +164,7 @@ describe('Create office booking unit tests', function() {
         };
  
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(req)
             .end((err, res) => {
                 should.exist(res);
@@ -178,7 +178,7 @@ describe('Create office booking unit tests', function() {
  describe('Delete office booking unit tests', function() {
     it('Return 400 if request is empty', function(done) {
         chai.request(server)
-            .delete('/api/office')
+            .delete('/api/mock/office')
             .send(null)
             .end((err, res) => {
                 should.exist(res);
@@ -200,7 +200,7 @@ describe('Create office booking unit tests', function() {
         };
  
         chai.request(server)
-            .post('/api/office')
+            .post('/api/mock/office')
             .send(req)
             .end((err, res) => {
                 console.log(res.body);
@@ -227,7 +227,7 @@ describe('Create office booking unit tests', function() {
         };
 
         chai.request(server)
-            .post('/api/office/view')
+            .post('/api/mock/office/view')
             .send(req)
             .end((err, res) => {
                 should.exist(res);

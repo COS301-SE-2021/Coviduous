@@ -70,7 +70,7 @@ class _UserHomePageState extends State<UserHomePage> {
       onWillPop: _onWillPop, //Pressing the back button prompts you to log out
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Welcome ' + email),
+          title: Text('Welcome'),
         ),
           // ====================
           // SIDEBAR STARTS HERE
@@ -100,8 +100,7 @@ class _UserHomePageState extends State<UserHomePage> {
                           ),
                           Text(globals.loggedInUserEmail,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white,
-                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 1.5),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ],
                       ),
