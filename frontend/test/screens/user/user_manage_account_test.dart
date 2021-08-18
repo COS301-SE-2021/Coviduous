@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/frontend/screens/user/user_manage_account.dart';
+import 'package:frontend/views/user/user_manage_account.dart';
+
+import 'package:frontend/globals.dart' as globals;
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);
@@ -14,6 +16,8 @@ void main() {
           home: child
       );
     }
+
+    globals.loggedInUserType = "USER";
 
     //Build user manage account screen
     await tester.pumpWidget(createWidgetForTesting(child: new UserManageAccount()));

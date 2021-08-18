@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/frontend/screens/user/admin_reset_password_screen.dart';
+import 'package:frontend/views/user/admin_reset_password_screen.dart';
+
+import 'package:frontend/globals.dart' as globals;
 
 void main() {
   setUpAll(() => HttpOverrides.global = null);
@@ -14,6 +16,8 @@ void main() {
           home: child
       );
     }
+
+    globals.loggedInUserType = "ADMIN";
 
     //Build admin reset password screen
     await tester.pumpWidget(createWidgetForTesting(child: new AdminResetPassword()));
