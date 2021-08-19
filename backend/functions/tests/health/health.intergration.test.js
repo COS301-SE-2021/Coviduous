@@ -5,19 +5,19 @@ const app = express();
 app.use(cors({ origin: true }));
 var serviceAccount = require("../../permissions.json");
 
-admin.initializeApp({
+/*admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://fir-api-9a206..firebaseio.com"
-}); 
+}); */
 var chai = require("chai");
 var chaiHttp = require("chai-http");
 chai.use(chaiHttp);
 var should = chai.should();
-let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
+let server = 'http://localhost:5002/coviduous-api/us-central1/app/';
 let devDatabase = require("../../config/health.firestore.database.js");
 const healthService = require("../../services/health/health.controller.js");
 // Set the database you want to work with the test or production database
-healthService.setDatabase(devDatabase);
+// healthService.setDatabase(devDatabase);
 
 
 //Intergration tests to test the heath service using the production database health.firestore.database.js

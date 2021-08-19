@@ -158,6 +158,7 @@ Future<bool> viewShifts(String userEmail) async {
   ]).then((results) {
     if (results != null) {
       globals.currentShifts = results.first;
+      globals.currentShiftNum = results.first[0].getShiftId();
       result = true;
     }
   });

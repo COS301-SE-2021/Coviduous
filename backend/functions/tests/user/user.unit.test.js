@@ -4,7 +4,7 @@ var expect = chai.expect;
 var should = chai.should();
 const uuid = require("uuid");
 
-let server = 'http://localhost:5001/coviduous-api/us-central1/app/';
+let server = 'http://localhost:5002/coviduous-api/us-central1/app/';
 
 chai.use(chaiHttp);
 
@@ -140,30 +140,6 @@ describe('Create user unit tests', function() {
                 done();
             });
     });
- 
-    it('Return 200 if creation successful', function() {
-        let req = {
-            userId: "test-000",
-            type: "ADMIN",
-            firstName: "test-000",
-            lastName: "test-000",
-            email: "test-000",
-            userName: "test-000",
-            companyId: "test-000",
-            companyName: "test-000",
-            companyAddress: "test-000"
-        };
- 
-        chai.request(server)
-            .post('/api/users')
-            .send(req)
-            .end((err, res) => {
-                should.exist(res);
-                res.should.have.status(200);
-                console.log(res.body);
-                //done();
-            });
-    })
  });
  
 describe('Delete user unit tests', function() {

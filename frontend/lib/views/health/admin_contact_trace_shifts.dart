@@ -139,6 +139,12 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                                         if (result == true) {
                                           userHelpers.getUsersForGroup(globals.currentGroup).then((result) {
                                             if (result == true) {
+                                              for (int i = 0; i < globals.selectedUsers.length; i++) {
+                                                if (globals.selectedUsers[i].getEmail() == globals.selectedUserEmail) {
+                                                  globals.selectedUser = globals.selectedUsers[i];
+                                                }
+                                              }
+                                              globals.currentShift = globals.currentShifts[index];
                                               Navigator.of(context).pushReplacementNamed(AdminContactTrace.routeName);
                                             } else {
                                               ScaffoldMessenger.of(context).showSnackBar(

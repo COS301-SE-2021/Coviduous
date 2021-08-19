@@ -7,16 +7,16 @@
       "port": 9099
     },
     "functions": {
-      "port": 5001
+      "port": 5002
     },
     "firestore": {
-      "port": 8081
+      "port": 8080
     },
     "ui": {
       "enabled": true
     },
     "database": {
-      "port": 9001
+      "port": 9000
     },
     "hosting": {
       "port": 5000
