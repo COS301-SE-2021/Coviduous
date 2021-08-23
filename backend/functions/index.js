@@ -31,6 +31,7 @@ const userRoute = require("./routes/user.route.js");
 const shiftRoute = require("./routes/shift.route.js");
 const officeRoute = require("./routes/office.route.js");
 const healthRoute = require("./routes/health.route.js");
+//const reportingRoute = require("./routes/reporting.route.js");
 
 // app.use('/api', subsystem_nameRoute) - use '/api/' path for each subsystem route
 app.use('/api/', announcementRoute);
@@ -40,5 +41,6 @@ app.use('/api/', userRoute);
 app.use('/api/', shiftRoute);
 app.use('/api/', officeRoute);
 app.use('/api/', healthRoute);
+//app.use('/api/', reportingRoute);
 
 exports.app = functions.https.onRequest(app);
