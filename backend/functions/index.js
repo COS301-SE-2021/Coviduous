@@ -33,7 +33,7 @@ const officeRoute = require("./routes/office.route.js");
 const healthRoute = require("./routes/health.route.js");
 
 // app.use('/api', subsystem_nameRoute) - use '/api/' path for each subsystem route
-app.use('/api/', announcementRoute); // testing http would be '.../api/announcement' - see announcement.route.js file for routes
+app.use('/api/', announcementRoute);
 app.use('/api/', notificationRoute);
 app.use('/api/', floorplanRoute);
 app.use('/api/', userRoute);
