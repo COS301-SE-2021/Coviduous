@@ -16,8 +16,8 @@ reportingController.setDatabase(devDatabase);
 //router.post('/mock/reporting', reportingMockService.addSickEmployees);
 
 // reporting routes
-//router.post('/reporting/health/addSickEmployees', reportingController.addSickEmployee);
-//router.post('/reporting/health/addSickEmployees', reportingController.viewSickEmployees);
+//router.post('/reporting/health/sick-employees', reportingController.addSickEmployee);
+//router.post('/reporting/health/sick-employees', reportingController.viewSickEmployees);
 
 // Export API routes
 module.exports = router;
