@@ -29,8 +29,6 @@ exports.verifyCredentials = async (adminId, companyId) => {
  * @returns res An HTTP status indicating whether the request was successful or not.
  */
 exports.createNotification = async (req, res) => {
-    // try {
-        // data validation
         let fieldErrors = [];
         
         let reqJson;
@@ -111,10 +109,6 @@ exports.createNotification = async (req, res) => {
         {
             return res.status(500).send({message: "500 server error."});
         }
-    //   } catch (error) {
-    //       console.log(error);
-    //       return res.status(500).send(error);
-    //   }
 };
 
 /**
