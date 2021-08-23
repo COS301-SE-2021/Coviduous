@@ -187,7 +187,6 @@ exports.viewNotifications = async (req, res) => {
  * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
 exports.viewNotificationsUserEmail = async (req, res) => {
-    // try {
         let fieldErrors = [];
 
         let reqJson;
@@ -226,12 +225,6 @@ exports.viewNotificationsUserEmail = async (req, res) => {
         {
             return res.status(500).send({message: "Some error occurred while fetching notifications."});
         }
-    // } catch (error) {
-    //     console.log(error);
-    //     return res.status(500).send({
-    //         message: error.message || "Some error occurred while fetching notifications."
-    //     });
-    // }
 };
 
 
