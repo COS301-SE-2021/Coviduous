@@ -30,73 +30,72 @@ Date.prototype.timeNow = function () {
 }
 
 // functions
-// exports.addSickEmployee = async (req, res) => {
-//     if (req == null || req.body == null) {
-//         return res.status(400).send({
-//             message: '400 Bad Request: Null request object',
-//         });
-//     }
+exports.addSickEmployee = async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
 
-//     //Look into express.js middleware so that these lines are not necessary
-//     let reqJson;
-//     try {
-//         reqJson = JSON.parse(req.body);
-//     } catch (e) {
-//         reqJson = req.body;
-//     }
-//     console.log(reqJson);
-//     //////////////////////////////////////////////////////////////////////
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
 
-//     let fieldErrors = [];
+    let fieldErrors = [];
 
-//     if (reqJson.userId == null || reqJson.userId === "") {
-//         fieldErrors.push({field: 'message', message: 'UserID may not be empty'})
-//     }
+    if (reqJson.userId == null || reqJson.userId === "") {
+        fieldErrors.push({field: 'userId', message: 'UserID may not be empty'})
+    }
 
-//     if (reqJson.userEmail == null || reqJson.userEmail === "") {
-//         fieldErrors.push({field: 'adminId', message: 'User email may not be empty'})
-//     }
+    if (reqJson.userEmail == null || reqJson.userEmail === "") {
+        fieldErrors.push({field: 'adminId', message: 'User email may not be empty'})
+    }
 
-//     if (reqJson.timeOfDiagnosis == null || reqJson.timeOfDiagnosis === "") {
-//         fieldErrors.push({field: 'adminId', message: 'Time of diagnosis may not be empty'})
-//     }
+    if (reqJson.timeOfDiagnosis == null || reqJson.timeOfDiagnosis === "") {
+        fieldErrors.push({field: 'adminId', message: 'Time of diagnosis may not be empty'})
+    }
 
-//     if (reqJson.companyId == null || reqJson.companyId === "") {
-//         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
-//     }
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
 
-//     if (fieldErrors.length > 0) {
-//         return res.status(400).send({
-//             message: '400 Bad Request: Incorrect fields',
-//             errors: fieldErrors
-//         });
-//     }
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
 
-//     //let sickEmployeeId = "SCK-" + uuid.v4();
-//     let timestamp = new Date().today() + " @ " + new Date().timeNow();
+    //let sickEmployeeId = "SCK-" + uuid.v4();
+    let timestamp = new Date().today() + " @ " + new Date().timeNow();
 
-//     let sickEmployeeData = {
-//         //sickEmployeeId: sickEmployeeId,
-//         userId: reqJson.userId,
-//         userEmail: reqJson.userEmail,
-//         message: reqJson.message,
-//         timeOfDiagnosis: timestamp,
-//         companyId: reqJson.companyId
-//     }
+    let sickEmployeeData = {
+        //sickEmployeeId: sickEmployeeId,
+        userId: reqJson.userId,
+        userEmail: reqJson.userEmail,
+        timeOfDiagnosis: timestamp,
+        companyId: reqJson.companyId
+    }
 
-//     let result = await database.addSickEmployee(sickEmployeeData.userId, sickEmployeeData);
+    let result = await database.addSickEmployee(sickEmployeeData.userId, sickEmployeeData);
     
-//     if (!result) {
-//         return res.status(500).send({
-//             message: '500 Server Error: DB error',
-//         });
-//     }
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
 
-//     return res.status(200).send({
-//        message: 'Sick employee successfully created',
-//        data: sickEmployeeData
-//     });
-// };
+    return res.status(200).send({
+       message: 'Sick employee successfully created',
+       data: sickEmployeeData
+    });
+};
 
 // exports.viewSickEmployees = async (req, res) => {
 //     let result = await database.viewSickEmployees();
@@ -114,7 +113,7 @@ Date.prototype.timeNow = function () {
 //     });
 // };
 
-// exports.viewSickEmployeesCompanyId = async (req, res) => {
+// exports.viewSickEmployees = async (req, res) => {
 //     let fieldErrors = [];
 
 //     let reqJson;
@@ -130,7 +129,7 @@ Date.prototype.timeNow = function () {
 //     }
 
 //     if (reqJson.companyId == null || reqJson.companyId === '') {
-//         fieldErrors.push({field: 'companyId', message: 'User email may not be empty'});
+//         fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
 //     }
 
 //     if (fieldErrors.length > 0) {
@@ -140,7 +139,7 @@ Date.prototype.timeNow = function () {
 //         });
 //     }
 
-//     let sickEmployees = await database.viewSickEmployeesCompanyId(reqJson.companyId);
+//     let sickEmployees = await database.viewSickEmployees(reqJson.companyId);
 
 //     if (sickEmployees != null)
 //     {
