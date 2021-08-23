@@ -80,6 +80,7 @@ class _AdminContactTraceEmployeeState extends State<AdminContactTraceEmployee> {
                   onPressed: () {
                     healthHelpers.viewShifts(_employeeEmail.text).then((result) {
                       if (result == true) {
+                        globals.selectedUserEmail = _employeeEmail.text;
                         Navigator.of(context).pushReplacementNamed(AdminContactTraceShifts.routeName);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(

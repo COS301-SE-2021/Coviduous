@@ -165,6 +165,7 @@ List<PermissionRequest> currentPermissionRequests;
 //Current user
 User selectedUser;
 List<User> selectedUsers = [];
+String selectedUserEmail = '';
 
 //===============================
 //Used in announcement subsystem

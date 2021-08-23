@@ -3,7 +3,7 @@ var expect = chai.expect;
 //const { expect } = require('chai');
 let chaiHttp = require('chai-http'); // npm install chai-http
 //let server = require('../index.js');
-let server = 'http://localhost:5001/coviduous-api/us-central1/app/'
+let server = 'http://localhost:5002/coviduous-api/us-central1/app/'
 let should = chai.should();
 const NotificationService = require("../../services/notification/notification.controller.js");
 
@@ -15,7 +15,7 @@ const NotificationService = require("../../services/notification/notification.co
 
 chai.use(chaiHttp);
 
-//needs to be correctly asserted but doesdeliver an email
+//needs to be correctly asserted but does deliver an email
 /*describe('Notification Sending Email Notification', function() {
     it('Send User Email', async function() {
         let message="Hey There!";
