@@ -5,7 +5,7 @@ let db = admin.firestore();
 exports.addSickEmployee = async (sickEmployeeId, data) => {
     try {
         await db.collection('sick-employees').doc(sickEmployeeId)
-          .create(data); // .add - auto generates document id
+          .create(data);
         return true;
     } catch (error) {
         console.log(error);
