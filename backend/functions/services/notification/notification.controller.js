@@ -164,20 +164,20 @@ exports.deleteNotification = async (req, res) => {
  * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
 exports.viewNotifications = async (req, res) => {
-        let notifications = await database.viewNotifications();
+    let notifications = await database.viewNotifications();
 
 
-        if (notifications != null)
-        {
-            return res.status(200).send({
-                message: 'Successfully retrieved notifications',
-                data: notifications
-            });      
-        }
-        else
-        {
-            return res.status(500).send({message: "Some error occurred while fetching notifications."});
-        }
+    if (notifications != null)
+    {
+        return res.status(200).send({
+            message: 'Successfully retrieved notifications',
+            data: notifications
+        });      
+    }
+    else
+    {
+        return res.status(500).send({message: "Some error occurred while fetching notifications."});
+    }
 };
 
 /**
@@ -187,44 +187,44 @@ exports.viewNotifications = async (req, res) => {
  * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
 exports.viewNotificationsUserEmail = async (req, res) => {
-        let fieldErrors = [];
+    let fieldErrors = [];
 
-        let reqJson;
-        try {
-            reqJson = JSON.parse(req.body);
-        } catch (e) {
-            reqJson = req.body;
-        }
-        console.log(reqJson);
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
 
-        if(req.body == null) {
-            fieldErrors.push({field: null, message: 'Request object may not be null'});
-        }
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
 
-        if (reqJson.userEmail == null || reqJson.userEmail === '') {
-            fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
-        }
+    if (reqJson.userEmail == null || reqJson.userEmail === '') {
+        fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
+    }
 
-        if (fieldErrors.length > 0) {
-            return res.status(400).send({
-                message: '400 Bad Request: Incorrect fields',
-                errors: fieldErrors
-            });
-        }
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
 
-        let notifications = await database.viewNotificationsUserEmail(reqJson.userEmail);
+    let notifications = await database.viewNotificationsUserEmail(reqJson.userEmail);
 
-        if (notifications != null)
-        {
-            return res.status(200).send({
-                message: 'Successfully retrieved notifications',
-                data: notifications
-            });      
-        }
-        else
-        {
-            return res.status(500).send({message: "Some error occurred while fetching notifications."});
-        }
+    if (notifications != null)
+    {
+        return res.status(200).send({
+            message: 'Successfully retrieved notifications',
+            data: notifications
+        });      
+    }
+    else
+    {
+        return res.status(500).send({message: "Some error occurred while fetching notifications."});
+    }
 };
 
 
