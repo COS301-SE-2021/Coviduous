@@ -13,7 +13,7 @@ reportingController.setDatabase(devDatabase);
 //reportingMockService.setDatabase(mockDatabase);
 
 //reporting routes for mock testing
-//router.post('/mock/reportings', reportingMockService.addSickEmployees);
+//router.post('/mock/reporting', reportingMockService.addSickEmployees);
 
 // reporting routes
 //router.post('/reporting/health/addSickEmployees', reportingController.addSickEmployees);
