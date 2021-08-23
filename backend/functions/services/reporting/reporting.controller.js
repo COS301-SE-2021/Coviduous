@@ -72,11 +72,11 @@ Date.prototype.timeNow = function () {
 //         });
 //     }
 
-//     let sickEmployeeId = "SCK-" + uuid.v4();
+//     //let sickEmployeeId = "SCK-" + uuid.v4();
 //     let timestamp = new Date().today() + " @ " + new Date().timeNow();
 
 //     let sickEmployeeData = {
-//         sickEmployeeId: sickEmployeeId,
+//         //sickEmployeeId: sickEmployeeId,
 //         userId: reqJson.userId,
 //         userEmail: reqJson.userEmail,
 //         message: reqJson.message,
@@ -84,8 +84,8 @@ Date.prototype.timeNow = function () {
 //         companyId: reqJson.companyId
 //     }
 
-//     let result = await database.addSickEmployee(sickEmployeeData.sickEmployeeId, sickEmployeeData);
-
+//     let result = await database.addSickEmployee(sickEmployeeData.userId, sickEmployeeData);
+    
 //     if (!result) {
 //         return res.status(500).send({
 //             message: '500 Server Error: DB error',
@@ -112,4 +112,45 @@ Date.prototype.timeNow = function () {
 //         message: 'Successfully retrieved sick employees',
 //         data: result
 //     });
+// };
+
+// exports.viewSickEmployeesCompanyId = async (req, res) => {
+//     let fieldErrors = [];
+
+//     let reqJson;
+//     try {
+//         reqJson = JSON.parse(req.body);
+//     } catch (e) {
+//         reqJson = req.body;
+//     }
+//     console.log(reqJson);
+
+//     if(req.body == null) {
+//         fieldErrors.push({field: null, message: 'Request object may not be null'});
+//     }
+
+//     if (reqJson.companyId == null || reqJson.companyId === '') {
+//         fieldErrors.push({field: 'companyId', message: 'User email may not be empty'});
+//     }
+
+//     if (fieldErrors.length > 0) {
+//         return res.status(400).send({
+//             message: '400 Bad Request: Incorrect fields',
+//             errors: fieldErrors
+//         });
+//     }
+
+//     let sickEmployees = await database.viewSickEmployeesCompanyId(reqJson.companyId);
+
+//     if (sickEmployees != null)
+//     {
+//         return res.status(200).send({
+//             message: 'Successfully retrieved sick employees',
+//             data: sickEmployees
+//         });      
+//     }
+//     else
+//     {
+//         return res.status(500).send({message: "Some error occurred while fetching sick employees."});
+//     }
 // };
