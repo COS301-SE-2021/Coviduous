@@ -200,43 +200,43 @@ exports.viewRecoveredEmployee = async (req, res) => {
 //     });
 // };
 
-// exports.viewSickEmployees = async (req, res) => {
-//     let fieldErrors = [];
+exports.viewSickEmployees = async (req, res) => {
+    let fieldErrors = [];
 
-//     let reqJson;
-//     try {
-//         reqJson = JSON.parse(req.body);
-//     } catch (e) {
-//         reqJson = req.body;
-//     }
-//     console.log(reqJson);
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
 
-//     if(req.body == null) {
-//         fieldErrors.push({field: null, message: 'Request object may not be null'});
-//     }
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
 
-//     if (reqJson.companyId == null || reqJson.companyId === '') {
-//         fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
-//     }
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
+    }
 
-//     if (fieldErrors.length > 0) {
-//         return res.status(400).send({
-//             message: '400 Bad Request: Incorrect fields',
-//             errors: fieldErrors
-//         });
-//     }
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
 
-//     let sickEmployees = await database.viewSickEmployees(reqJson.companyId);
+    let sickEmployees = await database.viewSickEmployees(reqJson.companyId);
 
-//     if (sickEmployees != null)
-//     {
-//         return res.status(200).send({
-//             message: 'Successfully retrieved sick employees',
-//             data: sickEmployees
-//         });      
-//     }
-//     else
-//     {
-//         return res.status(500).send({message: "Some error occurred while fetching sick employees."});
-//     }
-// };
+    if (sickEmployees != null)
+    {
+        return res.status(200).send({
+            message: 'Successfully retrieved sick employees',
+            data: sickEmployees
+        });      
+    }
+    else
+    {
+        return res.status(500).send({message: "Some error occurred while fetching sick employees."});
+    }
+};
