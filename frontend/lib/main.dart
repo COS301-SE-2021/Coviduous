@@ -32,6 +32,7 @@ import 'package:frontend/views/health/admin_view_permissions.dart';
 import 'package:frontend/views/health/admin_contact_trace.dart';
 import 'package:frontend/views/health/admin_contact_trace_employee.dart';
 import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
+import 'package:frontend/views/health/admin_set_recovered_employee.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/health/user_health_check.dart';
 import 'package:frontend/views/health/user_view_permissions.dart';
@@ -160,10 +161,10 @@ class MyApp extends StatelessWidget{
         primaryTextTheme: globals.textTheme,
         scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
         snackBarTheme: SnackBarThemeData(
-          actionTextColor: Colors.black,
+          actionTextColor: Colors.white,
           backgroundColor: globals.primaryColor,
-          contentTextStyle: TextStyle(color: Colors.black),
-          disabledActionTextColor: Colors.black,
+          contentTextStyle: TextStyle(color: Colors.white),
+          disabledActionTextColor: Colors.white,
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
@@ -195,6 +196,7 @@ class MyApp extends StatelessWidget{
         AdminContactTrace.routeName: (ctx)=> AdminContactTrace(),
         AdminContactTraceEmployee.routeName: (ctx)=> AdminContactTraceEmployee(),
         AdminContactTraceShifts.routeName: (ctx)=> AdminContactTraceShifts(),
+        AdminSetRecoveredEmployee.routeName: (ctx)=> AdminSetRecoveredEmployee(),
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
