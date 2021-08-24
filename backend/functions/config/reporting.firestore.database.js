@@ -23,6 +23,24 @@ try{
 }
 };
 
+exports.viewRecoveredEmployee = async () =>{
+    try{
+        const document = db.collection('recovered-employees');
+        const snapshot = await document.get();
+    
+        let list =[];
+       snapshot.forEach(doc => {
+          let data = doc.data();
+            list.push(data);
+        });
+    return list;
+    }catch(error){
+        console.log(error);
+        return false;
+    }
+};
+
+
 
 
 
