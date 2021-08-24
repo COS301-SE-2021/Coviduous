@@ -54,11 +54,7 @@ exports.addSickEmployee = async (req, res) => {
     }
 
     if (reqJson.userEmail == null || reqJson.userEmail === "") {
-        fieldErrors.push({field: 'adminId', message: 'User email may not be empty'})
-    }
-
-    if (reqJson.timeOfDiagnosis == null || reqJson.timeOfDiagnosis === "") {
-        fieldErrors.push({field: 'adminId', message: 'Time of diagnosis may not be empty'})
+        fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'})
     }
 
     if (reqJson.companyId == null || reqJson.companyId === "") {
