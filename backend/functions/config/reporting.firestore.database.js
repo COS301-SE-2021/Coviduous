@@ -12,6 +12,19 @@ exports.addSickEmployee = async (sickEmployeeId, data) => {
         return false;
     }
 };
+exports.addRecoveredEmployee = async (userId,recoveredData) =>{
+try{
+     await db.collection('recovered-employees').doc(userId)
+     .create(recoveredData);
+     return true;
+} catch(error){
+    console.log(error);
+    return false;
+}
+};
+
+
+
 
 // need to test
 // exports.viewSickEmployees = async () => {

@@ -97,7 +97,7 @@ exports.addSickEmployee = async (req, res) => {
     });
 };
 
-exports.addRecoveredEmployee = async (req,res) =>{
+exports.addRecoveredEmployee= async (req,res) =>{
     let reqJson;
     try {
         reqJson = JSON.parse(req.body);
@@ -127,7 +127,28 @@ exports.addRecoveredEmployee = async (req,res) =>{
         });
     }
 
+    let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+    let recoveredData = {
+        
+        userId: reqJson.userId,
+        userEmail: reqJson.userEmail,
+        recoveredTime: timestamp,
+        companyId: reqJson.companyId
+    }
+
+    let result = await database.addRecoveredEmployee(recoveredData.userId,recoveredData);
     
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
+
+    return res.status(200).send({
+       message: 'Recovered employee successfully created',
+       data: recoveredData
+    });
 
 
 
