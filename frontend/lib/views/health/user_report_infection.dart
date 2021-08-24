@@ -8,6 +8,7 @@ import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/controllers/reporting/reporting_helpers.dart' as reportingHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserReportInfection extends StatefulWidget {
@@ -146,7 +147,7 @@ class _UserReportInfectionState extends State<UserReportInfection>{
                                             title: Text('Warning'),
                                             content: Text('Are you sure you want to report your infection?'),
                                             actions: <Widget>[
-                                              ElevatedButton(
+                                              TextButton(
                                                 child: Text('Yes'),
                                                 onPressed: () {
                                                   setState(() {
@@ -154,6 +155,7 @@ class _UserReportInfectionState extends State<UserReportInfection>{
                                                   });
                                                   healthHelpers.reportInfection(_adminEmail.text).then((result) {
                                                     if (result == true) {
+                                                      reportingHelpers.addSickEmployee(globals.loggedInUserEmail);
                                                       setState(() {
                                                         isLoading = false;
                                                       });
@@ -170,7 +172,7 @@ class _UserReportInfectionState extends State<UserReportInfection>{
                                                   });
                                                 }
                                               ),
-                                              ElevatedButton(
+                                              TextButton(
                                                 child: Text('No'),
                                                 onPressed: () {
                                                   Navigator.of(ctx).pop();
