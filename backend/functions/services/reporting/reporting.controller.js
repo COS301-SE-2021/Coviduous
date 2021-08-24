@@ -149,15 +149,44 @@ exports.addRecoveredEmployee= async (req,res) =>{
        message: 'Recovered employee successfully created',
        data: recoveredData
     });
-
-
-
-
-
-
 };
+exports.viewRecoveredEmployee = async (req, res) => {
 
+    // data validation
+    let fieldErrors = [];
 
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let viewRecovered = await db.viewRecoveredEmployee();
+      
+    if (viewRecovered != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved recovered employees',
+        data: viewRecovered
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while recovered employees"});
+    }
+};
 
 // exports.viewSickEmployees = async (req, res) => {
 //     let result = await database.viewSickEmployees();
