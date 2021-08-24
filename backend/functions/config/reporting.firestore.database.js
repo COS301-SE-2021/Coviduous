@@ -12,15 +12,16 @@ exports.addSickEmployee = async (sickEmployeeId, data) => {
         return false;
     }
 };
+
 exports.addRecoveredEmployee = async (userId,recoveredData) =>{
-try{
-     await db.collection('recovered-employees').doc(userId)
-     .create(recoveredData);
-     return true;
-} catch(error){
-    console.log(error);
-    return false;
-}
+    try{
+        await db.collection('recovered-employees').doc(userId)
+        .create(recoveredData);
+        return true;
+    } catch(error){
+        console.log(error);
+        return false;
+    }
 };
 
 exports.viewRecoveredEmployee = async () =>{
@@ -40,11 +41,6 @@ exports.viewRecoveredEmployee = async () =>{
     }
 };
 
-
-
-
-
-// need to test
 // exports.viewSickEmployees = async () => {
 //     try {
 //         const document = db.collection('sick-employees');
@@ -66,21 +62,21 @@ exports.viewRecoveredEmployee = async () =>{
 //     }
 // };
 
-// exports.viewSickEmployees = async (companyId) => {
-//     try {
-//         const document = db.collection('sick-employees').where("companyId", "==", companyId);
-//         const snapshot = await document.get();
+exports.viewSickEmployees = async (companyId) => {
+    try {
+        const document = db.collection('sick-employees').where("companyId", "==", companyId);
+        const snapshot = await document.get();
 
-//         let list = [];
+        let list = [];
 
-//         snapshot.forEach(doc => {
-//             let data = doc.data();
-//             list.push(data);
-//         });
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
 
-//         return list;
-//     } catch (error) {
-//         console.log(error);
-//         return error;
-//     }
-// };
+        return list;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
