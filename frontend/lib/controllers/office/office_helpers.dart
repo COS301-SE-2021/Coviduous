@@ -25,6 +25,19 @@ Future<bool> getBookings() async {
   return result;
 }
 
+Future<bool> getAllBookings() async {
+  bool result = false;
+  await Future.wait([
+
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentBookings = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
 Future<bool> cancelBooking(String bookingNumber) async {
   bool result = false;
   await Future.wait([

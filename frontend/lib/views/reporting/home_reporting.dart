@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
+import 'package:frontend/views/reporting/reporting_company.dart';
 import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class Reporting extends StatefulWidget {
@@ -57,6 +59,34 @@ class _ReportingState extends State<Reporting> {
                   child: Column (
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
+                        ElevatedButton (
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Row (
+                                children: <Widget>[
+                                  Expanded(child: Text('Company overview')),
+                                  Icon(Icons.book)
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                            ),
+                            onPressed: () {
+                              officeHelpers.getBookings().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
+                                } else {
+
+                                }
+                              });
+                            }
+                        ),
+                        SizedBox (
+                          height: MediaQuery.of(context).size.height/48,
+                          width: MediaQuery.of(context).size.width,
+                        ),
                         ElevatedButton (
                             style: ElevatedButton.styleFrom (
                               shape: RoundedRectangleBorder(

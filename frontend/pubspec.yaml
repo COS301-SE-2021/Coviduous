@@ -47,6 +47,7 @@ dependencies:
   objectdb: ^1.2.1+1
   build_runner: ^2.0.6
   random_string: ^2.3.1
+  syncfusion_flutter_charts: ^19.2.57
 
 dev_dependencies:
   flutter_test:
