@@ -19,5 +19,7 @@ reportingController.setDatabase(devDatabase);
 router.post('/reporting/health/sick-employees', reportingController.addSickEmployee);
 //router.post('/reporting/health/sick-employees/view', reportingController.viewSickEmployees);
 
+router.post('/reporting/health/recovered-employees',reportingController.addRecoveredEmployee);
+
 // Export API routes
 module.exports = router;

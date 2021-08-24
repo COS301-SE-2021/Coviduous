@@ -97,6 +97,47 @@ exports.addSickEmployee = async (req, res) => {
     });
 };
 
+exports.addRecoveredEmployee = async (req,res) =>{
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+   
+    let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === "") {
+        fieldErrors.push({field: 'userId', message: 'UserID may not be empty'})
+    }
+
+    if (reqJson.userEmail == null || reqJson.userEmail === "") {
+        fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'})
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    
+
+
+
+
+
+
+};
+
+
+
 // exports.viewSickEmployees = async (req, res) => {
 //     let result = await database.viewSickEmployees();
     
