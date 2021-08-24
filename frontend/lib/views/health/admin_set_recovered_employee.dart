@@ -41,7 +41,7 @@ class _AdminSetRecoveredEmployeeState extends State<AdminSetRecoveredEmployee> {
       onWillPop: _onWillPop,
       child: new Scaffold(
         appBar: new AppBar(
-          title: new Text("Set employee recovering status"),
+          title: new Text("Set employee recovery status"),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);

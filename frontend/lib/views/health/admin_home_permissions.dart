@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/health/admin_contact_trace_employee.dart';
+import 'package:frontend/views/health/admin_set_recovered_employee.dart';
 import 'package:frontend/views/health/admin_view_permissions.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/user_homepage.dart';
@@ -116,14 +117,14 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                     ),
                     child: Row (
                         children: <Widget>[
-                          Expanded(child: Text('Manage PPE')),
+                          Expanded(child: Text('Set employee recovery status')),
                           Icon(Icons.medical_services)
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                         crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                     ),
                     onPressed: () {
-                      //screens pending.
+                      Navigator.of(context).pushReplacementNamed(AdminSetRecoveredEmployee.routeName);
                     }
                 ),
                 SizedBox (
