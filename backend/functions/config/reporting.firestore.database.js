@@ -82,6 +82,8 @@ exports.viewSickEmployees = async (companyId) => {
 };
 
 ////////// COMPANY REPORTING ////////////
+
+// company-data
 exports.addCompanyData = async (companyId, data) => {
     try {
         await db.collection('company-data').doc(companyId)
@@ -139,6 +141,54 @@ exports.updateNumberOfRegisteredUsers = async (companyId, value) => {
 
         await document.update({
             numberOfRegisteredUsers: value
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+// users-data
+exports.addUsersData = async (usersDataId, data) => {
+    try {
+        await db.collection('users-data').doc(usersDataId)
+          .create(data);
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.viewUsersData = async () => {
+    try {
+        const document = db.collection('users-data');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+    
+        let usersData = list;
+        
+        return usersData;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
+exports.updateTotalRegisteredUsers = async (usersDataId, value) => {
+    try {
+        const document = db.collection('users-data').doc(usersDataId); //or db.collection().where()
+
+        await document.update({
+            totalRegisteredUsers: value
         });
         return true;
     }
