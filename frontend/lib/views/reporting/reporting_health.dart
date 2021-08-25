@@ -36,5 +36,92 @@ class _ReportingHealthState extends State<ReportingHealth> {
       }
       return Container();
     }
+
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text('View company reports'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+              },
+            ),
+          ),
+          body: Center(
+              child: Container (
+                  height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                  padding: EdgeInsets.all(16),
+                  child: Column (
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        ElevatedButton (
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Row (
+                                children: <Widget>[
+                                  Expanded(child: Text('View Sick Employees')),
+                                  Icon(Icons.book)
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                            ),
+                            onPressed: () {
+                              floorPlanHelpers.getFloorPlans().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(ReportingFloorPlans.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("An error occurred while retrieving sick employees. Please try again later.")));
+                                }
+                              });
+                            }
+                        ),
+                        SizedBox (
+                          height: MediaQuery.of(context).size.height/48,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        ElevatedButton (
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Row (
+                                children: <Widget>[
+                                  Expanded(child: Text('View Recovered Employees')),
+                                  Icon(Icons.medical_services)
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: Text('Placeholder'),
+                                    content: Text('Health reports.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text('Okay'),
+                                        onPressed: (){
+                                          Navigator.of(ctx).pop();
+                                        },
+                                      )
+                                    ],
+                                  )
+                              );
+                            }
+                        ),
+                      ]
+                  )
+              )
+          )
+      ),
+    );
   }
 }
