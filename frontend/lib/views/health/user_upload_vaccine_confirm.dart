@@ -49,8 +49,14 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
             globals.vaccineConfirmExists = true;
           }
         } else { //Else, PC browser
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("File upload unsupported on PC. Please use mobile app.")));
+          FilePickerResult result = results.first;
+          if (result != null) {
+            String tempFileName = '${randomName}.pdf';
+            print(tempFileName);
+            fileName = tempFileName;
+            fileBytes = result.files.first.bytes;
+            globals.vaccineConfirmExists = true;
+          }
         }
       } else { //Else, mobile app
         FilePickerResult result = results.first;
