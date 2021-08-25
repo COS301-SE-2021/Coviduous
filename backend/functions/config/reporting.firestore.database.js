@@ -93,21 +93,40 @@ exports.addCompanyData = async (companyId, data) => {
     }
 };
 
-exports.viewCompanyData = async () => {
+// exports.viewCompanyData = async () => {
+//     try {
+//         const document = db.collection('company-data');
+//         const snapshot = await document.get();
+        
+//         let list = [];
+        
+//         snapshot.forEach(doc => {
+//             let data = doc.data();
+//             list.push(data);
+//         });
+    
+//         let companyData = list;
+        
+//         return companyData;
+//     } catch (error) {
+//         console.log(error);
+//         return error;
+//     }
+// };
+
+exports.viewCompanyData = async (companyId) => {
     try {
-        const document = db.collection('company-data');
+        const document = db.collection('company-data').where("companyId", "==", companyId);
         const snapshot = await document.get();
-        
+
         let list = [];
-        
+
         snapshot.forEach(doc => {
             let data = doc.data();
             list.push(data);
         });
-    
-        let companyData = list;
-        
-        return companyData;
+
+        return list;
     } catch (error) {
         console.log(error);
         return error;
