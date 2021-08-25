@@ -430,3 +430,61 @@ Future<bool> notifyGroup(String shiftNumber) async {
 
   return false;
 }
+
+//Health documents related
+
+//Upload COVID-19 vaccine confirmation
+Future<bool> uploadVaccineConfirmation(String userId, String fileName, String bytes) async {
+  String path = '/health/Covid19VaccineConfirmation';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+      "fileName": fileName,
+      "base64String": bytes
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return false;
+}
+
+//Upload COVID-19 test results
+Future<bool> uploadTestResults(String userId, String fileName, String bytes) async {
+  String path = '/health/Covid19TestResults';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+      "fileName": fileName,
+      "bytes": bytes
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+  } catch(error) {
+  print(error);
+  }
+
+  return false;
+}

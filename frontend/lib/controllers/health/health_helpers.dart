@@ -174,3 +174,23 @@ Future<bool> notifyGroup() async {
   });
   return result;
 }
+
+Future<bool> uploadVaccineConfirmation(String fileName, String bytes) async {
+  bool result = false;
+  await Future.wait([
+    healthController.uploadVaccineConfirmation(globals.loggedInUserId, fileName, bytes)
+  ]).then((results) {
+    result = results.first;
+  });
+  return result;
+}
+
+Future<bool> uploadTestResults(String fileName, String bytes) async {
+  bool result = false;
+  await Future.wait([
+    healthController.uploadTestResults(globals.loggedInUserId, fileName, bytes)
+  ]).then((results) {
+    result = results.first;
+  });
+  return result;
+}

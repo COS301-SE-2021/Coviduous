@@ -70,8 +70,6 @@ Future<List<User>> getUsers() async {
     response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
 
     if (response.statusCode == 200) {
-      //print(response.body);
-
       var jsonString = response.body;
       var jsonMap = jsonDecode(jsonString);
 
@@ -108,7 +106,6 @@ Future<User> getUserDetails(String userId) async {
       "userId": userId,
     });
     request.headers.addAll(globals.requestHeaders);
-    print(request.body);
 
     var response = await request.send();
 
@@ -149,7 +146,6 @@ Future<User> getUserDetailsByEmail(String email) async {
       "email": email,
     });
     request.headers.addAll(globals.requestHeaders);
-    print(request.body);
 
     var response = await request.send();
 

@@ -74,8 +74,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
   }
 
   final List<Booking> bookingData = globals.currentBookings;
-  List<List<Booking>> bookingDataSorted;
-  List<String> bookingDataDates;
+  List<List<Booking>> bookingDataSorted = [];
+  List<String> bookingDataDates = [];
 
   //Group a list of bookings by date
   groupBookingsByDate(List<Booking> bookings) {
@@ -143,8 +143,10 @@ class ReportingCompanyState extends State<ReportingCompany> {
               child:  ElevatedButton(
                   child: Text('Create PDF'),
                   onPressed: () async {
+                    if (globals.currentBookings != null) {
+                      groupBookingsByDate(bookingData);
+                    }
                     pw.MemoryImage bookingChart = new pw.MemoryImage(await renderBookingChart());
-                    groupBookingsByDate(bookingData);
 
                     //Create PDF
                     pdf.addPage(pw.MultiPage(

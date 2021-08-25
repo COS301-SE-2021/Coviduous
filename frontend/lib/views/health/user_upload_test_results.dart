@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -13,6 +12,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_view_test_results.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserUploadTestResults extends StatefulWidget {
@@ -24,6 +24,9 @@ class UserUploadTestResults extends StatefulWidget {
 
 //Let user pick PDF from their device
 class _UserUploadTestResultsState extends State<UserUploadTestResults> {
+  String fileName = "";
+  List<int> fileBytes;
+
   Future getPdf() async {
     var rng = new Random();
     String randomName = "";
@@ -40,22 +43,25 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
           FilePickerResult result = results.first;
           if (result != null) {
             File file = File(result.files.single.path);
-            String fileName = '${randomName}.pdf';
-            print(fileName);
-            print('${file.readAsBytesSync()}');
-            savePdf(file.readAsBytesSync(), fileName);
+            String tempFileName = '${randomName}.pdf';
+            print(tempFileName);
+            tempFileName = fileName;
+            fileBytes = file.readAsBytesSync();
+            globals.vaccineConfirmExists = true;
           }
         } else { //Else, PC browser
-          //Not sure what to do here
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("File upload unsupported on PC. Please use mobile app.")));
         }
       } else { //Else, mobile app
         FilePickerResult result = results.first;
         if (result != null) {
           File file = File(result.files.single.path);
-          String fileName = '${randomName}.pdf';
-          print(fileName);
-          print('${file.readAsBytesSync()}');
-          savePdf(file.readAsBytesSync(), fileName);
+          String tempFileName = '${randomName}.pdf';
+          print(tempFileName);
+          fileName = tempFileName;
+          fileBytes = file.readAsBytesSync();
+          globals.vaccineConfirmExists = true;
         }
       }
     });
@@ -63,18 +69,15 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
 
   Future savePdf(List<int> asset, String name) async {
     //Upload the PDF to Firebase Cloud Storage
-    documentFileUpload("Test URL.pdf");
-    return;
-  }
-
-  //Upload URL of the document to Firestore
-  void documentFileUpload(String str) {
-    CollectionReference users = FirebaseFirestore.instance.collection('Test Results');
-    FirebaseAuth auth = FirebaseAuth.instance;
-    String uid = auth.currentUser.uid.toString();
-    users.add({
-      'uid': uid,
-      'Document path': str,
+    String fileBytes = base64Encode(asset);
+    await healthHelpers.uploadVaccineConfirmation(name, fileBytes).then((result) {
+      if (result == true) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("PDF successfully uploaded.")));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Error occurred while uploading PDF. Please try again later.")));
+      }
     });
   }
 
@@ -168,14 +171,15 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                                         'Submit'
                                     ),
                                     onPressed: () {
-                                      globals.testResultsExist = true;
-                                      if (globals.testResultsExist) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("PDF successfully uploaded")));
-                                        Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                      if (globals.vaccineConfirmExists) {
+                                        savePdf(fileBytes, fileName).then((result) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Success.")));
+                                          //Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                        });
                                       } else {
                                         ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("Please upload a PDF")));
+                                            SnackBar(content: Text("Please upload a PDF.")));
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(

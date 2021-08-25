@@ -68,19 +68,20 @@ class _ReportingState extends State<Reporting> {
                             child: Row (
                                 children: <Widget>[
                                   Expanded(child: Text('Company overview')),
-                                  Icon(Icons.book)
+                                  Icon(Icons.business)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              officeHelpers.getBookings().then((result) {
+                              Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
+                              /*officeHelpers.getBookings().then((result) {
                                 if (result == true) {
                                   Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                 } else {
 
                                 }
-                              });
+                              });*/
                             }
                         ),
                         SizedBox (

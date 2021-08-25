@@ -37,7 +37,6 @@ class AuthClass {
          globals.loggedInUserId = userCredential.user.uid;
          globals.loggedInUserEmail = userCredential.user.email;
          globals.token = await userCredential.user.getIdToken();
-         //print(globals.token);
        });
        return "welcome";
      } on FirebaseAuthException catch (e) {
