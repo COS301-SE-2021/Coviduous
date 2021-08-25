@@ -29,7 +29,7 @@ Date.prototype.timeNow = function () {
        + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
 
-// functions
+////////// HEALTH REPORTING ////////////
 exports.addSickEmployee = async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -239,4 +239,81 @@ exports.viewSickEmployees = async (req, res) => {
     {
         return res.status(500).send({message: "Some error occurred while fetching sick employees."});
     }
+};
+
+////////// COMPANY REPORTING ////////////
+exports.addCompanyData = async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
+
+    if (reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === "") {
+        fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'})
+    }
+
+    if (reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === "") {
+        fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered admins may not be empty'})
+    }
+
+    if (reqJson.numberOfFloorplans == null || reqJson.numberOfFloorplans === "") {
+        fieldErrors.push({field: 'numberOfFloorplans', message: 'Number of floorplans may not be empty'})
+    }
+
+    if (reqJson.numberOfFloors == null || reqJson.numberOfFloors === "") {
+        fieldErrors.push({field: 'numberOfFloors', message: 'Number of floors may not be empty'})
+    }
+
+    if (reqJson.numberOfRooms == null || reqJson.numberOfRooms === "") {
+        fieldErrors.push({field: 'numberOfRooms', message: 'Number of rooms may not be empty'})
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    //let sickEmployeeId = "SCK-" + uuid.v4();
+    //let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+    let companyData = {
+        companyId: reqJson.companyId,
+        numberOfRegisteredUsers: reqJson.numberOfRegisteredUsers,
+        numberOfRegisteredAdmins: reqJson.numberOfRegisteredAdmins,
+        numberOfFloorplans: reqJson.numberOfFloorplans,
+        numberOfFloors: reqJson.numberOfFloors,
+        numberOfRooms: reqJson.numberOfRooms
+    }
+
+    let result = await database.addSickEmployee(companyData.companyId, companyData);
+    
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
+
+    return res.status(200).send({
+       message: 'Company data successfully created',
+       data: companyData
+    });
 };
