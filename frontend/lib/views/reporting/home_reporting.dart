@@ -6,9 +6,9 @@ import 'package:frontend/views/reporting/reporting_company.dart';
 import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-
+import 'package:frontend/views/reporting/reporting_health.dart';
 import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
-import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+//import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class Reporting extends StatefulWidget {
@@ -132,21 +132,22 @@ class _ReportingState extends State<Reporting> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              showDialog(
+                              Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
+                             /* showDialog(
                                   context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('Health reports.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              builder: (ctx) => AlertDialog(
+                              title: Text('Placeholder'),
+                              content: Text('Health reports.'),
+                              actions: <Widget>[
+                              TextButton(
+                              child: Text('Okay'),
+                              onPressed: (){
+                              Navigator.of(ctx).pop();
+                              },
+                              )
+                              ],
+                              )
+                              ); */
                             }
                         ),
                       ]
