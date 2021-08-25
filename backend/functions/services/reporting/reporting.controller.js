@@ -304,7 +304,7 @@ exports.addCompanyData = async (req, res) => {
         numberOfRooms: reqJson.numberOfRooms
     }
 
-    let result = await database.addSickEmployee(companyData.companyId, companyData);
+    let result = await database.addCompanyData(companyData.companyId, companyData);
     
     if (!result) {
         return res.status(500).send({
