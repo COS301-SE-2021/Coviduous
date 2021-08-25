@@ -581,3 +581,48 @@ exports.notifyGroup = async (req, res) => {
       });
   }
 };
+
+//upload documents
+exports.uploadCovid19VaccineConfirmation = async (req, res) => {
+  try {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      console.log("SET UP");
+      
+      return res.status(200).send({
+        message: 'Successfully stored vaccine confirmation document',
+        data: req.headers
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while storing vaccine document."
+      });
+  }
+};
+
+exports.uploadCovid19TestResults = async (req, res) => {
+  try {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      console.log("SET UP");
+      
+      return res.status(200).send({
+        message: 'Successfully stored test results',
+        data: req.headers
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while trying to store results."
+      });
+  }
+};
