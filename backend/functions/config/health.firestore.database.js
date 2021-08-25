@@ -296,3 +296,25 @@ exports.viewShifts = async (userEmail) => {
         return error;
     }
 };
+
+exports.saveCovid19VaccineConfirmation = async (documentId, data) => {
+    try {
+        await db.collection('vaccine-confirmation').doc(documentId)
+          .create(data); 
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.saveCovid19TestResults = async (documentId, data) => {
+    try {
+        await db.collection('test-results').doc(documentId)
+          .create(data);
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
