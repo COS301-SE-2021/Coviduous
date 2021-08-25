@@ -21,6 +21,7 @@ router.post('/reporting/health/sick-employees', reportingController.addSickEmplo
 router.post('/reporting/health/sick-employees/view', reportingController.viewSickEmployees);
 
 router.post('/reporting/health/recovered-employees',reportingController.addRecoveredEmployee);
+router.post('/reporting/health/recovered-employees/view',reportingController.viewRecoveredEmployee);
 
 // company reports
 router.post('/reporting/company/company-data', reportingController.addCompanyData);
