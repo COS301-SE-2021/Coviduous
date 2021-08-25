@@ -150,6 +150,21 @@ exports.updateNumberOfRegisteredUsers = async (companyId, value) => {
     }
 };
 
+exports.updateNumberOfRegisteredAdmins = async (companyId, value) => {
+    try {
+        const document = db.collection('company-data').doc(companyId);
+
+        await document.update({
+            numberOfRegisteredAdmins: value
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 // users-data
 exports.addUsersData = async (usersDataId, data) => {
     try {
