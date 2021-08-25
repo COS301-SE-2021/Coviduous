@@ -172,7 +172,7 @@ exports.viewRecoveredEmployee = async (req, res) => {
         });
     }
 
-    let viewRecovered = await db.viewRecoveredEmployee();
+    let viewRecovered = await database.viewRecoveredEmployee();
       
     if (viewRecovered != null) {
       return res.status(200).send({
