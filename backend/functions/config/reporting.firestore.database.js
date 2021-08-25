@@ -132,3 +132,18 @@ exports.viewCompanyData = async (companyId) => {
         return error;
     }
 };
+
+exports.updateNumberOfRegisteredUsers = async (companyId, value) => {
+    try {
+        const document = db.collection('company-data').doc(companyId);
+
+        await document.update({
+            numberOfRegisteredUsers: value
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+};
