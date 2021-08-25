@@ -172,7 +172,7 @@ exports.viewRecoveredEmployee = async (req, res) => {
         });
     }
 
-    let viewRecovered = await database.viewRecoveredEmployee();
+    let viewRecovered = await db.viewRecoveredEmployee();
       
     if (viewRecovered != null) {
       return res.status(200).send({
@@ -242,6 +242,8 @@ exports.viewSickEmployees = async (req, res) => {
 };
 
 ////////// COMPANY REPORTING ////////////
+
+// company-data
 exports.addCompanyData = async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -397,5 +399,129 @@ exports.updateNumberOfRegisteredUsers = async (req, res) => {
       });
     } else {
       return res.status(500).send({message: "Some error occurred while updating number of registered users."});
+    }
+};
+
+
+
+
+// users-data
+exports.addUsersData = async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === "") {
+        fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'})
+    }
+
+    if (reqJson.totalEmployees == null || reqJson.totalEmployees === "") {
+        fieldErrors.push({field: 'totalEmployees', message: 'Total number of employees may not be empty'})
+    }
+
+    if (reqJson.totalAdmins == null || reqJson.totalAdmins === "") {
+        fieldErrors.push({field: 'totalAdmins', message: 'Total number of admins may not be empty'})
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let usersDataId = "UD-" + uuid.v4();
+
+    let usersData = {
+        usersDataId: usersDataId,
+        totalRegisteredUsers: reqJson.totalRegisteredUsers,
+        totalEmployees: reqJson.totalEmployees,
+        totalAdmins: reqJson.totalAdmins
+    }
+
+    let result = await database.addUsersData(usersData.usersDataId, usersData);
+    
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
+
+    return res.status(200).send({
+       message: 'Users data successfully created',
+       data: usersData
+    });
+};
+
+exports.viewUsersData = async (req, res) => {
+    let result = await database.viewUsersData();
+    
+    if (!result) {
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+        });
+    }
+
+    return res.status(200).send({
+        message: 'Successfully retrieved sick employees',
+        data: result
+    });
+};
+
+exports.updateTotalRegisteredUsers = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.usersDataId == null || reqJson.usersDataId === '') {
+        fieldErrors.push({field: 'usersDataId', message: 'Users data ID may not be empty'});
+    }
+
+    if(reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === ''){
+        fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+  
+    if (await database.updateTotalRegisteredUsers(reqJson.usersDataId, reqJson.totalRegisteredUsers) == true) {
+      return res.status(200).send({
+        message: "Successfully updated total number of registered users",
+        data: req.body
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while updating total number of registered users."});
     }
 };
