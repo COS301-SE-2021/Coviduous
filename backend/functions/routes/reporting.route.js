@@ -21,5 +21,9 @@ router.post('/reporting/health/sick-employees/view', reportingController.viewSic
 
 router.post('/reporting/health/recovered-employees',reportingController.addRecoveredEmployee);
 
+router.post('/reporting/company/company-data', reportingController.addCompanyData);
+router.post('/reporting/company/company-data/view', reportingController.viewCompanyData);
+//router.put('/reporting/company/company-data/registered-users', reportingController.updateRegisteredUsers);
+
 // Export API routes
 module.exports = router;
