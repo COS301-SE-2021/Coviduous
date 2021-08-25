@@ -591,12 +591,24 @@ exports.uploadCovid19VaccineConfirmation = async (req, res) => {
       } catch (e) {
           reqJson = req.body;
       }
-      console.log("SET UP");
-      
+      let documentId = "DOC-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+      let documentData = {
+          documentId: documentId,
+          userId: reqJson.userId,
+          fileName:reqJson.fileName,
+          timestamp: timestamp,
+          base64String: reqJson.base64String,
+          
+        }
+        if ( await database.saveCovid19VaccineConfirmation(documentId,documentData) == true)
+        {
       return res.status(200).send({
         message: 'Successfully stored vaccine confirmation document',
-        data: req.headers
+        data: documentData
       });
+    }
   } catch (error) {
       console.log(error);
       return res.status(500).send({
