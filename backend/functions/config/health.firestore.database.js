@@ -299,7 +299,7 @@ exports.viewShifts = async (userEmail) => {
 
 exports.saveCovid19VaccineConfirmation = async (documentId, data) => {
     try {
-        await db.collection('vaccine-confirmation').doc(documentId)
+        await db.collection('vaccine-confirmations').doc(documentId)
           .create(data); 
         return true;
     } catch (error) {
