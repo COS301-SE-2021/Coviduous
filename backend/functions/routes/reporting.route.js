@@ -16,15 +16,20 @@ reportingController.setDatabase(devDatabase);
 //router.post('/mock/reporting', reportingMockService.addSickEmployees);
 
 // reporting routes
+// health reports
 router.post('/reporting/health/sick-employees', reportingController.addSickEmployee);
 router.post('/reporting/health/sick-employees/view', reportingController.viewSickEmployees);
 
 router.post('/reporting/health/recovered-employees',reportingController.addRecoveredEmployee);
-router.post('//reporting/health/recovered-employees/view',reportingController.viewRecoveredEmployee);
 
+// company reports
 router.post('/reporting/company/company-data', reportingController.addCompanyData);
 router.post('/reporting/company/company-data/view', reportingController.viewCompanyData);
 router.put('/reporting/company/company-data/registered-users', reportingController.updateNumberOfRegisteredUsers);
+
+router.post('/reporting/company/users-data', reportingController.addUsersData);
+router.post('/reporting/company/users-data/view', reportingController.viewUsersData);
+router.put('/reporting/company/users-data/registered-users', reportingController.updateTotalRegisteredUsers);
 
 // Export API routes
 module.exports = router;
