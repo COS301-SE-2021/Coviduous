@@ -23,7 +23,7 @@ router.post('/reporting/health/recovered-employees',reportingController.addRecov
 
 router.post('/reporting/company/company-data', reportingController.addCompanyData);
 router.post('/reporting/company/company-data/view', reportingController.viewCompanyData);
-//router.put('/reporting/company/company-data/registered-users', reportingController.updateRegisteredUsers);
+router.put('/reporting/company/company-data/registered-users', reportingController.updateNumberOfRegisteredUsers);
 
 // Export API routes
 module.exports = router;
