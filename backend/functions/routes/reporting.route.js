@@ -27,6 +27,7 @@ router.post('/reporting/health/recovered-employees/view',reportingController.vie
 router.post('/reporting/company/company-data', reportingController.addCompanyData);
 router.post('/reporting/company/company-data/view', reportingController.viewCompanyData);
 router.put('/reporting/company/company-data/registered-users', reportingController.updateNumberOfRegisteredUsers);
+router.put('/reporting/company/company-data/registered-admins', reportingController.updateNumberOfRegisteredAdmins);
 
 router.post('/reporting/company/users-data', reportingController.addUsersData);
 router.post('/reporting/company/users-data/view', reportingController.viewUsersData);
