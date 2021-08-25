@@ -292,9 +292,6 @@ exports.addCompanyData = async (req, res) => {
         });
     }
 
-    //let sickEmployeeId = "SCK-" + uuid.v4();
-    //let timestamp = new Date().today() + " @ " + new Date().timeNow();
-
     let companyData = {
         companyId: reqJson.companyId,
         numberOfRegisteredUsers: reqJson.numberOfRegisteredUsers,
@@ -356,5 +353,49 @@ exports.viewCompanyData = async (req, res) => {
     else
     {
         return res.status(500).send({message: "Some error occurred while fetching company data."});
+    }
+};
+
+exports.updateNumberOfRegisteredUsers = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if(reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === ''){
+        fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+  
+    if (await database.updateNumberOfRegisteredUsers(reqJson.companyId, reqJson.numberOfRegisteredUsers) == true) {
+      return res.status(200).send({
+        message: "Successfully updated number of registered users",
+        data: req.body
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while updating number of registered users."});
     }
 };
