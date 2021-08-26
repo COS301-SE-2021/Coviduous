@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:frontend/views/reporting/reporting_view_single_vaccine_confirmation.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart';
@@ -8,15 +9,13 @@ import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingViewVaccineConfirmation extends StatefulWidget {
-  static const routeName = "/reporting_view_vaccine_confirmation";
+  static const routeName = "/reporting_view_vaccine_confirmations";
 
   @override
   _ReportingViewVaccineConfirmationState createState() => _ReportingViewVaccineConfirmationState();
 }
 
 class _ReportingViewVaccineConfirmationState extends State<ReportingViewVaccineConfirmation> {
-  int numberOfEmployees = 1;
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
     return (await true);
@@ -36,7 +35,7 @@ class _ReportingViewVaccineConfirmationState extends State<ReportingViewVaccineC
       return Container();
     }
     Widget getList() {
-      int numberOfResults = 1;
+      int numberOfResults = globals.currentVaccineConfirmations.length;
 
       print(numberOfResults);
 
@@ -79,14 +78,13 @@ class _ReportingViewVaccineConfirmationState extends State<ReportingViewVaccineC
             padding: EdgeInsets.all(16),
             itemCount: numberOfResults,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH room in rooms[]
               return ListTile(
                 title: Column(children: [
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Employee ID '),
+                    child: Text('Employee ' + globals.currentVaccineConfirmations[index].getUserId()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -95,12 +93,7 @@ class _ReportingViewVaccineConfirmationState extends State<ReportingViewVaccineC
                       children: <Widget>[
                         Container(
                           color: Colors.white,
-                          child: Text('Vaccine Confirmation: 1 '),
-                        ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('DATE: '),
+                          child: Text('Date: ' + globals.currentVaccineConfirmations[index].getTimestamp()),
                         ),
                         Container(
                           height: 50,
@@ -111,7 +104,8 @@ class _ReportingViewVaccineConfirmationState extends State<ReportingViewVaccineC
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    ///will show pdf of vaccine confirmations.
+                                    globals.currentVaccineConfirmation = globals.currentVaccineConfirmations[index];
+                                    Navigator.of(context).pushReplacementNamed(ReportingViewSingleVaccineConfirmation.routeName);
                                   }),
                             ],
                           ),
