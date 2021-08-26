@@ -530,6 +530,48 @@ exports.addNumberOfFloorsCompanyData = async (req, res) => {
     }
 };
 
+exports.addNumberOfRoomsCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let companyData = await database.getCompanyData(reqJson.companyId);
+
+    if (await database.addNumberOfRoomsCompanyData(reqJson.companyId, companyData.numberOfRooms) == true) {
+        return res.status(200).send({
+            message: "Successfully added number of rooms",
+            //data: req.body
+        });
+    } else {
+        return res.status(500).send({message: "Some error occurred while updating number of rooms."});
+    }
+};
+
 
 /////// users-data ////////
 exports.generateUsersData = async (req, res) => {
