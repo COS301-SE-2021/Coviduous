@@ -275,3 +275,36 @@ exports.getTotalEmployees = async () => {
         return error;
     }
 };
+
+//health summary
+
+exports.viewHealthSummary = async () => {
+    try {
+      const document = db.collection('health-summary');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };
+
+  exports.setHealthSummary = async (healthSummaryId,data) => {
+    try {
+        await db.collection('health-summary').doc(healthSummaryId)
+          .create(data);
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
