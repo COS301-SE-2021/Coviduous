@@ -318,3 +318,43 @@ exports.saveCovid19TestResults = async (documentId, data) => {
         return false;
     }
 };
+
+exports.getVaccineConfirmations = async () => {
+    try {
+      const document = db.collection('vaccine-confirmations');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };
+
+  exports.getTestResults = async () => {
+    try {
+      const document = db.collection('test-results');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };

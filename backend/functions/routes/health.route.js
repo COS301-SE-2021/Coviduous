@@ -16,6 +16,8 @@ router.post('/health/report-infection', healthController.reportInfection);
 router.post('/health/Covid19VaccineConfirmation', healthController.uploadCovid19VaccineConfirmation);
 router.post('/health/Covid19TestResults', healthController.uploadCovid19TestResults);
 router.post('/health/permissions/view', healthController.viewPermissions);
+router.post('/health/Covid19VaccineConfirmation/view', healthController.viewVaccineConfirmations);
+router.post('/health/Covid19TestResults/view', healthController.viewTestResults);
 router.delete('/health/permissions', healthController.deletePermissionRequest);
 
 router.post('/health/permissions/permission-request', healthController.createPermissionRequest);
