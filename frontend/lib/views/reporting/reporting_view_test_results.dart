@@ -5,7 +5,7 @@ import 'package:frontend/views/admin_homepage.dart';
 ///import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-
+import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart';
 ///import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
@@ -133,7 +133,7 @@ class _ViewTestResultsState extends State<ViewTestResults> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              ///Navigator.of(context).pushReplacementNamed(ReportingFloors.routeName);
+              Navigator.of(context).pushReplacementNamed(ReportingHealthViewEmployees.routeName);
             },
           ),
         ),
