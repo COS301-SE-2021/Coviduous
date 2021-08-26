@@ -12,6 +12,8 @@ import 'package:frontend/models/floor_plan/room.dart';
 import 'package:frontend/models/health/health_check.dart';
 import 'package:frontend/models/health/permission.dart';
 import 'package:frontend/models/health/permission_request.dart';
+import 'package:frontend/models/health/test_results.dart';
+import 'package:frontend/models/health/vaccine_confirmation.dart';
 import 'package:frontend/models/notification/notification.dart';
 import 'package:frontend/models/office/booking.dart';
 import 'package:frontend/models/shift/group.dart';
@@ -170,6 +172,14 @@ List<User> selectedUsers = [];
 List<SickUser> selectedSickUsers = [];
 List<RecoveredUser> selectedRecoveredUsers = [];
 String selectedUserEmail = '';
+
+//Current vaccine confirmation documents
+List<VaccineConfirmation> currentVaccineConfirmations = [];
+VaccineConfirmation currentVaccineConfirmation;
+
+//Current test result documents
+List<TestResults> currentTestResults = [];
+TestResults currentTestResult;
 
 //===============================
 //Used in announcement subsystem
