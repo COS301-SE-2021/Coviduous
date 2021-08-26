@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:frontend/views/reporting/reporting_view_single_test_result.dart';
 
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
@@ -15,8 +16,6 @@ class ReportingViewTestResults extends StatefulWidget {
 }
 
 class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
-  int numberOfEmployees = 1;
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
     return (await true);
@@ -36,7 +35,7 @@ class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
       return Container();
     }
     Widget getList() {
-      int numberOfResults = 1;
+      int numberOfResults = globals.currentTestResults.length;
 
       print(numberOfResults);
 
@@ -79,14 +78,13 @@ class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
             padding: EdgeInsets.all(16),
             itemCount: numberOfResults,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH room in rooms[]
               return ListTile(
                 title: Column(children: [
                   Container(
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     color: Theme.of(context).primaryColor,
-                    child: Text('Employee ID '),
+                    child: Text('Employee ' + globals.currentTestResults[index].getUserId()),
                   ),
                   ListView(
                       shrinkWrap: true,
@@ -95,12 +93,7 @@ class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
                       children: <Widget>[
                         Container(
                           color: Colors.white,
-                          child: Text('Results: 1 '),
-                        ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('DATE: '),
+                          child: Text('Date: ' + globals.currentTestResults[index].getTimestamp()),
                         ),
                         Container(
                           height: 50,
@@ -111,7 +104,8 @@ class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
-                                    ///will show pdf of results.
+                                    globals.currentTestResult = globals.currentTestResults[index];
+                                    Navigator.of(context).pushReplacementNamed(ReportingViewSingleTestResult.routeName);
                                   }),
                             ],
                           ),
@@ -127,7 +121,7 @@ class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
       child: Scaffold(
         appBar: AppBar(
           title:
-          Text("View test results"),
+          Text("View COVID-19 test results"),
           leading: BackButton(
             //Specify back button
             onPressed: () {
