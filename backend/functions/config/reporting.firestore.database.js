@@ -197,6 +197,24 @@ exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompa
     }
 };
 
+exports.addNumberOfRoomsCompanyData = async (companyId, currentNumRoomsInCompanyData) => {
+    try {
+        if (parseInt(currentNumRoomsInCompanyData) >= 0)
+        {
+            let newNumRooms = parseInt(currentNumRoomsInCompanyData) + 1;
+            newNumRooms = newNumRooms.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfRooms": newNumRooms
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
 
 
 /////// users-data ////////
