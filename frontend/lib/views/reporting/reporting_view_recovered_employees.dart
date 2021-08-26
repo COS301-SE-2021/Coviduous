@@ -5,7 +5,8 @@ import 'package:frontend/views/admin_homepage.dart';
 ///import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-
+import 'package:frontend/views/reporting/reporting_view_test_results.dart';
+import 'package:frontend/views/reporting/reporting_view_vaccine_confirmation.dart';
 ///import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
@@ -99,7 +100,7 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                                       ),
                                       child: Text('View Test Results'),
                                       onPressed: () {
-
+                                        Navigator.of(context).pushReplacementNamed(ViewTestResults.routeName);
                                       }),
                                 ],
                               ),
@@ -118,7 +119,7 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                                       ),
                                       child: Text('View Vaccine Proof'),
                                       onPressed: () {
-
+                                        Navigator.of(context).pushReplacementNamed(ViewVaccineConfirmation.routeName);
                                       }),
                                 ],
                               ),
@@ -137,7 +138,7 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                                       ),
                                       child: Text('Generate report'),
                                       onPressed: () {
-
+                                        ///will generate report of pdfs
                                       }),
                                 ],
                               ),
