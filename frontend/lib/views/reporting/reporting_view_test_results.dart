@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/views/admin_homepage.dart';
-///import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart';
-///import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+
 import 'package:frontend/globals.dart' as globals;
 
-class ViewTestResults extends StatefulWidget {
+class ReportingViewTestResults extends StatefulWidget {
   static const routeName = "/reporting_view_test_results";
 
   @override
-  _ViewTestResultsState createState() => _ViewTestResultsState();
+  _ReportingViewTestResultsState createState() => _ReportingViewTestResultsState();
 }
-//class admin
-class _ViewTestResultsState extends State<ViewTestResults> {
+
+class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
   int numberOfEmployees = 1;
 
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+    Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
     return (await true);
   }
   @override
@@ -133,7 +131,7 @@ class _ViewTestResultsState extends State<ViewTestResults> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed(ReportingHealthViewEmployees.routeName);
+              Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
             },
           ),
         ),
