@@ -123,10 +123,30 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                                 ],
                               ),
                             ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom (
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text('Generate report'),
+                                      onPressed: () {
+
+                                      }),
+                                ],
+                              ),
+                            ),
                           ]
                       )
                     ]
                 ),
+
                 //title: floors[index].floor()
               );
             }
