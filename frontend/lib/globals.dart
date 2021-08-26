@@ -18,6 +18,8 @@ import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
 import 'package:frontend/models/notification/temp_notification.dart';
 import 'package:frontend/models/user/user.dart';
+import 'package:frontend/models/user/recovered_user.dart';
+import 'package:frontend/models/user/sick_user.dart';
 
 import 'package:frontend/theme.dart' as theme;
 
@@ -165,6 +167,8 @@ List<PermissionRequest> currentPermissionRequests;
 //Current user
 User selectedUser;
 List<User> selectedUsers = [];
+List<SickUser> selectedSickUsers = [];
+List<RecoveredUser> selectedRecoveredUsers = [];
 String selectedUserEmail = '';
 
 //===============================
