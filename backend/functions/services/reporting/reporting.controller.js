@@ -450,7 +450,7 @@ exports.updateNumberOfRegisteredAdmins = async (req, res) => {
 
 
 // users-data
-exports.addUsersData = async (req, res) => {
+exports.generateUsersData = async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
             message: '400 Bad Request: Null request object',
@@ -493,19 +493,23 @@ exports.addUsersData = async (req, res) => {
     totalUsers = totalUsers.toString();
 
     // get total employees
+    let totalEmployees = await database.getTotalEmployees();
+    totalEmployees = totalEmployees.toString();
 
     // get total admins
+    let totalAdmins = await database.getTotalAdmins();
+    totalAdmins = totalAdmins.toString();
 
     let usersDataId = "UD-" + uuid.v4();
 
     let usersData = {
         usersDataId: usersDataId,
         totalRegisteredUsers: totalUsers,
-        totalEmployees: reqJson.totalEmployees,
-        totalAdmins: reqJson.totalAdmins
+        totalEmployees: totalEmployees,
+        totalAdmins: totalAdmins
     }
 
-    let result = await database.addUsersData(usersData.usersDataId, usersData);
+    let result = await database.generateUsersData(usersData.usersDataId, usersData);
     
     if (!result) {
         return res.status(500).send({
