@@ -267,25 +267,25 @@ exports.addCompanyData = async (req, res) => {
         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
     }
 
-    if (reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === "") {
-        fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'})
-    }
+    // if (reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === "") {
+    //     fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'})
+    // }
 
-    if (reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === "") {
-        fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered admins may not be empty'})
-    }
+    // if (reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === "") {
+    //     fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered admins may not be empty'})
+    // }
 
-    if (reqJson.numberOfFloorplans == null || reqJson.numberOfFloorplans === "") {
-        fieldErrors.push({field: 'numberOfFloorplans', message: 'Number of floorplans may not be empty'})
-    }
+    // if (reqJson.numberOfFloorplans == null || reqJson.numberOfFloorplans === "") {
+    //     fieldErrors.push({field: 'numberOfFloorplans', message: 'Number of floorplans may not be empty'})
+    // }
 
-    if (reqJson.numberOfFloors == null || reqJson.numberOfFloors === "") {
-        fieldErrors.push({field: 'numberOfFloors', message: 'Number of floors may not be empty'})
-    }
+    // if (reqJson.numberOfFloors == null || reqJson.numberOfFloors === "") {
+    //     fieldErrors.push({field: 'numberOfFloors', message: 'Number of floors may not be empty'})
+    // }
 
-    if (reqJson.numberOfRooms == null || reqJson.numberOfRooms === "") {
-        fieldErrors.push({field: 'numberOfRooms', message: 'Number of rooms may not be empty'})
-    }
+    // if (reqJson.numberOfRooms == null || reqJson.numberOfRooms === "") {
+    //     fieldErrors.push({field: 'numberOfRooms', message: 'Number of rooms may not be empty'})
+    // }
 
     if (fieldErrors.length > 0) {
         return res.status(400).send({
@@ -491,42 +491,42 @@ exports.addNumberOfFloorsCompanyData = async (req, res) => {
 
 /////// users-data ////////
 exports.generateUsersData = async (req, res) => {
-    if (req == null || req.body == null) {
-        return res.status(400).send({
-            message: '400 Bad Request: Null request object',
-        });
-    }
+    // if (req == null || req.body == null) {
+    //     return res.status(400).send({
+    //         message: '400 Bad Request: Null request object',
+    //     });
+    // }
 
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
+    // //Look into express.js middleware so that these lines are not necessary
+    // let reqJson;
+    // try {
+    //     reqJson = JSON.parse(req.body);
+    // } catch (e) {
+    //     reqJson = req.body;
+    // }
+    // console.log(reqJson);
+    // //////////////////////////////////////////////////////////////////////
 
-    let fieldErrors = [];
+    // let fieldErrors = [];
 
-    if (reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === "") {
-        fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'})
-    }
+    // if (reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === "") {
+    //     fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'})
+    // }
 
-    if (reqJson.totalEmployees == null || reqJson.totalEmployees === "") {
-        fieldErrors.push({field: 'totalEmployees', message: 'Total number of employees may not be empty'})
-    }
+    // if (reqJson.totalEmployees == null || reqJson.totalEmployees === "") {
+    //     fieldErrors.push({field: 'totalEmployees', message: 'Total number of employees may not be empty'})
+    // }
 
-    if (reqJson.totalAdmins == null || reqJson.totalAdmins === "") {
-        fieldErrors.push({field: 'totalAdmins', message: 'Total number of admins may not be empty'})
-    }
+    // if (reqJson.totalAdmins == null || reqJson.totalAdmins === "") {
+    //     fieldErrors.push({field: 'totalAdmins', message: 'Total number of admins may not be empty'})
+    // }
 
-    if (fieldErrors.length > 0) {
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
+    // if (fieldErrors.length > 0) {
+    //     return res.status(400).send({
+    //         message: '400 Bad Request: Incorrect fields',
+    //         errors: fieldErrors
+    //     });
+    // }
 
     // get total users
     let totalUsers = await database.getTotalUsers();
