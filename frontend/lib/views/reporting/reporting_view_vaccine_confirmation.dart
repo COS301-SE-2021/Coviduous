@@ -10,7 +10,7 @@ import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart
 import 'package:frontend/globals.dart' as globals;
 
 class ViewVaccineConfirmation extends StatefulWidget {
-  static const routeName = "/reporting";
+  static const routeName = "/reporting_view_vaccine_confirmation";
 
   @override
   _ViewVaccineConfirmationState createState() => _ViewVaccineConfirmationState();
