@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/views/admin_homepage.dart';
-///import 'package:frontend/views/reporting/reporting_floor_plans.dart';
+import 'package:frontend/views/reporting/reporting_health.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_view_test_results.dart';
 import 'package:frontend/views/reporting/reporting_view_vaccine_confirmation.dart';
-///import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+
 import 'package:frontend/globals.dart' as globals;
 
-class ReportingHealthViewEmployees extends StatefulWidget {
-  static const routeName = "/reporting_view_employees";
+class ReportingViewRecoveredEmployees extends StatefulWidget {
+  static const routeName = "/reporting_view_recovered_employees";
 
   @override
-  _ReportingHealthViewEmployeesState createState() => _ReportingHealthViewEmployeesState();
+  _ReportingViewRecoveredEmployeesState createState() => _ReportingViewRecoveredEmployeesState();
 }
-//class admin
-class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmployees> {
+
+class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecoveredEmployees> {
   int numberOfEmployees = 1;
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+    Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
     return (await true);
   }
 
@@ -49,7 +48,7 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                 width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                 height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
                 color: Theme.of(context).primaryColor,
-                child: Text('No Employee health status found', style: TextStyle(color: Colors.white,
+                child: Text('No employee health status found', style: TextStyle(color: Colors.white,
                     fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
               ),
               Container(
@@ -98,9 +97,9 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                       ),
-                                      child: Text('View Test Results'),
+                                      child: Text('View test results'),
                                       onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(ViewTestResults.routeName);
+                                        Navigator.of(context).pushReplacementNamed(ReportingViewTestResults.routeName);
                                       }),
                                 ],
                               ),
@@ -117,9 +116,9 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                       ),
-                                      child: Text('View Vaccine Proof'),
+                                      child: Text('View vaccine proof'),
                                       onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(ViewVaccineConfirmation.routeName);
+                                        Navigator.of(context).pushReplacementNamed(ReportingViewVaccineConfirmation.routeName);
                                       }),
                                 ],
                               ),
@@ -147,23 +146,20 @@ class _ReportingHealthViewEmployeesState extends State<ReportingHealthViewEmploy
                       )
                     ]
                 ),
-
-                //title: floors[index].floor()
               );
             }
         );
       }
     }
 
-
     return WillPopScope(
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: AppBar(
-            title: Text('View Employee health status'),
+            title: Text('View recovered employees'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                ///Navigator.of(context).pushReplacementNamed(Office.routeName);
+                Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
               },
             ),
           ),
