@@ -581,3 +581,66 @@ exports.updateTotalRegisteredUsers = async (req, res) => {
       return res.status(500).send({message: "Some error occurred while updating total number of registered users."});
     }
 };
+
+
+// health summary 
+//initial setup
+exports.setUpHealthSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    let healthSummaries = await database.viewHealthSummary();
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        return res.status(200).send({
+            message: 'Company Health Summary Already Has An Initial Instance',
+        });
+
+    }
+    else
+    {
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+
+      let healthSummary = {
+        healthSummaryId: healthSummaryId,
+        month: month,
+        year:year,
+        timestamp: timestamp,
+        companyId: reqJson.companyId,
+        numHealthChecksUsers: 0,
+        numHealthChecksVisitors: 0,
+        numReportedInfections: 0,
+        numRecovered: 0,
+          
+        }
+        await database.setHealthSummary(healthSummaryId,healthSummary);
+        return res.status(200).send({
+            message: 'Company Health Summary Successfuly Set',
+            data:healthSummary
+        });
+
+
+    }
+
+
+};
