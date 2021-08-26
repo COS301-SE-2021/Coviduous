@@ -216,11 +216,49 @@ exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompa
     }
 };
 
+exports.decreaseNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompanyData) => {
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) > 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) - 1;
+            newNumFloors = newNumFloors.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfFloors": newNumFloors
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 exports.addNumberOfRoomsCompanyData = async (companyId, currentNumRoomsInCompanyData) => {
     try {
         if (parseInt(currentNumRoomsInCompanyData) >= 0)
         {
             let newNumRooms = parseInt(currentNumRoomsInCompanyData) + 1;
+            newNumRooms = newNumRooms.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfRooms": newNumRooms
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.decreaseNumberOfRoomsCompanyData = async (companyId, currentNumRoomsInCompanyData) => {
+    try {
+        if (parseInt(currentNumRoomsInCompanyData) > 0)
+        {
+            let newNumRooms = parseInt(currentNumRoomsInCompanyData) - 1;
             newNumRooms = newNumRooms.toString();
 
             response = await db.collection('company-data').doc(companyId).update({
