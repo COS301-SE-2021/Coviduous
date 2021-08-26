@@ -338,3 +338,23 @@ exports.getVaccineConfirmations = async () => {
       lastQuerySucceeded=false;
     }
   };
+
+  exports.getTestResults = async () => {
+    try {
+      const document = db.collection('test-results');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };
