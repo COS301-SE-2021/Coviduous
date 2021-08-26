@@ -488,11 +488,19 @@ exports.addUsersData = async (req, res) => {
         });
     }
 
+    // get total users
+    let totalUsers = await database.getTotalUsers();
+    totalUsers = totalUsers.toString();
+
+    // get total employees
+
+    // get total admins
+
     let usersDataId = "UD-" + uuid.v4();
 
     let usersData = {
         usersDataId: usersDataId,
-        totalRegisteredUsers: reqJson.totalRegisteredUsers,
+        totalRegisteredUsers: totalUsers,
         totalEmployees: reqJson.totalEmployees,
         totalAdmins: reqJson.totalAdmins
     }
@@ -521,7 +529,7 @@ exports.viewUsersData = async (req, res) => {
     }
 
     return res.status(200).send({
-        message: 'Successfully retrieved sick employees',
+        message: 'Successfully retrieved users data',
         data: result
     });
 };
