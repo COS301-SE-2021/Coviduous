@@ -26,13 +26,15 @@ router.post('/reporting/health/recovered-employees/view',reportingController.vie
 // company reports
 router.post('/reporting/company/company-data', reportingController.addCompanyData);
 router.post('/reporting/company/company-data/view', reportingController.viewCompanyData);
-router.put('/reporting/company/company-data/registered-users', reportingController.updateNumberOfRegisteredUsers);
-router.put('/reporting/company/company-data/registered-admins', reportingController.updateNumberOfRegisteredAdmins);
+//router.put('/reporting/company/company-data/registered-users', reportingController.updateNumberOfRegisteredUsers);
+//router.put('/reporting/company/company-data/registered-admins', reportingController.updateNumberOfRegisteredAdmins);
+router.put('/reporting/company/company-data/floorplans/inc', reportingController.addNumberOfFloorplansCompanyData);
 router.put('/reporting/company/company-data/floors/inc', reportingController.addNumberOfFloorsCompanyData);
 
 router.post('/reporting/company/users-data', reportingController.generateUsersData);
 router.post('/reporting/company/users-data/view', reportingController.viewUsersData);
-router.put('/reporting/company/users-data/registered-users', reportingController.updateTotalRegisteredUsers);
+//router.put('/reporting/company/users-data/registered-users', reportingController.updateTotalRegisteredUsers);
+
 //health reports
 router.post('/reporting/health-summary', reportingController.setUpHealthSummary);
 
