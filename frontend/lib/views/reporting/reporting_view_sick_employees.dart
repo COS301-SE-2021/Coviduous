@@ -15,7 +15,8 @@ class ReportingViewSickEmployees extends StatefulWidget {
 }
 
 class _ReportingViewSickEmployeesState extends State<ReportingViewSickEmployees> {
-  int numberOfEmployees = 1;
+  int numberOfEmployees = globals.selectedSickUsers.length;
+
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
     return (await true);
@@ -71,7 +72,7 @@ class _ReportingViewSickEmployeesState extends State<ReportingViewSickEmployees>
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Employee '),
+                        child: Text('Employee ' + globals.selectedSickUsers[index].getUserId(), style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -80,7 +81,13 @@ class _ReportingViewSickEmployeesState extends State<ReportingViewSickEmployees>
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Average Temperature: 69.5' ),
+                              child: Text('Email: ' + globals.selectedSickUsers[index].getEmail()),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text('Time of diagnosis: ' + globals.selectedSickUsers[index].getTimeOfDiagnosis()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
