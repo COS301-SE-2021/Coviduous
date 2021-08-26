@@ -166,7 +166,7 @@ exports.updateNumberOfRegisteredAdmins = async (companyId, value) => {
 };
 
 // users-data
-exports.addUsersData = async (usersDataId, data) => {
+exports.generateUsersData = async (usersDataId, data) => {
     try {
         await db.collection('users-data').doc(usersDataId)
           .create(data);
@@ -216,6 +216,48 @@ exports.updateTotalRegisteredUsers = async (usersDataId, value) => {
 exports.getTotalUsers = async () => {
     try {
         const document = db.collection('users');
+        const snapshot = await document.get();
+        
+        let counter = 0;
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(counter);
+            counter++;
+        });
+        
+        //console.log(counter)
+        return counter
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
+exports.getTotalAdmins = async () => {
+    try {
+        const document = db.collection('users').where("type","==", "Admin"); // or "ADMIN"
+        const snapshot = await document.get();
+        
+        let counter = 0;
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(counter);
+            counter++;
+        });
+        
+        //console.log(counter)
+        return counter
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
+exports.getTotalEmployees = async () => {
+    try {
+        const document = db.collection('users').where("type","==", "User"); // or "USER"
         const snapshot = await document.get();
         
         let counter = 0;
