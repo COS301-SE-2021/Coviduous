@@ -636,7 +636,7 @@ exports.uploadCovid19TestResults = async (req, res) => {
           base64String: reqJson.base64String,
           
         }
-        if ( await database.saveCovid19VaccineConfirmation(documentId,documentData) == true)
+        if ( await database.saveCovid19TestResults(documentId,documentData) == true)
         {
       
       return res.status(200).send({
@@ -680,3 +680,31 @@ exports.viewVaccineConfirmations = async (req, res) => {
       });
   }
   };
+
+  exports.viewTestResults = async (req, res) => {
+    try {
+        let reqJson = JSON.parse(req.body);
+        let filteredList=[];
+        let results = await database.getTestResults();
+        
+        results.forEach(obj => {
+          if(obj.userId===reqJson.userId)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+        return res.status(200).send({
+          message: 'Successfully Fetched Documents.',
+          data: filteredList
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+          message: err.message || "Some error occurred while fetching Documents."
+        });
+    }
+    };
