@@ -47,7 +47,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
             print(tempFileName);
             tempFileName = fileName;
             fileBytes = file.readAsBytesSync();
-            globals.vaccineConfirmExists = true;
+            globals.testResultsExist = true;
           }
         } else { //Else, PC browser
           FilePickerResult result = results.first;
@@ -56,7 +56,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
             print(tempFileName);
             fileName = tempFileName;
             fileBytes = result.files.first.bytes;
-            globals.vaccineConfirmExists = true;
+            globals.testResultsExist = true;
           }
         }
       } else { //Else, mobile app
@@ -67,7 +67,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
           print(tempFileName);
           fileName = tempFileName;
           fileBytes = file.readAsBytesSync();
-          globals.vaccineConfirmExists = true;
+          globals.testResultsExist = true;
         }
       }
     });
@@ -76,7 +76,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
   Future savePdf(List<int> asset, String name) async {
     //Upload the PDF to Firebase Cloud Storage
     String fileBytes = base64Encode(asset);
-    await healthHelpers.uploadVaccineConfirmation(name, fileBytes).then((result) {
+    await healthHelpers.uploadTestResults(name, fileBytes).then((result) {
       if (result == true) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("PDF successfully uploaded.")));
@@ -135,6 +135,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                           child: Text(
                               'Upload your COVID-19 test results',
                               style: TextStyle(
+                                color: Colors.white,
                                 fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
                               )
                           ),
@@ -179,9 +180,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                                     onPressed: () {
                                       if (globals.vaccineConfirmExists) {
                                         savePdf(fileBytes, fileName).then((result) {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Success.")));
-                                          //Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                          Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
                                         });
                                       } else {
                                         ScaffoldMessenger.of(context).showSnackBar(
