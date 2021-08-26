@@ -159,11 +159,31 @@ exports.updateNumberOfRegisteredAdmins = async (companyId, value) => {
     }
 };
 
+exports.addNumberOfFloorplansCompanyData = async (companyId, currentNumFloorplansInCompanyData) => {
+    try {
+        if (parseInt(currentNumFloorplansInCompanyData) >= 0)
+        {
+            let newNumFloorplans = parseInt(currentNumFloorplansInCompanyData) + 1;
+            newNumFloorplans = newNumFloorplans.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfFloorplans": newNumFloorplans
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompanyData) => {
     try {
         if (parseInt(currentNumFloorsInCompanyData) >= 0)
         {
             let newNumFloors = parseInt(currentNumFloorsInCompanyData) + 1;
+            newNumFloors = newNumFloors.toString();
 
             response = await db.collection('company-data').doc(companyId).update({
                 "numberOfFloors": newNumFloors
@@ -176,6 +196,7 @@ exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompa
         return false;
     }
 };
+
 
 
 /////// users-data ////////
