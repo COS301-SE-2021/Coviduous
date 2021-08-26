@@ -32,6 +32,8 @@ router.put('/reporting/company/company-data/registered-admins', reportingControl
 router.post('/reporting/company/users-data', reportingController.generateUsersData);
 router.post('/reporting/company/users-data/view', reportingController.viewUsersData);
 router.put('/reporting/company/users-data/registered-users', reportingController.updateTotalRegisteredUsers);
+//health reports
+router.post('/reporting/health-summary', reportingController.setUpHealthSummary);
 
 // Export API routes
 module.exports = router;
