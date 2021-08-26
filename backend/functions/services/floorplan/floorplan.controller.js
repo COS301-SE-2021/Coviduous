@@ -1,7 +1,19 @@
 //Floor plan controller handles the operations of the floor plan service with business logic and CRUD operations
-let database; //this variable holds the database
+
 const Room = require("../../models/room.model");
 const uuid = require("uuid"); // npm install uuid
+
+let database; //this variable holds the database
+let reportingDatabase;
+
+//This function allows dependency injections for production or mock databases
+exports.setDatabase = async(db) => {
+  database = db;
+}
+
+exports.setReportingDatabase = async (db) => {
+  reportingDatabase = db;
+}
 
 /**
  * This function creates a specified floor plan via an HTTP CREATE request.
@@ -76,6 +88,11 @@ exports.createFloorPlan = async (req, res) => {
 
   }
   console.log("Floorplan with floorplanNumber : "+floorplanNumber+" succesfully created");
+
+  // company-data summary
+  // let companyData = await reportingDatabase.getCompanyData(reqJson.companyId);
+  // await reportingDatabase.addNumberOfFloorplansCompanyData(reqJson.companyId, companyData.numberOfFloorplans);
+
   return res.status(200).send({
   message: 'floorplan successfully created',
   data: reqJson
@@ -110,6 +127,10 @@ exports.createFloorPlan = async (req, res) => {
     await database.createFloor(floorNumber,floorData);
     console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+reqJson.floorplanNumber);
     
+    // company-data summary
+    // let companyData = await reportingDatabase.getCompanyData(reqJson.companyId);
+    // await reportingDatabase.addNumberOfFloorsCompanyData(reqJson.companyId, companyData.numberOfFloors);
+
     return res.status(200).send({
       message: 'floor successfully created',
       data: floorData
@@ -146,7 +167,12 @@ try {
     capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
     capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle
   }
-  let floor= await database.getFloor(reqJson.floorNumber);
+  let floor = await database.getFloor(reqJson.floorNumber);
+
+  // company-data summary
+  // let companyData = await reportingDatabase.getCompanyData(floor.companyId);
+  // await reportingDatabase.addNumberOfRoomsCompanyData(floor.companyId, companyData.numberOfRooms);
+
   await database.addRoom(reqJson.floorNumber,reqJson.currentNumberRoomInFloor);
   await database.createRoom(roomNumber,roomData);
   console.log("Room with roomNumber : "+roomNumber+" succesfully created under floor : "+reqJson.floorNumber);
@@ -327,6 +353,11 @@ exports.deleteRoom = async (req, res) => {
     let floor= await  database.getFloor(reqJson.floorNumber);
     await database.removeRoom(reqJson.floorNumber,floor.numRooms)
     await database.deleteRoom(reqJson.roomNumber);
+
+    // company-data summary
+    // let companyData = await reportingDatabase.getCompanyData(floor.companyId);
+    // await reportingDatabase.decreaseNumberOfRoomsCompanyData(floor.companyId, companyData.numberOfRooms);
+
       return res.status(200).send({
         message: 'Room successfully deleted',
       });
@@ -376,6 +407,11 @@ exports.deleteFloor = async (req, res) => {
     let floorplan= await  database.getFloorPlan(reqJson.floorplanNumber);
     await database.removeFloor(reqJson.floorplanNumber,floorplan.numFloors);
     await database.deleteFloor(reqJson.floorNumber);
+
+    // company-data summary
+    // let companyData = await reportingDatabase.getCompanyData(floorplan.companyId);
+    // await reportingDatabase.decreaseNumberOfFloorsCompanyData(floorplan.companyId, companyData.numberOfFloors);
+
       return res.status(200).send({
         message: 'Floor successfully deleted',
       });
@@ -394,6 +430,8 @@ exports.deleteFloorPlan = async (req, res) => {
 
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
+
+    let floorplan= await  database.getFloorPlan(reqJson.floorplanNumber);
 
     floors.forEach(obj => {
       if(obj.floorplanNumber===reqJson.floorplanNumber)
@@ -440,6 +478,11 @@ exports.deleteFloorPlan = async (req, res) => {
     });
 
     await database.deleteFloorPlan(reqJson.floorplanNumber);
+
+    // company-data summary
+    // let companyData = await reportingDatabase.getCompanyData(floorplan.companyId);
+    // await reportingDatabase.decreaseNumberOfFloorplansCompanyData(floorplan.companyId, companyData.numberOfFloorplans);
+
       return res.status(200).send({
         message: 'Floor Plan successfully deleted',
       });
@@ -448,9 +491,3 @@ exports.deleteFloorPlan = async (req, res) => {
     return res.status(500).send(error);
   }
 };
-
-//This function allows dependency injections for production or mock databases
-exports.setDatabase= async(db)=>{
-
-  database=db;
-}
