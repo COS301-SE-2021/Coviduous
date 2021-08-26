@@ -17,7 +17,8 @@ class ReportingViewRecoveredEmployees extends StatefulWidget {
 }
 
 class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecoveredEmployees> {
-  int numberOfEmployees = 1;
+  int numberOfEmployees = globals.selectedRecoveredUsers.length;
+
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
     return (await true);
@@ -73,7 +74,7 @@ class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecovered
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Employee '),
+                        child: Text('Employee ' + globals.selectedRecoveredUsers[index].getUserId(), style: TextStyle(color: Colors.white)),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -82,7 +83,13 @@ class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecovered
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Average Temperature: 69.5' ),
+                              child: Text('Email: ' + globals.selectedRecoveredUsers[index].getEmail()),
+                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                            ),
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Text('Recovered time: ' + globals.selectedRecoveredUsers[index].getRecoveredTime()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
