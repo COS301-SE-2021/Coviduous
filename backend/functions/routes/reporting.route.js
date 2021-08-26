@@ -30,6 +30,7 @@ router.post('/reporting/company/company-data/view', reportingController.viewComp
 //router.put('/reporting/company/company-data/registered-admins', reportingController.updateNumberOfRegisteredAdmins);
 router.put('/reporting/company/company-data/floorplans/inc', reportingController.addNumberOfFloorplansCompanyData);
 router.put('/reporting/company/company-data/floors/inc', reportingController.addNumberOfFloorsCompanyData);
+router.put('/reporting/company/company-data/rooms/inc', reportingController.addNumberOfRoomsCompanyData);
 
 router.post('/reporting/company/users-data', reportingController.generateUsersData);
 router.post('/reporting/company/users-data/view', reportingController.viewUsersData);
