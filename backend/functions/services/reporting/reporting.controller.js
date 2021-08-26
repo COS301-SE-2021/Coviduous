@@ -243,7 +243,7 @@ exports.viewSickEmployees = async (req, res) => {
 
 ////////// COMPANY REPORTING ////////////
 
-// company-data
+/////// company-data ////////
 exports.addCompanyData = async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -296,11 +296,11 @@ exports.addCompanyData = async (req, res) => {
 
     let companyData = {
         companyId: reqJson.companyId,
-        numberOfRegisteredUsers: reqJson.numberOfRegisteredUsers,
-        numberOfRegisteredAdmins: reqJson.numberOfRegisteredAdmins,
-        numberOfFloorplans: reqJson.numberOfFloorplans,
-        numberOfFloors: reqJson.numberOfFloors,
-        numberOfRooms: reqJson.numberOfRooms
+        numberOfRegisteredUsers: "0",
+        numberOfRegisteredAdmins: "0",
+        numberOfFloorplans: "0",
+        numberOfFloors: "0",
+        numberOfRooms: "0"
     }
 
     let result = await database.addCompanyData(companyData.companyId, companyData);
@@ -343,7 +343,7 @@ exports.viewCompanyData = async (req, res) => {
         });
     }
 
-    let companyData = await database.viewCompanyData(reqJson.companyId);
+    let companyData = await database.getCompanyData(reqJson.companyId);
 
     if (companyData != null)
     {
@@ -446,10 +446,50 @@ exports.updateNumberOfRegisteredAdmins = async (req, res) => {
     }
 };
 
+exports.addNumberOfFloorsCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let companyData = await database.getCompanyData(reqJson.companyId);
+
+    if (await database.addNumberOfFloorsCompanyData(reqJson.companyId, companyData.numberOfFloors) == true) {
+        return res.status(200).send({
+            message: "Successfully added number of floors",
+            //data: req.body
+        });
+    } else {
+        return res.status(500).send({message: "Some error occurred while updating number of floors."});
+    }
+};
 
 
-
-// users-data
+/////// users-data ////////
 exports.generateUsersData = async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({

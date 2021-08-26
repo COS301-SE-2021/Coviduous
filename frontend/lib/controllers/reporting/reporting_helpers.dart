@@ -41,3 +41,29 @@ Future<bool> addRecoveredEmployee(String userEmail) async {
   });
   return result;
 }
+
+Future<bool> viewSickEmployees() async {
+  bool result = false;
+  await Future.wait([
+    reportingController.viewSickEmployees(globals.loggedInCompanyId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.selectedSickUsers = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
+Future<bool> viewRecoveredEmployees() async {
+  bool result = false;
+  await Future.wait([
+    reportingController.viewRecoveredEmployees(globals.loggedInCompanyId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.selectedRecoveredUsers = results.first;
+      result = true;
+    }
+  });
+  return result;
+}

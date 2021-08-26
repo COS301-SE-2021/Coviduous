@@ -7,6 +7,7 @@ import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart
 import 'package:frontend/views/reporting/reporting_view_sick_employees.dart';
 import 'package:frontend/views/reporting/home_reporting.dart';
 
+import 'package:frontend/controllers/reporting/reporting_helpers.dart' as reportingHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingHealth extends StatefulWidget {
@@ -71,7 +72,14 @@ class _ReportingHealthState extends State<ReportingHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(ReportingViewSickEmployees.routeName);
+                              reportingHelpers.viewSickEmployees().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(ReportingViewSickEmployees.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("An error occurred while retrieving sick employees. Please try again later.")));
+                                }
+                              });
                             }
                         ),
                         SizedBox (
@@ -93,7 +101,14 @@ class _ReportingHealthState extends State<ReportingHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
+                              reportingHelpers.viewRecoveredEmployees().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("An error occurred while retrieving recovered employees. Please try again later.")));
+                                }
+                              });
                             }
                         ),
                       ]

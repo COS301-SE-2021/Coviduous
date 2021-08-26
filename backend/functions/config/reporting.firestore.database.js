@@ -83,7 +83,7 @@ exports.viewSickEmployees = async (companyId) => {
 
 ////////// COMPANY REPORTING ////////////
 
-// company-data
+/////// company-data ////////
 exports.addCompanyData = async (companyId, data) => {
     try {
         await db.collection('company-data').doc(companyId)
@@ -95,45 +95,39 @@ exports.addCompanyData = async (companyId, data) => {
     }
 };
 
-// exports.viewCompanyData = async () => {
+// returns data for 1 document 
+exports.getCompanyData = async (companyId) => {
+    try {
+        let response = db.collection('company-data').doc(companyId);
+        let doc = await response.get();
+        let res = doc.data()
+        
+        return res;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+// returns list data for multiple documents where companyId = given companyId value
+// exports.viewCompanyData = async (companyId) => {
 //     try {
-//         const document = db.collection('company-data');
+//         const document = db.collection('company-data').where("companyId", "==", companyId);
 //         const snapshot = await document.get();
-        
+
 //         let list = [];
-        
+
 //         snapshot.forEach(doc => {
 //             let data = doc.data();
 //             list.push(data);
 //         });
-    
-//         let companyData = list;
-        
-//         return companyData;
+
+//         return list;
 //     } catch (error) {
 //         console.log(error);
 //         return error;
 //     }
 // };
-
-exports.viewCompanyData = async (companyId) => {
-    try {
-        const document = db.collection('company-data').where("companyId", "==", companyId);
-        const snapshot = await document.get();
-
-        let list = [];
-
-        snapshot.forEach(doc => {
-            let data = doc.data();
-            list.push(data);
-        });
-
-        return list;
-    } catch (error) {
-        console.log(error);
-        return error;
-    }
-};
 
 exports.updateNumberOfRegisteredUsers = async (companyId, value) => {
     try {
@@ -165,7 +159,26 @@ exports.updateNumberOfRegisteredAdmins = async (companyId, value) => {
     }
 };
 
-// users-data
+exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompanyData) => {
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) >= 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) + 1;
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfFloors": newNumFloors
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+
+/////// users-data ////////
 exports.generateUsersData = async (usersDataId, data) => {
     try {
         await db.collection('users-data').doc(usersDataId)

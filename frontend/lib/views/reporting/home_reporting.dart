@@ -97,6 +97,28 @@ class _ReportingState extends State<Reporting> {
                             ),
                             child: Row (
                                 children: <Widget>[
+                                  Expanded(child: Text('Health reports')),
+                                  Icon(Icons.medical_services)
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
+                            }
+                        ),
+                        SizedBox (
+                          height: MediaQuery.of(context).size.height/48,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        ElevatedButton (
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Row (
+                                children: <Widget>[
                                   Expanded(child: Text('Office reports')),
                                   Icon(Icons.book)
                                 ],
@@ -112,28 +134,6 @@ class _ReportingState extends State<Reporting> {
                                       SnackBar(content: Text("An error occurred while retrieving floor plans. Please try again later.")));
                                 }
                               });
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Health reports')),
-                                  Icon(Icons.medical_services)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
                             }
                         ),
                       ]
