@@ -110,6 +110,7 @@ class _ReportingFloorPlansState extends State<ReportingFloorPlans> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
+                                    globals.currentFloorPlanNum = globals.currentFloorPlans[index].getFloorPlanNumber();
                                     floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
                                       if (result == true) {
                                         Navigator.of(context).pushReplacementNamed(ReportingFloors.routeName);
