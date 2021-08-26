@@ -5,7 +5,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-
+import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart';
 import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
 
@@ -100,21 +100,7 @@ class _ReportingHealthState extends State<ReportingHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) => AlertDialog(
-                                    title: Text('Placeholder'),
-                                    content: Text('Health reports.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text('Okay'),
-                                        onPressed: (){
-                                          Navigator.of(ctx).pop();
-                                        },
-                                      )
-                                    ],
-                                  )
-                              );
+                              Navigator.of(context).pushReplacementNamed(ReportingHealthViewEmployees.routeName);
                             }
                         ),
                       ]
