@@ -651,3 +651,32 @@ exports.uploadCovid19TestResults = async (req, res) => {
       });
   }
 };
+
+// get documents 
+exports.viewVaccineConfirmations = async (req, res) => {
+  try {
+      let reqJson = JSON.parse(req.body);
+      let filteredList=[];
+      let results = await database.getVaccineConfirmations();
+      
+      results.forEach(obj => {
+        if(obj.userId===reqJson.userId)
+        {
+          filteredList.push(obj);
+        }
+        else
+        {
+  
+        }
+      });
+      return res.status(200).send({
+        message: 'Successfully Fetched Documents.',
+        data: filteredList
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message || "Some error occurred while fetching Documents."
+      });
+  }
+  };
