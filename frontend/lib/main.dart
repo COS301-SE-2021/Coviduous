@@ -88,6 +88,11 @@ import 'package:frontend/views/reporting/reporting_floors.dart';
 import 'package:frontend/views/reporting/reporting_rooms.dart';
 import 'package:frontend/views/reporting/reporting_shifts.dart';
 import 'package:frontend/views/reporting/reporting_employees.dart';
+import 'package:frontend/views/reporting/reporting_health.dart';
+import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart';
+import 'package:frontend/views/reporting/reporting_view_sick_employees.dart';
+import 'package:frontend/views/reporting/reporting_view_test_results.dart';
+import 'package:frontend/views/reporting/reporting_view_vaccine_confirmation.dart';
 
 //User
 import 'package:frontend/views/admin_homepage.dart';
@@ -253,6 +258,11 @@ class MyApp extends StatelessWidget{
         ReportingRooms.routeName: (ctx)=> ReportingRooms(),
         ReportingShifts.routeName: (ctx)=> ReportingShifts(),
         ReportingEmployees.routeName: (ctx)=> ReportingEmployees(),
+        ReportingHealth.routeName: (ctx)=> ReportingHealth(),
+        ReportingViewRecoveredEmployees.routeName: (ctx)=> ReportingViewRecoveredEmployees(),
+        ReportingViewSickEmployees.routeName: (ctx)=> ReportingViewSickEmployees(),
+        ReportingViewTestResults.routeName: (ctx)=> ReportingViewTestResults(),
+        ReportingViewVaccineConfirmation.routeName: (ctx)=> ReportingViewVaccineConfirmation(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),

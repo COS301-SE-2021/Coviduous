@@ -134,21 +134,6 @@ class _ReportingState extends State<Reporting> {
                             ),
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
-                             /* showDialog(
-                                  context: context,
-                              builder: (ctx) => AlertDialog(
-                              title: Text('Placeholder'),
-                              content: Text('Health reports.'),
-                              actions: <Widget>[
-                              TextButton(
-                              child: Text('Okay'),
-                              onPressed: (){
-                              Navigator.of(ctx).pop();
-                              },
-                              )
-                              ],
-                              )
-                              ); */
                             }
                         ),
                       ]
