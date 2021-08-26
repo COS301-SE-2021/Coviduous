@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/views/admin_homepage.dart';
-import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart';
-import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/views/reporting/reporting_view_sick_employees.dart';
+import 'package:frontend/views/reporting/home_reporting.dart';
+
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingHealth extends StatefulWidget {
-  static const routeName = "/reporting";
+  static const routeName = "/reporting_health";
 
   @override
   _ReportingHealthState createState() => _ReportingHealthState();
 }
-//class admin
+
 class _ReportingHealthState extends State<ReportingHealth> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+    Navigator.of(context).pushReplacementNamed(Reporting.routeName);
     return (await true);
   }
   @override
@@ -41,10 +41,10 @@ class _ReportingHealthState extends State<ReportingHealth> {
       onWillPop: _onWillPop,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('View company reports'),
+            title: Text('View health reports'),
             leading: BackButton( //Specify back button
               onPressed: (){
-                Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+                Navigator.of(context).pushReplacementNamed(Reporting.routeName);
               },
             ),
           ),
@@ -64,21 +64,14 @@ class _ReportingHealthState extends State<ReportingHealth> {
                             ),
                             child: Row (
                                 children: <Widget>[
-                                  Expanded(child: Text('View Sick Employees')),
-                                  Icon(Icons.book)
+                                  Expanded(child: Text('View sick employees')),
+                                  Icon(Icons.sick)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              floorPlanHelpers.getFloorPlans().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(ReportingFloorPlans.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("An error occurred while retrieving sick employees. Please try again later.")));
-                                }
-                              });
+                              Navigator.of(context).pushReplacementNamed(ReportingViewSickEmployees.routeName);
                             }
                         ),
                         SizedBox (
@@ -93,14 +86,14 @@ class _ReportingHealthState extends State<ReportingHealth> {
                             ),
                             child: Row (
                                 children: <Widget>[
-                                  Expanded(child: Text('View Recovered Employees')),
+                                  Expanded(child: Text('View recovered employees')),
                                   Icon(Icons.medical_services)
                                 ],
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(ReportingHealthViewEmployees.routeName);
+                              Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
                             }
                         ),
                       ]
