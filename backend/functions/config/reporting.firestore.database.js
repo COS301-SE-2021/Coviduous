@@ -212,3 +212,24 @@ exports.updateTotalRegisteredUsers = async (usersDataId, value) => {
         return false;
     }
 };
+
+exports.getTotalUsers = async () => {
+    try {
+        const document = db.collection('users');
+        const snapshot = await document.get();
+        
+        let counter = 0;
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(counter);
+            counter++;
+        });
+        
+        //console.log(counter)
+        return counter
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
