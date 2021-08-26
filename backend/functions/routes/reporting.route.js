@@ -29,7 +29,7 @@ router.post('/reporting/company/company-data/view', reportingController.viewComp
 router.put('/reporting/company/company-data/registered-users', reportingController.updateNumberOfRegisteredUsers);
 router.put('/reporting/company/company-data/registered-admins', reportingController.updateNumberOfRegisteredAdmins);
 
-router.post('/reporting/company/users-data', reportingController.addUsersData);
+router.post('/reporting/company/users-data', reportingController.generateUsersData);
 router.post('/reporting/company/users-data/view', reportingController.viewUsersData);
 router.put('/reporting/company/users-data/registered-users', reportingController.updateTotalRegisteredUsers);
 
