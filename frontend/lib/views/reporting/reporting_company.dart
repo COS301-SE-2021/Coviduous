@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:collection/collection.dart' as collection;
 import 'dart:ui' as dart_ui;
@@ -6,11 +5,9 @@ import 'dart:ui' as dart_ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:universal_html/html.dart' as html;
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:frontend/views/reporting/home_reporting.dart';
@@ -18,6 +15,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/models/office/booking.dart';
 
+import 'package:frontend/controllers/pdf_helpers.dart' as pdfHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingCompany extends StatefulWidget {
@@ -29,49 +27,9 @@ class ReportingCompany extends StatefulWidget {
 }
 
 class ReportingCompanyState extends State<ReportingCompany> {
-  var myTheme;
+  pw.ThemeData myTheme;
   var pdf;
   final GlobalKey<SfCartesianChartState> _bookingChartKey = GlobalKey();
-
-  Future loadPDFFonts() async {
-    var fontAssets = await globals.loadPDFFonts();
-    myTheme = pw.ThemeData.withFont(
-      base: pw.Font.ttf(fontAssets[0]),
-      bold: pw.Font.ttf(fontAssets[1]),
-      italic: pw.Font.ttf(fontAssets[2]),
-      boldItalic: pw.Font.ttf(fontAssets[3]),
-    );
-  }
-
-  //Save PDF on mobile
-  Future savePDFMobile() async {
-    List<Directory> outputs;
-
-    outputs = await Future.wait([
-      DownloadsPathProvider.downloadsDirectory
-    ]);
-    Directory output = outputs.first;
-    print(output.path);
-
-    File file = File('${output.path}/report_company_' + globals.loggedInCompanyId + '.pdf');
-    await file.writeAsBytes(await pdf.save());
-  }
-
-  //Save PDF on web
-  Future savePDFWeb() async {
-    var bytes = await pdf.save();
-    var blob = html.Blob([bytes], 'application/pdf');
-    var url = html.Url.createObjectUrlFromBlob(blob);
-    var anchor =
-    html.document.createElement('a') as html.AnchorElement
-      ..href = url
-      ..style.display = 'none'
-      ..download = 'report_company_' + globals.loggedInCompanyId + '.pdf';
-    html.document.body.children.add(anchor);
-    anchor.click();
-    html.document.body.children.remove(anchor);
-    html.Url.revokeObjectUrl(url);
-  }
 
   final List<Booking> bookingData = globals.currentBookings;
   List<List<Booking>> bookingDataSorted = [];
@@ -116,7 +74,9 @@ class ReportingCompanyState extends State<ReportingCompany> {
     }
 
     //Load fonts from assets and initialize PDF
-    loadPDFFonts();
+    pdfHelpers.loadPDFFonts().then((result) {
+      myTheme = result;
+    });
     pdf = pw.Document(
       theme: myTheme,
     );
@@ -138,10 +98,9 @@ class ReportingCompanyState extends State<ReportingCompany> {
             child: Container(
               alignment: Alignment.bottomCenter,
               height: 50,
-              width: 130,
               padding: EdgeInsets.all(10),
               child:  ElevatedButton(
-                  child: Text('Create PDF'),
+                  child: Text('Generate PDF report'),
                   onPressed: () async {
                     if (globals.currentBookings != null) {
                       groupBookingsByDate(bookingData);
@@ -197,14 +156,14 @@ class ReportingCompanyState extends State<ReportingCompany> {
                     if (kIsWeb) { //If web browser
                       String platform = globals.getOSWeb();
                       if (platform == "Android" || platform == "iOS") { //Check if mobile browser
-                        savePDFMobile();
+                        pdfHelpers.savePDFMobile(pdf, 'report_company_' + globals.loggedInCompanyId + '.pdf');
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text("PDF file saved to downloads folder")));
                       } else { //Else, PC web browser
-                        savePDFWeb();
+                        pdfHelpers.savePDFWeb(pdf, 'report_company_' + globals.loggedInCompanyId + '.pdf');
                       }
                     } else { //Else, mobile app
-                      savePDFMobile();
+                      pdfHelpers.savePDFMobile(pdf, 'report_company_' + globals.loggedInCompanyId + '.pdf');
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("PDF file saved to downloads folder")));
                     }
