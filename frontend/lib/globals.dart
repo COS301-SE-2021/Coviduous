@@ -16,6 +16,7 @@ import 'package:frontend/models/health/test_results.dart';
 import 'package:frontend/models/health/vaccine_confirmation.dart';
 import 'package:frontend/models/notification/notification.dart';
 import 'package:frontend/models/office/booking.dart';
+import 'package:frontend/models/reporting/health_summary.dart';
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
 import 'package:frontend/models/notification/temp_notification.dart';
@@ -203,6 +204,13 @@ List<Notification> currentNotifications = [];
 
 //List of users to send notifications to
 List<TempNotification> tempUsers = [];
+
+//============================
+//Used in reporting subsystem
+//============================
+
+//Current health summary
+HealthSummary currentHealthSummary;
 
 //===========================
 //Used in multiple subsystems
