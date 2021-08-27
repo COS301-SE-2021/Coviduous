@@ -7,9 +7,9 @@ import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_health.dart';
-import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 
-///import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/reporting/reporting_helpers.dart' as reportingHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class Reporting extends StatefulWidget {
@@ -75,14 +75,17 @@ class _ReportingState extends State<Reporting> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
-                              /*officeHelpers.getBookings().then((result) {
+                              //The padLeft(2, "0") after the month is to ensure that if the month is a single digit, it should be preceded by a 0
+                              //Double digit months will automatically not have any leading 0s
+                              reportingHelpers.getHealthSummary(DateTime.now().year.toString(), DateTime.now().month.toString().padLeft(2, "0")).then((result) {
                                 if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
+                                  print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
+                                  //Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                 } else {
-
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("An error occurred while retrieving company overview. Please try again later.")));
                                 }
-                              });*/
+                              });
                             }
                         ),
                         SizedBox (
