@@ -15,6 +15,11 @@ Future<bool> createAdmin(String firstName, String lastName, String userName,
     userController.createUser(uid, "ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress)
   ]).then((results) {
     result = results.first;
+    if (result == true) {
+      createCompany(companyId).then((result2) {
+        result = result2;
+      });
+    }
   });
   return result;
 }
@@ -26,9 +31,19 @@ Future<bool> createUser(String firstName, String lastName, String userName, Stri
 
   bool result = false;
   await Future.wait([
-  userController.createUser(uid, "USER", firstName, lastName, email, userName, companyId, null, null)
+    userController.createUser(uid, "USER", firstName, lastName, email, userName, companyId, null, null)
   ]).then((results) {
-  result = results.first;
+    result = results.first;
+  });
+  return result;
+}
+
+Future<bool> createCompany(String companyId) async {
+  bool result = false;
+  await Future.wait([
+    userController.createCompany(companyId)
+  ]).then((results) {
+    result = results.first;
   });
   return result;
 }
