@@ -304,28 +304,6 @@ exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompa
     }
 };
 
-exports.getNumberBookings = async () => {
-    try {
-        const document = db.collection('summary-bookings');
-        const snapshot = await document.get();
-
-
-        let list = [];
-        snapshot.forEach(doc => {
-            let data = doc.data();
-            list.push(data);
-        });
-        return list;
-    } catch (error) {
-            console.log(error);
-            return false;
-    }
-};
-
-
-
-
-
 exports.decreaseNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompanyData) => {
     try {
         if (parseInt(currentNumFloorsInCompanyData) > 0)
