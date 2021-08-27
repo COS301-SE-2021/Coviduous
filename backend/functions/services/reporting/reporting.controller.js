@@ -241,6 +241,52 @@ exports.viewSickEmployees = async (req, res) => {
     }
 };
 
+exports.deleteSickEmployee = async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let result = await database.deleteSickEmployee(reqJson.userId);
+
+    if (!result) {
+        console.log("500 server error");
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            data: null
+        });
+    }
+
+    return res.status(200).send({
+        message: 'Successfully deleted sick employee',
+    });
+}
+
 ////////// COMPANY REPORTING ////////////
 
 /////// company-data ////////
