@@ -4,7 +4,7 @@ let db = admin.firestore();
 exports.createShift = async (data,ShiftData) => { 
     try {
         let c="";
-        await db.collection('shifts').doc(ShiftData.ShiftID)
+        await db.collection('shifts').doc(ShiftData.shiftID)
             .create(ShiftData); 
             const document =  db.collection('summary-shifts').where("month","==",data.month);
             let snapshot = await document.get(); 
@@ -16,11 +16,13 @@ exports.createShift = async (data,ShiftData) => {
                 list.push(d);
             });
             
+        
             for (const element of list) {
                 if(data.month===element.month){
                     c="checked";  
                 }
             }
+            
             if(c==="")
             {
                 await db.collection('summary-shifts').doc(data.summaryShiftId)
