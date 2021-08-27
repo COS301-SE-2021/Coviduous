@@ -628,6 +628,62 @@ exports.reportInfection = async (req, res) => {
 
     await database.reportInfection(notificationId,reportedInfectionData);
     await notificationService.sendUserEmail(reqJson.adminEmail,notificationData.subject,notificationData.message);
+
+     ////////////////////////////////////////////////////////////////////////////////////////
+      // update the health check summary collection
+      // first check if the current month and year you are currently in is registered
+
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let healthSummaries = await reportingDatabase.viewHealthSummary();
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+          let numReportedInfections=filteredList[0].numReportedInfections;
+          numReportedInfections++;
+
+          await reportingDatabase.updateHealthSummaryReportedInfections(filteredList[0].healthSummaryId,numReportedInfections);
+
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 1,
+            numRecovered: 0,
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+
+        
+    }
+    /////////////////////////////////////////////////////////////////////////////
       
       return res.status(200).send({
         message: 'Successfully reported infection',
