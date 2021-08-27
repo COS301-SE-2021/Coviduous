@@ -702,7 +702,13 @@ exports.uploadCovid19TestResults = async (req, res) => {
 // get documents 
 exports.viewVaccineConfirmations = async (req, res) => {
   try {
-      let reqJson = JSON.parse(req.body);
+      let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+
       let filteredList=[];
       let results = await database.getVaccineConfirmations();
       
@@ -723,14 +729,20 @@ exports.viewVaccineConfirmations = async (req, res) => {
   } catch (error) {
       console.log(error);
       return res.status(500).send({
-        message: err.message || "Some error occurred while fetching Documents."
+        message: error.message || "Some error occurred while fetching Documents."
       });
   }
   };
 
   exports.viewTestResults = async (req, res) => {
     try {
-        let reqJson = JSON.parse(req.body);
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+
         let filteredList=[];
         let results = await database.getTestResults();
         
@@ -751,7 +763,7 @@ exports.viewVaccineConfirmations = async (req, res) => {
     } catch (error) {
         console.log(error);
         return res.status(500).send({
-          message: err.message || "Some error occurred while fetching Documents."
+          message: error.message || "Some error occurred while fetching Documents."
         });
     }
     };

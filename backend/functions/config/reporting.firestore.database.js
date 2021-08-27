@@ -159,6 +159,82 @@ exports.updateNumberOfRegisteredAdmins = async (companyId, value) => {
     }
 };
 
+exports.addNumberOfRegisteredUsersCompanyData = async (companyId, currentNumRegisteredUsersInCompanyData) => {
+    try {
+        if (parseInt(currentNumRegisteredUsersInCompanyData) >= 0)
+        {
+            let newNumRegisteredUsers = parseInt(currentNumRegisteredUsersInCompanyData) + 1;
+            newNumRegisteredUsers = newNumRegisteredUsers.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfRegisteredUsers": newNumRegisteredUsers
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.decreaseNumberOfRegisteredUsersCompanyData = async (companyId, currentNumRegisteredUsersInCompanyData) => {
+    try {
+        if (parseInt(currentNumRegisteredUsersInCompanyData) > 0)
+        {
+            let newNumRegisteredUsers = parseInt(currentNumRegisteredUsersInCompanyData) - 1;
+            newNumRegisteredUsers = newNumRegisteredUsers.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfRegisteredUsers": newNumRegisteredUsers
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.addNumberOfRegisteredAdminsCompanyData = async (companyId, currentNumRegisteredAdminsInCompanyData) => {
+    try {
+        if (parseInt(currentNumRegisteredAdminsInCompanyData) >= 0)
+        {
+            let newNumRegisteredAdmins = parseInt(currentNumRegisteredAdminsInCompanyData) + 1;
+            newNumRegisteredAdmins = newNumRegisteredAdmins.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfRegisteredAdmins": newNumRegisteredAdmins
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.decreaseNumberOfRegisteredAdminsCompanyData = async (companyId, currentNumRegisteredAdminsInCompanyData) => {
+    try {
+        if (parseInt(currentNumRegisteredAdminsInCompanyData) > 0)
+        {
+            let newNumRegisteredAdmins = parseInt(currentNumRegisteredAdminsInCompanyData) - 1;
+            newNumRegisteredAdmins = newNumRegisteredAdmins.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                "numberOfRegisteredAdmins": newNumRegisteredAdmins
+            });
+        
+            return true;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 exports.addNumberOfFloorplansCompanyData = async (companyId, currentNumFloorplansInCompanyData) => {
     try {
         if (parseInt(currentNumFloorplansInCompanyData) >= 0)

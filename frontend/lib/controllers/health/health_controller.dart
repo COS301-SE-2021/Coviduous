@@ -7,9 +7,11 @@ import 'dart:convert';
 
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
+import 'package:frontend/models/health/health_check.dart';
 import 'package:frontend/models/health/permission.dart';
 import 'package:frontend/models/health/permission_request.dart';
-import 'package:frontend/models/health/health_check.dart';
+import 'package:frontend/models/health/test_results.dart';
+import 'package:frontend/models/health/vaccine_confirmation.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
 import 'package:frontend/globals.dart' as globals;
 
@@ -18,12 +20,16 @@ List<Shift> shiftDatabaseTable = [];
 List<Permission> permissionDatabaseTable = [];
 List<PermissionRequest> permission_requestDatabaseTable = [];
 List<HealthCheck> healthCheckDatabaseTable = [];
+List<TestResults> testResultsDatabaseTable = [];
+List<VaccineConfirmation> vaccineConfirmationDatabaseTable = [];
 
 int numPermission_request = 0;
 int numPermissions = 0;
 int numHealthChecks = 0;
 int numGroups = 0;
 int numShifts = 0;
+int numTestResults = 0;
+int numVaccineConfirmations = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 String AIserver = serverInfo.getAIserver();
@@ -472,7 +478,7 @@ Future<bool> uploadTestResults(String userId, String fileName, String bytes) asy
     request.body = json.encode({
       "userId": userId,
       "fileName": fileName,
-      "bytes": bytes
+      "base64String": bytes
     });
     request.headers.addAll(globals.requestHeaders);
 
@@ -487,4 +493,79 @@ Future<bool> uploadTestResults(String userId, String fileName, String bytes) asy
   }
 
   return false;
+}
+
+//Get vaccine confirmation documents
+Future<List<VaccineConfirmation>> getVaccineConfirmations(String userId) async {
+  String path = '/health/Covid19VaccineConfirmation/view';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      vaccineConfirmationDatabaseTable.clear();
+      numVaccineConfirmations = 0;
+
+      for (var data in jsonMap["data"]) {
+        var vaccineConfirmation = VaccineConfirmation.fromJson(data);
+        vaccineConfirmationDatabaseTable.add(vaccineConfirmation);
+        numVaccineConfirmations++;
+      }
+
+      return vaccineConfirmationDatabaseTable;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Get test result documents
+Future<List<TestResults>> getTestResults(String userId) async {
+  String path = '/health/Covid19TestResults/view';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      testResultsDatabaseTable.clear();
+      numTestResults = 0;
+
+      for (var data in jsonMap["data"]) {
+        var testResults = TestResults.fromJson(data);
+        testResultsDatabaseTable.add(testResults);
+        numTestResults++;
+      }
+
+      return testResultsDatabaseTable;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
 }

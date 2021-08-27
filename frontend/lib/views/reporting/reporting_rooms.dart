@@ -125,6 +125,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                               ElevatedButton(
                                   child: Text('View'),
                                   onPressed: () {
+                                    globals.currentRoomNum = globals.currentRooms[index].getRoomNumber();
                                     shiftHelpers.getShifts().then((result) {
                                       if (result == true) {
                                         Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);

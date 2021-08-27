@@ -41,6 +41,8 @@ import 'package:frontend/views/health/user_upload_test_results.dart';
 import 'package:frontend/views/health/user_upload_vaccine_confirm.dart';
 import 'package:frontend/views/health/user_view_test_results.dart';
 import 'package:frontend/views/health/user_view_vaccine_confirm.dart';
+import 'package:frontend/views/health/user_view_single_test_result.dart';
+import 'package:frontend/views/health/user_view_single_vaccine_confirm.dart';
 import 'package:frontend/views/health/user_report_infection.dart';
 import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/health/user_request_access.dart';
@@ -93,6 +95,8 @@ import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart
 import 'package:frontend/views/reporting/reporting_view_sick_employees.dart';
 import 'package:frontend/views/reporting/reporting_view_test_results.dart';
 import 'package:frontend/views/reporting/reporting_view_vaccine_confirmation.dart';
+import 'package:frontend/views/reporting/reporting_view_single_test_result.dart';
+import 'package:frontend/views/reporting/reporting_view_single_vaccine_confirmation.dart';
 
 //User
 import 'package:frontend/views/admin_homepage.dart';
@@ -211,6 +215,8 @@ class MyApp extends StatelessWidget{
         UserUploadVaccineConfirm.routeName: (ctx)=> UserUploadVaccineConfirm(),
         UserViewTestResults.routeName: (ctx)=> UserViewTestResults(),
         UserViewVaccineConfirm.routeName: (ctx)=> UserViewVaccineConfirm(),
+        UserViewSingleTestResult.routeName: (ctx)=> UserViewSingleTestResult(),
+        UserViewSingleVaccineConfirm.routeName: (ctx)=> UserViewSingleVaccineConfirm(),
         UserReportInfection.routeName: (ctx)=> UserReportInfection(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
         UserRequestAccessShifts.routeName: (ctx)=> UserRequestAccessShifts(),
@@ -263,6 +269,8 @@ class MyApp extends StatelessWidget{
         ReportingViewSickEmployees.routeName: (ctx)=> ReportingViewSickEmployees(),
         ReportingViewTestResults.routeName: (ctx)=> ReportingViewTestResults(),
         ReportingViewVaccineConfirmation.routeName: (ctx)=> ReportingViewVaccineConfirmation(),
+        ReportingViewSingleTestResult.routeName: (ctx)=> ReportingViewSingleTestResult(),
+        ReportingViewSingleVaccineConfirmation.routeName: (ctx)=> ReportingViewSingleVaccineConfirmation(),
 
         //User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),

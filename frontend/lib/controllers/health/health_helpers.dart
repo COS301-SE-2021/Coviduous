@@ -194,3 +194,35 @@ Future<bool> uploadTestResults(String fileName, String bytes) async {
   });
   return result;
 }
+
+Future<bool> getVaccineConfirmations() async {
+  bool result = false;
+  await Future.wait([
+    healthController.getVaccineConfirmations(globals.loggedInUserId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentVaccineConfirmations = results.first;
+      globals.vaccineConfirmExists = true;
+      result = true;
+    } else {
+      globals.vaccineConfirmExists = false;
+    }
+  });
+  return result;
+}
+
+Future<bool> getTestResults() async {
+  bool result = false;
+  await Future.wait([
+    healthController.getTestResults(globals.loggedInUserId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentTestResults = results.first;
+      globals.testResultsExist = true;
+      result = true;
+    } else {
+      globals.testResultsExist = false;
+    }
+  });
+  return result;
+}

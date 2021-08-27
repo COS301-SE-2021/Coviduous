@@ -54,6 +54,7 @@ Future<bool> getGroupForShift(String shiftId) async {
   ]).then((results) {
     if (results.first != null) {
       globals.currentGroups = results.first;
+      globals.currentGroup = results.first[0];
       globals.currentShiftNum = shiftId;
       result = true;
     }
