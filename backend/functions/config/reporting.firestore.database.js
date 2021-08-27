@@ -417,3 +417,33 @@ exports.viewHealthSummary = async () => {
         return false;
     }
 };
+
+exports.updateHealthSummaryVisitor = async (healthSummaryId,numHealthChecksVisitors) =>{
+    try {
+      response= await db.collection('health-summary').doc(healthSummaryId).update(
+      {
+        numHealthChecksVisitors:numHealthChecksVisitors
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updateHealthSummaryUser = async (healthSummaryId,numHealthChecksUsers) =>{
+    try {
+      response= await db.collection('health-summary').doc(healthSummaryId).update(
+      {
+        numHealthChecksUsers:numHealthChecksUsers
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
