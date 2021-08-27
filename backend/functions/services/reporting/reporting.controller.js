@@ -313,26 +313,6 @@ exports.addCompanyData = async (req, res) => {
         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
     }
 
-    // if (reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === "") {
-    //     fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'})
-    // }
-
-    // if (reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === "") {
-    //     fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered admins may not be empty'})
-    // }
-
-    // if (reqJson.numberOfFloorplans == null || reqJson.numberOfFloorplans === "") {
-    //     fieldErrors.push({field: 'numberOfFloorplans', message: 'Number of floorplans may not be empty'})
-    // }
-
-    // if (reqJson.numberOfFloors == null || reqJson.numberOfFloors === "") {
-    //     fieldErrors.push({field: 'numberOfFloors', message: 'Number of floors may not be empty'})
-    // }
-
-    // if (reqJson.numberOfRooms == null || reqJson.numberOfRooms === "") {
-    //     fieldErrors.push({field: 'numberOfRooms', message: 'Number of rooms may not be empty'})
-    // }
-
     if (fieldErrors.length > 0) {
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
@@ -349,18 +329,29 @@ exports.addCompanyData = async (req, res) => {
         numberOfRooms: "0"
     }
 
-    let result = await database.addCompanyData(companyData.companyId, companyData);
-    
-    if (!result) {
-        return res.status(500).send({
-            message: '500 Server Error: DB error',
+    let result2 = await database.getCompanyData(reqJson.companyId);
+
+    if (result2 != null) // check if entry exists in database
+    {
+        return res.status(200).send({
+            message: 'Database entry already exists for companyId:' + reqJson.companyId,
         });
     }
-
-    return res.status(200).send({
-       message: 'Company data successfully created',
-       data: companyData
-    });
+    else
+    {
+        let result = await database.addCompanyData(companyData.companyId, companyData);
+        
+        if (!result) {
+            return res.status(500).send({
+                message: '500 Server Error: DB error',
+            });
+        }
+    
+        return res.status(200).send({
+           message: 'Company data successfully created',
+           data: companyData
+        });
+    }
 };
 
 exports.viewCompanyData = async (req, res) => {
