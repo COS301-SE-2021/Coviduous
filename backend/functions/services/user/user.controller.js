@@ -1,6 +1,7 @@
 const uuid = require("uuid");
 let admin = require('firebase-admin');
 let database;
+let reportingDatabase;
 
 /**
  * This function sets the database used by the user controller.
@@ -9,6 +10,10 @@ let database;
 exports.setDatabase = async (db) => {
     database = db;
 }
+
+exports.setReportingDatabase = async (db) => {
+    reportingDatabase = db;
+  }
 
 /**
  * Verifies the request token provided to it to ensure only authorized users may update and retrieve information from the database.
@@ -165,6 +170,19 @@ exports.createUser = async (req, res) => {
             message: '500 Server Error: DB error',
         });
     }
+
+    // company-data summary
+    if (reqJson.type === 'USER')
+    {
+        let companyData = await reportingDatabase.getCompanyData(reqJson.companyId);
+        await reportingDatabase.addNumberOfRegisteredUsersCompanyData(reqJson.companyId, companyData.numberOfRegisteredUsers);
+    }
+    else if (reqJson.type === 'ADMIN')
+    {
+        let companyData = await reportingDatabase.getCompanyData(reqJson.companyId);
+        await reportingDatabase.addNumberOfRegisteredAdminsCompanyData(reqJson.companyId, companyData.numberOfRegisteredAdmins);
+    }
+
 
     return res.status(200).send({
         message: 'User successfully created',
@@ -501,6 +519,19 @@ exports.deleteUser = async (req, res) => {
             data: null
         });
     }
+
+    // let result2 = await database.getUserDetails(reqJson.userId);
+    // // company-data summary
+    // if (result2[0].type === 'USER')
+    // {
+    //     let companyData = await reportingDatabase.getCompanyData(result2[0].companyId);
+    //     await reportingDatabase.decreaseNumberOfRegisteredUsersCompanyData(result2[0].companyId, companyData.numberOfRegisteredUsers);
+    // }
+    // else if (result2[0].type === 'ADMIN')
+    // {
+    //     let companyData = await reportingDatabase.getCompanyData(result2[0].companyId);
+    //     await reportingDatabase.decreaseNumberOfRegisteredAdminsCompanyData(result2[0].companyId, companyData.numberOfRegisteredAdmins);
+    // }
 
     return res.status(200).send({
         message: 'Successfully deleted user',
