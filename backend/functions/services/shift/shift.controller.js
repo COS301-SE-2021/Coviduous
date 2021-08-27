@@ -272,7 +272,7 @@ exports.deleteShift = async (req, res) => {
         });
     }
 
-    let group = await db.getGroupForShift(reqJson.shiftId);
+    let group = await db.getGroupForShift(reqJson.shiftID);
     await db.deleteGroup(group.groupId);
 
     if (await db.deleteShift(reqJson.shiftID) == true) {
@@ -343,16 +343,16 @@ exports.updateShift = async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and retrieved data.
  * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
-exports.viewShifts = async (req, res) => {
-    let viewShifts = await db.viewShifts();
+exports.getNumberShifts = async (req, res) => {
+    let getNumberShift = await db.getNumberShifts();
       
-    if (viewShifts != null) {
+    if (getNumberShift != null) {
       return res.status(200).send({
-        message: 'Successfully retrieved shifts',
-        data: viewShifts
+        message: 'Successfully retrieved number shifts',
+        data: getNumberShift
       });
     } else {
-      return res.status(500).send({message: "Some error occurred while fetching shifts."});
+      return res.status(500).send({message: "Some error occurred while fetching number shifts."});
     }
 };
 /**
