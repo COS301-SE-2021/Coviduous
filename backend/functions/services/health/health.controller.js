@@ -251,7 +251,7 @@ exports.createHealthCheck = async (req, res) => {
       await this.permissionDeniedBadge(reqJson.userId,reqJson.email);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       ////////////////////////////////////////////////////////////////////////////////////////
-      // update the health check summary collection
+      // update the health summary collection
       // first check if the current month and year you are currently in is registered
 
       let healthSummaryId = "HSID-" + uuid.v4();
@@ -297,6 +297,7 @@ exports.createHealthCheck = async (req, res) => {
     else
     {
       // The year and the month for this company is not registered
+      //initialize a new month or year for this company and set its initial values
 
         if(reqJson.userId==="VISITOR")
         {
@@ -309,8 +310,7 @@ exports.createHealthCheck = async (req, res) => {
             numHealthChecksUsers: 0,
             numHealthChecksVisitors: 1,
             numReportedInfections: 0,
-            numReportedRecoveries:0,
-            numRecovered: 0,
+            numReportedRecoveries:0
               
             }
             await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
@@ -328,8 +328,7 @@ exports.createHealthCheck = async (req, res) => {
             numHealthChecksUsers: 1,
             numHealthChecksVisitors: 0,
             numReportedInfections: 0,
-            numReportedRecoveries:0,
-            numRecovered: 0,
+            numReportedRecoveries:0
               
             }
             await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
@@ -409,8 +408,7 @@ exports.createHealthCheck = async (req, res) => {
             numHealthChecksUsers: 0,
             numHealthChecksVisitors: 1,
             numReportedInfections: 0,
-            numReportedRecoveries:0,
-            numRecovered: 0,
+            numReportedRecoveries:0
               
             }
             await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
@@ -428,8 +426,7 @@ exports.createHealthCheck = async (req, res) => {
             numHealthChecksUsers: 1,
             numHealthChecksVisitors: 0,
             numReportedInfections: 0,
-            numReportedRecoveries:0,
-            numRecovered: 0,
+            numReportedRecoveries:0
               
             }
             await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
@@ -679,8 +676,7 @@ exports.reportInfection = async (req, res) => {
             numHealthChecksUsers: 0,
             numHealthChecksVisitors: 0,
             numReportedInfections: 1,
-            numReportedRecoveries:0,
-            numRecovered: 0,
+            numReportedRecoveries:0
               
             }
             await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
@@ -789,8 +785,7 @@ exports.reportRecovery = async (req, res) => {
             numHealthChecksUsers: 0,
             numHealthChecksVisitors: 0,
             numReportedInfections: 0,
-            numReportedRecoveries:1,
-            numRecovered: 0,
+            numReportedRecoveries:1
               
             }
             await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
