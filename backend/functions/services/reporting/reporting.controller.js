@@ -1010,6 +1010,9 @@ exports.setUpHealthSummary = async (req, res) => {
       } catch (e) {
           reqJson = req.body;
       }
+    
+    // First we get all the health summaries in our database and check if there is an exisiting health summary with
+    // our companyId
     let healthSummaries = await database.viewHealthSummary();
     
     let filteredList=[];   
@@ -1034,6 +1037,8 @@ exports.setUpHealthSummary = async (req, res) => {
     }
     else
     {
+        
+      //company was never registered before so we setup their health summary table
       let healthSummaryId = "HSID-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
       let month= timestamp.charAt(3)+timestamp.charAt(4);
@@ -1048,8 +1053,7 @@ exports.setUpHealthSummary = async (req, res) => {
         numHealthChecksUsers: 0,
         numHealthChecksVisitors: 0,
         numReportedInfections: 0,
-        numReportedRecoveries:0,
-        numRecovered: 0,
+        numReportedRecoveries:0
           
         }
         await database.setHealthSummary(healthSummaryId,healthSummary);
@@ -1061,5 +1065,42 @@ exports.setUpHealthSummary = async (req, res) => {
 
     }
 
+
+};
+
+exports.getHealthSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    let healthSummaries = await database.viewHealthSummary();
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && reqJson.month===obj.month && reqJson.year==obj.year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+    
+        if(filteredList.length>0)
+        {
+            return res.status(200).send({
+                message: 'Successfully retrieved health summary',
+                data: filteredList
+            });
+       
+         }
+        else{
+            return res.status(500).send({
+                message: 'Problem with either the companId,month or year you requesting for',
+            });
+        }
 
 };
