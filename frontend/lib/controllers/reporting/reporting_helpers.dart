@@ -31,7 +31,7 @@ Future<bool> addRecoveredEmployee(String userEmail) async {
     if (results.first != null) {
       userId = results.first.getUserId();
       await Future.wait([
-        reportingController.addRecoveredEmployee(userId, userEmail, globals.loggedInCompanyId)
+        reportingController.addRecoveredEmployee(userId, userEmail, globals.loggedInUserId, globals.loggedInCompanyId)
       ]).then((results) {
         if (results.first == true) {
           result = true;
