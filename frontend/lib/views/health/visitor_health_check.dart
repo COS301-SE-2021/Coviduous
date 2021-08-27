@@ -16,6 +16,7 @@ class VisitorHealthCheck extends StatefulWidget {
 }
 
 class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
+  TextEditingController _companyId = TextEditingController();
   TextEditingController _name = TextEditingController();
   TextEditingController _surname = TextEditingController();
   TextEditingController _email = TextEditingController();
@@ -81,6 +82,21 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
+                          TextFormField(
+                            textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                            decoration: InputDecoration(
+                              labelText: 'The ID of the company you want to access',
+                            ),
+                            keyboardType: TextInputType.text,
+                            controller: _companyId,
+                            validator: (value) {
+                              if(value.isEmpty) //Check if valid name format
+                                  {
+                                return 'please input a valid company ID';
+                              }
+                              return null;
+                            },
+                          ),
                           TextFormField(
                             textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                             decoration: InputDecoration(
@@ -306,7 +322,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                             onPressed: () {
                               FormState form = _formKey.currentState;
                               if (form.validate()) {
-                                healthHelpers.createHealthCheckVisitor(_name.text, _surname.text, _email.text, _phoneNumber.text,
+                                healthHelpers.createHealthCheckVisitor(_companyId.text, _name.text, _surname.text, _email.text, _phoneNumber.text,
                                     _temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
                                     _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
                                   if (result == true) {
