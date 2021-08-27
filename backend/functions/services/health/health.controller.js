@@ -15,6 +15,7 @@ Date.prototype.timeNow = function () {
 
 let database;
 let notificationDatabase;
+let reportingDatabase;
 
 exports.setDatabase = async (db) => {
   database = db;
@@ -22,6 +23,10 @@ exports.setDatabase = async (db) => {
 
 exports.setNotificationDatabase = async (db) => {
   notificationDatabase = db;
+}
+
+exports.setReportingDatabase = async (db) => {
+  reportingDatabase = db;
 }
 
 exports.hasHighTemperature = async (temparature) => {
@@ -245,6 +250,48 @@ exports.createHealthCheck = async (req, res) => {
       //if prediction is positive issue out a permission denied
       await this.permissionDeniedBadge(reqJson.userId,reqJson.email);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
+      // update the health check summary collection
+      // first check if the current month and year you are currently in is registered
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let healthSummaries = await reportingDatabase.viewHealthSummary();
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+        if(reqJson.userId==="VISITOR")
+        {
+          let numHealthChecksVisitors=filteredList[0].numHealthChecksVisitors;
+          numHealthChecksVisitors++;
+
+          await reportingDatabase.updateHealthSummaryVisitor(filteredList[0].healthSummaryId,numHealthChecksVisitors);
+        }
+        else
+        {
+          let numHealthChecksUsers=filteredList[0].numHealthChecksUsers;
+          numHealthChecksUsers++;
+
+          await reportingDatabase.updateHealthSummaryUser(filteredList[0].healthSummaryId,numHealthChecksUsers);
+
+        }
+        
+
+    }
+
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
         data: healthCheckData
