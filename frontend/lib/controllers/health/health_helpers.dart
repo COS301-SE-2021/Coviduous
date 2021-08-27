@@ -7,7 +7,7 @@ Future<bool> createHealthCheckUser(String temperature, bool fever, bool cough, b
     bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
   bool result = false;
   await Future.wait([
-    healthController.createHealthCheck(globals.loggedInUserId, globals.loggedInUser.getFirstName(), globals.loggedInUser.getLastName(),
+    healthController.createHealthCheck(globals.loggedInCompanyId, globals.loggedInUserId, globals.loggedInUser.getFirstName(), globals.loggedInUser.getLastName(),
         globals.loggedInUserEmail, "N/A", temperature, fever, cough, soreThroat, chills, aches, nausea,
         shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache)
   ]).then((results) {
@@ -19,12 +19,12 @@ Future<bool> createHealthCheckUser(String temperature, bool fever, bool cough, b
   return result;
 }
 
-Future<bool> createHealthCheckVisitor(String firstName, String lastName, String email, String phoneNumber,
+Future<bool> createHealthCheckVisitor(String companyId, String firstName, String lastName, String email, String phoneNumber,
     String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea,
     bool shortnessOfBreath, bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
   bool result = false;
   await Future.wait([
-    healthController.createHealthCheck("VISITOR", firstName, lastName, email, phoneNumber, temperature, fever, cough,
+    healthController.createHealthCheck(companyId, "VISITOR", firstName, lastName, email, phoneNumber, temperature, fever, cough,
         soreThroat, chills, aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache)
   ]).then((results) {
     if (results != null) {

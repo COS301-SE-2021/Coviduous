@@ -37,7 +37,7 @@ String AIserver = serverInfo.getAIserver();
 //Health check
 
 //Complete a health check
-Future<HealthCheck> createHealthCheck(String userId, String name, String surname, String email, String phoneNumber, String temperature,
+Future<HealthCheck> createHealthCheck(String companyId, String userId, String name, String surname, String email, String phoneNumber, String temperature,
     bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
     bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
   String path = '/health/health-check';
@@ -69,6 +69,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
 
       request = http.Request('POST', Uri.parse(url));
       request.body = json.encode({
+        "companyId": companyId,
         "userId": userId,
         "name": name,
         "surname": surname,
