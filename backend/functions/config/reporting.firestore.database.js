@@ -538,3 +538,18 @@ exports.updateHealthSummaryVisitor = async (healthSummaryId,numHealthChecksVisit
       return false;
     }
   };
+
+  exports.updateHealthSummaryReportedRecoveries = async (healthSummaryId,numReportedRecoveries) =>{
+    try {
+      response= await db.collection('health-summary').doc(healthSummaryId).update(
+      {
+        numReportedRecoveries:numReportedRecoveries
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
