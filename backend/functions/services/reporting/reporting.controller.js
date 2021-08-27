@@ -1119,7 +1119,7 @@ exports.getNumberShifts = async (req, res) => {
     if (getNumberShift != null) {
       return res.status(200).send({
         message: 'Successfully retrieved number of shifts',
-        data: getNumberShifts
+        data: getNumberShift
       });
     } else {
       return res.status(500).send({message: "Some error occurred while fetching number of Bookings."});
