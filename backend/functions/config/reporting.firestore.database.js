@@ -449,6 +449,36 @@ exports.updateTotalRegisteredUsers = async (usersDataId, value) => {
     }
 };
 
+exports.updateTotalAdmins = async (usersDataId, value) => {
+    try {
+        const document = db.collection('users-data').doc(usersDataId); //or db.collection().where()
+
+        await document.update({
+            totalAdmins: value
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.updateTotalEmployees = async (usersDataId, value) => {
+    try {
+        const document = db.collection('users-data').doc(usersDataId); //or db.collection().where()
+
+        await document.update({
+            totalEmployees: value
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 exports.getTotalUsers = async () => {
     try {
         const document = db.collection('users');
