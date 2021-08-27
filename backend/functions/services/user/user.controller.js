@@ -510,6 +510,9 @@ exports.deleteUser = async (req, res) => {
         });
     }
 
+    let result2 = await database.getUserDetails(reqJson.userId);
+    console.log(result2);
+
     let result = await database.deleteUser(reqJson.userId);
 
     if (!result) {
@@ -520,8 +523,7 @@ exports.deleteUser = async (req, res) => {
         });
     }
 
-    // let result2 = await database.getUserDetails(reqJson.userId);
-    // // company-data summary
+    // company-data summary
     // if (result2[0].type === 'USER')
     // {
     //     let companyData = await reportingDatabase.getCompanyData(result2[0].companyId);
