@@ -4,10 +4,12 @@ let router = require('express').Router();
 // Import database
 const devDatabase = require("../config/health.firestore.database.js");
 const devDatabase2 = require("../config/notification.firestore.database.js");
+const devDatabase3 = require("../config/reporting.firestore.database.js");
 
 // set database to use
 healthController.setDatabase(devDatabase);
 healthController.setNotificationDatabase(devDatabase2);
+healthController.setReportingDatabase(devDatabase3);
 
 // Health routes
 // N.B. paths for a subsystem can all be the same
