@@ -50,8 +50,8 @@ Future<bool> addSickEmployee(String userId, String userEmail, String companyId) 
 }
 
 //Add recovered employee
-Future<bool> addRecoveredEmployee(String userId, String userEmail, String companyId) async {
-  String path = "/reporting/health/recovered-employees";
+Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminId, String companyId) async {
+  String path = "/health/report-recovery";
   String url = server + path;
 
   var request;
@@ -61,6 +61,7 @@ Future<bool> addRecoveredEmployee(String userId, String userEmail, String compan
     request.body = json.encode({
       "userId": userId,
       "userEmail": userEmail,
+      "adminId": adminId,
       "companyId": companyId,
     });
     request.headers.addAll(globals.requestHeaders);
