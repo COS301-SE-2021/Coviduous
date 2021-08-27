@@ -81,6 +81,18 @@ exports.viewSickEmployees = async (companyId) => {
     }
 };
 
+exports.deleteSickEmployee = async (userId) => {
+    try {
+        const document = db.collection('sick-employees').doc(userId);
+        await document.delete();
+
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
 ////////// COMPANY REPORTING ////////////
 
 /////// company-data ////////
