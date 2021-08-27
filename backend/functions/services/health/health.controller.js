@@ -252,6 +252,7 @@ exports.createHealthCheck = async (req, res) => {
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
       // update the health check summary collection
       // first check if the current month and year you are currently in is registered
+      let healthSummaryId = "HSID-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
       let month= timestamp.charAt(3)+timestamp.charAt(4);
       let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
@@ -290,6 +291,47 @@ exports.createHealthCheck = async (req, res) => {
         }
         
 
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+
+        if(reqJson.userId==="VISITOR")
+        {
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 1,
+            numReportedInfections: 0,
+            numRecovered: 0,
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+        }
+        else
+        {
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 1,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 0,
+            numRecovered: 0,
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+
+        }
     }
 
       return res.status(200).send({
