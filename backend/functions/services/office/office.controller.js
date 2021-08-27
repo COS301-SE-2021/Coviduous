@@ -87,13 +87,26 @@ exports.createBooking = async (req, res) => {
     }
 
     let bookingNumber = "BKN-" + uuid.v4();
+    let summary = "SUM-"+uuid.v4();
     let timestamp = "Booking Placed On The : " + new Date().today() + " @ " + new Date().timeNow();
     let bookingData = { bookingNumber: bookingNumber, deskNumber: reqJson.deskNumber,
         floorPlanNumber: reqJson.floorPlanNumber, floorNumber: reqJson.floorNumber,
         roomNumber: reqJson.roomNumber, timestamp: timestamp, userId: reqJson.userId, companyId: reqJson.companyId
     }
 
-    let result = await database.createBooking(bookingNumber, bookingData);
+    let time = new Date();
+    let year = time.getFullYear();
+    let month = time.getMonth()+1;
+
+    let dta ={
+        summaryBookingId: summary,
+        companyId: reqJson.companyId,
+        numBookings: 1,
+        month: month,
+        year: year
+    }
+
+    let result = await database.createBooking(dta, bookingData);
 
     if (!result) {
         return res.status(500).send({
