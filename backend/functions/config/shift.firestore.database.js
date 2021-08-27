@@ -134,9 +134,55 @@ exports.viewShifts = async () => {
 
 exports.deleteShift = async (ShiftID) => {
     try {
+
+       
+        const documents = db.collection('shifts').where("shiftID","==",ShiftID);
+        const snapshot = await documents.get();
+       
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+
+        let companyId;
+
+        for (const element of list) {
+         companyId = element.companyId;
+        }
+        
+
         const document = db.collection('shifts').doc(ShiftID);
         await document.delete();
-        return true;
+
+        const doc =   db.collection('summary-shifts').where("companyId","==",companyId) 
+        const snap = await doc.get();    
+         
+        
+       let lists = [];
+
+       snap.forEach(docs => {
+           let dat = docs.data();
+           lists.push(dat);
+       });
+     
+       let numShifts;
+       let summaryId;
+       for (const element of lists) {
+           summaryId = element.summaryShiftId,
+           numShifts = element.numShifts;
+          }
+          
+       let numShift = parseInt(numShifts)-1;
+       numShift = numShift.toString();   
+       
+       const documented = db.collection('summary-shifts').doc(summaryId);
+           await documented.update({ 
+            numShifts:numShift
+            });   
+       return true;
+
     } catch (error) {
         console.log(error);
         return false;
