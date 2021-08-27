@@ -78,7 +78,7 @@ Future<bool> reportInfection(String adminEmail) async {
   bool result = false;
   await Future.wait([
     healthController.reportInfection((globals.loggedInUser.getFirstName() + " " + globals.loggedInUser.getLastName()),
-        adminEmail, "SYSTEM", globals.loggedInCompanyId)
+        globals.loggedInUser.getEmail(), "SYSTEM", globals.loggedInCompanyId, adminEmail)
   ]).then((results) {
     result = results.first;
   });
