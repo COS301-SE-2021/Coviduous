@@ -15,6 +15,7 @@ healthController.setReportingDatabase(devDatabase3);
 // N.B. paths for a subsystem can all be the same
 router.post('/health/health-check', healthController.createHealthCheck);
 router.post('/health/report-infection', healthController.reportInfection);
+router.post('/health/report-recovery', healthController.reportRecovery);
 router.post('/health/Covid19VaccineConfirmation', healthController.uploadCovid19VaccineConfirmation);
 router.post('/health/Covid19TestResults', healthController.uploadCovid19TestResults);
 router.post('/health/permissions/view', healthController.viewPermissions);

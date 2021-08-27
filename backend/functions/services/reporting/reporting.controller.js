@@ -1048,6 +1048,7 @@ exports.setUpHealthSummary = async (req, res) => {
         numHealthChecksUsers: 0,
         numHealthChecksVisitors: 0,
         numReportedInfections: 0,
+        numReportedRecoveries:0,
         numRecovered: 0,
           
         }
