@@ -168,7 +168,7 @@ Future<List<Permission>> getPermissions(String userEmail) async {
 }
 
 //Report your potential infection to your company's admins
-Future<bool> reportInfection(String userId, String userEmail, String adminId, String companyId) async {
+Future<bool> reportInfection(String userId, String userEmail, String adminId, String companyId, String adminEmail) async {
   String path = '/health/report-infection';
   String url = server + path;
   var request;
@@ -180,7 +180,7 @@ Future<bool> reportInfection(String userId, String userEmail, String adminId, St
       "userEmail": userEmail,
       "adminId": adminId,
       "companyId": companyId,
-      "adminEmail": "capslock.cos301@gmail.com"
+      "adminEmail": adminEmail
     });
     request.headers.addAll(globals.requestHeaders);
 
