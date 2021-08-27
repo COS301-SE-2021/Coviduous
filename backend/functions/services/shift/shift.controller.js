@@ -260,7 +260,7 @@ exports.deleteShift = async (req, res) => {
         fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
 
-    if (reqJson.shiftId == null || reqJson.shiftId === '') {
+    if (reqJson.shiftID == null || reqJson.shiftID === '') {
         fieldErrors.push({field: 'shiftId', message: 'Shift ID may not be empty'});
     }
 
@@ -275,7 +275,7 @@ exports.deleteShift = async (req, res) => {
     let group = await db.getGroupForShift(reqJson.shiftId);
     await db.deleteGroup(group.groupId);
 
-    if (await db.deleteShift(reqJson.shiftId) == true) {
+    if (await db.deleteShift(reqJson.shiftID) == true) {
         return res.status(200).send({
             message: "Shift successfully deleted"
         });
