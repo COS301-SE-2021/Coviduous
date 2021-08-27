@@ -4,10 +4,9 @@ let db = admin.firestore();
 exports.createBooking = async (data, bookingData) => {
     try {
         let c ="";
-        console.log(bookingData.bookingNumber);
          await db.collection('bookings').doc(bookingData.bookingNumber)
             .create(bookingData);
-            console.log(data.month);
+            
         const document =  db.collection('summary-bookings').where("month","==",data.month);
         let snapshot = await document.get(); 
 
