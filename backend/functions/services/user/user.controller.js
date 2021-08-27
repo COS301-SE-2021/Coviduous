@@ -511,7 +511,7 @@ exports.deleteUser = async (req, res) => {
     }
 
     let result2 = await database.getUserDetails(reqJson.userId);
-    console.log(result2);
+    //console.log(result2);
 
     let result = await database.deleteUser(reqJson.userId);
 
@@ -524,16 +524,16 @@ exports.deleteUser = async (req, res) => {
     }
 
     // company-data summary
-    // if (result2[0].type === 'USER')
-    // {
-    //     let companyData = await reportingDatabase.getCompanyData(result2[0].companyId);
-    //     await reportingDatabase.decreaseNumberOfRegisteredUsersCompanyData(result2[0].companyId, companyData.numberOfRegisteredUsers);
-    // }
-    // else if (result2[0].type === 'ADMIN')
-    // {
-    //     let companyData = await reportingDatabase.getCompanyData(result2[0].companyId);
-    //     await reportingDatabase.decreaseNumberOfRegisteredAdminsCompanyData(result2[0].companyId, companyData.numberOfRegisteredAdmins);
-    // }
+    if (result2[0].type === 'USER')
+    {
+        let companyData = await reportingDatabase.getCompanyData(result2[0].companyId);
+        await reportingDatabase.decreaseNumberOfRegisteredUsersCompanyData(result2[0].companyId, companyData.numberOfRegisteredUsers);
+    }
+    else if (result2[0].type === 'ADMIN')
+    {
+        let companyData = await reportingDatabase.getCompanyData(result2[0].companyId);
+        await reportingDatabase.decreaseNumberOfRegisteredAdminsCompanyData(result2[0].companyId, companyData.numberOfRegisteredAdmins);
+    }
 
     return res.status(200).send({
         message: 'Successfully deleted user',
