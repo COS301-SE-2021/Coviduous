@@ -1113,6 +1113,22 @@ exports.setUpHealthSummary = async (req, res) => {
 
 
 };
+exports.getNumberShifts = async (req, res) => {
+    let getNumberShift = await database.getNumberShifts();
+      
+    if (getNumberShift != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved number of shifts',
+        data: getNumberShifts
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching number of Bookings."});
+    }
+};
+
+
+
+
 
 exports.getNumberBookings = async (req, res) => {
     let getNumberBooking = await database.getNumberBookings();

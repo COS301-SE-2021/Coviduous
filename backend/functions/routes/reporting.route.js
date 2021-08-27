@@ -47,5 +47,8 @@ router.post('/reporting/health-summary', reportingController.getHealthSummary);
 //Booking reporting
 router.post('/reporting/summary-bookings',reportingController.getNumberBookings);
 
+//Shifts reporting
+router.post('/reporting/summary-shifts',reportingController.getNumberShifts);
+
 // Export API routes
 module.exports = router;

@@ -303,6 +303,26 @@ exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompa
         return false;
     }
 };
+exports.getNumberShifts = async () => {
+    try {
+        const document = db.collection('summary-shifts');
+        const snapshot = await document.get();
+  
+        let list = [];
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+        return list;
+    } catch (error) {
+            console.log(error);
+            return false;
+    }
+};
+
+
+
+
 exports.getNumberBookings = async () => {
     try {
         const document = db.collection('summary-bookings');
