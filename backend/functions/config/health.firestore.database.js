@@ -30,6 +30,17 @@ exports.reportInfection = async (infectionId, data) => {
     }
 };
 
+exports.reportRecovery = async (recoveryId, data) => {
+    try {
+        await db.collection('reported-recoveries').doc(recoveryId)
+          .create(data); // .add - auto generates document id
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 exports.viewHealthChecks = async () => {
     try {
         const document = db.collection('health-check');
