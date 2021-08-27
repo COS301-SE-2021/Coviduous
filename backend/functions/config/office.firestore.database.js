@@ -51,14 +51,14 @@ exports.createBooking = async (data, bookingData) => {
 
             }
 
+              
+            let numBookings = parseInt(count) + 1;
+            numBookings = numBookings.toString();
+        
             
-            console.log(summaryId);
-            console.log(count)
-
-
-
-            const documented = db.collection('summary-bookings').doc(data.month);
+            const documented = db.collection('summary-bookings').doc(summaryId);
             await documented.update({ 
+                numBookings:numBookings
              });
 
     }    
@@ -91,8 +91,48 @@ exports.getBookings = async (userId) => {
 
 exports.deleteBooking= async (bookingNumber) => {
     try {
+
+        const documents = db.collection('bookings').where("bookingNumber","==",bookingNumber);
+        const snapshot = await documents.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+
+        let companyId;
+
+        for (const element of list) {
+         companyId = element.companyId;
+        }
+
         const document = db.collection('bookings').doc(bookingNumber);
         await document.delete();
+
+         const doc =   db.collection('summary-bookings').where("companyId","==",companyId) 
+         const snap = await doc.get();    
+          
+         
+        let lists = [];
+
+        snap.forEach(docs => {
+            let dat = docs.data();
+            lists.push(dat);
+        });
+        console.log(lists);
+
+        let numBooking;
+        for (const element of lists) {
+            numBooking = element.numBookings;
+           }
+        
+        console.log(numBooking);   
+        let numBookings = parseInt(numBooking)-1;
+        numBookings = numBookings.toString();   
+        console.log(numBookings);   
+
         return true;
     } catch (error) {
         console.log(error);
