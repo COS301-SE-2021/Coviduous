@@ -44,5 +44,11 @@ router.post('/reporting/company/users-data/view', reportingController.viewUsersD
 router.post('/reporting/health-summary/setup', reportingController.setUpHealthSummary);
 router.post('/reporting/health-summary', reportingController.getHealthSummary);
 
+//booking reports
+router.post('/reporting/Numberbookings',reportingController.getNumberBookings);
+
+
+
+
 // Export API routes
 module.exports = router;

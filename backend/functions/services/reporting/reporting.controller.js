@@ -241,52 +241,6 @@ exports.viewSickEmployees = async (req, res) => {
     }
 };
 
-exports.deleteSickEmployee = async (req, res) => {
-    if (req == null || req.body == null) {
-        return res.status(400).send({
-            message: '400 Bad Request: Null request object',
-        });
-    }
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-
-    let fieldErrors = [];
-
-    if (reqJson.userId == null || reqJson.userId === '') {
-        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-
-    let result = await database.deleteSickEmployee(reqJson.userId);
-
-    if (!result) {
-        console.log("500 server error");
-        return res.status(500).send({
-            message: '500 Server Error: DB error',
-            data: null
-        });
-    }
-
-    return res.status(200).send({
-        message: 'Successfully deleted sick employee',
-    });
-}
-
 ////////// COMPANY REPORTING ////////////
 
 /////// company-data ////////
@@ -313,25 +267,25 @@ exports.addCompanyData = async (req, res) => {
         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
     }
 
-    // if (reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === "") {
-    //     fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'})
-    // }
+    if (reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === "") {
+        fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'})
+    }
 
-    // if (reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === "") {
-    //     fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered admins may not be empty'})
-    // }
+    if (reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === "") {
+        fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered admins may not be empty'})
+    }
 
-    // if (reqJson.numberOfFloorplans == null || reqJson.numberOfFloorplans === "") {
-    //     fieldErrors.push({field: 'numberOfFloorplans', message: 'Number of floorplans may not be empty'})
-    // }
+    if (reqJson.numberOfFloorplans == null || reqJson.numberOfFloorplans === "") {
+        fieldErrors.push({field: 'numberOfFloorplans', message: 'Number of floorplans may not be empty'})
+    }
 
-    // if (reqJson.numberOfFloors == null || reqJson.numberOfFloors === "") {
-    //     fieldErrors.push({field: 'numberOfFloors', message: 'Number of floors may not be empty'})
-    // }
+    if (reqJson.numberOfFloors == null || reqJson.numberOfFloors === "") {
+        fieldErrors.push({field: 'numberOfFloors', message: 'Number of floors may not be empty'})
+    }
 
-    // if (reqJson.numberOfRooms == null || reqJson.numberOfRooms === "") {
-    //     fieldErrors.push({field: 'numberOfRooms', message: 'Number of rooms may not be empty'})
-    // }
+    if (reqJson.numberOfRooms == null || reqJson.numberOfRooms === "") {
+        fieldErrors.push({field: 'numberOfRooms', message: 'Number of rooms may not be empty'})
+    }
 
     if (fieldErrors.length > 0) {
         return res.status(400).send({
@@ -448,6 +402,19 @@ exports.updateNumberOfRegisteredUsers = async (req, res) => {
     }
 };
 
+exports.getNumberBookings = async (req, res) => {
+    let getNumberBooking = await db.getNumberBookings();
+      
+    if (getNumberBooking != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved summary bookings',
+        data: getNumberBooking
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching number bookings."});
+    }
+};
+
 exports.updateNumberOfRegisteredAdmins = async (req, res) => {
     // data validation
     let fieldErrors = [];
@@ -489,258 +456,6 @@ exports.updateNumberOfRegisteredAdmins = async (req, res) => {
       });
     } else {
       return res.status(500).send({message: "Some error occurred while updating number of registered admins."});
-    }
-};
-
-exports.addNumberOfRegisteredUsersCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.addNumberOfRegisteredUsersCompanyData(reqJson.companyId, companyData.numberOfRegisteredUsers) == true) {
-        return res.status(200).send({
-            message: "Successfully added number of registered users",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of registered users."});
-    }
-};
-
-exports.decreaseNumberOfRegisteredUsersCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.decreaseNumberOfRegisteredUsersCompanyData(reqJson.companyId, companyData.numberOfRegisteredUsers) == true) {
-        return res.status(200).send({
-            message: "Successfully decreased number of registered users",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of registered users."});
-    }
-};
-
-exports.addNumberOfRegisteredAdminsCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.addNumberOfRegisteredAdminsCompanyData(reqJson.companyId, companyData.numberOfRegisteredAdmins) == true) {
-        return res.status(200).send({
-            message: "Successfully added number of registered admins",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of registered admins."});
-    }
-};
-
-exports.decreaseNumberOfRegisteredAdminsCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.decreaseNumberOfRegisteredAdminsCompanyData(reqJson.companyId, companyData.numberOfRegisteredAdmins) == true) {
-        return res.status(200).send({
-            message: "Successfully decreased number of registered admins",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of registered admins."});
-    }
-};
-
-exports.addNumberOfFloorplansCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.addNumberOfFloorplansCompanyData(reqJson.companyId, companyData.numberOfFloorplans) == true) {
-        return res.status(200).send({
-            message: "Successfully added number of floorplans",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
-    }
-};
-
-exports.decreaseNumberOfFloorplansCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.decreaseNumberOfFloorplansCompanyData(reqJson.companyId, companyData.numberOfFloorplans) == true) {
-        return res.status(200).send({
-            message: "Successfully decreased number of floorplans",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
     }
 };
 
@@ -786,171 +501,45 @@ exports.addNumberOfFloorsCompanyData = async (req, res) => {
     }
 };
 
-exports.decreaseNumberOfFloorsCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.decreaseNumberOfFloorsCompanyData(reqJson.companyId, companyData.numberOfFloors) == true) {
-        return res.status(200).send({
-            message: "Successfully decreased number of floors",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of floors."});
-    }
-};
-
-exports.addNumberOfRoomsCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.addNumberOfRoomsCompanyData(reqJson.companyId, companyData.numberOfRooms) == true) {
-        return res.status(200).send({
-            message: "Successfully added number of rooms",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of rooms."});
-    }
-};
-
-exports.decreaseNumberOfRoomsCompanyData = async (req, res) => {
-    // data validation
-    let fieldErrors = [];
-
-    //Look into express.js middleware so that these lines are not necessary
-    let reqJson;
-    try {
-        reqJson = JSON.parse(req.body);
-    } catch (e) {
-        reqJson = req.body;
-    }
-    console.log(reqJson);
-    //////////////////////////////////////////////////////////////////////
-       
-    if(req.body == null) {
-        fieldErrors.push({field: null, message: 'Request object may not be null'});
-    }
-
-    if (reqJson.companyId == null || reqJson.companyId === '') {
-        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
-    }
-
-    if (fieldErrors.length > 0) {
-        console.log(fieldErrors);
-        return res.status(400).send({
-            message: '400 Bad Request: Incorrect fields',
-            errors: fieldErrors
-        });
-    }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
-
-    if (await database.decreaseNumberOfRoomsCompanyData(reqJson.companyId, companyData.numberOfRooms) == true) {
-        return res.status(200).send({
-            message: "Successfully decreased number of rooms",
-            //data: req.body
-        });
-    } else {
-        return res.status(500).send({message: "Some error occurred while updating number of rooms."});
-    }
-};
-
 
 /////// users-data ////////
 exports.generateUsersData = async (req, res) => {
-    // if (req == null || req.body == null) {
-    //     return res.status(400).send({
-    //         message: '400 Bad Request: Null request object',
-    //     });
-    // }
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
 
-    // //Look into express.js middleware so that these lines are not necessary
-    // let reqJson;
-    // try {
-    //     reqJson = JSON.parse(req.body);
-    // } catch (e) {
-    //     reqJson = req.body;
-    // }
-    // console.log(reqJson);
-    // //////////////////////////////////////////////////////////////////////
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
 
-    // let fieldErrors = [];
+    let fieldErrors = [];
 
-    // if (reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === "") {
-    //     fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'})
-    // }
+    if (reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === "") {
+        fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'})
+    }
 
-    // if (reqJson.totalEmployees == null || reqJson.totalEmployees === "") {
-    //     fieldErrors.push({field: 'totalEmployees', message: 'Total number of employees may not be empty'})
-    // }
+    if (reqJson.totalEmployees == null || reqJson.totalEmployees === "") {
+        fieldErrors.push({field: 'totalEmployees', message: 'Total number of employees may not be empty'})
+    }
 
-    // if (reqJson.totalAdmins == null || reqJson.totalAdmins === "") {
-    //     fieldErrors.push({field: 'totalAdmins', message: 'Total number of admins may not be empty'})
-    // }
+    if (reqJson.totalAdmins == null || reqJson.totalAdmins === "") {
+        fieldErrors.push({field: 'totalAdmins', message: 'Total number of admins may not be empty'})
+    }
 
-    // if (fieldErrors.length > 0) {
-    //     return res.status(400).send({
-    //         message: '400 Bad Request: Incorrect fields',
-    //         errors: fieldErrors
-    //     });
-    // }
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
 
     // get total users
     let totalUsers = await database.getTotalUsers();
@@ -1056,9 +645,6 @@ exports.setUpHealthSummary = async (req, res) => {
       } catch (e) {
           reqJson = req.body;
       }
-    
-    // First we get all the health summaries in our database and check if there is an exisiting health summary with
-    // our companyId
     let healthSummaries = await database.viewHealthSummary();
     
     let filteredList=[];   
@@ -1083,8 +669,6 @@ exports.setUpHealthSummary = async (req, res) => {
     }
     else
     {
-        
-      //company was never registered before so we setup their health summary table
       let healthSummaryId = "HSID-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
       let month= timestamp.charAt(3)+timestamp.charAt(4);
@@ -1099,7 +683,7 @@ exports.setUpHealthSummary = async (req, res) => {
         numHealthChecksUsers: 0,
         numHealthChecksVisitors: 0,
         numReportedInfections: 0,
-        numReportedRecoveries:0
+        numRecovered: 0,
           
         }
         await database.setHealthSummary(healthSummaryId,healthSummary);
@@ -1113,40 +697,5 @@ exports.setUpHealthSummary = async (req, res) => {
 
 
 };
-
-exports.getHealthSummary = async (req, res) => {
-    let reqJson;
-      try {
-          reqJson = JSON.parse(req.body);
-      } catch (e) {
-          reqJson = req.body;
-      }
-    let healthSummaries = await database.viewHealthSummary();
-    
-    let filteredList=[];   
-    healthSummaries.forEach(obj => {
-    if(obj.companyId===reqJson.companyId && reqJson.month===obj.month && reqJson.year==obj.year)
-          {
-            filteredList.push(obj);
-          }
-          else
-          {
-    
-          }
-        });
-    
-        if(filteredList.length>0)
-        {
-            return res.status(200).send({
-                message: 'Successfully retrieved health summary',
-                data: filteredList
-            });
-       
-         }
-        else{
-            return res.status(500).send({
-                message: 'Problem with either the companId,month or year you requesting for',
-            });
-        }
-
-};
+// health summary 
+//initial setup
