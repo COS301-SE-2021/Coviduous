@@ -4,9 +4,10 @@ let db = admin.firestore();
 exports.createBooking = async (data, bookingData) => {
     try {
         let c ="";
+        console.log(bookingData.bookingNumber);
          await db.collection('bookings').doc(bookingData.bookingNumber)
             .create(bookingData);
-        
+            console.log(data.month);
         const document =  db.collection('summary-bookings').where("month","==",data.month);
         let snapshot = await document.get(); 
 
@@ -21,51 +22,47 @@ exports.createBooking = async (data, bookingData) => {
             if(data.month===element.month){
                   //update
                 c="checked";  
-
             }
-          
         }
-        console.log(c);
         if(c==="")
         {
-            const documents =  db.collection('summary-bookings').where("month","==",data.month);
-            let snapshots = await documents.get(); 
-
-            let lists = [];
-
-            snapshots.forEach(doc => {
-            let ds = doc.data();
-            lists.push(ds);
-        });
-        let numBook;
-        for (const elements of lists) {
-
-            console.log(elements.numBookings);
-            
-            numBook = elements.numBookings;
-            
-            console.log(numBook);
-        }
-            //create 
-            console.log(numBook);
-            console.log("Chaks");
-            console.log(data.numBookings);
-            data.numBookings=numBook+1;
-            console.log(data.numBookings);
-            await db.collection('summary-bookings').doc(data.companyId)
+            await db.collection('summary-bookings').doc(data.summaryBookingId)
             .create(data); 
         }
         if(c==="checked")
         {
-            //update 
-        }    
-        
-           
+            //update
+            const documents =  db.collection('summary-bookings').where("month","==",data.month);
+            let s = await documents.get(); 
+    
+           let lists = [];
+    
+            s.forEach(doc => {
+                let ds = doc.data();
+                lists.push(ds);
+            });
+            
+            let summaryId;
+            let count;
+            for (const elements of lists) {
+                
+                summaryId = elements.summaryBookingId;
+                count =elements.numBookings;
 
-        console.log(list.length);    
+            }
+
+            
+            console.log(summaryId);
+            console.log(count)
 
 
-        
+
+            const documented = db.collection('summary-bookings').doc(data.month);
+            await documented.update({ 
+             });
+
+    }    
+
         return true;
     } catch (error) {
         console.log(error);
