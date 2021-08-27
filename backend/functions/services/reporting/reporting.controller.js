@@ -915,43 +915,6 @@ exports.decreaseNumberOfRoomsCompanyData = async (req, res) => {
 
 /////// users-data ////////
 exports.generateUsersData = async (req, res) => {
-    // if (req == null || req.body == null) {
-    //     return res.status(400).send({
-    //         message: '400 Bad Request: Null request object',
-    //     });
-    // }
-
-    // //Look into express.js middleware so that these lines are not necessary
-    // let reqJson;
-    // try {
-    //     reqJson = JSON.parse(req.body);
-    // } catch (e) {
-    //     reqJson = req.body;
-    // }
-    // console.log(reqJson);
-    // //////////////////////////////////////////////////////////////////////
-
-    // let fieldErrors = [];
-
-    // if (reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === "") {
-    //     fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'})
-    // }
-
-    // if (reqJson.totalEmployees == null || reqJson.totalEmployees === "") {
-    //     fieldErrors.push({field: 'totalEmployees', message: 'Total number of employees may not be empty'})
-    // }
-
-    // if (reqJson.totalAdmins == null || reqJson.totalAdmins === "") {
-    //     fieldErrors.push({field: 'totalAdmins', message: 'Total number of admins may not be empty'})
-    // }
-
-    // if (fieldErrors.length > 0) {
-    //     return res.status(400).send({
-    //         message: '400 Bad Request: Incorrect fields',
-    //         errors: fieldErrors
-    //     });
-    // }
-
     // get total users
     let totalUsers = await database.getTotalUsers();
     totalUsers = totalUsers.toString();
@@ -973,18 +936,41 @@ exports.generateUsersData = async (req, res) => {
         totalAdmins: totalAdmins
     }
 
-    let result = await database.generateUsersData(usersData.usersDataId, usersData);
-    
-    if (!result) {
-        return res.status(500).send({
-            message: '500 Server Error: DB error',
+    let result2 = await database.viewUsersData();
+
+    if (result2.length > 0) // check if entry already exists in db table
+    {
+        await database.updateTotalRegisteredUsers(result2[0].usersDataId, totalUsers);
+        await database.updateTotalEmployees(result2[0].usersDataId, totalEmployees);
+        await database.updateTotalAdmins(result2[0].usersDataId, totalAdmins);
+
+        let usersData = {
+            usersDataId: result2[0].usersDataId,
+            totalRegisteredUsers: totalUsers,
+            totalEmployees: totalEmployees,
+            totalAdmins: totalAdmins
+        }
+
+        return res.status(200).send({
+            message: 'Users data successfully updated',
+            data: usersData
         });
     }
-
-    return res.status(200).send({
-       message: 'Users data successfully created',
-       data: usersData
-    });
+    else
+    {
+        let result = await database.generateUsersData(usersData.usersDataId, usersData);
+        
+        if (!result) {
+            return res.status(500).send({
+                message: '500 Server Error: DB error',
+            });
+        }
+    
+        return res.status(200).send({
+           message: 'Users data successfully created',
+           data: usersData
+        });
+    }
 };
 
 exports.viewUsersData = async (req, res) => {
