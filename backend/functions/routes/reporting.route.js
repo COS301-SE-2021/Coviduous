@@ -18,6 +18,7 @@ reportingController.setDatabase(devDatabase);
 // reporting routes
 // health reports
 router.post('/reporting/health/sick-employees', reportingController.addSickEmployee);
+router.delete('/reporting/health/sick-employees', reportingController.deleteSickEmployee);
 router.post('/reporting/health/sick-employees/view', reportingController.viewSickEmployees);
 
 router.post('/reporting/health/recovered-employees',reportingController.addRecoveredEmployee);
