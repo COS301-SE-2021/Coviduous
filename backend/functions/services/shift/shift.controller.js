@@ -124,13 +124,26 @@ exports.createShift = async (req,res) => {
     }
 
     let shiftID = "SHI-" + uuid.v4();
+    let summary = "SUM-"+uuid.v4();
     let shift = new Shift(shiftID, reqJson.date, reqJson.startTime, reqJson.endTime,
         reqJson.description, reqJson.adminId, reqJson.companyId, reqJson.floorPlanNumber, reqJson.floorNumber, reqJson.roomNumber);
     let shiftData = { shiftID: shift.shiftID,date: shift.date,startTime: shift.startTime, endTime: shift.endTime,
         description: shift.description, adminId: shift.adminId, companyId: shift.companyId, floorPlanNumber: shift.floorPlanNumber,
         floorNumber: shift.floorNumber, roomNumber: shift.roomNumber };
 
-    let result = await db.createShift(shiftID, shiftData);
+        let time = new Date();
+        let year = time.getFullYear();
+        let month = time.getMonth()+1;
+    
+        let dta ={
+            summaryShiftId: summary,
+            companyId: reqJson.companyId,
+            numShifts: 1,
+            month: month,
+            year: year
+        }
+
+    let result = await db.createShift(dta, shiftData);
 
     if (!result) {
         return res.status(500).send({
