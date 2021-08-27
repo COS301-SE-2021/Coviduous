@@ -2,6 +2,19 @@ import 'package:frontend/controllers/reporting/reporting_controller.dart' as rep
 import 'package:frontend/controllers/user/user_controller.dart' as userController;
 import 'package:frontend/globals.dart' as globals;
 
+Future<bool> getHealthSummary(String year, String month) async {
+  bool result = false;
+  await Future.wait([
+    reportingController.getHealthSummary(globals.loggedInCompanyId, year, month)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentHealthSummary = results.first[0];
+      result = true;
+    }
+  });
+  return result;
+}
+
 Future<bool> addSickEmployee(String userEmail) async {
   bool result = false;
   String userId = "";
@@ -31,7 +44,7 @@ Future<bool> addRecoveredEmployee(String userEmail) async {
     if (results.first != null) {
       userId = results.first.getUserId();
       await Future.wait([
-        reportingController.addRecoveredEmployee(userId, userEmail, globals.loggedInCompanyId)
+        reportingController.addRecoveredEmployee(userId, userEmail, globals.loggedInUserId, globals.loggedInCompanyId)
       ]).then((results) {
         if (results.first == true) {
           result = true;

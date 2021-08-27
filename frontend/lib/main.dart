@@ -153,6 +153,7 @@ class MyApp extends StatelessWidget{
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
           contentTextStyle: TextStyle(color: Colors.white, fontSize: 15),
         ),
+        errorColor: globals.focusColor,
         fontFamily: 'Poppins',
         hintColor: Colors.black,
         inputDecorationTheme: InputDecorationTheme(

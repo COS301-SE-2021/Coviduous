@@ -124,13 +124,26 @@ exports.createShift = async (req,res) => {
     }
 
     let shiftID = "SHI-" + uuid.v4();
+    let summary = "SUM-"+uuid.v4();
     let shift = new Shift(shiftID, reqJson.date, reqJson.startTime, reqJson.endTime,
         reqJson.description, reqJson.adminId, reqJson.companyId, reqJson.floorPlanNumber, reqJson.floorNumber, reqJson.roomNumber);
     let shiftData = { shiftID: shift.shiftID,date: shift.date,startTime: shift.startTime, endTime: shift.endTime,
         description: shift.description, adminId: shift.adminId, companyId: shift.companyId, floorPlanNumber: shift.floorPlanNumber,
         floorNumber: shift.floorNumber, roomNumber: shift.roomNumber };
 
-    let result = await db.createShift(shiftID, shiftData);
+        let time = new Date();
+        let year = time.getFullYear();
+        let month = time.getMonth()+1;
+    
+        let dta ={
+            summaryShiftId: summary,
+            companyId: reqJson.companyId,
+            numShifts: 1,
+            month: month,
+            year: year
+        }
+
+    let result = await db.createShift(dta, shiftData);
 
     if (!result) {
         return res.status(500).send({
@@ -247,7 +260,7 @@ exports.deleteShift = async (req, res) => {
         fieldErrors.push({field: null, message: 'Request object may not be null'});
     }
 
-    if (reqJson.shiftId == null || reqJson.shiftId === '') {
+    if (reqJson.shiftID == null || reqJson.shiftID === '') {
         fieldErrors.push({field: 'shiftId', message: 'Shift ID may not be empty'});
     }
 
@@ -262,7 +275,7 @@ exports.deleteShift = async (req, res) => {
     let group = await db.getGroupForShift(reqJson.shiftId);
     await db.deleteGroup(group.groupId);
 
-    if (await db.deleteShift(reqJson.shiftId) == true) {
+    if (await db.deleteShift(reqJson.shiftID) == true) {
         return res.status(200).send({
             message: "Shift successfully deleted"
         });

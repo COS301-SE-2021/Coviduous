@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:frontend/models/reporting/health_summary.dart';
 import 'package:frontend/models/user/recovered_user.dart';
 import 'package:frontend/models/user/sick_user.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
@@ -16,7 +17,55 @@ int numSickEmployees = 0;
 List<RecoveredUser> recoveredEmployeesDatabaseTable = [];
 int numRecoveredEmployees = 0;
 
+List<HealthSummary> healthSummaryDatabaseTable = [];
+int numHealthSummaries = 0;
+
 String server = serverInfo.getServer(); //server needs to be running on Firebase
+
+//Company reporting
+
+//Get health overview
+Future<List<HealthSummary>> getHealthSummary(String companyId, String year, String month) async {
+  String path = "/reporting/health-summary";
+  String url = server + path;
+
+  var request;
+
+  try {
+    request = http.Request("POST", Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+      "year": year,
+      "month": month,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      healthSummaryDatabaseTable.clear();
+      numHealthSummaries = 0;
+
+      for (var data in jsonMap["data"]) {
+        var summaryData = HealthSummary.fromJson(data);
+        healthSummaryDatabaseTable.add(summaryData);
+        numHealthSummaries++;
+      }
+
+      return healthSummaryDatabaseTable;
+    }
+  } catch (error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Health reporting
 
 //Add sick employee
 Future<bool> addSickEmployee(String userId, String userEmail, String companyId) async {
@@ -50,8 +99,8 @@ Future<bool> addSickEmployee(String userId, String userEmail, String companyId) 
 }
 
 //Add recovered employee
-Future<bool> addRecoveredEmployee(String userId, String userEmail, String companyId) async {
-  String path = "/reporting/health/recovered-employees";
+Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminId, String companyId) async {
+  String path = "/health/report-recovery";
   String url = server + path;
 
   var request;
@@ -61,6 +110,7 @@ Future<bool> addRecoveredEmployee(String userId, String userEmail, String compan
     request.body = json.encode({
       "userId": userId,
       "userEmail": userEmail,
+      "adminId": adminId,
       "companyId": companyId,
     });
     request.headers.addAll(globals.requestHeaders);

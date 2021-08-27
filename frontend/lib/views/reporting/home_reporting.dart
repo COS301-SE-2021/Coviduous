@@ -7,9 +7,9 @@ import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_health.dart';
-import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 
-///import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/controllers/reporting/reporting_helpers.dart' as reportingHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class Reporting extends StatefulWidget {
@@ -20,6 +20,11 @@ class Reporting extends StatefulWidget {
 }
 //class admin
 class _ReportingState extends State<Reporting> {
+  TextEditingController _year = TextEditingController();
+  TextEditingController _month = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
     return (await true);
@@ -75,14 +80,79 @@ class _ReportingState extends State<Reporting> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
-                              /*officeHelpers.getBookings().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
-                                } else {
+                              showDialog(context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('Enter date to view'),
+                                  content: Form(
+                                    key: _formKey,
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          TextFormField(
+                                            controller: _year,
+                                            decoration: InputDecoration(hintText: 'Enter year', filled: true, fillColor: Colors.white),
+                                            obscureText: false,
+                                            validator: (value) {
+                                              if (value.isEmpty || !globals.isNumeric(value)) {
+                                                return 'please input a year';
+                                              }
+                                              return null;
+                                            },
+                                            onSaved: (String value) {
+                                              _year.text = value;
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: MediaQuery.of(context).size.height/48,
+                                          ),
+                                          TextFormField(
+                                            controller: _month,
+                                            decoration: InputDecoration(hintText: 'Enter month (as a number)', filled: true, fillColor: Colors.white),
+                                            obscureText: false,
+                                            validator: (value) {
+                                              if (value.isEmpty || !globals.isNumeric(value)) {
+                                                return 'please input a month as a number';
+                                              }
+                                              return null;
+                                            },
+                                            onSaved: (String value) {
+                                              _month.text = value;
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text('Submit'),
+                                      onPressed: () {
+                                        FormState form = _formKey.currentState;
 
-                                }
-                              });*/
+                                        if (form.validate()) {
+                                          //The padLeft(2, "0") after the month is to ensure that if the month is a single digit, it should be preceded by a 0
+                                          //Double digit months will automatically not have any leading 0s
+                                          reportingHelpers.getHealthSummary(_year.text, _month.text.padLeft(2, "0")).then((result) {
+                                            if (result == true) {
+                                              print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
+                                              //Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("No company information found for the selected year and month. Please try again later.")));
+                                            }
+                                          });
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text('Cancel'),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                  ],
+                                );
+                              });
                             }
                         ),
                         SizedBox (

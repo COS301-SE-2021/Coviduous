@@ -4,10 +4,9 @@ let db = admin.firestore();
 exports.createBooking = async (data, bookingData) => {
     try {
         let c ="";
-        console.log(bookingData.bookingNumber);
          await db.collection('bookings').doc(bookingData.bookingNumber)
             .create(bookingData);
-            console.log(data.month);
+            
         const document =  db.collection('summary-bookings').where("month","==",data.month);
         let snapshot = await document.get(); 
 
@@ -20,7 +19,6 @@ exports.createBooking = async (data, bookingData) => {
         
         for (const element of list) {
             if(data.month===element.month){
-                  //update
                 c="checked";  
             }
         }
@@ -31,7 +29,6 @@ exports.createBooking = async (data, bookingData) => {
         }
         if(c==="checked")
         {
-            //update
             const documents =  db.collection('summary-bookings').where("month","==",data.month);
             let s = await documents.get(); 
     
@@ -121,18 +118,22 @@ exports.deleteBooking= async (bookingNumber) => {
             let dat = docs.data();
             lists.push(dat);
         });
-        console.log(lists);
-
+      
         let numBooking;
+        let summaryId;
         for (const element of lists) {
+            summaryId = element.summaryBookingId,
             numBooking = element.numBookings;
            }
         
         console.log(numBooking);   
         let numBookings = parseInt(numBooking)-1;
         numBookings = numBookings.toString();   
-        console.log(numBookings);   
-
+        
+        const documented = db.collection('summary-bookings').doc(summaryId);
+            await documented.update({ 
+                numBookings:numBookings
+             });   
         return true;
     } catch (error) {
         console.log(error);

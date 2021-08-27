@@ -49,10 +49,41 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
 
-  return true;
-  }
+      return true;
+    }
   } catch (error) {
   print(error);
+  }
+
+  return false;
+}
+
+/**
+ * createCompany() : Creates a new company.
+ */
+Future<bool> createCompany(String companyId) async {
+  String path = '/reporting/health-summary/setup';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+  } catch(error) {
+    print(error);
   }
 
   return false;
