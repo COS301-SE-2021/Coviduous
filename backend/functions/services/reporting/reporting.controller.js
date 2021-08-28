@@ -1090,6 +1090,76 @@ exports.setUpHealthSummary = async (req, res) => {
 
 
 };
+
+////
+// Permission summary 
+//initial setup
+exports.setUpPermissionSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    
+    // First we get all the permission summaries in our database and check if there is an exisiting permission summary with
+    // our companyId
+    let healthSummaries = await database.viewPermissionSummary();
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        return res.status(200).send({
+            message: 'Company Permission Summary Already Has An Initial Instance',
+        });
+
+    }
+    else
+    {
+        
+      //company was never registered before so we setup their permission summary table
+      let permissionSummaryId = "PMSN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+
+      let permissionSummary = {
+        permissionSummaryId: permissionSummaryId,
+        month: month,
+        year:year,
+        timestamp: timestamp,
+        companyId: reqJson.companyId,
+        numPermissionDeniedUsers: 0,
+        numPermissionDeniedVisitors: 0,
+        numPermissionGrantedUsers: 0,
+        numPermissionGrantedVisitors: 0,
+        totalPermissions:0
+          
+        }
+        await database.setPermissionSummary(permissionSummaryId,permissionSummary);
+        return res.status(200).send({
+            message: 'Company Permission Summary Successfuly Set',
+            data:permissionSummary
+        });
+
+
+    }
+
+
+};
+
 exports.getNumberShifts = async (req, res) => {
     let getNumberShift = await database.getNumberShifts();
       
