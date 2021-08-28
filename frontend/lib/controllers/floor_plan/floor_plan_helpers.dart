@@ -92,10 +92,10 @@ Future<bool> deleteFloorPlan(String floorPlanNumber) async {
   return result;
 }
 
-Future<bool> deleteFloor(String floorNumber) async {
+Future<bool> deleteFloor(String floorPlanNumber, String floorNumber) async {
   bool result = false;
   await Future.wait([
-    floorPlanController.deleteFloor(floorNumber)
+    floorPlanController.deleteFloor(floorPlanNumber, floorNumber)
   ]).then((results) {
     result = results.first;
   });
