@@ -22,9 +22,9 @@ class ShiftSummary {
   factory ShiftSummary.fromJson(Map<String, dynamic> json) => ShiftSummary(
     shiftSummaryId: json["summaryShiftId"],
     companyId: json["companyId"],
-    year: json["year"],
-    month: json["month"],
-    numShifts: json["numShifts"],
+    year: json["year"].toString(),
+    month: json["month"].toString().padLeft(2, "0"),
+    numShifts: int.parse(json["numShifts"]),
   );
 
   Map<String, dynamic> toJson() => {
