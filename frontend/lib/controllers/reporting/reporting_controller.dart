@@ -6,7 +6,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:frontend/models/reporting/booking_summary.dart';
+import 'package:frontend/models/reporting/company_summary.dart';
 import 'package:frontend/models/reporting/health_summary.dart';
+import 'package:frontend/models/reporting/permission_summary.dart';
 import 'package:frontend/models/reporting/shift_summary.dart';
 import 'package:frontend/models/user/recovered_user.dart';
 import 'package:frontend/models/user/sick_user.dart';
@@ -20,10 +22,16 @@ List<RecoveredUser> recoveredEmployeesDatabaseTable = [];
 int numRecoveredEmployees = 0;
 
 List<BookingSummary> bookingSummaryDatabaseTable = [];
-int numBookingSummaries;
+int numBookingSummaries = 0;
+
+List<CompanySummary> companySummaryDatabaseTable = [];
+int numCompanySummaries = 0;
 
 List<HealthSummary> healthSummaryDatabaseTable = [];
 int numHealthSummaries = 0;
+
+List<PermissionSummary> permissionSummaryDatabaseTable = [];
+int numPermissionSummaries = 0;
 
 List<ShiftSummary> shiftSummaryDatabaseTable = [];
 int numShiftSummaries = 0;
@@ -73,6 +81,43 @@ Future<List<BookingSummary>> getBookingSummary(String companyId, String year, St
   return null;
 }
 
+//Get company overview
+Future<List<CompanySummary>> getCompanySummary(String companyId) async {
+  String path = "/reporting/company/company-data/view";
+  String url = server + path;
+
+  var request;
+
+  try {
+    request = http.Request("POST", Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      companySummaryDatabaseTable.clear();
+      numCompanySummaries = 0;
+
+      var summaryData = CompanySummary.fromJson(jsonMap["data"]);
+      companySummaryDatabaseTable.add(summaryData);
+      numCompanySummaries++;
+
+      return companySummaryDatabaseTable;
+    }
+  } catch (error) {
+    print(error);
+  }
+
+  return null;
+}
+
 //Get health overview
 Future<List<HealthSummary>> getHealthSummary(String companyId, String year, String month) async {
   String path = "/reporting/health-summary";
@@ -106,6 +151,47 @@ Future<List<HealthSummary>> getHealthSummary(String companyId, String year, Stri
       }
 
       return healthSummaryDatabaseTable;
+    }
+  } catch (error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Get permission overview
+Future<List<PermissionSummary>> getPermissionSummary(String companyId, String year, String month) async {
+  String path = "/reporting/permission-summary";
+  String url = server + path;
+
+  var request;
+
+  try {
+    request = http.Request("POST", Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+      "year": year,
+      "month": month,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      permissionSummaryDatabaseTable.clear();
+      numPermissionSummaries = 0;
+
+      for (var data in jsonMap["data"]) {
+        var summaryData = PermissionSummary.fromJson(data);
+        permissionSummaryDatabaseTable.add(summaryData);
+        numPermissionSummaries++;
+      }
+
+      return permissionSummaryDatabaseTable;
     }
   } catch (error) {
     print(error);
