@@ -138,13 +138,13 @@ class _ReportingState extends State<Reporting> {
                                               print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
                                               print("Shift summary ID: " + globals.currentShiftSummary.getShiftSummaryID());
                                               print("Booking summary ID: " + globals.currentBookingSummary.getBookingSummaryID());
-                                              //Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
+                                              Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                             } else {
                                               ScaffoldMessenger.of(context).showSnackBar(
                                                   SnackBar(content: Text("No company information found for the selected year and month. Please try again later.")));
+                                              Navigator.pop(context);
                                             }
                                           });
-                                          Navigator.pop(context);
                                         }
                                       },
                                     ),
