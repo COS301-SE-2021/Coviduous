@@ -17,8 +17,6 @@ class ViewShifts extends StatefulWidget {
   _ViewShiftsState createState() => _ViewShiftsState();
 }
 class _ViewShiftsState extends State<ViewShifts> {
-  int numOfGroups = globals.currentShifts.length;
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
     return (await true);
@@ -41,7 +39,7 @@ class _ViewShiftsState extends State<ViewShifts> {
     }
 
     Widget getList() {
-      if (numOfGroups == 0) {
+      if (globals.currentShifts.length == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -72,8 +70,8 @@ class _ViewShiftsState extends State<ViewShifts> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.all(16),
-            itemCount: numOfGroups,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
+            itemCount: globals.currentShifts.length,
+            itemBuilder: (context, index) {
               return ListTile(
                 title: Column(
                     children:[
@@ -140,7 +138,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                               title: Text('Alert'),
                                               content: Text('Are you sure you want to delete this shift?'),
                                               actions: <Widget>[
-                                                ElevatedButton(
+                                                TextButton(
                                                   child: Text("Yes"),
                                                   onPressed: () {
                                                     shiftHelpers.deleteShift(globals.currentShiftNum).then((result) {
@@ -155,7 +153,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                                     });
                                                   },
                                                 ),
-                                                ElevatedButton(
+                                                TextButton(
                                                   child: Text("No"),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
