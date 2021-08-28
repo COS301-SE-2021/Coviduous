@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:collection/collection.dart' as collection;
 import 'dart:ui' as dart_ui;
 
 import 'package:flutter/foundation.dart';
@@ -13,7 +12,6 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:frontend/views/reporting/home_reporting.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-import 'package:frontend/models/office/booking.dart';
 
 import 'package:frontend/controllers/pdf_helpers.dart' as pdfHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -29,25 +27,16 @@ class ReportingCompany extends StatefulWidget {
 class ReportingCompanyState extends State<ReportingCompany> {
   pw.ThemeData myTheme;
   var pdf;
-  final GlobalKey<SfCartesianChartState> _bookingChartKey = GlobalKey();
+  final GlobalKey<SfCartesianChartState> _bookingShiftChartKey = GlobalKey();
 
-  final List<Booking> bookingData = globals.currentBookings;
-  List<List<Booking>> bookingDataSorted = [];
-  List<String> bookingDataDates = [];
-
-  //Group a list of bookings by date
-  groupBookingsByDate(List<Booking> bookings) {
-    final groups = collection.groupBy(bookings, (Booking booking) {
-      return booking.getTimestamp().substring(0, 10);
-    });
-
-    bookingDataDates = groups.keys.toList().reversed;
-    bookingDataSorted = groups.values.toList();
-  }
+  List<Map<String, int>> bookingShiftList = [
+    {"Bookings": globals.currentBookingSummary.getNumBookings()},
+    {"Shifts": globals.currentShiftSummary.getNumShifts()},
+  ];
 
   //Render booking and shift chart
   Future<Uint8List> renderBookingChart() async {
-    final dart_ui.Image data = await _bookingChartKey.currentState.toImage(pixelRatio: 3.0);
+    final dart_ui.Image data = await _bookingShiftChartKey.currentState.toImage(pixelRatio: 3.0);
     final ByteData bytes = await data.toByteData(format: dart_ui.ImageByteFormat.png);
     return bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
   }
@@ -102,9 +91,6 @@ class ReportingCompanyState extends State<ReportingCompany> {
               child:  ElevatedButton(
                   child: Text('Generate PDF report'),
                   onPressed: () async {
-                    if (globals.currentBookings != null) {
-                      groupBookingsByDate(bookingData);
-                    }
                     pw.MemoryImage bookingChart = new pw.MemoryImage(await renderBookingChart());
 
                     //Create PDF
@@ -119,7 +105,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             child: pw.Text('Coviduous - Company report', textScaleFactor: 2),
                           ),
                           pw.Bullet(
-                            text: 'Date: ' + DateTime.now().toString(),
+                            text: 'Date: ' + globals.currentHealthSummary.getTimestamp().substring(0, 10),
                           ),
                           pw.SizedBox(
                             width: 500,
@@ -131,16 +117,16 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             child: pw.Text('Booking and shift statistics', textScaleFactor: 1.5),
                           ),
                           pw.Bullet(
-                              text: 'Number of bookings for this month: '
+                              text: 'Number of bookings for this month: ' + globals.currentBookingSummary.getNumBookings().toString()
                           ),
                           pw.Bullet(
-                              text: 'Number of shifts for this month: '
+                              text: 'Number of shifts for this month: ' + globals.currentShiftSummary.getNumShifts().toString()
                           ),
                           pw.Bullet(
-                              text: 'Average weekly bookings for this month: '
+                              text: 'Average weekly bookings for this month: ' + (globals.currentBookingSummary.getNumBookings()/4).toString()
                           ),
                           pw.Bullet(
-                              text: 'Average weekly shifts for this month: '
+                              text: 'Average weekly shifts for this month: ' + (globals.currentShiftSummary.getNumShifts()/4).toString()
                           ),
                           pw.Image(
                             bookingChart,
@@ -183,19 +169,30 @@ class ReportingCompanyState extends State<ReportingCompany> {
                       color: Colors.white,
                       width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
                       padding: EdgeInsets.all(16),
-                      child: SfCartesianChart(
-                        key: _bookingChartKey,
-                        primaryXAxis: DateTimeAxis(
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                        series: <ChartSeries>[
-                          LineSeries<List<Booking>, DateTime>(
-                            color: Colors.black,
-                            dataSource: bookingDataSorted,
-                            xValueMapper: (List<Booking> bookings, _) => DateTime.parse(bookingDataDates.removeLast()),
-                            yValueMapper: (List<Booking> bookings, _) => bookings.length
+                      child: Column(
+                        children: [
+                          Text("Number of bookings: " + globals.currentBookingSummary.getNumBookings().toString()),
+                          Text("Number of shifts: " + globals.currentShiftSummary.getNumShifts().toString()),
+                          SfCartesianChart(
+                            key: _bookingShiftChartKey,
+                            primaryXAxis: CategoryAxis(
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
+                                )
+                            ),
+                            primaryYAxis: NumericAxis(
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            series: <ChartSeries>[
+                              BarSeries<Map<String, int>, String>(
+                                color: globals.primaryColor,
+                                dataSource: bookingShiftList,
+                                xValueMapper: (Map<String, int> bookingShiftData, _) => bookingShiftData.keys.first,
+                                yValueMapper: (Map<String, int> bookingShiftData, _) => bookingShiftData.values.first,
+                              ),
+                            ],
                           ),
                         ],
                       ),
