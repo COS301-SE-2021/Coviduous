@@ -35,6 +35,14 @@ class ReportingCompanyState extends State<ReportingCompany> {
 
   final GlobalKey<SfCartesianChartState> _bookingShiftChartKey = GlobalKey();
   final GlobalKey<SfCartesianChartState> _healthChartKey = GlobalKey();
+  final GlobalKey<SfCartesianChartState> _permissionChartKey = GlobalKey();
+  final GlobalKey<SfCircularChartState> _userChartKey = GlobalKey();
+
+  List<Map<String, int>> companyList = [
+    {"Floor plans": globals.currentCompanySummary.getNumberOfFloorPlans()},
+    {"Floors": globals.currentCompanySummary.getNumberOfFloors()},
+    {"Rooms": globals.currentCompanySummary.getNumberOfRooms()},
+  ];
 
   List<Map<String, int>> bookingShiftList = [
     {"Bookings": globals.currentBookingSummary.getNumBookings()},
@@ -48,6 +56,20 @@ class ReportingCompanyState extends State<ReportingCompany> {
     {"Visitor checks": globals.currentHealthSummary.getHealthChecksVisitors()},
   ];
 
+  List<Map<String, int>> permissionList = [
+    {"Total permissions": globals.currentPermissionSummary.getTotalPermissions()},
+    {"Denied employees": globals.currentPermissionSummary.getPermissionsDeniedUsers()},
+    {"Denied visitors": globals.currentPermissionSummary.getPermissionsDeniedVisitors()},
+    {"Granted employees": globals.currentPermissionSummary.getPermissionsGrantedUsers()},
+    {"Granted visitors": globals.currentPermissionSummary.getPermissionsGrantedVisitors()},
+  ];
+
+  //The user list is a list of Map<String, List> instead of Map<String, int> because pie charts also require a color attribute for each category
+  List<Map<String, List>> userList = [
+    {"Employees": [globals.currentCompanySummary.getNumberOfRegisteredUsers(), globals.primaryColor]},
+    {"Admins": [globals.currentCompanySummary.getNumberOfRegisteredAdmins(), globals.focusColor]}
+  ];
+
   //Render booking and shift chart
   Future<Uint8List> renderBookingChart() async {
     final dart_ui.Image data = await _bookingShiftChartKey.currentState.toImage(pixelRatio: 3.0);
@@ -58,6 +80,20 @@ class ReportingCompanyState extends State<ReportingCompany> {
   //Render health chart
   Future<Uint8List> renderHealthChart() async {
     final dart_ui.Image data = await _healthChartKey.currentState.toImage(pixelRatio:  3.0);
+    final ByteData bytes = await data.toByteData(format: dart_ui.ImageByteFormat.png);
+    return bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
+  }
+
+  //Render permission chart
+  Future<Uint8List> renderPermissionChart() async {
+    final dart_ui.Image data = await _permissionChartKey.currentState.toImage(pixelRatio:  3.0);
+    final ByteData bytes = await data.toByteData(format: dart_ui.ImageByteFormat.png);
+    return bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
+  }
+
+  //Render permission chart
+  Future<Uint8List> renderUserChart() async {
+    final dart_ui.Image data = await _userChartKey.currentState.toImage(pixelRatio:  3.0);
     final ByteData bytes = await data.toByteData(format: dart_ui.ImageByteFormat.png);
     return bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
   }
@@ -170,9 +206,11 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                       //Double digit months will automatically not have any leading 0s
                                       reportingHelpers.getCompanySummaries(_year.text, _month.text.padLeft(2, "0")).then((result) {
                                         if (result == true) {
+                                          print("Booking summary ID: " + globals.currentBookingSummary.getBookingSummaryID());
+                                          print("Company summary ID: " + globals.currentCompanySummary.getCompanyId());
                                           print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
                                           print("Shift summary ID: " + globals.currentShiftSummary.getShiftSummaryID());
-                                          print("Booking summary ID: " + globals.currentBookingSummary.getBookingSummaryID());
+                                          print("Permission summary ID: " + globals.currentPermissionSummary.getPermissionSummaryID());
                                           Navigator.pop(context);
                                           setState(() {});
                                         } else {
@@ -198,6 +236,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
                       onPressed: () async {
                         pw.MemoryImage bookingChart = new pw.MemoryImage(await renderBookingChart());
                         pw.MemoryImage healthChart = new pw.MemoryImage(await renderHealthChart());
+                        pw.MemoryImage permissionChart = new pw.MemoryImage(await renderPermissionChart());
+                        pw.MemoryImage userChart = new pw.MemoryImage(await renderUserChart());
 
                         //Create PDF
                         pdf.addPage(pw.MultiPage(
@@ -215,6 +255,24 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                               pw.Bullet(
                                 text: 'Date: ' + globals.currentHealthSummary.getTimestamp().substring(0, 10),
+                              ),
+                              pw.SizedBox(
+                                width: 500,
+                                child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
+                              ),
+                              pw.Header(
+                                level: 1,
+                                title: 'Company overview',
+                                child: pw.Text('Company overview', textScaleFactor: 1.5),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of floor plans: ' + globals.currentCompanySummary.getNumberOfFloorPlans().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of floors: ' + globals.currentCompanySummary.getNumberOfFloors().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of rooms: ' + globals.currentCompanySummary.getNumberOfRooms().toString(),
                               ),
                               pw.SizedBox(
                                 width: 500,
@@ -262,6 +320,42 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               pw.Image(
                                 healthChart,
                               ),
+                              pw.Header(
+                                child: pw.Text('Permission statistics', textScaleFactor: 1.5),
+                              ),
+                              pw.Bullet(
+                                text: 'Total number of permissions granted or denied this month: ' + globals.currentPermissionSummary.getTotalPermissions().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of employee permissions denied: ' + globals.currentPermissionSummary.getPermissionsDeniedUsers().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of visitor permissions denied: ' + globals.currentPermissionSummary.getPermissionsDeniedVisitors().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of employee permissions granted: ' + globals.currentPermissionSummary.getPermissionsGrantedUsers().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of visitor permissions granted: ' + globals.currentPermissionSummary.getPermissionsGrantedVisitors().toString(),
+                              ),
+                              pw.Image(
+                                permissionChart,
+                              ),
+                              pw.Header(
+                                child: pw.Text('User statistics', textScaleFactor: 1.5),
+                              ),
+                              pw.Bullet(
+                                text: 'Total number of registered users: ' + globals.currentCompanySummary.getTotalNumberOfRegistered().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of admins: ' + globals.currentCompanySummary.getNumberOfRegisteredAdmins().toString(),
+                              ),
+                              pw.Bullet(
+                                text: 'Number of employees: ' + globals.currentCompanySummary.getNumberOfRegisteredUsers().toString(),
+                              ),
+                              pw.Image(
+                                userChart,
+                              ),
                             ]
                         ));
 
@@ -302,6 +396,98 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             color: globals.appBarColor,
                             width: MediaQuery.of(context).size.width,
                             child: Text(
+                              "Company overview",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          GridView.count(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5,
+                            shrinkWrap: true,
+                            children: [
+                              Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    color: globals.primaryColor,
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      "Number of floor plans",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    color: globals.focusColor,
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      globals.currentCompanySummary.getNumberOfFloorPlans().toString(),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    color: globals.primaryColor,
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      "Number of floors",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    color: globals.focusColor,
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      globals.currentCompanySummary.getNumberOfFloors().toString(),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    color: globals.primaryColor,
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      "Number of rooms",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    color: globals.focusColor,
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(
+                                      globals.currentCompanySummary.getNumberOfRooms().toString(),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: globals.lineColor,
+                            thickness: 2,
+                          ),
+                          Container(
+                            color: globals.appBarColor,
+                            width: MediaQuery.of(context).size.width,
+                            child: Text(
                               "Bookings and shifts",
                               style: TextStyle(
                                   color: Colors.white,
@@ -333,8 +519,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ColumnSeries<Map<String, int>, String>(
                                 color: globals.primaryColor,
                                 dataSource: bookingShiftList,
-                                xValueMapper: (Map<String, int> bookingShiftData, _) => bookingShiftData.keys.first,
-                                yValueMapper: (Map<String, int> bookingShiftData, _) => bookingShiftData.values.first,
+                                xValueMapper: (Map<String, int> data, _) => data.keys.first,
+                                yValueMapper: (Map<String, int> data, _) => data.values.first,
                               ),
                             ],
                           ),
@@ -374,8 +560,86 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ColumnSeries<Map<String, int>, String>(
                                 color: globals.primaryColor,
                                 dataSource: healthList,
-                                xValueMapper: (Map<String, int> healthData, _) => healthData.keys.first,
-                                yValueMapper: (Map<String, int> healthData, _) => healthData.values.first,
+                                xValueMapper: (Map<String, int> data, _) => data.keys.first,
+                                yValueMapper: (Map<String, int> data, _) => data.values.first,
+                              ),
+                            ],
+                          ),
+                          Container(
+                            color: globals.appBarColor,
+                            width: MediaQuery.of(context).size.width,
+                            child: Text(
+                              "Permissions",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                              ),
+                            ),
+                          ),
+                          Text("Total number of permissions granted or denied this month: " + globals.currentPermissionSummary.getTotalPermissions().toString()),
+                          Text("Number of employee permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedUsers().toString()),
+                          Text("Number of visitor permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedVisitors().toString()),
+                          Text("Number of employee permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedUsers().toString()),
+                          Text("Number of visitor permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedVisitors().toString()),
+                          Divider(
+                            color: globals.lineColor,
+                            thickness: 2,
+                          ),
+                          SfCartesianChart(
+                            key: _permissionChartKey,
+                            primaryXAxis: CategoryAxis(
+                                labelRotation: -45,
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
+                                )
+                            ),
+                            primaryYAxis: NumericAxis(
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            series: <ChartSeries>[
+                              ColumnSeries<Map<String, int>, String>(
+                                color: globals.primaryColor,
+                                dataSource: permissionList,
+                                xValueMapper: (Map<String, int> data, _) => data.keys.first,
+                                yValueMapper: (Map<String, int> data, _) => data.values.first,
+                              ),
+                            ],
+                          ),
+                          Container(
+                            color: globals.appBarColor,
+                            width: MediaQuery.of(context).size.width,
+                            child: Text(
+                              "Users",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                              ),
+                            ),
+                          ),
+                          Text("Total number of registered users: " + globals.currentCompanySummary.getTotalNumberOfRegistered().toString()),
+                          Text("Number of registered admins: " + globals.currentCompanySummary.getNumberOfRegisteredAdmins().toString()),
+                          Text("Number of registered employees: " + globals.currentCompanySummary.getNumberOfRegisteredUsers().toString()),
+                          Divider(
+                            color: globals.lineColor,
+                            thickness: 2,
+                          ),
+                          SfCircularChart(
+                            key: _userChartKey,
+                            series: <CircularSeries>[
+                              PieSeries<Map<String, List>, String>(
+                                pointColorMapper: (Map<String, List> data, _) => data.values.first[1],
+                                dataLabelMapper: (Map<String, List> data, _) => data.values.first[0].toString(),
+                                dataLabelSettings: DataLabelSettings(
+                                  isVisible: true,
+                                  textStyle: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                dataSource: userList,
+                                xValueMapper: (Map<String, List> data, _) => data.keys.first,
+                                yValueMapper: (Map<String, List> data, _) => data.values.first[0],
                               ),
                             ],
                           ),
