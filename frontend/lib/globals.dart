@@ -29,7 +29,9 @@ import 'package:frontend/models/office/booking.dart';
 
 //Reporting subsystem
 import 'package:frontend/models/reporting/booking_summary.dart';
+import 'package:frontend/models/reporting/company_summary.dart';
 import 'package:frontend/models/reporting/health_summary.dart';
+import 'package:frontend/models/reporting/permission_summary.dart';
 import 'package:frontend/models/reporting/shift_summary.dart';
 
 //Shift subsystem
@@ -229,8 +231,14 @@ List<TempNotification> tempUsers = [];
 //Current booking summary
 BookingSummary currentBookingSummary;
 
+//Current company summary
+CompanySummary currentCompanySummary;
+
 //Current health summary
 HealthSummary currentHealthSummary;
+
+//Current permission summary
+PermissionSummary currentPermissionSummary;
 
 //Current shift summary
 ShiftSummary currentShiftSummary;
