@@ -634,3 +634,35 @@ exports.updateHealthSummaryVisitor = async (healthSummaryId,numHealthChecksVisit
       return false;
     }
   };
+
+  //permissions
+  exports.viewPermissionSummary = async () => {
+    try {
+      const document = db.collection('permission-summary');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };
+
+  exports.setPermissionSummary = async (permissionSummaryId,data) => {
+    try {
+        await db.collection('permission-summary').doc(permissionSummaryId)
+          .create(data);
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
