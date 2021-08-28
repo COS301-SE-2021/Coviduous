@@ -12,19 +12,19 @@ class BookingSummary {
   int numBookings;
 
   BookingSummary({
-    this.bookingSummaryId,
-    this.companyId,
-    this.year,
-    this.month,
-    this.numBookings,
+    this.bookingSummaryId = "",
+    this.companyId = "",
+    this.year = "",
+    this.month = "",
+    this.numBookings = 0,
   });
 
   factory BookingSummary.fromJson(Map<String, dynamic> json) => BookingSummary(
     bookingSummaryId: json["summaryBookingsId"],
     companyId: json["companyId"],
-    year: json["year"],
-    month: json["month"],
-    numBookings: json["numBookings"],
+    year: json["year"].toString(),
+    month: json["month"].toString().padLeft(2, "0"),
+    numBookings: int.parse(json["numBookings"]),
   );
 
   Map<String, dynamic> toJson() => {
