@@ -16,22 +16,22 @@ class PermissionSummary {
   int permissionsGrantedVisitors;
 
   PermissionSummary({
-    this.permissionSummaryId,
-    this.companyId,
-    this.year,
-    this.month,
-    this.totalPermissions,
-    this.permissionsDeniedUsers,
-    this.permissionsDeniedVisitors,
-    this.permissionsGrantedUsers,
-    this.permissionsGrantedVisitors,
+    this.permissionSummaryId = "",
+    this.companyId = "",
+    this.year = "",
+    this.month = "",
+    this.totalPermissions = 0,
+    this.permissionsDeniedUsers = 0,
+    this.permissionsDeniedVisitors = 0,
+    this.permissionsGrantedUsers = 0,
+    this.permissionsGrantedVisitors = 0,
   });
 
   factory PermissionSummary.fromJson(Map<String, dynamic> json) => PermissionSummary(
     permissionSummaryId: json["permissionSummaryId"],
     companyId: json["companyId"],
-    year: json["year"],
-    month: json["month"],
+    year: json["year"].toString(),
+    month: json["month"].toString().padLeft(2, "0"),
     totalPermissions: json["totalPermissions"],
     permissionsDeniedUsers: json["numPermissionDeniedUsers"],
     permissionsDeniedVisitors: json["numPermissionDeniedVisitors"],
