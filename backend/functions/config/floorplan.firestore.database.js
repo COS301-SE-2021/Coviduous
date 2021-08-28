@@ -170,7 +170,7 @@ class Firestore {
         let numFloors=parseInt(currentNumFloorsInFloorplan)-1;
         response= await db.collection('floorplans').doc(floorplanNumber).update(
           {
-            "numRooms": numFloors
+            "numFloors": numFloors
         }
         );
         
