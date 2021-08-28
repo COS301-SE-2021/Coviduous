@@ -92,6 +92,9 @@ exports.createFloorPlan = async (req, res) => {
   // company-data summary
   let companyData = await reportingDatabase.getCompanyData(reqJson.companyId);
   await reportingDatabase.addNumberOfFloorplansCompanyData(reqJson.companyId, companyData.numberOfFloorplans);
+  for (let i = 0; i < reqJson.numFloors; i++) {
+    await reportingDatabase.addNumberOfFloorsCompanyData(reqJson.companyId, parseInt(companyData.numberOfFloors) + i);
+  }
 
   return res.status(200).send({
   message: 'floorplan successfully created',
@@ -375,6 +378,7 @@ exports.deleteFloor = async (req, res) => {
   try {
     let filteredList=[];
     let rooms = await database.getRooms();
+    let numRoomsToDelete = 0;
 
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
@@ -383,6 +387,7 @@ exports.deleteFloor = async (req, res) => {
       if(obj.floorNumber===reqJson.floorNumber)
       {
         filteredList.push(obj);
+        numRoomsToDelete++;
       }
       else
       {
@@ -414,6 +419,9 @@ exports.deleteFloor = async (req, res) => {
     // company-data summary
     let companyData = await reportingDatabase.getCompanyData(floorplan.companyId);
     await reportingDatabase.decreaseNumberOfFloorsCompanyData(floorplan.companyId, companyData.numberOfFloors);
+    for (let i = 0; i < numRoomsToDelete; i++) {
+      await reportingDatabase.decreaseNumberOfRoomsCompanyData(floorplan.companyId, parseInt(companyData.numberOfRooms) - i);
+    }
 
       return res.status(200).send({
         message: 'Floor successfully deleted',
@@ -430,6 +438,8 @@ exports.deleteFloorPlan = async (req, res) => {
   try {
     let filteredList=[];
     let floors = await database.getFloors();
+    let numFloorsToDelete = 0;
+    let numRoomsToDelete = 0;
 
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
@@ -440,6 +450,7 @@ exports.deleteFloorPlan = async (req, res) => {
       if(obj.floorplanNumber===reqJson.floorplanNumber)
       {
         filteredList.push(obj);
+        numFloorsToDelete++;
       }
       else
       {
@@ -454,6 +465,7 @@ exports.deleteFloorPlan = async (req, res) => {
         if(obj2.floorNumber===obj.floorNumber)
         {
           filteredList2.push(obj2);
+          numRoomsToDelete++;
         }
         else
         {
@@ -485,6 +497,12 @@ exports.deleteFloorPlan = async (req, res) => {
     // company-data summary
     let companyData = await reportingDatabase.getCompanyData(floorplan.companyId);
     await reportingDatabase.decreaseNumberOfFloorplansCompanyData(floorplan.companyId, companyData.numberOfFloorplans);
+    for (let i = 0; i < numFloorsToDelete; i++) {
+      await reportingDatabase.decreaseNumberOfFloorsCompanyData(floorplan.companyId, parseInt(companyData.numberOfFloors) - i);
+    }
+    for (let i = 0; i < numRoomsToDelete; i++) {
+      await reportingDatabase.decreaseNumberOfRoomsCompanyData(floorplan.companyId, parseInt(companyData.numberOfRooms) - i);
+    }
 
       return res.status(200).send({
         message: 'Floor Plan successfully deleted',
