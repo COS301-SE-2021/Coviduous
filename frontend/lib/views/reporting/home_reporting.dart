@@ -133,9 +133,11 @@ class _ReportingState extends State<Reporting> {
                                         if (form.validate()) {
                                           //The padLeft(2, "0") after the month is to ensure that if the month is a single digit, it should be preceded by a 0
                                           //Double digit months will automatically not have any leading 0s
-                                          reportingHelpers.getHealthSummary(_year.text, _month.text.padLeft(2, "0")).then((result) {
+                                          reportingHelpers.getCompanySummaries(_year.text, _month.text.padLeft(2, "0")).then((result) {
                                             if (result == true) {
                                               print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
+                                              print("Shift summary ID: " + globals.currentShiftSummary.getShiftSummaryID());
+                                              print("Booking summary ID: " + globals.currentBookingSummary.getBookingSummaryID());
                                               //Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                             } else {
                                               ScaffoldMessenger.of(context).showSnackBar(
