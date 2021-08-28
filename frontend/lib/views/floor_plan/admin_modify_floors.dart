@@ -131,7 +131,8 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                                   onPressed: () {
                                     //Delete floor and reload the page
                                     if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
-                                      floorPlanHelpers.deleteFloor(globals.currentFloors[index].getFloorNumber()).then((result) {
+                                      floorPlanHelpers.deleteFloor(globals.currentFloors[index].getFloorPlanNumber(),
+                                          globals.currentFloors[index].getFloorNumber()).then((result) {
                                         if (result == true) {
                                           floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
                                             if (result == true) {
