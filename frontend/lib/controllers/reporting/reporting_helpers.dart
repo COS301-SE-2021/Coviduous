@@ -3,21 +3,25 @@ import 'package:frontend/controllers/user/user_controller.dart' as userControlle
 import 'package:frontend/globals.dart' as globals;
 
 Future<bool> getCompanySummaries(String year, String month) async {
-  bool result = false;
+  bool result1 = false;
+  bool result2 = false;
+  bool result3 = false;
   await Future.wait([
     getBookingSummary(year, month),
     getHealthSummary(year, month),
     getShiftSummary(year, month)
   ]).then((results) {
-    for (int i = 0; i < results.length; i++) {
-      if (results[i] == true) {
-        result = true;
-      } else {
-        result = false;
-      }
+    if (results[0] == true) {
+      result1 = true;
+    }
+    if (results[1] == true) {
+      result2 = true;
+    }
+    if (results[2] == true) {
+      result3 = true;
     }
   });
-  return result;
+  return (result1 && result2 && result3);
 }
 
 Future<bool> getBookingSummary(String year, String month) async {
