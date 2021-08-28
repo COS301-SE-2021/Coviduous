@@ -17,7 +17,7 @@ class ViewShifts extends StatefulWidget {
   _ViewShiftsState createState() => _ViewShiftsState();
 }
 class _ViewShiftsState extends State<ViewShifts> {
-  int numOfGroups = globals.currentGroups.length;
+  int numOfGroups = globals.currentShifts.length;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ViewShiftsRooms.routeName);
@@ -81,7 +81,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
                         color: Theme.of(context).primaryColor,
-                        child: Text('Shift ' + globals.currentShift.getShiftId()),
+                        child: Text('Shift ' + globals.currentShifts[index].getShiftId()),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -89,41 +89,35 @@ class _ViewShiftsState extends State<ViewShifts> {
                           children: <Widget>[
                             Container(
                               color: Colors.white,
-                              child: Text('Floor plan number: ' + globals.currentShift.getFloorPlanNumber()),
+                              child: Text('Floor plan number: ' + globals.currentShifts[index].getFloorPlanNumber()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               color: Colors.white,
-                              child: Text('Floor number: ' + globals.currentShift.getFloorNumber()),
+                              child: Text('Floor number: ' + globals.currentShifts[index].getFloorNumber()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               color: Colors.white,
-                              child: Text('Room number: ' + globals.currentShift.getRoomNumber()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Group number: ' + globals.currentGroups[index].getGroupName()),
+                              child: Text('Room number: ' + globals.currentShifts[index].getRoomNumber()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Date: ' + globals.currentShift.getDate()),
+                              child: Text('Date: ' + globals.currentShifts[index].getDate()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('Start time: ' + globals.currentShift.getStartTime()),
+                              child: Text('Start time: ' + globals.currentShifts[index].getStartTime()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
                               height: 50,
                               color: Colors.white,
-                              child: Text('End time: ' + globals.currentShift.getEndTime()),
+                              child: Text('End time: ' + globals.currentShifts[index].getEndTime()),
                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             ),
                             Container(
