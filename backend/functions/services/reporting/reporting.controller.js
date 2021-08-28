@@ -1104,10 +1104,10 @@ exports.setUpPermissionSummary = async (req, res) => {
     
     // First we get all the permission summaries in our database and check if there is an exisiting permission summary with
     // our companyId
-    let healthSummaries = await database.viewPermissionSummary();
+    let permissionSummaries = await database.viewPermissionSummary();
     
     let filteredList=[];   
-    healthSummaries.forEach(obj => {
+    permissionSummaries.forEach(obj => {
     if(obj.companyId===reqJson.companyId)
           {
             filteredList.push(obj);

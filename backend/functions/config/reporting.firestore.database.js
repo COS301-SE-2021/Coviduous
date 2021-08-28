@@ -666,3 +666,78 @@ exports.updateHealthSummaryVisitor = async (healthSummaryId,numHealthChecksVisit
         return false;
     }
 };
+
+exports.updatePermissionDeniedVisitor = async (permissionSummaryId,numPermissionDeniedVisitors) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionDeniedVisitors:numPermissionDeniedVisitors
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updatePermissionDeniedUser = async (permissionSummaryId,numPermissionDeniedUsers) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionDeniedUsers:numPermissionDeniedUsers
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updatePermissionGrantedVisitor = async (permissionSummaryId,numPermissionGrantedVisitors) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionGrantedVisitors:numPermissionGrantedVisitors
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updatePermissionGrantedUser = async (permissionSummaryId,numPermissionGrantedUsers) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionGrantedUsers:numPermissionGrantedUsers
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updateTotalPermissions = async (permissionSummaryId,totalPermissions) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        totalPermissions:totalPermissions
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
