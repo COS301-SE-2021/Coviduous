@@ -114,6 +114,31 @@ Future<bool> createCompany(String companyId) async {
     result = false;
   }
 
+  String path3 = '/reporting/company/company-data';
+  String url3 = server + path3;
+  var request3;
+
+  try {
+    request3 = http.Request('POST', Uri.parse(url3));
+    request3.body = json.encode({
+      "companyId": companyId,
+    });
+    request3.headers.addAll(globals.requestHeaders);
+
+    var response3 = await request3.send();
+
+    print(await response3.statusCode);
+
+    if (response3.statusCode == 200) {
+      print(await response3.stream.bytesToString());
+
+      result = true;
+    }
+  } catch(error) {
+    print(error);
+    result = false;
+  }
+
   return result;
 }
 
