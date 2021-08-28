@@ -303,9 +303,10 @@ exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompa
         return false;
     }
 };
-exports.getNumberShifts = async () => {
+
+exports.getNumberShifts = async (companyId) => {
     try {
-        const document = db.collection('summary-shifts');
+        const document = db.collection('summary-shifts').where("companyId", "==", companyId);
         const snapshot = await document.get();
   
         let list = [];
@@ -320,12 +321,9 @@ exports.getNumberShifts = async () => {
     }
 };
 
-
-
-
-exports.getNumberBookings = async () => {
+exports.getNumberBookings = async (companyId) => {
     try {
-        const document = db.collection('summary-bookings');
+        const document = db.collection('summary-bookings').where("companyId", "==", companyId);
         const snapshot = await document.get();
   
         let list = [];
@@ -339,9 +337,6 @@ exports.getNumberBookings = async () => {
             return false;
     }
 };
-
-
-
 
 exports.decreaseNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompanyData) => {
     try {
