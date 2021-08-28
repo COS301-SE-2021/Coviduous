@@ -1226,3 +1226,41 @@ exports.getHealthSummary = async (req, res) => {
         }
 
 };
+
+
+exports.getPermissionSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    let permissionSummaries = await database.viewPermissionSummary();
+    
+    let filteredList=[];   
+    permissionSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && reqJson.month===obj.month && reqJson.year==obj.year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+    
+        if(filteredList.length>0)
+        {
+            return res.status(200).send({
+                message: 'Successfully retrieved permission summary',
+                data: filteredList
+            });
+       
+         }
+        else{
+            return res.status(500).send({
+                message: 'Problem with either the companId,month or year you requesting for',
+            });
+        }
+
+};

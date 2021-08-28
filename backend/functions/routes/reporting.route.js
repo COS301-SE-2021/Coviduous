@@ -46,6 +46,7 @@ router.post('/reporting/health-summary', reportingController.getHealthSummary);
 
 //permission reports
 router.post('/reporting/permission-summary/setup', reportingController.setUpPermissionSummary);
+router.post('/reporting/permission-summary', reportingController.getPermissionSummary);
 //Booking reporting
 router.post('/reporting/summary-bookings',reportingController.getNumberBookings);
 
