@@ -284,12 +284,15 @@ Future<bool> deleteFloorPlan(String floorPlanNumber) async {
   return false;
 }
 
-Future<bool> deleteFloor(String floorNumber) async {
+Future<bool> deleteFloor(String floorPlanNumber, String floorNumber) async {
   String path = '/floorplan/floor';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
-  request.body = json.encode({"floorNumber": floorNumber});
+  request.body = json.encode({
+    "floorplanNumber": floorPlanNumber,
+    "floorNumber": floorNumber,
+  });
 
   var response = await request.send();
 
