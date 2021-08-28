@@ -135,11 +135,6 @@ class _ReportingState extends State<Reporting> {
                                           //Double digit months will automatically not have any leading 0s
                                           reportingHelpers.getCompanySummaries(_year.text, _month.text.padLeft(2, "0")).then((result) {
                                             if (result == true) {
-                                              print("Booking summary ID: " + globals.currentBookingSummary.getBookingSummaryID());
-                                              print("Company summary ID: " + globals.currentCompanySummary.getCompanyId());
-                                              print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
-                                              print("Shift summary ID: " + globals.currentShiftSummary.getShiftSummaryID());
-                                              print("Permission summary ID: " + globals.currentPermissionSummary.getPermissionSummaryID());
                                               Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                             } else {
                                               ScaffoldMessenger.of(context).showSnackBar(
