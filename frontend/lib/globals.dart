@@ -5,21 +5,38 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
 import 'package:universal_html/html.dart' as html;
 
+//Announcement subsystem
 import 'package:frontend/models/announcement/announcement.dart';
+
+//Floor plan subsystem
 import 'package:frontend/models/floor_plan/floor.dart';
 import 'package:frontend/models/floor_plan/floor_plan.dart';
 import 'package:frontend/models/floor_plan/room.dart';
+
+//Health subsystem
 import 'package:frontend/models/health/health_check.dart';
 import 'package:frontend/models/health/permission.dart';
 import 'package:frontend/models/health/permission_request.dart';
 import 'package:frontend/models/health/test_results.dart';
 import 'package:frontend/models/health/vaccine_confirmation.dart';
+
+//Notification subsystem
 import 'package:frontend/models/notification/notification.dart';
+import 'package:frontend/models/notification/temp_notification.dart';
+
+//Office subsystem
 import 'package:frontend/models/office/booking.dart';
+
+//Reporting subsystem
+import 'package:frontend/models/reporting/booking_summary.dart';
 import 'package:frontend/models/reporting/health_summary.dart';
+import 'package:frontend/models/reporting/shift_summary.dart';
+
+//Shift subsystem
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
-import 'package:frontend/models/notification/temp_notification.dart';
+
+//User subsystem
 import 'package:frontend/models/user/user.dart';
 import 'package:frontend/models/user/recovered_user.dart';
 import 'package:frontend/models/user/sick_user.dart';
@@ -209,8 +226,14 @@ List<TempNotification> tempUsers = [];
 //Used in reporting subsystem
 //============================
 
+//Current booking summary
+BookingSummary currentBookingSummary;
+
 //Current health summary
 HealthSummary currentHealthSummary;
+
+//Current shift summary
+ShiftSummary currentShiftSummary;
 
 //===========================
 //Used in multiple subsystems
