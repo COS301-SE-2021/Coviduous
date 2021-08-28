@@ -6,9 +6,13 @@ Future<bool> getCompanySummaries(String year, String month) async {
   bool result1 = false;
   bool result2 = false;
   bool result3 = false;
+  bool result4 = false;
+  bool result5 = false;
   await Future.wait([
     getBookingSummary(year, month),
+    getCompanySummary(),
     getHealthSummary(year, month),
+    getPermissionSummary(year, month),
     getShiftSummary(year, month)
   ]).then((results) {
     if (results[0] == true) {
@@ -20,8 +24,14 @@ Future<bool> getCompanySummaries(String year, String month) async {
     if (results[2] == true) {
       result3 = true;
     }
+    if (results[3] == true) {
+      result4 = true;
+    }
+    if (results[4] == true) {
+      result5 = true;
+    }
   });
-  return (result1 && result2 && result3);
+  return (result1 && result2 && result3 && result4 && result5);
 }
 
 Future<bool> getBookingSummary(String year, String month) async {
@@ -37,6 +47,19 @@ Future<bool> getBookingSummary(String year, String month) async {
   return result;
 }
 
+Future<bool> getCompanySummary() async {
+  bool result = false;
+  await Future.wait([
+    reportingController.getCompanySummary(globals.loggedInCompanyId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentCompanySummary = results.first[0];
+      result = true;
+    }
+  });
+  return result;
+}
+
 Future<bool> getHealthSummary(String year, String month) async {
   bool result = false;
   await Future.wait([
@@ -44,6 +67,19 @@ Future<bool> getHealthSummary(String year, String month) async {
   ]).then((results) {
     if (results.first != null) {
       globals.currentHealthSummary = results.first[0];
+      result = true;
+    }
+  });
+  return result;
+}
+
+Future<bool> getPermissionSummary(String year, String month) async {
+  bool result = false;
+  await Future.wait([
+    reportingController.getPermissionSummary(globals.loggedInCompanyId, year, month)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentPermissionSummary = results.first[0];
       result = true;
     }
   });
