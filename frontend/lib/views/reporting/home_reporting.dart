@@ -141,7 +141,7 @@ class _ReportingState extends State<Reporting> {
                                               Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                             } else {
                                               ScaffoldMessenger.of(context).showSnackBar(
-                                                  SnackBar(content: Text("No company information found for the selected year and month. Please try again later.")));
+                                                  SnackBar(content: Text("No company information found for the selected year and month. Please choose a different date.")));
                                               Navigator.pop(context);
                                             }
                                           });
