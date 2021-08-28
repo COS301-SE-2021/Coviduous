@@ -1,71 +1,69 @@
 import 'dart:convert';
 
-UserSummary userSummaryFromJson(String str) => UserSummary.fromJson(json.decode(str));
+CompanySummary companySummaryFromJson(String str) => CompanySummary.fromJson(json.decode(str));
 
-String userSummaryToJson(UserSummary data) => json.encode(data.toJson());
+String companySummaryToJson(CompanySummary data) => json.encode(data.toJson());
 
-class UserSummary {
-  String userSummaryId;
+class CompanySummary {
   String companyId;
   int numberOfRegisteredUsers;
   int numberOfRegisteredAdmins;
-  int numberOfFloorplans;
+  int numberOfFloorPlans;
   int numberOfFloors;
   int numberOfRooms;
 
-  UserSummary({
-    this.userSummaryId,
+  CompanySummary({
     this.companyId,
     this.numberOfRegisteredUsers,
     this.numberOfRegisteredAdmins,
-    this.numberOfFloorplans,
+    this.numberOfFloorPlans,
     this.numberOfFloors,
     this.numberOfRooms,
   });
 
-  factory UserSummary.fromJson(Map<String, dynamic> json) => UserSummary(
-    userSummaryId: json["userSummaryId"],
+  factory CompanySummary.fromJson(Map<String, dynamic> json) => CompanySummary(
     companyId: json["companyId"],
     numberOfRegisteredUsers: json["numberOfRegisteredUsers"],
     numberOfRegisteredAdmins: json["numberOfRegisteredAdmins"],
-    numberOfFloorplans: json["numberOfFloorplans"],
+    numberOfFloorPlans: json["numberOfFloorplans"],
     numberOfFloors: json["numberOfFloors"],
     numberOfRooms: json["numberOfRooms"],
   );
 
   Map<String, dynamic> toJson() => {
-    "userSummaryId": userSummaryId,
     "companyId": companyId,
     "numberOfRegisteredUsers": numberOfRegisteredUsers,
     "numberOfRegisteredAdmins": numberOfRegisteredAdmins,
-    "numberOfFloorplans": numberOfFloorplans,
+    "numberOfFloorplans": numberOfFloorPlans,
     "numberOfFloors": numberOfFloors,
     "numberOfRooms": numberOfRooms,
   };
-
-  String getuserSummaryId() {
-    return userSummaryId;
-  }
 
   String getCompanyId() {
     return companyId;
   }
 
-  int getnumberOfRegisteredUsers() {
+  int getNumberOfRegisteredUsers() {
     return numberOfRegisteredUsers;
   }
 
-  int getnumberOfRegisteredAdmins() {
+  int getNumberOfRegisteredAdmins() {
     return numberOfRegisteredAdmins;
   }
 
-  int getnumberOfFloorplans() {
-    return numberOfFloorplans;
+  int getTotalNumberOfRegistered() {
+    return numberOfRegisteredAdmins + numberOfRegisteredUsers;
   }
-  int getnumberOfFloors(){
+
+  int getNumberOfFloorPlans() {
+    return numberOfFloorPlans;
+  }
+
+  int getNumberOfFloors() {
     return numberOfFloors;
   }
-  int getnumberOfRooms(){
+
+  int getNumberOfRooms() {
     return numberOfFloors;
   }
 }
