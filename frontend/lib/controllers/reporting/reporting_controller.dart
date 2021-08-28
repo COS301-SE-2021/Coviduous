@@ -34,7 +34,7 @@ String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 //Get bookings overview
 Future<List<BookingSummary>> getBookingSummary(String companyId, String year, String month) async {
-  String path = "/reporting/booking-summary";
+  String path = "/reporting/summary-bookings";
   String url = server + path;
 
   var request;
@@ -116,7 +116,7 @@ Future<List<HealthSummary>> getHealthSummary(String companyId, String year, Stri
 
 //Get shift overview
 Future<List<ShiftSummary>> getShiftSummary(String companyId, String year, String month) async {
-  String path = "/reporting/shift-summary";
+  String path = "/reporting/summary-shifts";
   String url = server + path;
 
   var request;
