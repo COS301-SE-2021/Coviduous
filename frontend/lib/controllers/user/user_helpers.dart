@@ -12,11 +12,11 @@ Future<bool> createAdmin(String firstName, String lastName, String userName,
 
   bool result = false;
   await Future.wait([
-    userController.createUser(uid, "ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress)
+    createCompany(companyId)
   ]).then((results) {
     result = results.first;
     if (result == true) {
-      createCompany(companyId).then((result2) {
+      userController.createUser(uid, "ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress).then((result2) {
         result = result2;
       });
     }
