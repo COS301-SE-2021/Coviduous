@@ -16,23 +16,23 @@ class HealthSummary {
   int healthChecksVisitors;
 
   HealthSummary({
-    this.healthSummaryId,
-    this.companyId,
-    this.timestamp,
-    this.year,
-    this.month,
-    this.reportedRecoveries,
-    this.reportedInfections,
-    this.healthChecksUsers,
-    this.healthChecksVisitors,
+    this.healthSummaryId = "",
+    this.companyId = "",
+    this.timestamp = "",
+    this.year = "",
+    this.month = "",
+    this.reportedRecoveries = 0,
+    this.reportedInfections = 0,
+    this.healthChecksUsers = 0,
+    this.healthChecksVisitors = 0,
   });
 
   factory HealthSummary.fromJson(Map<String, dynamic> json) => HealthSummary(
     healthSummaryId: json["healthSummaryId"],
     companyId: json["companyId"],
     timestamp: json["timestamp"],
-    year: json["year"],
-    month: json["month"],
+    year: json["year"].toString(),
+    month: json["month"].toString().padLeft(2, "0"),
     reportedRecoveries: json["numReportedRecoveries"],
     reportedInfections: json["numReportedInfections"],
     healthChecksUsers: json["numHealthChecksUsers"],
