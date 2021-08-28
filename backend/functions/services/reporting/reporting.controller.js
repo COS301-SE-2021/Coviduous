@@ -1153,15 +1153,18 @@ exports.setUpPermissionSummary = async (req, res) => {
             message: 'Company Permission Summary Successfuly Set',
             data:permissionSummary
         });
-
-
     }
-
-
 };
 
 exports.getNumberShifts = async (req, res) => {
-    let getNumberShift = await database.getNumberShifts();
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+
+    let getNumberShift = await database.getNumberShifts(reqJson.companyId);
       
     if (getNumberShift != null) {
       return res.status(200).send({
@@ -1169,24 +1172,27 @@ exports.getNumberShifts = async (req, res) => {
         data: getNumberShift
       });
     } else {
-      return res.status(500).send({message: "Some error occurred while fetching number of Bookings."});
+      return res.status(500).send({message: "Some error occurred while fetching number of shifts."});
     }
 };
 
-
-
-
-
 exports.getNumberBookings = async (req, res) => {
-    let getNumberBooking = await database.getNumberBookings();
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+
+    let getNumberBooking = await database.getNumberBookings(reqJson.companyId);
       
     if (getNumberBooking != null) {
       return res.status(200).send({
-        message: 'Successfully retrieved number of Bookings',
+        message: 'Successfully retrieved number of bookings',
         data: getNumberBooking
       });
     } else {
-      return res.status(500).send({message: "Some error occurred while fetching number of Bookings."});
+      return res.status(500).send({message: "Some error occurred while fetching number of bookings."});
     }
 };
 
