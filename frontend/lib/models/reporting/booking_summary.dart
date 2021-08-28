@@ -35,7 +35,7 @@ class BookingSummary {
     "numBookings": numBookings,
   };
 
-  String getHealthSummaryID() {
+  String getBookingSummaryID() {
     return bookingSummaryId;
   }
 
