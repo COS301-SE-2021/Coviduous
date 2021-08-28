@@ -75,7 +75,7 @@ Future<List<BookingSummary>> getBookingSummary(String companyId, String year, St
       return bookingSummaryDatabaseTable;
     }
   } catch (error) {
-    print(error);
+    print("Error in getBookingSummary: " + error.toString());
   }
 
   return null;
@@ -112,7 +112,7 @@ Future<List<CompanySummary>> getCompanySummary(String companyId) async {
       return companySummaryDatabaseTable;
     }
   } catch (error) {
-    print(error);
+    print("Error in getCompanySummary: " + error.toString());
   }
 
   return null;
@@ -153,7 +153,7 @@ Future<List<HealthSummary>> getHealthSummary(String companyId, String year, Stri
       return healthSummaryDatabaseTable;
     }
   } catch (error) {
-    print(error);
+    print("Error in getHealthSummary: " + error.toString());
   }
 
   return null;
@@ -194,7 +194,7 @@ Future<List<PermissionSummary>> getPermissionSummary(String companyId, String ye
       return permissionSummaryDatabaseTable;
     }
   } catch (error) {
-    print(error);
+    print("Error in getPermissionSummary: " + error.toString());
   }
 
   return null;
@@ -235,7 +235,7 @@ Future<List<ShiftSummary>> getShiftSummary(String companyId, String year, String
       return shiftSummaryDatabaseTable;
     }
   } catch (error) {
-    print(error);
+    print("Error in getShiftSummary: " + error.toString());
   }
 
   return null;
