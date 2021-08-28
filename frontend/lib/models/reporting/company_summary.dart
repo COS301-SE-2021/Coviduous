@@ -13,21 +13,21 @@ class CompanySummary {
   int numberOfRooms;
 
   CompanySummary({
-    this.companyId,
-    this.numberOfRegisteredUsers,
-    this.numberOfRegisteredAdmins,
-    this.numberOfFloorPlans,
-    this.numberOfFloors,
-    this.numberOfRooms,
+    this.companyId = "",
+    this.numberOfRegisteredUsers = 0,
+    this.numberOfRegisteredAdmins = 0,
+    this.numberOfFloorPlans = 0,
+    this.numberOfFloors = 0,
+    this.numberOfRooms = 0,
   });
 
   factory CompanySummary.fromJson(Map<String, dynamic> json) => CompanySummary(
     companyId: json["companyId"],
-    numberOfRegisteredUsers: json["numberOfRegisteredUsers"],
-    numberOfRegisteredAdmins: json["numberOfRegisteredAdmins"],
-    numberOfFloorPlans: json["numberOfFloorplans"],
-    numberOfFloors: json["numberOfFloors"],
-    numberOfRooms: json["numberOfRooms"],
+    numberOfRegisteredUsers: int.parse(json["numberOfRegisteredUsers"]),
+    numberOfRegisteredAdmins: int.parse(json["numberOfRegisteredAdmins"]),
+    numberOfFloorPlans: int.parse(json["numberOfFloorplans"]),
+    numberOfFloors: int.parse(json["numberOfFloors"]),
+    numberOfRooms: int.parse(json["numberOfRooms"]),
   );
 
   Map<String, dynamic> toJson() => {
