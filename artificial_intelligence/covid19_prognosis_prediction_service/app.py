@@ -1,8 +1,8 @@
 # importing Flask and other modules 
-from flask import Flask, jsonify, request, render_template 
+from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS, cross_origin
 import numpy as np
 import pandas as pd
-
 
 # list of attributes
 l1=['cough','fever','sore_throat','shortness_of_breath','head_ache']
@@ -30,7 +30,9 @@ np.ravel(y_test)
 # --------------------
 
 # Flask constructor 
-app = Flask(__name__) 
+app = Flask(__name__)
+cors = CORS(app, resources={r"/api/prognosis": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 #Decision Tree Algorithm
 def DecisionTree(psymptoms):
@@ -100,6 +102,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/api/prognosis', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def prognosis():
     data = request.get_json()
     cough = data.get('cough', '')
