@@ -147,7 +147,8 @@ class AdminModifyRoomsState extends State<AdminModifyRooms> {
                                   onPressed: () {
                                     //Delete room and reload the page
                                     if (numOfRooms > 1) { //Only allow deletion of rooms if there is more than one room
-                                      floorPlanHelpers.deleteRoom(globals.currentRooms[index].getRoomNumber()).then((result) {
+                                      floorPlanHelpers.deleteRoom(globals.currentRooms[index].getFloorNumber(),
+                                          globals.currentRooms[index].getRoomNumber()).then((result) {
                                         if (result == true) {
                                           floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
                                             if (result == true) {

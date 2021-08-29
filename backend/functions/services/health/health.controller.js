@@ -255,12 +255,15 @@ exports.createHealthCheck = async (req, res) => {
       // first check if the current month and year you are currently in is registered
 
       let healthSummaryId = "HSID-" + uuid.v4();
+      let permissionSummaryId = "PMSN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
       let month= timestamp.charAt(3)+timestamp.charAt(4);
       let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
       let healthSummaries = await reportingDatabase.viewHealthSummary();
+      let permissionSummaries = await reportingDatabase.viewPermissionSummary();
     
-    let filteredList=[];   
+    let filteredList=[];  
+    let filteredList2=[]; 
     healthSummaries.forEach(obj => {
     if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
           {
@@ -271,6 +274,16 @@ exports.createHealthCheck = async (req, res) => {
     
           }
         });
+    permissionSummaries.forEach(obj => {
+      if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+            {
+              filteredList2.push(obj);
+            }
+            else
+            {
+      
+            }
+          });
 
     if(filteredList.length>0)
     {
@@ -336,6 +349,80 @@ exports.createHealthCheck = async (req, res) => {
 
         }
     }
+    //////////////////////////////////////////////////////////
+    if(filteredList2.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the numPermissionDeniedVisitors field
+        if(reqJson.userId==="VISITOR")
+        {
+          let numPermissionDeniedVisitors=filteredList[0].numPermissionDeniedVisitors;
+          numPermissionDeniedVisitors++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+
+          await reportingDatabase.updatePermissionDeniedVisitor(filteredList[0].permissionSummaryId,numPermissionDeniedVisitors);
+        }
+        else
+        {
+          let numPermissionDeniedUsers=filteredList[0].numPermissionDeniedUsers;
+          numPermissionDeniedUsers++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+
+          await reportingDatabase.updatePermissionDeniedUser(filteredList[0].permissionSummaryId,numPermissionDeniedUsers);
+
+        }
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+      //initialize a new month or year for this company and set its initial values
+
+        if(reqJson.userId==="VISITOR")
+        {
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 0,
+            numPermissionDeniedVisitors: 1,
+            numPermissionGrantedUsers: 0,
+            numPermissionGrantedVisitors: 0,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+        }
+        else
+        {
+
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 1,
+            numPermissionDeniedVisitors: 0,
+            numPermissionGrantedUsers: 0,
+            numPermissionGrantedVisitors: 0,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+
+        }
+      }
+    /////////
     /////////////////////////////////////////////////////////////////////////////
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
@@ -354,12 +441,15 @@ exports.createHealthCheck = async (req, res) => {
       // first check if the current month and year you are currently in is registered
 
       let healthSummaryId = "HSID-" + uuid.v4();
+      let permissionSummaryId = "PMSN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
       let month= timestamp.charAt(3)+timestamp.charAt(4);
       let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
       let healthSummaries = await reportingDatabase.viewHealthSummary();
+      let permissionSummaries = await reportingDatabase.viewPermissionSummary();
     
-    let filteredList=[];   
+    let filteredList=[];
+    let filteredList2=[];   
     healthSummaries.forEach(obj => {
     if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
           {
@@ -370,6 +460,16 @@ exports.createHealthCheck = async (req, res) => {
     
           }
         });
+    permissionSummaries.forEach(obj => {
+      if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+            {
+              filteredList2.push(obj);
+            }
+            else
+            {
+      
+            }
+          });
 
     if(filteredList.length>0)
     {
@@ -435,6 +535,78 @@ exports.createHealthCheck = async (req, res) => {
         }
     }
     //////////////////////////////////////////////////////////
+    if(filteredList2.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the numPermissionAccepted field
+        if(reqJson.userId==="VISITOR")
+        {
+          let numPermissionGrantedVisitors=filteredList[0].numPermissionGrantedVisitors;
+          numPermissionGrantedVisitors++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+
+          await reportingDatabase.updatePermissionGrantedVisitor(filteredList[0].permissionSummaryId,numPermissionGrantedVisitors);
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+        }
+        else
+        {
+          let numPermissionGrantedUsers=filteredList[0].numPermissionGrantedUsers;
+          numPermissionGrantedUsers++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+
+          await reportingDatabase.updatePermissionGrantedUser(filteredList[0].permissionSummaryId,numPermissionGrantedUsers);
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+        }
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+      //initialize a new month or year for this company and set its initial values
+
+        if(reqJson.userId==="VISITOR")
+        {
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 0,
+            numPermissionDeniedVisitors: 0,
+            numPermissionGrantedUsers: 0,
+            numPermissionGrantedVisitors: 1,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+        }
+        else
+        {
+
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 0,
+            numPermissionDeniedVisitors: 0,
+            numPermissionGrantedUsers: 1,
+            numPermissionGrantedVisitors: 0,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+
+        }
+      }
+    /////////
       return res.status(200).send({
         message: 'Health Check Successfully Created , Access Granted',
         data: healthCheckData

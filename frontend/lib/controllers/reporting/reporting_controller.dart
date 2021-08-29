@@ -5,7 +5,11 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:frontend/models/reporting/booking_summary.dart';
+import 'package:frontend/models/reporting/company_summary.dart';
 import 'package:frontend/models/reporting/health_summary.dart';
+import 'package:frontend/models/reporting/permission_summary.dart';
+import 'package:frontend/models/reporting/shift_summary.dart';
 import 'package:frontend/models/user/recovered_user.dart';
 import 'package:frontend/models/user/sick_user.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
@@ -17,12 +21,102 @@ int numSickEmployees = 0;
 List<RecoveredUser> recoveredEmployeesDatabaseTable = [];
 int numRecoveredEmployees = 0;
 
+List<BookingSummary> bookingSummaryDatabaseTable = [];
+int numBookingSummaries = 0;
+
+List<CompanySummary> companySummaryDatabaseTable = [];
+int numCompanySummaries = 0;
+
 List<HealthSummary> healthSummaryDatabaseTable = [];
 int numHealthSummaries = 0;
+
+List<PermissionSummary> permissionSummaryDatabaseTable = [];
+int numPermissionSummaries = 0;
+
+List<ShiftSummary> shiftSummaryDatabaseTable = [];
+int numShiftSummaries = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 //Company reporting
+
+//Get bookings overview
+Future<List<BookingSummary>> getBookingSummary(String companyId, String year, String month) async {
+  String path = "/reporting/summary-bookings";
+  String url = server + path;
+
+  var request;
+
+  try {
+    request = http.Request("POST", Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+      "year": year,
+      "month": month,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      bookingSummaryDatabaseTable.clear();
+      numBookingSummaries = 0;
+
+      for (var data in jsonMap["data"]) {
+        var summaryData = BookingSummary.fromJson(data);
+        bookingSummaryDatabaseTable.add(summaryData);
+        numBookingSummaries++;
+      }
+
+      return bookingSummaryDatabaseTable;
+    }
+  } catch (error) {
+    print("Error in getBookingSummary: " + error.toString());
+  }
+
+  return null;
+}
+
+//Get company overview
+Future<List<CompanySummary>> getCompanySummary(String companyId) async {
+  String path = "/reporting/company/company-data/view";
+  String url = server + path;
+
+  var request;
+
+  try {
+    request = http.Request("POST", Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      companySummaryDatabaseTable.clear();
+      numCompanySummaries = 0;
+
+      var summaryData = CompanySummary.fromJson(jsonMap["data"]);
+      companySummaryDatabaseTable.add(summaryData);
+      numCompanySummaries++;
+
+      return companySummaryDatabaseTable;
+    }
+  } catch (error) {
+    print("Error in getCompanySummary: " + error.toString());
+  }
+
+  return null;
+}
 
 //Get health overview
 Future<List<HealthSummary>> getHealthSummary(String companyId, String year, String month) async {
@@ -59,7 +153,89 @@ Future<List<HealthSummary>> getHealthSummary(String companyId, String year, Stri
       return healthSummaryDatabaseTable;
     }
   } catch (error) {
-    print(error);
+    print("Error in getHealthSummary: " + error.toString());
+  }
+
+  return null;
+}
+
+//Get permission overview
+Future<List<PermissionSummary>> getPermissionSummary(String companyId, String year, String month) async {
+  String path = "/reporting/permission-summary";
+  String url = server + path;
+
+  var request;
+
+  try {
+    request = http.Request("POST", Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+      "year": year,
+      "month": month,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      permissionSummaryDatabaseTable.clear();
+      numPermissionSummaries = 0;
+
+      for (var data in jsonMap["data"]) {
+        var summaryData = PermissionSummary.fromJson(data);
+        permissionSummaryDatabaseTable.add(summaryData);
+        numPermissionSummaries++;
+      }
+
+      return permissionSummaryDatabaseTable;
+    }
+  } catch (error) {
+    print("Error in getPermissionSummary: " + error.toString());
+  }
+
+  return null;
+}
+
+//Get shift overview
+Future<List<ShiftSummary>> getShiftSummary(String companyId, String year, String month) async {
+  String path = "/reporting/summary-shifts";
+  String url = server + path;
+
+  var request;
+
+  try {
+    request = http.Request("POST", Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+      "year": year,
+      "month": month,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+    print(await response.statusCode);
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      shiftSummaryDatabaseTable.clear();
+      numShiftSummaries = 0;
+
+      for (var data in jsonMap["data"]) {
+        var summaryData = ShiftSummary.fromJson(data);
+        shiftSummaryDatabaseTable.add(summaryData);
+        numShiftSummaries++;
+      }
+
+      return shiftSummaryDatabaseTable;
+    }
+  } catch (error) {
+    print("Error in getShiftSummary: " + error.toString());
   }
 
   return null;

@@ -121,7 +121,6 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                       )
                     ]
                 ),
-                //title: floors[index].floor()
               );
             }
         );
@@ -195,15 +194,14 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                                     globals.currentShiftNum = globals.currentShifts[i].getShiftId();
                                                     shiftHelpers.createGroup(globals.currentGroupDescription, globals.tempGroup.getUserEmails(), globals.currentShiftNum).then((result) {
                                                       if (result == true) {
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(content: Text('Shift successfully created.')));
                                                         Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
                                                       } else {
                                                         ScaffoldMessenger.of(context).showSnackBar(
                                                             SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
                                                       }
                                                     });
-                                                  } else {
-                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                        SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
                                                   }
                                                 }
                                               } else {

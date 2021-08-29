@@ -303,9 +303,10 @@ exports.addNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompa
         return false;
     }
 };
-exports.getNumberShifts = async () => {
+
+exports.getNumberShifts = async (companyId) => {
     try {
-        const document = db.collection('summary-shifts');
+        const document = db.collection('summary-shifts').where("companyId", "==", companyId);
         const snapshot = await document.get();
   
         let list = [];
@@ -320,12 +321,9 @@ exports.getNumberShifts = async () => {
     }
 };
 
-
-
-
-exports.getNumberBookings = async () => {
+exports.getNumberBookings = async (companyId) => {
     try {
-        const document = db.collection('summary-bookings');
+        const document = db.collection('summary-bookings').where("companyId", "==", companyId);
         const snapshot = await document.get();
   
         let list = [];
@@ -339,9 +337,6 @@ exports.getNumberBookings = async () => {
             return false;
     }
 };
-
-
-
 
 exports.decreaseNumberOfFloorsCompanyData = async (companyId, currentNumFloorsInCompanyData) => {
     try {
@@ -440,6 +435,36 @@ exports.updateTotalRegisteredUsers = async (usersDataId, value) => {
 
         await document.update({
             totalRegisteredUsers: value
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.updateTotalAdmins = async (usersDataId, value) => {
+    try {
+        const document = db.collection('users-data').doc(usersDataId); //or db.collection().where()
+
+        await document.update({
+            totalAdmins: value
+        });
+        return true;
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.updateTotalEmployees = async (usersDataId, value) => {
+    try {
+        const document = db.collection('users-data').doc(usersDataId); //or db.collection().where()
+
+        await document.update({
+            totalEmployees: value
         });
         return true;
     }
@@ -595,6 +620,113 @@ exports.updateHealthSummaryVisitor = async (healthSummaryId,numHealthChecksVisit
       response= await db.collection('health-summary').doc(healthSummaryId).update(
       {
         numReportedRecoveries:numReportedRecoveries
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  //permissions
+  exports.viewPermissionSummary = async () => {
+    try {
+      const document = db.collection('permission-summary');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };
+
+  exports.setPermissionSummary = async (permissionSummaryId,data) => {
+    try {
+        await db.collection('permission-summary').doc(permissionSummaryId)
+          .create(data);
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.updatePermissionDeniedVisitor = async (permissionSummaryId,numPermissionDeniedVisitors) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionDeniedVisitors:numPermissionDeniedVisitors
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updatePermissionDeniedUser = async (permissionSummaryId,numPermissionDeniedUsers) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionDeniedUsers:numPermissionDeniedUsers
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updatePermissionGrantedVisitor = async (permissionSummaryId,numPermissionGrantedVisitors) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionGrantedVisitors:numPermissionGrantedVisitors
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updatePermissionGrantedUser = async (permissionSummaryId,numPermissionGrantedUsers) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        numPermissionGrantedUsers:numPermissionGrantedUsers
+      }
+      );
+      
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  exports.updateTotalPermissions = async (permissionSummaryId,totalPermissions) =>{
+    try {
+      response= await db.collection('permission-summary').doc(permissionSummaryId).update(
+      {
+        totalPermissions:totalPermissions
       }
       );
       

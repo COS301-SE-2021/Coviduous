@@ -62,6 +62,8 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
  * createCompany() : Creates a new company.
  */
 Future<bool> createCompany(String companyId) async {
+  bool result = false;
+
   String path = '/reporting/health-summary/setup';
   String url = server + path;
   var request;
@@ -80,13 +82,64 @@ Future<bool> createCompany(String companyId) async {
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
 
-      return true;
+      result = true;
     }
   } catch(error) {
     print(error);
+    result = false;
   }
 
-  return false;
+  String path2 = '/reporting/permission-summary/setup';
+  String url2 = server + path2;
+  var request2;
+
+  try {
+    request2 = http.Request('POST', Uri.parse(url2));
+    request2.body = json.encode({
+      "companyId": companyId,
+    });
+    request2.headers.addAll(globals.requestHeaders);
+
+    var response2 = await request2.send();
+
+    print(await response2.statusCode);
+
+    if (response2.statusCode == 200) {
+      print(await response2.stream.bytesToString());
+
+      result = true;
+    }
+  } catch(error) {
+    print(error);
+    result = false;
+  }
+
+  String path3 = '/reporting/company/company-data';
+  String url3 = server + path3;
+  var request3;
+
+  try {
+    request3 = http.Request('POST', Uri.parse(url3));
+    request3.body = json.encode({
+      "companyId": companyId,
+    });
+    request3.headers.addAll(globals.requestHeaders);
+
+    var response3 = await request3.send();
+
+    print(await response3.statusCode);
+
+    if (response3.statusCode == 200) {
+      print(await response3.stream.bytesToString());
+
+      result = true;
+    }
+  } catch(error) {
+    print(error);
+    result = false;
+  }
+
+  return result;
 }
 
 /**

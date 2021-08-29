@@ -133,16 +133,15 @@ class _ReportingState extends State<Reporting> {
                                         if (form.validate()) {
                                           //The padLeft(2, "0") after the month is to ensure that if the month is a single digit, it should be preceded by a 0
                                           //Double digit months will automatically not have any leading 0s
-                                          reportingHelpers.getHealthSummary(_year.text, _month.text.padLeft(2, "0")).then((result) {
+                                          reportingHelpers.getCompanySummaries(_year.text, _month.text.padLeft(2, "0")).then((result) {
                                             if (result == true) {
-                                              print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
-                                              //Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
+                                              Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                             } else {
                                               ScaffoldMessenger.of(context).showSnackBar(
-                                                  SnackBar(content: Text("No company information found for the selected year and month. Please try again later.")));
+                                                  SnackBar(content: Text("No company information found for the selected year and month. Please choose a different date.")));
+                                              Navigator.pop(context);
                                             }
                                           });
-                                          Navigator.pop(context);
                                         }
                                       },
                                     ),
