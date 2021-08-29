@@ -2,6 +2,7 @@ install python on your local machine
 open a new terminal on your ide and run the following commands under the covid19_prognosis_service directory
 cd artificial_intelligence/covid19_prognosis_prediction_service
 py -m pip install flask
+py -m pip install flask_cors
 py -m pip install gunicorn
 py -m pip install matplotlib
 py -m pip install seaborn
