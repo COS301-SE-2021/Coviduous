@@ -24,7 +24,7 @@ Future<bool> createGroup(String groupName, List userEmails, String shiftNumber) 
 Future<bool> getShifts() async {
   bool result = false;
   await Future.wait([
-    shiftController.getShifts()
+    shiftController.getShifts(globals.currentRoomNum)
   ]).then((results) {
     if (results.first != null) {
       globals.currentShifts = results.first;
