@@ -91,18 +91,24 @@ Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, 
   return false;
 }
 
-Future<List<Shift>> getShifts() async {
-  String path = '/shift';
+Future<List<Shift>> getShifts(String roomNumber) async {
+  String path = '/shift/getRoomShift';
   String url = server + path;
-  var response;
+  var request;
 
   try {
-    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "roomNumber": roomNumber,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+
+    print(await response.statusCode);
 
     if (response.statusCode == 200) {
-      //print(response.body);
-
-      var jsonString = response.body;
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
