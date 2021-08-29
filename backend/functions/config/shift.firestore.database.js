@@ -97,6 +97,31 @@ exports.getGroupForShift = async (shiftNumber) =>{
         return false;
     }
 };
+exports.getRoomShift = async (roomNumber) =>{
+    try{
+        const document = db.collection('shifts').where("roomNumber","==",roomNumber);
+        const snapshot = await document.get();
+ 
+        let list =[];
+ 
+         snapshot.forEach(doc => {
+             let data = doc.data();
+             list.push(data);
+         });
+
+         return list;
+    }
+    catch(error){
+        console.log(error);
+        return false;
+    }
+};
+
+
+
+
+
+
 
 exports.getGroup = async () =>{
     try{

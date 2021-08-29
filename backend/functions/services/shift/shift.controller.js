@@ -416,3 +416,48 @@ exports.getGroupForShift = async (req, res) => {
       return res.status(500).send({message: "Some error occurred while fetching shifts."});
     }
 };
+
+exports.getRoomShift = async (req, res) => {
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.roomNumber == null || reqJson.roomNumber === '') {
+        fieldErrors.push({field: 'roomNumber', message: 'roomNumber may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let getRoomShifts = await db.getRoomShift(reqJson.roomNumber);
+      
+    if (getRoomShifts != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved room shift ',
+        data: getRoomShifts
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching shifts."});
+    }
+};
+
+
+
