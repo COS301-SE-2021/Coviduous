@@ -37,8 +37,8 @@ String AIserver = serverInfo.getAIserver();
 //Health check
 
 //Complete a health check
-Future<HealthCheck> createHealthCheck(String companyId, String userId, String name, String surname, String email, String phoneNumber, String temperature,
-    bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
+Future<HealthCheck> createHealthCheck(String companyId, String userId, String name, String surname, String email, String phoneNumber,
+    String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
     bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
   String path = '/health/health-check';
   String url = server + path;
@@ -116,7 +116,7 @@ Future<HealthCheck> createHealthCheck(String companyId, String userId, String na
         return healthCheckDatabaseTable.first;
       }
     }
-  } catch (error) {
+  } catch(error) {
     print(error);
   }
 
