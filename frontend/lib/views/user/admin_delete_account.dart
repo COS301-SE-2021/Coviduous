@@ -49,7 +49,7 @@ class _AdminDeleteAccountState extends State<AdminDeleteAccount>{
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Container(
-        color: globals.secondaryColor,
+        color: globals.secondColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
             title: Text('Delete user'),

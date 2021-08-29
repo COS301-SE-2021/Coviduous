@@ -81,7 +81,7 @@ class _UserUpdateAccountState extends State<UserUpdateAccount>{
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Container(
-        color: globals.secondaryColor,
+        color: globals.secondColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
             title: Text('Update account information'),

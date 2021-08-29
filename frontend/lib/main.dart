@@ -142,14 +142,14 @@ class MyApp extends StatelessWidget{
         checkboxTheme: CheckboxThemeData(
           fillColor: MaterialStateColor.resolveWith((states) {
             if (states.contains(MaterialState.selected)) {
-              return globals.primaryColor;
+              return globals.firstColor;
             } else {
-              return globals.secondaryColor;
+              return globals.secondColor;
             }
           })
         ),
         dialogTheme: DialogTheme(
-          backgroundColor: globals.secondaryColor,
+          backgroundColor: globals.secondColor,
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
           contentTextStyle: TextStyle(color: Colors.white, fontSize: 15),
         ),
@@ -158,7 +158,7 @@ class MyApp extends StatelessWidget{
         hintColor: Colors.black,
         inputDecorationTheme: InputDecorationTheme(
             enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: globals.secondaryColor)
+                borderSide: BorderSide(color: globals.secondColor)
             ),
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: globals.focusColor)
@@ -167,13 +167,13 @@ class MyApp extends StatelessWidget{
               color: Colors.black,
             )
         ),
-        primaryColor: globals.primaryColor, //AppBar and buttons default color
+        primaryColor: globals.firstColor, //AppBar and buttons default color
         primarySwatch: globals.textFieldSelectedColor, //TextField default color when selected
         primaryTextTheme: globals.textTheme,
-        scaffoldBackgroundColor: globals.secondaryColor, //Scaffold background default color
+        scaffoldBackgroundColor: globals.secondColor, //Scaffold background default color
         snackBarTheme: SnackBarThemeData(
           actionTextColor: Colors.white,
-          backgroundColor: globals.primaryColor,
+          backgroundColor: globals.firstColor,
           contentTextStyle: TextStyle(color: Colors.white),
           disabledActionTextColor: Colors.white,
         ),

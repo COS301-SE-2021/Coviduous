@@ -37,7 +37,7 @@ class _AdminRegisterState extends State<AdminRegister>{
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Container(
-        color: globals.secondaryColor,
+        color: globals.secondColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
             title: Text('Register admin'),

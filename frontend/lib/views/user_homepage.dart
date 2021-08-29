@@ -77,13 +77,13 @@ class _UserHomePageState extends State<UserHomePage> {
           // ====================
           drawer: Drawer(
             child: Container(
-              color: globals.secondaryColor,
+              color: globals.secondColor,
               child: ListView(
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   children: [
                     DrawerHeader(
                       decoration: BoxDecoration(
-                        color: globals.primaryColor,
+                        color: globals.firstColor,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

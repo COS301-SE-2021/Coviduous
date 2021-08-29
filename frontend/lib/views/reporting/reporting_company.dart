@@ -66,7 +66,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
 
   //The user list is a list of Map<String, List> instead of Map<String, int> because pie charts also require a color attribute for each category
   List<Map<String, List>> userList = [
-    {"Employees": [globals.currentCompanySummary.getNumberOfRegisteredUsers(), globals.primaryColor]},
+    {"Employees": [globals.currentCompanySummary.getNumberOfRegisteredUsers(), globals.firstColor]},
     {"Admins": [globals.currentCompanySummary.getNumberOfRegisteredAdmins(), globals.focusColor]}
   ];
 
@@ -416,7 +416,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.primaryColor,
+                                    color: globals.firstColor,
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       "Number of floor plans",
@@ -438,7 +438,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.primaryColor,
+                                    color: globals.firstColor,
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       "Number of floors",
@@ -460,7 +460,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.primaryColor,
+                                    color: globals.firstColor,
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       "Number of rooms",
@@ -517,7 +517,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             ),
                             series: <ChartSeries>[
                               ColumnSeries<Map<String, int>, String>(
-                                color: globals.primaryColor,
+                                color: globals.thirdColor,
                                 dataSource: bookingShiftList,
                                 xValueMapper: (Map<String, int> data, _) => data.keys.first,
                                 yValueMapper: (Map<String, int> data, _) => data.values.first,
@@ -558,7 +558,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             ),
                             series: <ChartSeries>[
                               ColumnSeries<Map<String, int>, String>(
-                                color: globals.primaryColor,
+                                color: globals.fourthColor,
                                 dataSource: healthList,
                                 xValueMapper: (Map<String, int> data, _) => data.keys.first,
                                 yValueMapper: (Map<String, int> data, _) => data.values.first,
@@ -600,7 +600,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             ),
                             series: <ChartSeries>[
                               ColumnSeries<Map<String, int>, String>(
-                                color: globals.primaryColor,
+                                color: globals.fifthColor,
                                 dataSource: permissionList,
                                 xValueMapper: (Map<String, int> data, _) => data.keys.first,
                                 yValueMapper: (Map<String, int> data, _) => data.values.first,

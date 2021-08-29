@@ -34,9 +34,9 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              primaryColor: globals.secondaryColor,
-              accentColor: globals.secondaryColor,
-              colorScheme: ColorScheme.light(primary: globals.secondaryColor),
+              primaryColor: globals.secondColor,
+              accentColor: globals.secondColor,
+              colorScheme: ColorScheme.light(primary: globals.secondColor),
               buttonTheme: ButtonThemeData(
                   textTheme: ButtonTextTheme.primary
               ),
@@ -59,9 +59,9 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              primaryColor: globals.secondaryColor,
-              accentColor: globals.secondaryColor,
-              colorScheme: ColorScheme.light(primary: globals.secondaryColor),
+              primaryColor: globals.secondColor,
+              accentColor: globals.secondColor,
+              colorScheme: ColorScheme.light(primary: globals.secondColor),
               buttonTheme: ButtonThemeData(
                   textTheme: ButtonTextTheme.primary
               ),
@@ -101,7 +101,7 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Container(
-        color: globals.secondaryColor,
+        color: globals.secondColor,
         child: isLoading == false ? new Scaffold(
             backgroundColor: Colors.transparent,
             appBar: new AppBar(

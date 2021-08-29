@@ -125,10 +125,14 @@ String token = '';
 //==============
 
 Color appBarColor = theme.appBarColor;
-Color primaryColor = theme.primaryColor;
-Color secondaryColor = theme.secondaryColor;
-Color lineColor = theme.lineColor;
 Color focusColor = theme.focusColor;
+Color lineColor = theme.lineColor;
+
+Color firstColor = theme.firstColor;
+Color secondColor = theme.secondColor;
+Color thirdColor = theme.thirdColor;
+Color fourthColor = theme.fourthColor;
+Color fifthColor = theme.fifthColor;
 
 //Needed to change the color of a TextField when it's selected.
 MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;

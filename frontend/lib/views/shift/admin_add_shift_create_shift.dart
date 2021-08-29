@@ -37,9 +37,9 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              primaryColor: globals.secondaryColor,
-              accentColor: globals.secondaryColor,
-              colorScheme: ColorScheme.light(primary: globals.secondaryColor),
+              primaryColor: globals.secondColor,
+              accentColor: globals.secondColor,
+              colorScheme: ColorScheme.light(primary: globals.secondColor),
               buttonTheme: ButtonThemeData(
                   textTheme: ButtonTextTheme.primary
               ),
@@ -61,9 +61,9 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              primaryColor: globals.secondaryColor,
-              accentColor: globals.secondaryColor,
-              colorScheme: ColorScheme.light(primary: globals.secondaryColor),
+              primaryColor: globals.secondColor,
+              accentColor: globals.secondColor,
+              colorScheme: ColorScheme.light(primary: globals.secondColor),
               buttonTheme: ButtonThemeData(
                   textTheme: ButtonTextTheme.primary
               ),
@@ -85,9 +85,9 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
-              primaryColor: globals.secondaryColor,
-              accentColor: globals.secondaryColor,
-              colorScheme: ColorScheme.light(primary: globals.secondaryColor),
+              primaryColor: globals.secondColor,
+              accentColor: globals.secondColor,
+              colorScheme: ColorScheme.light(primary: globals.secondColor),
               buttonTheme: ButtonThemeData(
                   textTheme: ButtonTextTheme.primary
               ),
