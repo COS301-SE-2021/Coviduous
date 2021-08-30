@@ -48,6 +48,7 @@ dependencies:
   build_runner: ^2.0.6
   random_string: ^2.3.1
   syncfusion_flutter_charts: ^19.2.57
+  flutter_webrtc: ^0.6.5 # Needed to implement video conferencing
 
 dev_dependencies:
   flutter_test:
