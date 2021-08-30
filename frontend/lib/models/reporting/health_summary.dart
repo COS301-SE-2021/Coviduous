@@ -33,10 +33,10 @@ class HealthSummary {
     timestamp: json["timestamp"],
     year: json["year"].toString(),
     month: json["month"].toString().padLeft(2, "0"),
-    reportedRecoveries: json["numReportedRecoveries"],
-    reportedInfections: json["numReportedInfections"],
-    healthChecksUsers: json["numHealthChecksUsers"],
-    healthChecksVisitors: json["numHealthChecksVisitors"],
+    reportedRecoveries: (json["numReportedRecoveries"] is String) ? int.parse(json["numReportedRecoveries"]) : json["numReportedRecoveries"],
+    reportedInfections: (json["numReportedInfections"] is String) ? int.parse(json["numReportedInfections"]) : json["numReportedInfections"],
+    healthChecksUsers: (json["numHealthChecksUsers"] is String) ? int.parse(json["numHealthChecksUsers"]) : json["numHealthChecksUsers"],
+    healthChecksVisitors: (json["numHealthChecksVisitors"] is String) ? int.parse(json["numHealthChecksVisitors"]) : json["numHealthChecksVisitors"],
   );
 
   Map<String, dynamic> toJson() => {

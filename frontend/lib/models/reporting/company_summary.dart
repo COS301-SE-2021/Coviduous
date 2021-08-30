@@ -23,11 +23,11 @@ class CompanySummary {
 
   factory CompanySummary.fromJson(Map<String, dynamic> json) => CompanySummary(
     companyId: json["companyId"],
-    numberOfRegisteredUsers: int.parse(json["numberOfRegisteredUsers"]),
-    numberOfRegisteredAdmins: int.parse(json["numberOfRegisteredAdmins"]),
-    numberOfFloorPlans: int.parse(json["numberOfFloorplans"]),
-    numberOfFloors: int.parse(json["numberOfFloors"]),
-    numberOfRooms: int.parse(json["numberOfRooms"]),
+    numberOfRegisteredUsers: (json["numberOfRegisteredUsers"] is String) ? int.parse(json["numberOfRegisteredUsers"]) : json["numberOfRegisteredUsers"],
+    numberOfRegisteredAdmins: (json["numberOfRegisteredAdmins"] is String) ? int.parse(json["numberOfRegisteredAdmins"]) : json["numberOfRegisteredAdmins"],
+    numberOfFloorPlans: (json["numberOfFloorplans"] is String) ? int.parse(json["numberOfFloorplans"]) : json["numberOfFloorplans"],
+    numberOfFloors: (json["numberOfFloors"] is String) ? int.parse(json["numberOfFloors"]) : json["numberOfFloors"],
+    numberOfRooms: (json["numberOfRooms"] is String) ? int.parse(json["numberOfRooms"]) : json["numberOfRooms"],
   );
 
   Map<String, dynamic> toJson() => {

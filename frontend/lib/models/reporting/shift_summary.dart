@@ -24,7 +24,7 @@ class ShiftSummary {
     companyId: json["companyId"],
     year: json["year"].toString(),
     month: json["month"].toString().padLeft(2, "0"),
-    numShifts: int.parse(json["numShifts"]),
+    numShifts: (json["numShifts"] is String) ? int.parse(json["numShifts"]) : json["numShifts"],
   );
 
   Map<String, dynamic> toJson() => {

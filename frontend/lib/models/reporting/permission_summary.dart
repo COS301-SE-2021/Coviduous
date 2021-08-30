@@ -32,11 +32,11 @@ class PermissionSummary {
     companyId: json["companyId"],
     year: json["year"].toString(),
     month: json["month"].toString().padLeft(2, "0"),
-    totalPermissions: json["totalPermissions"],
-    permissionsDeniedUsers: json["numPermissionDeniedUsers"],
-    permissionsDeniedVisitors: json["numPermissionDeniedVisitors"],
-    permissionsGrantedUsers: json["numPermissionGrantedUsers"],
-    permissionsGrantedVisitors: json["numPermissionGrantedVisitors"],
+    totalPermissions: (json["totalPermissions"] is String) ? int.parse(json["totalPermissions"]) : json["totalPermissions"],
+    permissionsDeniedUsers: (json["numPermissionDeniedUsers"] is String) ? int.parse(json["numPermissionDeniedUsers"]) : json["numPermissionDeniedUsers"],
+    permissionsDeniedVisitors: (json["numPermissionDeniedVisitors"] is String) ? int.parse(json["numPermissionDeniedVisitors"]) : json["numPermissionDeniedVisitors"],
+    permissionsGrantedUsers: (json["numPermissionGrantedUsers"] is String) ? int.parse(json["numPermissionGrantedUsers"]) : json["numPermissionGrantedUsers"],
+    permissionsGrantedVisitors: (json["numPermissionGrantedVisitors"] is String) ? int.parse(json["numPermissionGrantedVisitors"]) : json["numPermissionGrantedVisitors"],
   );
 
   Map<String, dynamic> toJson() => {

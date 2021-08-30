@@ -24,7 +24,7 @@ class BookingSummary {
     companyId: json["companyId"],
     year: json["year"].toString(),
     month: json["month"].toString().padLeft(2, "0"),
-    numBookings: json["numBookings"],
+    numBookings: (json["numBookings"] is String) ? int.parse(json["numBookings"]) : json["numBookings"],
   );
 
   Map<String, dynamic> toJson() => {
