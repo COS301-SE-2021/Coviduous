@@ -59,13 +59,17 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
       List<User> users = globals.selectedUsers;
       int numOfUsers = users.length;
 
-      employeeList.clear();
-      employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email']);
-      for (int i = 0; i < users.length; i++) {
-        List<String> employeeInfo = <String>[
-          users[i].getUserId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail()
-        ];
-        employeeList.add(employeeInfo);
+      if (employeeList.isNotEmpty) {
+        employeeList.clear();
+        employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email']);
+        for (int i = 0; i < users.length; i++) {
+          List<String> employeeInfo = <String>[
+            users[i].getUserId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail()
+          ];
+          employeeList.add(employeeInfo);
+        }
+      } else {
+        numOfUsers = 0;
       }
 
       print(numOfUsers);
