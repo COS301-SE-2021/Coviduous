@@ -303,6 +303,65 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
     }
   }
 
+  Widget getAnswerFormat() {
+    switch(currentQuestionNumber) {
+      case 1: {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            color: Colors.white,
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+            padding: EdgeInsets.all(16),
+            child: TextFormField(
+              textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+              decoration: InputDecoration(
+                labelText: 'Measured temperature (in degrees Celsius)',
+              ),
+              keyboardType: TextInputType.text,
+              controller: _temperature,
+            ),
+          ),
+        );
+      }
+      break;
+
+      default: {
+        return Row(
+            children:[
+              ElevatedButton(
+                child: Text("👍", style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 4)),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(24),
+                  primary: (getAnswer()) ? globals.focusColor : globals.firstColor,
+                ),
+                onPressed: () {
+                  setAnswer(true);
+                  setState(() {});
+                },
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width/12,
+              ),
+              ElevatedButton(
+                child: Text("👎", style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 4)),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(24),
+                  primary: (getAnswer()) ? globals.firstColor : globals.focusColor,
+                ),
+                onPressed: () {
+                  setAnswer(false);
+                  setState(() {});
+                },
+              ),
+            ]
+        );
+      }
+      break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
@@ -404,64 +463,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height/24
                             ),
-                            (currentQuestionNumber != 1) ? Row(
-                                children:[
-                                  ElevatedButton(
-                                    child: Text("👍", style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 4)),
-                                    style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(24),
-                                      primary: (getAnswer()) ? globals.focusColor : globals.firstColor,
-                                    ),
-                                    onPressed: () {
-                                      setAnswer(true);
-                                      setState(() {});
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width/12,
-                                  ),
-                                  ElevatedButton(
-                                    child: Text("👎", style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 4)),
-                                    style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(24),
-                                      primary: (getAnswer()) ? globals.firstColor : globals.focusColor,
-                                    ),
-                                    onPressed: () {
-                                      setAnswer(false);
-                                      setState(() {});
-                                    },
-                                  ),
-                                ]
-                            ) : ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                color: Colors.white,
-                                width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
-                                padding: EdgeInsets.all(16),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                  decoration: InputDecoration(
-                                    labelText: 'Measured temperature (in degrees Celsius)',
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  controller: _temperature,
-                                  validator: (value) {
-                                    if (value.isNotEmpty) {
-                                      print(_temperature);
-                                      if(!globals.isNumeric(value)) //Check if number
-                                          {
-                                        return 'Temperature must be a number';
-                                      }
-                                    } else {
-                                      return 'Please enter a temperature';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ),
+                            getAnswerFormat(),
                           ],
                         ),
                         IconButton(
