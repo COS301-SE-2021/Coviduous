@@ -76,6 +76,9 @@ flutter:
     - assets/images/city-silhouette.png
     - assets/images/logo.png
     - assets/images/placeholder-profile-image.png
+    - assets/images/sick1.jpg
+    - assets/images/sick2.jpg
+    - assets/images/sick3.jpg
     - assets/sample.pdf
   # PDF fonts
     - assets/fonts/OpenSans-Regular.ttf
