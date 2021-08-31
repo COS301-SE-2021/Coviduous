@@ -20,7 +20,7 @@ class UserHealth extends StatefulWidget {
   @override
   _UserHealthState createState() => _UserHealthState();
 }
-//class admin
+
 class _UserHealthState extends State<UserHealth> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
