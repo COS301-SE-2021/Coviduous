@@ -18,7 +18,7 @@ class AddShiftCreateShift extends StatefulWidget {
 
 class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
   DateTime _currentDate = DateTime.now();
-  DateTime _tomorrowDate = DateTime.now().add(Duration(days: 1));
+  DateTime _oneMonthFromNow = DateTime.now().add(Duration(days: 31)); //Allow a shift to be created 
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedStartTime = TimeOfDay.now();
   TimeOfDay _selectedEndTime = TimeOfDay.now();
@@ -33,7 +33,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
         context: context,
         initialDate: _selectedDate,
         firstDate: _currentDate,
-        lastDate: _tomorrowDate,
+        lastDate: _oneMonthFromNow,
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
