@@ -21,17 +21,12 @@ describe('Create sick employee unit tests', function() {
             });
     });
  
-    it('Return 400 if empty userId', function(done) {
+    it('Return 400 if empty user ID', function(done) {
         let req = {
             userId: "",
-            type: "USER",
-            firstName: "test-000",
-            lastName: "test-000",
-            email: "test-000",
-            userName: "test-000",
-            companyId: "test-000",
-            companyName: "test-000",
-            companyAddress: "test-000"
+            userEmail: "test-000",
+            timeOfDiagnosis: "test-000",
+            companyId: "test-000"
         };
 
         chai.request(server)
@@ -45,17 +40,12 @@ describe('Create sick employee unit tests', function() {
             });
     });
  
-    it('Return 400 if empty type', function(done) {
+    it('Return 400 if empty user email', function(done) {
         let req = {
             userId: "test-000",
-            type: "",
-            firstName: "test-000",
-            lastName: "test-000",
-            email: "test-000",
-            userName: "test-000",
-            companyId: "test-000",
-            companyName: "test-000",
-            companyAddress: "test-000"
+            userEmail: "",
+            timeOfDiagnosis: "test-000",
+            companyId: "test-000"
         };
 
         chai.request(server)
@@ -69,17 +59,12 @@ describe('Create sick employee unit tests', function() {
             });
     });
 
-    it('Return 400 if incorrect type', function(done) {
+    it('Return 400 if empty time of diagnosis', function(done) {
         let req = {
             userId: "test-000",
-            type: "INCORRECT TYPE",
-            firstName: "test-000",
-            lastName: "test-000",
-            email: "test-000",
-            userName: "test-000",
-            companyId: "test-000",
-            companyName: "test-000",
-            companyAddress: "test-000"
+            userEmail: "test-000",
+            timeOfDiagnosis: "",
+            companyId: "test-000"
         };
 
       chai.request(server)
@@ -93,17 +78,12 @@ describe('Create sick employee unit tests', function() {
           });
     });
  
-    it('Return 400 if empty company name for admin user', function(done) {
+    it('Return 400 if empty company ID', function(done) {
         let req = {
             userId: "test-000",
-            type: "ADMIN",
-            firstName: "test-000",
-            lastName: "test-000",
-            email: "test-000",
-            userName: "test-000",
-            companyId: "test-000",
-            companyName: "",
-            companyAddress: "test-000"
+            userEmail: "test-000",
+            timeOfDiagnosis: "test-000",
+            companyId: ""
         };
 
         chai.request(server)
@@ -117,6 +97,7 @@ describe('Create sick employee unit tests', function() {
             });
     });
  });
+ 
 
  describe('Get sick employees unit tests', function() {
     it('Return 200 if retrieval is successful', function() {
