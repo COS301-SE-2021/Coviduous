@@ -1,5 +1,10 @@
+import 'dart:io';
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'package:frontend/views/floor_plan/home_floor_plan.dart';
 import 'package:frontend/views/floor_plan/admin_modify_floor_plans.dart';
@@ -19,27 +24,64 @@ class AddFloorPlan extends StatefulWidget {
 //add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
+  String fileName = "";
+  String pickerFileName = "";
+  List<int> fileBytes;
 
-  Widget _buildFloors() {
-    return TextFormField(
-      textInputAction: TextInputAction
-          .done, //The "return" button becomes a "done" button when typing
-      decoration: InputDecoration(labelText: 'Enter number of floors'),
-      keyboardType: TextInputType.number,
-      validator: (String value) {
-        int num = int.tryParse(value);
-        if (num == null || num <= 0) {
-          return 'Number of floors must be greater than zero';
+  Future getImage() async {
+    var rng = new Random();
+    String randomName = "";
+    for (var i = 0; i < 20; i++) {
+      print(rng.nextInt(100));
+      randomName += rng.nextInt(100).toString();
+    }
+    await Future.wait([
+      FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['jpg', 'png'])
+    ]).then((results){
+      if (kIsWeb) { //If web browser
+        String platform = globals.getOSWeb();
+        if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+          FilePickerResult result = results.first;
+          if (result != null) {
+            pickerFileName = results.first.names.first;
+            File file = File(result.files.single.path);
+            String tempFileName = '${randomName}.' + result.files.single.extension;
+            print(tempFileName);
+            tempFileName = fileName;
+            fileBytes = file.readAsBytesSync();
+            globals.floorPlanImageExists = true;
+          }
+        } else { //Else, PC browser
+          FilePickerResult result = results.first;
+          if (result != null) {
+            pickerFileName = results.first.names.first;
+            String tempFileName = '${randomName}.' + result.files.single.extension;
+            print(tempFileName);
+            fileName = tempFileName;
+            fileBytes = result.files.first.bytes;
+            globals.floorPlanImageExists = true;
+          }
         }
-        return null;
-      },
-      onSaved: (String value) {
-        _numFloor = value;
-      },
-    );
+      } else { //Else, mobile app
+        FilePickerResult result = results.first;
+        if (result != null) {
+          pickerFileName = results.first.names.first;
+          File file = File(result.files.single.path);
+          String tempFileName = '${randomName}.' + result.files.single.extension;
+          print(tempFileName);
+          fileName = tempFileName;
+          fileBytes = file.readAsBytesSync();
+          globals.floorPlanImageExists = true;
+        }
+      }
+      setState(() {});
+    });
   }
 
-//global key _formkey.
+  Future saveImage(List<int> asset, String name) {
+    //Upload the image to Firestore
+  }
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<bool> _onWillPop() async {
@@ -90,11 +132,61 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(20.0),
+                        child: (globals.floorPlanImageExists) ? Image(
+                          alignment: Alignment.center,
+                          image: MemoryImage(fileBytes),
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height/6,
+                        ) : Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/images/placeholder-office-building.png'),
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height/6,
+                        ),
+                      ),
+                      Text('Selected file: ' + pickerFileName),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      ElevatedButton(
+                        child: Text('Select an image'),
+                        onPressed: () {
+                          getImage();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/48,
+                        width: MediaQuery.of(context).size.width,
+                      ),
                       Padding(
                           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: _buildFloors()),
+                          child: TextFormField(
+                            textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                            decoration: InputDecoration(labelText: 'Enter number of floors'),
+                            keyboardType: TextInputType.number,
+                            validator: (String value) {
+                              int num = int.tryParse(value);
+                              if (num == null || num <= 0) {
+                                return 'Number of floors must be greater than zero';
+                              }
+                              return null;
+                            },
+                            onSaved: (String value) {
+                              _numFloor = value;
+                            },
+                          )
+                      ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 48,
+                        height: MediaQuery.of(context).size.height/48,
                         width: MediaQuery.of(context).size.width,
                       ),
                       ElevatedButton(
@@ -112,6 +204,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
 
                             floorPlanHelpers.createFloorPlan(num.parse(_numFloor)).then((result) {
                               if (result == true) {
+                                saveImage(fileBytes, fileName);
                                 floorPlanHelpers.getFloorPlans().then((result) {
                                   if (result == true) {
                                     Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);

@@ -166,6 +166,9 @@ List<Booking> currentBookings;
 //Floor plan ID
 String floorPlanId = '';
 
+//Check if floor plan image has been uploaded
+bool floorPlanImageExists = false;
+
 //=========================
 //Used in health subsystem
 //=========================

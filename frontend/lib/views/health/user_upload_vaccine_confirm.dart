@@ -77,7 +77,7 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
   }
 
   Future savePdf(List<int> asset, String name) async {
-    //Upload the PDF to Firebase Cloud Storage
+    //Upload the PDF to Firestore
     String fileBytes = base64Encode(asset);
     await healthHelpers.uploadVaccineConfirmation(name, fileBytes).then((result) {
       if (result == true) {
