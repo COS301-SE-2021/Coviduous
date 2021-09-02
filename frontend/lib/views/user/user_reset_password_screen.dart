@@ -52,6 +52,7 @@ class _UserResetPasswordState extends State<UserResetPassword> {
           ),
         ),
         body: isLoading == false ? Center(
+          child: SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
             height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
@@ -67,7 +68,7 @@ class _UserResetPasswordState extends State<UserResetPassword> {
                   ),
                 ),
 
-                const SizedBox(height: 30,),
+                const SizedBox(height: 32,),
 
                 ElevatedButton(
                     onPressed: (){
@@ -98,6 +99,7 @@ class _UserResetPasswordState extends State<UserResetPassword> {
             ),
             ),
           ),
+         ),
         ) : Center(child: CircularProgressIndicator(),
         ),
       ),
