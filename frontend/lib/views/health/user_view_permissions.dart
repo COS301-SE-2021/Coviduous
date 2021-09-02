@@ -3,10 +3,10 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_home_health.dart';
-///import 'package:frontend/views/health/user_request_access_shifts.dart';
+import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/user_view_permissions_details.dart';
-///import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 import 'package:frontend/views/health/user_permissions_QR.dart';
 
@@ -130,6 +130,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  /***
                                   Column(
                                   children: <Widget>[
                                     Icon(
@@ -141,7 +142,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
 
                                   ],
 
-                                  ),
+                                  ), ***/
 
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
@@ -152,8 +153,6 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       ),
                                       child: Text('Request access'),
                                       onPressed: () {
-                                        ///for testing purposes
-                                        /*
                                         globals.currentPermissionId = globals.currentPermissions[index].getPermissionId();
                                         healthHelpers.viewShifts(globals.loggedInUserEmail).then((result) {
                                           if (result == true) {
@@ -162,8 +161,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                             ScaffoldMessenger.of(context).showSnackBar(
                                                 SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
                                           }
-                                        }); */
-                                        Navigator.of(context).pushReplacementNamed(UserViewPermissionsDetails.routeName);
+                                        });
+
                                       }),
                                 ],
                               ),
