@@ -52,39 +52,43 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
       print(numOfFloors);
 
       if (numOfFloors == 0) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                  color: globals.firstColor,
-                  child: Text('No floors found',
-                      style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
-                      )
-                  ),
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height / (12 * globals.getWidgetScaling()),
-                    color: Colors.white,
-                    padding: EdgeInsets.all(12),
-                    child: Text('No floors have been registered for this floor plan.',
-                        style: TextStyle(
-                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                      color: globals.firstColor,
+                      child: Text('No floors found',
+                          style: TextStyle(color: Colors.white,
+                              fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                          )
+                      ),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height / (12 * globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('No floors have been registered for this floor plan.',
+                            style: TextStyle(
+                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                            )
                         )
-                    )
-                )
-          ]),
-        );
+                    ),
+                  ],
+                ),
+              )
+        ]);
       } else {
         //Else create and return a gridview
         return ClipRRect(
@@ -254,18 +258,15 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
         ),
         bottomNavigationBar: BottomAppBar(
           child: Container(
-              alignment: Alignment.bottomLeft,
-              height: MediaQuery.of(context).size.height/20,
-              child: ElevatedButton(
+              alignment: Alignment.bottomCenter,
+              height: MediaQuery.of(context).size.height/10,
+              child: TextButton(
                 child: Text('+',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 4,
+                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 5,
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff00990F),
                 ),
                 onPressed: () {
                   //Add new floor and reload page
