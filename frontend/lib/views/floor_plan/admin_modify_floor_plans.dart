@@ -48,182 +48,240 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
       print(numOfFloorPlans);
 
       if (numOfFloorPlans == 0) {
-        return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height /
-                (5 * globals.getWidgetScaling()),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width /
-                (2 * globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height /
-                (24 * globals.getWidgetScaling()),
-            color: Theme.of(context).primaryColor,
-            child: Text('No floor plans found',
-                style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-          ),
-          Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width /
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height /
+                  (5 * globals.getWidgetScaling()),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width /
                   (2 * globals.getWidgetScaling()),
-              height: MediaQuery.of(context).size.height /
-                  (12 * globals.getWidgetScaling()),
-              color: Colors.white,
-              padding: EdgeInsets.all(12),
-              child: Text('No floor plans have been registered for your company.',
-                  style: TextStyle(
-                      fontSize:
-                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
-        ]);
+                  height: MediaQuery.of(context).size.height /
+                  (24 * globals.getWidgetScaling()),
+                  color: Theme.of(context).primaryColor,
+                  child: Text('No floor plans found',
+                      style: TextStyle(color: Colors.white,
+                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+            ),
+            Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width /
+                    (2 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height /
+                    (12 * globals.getWidgetScaling()),
+                color: Colors.white,
+                padding: EdgeInsets.all(12),
+                child: Text('No floor plans have been registered for your company.',
+                    style: TextStyle(
+                        fontSize:
+                        (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+              ]),
+        );
       } else {
-        //Else create and return a list
-        return ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(16),
-            itemCount: numOfFloorPlans,
-            itemBuilder: (context, index) {
-              //Display a list tile FOR EACH floor plan in floorPlans[]
-              return ListTile(
-                title: Column(children: [
-                  Container(
+        //Else create and return a gridview
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                  color: globals.firstColor,
+                  child: Text('Choose a floor plan',
+                      style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                ),
+                Container(
                     alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).primaryColor,
-                    child: Text('Floor plan ' + globals.currentFloorPlans[index].getFloorPlanNumber()),
-                  ),
-                  ListView(
-                      shrinkWrap: true,
-                      physics:
-                      NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                      children: <Widget>[
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString()),
-                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                    width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
+                    color: Colors.white,
+                    padding: EdgeInsets.all(10),
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 2/3,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
                         ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: numOfFloorPlans,
+                        itemBuilder: (context, index) {
+                          return Column(
                             children: [
-                              ElevatedButton(
-                                  child: Text('Edit'),
-                                  onPressed: () {
-                                    floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
-                                      if (result == true) {
-                                        Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("There was an error. Please try again later.")));
-                                      }
-                                    });
-                                  }),
-                              ElevatedButton(
-                                  child: Text('Delete'),
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Warning'),
-                                          content: Text("Are you sure you want to remove this floor plan? All floors will be deleted, and this operation cannot be undone."),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Yes'),
-                                              onPressed: (){
-                                                Navigator.pop(context);
-                                                //Only allow floor plan to be deleted if password is correct; try to sign in with it
-                                                showDialog(context: context,
-                                                    builder: (context) {
-                                                      return AlertDialog(
-                                                        title: Text('Enter your password'),
-                                                        content: TextFormField(
-                                                          controller: _password,
-                                                          decoration: InputDecoration(hintText: 'Enter your password', filled: true, fillColor: Colors.white),
-                                                          obscureText: true,
-                                                          validator: (value) {
-                                                            if (value.isEmpty) {
-                                                              return 'please input your password';
-                                                            }
-                                                            return null;
-                                                          },
-                                                          onSaved: (String value) {
-                                                            _password.text = value;
-                                                          },
-                                                        ),
-                                                        actions: [
-                                                          TextButton(
-                                                            child: Text('Submit'),
-                                                            onPressed: () {
-                                                              if (_password.text.isNotEmpty) {
-                                                                AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
-                                                                  _password.clear();
-                                                                  if (value2 == "welcome") {
-                                                                    floorPlanHelpers.deleteFloorPlan(globals.currentFloorPlans[index].getFloorPlanNumber())
-                                                                        .then((result) {
-                                                                      if (result == true) {
-                                                                        floorPlanHelpers.getFloorPlans().then((result) {
-                                                                          if (result == true) {
-                                                                            Navigator.pop(context);
-                                                                            setState(() {});
-                                                                          } else {
-                                                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(content: Text("Could not retrieve updated floor plans at this time.")));
-                                                                            Navigator.pop(context);
-                                                                          }
-                                                                        });
-                                                                      } else {
-                                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                                            SnackBar(content: Text('Floor plan deletion unsuccessful. Please try again later.')));
-                                                                        Navigator.pop(context);
-                                                                      }
-                                                                    });
-                                                                  } else {
-                                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                                        SnackBar(content: Text('Invalid password')));
-                                                                    Navigator.pop(context);
-                                                                  }
-                                                                });
-                                                              } else {
-                                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                                    SnackBar(content: Text('Invalid password')));
-                                                                Navigator.pop(context);
-                                                              }
-                                                            },
-                                                          ),
-                                                          TextButton(
-                                                            child: Text('Cancel'),
-                                                            onPressed: () {
-                                                              _password.clear();
-                                                              Navigator.pop(context);
-                                                            },
-                                                          ),
-                                                        ],
-                                                      );
-                                                    });
-                                              },
+                              Container(
+                                color: globals.firstColor,
+                                padding: EdgeInsets.all(10),
+                                width: MediaQuery.of(context).size.width,
+                                child: Text('Floor plan ' + (index+1).toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.4
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height/8,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        child: Image(
+                                          image: AssetImage('assets/images/placeholder-office-building.png'),
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.bottomRight,
+                                        child: SizedBox(
+                                          height: MediaQuery.of(context).size.height/20,
+                                          width: MediaQuery.of(context).size.height/20,
+                                          child: ElevatedButton(
+                                            child: Text('X',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                                              ),
                                             ),
-                                            TextButton(
-                                              child: Text('No'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        ));
-                                  }),
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Color(0xff991E20),
+                                            ),
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                    title: Text('Warning'),
+                                                    content: Text("Are you sure you want to remove this floor plan? All floors will be deleted, and this operation cannot be undone."),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('Yes'),
+                                                        onPressed: (){
+                                                          Navigator.pop(context);
+                                                          //Only allow floor plan to be deleted if password is correct; try to sign in with it
+                                                          showDialog(context: context,
+                                                              builder: (context) {
+                                                                return AlertDialog(
+                                                                  title: Text('Enter your password'),
+                                                                  content: TextFormField(
+                                                                    controller: _password,
+                                                                    decoration: InputDecoration(hintText: 'Enter your password', filled: true, fillColor: Colors.white),
+                                                                    obscureText: true,
+                                                                    validator: (value) {
+                                                                      if (value.isEmpty) {
+                                                                        return 'please input your password';
+                                                                      }
+                                                                      return null;
+                                                                    },
+                                                                    onSaved: (String value) {
+                                                                      _password.text = value;
+                                                                    },
+                                                                  ),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      child: Text('Submit'),
+                                                                      onPressed: () {
+                                                                        if (_password.text.isNotEmpty) {
+                                                                          AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
+                                                                            _password.clear();
+                                                                            if (value2 == "welcome") {
+                                                                              floorPlanHelpers.deleteFloorPlan(globals.currentFloorPlans[index].getFloorPlanNumber())
+                                                                                  .then((result) {
+                                                                                if (result == true) {
+                                                                                  floorPlanHelpers.getFloorPlans().then((result) {
+                                                                                    if (result == true) {
+                                                                                      Navigator.pop(context);
+                                                                                      setState(() {});
+                                                                                    } else {
+                                                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                                                          SnackBar(content: Text("Could not retrieve updated floor plans at this time.")));
+                                                                                      Navigator.pop(context);
+                                                                                    }
+                                                                                  });
+                                                                                } else {
+                                                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                                                      SnackBar(content: Text('Floor plan deletion unsuccessful. Please try again later.')));
+                                                                                  Navigator.pop(context);
+                                                                                }
+                                                                              });
+                                                                            } else {
+                                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                                  SnackBar(content: Text('Invalid password')));
+                                                                              Navigator.pop(context);
+                                                                            }
+                                                                          });
+                                                                        } else {
+                                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                                              SnackBar(content: Text('Invalid password')));
+                                                                          Navigator.pop(context);
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                    TextButton(
+                                                                      child: Text('Cancel'),
+                                                                      onPressed: () {
+                                                                        _password.clear();
+                                                                        Navigator.pop(context);
+                                                                      },
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              });
+                                                        },
+                                                      ),
+                                                      TextButton(
+                                                        child: Text('No'),
+                                                        onPressed: (){
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  ));
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ]
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(MediaQuery.of(context).size.width, 1),
+                                  primary: globals.firstColor,
+                                ),
+                                child: Text(globals.currentFloorPlans[index].getNumFloors().toString() + ' floors',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                onPressed: () {
+                                  floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
+                                    if (result == true) {
+                                      Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("There was an error. Please try again later.")));
+                                    }
+                                  });
+                                },
+                              ),
                             ],
-                          ),
-                        ),
-                      ])
-                ]),
-                //title: floors[index].floor()
-              );
-            });
+                          );
+                        })
+                ),
+              ]),
+        );
       }
     }
 
@@ -241,8 +299,8 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
         ),
         body: Stack(
           children: <Widget>[
-            SingleChildScrollView(
-              child: Center(
+            Center(
+              child: SingleChildScrollView(
                 child: getList(),
               ),
             ),
