@@ -8,149 +8,125 @@ let server = 'http://localhost:5002/coviduous-api/us-central1/app/';
 
 chai.use(chaiHttp);
 
-// describe('Create sick employee unit tests', function() {
-//     it('Return 400 if request is empty', function(done) {
-//         chai.request(server)
-//             .post('/api/reporting/health/sick-employees')
-//             .send(null)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 //console.log(res.body);
-//                 done();
-//             });
-//     });
+describe('Create sick employee unit tests', function() {
+    it('Return 400 if request is empty', function(done) {
+        chai.request(server)
+            .post('/api/reporting/health/sick-employees')
+            .send(null)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                //console.log(res.body);
+                done();
+            });
+    });
  
-//     it('Return 400 if empty userId', function(done) {
-//         let req = {
-//             userId: "",
-//             type: "USER",
-//             firstName: "test-000",
-//             lastName: "test-000",
-//             email: "test-000",
-//             userName: "test-000",
-//             companyId: "test-000",
-//             companyName: "test-000",
-//             companyAddress: "test-000"
-//         };
+    it('Return 400 if empty userId', function(done) {
+        let req = {
+            userId: "",
+            type: "USER",
+            firstName: "test-000",
+            lastName: "test-000",
+            email: "test-000",
+            userName: "test-000",
+            companyId: "test-000",
+            companyName: "test-000",
+            companyAddress: "test-000"
+        };
 
-//         chai.request(server)
-//             .post('/api/reporting/health/sick-employees')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/reporting/health/sick-employees')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
  
-//     it('Return 400 if empty type', function(done) {
-//         let req = {
-//             userId: "test-000",
-//             type: "",
-//             firstName: "test-000",
-//             lastName: "test-000",
-//             email: "test-000",
-//             userName: "test-000",
-//             companyId: "test-000",
-//             companyName: "test-000",
-//             companyAddress: "test-000"
-//         };
+    it('Return 400 if empty type', function(done) {
+        let req = {
+            userId: "test-000",
+            type: "",
+            firstName: "test-000",
+            lastName: "test-000",
+            email: "test-000",
+            userName: "test-000",
+            companyId: "test-000",
+            companyName: "test-000",
+            companyAddress: "test-000"
+        };
 
-//         chai.request(server)
-//             .post('/api/reporting/health/sick-employees')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
+        chai.request(server)
+            .post('/api/reporting/health/sick-employees')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
 
-//     it('Return 400 if incorrect type', function(done) {
-//         let req = {
-//             userId: "test-000",
-//             type: "INCORRECT TYPE",
-//             firstName: "test-000",
-//             lastName: "test-000",
-//             email: "test-000",
-//             userName: "test-000",
-//             companyId: "test-000",
-//             companyName: "test-000",
-//             companyAddress: "test-000"
-//         };
+    it('Return 400 if incorrect type', function(done) {
+        let req = {
+            userId: "test-000",
+            type: "INCORRECT TYPE",
+            firstName: "test-000",
+            lastName: "test-000",
+            email: "test-000",
+            userName: "test-000",
+            companyId: "test-000",
+            companyName: "test-000",
+            companyAddress: "test-000"
+        };
 
-//       chai.request(server)
-//           .post('/api/reporting/health/sick-employees')
-//           .send(req)
-//           .end((err, res) => {
-//               should.exist(res);
-//               res.should.have.status(400);
-//               console.log(res.body);
-//               done();
-//           });
-//     });
+      chai.request(server)
+          .post('/api/reporting/health/sick-employees')
+          .send(req)
+          .end((err, res) => {
+              should.exist(res);
+              res.should.have.status(400);
+              console.log(res.body);
+              done();
+          });
+    });
  
-//     it('Return 400 if empty company name for admin user', function(done) {
-//         let req = {
-//             userId: "test-000",
-//             type: "ADMIN",
-//             firstName: "test-000",
-//             lastName: "test-000",
-//             email: "test-000",
-//             userName: "test-000",
-//             companyId: "test-000",
-//             companyName: "",
-//             companyAddress: "test-000"
-//         };
+    it('Return 400 if empty company name for admin user', function(done) {
+        let req = {
+            userId: "test-000",
+            type: "ADMIN",
+            firstName: "test-000",
+            lastName: "test-000",
+            email: "test-000",
+            userName: "test-000",
+            companyId: "test-000",
+            companyName: "",
+            companyAddress: "test-000"
+        };
 
-//         chai.request(server)
-//             .post('/api/reporting/health/sick-employees')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
- 
-//     it('Return 400 if empty company address for admin user', function(done) {
-//         let req = {
-//             userId: "test-000",
-//             type: "ADMIN",
-//             firstName: "test-000",
-//             lastName: "test-000",
-//             email: "test-000",
-//             userName: "test-000",
-//             companyId: "test-000",
-//             companyName: "test-000",
-//             companyAddress: ""
-//         };
+        chai.request(server)
+            .post('/api/reporting/health/sick-employees')
+            .send(req)
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(400);
+                console.log(res.body);
+                done();
+            });
+    });
+ });
 
-//         chai.request(server)
-//             .post('/api/reporting/health/sick-employees')
-//             .send(req)
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(400);
-//                 console.log(res.body);
-//                 done();
-//             });
-//     });
-//  });
-
-//  describe('Get sick employees unit tests', function() {
-//     it('Return 200 if retrieval is successful', function() {
-//         chai.request(server)
-//             .get('/api/reporting/health/sick-employees')
-//             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(200);
-//                 //console.log(res.body);
-//                 //done();
-//             });
-//     });
-// });
+ describe('Get sick employees unit tests', function() {
+    it('Return 200 if retrieval is successful', function() {
+        chai.request(server)
+            .get('/api/reporting/health/sick-employees') // change to post - /view
+            .end((err, res) => {
+                should.exist(res);
+                res.should.have.status(200);
+                //console.log(res.body);
+                //done();
+            });
+    });
+});
