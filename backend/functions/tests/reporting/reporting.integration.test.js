@@ -8,22 +8,9 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-//needs to be correctly asserted but does deliver an email
-/*describe('Notification Sending Email Notification', function() {
-    it('Send User Email', async function() {
-        let message="Hey There!";
-        let subject="Test Email";
-        let userEmail = "njabuloskosana24@gmail.com";
-        expect(await NotificationService.sendUserEmail(userEmail,subject,message)).to.equal(true);
-        
-
-    });
-});*/
-
 describe('/POST notifications', () => {
     it('it should create an notification', () => {
         let notification = {
-            // notificationId: "test-000",
             userId: "test-000",
             userEmail: "test-000",
             subject: "test-000",
@@ -34,7 +21,7 @@ describe('/POST notifications', () => {
         }
 
         chai.request(server)
-        .post('/api/notifications/')
+        .post('/api/reporting/health/sick-employees/')
         .send(notification)
         .end((err, res) => {
             res.should.have.status(200);
@@ -58,7 +45,7 @@ describe('/DELETE notifications', () => {
         };
     
         chai.request(server)
-            .post('/api/notifications')
+            .post('/api/reporting/health/sick-employees')
             .send(req)
             .end((err, res) => {
                 console.log(res.body);
@@ -67,7 +54,7 @@ describe('/DELETE notifications', () => {
                 };
     
                 chai.request(server)
-                    .delete('/api/notifications')
+                    .delete('/api/reporting/health/sick-employees')
                     .send(req2).end((err, res) => {
                         should.exist(res);
                         res.should.have.status(200);
@@ -80,7 +67,7 @@ describe('/DELETE notifications', () => {
     
 describe('/GET notifications', () => {
     it('it should GET all the notifications', () => {
-  chai.request(server).get('/api/notifications/')
+  chai.request(server).get('/api/reporting/health/sick-employees/')
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
