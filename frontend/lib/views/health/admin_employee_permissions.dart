@@ -6,7 +6,6 @@ import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/globals.dart' as globals;
 
-
 class EmployeePermissions extends StatefulWidget {
   static const routeName = "/admin_view_permissions";
 
@@ -34,9 +33,9 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
       return Container();
     }
     Widget getList() {
-      int numberOfRequests = globals.currentPermissions.length;
+      int numberOfPermissions = globals.currentPermissions.length;
 
-      if (numberOfRequests == 0) {
+      if (numberOfPermissions == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -44,21 +43,28 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No permissions granted', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('Employee has no access records.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                      color: Theme.of(context).primaryColor,
+                      child: Text('No permissions granted', style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('Employee has no access records.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                    ),
+                  ],
+                ),
               )
             ]
         );
@@ -66,22 +72,61 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(16),
-            itemCount: numberOfRequests,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
+            padding: const EdgeInsets.all(8),
+            itemCount: numberOfPermissions,
+            itemBuilder: (context, index) {
               return ListTile(
                 title: Column(
                     children:[
-                      Container(
+                      (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
                         alignment: Alignment.center,
+                        height: 50,
                         width: MediaQuery.of(context).size.width,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Permissions for User ' + globals.currentPermissions[index].getUserId()),
+                        color: Colors.green,
+                        child: Text('Access granted for ' + globals.currentPermissions[index].getUserId(),
+                            style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                      ) : Container(
+                        alignment: Alignment.center,
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.redAccent,
+                        child: Text('Access denied for ' + globals.currentPermissions[index].getUserId(),
+                            style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                       ),
                       ListView(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                           children: <Widget>[
+                            (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
+                              height: 120,
+                              color: Colors.white,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Colors.greenAccent,
+                                      size: 100.0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ) : Container(),
+                            (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
+                              height: 120,
+                              color: Colors.white,
+                              child: new SingleChildScrollView(
+                                child: new Column(
+                                  children: [
+                                    Icon(
+                                      Icons.no_accounts_outlined,
+                                      color: Colors.redAccent,
+                                      size: 100.0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ) : Container(),
                             Container(
                               height: 50,
                               color: Colors.white,
@@ -104,7 +149,6 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                       )
                     ]
                 ),
-                //title: floors[index].floor()
               );
             }
         );
