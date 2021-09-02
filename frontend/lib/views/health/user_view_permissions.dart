@@ -3,11 +3,12 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_home_health.dart';
-import 'package:frontend/views/health/user_request_access_shifts.dart';
+///import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/login_screen.dart';
-
-import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/views/health/user_view_permissions_details.dart';
+///import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
+import 'package:frontend/views/health/user_permissions_QR.dart';
 
 class UserViewPermissions extends StatefulWidget {
   static const routeName = "/user_view_permissions";
@@ -38,12 +39,12 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
       return Container();
     }
 
+
     Widget getList() {
       int numOfPermissions = 0;
       if (globals.currentPermissions != null) {
         numOfPermissions = globals.currentPermissions.length;
       }
-
       if (numOfPermissions == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -91,30 +92,57 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                           children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Office access: ' + globals.currentPermissions[index].getOfficeAccess().toString()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Granted by: ' + globals.currentPermissions[index].getGrantedBy()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Date: ' + globals.currentPermissions[index].getTimestamp()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
+                            (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
                               height: 50,
                               color: Colors.white,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom (
+                                        primary: Colors.greenAccent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text('Generate QR'),
+                                      onPressed: () {
+                                        ///Generate QR code page
+                                      }),
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom (
+                                        primary: Colors.greenAccent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: Text('View details'),
+                                      onPressed: () {
+                                        Navigator.of(context).pushReplacementNamed(UserViewPermissionsDetails.routeName);
+                                      }),
+                                ],
+                              ),
+                            ) : Container(),
+                            (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
+                              height: 100,
+                              color: Colors.white,
+
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.favorite,
+                                      color: Colors.pink,
+                                      size: 50.0,
+                                      semanticLabel: 'Text to announce in accessibility modes',
+                                    ),
+
+                                  ],
+
+                                  ),
+
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
                                         primary: Colors.redAccent,
@@ -124,6 +152,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       ),
                                       child: Text('Request access'),
                                       onPressed: () {
+                                        ///for testing purposes
+                                        /*
                                         globals.currentPermissionId = globals.currentPermissions[index].getPermissionId();
                                         healthHelpers.viewShifts(globals.loggedInUserEmail).then((result) {
                                           if (result == true) {
@@ -132,7 +162,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                             ScaffoldMessenger.of(context).showSnackBar(
                                                 SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
                                           }
-                                        });
+                                        }); */
+                                        Navigator.of(context).pushReplacementNamed(GenerateQR.routeName);
                                       }),
                                 ],
                               ),
@@ -170,3 +201,4 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
     );
   }
 }
+
