@@ -179,7 +179,9 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
                                     onPressed: () {
                                       if (globals.vaccineConfirmExists) {
                                         savePdf(fileBytes, fileName).then((result) {
-                                          Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                                          healthHelpers.getVaccineConfirmations().then((result) {
+                                            Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                                          });
                                         });
                                       } else {
                                         ScaffoldMessenger.of(context).showSnackBar(

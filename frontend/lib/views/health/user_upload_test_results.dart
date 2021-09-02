@@ -178,9 +178,11 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                                         'Submit'
                                     ),
                                     onPressed: () {
-                                      if (globals.vaccineConfirmExists) {
+                                      if (globals.testResultsExist) {
                                         savePdf(fileBytes, fileName).then((result) {
-                                          Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                          healthHelpers.getTestResults().then((result) {
+                                            Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                          });
                                         });
                                       } else {
                                         ScaffoldMessenger.of(context).showSnackBar(
