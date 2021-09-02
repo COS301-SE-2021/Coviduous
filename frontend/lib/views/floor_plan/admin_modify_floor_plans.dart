@@ -130,7 +130,6 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                               ),
                               Expanded(
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
                                   child: Stack(
                                     children: [
                                       Container(
