@@ -106,32 +106,35 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
         numOfPermissions = globals.currentPermissions.length;
       }
       if (numOfPermissions == 0) {
-        return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No permissions granted', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('No permissions have been granted to you.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-              )
-            ]
+                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                  color: Theme.of(context).primaryColor,
+                  child: Text('No permissions granted', style: TextStyle(color: Colors.white,
+                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                    height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                    color: Colors.white,
+                    padding: EdgeInsets.all(12),
+                    child: Text('No permissions have been granted to you.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                )
+              ]
+          ),
         );
       } else { //Else create and return a list
         return ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: numOfPermissions,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
+            itemBuilder: (context, index) {
               return ListTile(
                 title: Column(
                     children:[
@@ -155,8 +158,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                             (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
                               height: 200,
                               color: Colors.white,
-                                child: new SingleChildScrollView(
-                                  child: new Column(
+                                child: SingleChildScrollView(
+                                  child: Column(
                                   children: [
                                     Icon(
                                       Icons.check_circle_rounded,
