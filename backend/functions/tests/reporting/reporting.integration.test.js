@@ -8,15 +8,12 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('/POST notifications', () => {
-    it('it should create an sick employee', () => {
+describe('/POST sick employees', () => {
+    it('it should create a sick employee', () => {
         let sickEmployee = {
             userId: "test-000",
             userEmail: "test-000",
-            subject: "test-000",
-            message: "test-000",
-            timestamp: "test-000",
-            adminId: "test-000",
+            timeOfDiagnosis: "test-000",
             companyId: "test-000"
         }
 
@@ -26,7 +23,7 @@ describe('/POST notifications', () => {
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('sick employee successfully created');
+            res.body.should.have.property('message').eql('Sick employee successfully created');
             //done();
         });
     });
@@ -37,10 +34,7 @@ describe('/DELETE sick employees', () => {
         let req = {
             userId: "test-000",
             userEmail: "test-000",
-            subject: "test-000",
-            message: "test-000",
-            timestamp: "test-000",
-            adminId: "test-000",
+            timeOfDiagnosis: "test-000",
             companyId: "test-000"
         };
     
@@ -64,10 +58,10 @@ describe('/DELETE sick employees', () => {
             });
     });
 }); 
-    
+
 describe('/GET sick employees', () => {
     it('it should GET all the sick employees', () => {
-  chai.request(server).get('/api/reporting/health/sick-employees/')
+  chai.request(server).get('/api/reporting/health/sick-employees/') // change to post - /view
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
