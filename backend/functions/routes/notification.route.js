@@ -1,7 +1,8 @@
 let router = require('express').Router();
+const authMiddleware = require('../authMiddleware.js');
 
 //default response
-router.get('/', function (req, res) {
+router.get('/notifications/rest', authMiddleware,function (req, res) {
     res.json({
         status: 200,
         message: 'This is the default notification API route'
