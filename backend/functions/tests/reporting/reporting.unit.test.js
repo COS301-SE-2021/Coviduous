@@ -122,15 +122,15 @@ describe('Create sick employee unit tests', function() {
 //     });
 // });
 
- describe('Get sick employees unit tests', function() {
-    it('Return 200 if retrieval is successful', function() {
-        chai.request(server)
-            .get('/api/reporting/health/sick-employees') // change to post - /view
-            .end((err, res) => {
-                should.exist(res);
-                res.should.have.status(200);
-                //console.log(res.body);
-                //done();
-            });
-    });
-});
+//  describe('Get sick employees unit tests', function() {
+//     it('Return 200 if retrieval is successful', function() {
+//         chai.request(server)
+//             .get('/api/reporting/health/sick-employees') // change to post - /view
+//             .end((err, res) => {
+//                 should.exist(res);
+//                 res.should.have.status(200);
+//                 //console.log(res.body);
+//                 //done();
+//             });
+//     });
+// });
