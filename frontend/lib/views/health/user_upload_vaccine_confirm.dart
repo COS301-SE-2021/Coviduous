@@ -25,6 +25,7 @@ class UserUploadVaccineConfirm extends StatefulWidget {
 //Let user pick PDF from their device
 class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
   String fileName = "";
+  String pickerFileName = "";
   List<int> fileBytes;
 
   Future getPdf() async {
@@ -41,6 +42,7 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
         if (platform == "Android" || platform == "iOS") { //Check if mobile browser
           FilePickerResult result = results.first;
           if (result != null) {
+            pickerFileName = results.first.names.first;
             File file = File(result.files.single.path);
             String tempFileName = '${randomName}.pdf';
             print(tempFileName);
@@ -51,6 +53,7 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
         } else { //Else, PC browser
           FilePickerResult result = results.first;
           if (result != null) {
+            pickerFileName = results.first.names.first;
             String tempFileName = '${randomName}.pdf';
             print(tempFileName);
             fileName = tempFileName;
@@ -61,6 +64,7 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
       } else { //Else, mobile app
         FilePickerResult result = results.first;
         if (result != null) {
+          pickerFileName = results.first.names.first;
           File file = File(result.files.single.path);
           String tempFileName = '${randomName}.pdf';
           print(tempFileName);
@@ -145,15 +149,22 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
                           height: MediaQuery.of(context).size.height / (4 * globals.getWidgetScaling()),
                           padding: EdgeInsets.all(16),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                              ),
                               Text(
                                   'Please note that all documents must be uploaded in a PDF format.'
                               ),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                                height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                    'Selected file: ' + pickerFileName
+                                ),
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
