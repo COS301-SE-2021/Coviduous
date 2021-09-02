@@ -15,6 +15,7 @@
     "testOffice": "mocha './tests/office/*.test.js' --timeout 30000",
     "testShift": "mocha './tests/shift/*.test.js' --timeout 30000",
     "testFloorPlan": "mocha './tests/floorplan/*.test.js' --timeout 30000",
+    "testReporting": "mocha './tests/reporting/*.test.js' --timeout 30000",
     "testHealth": "mocha './tests/health/*.test.js' --timeout 30000"
   },
   "engines": {
