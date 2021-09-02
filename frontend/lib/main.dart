@@ -46,10 +46,12 @@ import 'package:frontend/views/health/user_view_single_vaccine_confirm.dart';
 import 'package:frontend/views/health/user_report_infection.dart';
 import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/health/user_request_access.dart';
+import 'package:frontend/views/health/user_permissions_QR.dart';
 import 'package:frontend/views/health/visitor_health_check.dart';
 import 'package:frontend/views/health/visitor_home_health.dart';
 import 'package:frontend/views/health/visitor_view_guidelines.dart';
 import 'package:frontend/views/health/visitor_view_permissions.dart';
+
 
 //Shift
 import 'package:frontend/views/shift/home_shift.dart';
@@ -124,7 +126,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget{
-  //FlutterStatusbarcolor.setStatusBarColor(Colors.white);
   @override
   Widget build(BuildContext context){
     return MaterialApp(
@@ -209,6 +210,7 @@ class MyApp extends StatelessWidget{
         AdminContactTraceShifts.routeName: (ctx)=> AdminContactTraceShifts(),
         AdminSetRecoveredEmployee.routeName: (ctx)=> AdminSetRecoveredEmployee(),
         UserHealth.routeName: (ctx)=> UserHealth(),
+        GenerateQR.routeName: (ctx)=> GenerateQR(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
         UserViewGuidelines.routeName: (ctx)=> UserViewGuidelines(),
