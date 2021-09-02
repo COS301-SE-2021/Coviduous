@@ -112,7 +112,7 @@ class _UserViewPermissionsDetailsState extends State<UserViewPermissionsDetails>
 
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.redAccent,
+                                        primary: Colors.greenAccent,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                               10),
