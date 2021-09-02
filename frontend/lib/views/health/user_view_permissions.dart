@@ -124,25 +124,26 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                               ),
                             ) : Container(),
                             (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
-                              height: 100,
+                              height: 200,
                               color: Colors.white,
+                              child: new SingleChildScrollView(
+                              child: new Column(
 
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  /***
-                                  Column(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.favorite,
-                                      color: Colors.pink,
-                                      size: 50.0,
-                                      semanticLabel: 'Text to announce in accessibility modes',
-                                    ),
 
-                                  ],
+                                  Icon(
+                                    Icons.no_accounts_outlined,
+                                    color: Colors.redAccent,
+                                    size: 100.0,
+                                  ),
 
-                                  ), ***/
+                                  Container(
+                                    height: 50,
+                                    color: Colors.white,
+                                    child: Text('Date: ' + globals
+                                        .currentPermissions[index].getTimestamp()),
+                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                  ),
 
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
@@ -165,6 +166,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
 
                                       }),
                                 ],
+                              ),
                               ),
                             ) : Container(),
                           ]
