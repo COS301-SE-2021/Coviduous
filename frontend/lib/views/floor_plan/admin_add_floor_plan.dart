@@ -85,6 +85,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<bool> _onWillPop() async {
+    globals.floorPlanImageExists = false;
     Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
     return (await true);
   }
@@ -113,6 +114,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
+              globals.floorPlanImageExists = false;
               Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
             },
           ),
@@ -217,8 +219,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                                     context: context,
                                     builder: (ctx) => AlertDialog(
                                       title: Text('Creation unsuccessful'),
-                                      content: Text(
-                                          'Floor plans must have at least one floor.'),
+                                      content: Text('Floor plans must have at least one floor.'),
                                       actions: <Widget>[
                                         TextButton(
                                           child: Text('Okay'),
