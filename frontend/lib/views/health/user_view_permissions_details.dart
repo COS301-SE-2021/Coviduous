@@ -9,7 +9,7 @@ import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewPermissionsDetails extends StatefulWidget {
-  static const routeName = "/user_view_permissions";
+  static const routeName = "/user_view_permissions_details";
 
   @override
   _UserViewPermissionsDetailsState createState() => _UserViewPermissionsDetailsState();
