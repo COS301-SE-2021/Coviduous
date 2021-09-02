@@ -188,12 +188,12 @@ class MyApp extends StatelessWidget{
       ),
       home: Home(),
       routes: {
-        //Announcement
+        ///Announcement
         MakeAnnouncement.routeName: (ctx)=> MakeAnnouncement(),
         AdminViewAnnouncements.routeName: (ctx)=> AdminViewAnnouncements(),
         UserViewAnnouncements.routeName: (ctx)=> UserViewAnnouncements(),
 
-        //Floor plan
+        ///Floor plan
         FloorPlanScreen.routeName: (ctx)=> FloorPlanScreen(),
         AddFloorPlan.routeName: (ctx)=> AddFloorPlan(),
         AdminEditRoomModify.routeName: (ctx)=> AdminEditRoomModify(),
@@ -201,7 +201,7 @@ class MyApp extends StatelessWidget{
         AdminModifyFloors.routeName: (ctx)=> AdminModifyFloors(),
         AdminModifyRooms.routeName: (ctx)=> AdminModifyRooms(),
 
-        //Health
+        ///Health
         AdminPermissions.routeName: (ctx)=> AdminPermissions(),
         EmployeePermissions.routeName: (ctx)=> EmployeePermissions(),
         AdminViewAccessRequests.routeName: (ctx)=> AdminViewAccessRequests(),
@@ -230,7 +230,7 @@ class MyApp extends StatelessWidget{
         VisitorViewPermissions.routeName: (ctx)=> VisitorViewPermissions(),
         VisitorViewGuidelines.routeName: (ctx)=> VisitorViewGuidelines(),
 
-        //Shift
+        ///Shift
         ShiftScreen.routeName: (ctx)=> ShiftScreen(),
         AddShiftFloorPlans.routeName: (ctx)=> AddShiftFloorPlans(),
         AddShiftFloors.routeName: (ctx)=> AddShiftFloors(),
@@ -244,7 +244,7 @@ class MyApp extends StatelessWidget{
         ViewShiftsRooms.routeName: (ctx)=> ViewShiftsRooms(),
         ViewShiftsEditShift.routeName: (ctx)=> ViewShiftsEditShift(),
 
-        //Office
+        ///Office
         Office.routeName: (ctx)=> Office(),
         UserViewOfficeFloorPlans.routeName: (ctx)=> UserViewOfficeFloorPlans(),
         UserViewOfficeFloors.routeName: (ctx)=> UserViewOfficeFloors(),
@@ -253,7 +253,7 @@ class MyApp extends StatelessWidget{
         UserViewOfficeDesks.routeName: (ctx)=> UserViewOfficeDesks(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
 
-        //Notification
+        ///Notification
         AdminNotifications.routeName: (ctx)=> AdminNotifications(),
         AdminViewNotifications.routeName: (ctx)=> AdminViewNotifications(),
         MakeNotification.routeName: (ctx)=> MakeNotification(),
@@ -261,7 +261,7 @@ class MyApp extends StatelessWidget{
         MakeNotificationAddEmployee.routeName: (ctx)=> MakeNotificationAddEmployee(),
         UserViewNotifications.routeName: (ctx)=> UserViewNotifications(),
 
-        //Reporting
+        ///Reporting
         Reporting.routeName: (ctx)=> Reporting(),
         ReportingCompany.routeName: (ctx)=> ReportingCompany(),
         ReportingFloorPlans.routeName: (ctx)=> ReportingFloorPlans(),
@@ -277,7 +277,7 @@ class MyApp extends StatelessWidget{
         ReportingViewSingleTestResult.routeName: (ctx)=> ReportingViewSingleTestResult(),
         ReportingViewSingleVaccineConfirmation.routeName: (ctx)=> ReportingViewSingleVaccineConfirmation(),
 
-        //User
+        ///User
         AdminHomePage.routeName: (ctx)=> AdminHomePage(),
         AdminManageAccount.routeName: (ctx)=> AdminManageAccount(),
         AdminUpdateAccount.routeName: (ctx)=> AdminUpdateAccount(),
@@ -287,18 +287,18 @@ class MyApp extends StatelessWidget{
         UserUpdateAccount.routeName: (ctx)=> UserUpdateAccount(),
         UserDeleteAccount.routeName: (ctx)=> UserDeleteAccount(),
 
-        //Signup screens
+        ///Signup screens
         Register.routeName: (ctx)=> Register(),
         AdminRegister.routeName: (ctx)=> AdminRegister(),
         UserRegister.routeName: (ctx)=> UserRegister(),
 
-        //Login screen
+        ///Login screen
         LoginScreen.routeName: (ctx)=> LoginScreen(),
 
-        //Main homepage screen
+        ///Main homepage screen
         HomePage.routeName: (ctx)=> HomePage(),
 
-        //Reset password
+        ///Reset password
         ForgotPassword.routeName: (ctx)=> ForgotPassword(),
         AdminResetPassword.routeName: (ctx)=> AdminResetPassword(),
         UserResetPassword.routeName: (ctx)=> UserResetPassword(),
