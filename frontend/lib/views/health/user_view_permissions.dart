@@ -93,14 +93,21 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                           physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                           children: <Widget>[
                             (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
-                              height: 50,
+                              height: 200,
                               color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                child: new SingleChildScrollView(
+                                  child: new Column(
                                 children: [
+
+                                  Icon(
+                                    Icons.check_circle_rounded,
+                                    color: Colors.greenAccent,
+                                    size: 100.0,
+                                  ),
+
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
-                                        primary: Colors.greenAccent,
+                                        primary: Colors.green,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10),
                                         ),
@@ -111,7 +118,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       }),
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
-                                        primary: Colors.greenAccent,
+                                        primary: Colors.green,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10),
                                         ),
@@ -122,6 +129,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       }),
                                 ],
                               ),
+                                ),
                             ) : Container(),
                             (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
                               height: 200,
