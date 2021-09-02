@@ -9,8 +9,8 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 describe('/POST notifications', () => {
-    it('it should create an notification', () => {
-        let notification = {
+    it('it should create an sick employee', () => {
+        let sickEmployee = {
             userId: "test-000",
             userEmail: "test-000",
             subject: "test-000",
@@ -22,18 +22,18 @@ describe('/POST notifications', () => {
 
         chai.request(server)
         .post('/api/reporting/health/sick-employees/')
-        .send(notification)
+        .send(sickEmployee)
         .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('Notification successfully created');
+            res.body.should.have.property('message').eql('sick employee successfully created');
             //done();
         });
     });
 });
 
-describe('/DELETE notifications', () => {
-    it('should DELETE a notification', function() {
+describe('/DELETE sick employees', () => {
+    it('should DELETE a sick employee', function() {
         let req = {
             userId: "test-000",
             userEmail: "test-000",
@@ -50,7 +50,7 @@ describe('/DELETE notifications', () => {
             .end((err, res) => {
                 console.log(res.body);
                 let req2 = {
-                    notificationId: res.body.data.notificationId
+                    userId: res.body.data.userId
                 };
     
                 chai.request(server)
@@ -65,8 +65,8 @@ describe('/DELETE notifications', () => {
     });
 }); 
     
-describe('/GET notifications', () => {
-    it('it should GET all the notifications', () => {
+describe('/GET sick employees', () => {
+    it('it should GET all the sick employees', () => {
   chai.request(server).get('/api/reporting/health/sick-employees/')
       .end((err, res) => {
         expect(err).to.be.null;
