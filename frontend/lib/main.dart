@@ -47,6 +47,7 @@ import 'package:frontend/views/health/user_report_infection.dart';
 import 'package:frontend/views/health/user_request_access_shifts.dart';
 import 'package:frontend/views/health/user_request_access.dart';
 import 'package:frontend/views/health/user_permissions_QR.dart';
+import 'package:frontend/views/health/user_view_permissions_details.dart';
 import 'package:frontend/views/health/visitor_health_check.dart';
 import 'package:frontend/views/health/visitor_home_health.dart';
 import 'package:frontend/views/health/visitor_view_guidelines.dart';
@@ -223,6 +224,7 @@ class MyApp extends StatelessWidget{
         UserReportInfection.routeName: (ctx)=> UserReportInfection(),
         UserRequestAccess.routeName: (ctx)=> UserRequestAccess(),
         UserRequestAccessShifts.routeName: (ctx)=> UserRequestAccessShifts(),
+        UserViewPermissionsDetails.routeName: (ctx)=> UserViewPermissionsDetails(),
         VisitorHealth.routeName: (ctx)=> VisitorHealth(),
         VisitorHealthCheck.routeName: (ctx)=> VisitorHealthCheck(),
         VisitorViewPermissions.routeName: (ctx)=> VisitorViewPermissions(),

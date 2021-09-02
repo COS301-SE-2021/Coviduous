@@ -107,7 +107,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       ),
                                       child: Text('Generate QR'),
                                       onPressed: () {
-                                        ///Generate QR code page
+                                        Navigator.of(context).pushReplacementNamed(GenerateQR.routeName);
                                       }),
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
@@ -163,7 +163,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                                 SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
                                           }
                                         }); */
-                                        Navigator.of(context).pushReplacementNamed(GenerateQR.routeName);
+                                        Navigator.of(context).pushReplacementNamed(UserViewPermissionsDetails.routeName);
                                       }),
                                 ],
                               ),
