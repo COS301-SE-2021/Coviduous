@@ -59,14 +59,14 @@ describe('/DELETE sick employees', () => {
     });
 }); 
 
-describe('/GET sick employees', () => {
-    it('it should GET all the sick employees', () => {
-  chai.request(server).get('/api/reporting/health/sick-employees/') // change to post - /view
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).should.be.a('object');
-        //done();
-      })//.catch(done);
-    });
-});
+// describe('/GET sick employees', () => {
+//     it('it should GET all the sick employees', () => {
+//   chai.request(server).get('/api/reporting/health/sick-employees/') // change to post - /view
+//       .end((err, res) => {
+//         expect(err).to.be.null;
+//         expect(res).to.have.status(200);
+//         expect(res.body).should.be.a('object');
+//         //done();
+//       })//.catch(done);
+//     });
+// });
