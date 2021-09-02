@@ -255,16 +255,18 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
         bottomNavigationBar: BottomAppBar(
           child: Container(
               alignment: Alignment.bottomLeft,
-              height: 50,
-              width: 130,
-              padding: EdgeInsets.all(10),
+              height: MediaQuery.of(context).size.height/20,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                child: Text('+',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 4,
                   ),
                 ),
-                child: Text('Add floor'),
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff00990F),
+                ),
                 onPressed: () {
                   //Add new floor and reload page
                   floorPlanHelpers.createFloor(globals.currentFloorPlanNum).then((result) {
