@@ -50,6 +50,7 @@ dependencies:
   syncfusion_flutter_charts: ^19.2.57
   flutter_webrtc: ^0.6.5 # Needed to implement video conferencing
   qr_flutter: ^4.0.0
+  flutter_typeahead: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,7 @@ flutter:
     - assets/images/placeholder-office-floor.png
     - assets/images/placeholder-office-room.png
     - assets/images/placeholder-profile-image.png
+    - assets/images/placeholder-shift.png
     - assets/images/coffee1.jpg
     - assets/images/sick1.jpg
     - assets/images/sick2.jpg
