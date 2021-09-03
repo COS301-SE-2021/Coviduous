@@ -123,7 +123,8 @@ exports.createFloorPlan = async (req, res) => {
       maxCapacity: 0,
       floorplanNumber: reqJson.floorplanNumber,
       adminId: reqJson.adminId,
-      companyId:reqJson.companyId
+      companyId:reqJson.companyId,
+      base64String: reqJson.base64String
     }
 
     let floorplan = await database.getFloorPlan(reqJson.floorplanNumber);
@@ -169,7 +170,8 @@ try {
     currentCapacity:room.currentCapacity,
     deskArea:room.deskArea, 
     capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
-    capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle
+    capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle,
+    base64String: reqJson.base64String
   }
 
   let floor = await database.getFloor(reqJson.floorNumber);
