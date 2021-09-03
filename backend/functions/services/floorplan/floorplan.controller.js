@@ -320,7 +320,8 @@ try {
     currentCapacity:room.currentCapacity,
     deskArea:room.deskArea,
     capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
-    capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle
+    capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle,
+    base64String: reqJson.base64String,
   }
   await database.editRoom(roomData);
   
