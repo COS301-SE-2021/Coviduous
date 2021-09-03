@@ -120,8 +120,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
           ),
         ),
         body: Center(
-          child: SingleChildScrollView(
-            //So the element doesn't overflow when you open the keyboard
+          child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Container(
