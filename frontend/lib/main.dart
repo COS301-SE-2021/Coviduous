@@ -59,7 +59,6 @@ import 'package:frontend/views/shift/admin_add_shift_floors.dart';
 import 'package:frontend/views/shift/admin_add_shift_rooms.dart';
 import 'package:frontend/views/shift/admin_add_shift_create_shift.dart';
 import 'package:frontend/views/shift/admin_add_shift_assign_employees.dart';
-import 'package:frontend/views/shift/admin_add_shift_add_employee.dart';
 import 'package:frontend/views/shift/admin_view_shifts_edit_shift.dart';
 import 'package:frontend/views/shift/admin_view_shifts.dart';
 import 'package:frontend/views/shift/admin_view_shifts_floor_plans.dart';
@@ -236,7 +235,6 @@ class MyApp extends StatelessWidget{
         AddShiftRooms.routeName: (ctx)=> AddShiftRooms(),
         AddShiftCreateShift.routeName: (ctx)=> AddShiftCreateShift(),
         AddShiftAssignEmployees.routeName: (ctx)=> AddShiftAssignEmployees(),
-        AddShiftAddEmployee.routeName: (ctx)=> AddShiftAddEmployee(),
         ViewShifts.routeName: (ctx)=> ViewShifts(),
         ViewShiftsFloorPlans.routeName: (ctx)=> ViewShiftsFloorPlans(),
         ViewShiftsFloors.routeName: (ctx)=> ViewShiftsFloors(),
