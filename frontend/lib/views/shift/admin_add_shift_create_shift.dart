@@ -137,176 +137,179 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
               children: <Widget>[
                 Center(
                   child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-                    child: Container(
-                      color: Colors.white,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      padding: EdgeInsets.all(16),
-                      child: Form(
-                        key: _formKey,
-                        child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: <Widget>[
-                                Container(
-                                  alignment: Alignment.center,
-                                  margin: EdgeInsets.all(20.0),
-                                  child: Image(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                        padding: EdgeInsets.all(16),
+                        child: Form(
+                          key: _formKey,
+                          child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Container(
                                     alignment: Alignment.center,
-                                    image: AssetImage('assets/images/placeholder-shift.png'),
-                                    width: double.maxFinite,
-                                    height: MediaQuery.of(context).size.height/6,
+                                    margin: EdgeInsets.all(20.0),
+                                    child: Image(
+                                      alignment: Alignment.center,
+                                      image: AssetImage('assets/images/placeholder-shift.png'),
+                                      width: double.maxFinite,
+                                      height: MediaQuery.of(context).size.height/6,
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                                  color: Theme.of(context).primaryColor,
-                                  child: Text(
-                                    'Room ' + globals.currentRoomIndex.toString(),
-                                    style: TextStyle(color: Colors.white,
-                                        fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                                    color: Theme.of(context).primaryColor,
+                                    child: Text(
+                                      'Room ' + globals.currentRoomIndex.toString(),
+                                      style: TextStyle(color: Colors.white,
+                                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Date: ' + "${_selectedDate.toLocal()}".split(' ')[0],
-                                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                                    ),
-                                    SizedBox(
-                                      height: MediaQuery.of(context).size.height/20,
-                                      width: MediaQuery.of(context).size.height/20,
-                                      child: ElevatedButton(
-                                        child: Icon(Icons.access_time),
-                                        style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                        ),
-                                        onPressed: () => _selectDate(context),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Start time: ' + _selectedStartTime.format(context),
-                                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                                    ),
-                                    SizedBox(
-                                      height: MediaQuery.of(context).size.height/20,
-                                      width: MediaQuery.of(context).size.height/20,
-                                      child: ElevatedButton(
-                                        child: Icon(Icons.access_time),
-                                        style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                        ),
-                                        onPressed: () => _selectStartTime(context),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'End time: ' + _selectedEndTime.format(context),
-                                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                                    ),
-                                    SizedBox(
-                                      height: MediaQuery.of(context).size.height/20,
-                                      width: MediaQuery.of(context).size.height/20,
-                                      child: ElevatedButton(
-                                        child: Icon(Icons.access_time),
-                                        style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                        ),
-                                        onPressed: () => _selectEndTime(context),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                TextFormField(
-                                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
-                                  decoration: InputDecoration(
-                                    labelText: 'Group number or name',
+                                  SizedBox(
+                                    height: 10.0,
                                   ),
-                                  keyboardType: TextInputType.text,
-                                  controller: _groupName,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter this field';
-                                    } else if (value.isNotEmpty) {
-                                      if(!(RegExp(r"^[a-zA-Z0-9 ,.'-]+$")).hasMatch(value)) //Check if valid name format
-                                          {
-                                        return 'Invalid group number or name';
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Date: ' + "${_selectedDate.toLocal()}".split(' ')[0],
+                                        style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                      ),
+                                      SizedBox(
+                                        height: MediaQuery.of(context).size.height/20,
+                                        width: MediaQuery.of(context).size.height/20,
+                                        child: ElevatedButton(
+                                          child: Icon(Icons.date_range),
+                                          style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                          onPressed: () => _selectDate(context),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Start time: ' + _selectedStartTime.format(context),
+                                        style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                      ),
+                                      SizedBox(
+                                        height: MediaQuery.of(context).size.height/20,
+                                        width: MediaQuery.of(context).size.height/20,
+                                        child: ElevatedButton(
+                                          child: Icon(Icons.access_time),
+                                          style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                          onPressed: () => _selectStartTime(context),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'End time: ' + _selectedEndTime.format(context),
+                                        style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                      ),
+                                      SizedBox(
+                                        height: MediaQuery.of(context).size.height/20,
+                                        width: MediaQuery.of(context).size.height/20,
+                                        child: ElevatedButton(
+                                          child: Icon(Icons.access_time),
+                                          style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                          onPressed: () => _selectEndTime(context),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  TextFormField(
+                                    textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                    decoration: InputDecoration(
+                                      labelText: 'Group number or name',
+                                    ),
+                                    keyboardType: TextInputType.text,
+                                    controller: _groupName,
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter this field';
+                                      } else if (value.isNotEmpty) {
+                                        if(!(RegExp(r"^[a-zA-Z0-9 ,.'-]+$")).hasMatch(value)) //Check if valid name format
+                                            {
+                                          return 'Invalid group number or name';
+                                        }
                                       }
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                ElevatedButton(
-                                  child: Text(
-                                      'Proceed'
+                                      return null;
+                                    },
                                   ),
-                                  onPressed: () {
-                                    FormState form = _formKey.currentState;
-                                    if (form.validate()) {
-                                      int selectedStartTimeInMinutes = _selectedStartTime.hour * 60 + _selectedStartTime.minute;
-                                      int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
-                                      //Only allow if start time is before end time
-                                      if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
-                                        globals.selectedShiftDate = _selectedDate.toString();
-                                        globals.selectedShiftStartTime = _selectedStartTime.toString();
-                                        globals.selectedShiftEndTime = _selectedEndTime.toString();
-                                        globals.currentGroupDescription = _groupName.text;
-                                        globals.tempGroup = new Group(groupNumber: "", groupName: globals.currentGroupDescription,
-                                            userEmails: [], shiftNumber: "", adminId: globals.loggedInUserId);
-                                        Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  ElevatedButton(
+                                    child: Text(
+                                        'Proceed'
+                                    ),
+                                    onPressed: () {
+                                      FormState form = _formKey.currentState;
+                                      if (form.validate()) {
+                                        int selectedStartTimeInMinutes = _selectedStartTime.hour * 60 + _selectedStartTime.minute;
+                                        int selectedEndTimeInMinutes = _selectedEndTime.hour * 60 + _selectedEndTime.minute;
+                                        //Only allow if start time is before end time
+                                        if (selectedStartTimeInMinutes < selectedEndTimeInMinutes) {
+                                          globals.selectedShiftDate = _selectedDate.toString();
+                                          globals.selectedShiftStartTime = _selectedStartTime.toString();
+                                          globals.selectedShiftEndTime = _selectedEndTime.toString();
+                                          globals.currentGroupDescription = _groupName.text;
+                                          globals.tempGroup = new Group(groupNumber: "", groupName: globals.currentGroupDescription,
+                                              userEmails: [], shiftNumber: "", adminId: globals.loggedInUserId);
+                                          Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                title: Text('Error'),
+                                                content: Text('Shift not created. Start time must be before end time.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text('Okay'),
+                                                    onPressed: (){
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                  )
+                                                ],
+                                              )
+                                          );
+                                        }
                                       } else {
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                              title: Text('Error'),
-                                              content: Text('Shift not created. Start time must be before end time.'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: Text('Okay'),
-                                                  onPressed: (){
-                                                    Navigator.of(ctx).pop();
-                                                  },
-                                                )
-                                              ],
-                                            )
-                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(content: Text("Please enter required fields")));
                                       }
-                                    } else {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Please enter required fields")));
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            )
+                                  )
+                                ],
+                              )
+                          ),
                         ),
                       ),
                     ),
