@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -137,8 +139,12 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                     children: [
                                       Container(
                                         alignment: Alignment.center,
-                                        child: Image(
-                                          image: AssetImage('assets/images/placeholder-office-building.png'),
+                                        child: (globals.currentFloorPlans[index].getImageBytes() != "")
+                                            ? Image(
+                                          image: MemoryImage(base64Decode(globals.currentFloorPlans[index].getImageBytes()))
+                                        )
+                                            : Image(
+                                            image: AssetImage('assets/images/placeholder-office-building.png')
                                         ),
                                       ),
                                       Container(

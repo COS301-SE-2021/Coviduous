@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -307,7 +308,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                               _tempName = _roomName.text;
                                             }
                                             floorPlanHelpers.updateRoom(_tempName, num.parse(_roomArea.text), num.parse(_deskArea.text),
-                                                num.parse(_numOfDesks.text), room.getCapacityPercentage()).then((result) {
+                                                num.parse(_numOfDesks.text), room.getCapacityPercentage(), base64Encode(fileBytes)).then((result) {
                                                   if (result == true) {
                                                     ScaffoldMessenger.of(context).showSnackBar(
                                                         SnackBar(content: Text("Room information updated")));

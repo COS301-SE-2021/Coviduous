@@ -21,7 +21,7 @@ int numRooms = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on firebase
 
-Future<bool> createFloorPlan(num numFloors, String adminId, String companyId) async {
+Future<bool> createFloorPlan(num numFloors, String adminId, String companyId, String imageBytes) async {
   String path = "/floorplan";
   String url = server + path;
   var request;
@@ -32,6 +32,7 @@ Future<bool> createFloorPlan(num numFloors, String adminId, String companyId) as
       "numFloors": numFloors,
       "adminId": adminId,
       "companyId": companyId,
+      "base64String": imageBytes,
     });
 
     var response = await request.send();
@@ -75,7 +76,7 @@ Future<bool> createFloor(String floorPlanNumber, String adminId, String companyI
   return false;
 }
 
-Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber) async {
+Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber, String imageBytes) async {
   String path = "/floorplan/room";
   String url = server + path;
   var request;
@@ -93,6 +94,7 @@ Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber) async {
       "deskArea": 0,
       "capacityOfPeopleForSixFtGrid": 0,
       "capacityOfPeopleForSixFtCircle": 0,
+      "base64String": imageBytes,
     });
 
     print(request.body);
@@ -219,8 +221,8 @@ Future<List<Room>> getRooms(String floorNumber) async {
   return null;
 }
 
-Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName,
-    num roomArea, num numberOfDesks, num deskArea, num capacityPercentage) async {
+Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName, num roomArea,
+    num numberOfDesks, num deskArea, num capacityPercentage, String imageBytes) async {
   String path = '/floorplan/room';
   String url = server + path;
   var request;
@@ -235,6 +237,7 @@ Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName,
       "numberDesks": numberOfDesks,
       "deskArea": deskArea,
       "capacityPercentage": capacityPercentage,
+      "base64String": imageBytes,
     });
 
     var response = await request.send();

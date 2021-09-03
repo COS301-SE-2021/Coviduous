@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,6 @@ class AddFloorPlan extends StatefulWidget {
   _AddFloorPlanState createState() => _AddFloorPlanState();
 }
 
-//add floor plan
 class _AddFloorPlanState extends State<AddFloorPlan> {
   String _numFloor;
   String fileName = "";
@@ -76,10 +76,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
       }
       setState(() {});
     });
-  }
-
-  Future saveImage(List<int> asset, String name) {
-    //Upload the image to Firestore
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -204,9 +200,8 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                               }
                               _formKey.currentState.save();
 
-                              floorPlanHelpers.createFloorPlan(num.parse(_numFloor)).then((result) {
+                              floorPlanHelpers.createFloorPlan(num.parse(_numFloor), base64Encode(fileBytes)).then((result) {
                                 if (result == true) {
-                                  saveImage(fileBytes, fileName);
                                   floorPlanHelpers.getFloorPlans().then((result) {
                                     if (result == true) {
                                       Navigator.of(context).pushReplacementNamed(AdminModifyFloorPlans.routeName);

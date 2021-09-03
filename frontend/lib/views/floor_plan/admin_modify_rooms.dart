@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -108,8 +110,12 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height/6,
-                          child: Image(
-                            image: AssetImage('assets/images/placeholder-office-room.png'),
+                          child: (globals.currentRooms[index].getImageBytes() != "")
+                              ? Image(
+                              image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                          )
+                              : Image(
+                              image: AssetImage('assets/images/placeholder-office-room.png')
                           ),
                         ),
                       ],
@@ -359,7 +365,7 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                 ),
                 onPressed: () {
                   //Add new room and reload page
-                  floorPlanHelpers.createRoom(globals.currentFloorNum).then((result) {
+                  floorPlanHelpers.createRoom(globals.currentFloorNum, "").then((result) {
                     if (result == true) {
                       floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
                         if (result == true) {
