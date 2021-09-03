@@ -266,6 +266,7 @@ List<Floor> currentFloors = [];
 String currentRoomNum = '';
 List<Room> currentRooms = [];
 Room currentRoom;
+int currentRoomIndex = 0;
 
 //Current shift/shifts you're working with
 String currentShiftNum = '';
@@ -284,6 +285,22 @@ List<Group> currentGroups = [];
 
 //Current group description you're working with
 String currentGroupDescription = '';
+
+//Current emails registered to a company, used for autocompletion provided by flutter_typeahead
+List<String> currentEmails = [
+  'email1@email1.com',
+  'email2@email2.com',
+];
+
+class CurrentEmails {
+  static List<String> getSuggestions(String query) {
+    List<String> matches = [];
+    matches.addAll(currentEmails);
+
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+}
 
 //============================
 // Controller request headers
