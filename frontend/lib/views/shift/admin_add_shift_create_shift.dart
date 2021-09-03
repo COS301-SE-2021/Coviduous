@@ -24,7 +24,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
   TimeOfDay _selectedEndTime = TimeOfDay.now();
 
   TextEditingController _groupName = TextEditingController();
-  TextEditingController _groupDescription = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -140,7 +139,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                   child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
                     child: Container(
                       color: Colors.white,
-                      height: MediaQuery.of(context).size.height/(2.8*globals.getWidgetScaling()),
                       width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                       padding: EdgeInsets.all(16),
                       child: Form(
@@ -150,14 +148,13 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 Container(
-                                  alignment: Alignment.centerLeft,
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                                  color: Theme.of(context).primaryColor,
-                                  child: Text(
-                                    "Floor plan: " + globals.currentFloorPlanNum,
-                                    style: TextStyle(color: Colors.white,
-                                        fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.all(20.0),
+                                  child: Image(
+                                    alignment: Alignment.center,
+                                    image: AssetImage('assets/images/placeholder-shift.png'),
+                                    width: double.maxFinite,
+                                    height: MediaQuery.of(context).size.height/6,
                                   ),
                                 ),
                                 Container(
@@ -166,18 +163,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                                   color: Theme.of(context).primaryColor,
                                   child: Text(
-                                    "Floor: " + globals.currentFloorNum,
-                                    style: TextStyle(color: Colors.white,
-                                        fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                                  color: Theme.of(context).primaryColor,
-                                  child: Text(
-                                    "Room: " + globals.currentRoomNum,
+                                    'Room ' + globals.currentRoomIndex.toString(),
                                     style: TextStyle(color: Colors.white,
                                         fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                   ),
@@ -185,50 +171,74 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                 SizedBox(
                                   height: 10.0,
                                 ),
-                                Text(
-                                    "${_selectedDate.toLocal()}".split(' ')[0],
-                                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Date: ' + "${_selectedDate.toLocal()}".split(' ')[0],
+                                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                    ),
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height/20,
+                                      width: MediaQuery.of(context).size.height/20,
+                                      child: ElevatedButton(
+                                        child: Icon(Icons.access_time),
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                        onPressed: () => _selectDate(context),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 10.0,
                                 ),
-                                ElevatedButton(
-                                  onPressed: () => _selectDate(context),
-                                  child: Text('Select date'),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Start time: ' + _selectedStartTime.format(context),
+                                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                    ),
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height/20,
+                                      width: MediaQuery.of(context).size.height/20,
+                                      child: ElevatedButton(
+                                        child: Icon(Icons.access_time),
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                        onPressed: () => _selectStartTime(context),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 10.0,
                                 ),
-                                Text(
-                                    _selectedStartTime.format(context),
-                                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () => _selectStartTime(context),
-                                  child: Text('Select start time'),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                    _selectedEndTime.format(context),
-                                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () => _selectEndTime(context),
-                                  child: Text('Select end time'),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'End time: ' + _selectedEndTime.format(context),
+                                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                    ),
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height/20,
+                                      width: MediaQuery.of(context).size.height/20,
+                                      child: ElevatedButton(
+                                        child: Icon(Icons.access_time),
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                        onPressed: () => _selectEndTime(context),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 TextFormField(
-                                  textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
                                   decoration: InputDecoration(
                                     labelText: 'Group number or name',
                                   ),
@@ -242,20 +252,6 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                           {
                                         return 'Invalid group number or name';
                                       }
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                TextFormField(
-                                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
-                                  decoration: InputDecoration(
-                                    labelText: 'Group description',
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  controller: _groupDescription,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter this field';
                                     }
                                     return null;
                                   },
@@ -277,7 +273,7 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                         globals.selectedShiftDate = _selectedDate.toString();
                                         globals.selectedShiftStartTime = _selectedStartTime.toString();
                                         globals.selectedShiftEndTime = _selectedEndTime.toString();
-                                        globals.currentGroupDescription = _groupDescription.text;
+                                        globals.currentGroupDescription = _groupName.text;
                                         globals.tempGroup = new Group(groupNumber: "", groupName: globals.currentGroupDescription,
                                             userEmails: [], shiftNumber: "", adminId: globals.loggedInUserId);
                                         Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
