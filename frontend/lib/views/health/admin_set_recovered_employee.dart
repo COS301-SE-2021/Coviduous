@@ -39,9 +39,9 @@ class _AdminSetRecoveredEmployeeState extends State<AdminSetRecoveredEmployee> {
     }
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Set employee recovery status"),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Set employee recovery status"),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
@@ -49,47 +49,50 @@ class _AdminSetRecoveredEmployeeState extends State<AdminSetRecoveredEmployee> {
           ),
         ),
         body: Center(
-          child: new Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Enter employee email address",
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  obscureText: false,
-                  controller: _employeeEmail,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "Enter employee email address",
                     ),
+                    keyboardType: TextInputType.emailAddress,
+                    obscureText: false,
+                    controller: _employeeEmail,
                   ),
-                  child: Text("Proceed"),
-                  onPressed: () {
-                    reportingHelpers.addRecoveredEmployee(_employeeEmail.text).then((result) {
-                      if (result == true) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Employee's status set to recovered successfully.")));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("An error occurred while setting employee status. Please try again later.")));
-                      }
-                    });
-                  },
-                )
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text("Proceed"),
+                    onPressed: () {
+                      reportingHelpers.addRecoveredEmployee(_employeeEmail.text).then((result) {
+                        if (result == true) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Employee's status set to recovered successfully.")));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("An error occurred while setting employee status. Please try again later.")));
+                        }
+                      });
+                    },
+                  )
 
-              ],
+                ],
+              ),
             ),
           ),
         ),

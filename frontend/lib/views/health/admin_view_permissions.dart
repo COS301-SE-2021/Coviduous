@@ -50,52 +50,55 @@ class _AdminViewPermissionsState extends State<AdminViewPermissions> {
           ),
         ),
         body: Center(
-          child: new Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Employee email",
-                  ),
-                  obscureText: false,
-                  controller: _employeeEmail,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom (
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height/(4*globals.getWidgetScaling()),
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "Employee email",
                     ),
+                    obscureText: false,
+                    controller: _employeeEmail,
                   ),
-                  child: Text("Proceed"),
-                  onPressed: () {
-                    healthHelpers.getPermissionsForEmployee(_employeeEmail.text).then((result) {
-                      if (result == true) {
-                        userHelpers.getOtherUser(globals.currentPermissions[0].getUserId()).then((result) {
-                          if (result == true) {
-                            Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("No permissions found for this user.")));
-                          }
-                        });
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("There was an error while retrieving user permissions. Please try again later.")));
-                      }
-                    });
-                  },
-                )
+                  SizedBox(
+                    height: 16,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom (
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text("Proceed"),
+                    onPressed: () {
+                      healthHelpers.getPermissionsForEmployee(_employeeEmail.text).then((result) {
+                        if (result == true) {
+                          userHelpers.getOtherUser(globals.currentPermissions[0].getUserId()).then((result) {
+                            if (result == true) {
+                              Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("No permissions found for this user.")));
+                            }
+                          });
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("There was an error while retrieving user permissions. Please try again later.")));
+                        }
+                      });
+                    },
+                  )
 
-              ],
+                ],
+              ),
             ),
           ),
         ),

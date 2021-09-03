@@ -49,21 +49,28 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No requests available', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('No access requests have currently been made.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                      color: Theme.of(context).primaryColor,
+                      child: Text('No requests available', style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('No access requests have currently been made.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                    ),
+                  ],
+                ),
               )
             ]
         );
