@@ -44,89 +44,133 @@ class _ReportingFloorsState extends State<ReportingFloors> {
       print(numOfFloors);
 
       if (numOfFloors == 0) {
-        return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height /
-                (5 * globals.getWidgetScaling()),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width /
-                (2 * globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height /
-                (24 * globals.getWidgetScaling()),
-            color: Theme.of(context).primaryColor,
-            child: Text('No floors found',
-                style: TextStyle(color: Colors.white,
-                    fontSize:
-                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-          ),
-          Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width /
-                  (2 * globals.getWidgetScaling()),
-              height: MediaQuery.of(context).size.height /
-                  (12 * globals.getWidgetScaling()),
-              color: Colors.white,
-              padding: EdgeInsets.all(12),
-              child: Text('No floors have been registered for this floor plan.',
-                  style: TextStyle(
-                      fontSize:
-                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
-        ]);
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                      color: globals.firstColor,
+                      child: Text('No floors found',
+                          style: TextStyle(color: Colors.white,
+                              fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                          )
+                      ),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height / (12 * globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('No floors have been registered for this floor plan.',
+                            style: TextStyle(
+                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                            )
+                        )
+                    ),
+                  ],
+                ),
+              )
+            ]);
       } else {
-        //Else create and return a list
-        return ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
-            itemCount: numOfFloors,
-            itemBuilder: (context, index) {
-              //Display a list tile FOR EACH floor in floors[]
-              return ListTile(
-                title: Column(children: [
-                  Container(
+        //Else create and return a gridview
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                  color: globals.firstColor,
+                  child: Text('Choose a floor',
+                      style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                ),
+                Container(
                     alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).primaryColor,
-                    child: Text('Floor ' + globals.currentFloors[index].getFloorNumber()),
-                  ),
-                  ListView(
-                      shrinkWrap: true,
-                      physics:
-                      NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                      children: <Widget>[
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Number of rooms: ' + globals.currentFloors[index].getNumRooms().toString()),
+                    width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
+                    color: Colors.white,
+                    padding: EdgeInsets.all(10),
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 2/3,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
                         ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: numOfFloors,
+                        itemBuilder: (context, index) {
+                          return Column(
                             children: [
+                              Container(
+                                color: globals.firstColor,
+                                padding: EdgeInsets.all(10),
+                                width: MediaQuery.of(context).size.width,
+                                child: Text('Floor ' + (index+1).toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.4
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  child: Stack(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          child: Image(
+                                            image: AssetImage('assets/images/placeholder-office-floor.png'),
+                                          ),
+                                        ),
+                                      ]
+                                  ),
+                                ),
+                              ),
                               ElevatedButton(
-                                  child: Text('View'),
-                                  onPressed: () {
-                                    globals.currentFloorNum = globals.currentFloors[index].getFloorNumber();
-                                    floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
-                                      if (result == true) {
-                                        Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("An error occurred while retrieving rooms. Please try again later.")));
-                                      }
-                                    });
-                                  }),
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/16),
+                                  primary: globals.firstColor,
+                                ),
+                                child: Text(globals.currentFloors[index].getNumRooms().toString() + ' rooms',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                onPressed: () {
+                                  globals.currentFloorNum = globals.currentFloors[index].getFloorNumber();
+                                  floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
+                                    if (result == true) {
+                                      Navigator.of(context).pushReplacementNamed(ReportingRooms.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("An error occurred while retrieving rooms. Please try again later.")));
+                                    }
+                                  });
+                                },
+                              ),
                             ],
-                          ),
-                        ),
-                      ])
-                ]),
-              );
-            });
+                          );
+                        })
+                ),
+              ]),
+        );
       }
     }
 
@@ -144,8 +188,8 @@ class _ReportingFloorsState extends State<ReportingFloors> {
         ),
         body: Stack(
           children: <Widget>[
-            SingleChildScrollView(
-              child: Center(
+            Center(
+              child: SingleChildScrollView(
                 child: getList(),
               ),
             ),

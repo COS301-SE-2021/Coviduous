@@ -69,26 +69,29 @@ class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecovered
       }
 
       if (numberOfEmployees == 0) { //If the number of bookings = 0, don't display a list
-        return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No employee health status found', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('No health statuses available.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-              )
-            ]
+                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                  color: Theme.of(context).primaryColor,
+                  child: Text('No employee health status found', style: TextStyle(color: Colors.white,
+                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                    height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                    color: Colors.white,
+                    padding: EdgeInsets.all(12),
+                    child: Text('No health statuses available.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                )
+              ]
+          ),
         );
       } else { //Else create and return a list
         return ListView.builder(
