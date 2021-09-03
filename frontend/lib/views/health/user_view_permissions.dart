@@ -41,9 +41,6 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
             title: 'Coviduous - Permission QR code',
             child: pw.Text('Coviduous - Permission QR code', textScaleFactor: 2),
           ),
-          pw.Bullet(
-            text: 'Company ID: ' + globals.loggedInCompanyId,
-          ),
           pw.SizedBox(
             width: 500,
             child: pw.Divider(color: PdfColors.grey, thickness: 1.5),
@@ -156,7 +153,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                           physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                           children: <Widget>[
                             (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
-                              height: 200,
+                              height: 220,
                               color: Colors.white,
                                 child: SingleChildScrollView(
                                   child: Column(
@@ -178,6 +175,9 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                         ByteData byteData = await QrPainter(data: "123456789", version: QrVersions.auto).toImageData(200.0);
                                         saveQRCode(globals.currentPermissions[index].getPermissionId(), byteData.buffer.asUint8List());
                                       }),
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height/70,
+                                    ),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom (
                                         primary: Colors.green,
@@ -232,12 +232,15 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                             )
                                         );
                                       }),
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height/70,
+                                    ),
                                 ],
                               ),
                                 ),
                             ) : Container(),
                             (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
-                              height: 200,
+                              height: 220,
                               color: Colors.white,
                               child: new SingleChildScrollView(
                                 child: new Column(

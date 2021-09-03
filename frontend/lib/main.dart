@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/auth/auth_provider.dart';
 
 //Splash screen, main homepage, and login
 import 'package:frontend/views/splash_screen.dart';
@@ -120,6 +121,9 @@ import 'package:frontend/globals.dart' as globals;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
+  if (globals.getIfOnPC()) {
+    AuthClass().signOut();
+  }
   runApp(MyApp());
 }
 

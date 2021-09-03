@@ -12,7 +12,6 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/health/visitor_home_health.dart';
 
 import 'package:frontend/controllers/pdf_helpers.dart' as pdfHelpers;
-import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class VisitorViewPermissions extends StatefulWidget {
@@ -39,9 +38,6 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
             level: 0,
             title: 'Coviduous - Permission QR code',
             child: pw.Text('Coviduous - Permission QR code', textScaleFactor: 2),
-          ),
-          pw.Bullet(
-            text: 'Company ID: ' + globals.loggedInCompanyId,
           ),
           pw.SizedBox(
             width: 500,
@@ -105,27 +101,29 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
       }
 
        if(numOfPermissions == 0) {
-         return Column(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               Container(
-                 alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                 color: Theme.of(context).primaryColor,
-                 child: Text('No permissions granted', style: TextStyle(color: Colors.white,
-                     fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-               ),
-               Container(
+         return ClipRRect(
+           borderRadius: BorderRadius.circular(20),
+           child: Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Container(
                    alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                   color: Colors.white,
-                   padding: EdgeInsets.all(12),
-                   child: Text('No permissions have been granted to you.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-               )
-
-             ]
+                    height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                   color: globals.firstColor,
+                   child: Text('No permissions granted', style: TextStyle(color: Colors.white,
+                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                 ),
+                 Container(
+                     alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                     color: Colors.white,
+                     padding: EdgeInsets.all(12),
+                     child: Text('No permissions have been granted to you.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                 )
+               ]
+           ),
          );
        } else {
          return ListView.builder(
@@ -153,7 +151,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                            physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
                            children: <Widget>[
                              (globals.currentPermissions[index].getOfficeAccess() == true) ? Container(
-                               height: 200,
+                               height: 220,
                                color: Colors.white,
                                child: new SingleChildScrollView(
                                  child: new Column(
@@ -175,6 +173,9 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                                            ByteData byteData = await QrPainter(data: "123456789", version: QrVersions.auto).toImageData(200.0);
                                            saveQRCode(globals.currentPermissions[index].getPermissionId(), byteData.buffer.asUint8List());
                                          }),
+                                     SizedBox(
+                                       height: MediaQuery.of(context).size.height/70,
+                                     ),
                                      ElevatedButton(
                                          style: ElevatedButton.styleFrom (
                                            primary: Colors.green,
@@ -229,12 +230,15 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                                                )
                                            );
                                          }),
+                                     SizedBox(
+                                       height: MediaQuery.of(context).size.height/70,
+                                     ),
                                    ],
                                  ),
                                ),
                              ) : Container(),
                              (globals.currentPermissions[index].getOfficeAccess() == false) ? Container(
-                               height: 200,
+                               height: 220,
                                color: Colors.white,
                                child: new SingleChildScrollView(
                                  child: new Column(

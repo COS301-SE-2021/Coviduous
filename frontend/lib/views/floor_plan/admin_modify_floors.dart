@@ -208,7 +208,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(MediaQuery.of(context).size.width, 1),
+                                  fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/16),
                                   primary: globals.firstColor,
                                 ),
                                 child: Text(globals.currentFloors[index].getNumRooms().toString() + ' rooms',
