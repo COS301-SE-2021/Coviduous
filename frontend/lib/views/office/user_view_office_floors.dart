@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'dart:convert';
+///import 'dart:convert';
 
 import 'package:frontend/views/office/user_view_office_floor_plans.dart';
 import 'package:frontend/views/office/user_view_office_rooms.dart';
@@ -72,7 +72,8 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
         );
       }
       else
-      { //Else create and return a list
+      {
+        //Else create and return a gridview
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Column(
@@ -83,7 +84,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                   width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
                   height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
                   color: globals.firstColor,
-                  child: Text('Choose a floor plan',
+                  child: Text('Choose a floor',
                       style: TextStyle(color: Colors.white,
                           fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                 ),
@@ -109,7 +110,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                 color: globals.firstColor,
                                 padding: EdgeInsets.all(10),
                                 width: MediaQuery.of(context).size.width,
-                                child: Text('Floor' + (index+1).toString(),
+                                child: Text('Floor ' + (index+1).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -123,14 +124,67 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                       children: [
                                         Container(
                                           alignment: Alignment.center,
-                                          child: (globals.currentFloorPlans[index].getImageBytes() != "")
-                                              ? Image(
-                                              image: MemoryImage(base64Decode(globals.currentFloorPlans[index].getImageBytes()))
-                                          )
-                                              : Image(
-                                              image: AssetImage('assets/images/placeholder-office-building.png')
+                                          child: Image(
+                                            image: AssetImage('assets/images/placeholder-office-floor.png'),
                                           ),
                                         ),
+                                        Container(
+                                          alignment: Alignment.bottomRight,
+                                          child: SizedBox(
+                                            height: MediaQuery.of(context).size.height/20,
+                                            width: MediaQuery.of(context).size.height/20,
+                                            child: ElevatedButton(
+                                              child: Text('X',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                                                ),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: globals.sixthColor,
+                                              ),
+                                              onPressed: () {
+                                                //Delete floor and reload the page
+                                                if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
+                                                  floorPlanHelpers.deleteFloor(globals.currentFloors[index].getFloorPlanNumber(),
+                                                      globals.currentFloors[index].getFloorNumber()).then((result) {
+                                                    if (result == true) {
+                                                      floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
+                                                        if (result == true) {
+                                                          setState(() {});
+                                                        } else {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                              SnackBar(content: Text("Could not retrieve updated floors at this time.")));
+                                                        }
+                                                      });
+                                                    } else {
+                                                      ScaffoldMessenger.of(context).showSnackBar(
+                                                          SnackBar(content: Text("Floor deletion unsuccessful. Please try again later.")));
+                                                    }
+                                                  });
+                                                } else {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (ctx) => AlertDialog(
+                                                        title: Text('Error'),
+                                                        content: Text(
+                                                            'Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the floor plan homepage.'),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: Text('Okay'),
+                                                            onPressed: () {
+                                                              Navigator.of(ctx).pop();
+                                                            },
+                                                          )
+                                                        ],
+                                                      )
+                                                  );
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                        )
                                       ]
                                   ),
                                 ),
@@ -140,7 +194,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                   fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/16),
                                   primary: globals.firstColor,
                                 ),
-                                child: Text(globals.currentFloorPlans[index].getNumFloors().toString() + ' Rooms',
+                                child: Text(globals.currentFloors[index].getNumRooms().toString() + ' rooms',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
@@ -148,7 +202,7 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                   textAlign: TextAlign.center,
                                 ),
                                 onPressed: () {
-                                  floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
+                                  floorPlanHelpers.getRooms(globals.currentFloors[index].getFloorNumber()).then((result) {
                                     if (result == true) {
                                       Navigator.of(context).pushReplacementNamed(UserViewOfficeRooms.routeName);
                                     } else {
