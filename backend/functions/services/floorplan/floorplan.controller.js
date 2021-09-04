@@ -256,6 +256,13 @@ try {
 
       }
     });
+
+    //Without these headers, the connection closes before it can send the whole base64String
+    res.set({
+      'Connection': 'Keep-Alive',
+      'Keep-Alive': 'timeout=5, max=1000'
+    });
+
     return res.status(200).send({
       message: 'Successfully retrieved floors based on your floorplan',
       data: filteredList
@@ -285,6 +292,13 @@ try {
 
       }
     });
+
+    //Without these headers, the connection closes before it can send the whole base64String
+    res.set({
+      'Connection': 'Keep-Alive',
+      'Keep-Alive': 'timeout=5, max=1000'
+    });
+
     return res.status(200).send({
       message: 'Successfully retrieved rooms based on your floor number',
       data: filteredList
