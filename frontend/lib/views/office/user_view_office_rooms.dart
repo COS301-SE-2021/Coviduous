@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
+import 'dart:convert';
 import 'package:frontend/views/office/user_view_office_floors.dart';
-import 'package:frontend/views/office/user_view_office_times.dart';
+import 'package:frontend/views/office/home_office.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
+import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewOfficeRooms extends StatefulWidget {
@@ -68,79 +68,188 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
               )
             ]
         );
-      } else { //Else create and return a list
+      }
+      else
+      {
+        //Else create and return a list
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: EdgeInsets.all(16),
             itemCount: numOfRooms,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH room in rooms[]
+            itemBuilder: (context, index) {
               return ListTile(
-                title: Column(
+                title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children:[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        color: Theme.of(context).primaryColor,
-                        //child: Text('Room ' + rooms[index].getRoomNum()),
-                        child: Text('Room ' + globals.currentRooms[index].getRoomNumber()),
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height/6,
+                            child: (globals.currentRooms[index].getImageBytes() != "")
+                                ? Image(
+                                image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                            )
+                                : Image(
+                                image: AssetImage('assets/images/placeholder-office-room.png')
+                            ),
+                          ),
+                        ],
                       ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Number of desks: ' + globals.currentRooms[index].getNumberOfDesks().toString()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Available desk percentage: ' +
-                                      (((globals.currentRooms[index].getNumberOfDesks() -
-                                          globals.currentRooms[index].getOccupiedDesks()) /
-                                          globals.currentRooms[index].getNumberOfDesks()) * 100)
-                                          .toString()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                      child: Text('View'),
-                                      onPressed: () {
-                                        globals.currentRoomNum = globals.currentRooms[index].getRoomNumber();
-                                        globals.currentRoom = globals.currentRooms[index];
-                                        shiftHelpers.getShifts().then((result) {
-                                          if (result == true) {
-                                            for (int i = 0; i < globals.currentShifts.length; i++) {
-                                              if (globals.currentShifts[i].getRoomNumber() != globals.currentRoomNum) {
-                                                globals.currentShifts.removeAt(i);
-                                              }
-                                            }
-                                            Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
-                                          } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text('Error occurred while retrieving time slots. Please try again later.')));
-                                          }
-                                        });
-                                      }),
-                                ],
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:[
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              SingleChildScrollView(
+                                                scrollDirection: Axis.horizontal,
+                                                child: Container(
+                                                  child: (globals.currentRooms[index].getRoomName() != "")
+                                                      ? Text(globals.currentRooms[index].getRoomName())
+                                                      : Text('Unnamed'),
+                                                ),
+                                              ),
+                                              Text(globals.currentRooms[index].getNumberOfDesks().toString() + ' desks'),
+                                              Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().toString())
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context).size.width/48,
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(8),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          ElevatedButton(
+                                            child: Text('Info'),
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                    title: Text('Room details'),
+                                                    content: Container(
+                                                      color: Colors.white,
+                                                      height: 350,
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Container(
+                                                                height: MediaQuery.of(context).size.height/5,
+                                                                child: Image(
+                                                                  image: AssetImage('assets/images/placeholder-office-room.png'),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Container(
+                                                                  alignment: Alignment.center,
+                                                                  color: Color(0xff9B7EE5),
+                                                                  height: MediaQuery.of(context).size.height/5,
+                                                                  child: Text('Room ' + (index+1).toString(),
+                                                                    style: TextStyle(
+                                                                      color: globals.secondColor,
+                                                                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Container(
+                                                            alignment: Alignment.center,
+                                                            height: 50,
+                                                            child: (globals.currentRooms[index].getRoomName() != "")
+                                                                ? Text('Room name: ' + globals.currentRooms[index].getRoomName(),
+                                                                style: TextStyle(color: Colors.black))
+                                                                : Text('Unnamed room',
+                                                                style: TextStyle(color: Colors.black)),
+                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                          ),
+                                                          Container(
+                                                            alignment: Alignment.centerLeft,
+                                                            height: 50,
+                                                            child: Text('Room area: ' + globals.currentRooms[index].getRoomArea().toString() + 'm²',
+                                                                style: TextStyle(color: Colors.black)),
+                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                          ),
+                                                          Container(
+                                                            alignment: Alignment.centerLeft,
+                                                            height: 50,
+                                                            child: Text('Desk area:' + globals.currentRooms[index].getDeskArea().toString() + 'm²',
+                                                                style: TextStyle(color: Colors.black)),
+                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                          ),
+                                                          Container(
+                                                            alignment: Alignment.centerLeft,
+                                                            height: 50,
+                                                            child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString() + '%',
+                                                                style: TextStyle(color: Colors.black)),
+                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('Okay'),
+                                                        onPressed: (){
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  )
+                                              );
+                                            },
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context).size.width/48,
+                                          ),
+                                          ElevatedButton(
+                                            child: Text('Book'),
+                                            onPressed: () {
+
+                                              officeHelpers.createBooking(index.toString()).then((result) {
+                                                if (result == true) {
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text("Desk successfully booked")));
+                                                  Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                                } else {
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text('Error occurred while booking the desk. Please try again later.')));
+                                                }
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ]
-                      )
+                            ]
+                        ),
+                      ),
                     ]
                 ),
-                //title: floors[index].floor()
               );
-            }
-        );
+            });
       }
     }
 
