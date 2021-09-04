@@ -10,13 +10,13 @@
       "port": 5002
     },
     "firestore": {
-      "port": 8082
+      "port": 8083
     },
     "ui": {
       "enabled": true
     },
     "database": {
-      "port": 9002
+      "port": 9001
     },
     "hosting": {
       "port": 5000
