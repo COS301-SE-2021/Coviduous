@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'dart:convert';
 
 import 'package:frontend/views/office/home_office.dart';
 import 'package:frontend/views/office/user_view_office_floors.dart';
@@ -68,60 +69,99 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
               )
             ]
         );
-      } else { //Else create and return a list
-        return ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(16),
-            itemCount: numOfFloorPlans,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH floor plan in floorplans[]
-              return ListTile(
-                title: Column(
-                    children:[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Floor plan' + globals.currentFloorPlans[index].getFloorPlanNumber()),
-                      ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Number of floors: ' + globals.currentFloorPlans[index].getNumFloors().toString()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                      child: Text('View'),
-                                      onPressed: () {
-                                        floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
-                                          if (result == true) {
-                                            Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
-                                          } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text('Error occurred while retrieving floors. Please try again later.')));
-                                          }
-                                        });
-                                      }),
-                                ],
-                              ),
-                            ),
-                          ]
-                      )
-                    ]
+      }
+      else
+      { //Else create and return a list
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                  color: globals.firstColor,
+                  child: Text('Choose a floor plan',
+                      style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
                 ),
-                //title: floors[index].floor()
-              );
-            }
+                Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
+                    color: Colors.white,
+                    padding: EdgeInsets.all(10),
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 2/3,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        ),
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: numOfFloorPlans,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Container(
+                                color: globals.firstColor,
+                                padding: EdgeInsets.all(10),
+                                width: MediaQuery.of(context).size.width,
+                                child: Text('Floor' + (index+1).toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.4
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  child: Stack(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          child: (globals.currentFloorPlans[index].getImageBytes() != "")
+                                              ? Image(
+                                              image: MemoryImage(base64Decode(globals.currentFloorPlans[index].getImageBytes()))
+                                          )
+                                              : Image(
+                                              image: AssetImage('assets/images/placeholder-office-building.png')
+                                          ),
+                                        ),
+                                      ]
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/16),
+                                  primary: globals.firstColor,
+                                ),
+                                child: Text(globals.currentFloorPlans[index].getNumFloors().toString() + ' Rooms',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                onPressed: () {
+                                  floorPlanHelpers.getFloors(globals.currentFloorPlans[index].getFloorPlanNumber()).then((result) {
+                                    if (result == true) {
+                                      Navigator.of(context).pushReplacementNamed(UserViewOfficeFloors.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("There was an error. Please try again later.")));
+                                    }
+                                  });
+                                },
+                              ),
+                            ],
+                          );
+                        })
+                ),
+              ]),
         );
       }
     }
