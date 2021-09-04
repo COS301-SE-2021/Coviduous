@@ -42,10 +42,10 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
     }
 
     Widget getList() {
-      int numOfUsers = globals.tempGroup
-          .getUserEmails()
-          .length;
-
+      int numOfUsers = 0;
+      if (globals.tempGroup != null) {
+        numOfUsers = globals.tempGroup.getUserEmails().length;
+      }
       print(numOfUsers);
 
       if (numOfUsers == 0) { //If the number of users = 0, don't display a list
