@@ -69,7 +69,8 @@ exports.createFloorPlan = async (req, res) => {
     floorplanNumber: floorplanNumber,
     numFloors: reqJson.numFloors,
     adminId: reqJson.adminId,
-    companyId: reqJson.companyId
+    companyId: reqJson.companyId,
+    base64String: reqJson.base64String
   }
   await database.createFloorPlan(floorplanNumber,floorplanData);
   for (let index = 0; index < reqJson.numFloors; index++) {
@@ -124,7 +125,6 @@ exports.createFloorPlan = async (req, res) => {
       floorplanNumber: reqJson.floorplanNumber,
       adminId: reqJson.adminId,
       companyId:reqJson.companyId,
-      base64String: reqJson.base64String
     }
 
     let floorplan = await database.getFloorPlan(reqJson.floorplanNumber);
@@ -226,6 +226,12 @@ try {
       {
       }
     });
+
+    //Without these headers, the connection closes before it can send the whole base64String
+    res.set({
+      'Connection': 'Keep-Alive',
+      'Keep-Alive': 'timeout=10, max=1000'
+    });
     
     return res.status(200).send({
       message: 'Successfully retrieved floorplans based on your company',
@@ -255,12 +261,6 @@ try {
       {
 
       }
-    });
-
-    //Without these headers, the connection closes before it can send the whole base64String
-    res.set({
-      'Connection': 'Keep-Alive',
-      'Keep-Alive': 'timeout=5, max=1000'
     });
 
     return res.status(200).send({
