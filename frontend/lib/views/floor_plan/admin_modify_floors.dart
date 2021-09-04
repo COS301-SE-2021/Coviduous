@@ -48,9 +48,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
 
     Widget getList() {
       int numOfFloors = globals.currentFloors.length;
-
       print(numOfFloors);
-
       if (numOfFloors == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +87,9 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                 ),
               )
         ]);
-      } else {
+      }
+      else
+      {
         //Else create and return a gridview
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
