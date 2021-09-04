@@ -105,10 +105,11 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                           Expanded(
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children:[
                                   Container(
                                     color: Colors.white,
-                                    padding: EdgeInsets.all(12),
+                                    padding: EdgeInsets.all(8),
                                     child: Column(
                                       children: [
                                         Row(
