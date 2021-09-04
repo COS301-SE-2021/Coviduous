@@ -224,7 +224,7 @@ List<Announcement> currentAnnouncements = [];
 String currentSubjectField = '';
 
 //Current description field
-String currentDescriptionField = '';
+String currentMessageField = '';
 
 //Global list of notifications
 List<Notification> currentNotifications = [];
