@@ -11,17 +11,13 @@ import 'package:frontend/globals.dart' as globals;
 
 class MakeAnnouncement extends StatefulWidget {
   static const routeName = "/admin_make_announcement";
-  MakeAnnouncement() : super();
-
-  final String title = "Make announcement";
 
   @override
   MakeAnnouncementState createState() => MakeAnnouncementState();
 }
 
-//class make announcement
 class MakeAnnouncementState extends State<MakeAnnouncement> {
-  TextEditingController _description = TextEditingController();
+  TextEditingController _message = TextEditingController();
 
   List<String> _announceType = ['General', 'Emergency'];
   List<DropdownMenuItem<String>> _dropdownMenuItems;
@@ -164,7 +160,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                               ),
                               obscureText: false,
                               maxLines: 3,
-                              controller: _description,
+                              controller: _message,
                             ),
                             SizedBox(
                               height: 16,
@@ -180,7 +176,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                               ),
                               child: Text("Post"),
                               onPressed: () {
-                                announcementHelpers.createAnnouncement(_selectedType, _description.text).then((result) {
+                                announcementHelpers.createAnnouncement(_selectedType, _message.text).then((result) {
                                   if (result == true) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(content: Text("Announcement successfully created.")));
