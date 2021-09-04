@@ -199,7 +199,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                                     ),
                                                   ),
                                                   style: ElevatedButton.styleFrom(
-                                                    primary: Color(0xff991E20),
+                                                    primary: globals.sixthColor,
                                                   ),
                                                   onPressed: () {
                                                     globals.tempGroup.getUserEmails().removeAt(index);

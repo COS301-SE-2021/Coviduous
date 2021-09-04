@@ -10,6 +10,7 @@ Color secondColor = Color(0xff251F34);
 Color thirdColor = Color(0xff1E7099);
 Color fourthColor = Color(0xff39457F);
 Color fifthColor = Color(0xff7A387A);
+Color sixthColor = Color(0xff991E20);
 
 Map<int, Color> textFieldSelectedSwatch = {
   50: Color.fromRGBO(0, 98, 102, .1),

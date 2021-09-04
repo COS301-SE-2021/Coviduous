@@ -161,7 +161,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                               ),
                                             ),
                                             style: ElevatedButton.styleFrom(
-                                              primary: Color(0xff991E20),
+                                              primary: globals.sixthColor,
                                             ),
                                             onPressed: () {
                                               showDialog(

@@ -133,6 +133,7 @@ Color secondColor = theme.secondColor;
 Color thirdColor = theme.thirdColor;
 Color fourthColor = theme.fourthColor;
 Color fifthColor = theme.fifthColor;
+Color sixthColor = theme.sixthColor;
 
 //Needed to change the color of a TextField when it's selected.
 MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;

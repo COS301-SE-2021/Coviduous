@@ -146,7 +146,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                                                     ),
                                                   ),
                                                   style: ElevatedButton.styleFrom(
-                                                    primary: Color(0xff991E20),
+                                                    primary: globals.sixthColor,
                                                   ),
                                                   onPressed: () {
                                                     showDialog(

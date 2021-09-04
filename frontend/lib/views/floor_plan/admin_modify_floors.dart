@@ -159,7 +159,7 @@ class _AdminModifyFloorsState extends State<AdminModifyFloors> {
                                                 ),
                                               ),
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color(0xff991E20),
+                                                primary: globals.sixthColor,
                                               ),
                                               onPressed: () {
                                                 //Delete floor and reload the page

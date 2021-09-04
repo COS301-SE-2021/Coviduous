@@ -172,7 +172,7 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                 ),
                                               ),
                                               style: ElevatedButton.styleFrom(
-                                                primary: Color(0xff991E20),
+                                                primary: globals.sixthColor,
                                               ),
                                               onPressed: () {
                                                 //Delete room and reload the page
