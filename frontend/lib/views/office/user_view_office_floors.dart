@@ -128,63 +128,6 @@ class _UserViewOfficeFloorsState extends State<UserViewOfficeFloors> {
                                             image: AssetImage('assets/images/placeholder-office-floor.png'),
                                           ),
                                         ),
-                                        Container(
-                                          alignment: Alignment.bottomRight,
-                                          child: SizedBox(
-                                            height: MediaQuery.of(context).size.height/20,
-                                            width: MediaQuery.of(context).size.height/20,
-                                            child: ElevatedButton(
-                                              child: Text('X',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
-                                                ),
-                                              ),
-                                              style: ElevatedButton.styleFrom(
-                                                primary: globals.sixthColor,
-                                              ),
-                                              onPressed: () {
-                                                //Delete floor and reload the page
-                                                if (numOfFloors > 1) { //Only allow deletion of floors if there is more than one floor
-                                                  floorPlanHelpers.deleteFloor(globals.currentFloors[index].getFloorPlanNumber(),
-                                                      globals.currentFloors[index].getFloorNumber()).then((result) {
-                                                    if (result == true) {
-                                                      floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
-                                                        if (result == true) {
-                                                          setState(() {});
-                                                        } else {
-                                                          ScaffoldMessenger.of(context).showSnackBar(
-                                                              SnackBar(content: Text("Could not retrieve updated floors at this time.")));
-                                                        }
-                                                      });
-                                                    } else {
-                                                      ScaffoldMessenger.of(context).showSnackBar(
-                                                          SnackBar(content: Text("Floor deletion unsuccessful. Please try again later.")));
-                                                    }
-                                                  });
-                                                } else {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder: (ctx) => AlertDialog(
-                                                        title: Text('Error'),
-                                                        content: Text(
-                                                            'Floor plans must have at least one floor. To delete a whole floor plan, please use the "delete floor plan" feature on the floor plan homepage.'),
-                                                        actions: <Widget>[
-                                                          TextButton(
-                                                            child: Text('Okay'),
-                                                            onPressed: () {
-                                                              Navigator.of(ctx).pop();
-                                                            },
-                                                          )
-                                                        ],
-                                                      )
-                                                  );
-                                                }
-                                              },
-                                            ),
-                                          ),
-                                        )
                                       ]
                                   ),
                                 ),
