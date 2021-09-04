@@ -39,10 +39,8 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
 
     Widget getList() {
       int numOfRooms = globals.currentRooms.length;
-
       print(numOfRooms);
-
-      if (numOfRooms == 0) { //If the number of rooms = 0, don't display a list
+      if (numOfRooms == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -83,9 +81,15 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                     children:[
                       Column(
                         children: [
+                          Text('Room ' + (index+1).toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                              )
+                          ),
                           Container(
                             height: MediaQuery.of(context).size.height/6,
-                            child: (globals.currentRooms[index].getImageBytes() != "")
+                            child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
                                 ? Image(
                                 image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
                             )
@@ -130,12 +134,13 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                         ),
                                       ],
                                     ),
+
                                     Container(
-                                      padding: EdgeInsets.all(8),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
+                                         padding: EdgeInsets.all(8),
+                                          child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            ElevatedButton(
                                             child: Text('Info'),
                                             onPressed: () {
                                               showDialog(
@@ -224,7 +229,6 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                           ElevatedButton(
                                             child: Text('Book'),
                                             onPressed: () {
-
                                               officeHelpers.createBooking(index.toString()).then((result) {
                                                 if (result == true) {
                                                   ScaffoldMessenger.of(context).showSnackBar(
