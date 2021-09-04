@@ -50,110 +50,120 @@ class _AdminPermissionsState extends State<AdminPermissions> {
             },
           ),
         ),
-        body: Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-            width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                      Icons.sensor_door,
+                      color: globals.focusColor,
+                      size: MediaQuery.of(context).size.width/4
+                  ),
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  ElevatedButton (
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Row (
-                        children: <Widget>[
-                          Expanded(child: Text('View permissions')),
-                          Icon(Icons.zoom_in)
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
-                    }
-                ),
-                SizedBox (
-                  height: MediaQuery.of(context).size.height/48,
-                  width: MediaQuery.of(context).size.width,
-                ),
-                ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      child: Row (
+                          children: <Widget>[
+                            Expanded(child: Text('View permissions')),
+                            Icon(Icons.zoom_in)
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                       ),
-                    ),
-                    child: Row (
-                        children: <Widget>[
-                          Expanded(child: Text('Grant permissions')),
-                          Icon(Icons.add_alert)
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                    ),
-                    onPressed: () {
-                      healthHelpers.getPermissionRequests().then((result) {
-                        if (result == true) {
-                          Navigator.of(context).pushReplacementNamed(AdminViewAccessRequests.routeName);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("There was an error while retrieving permission requests. Please try again later.")));
-                        }
-                      });
-                    }
-                ),
-                SizedBox (
-                  height: MediaQuery.of(context).size.height/48,
-                  width: MediaQuery.of(context).size.width,
-                ),
-                ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
+                      }
+                  ),
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  ElevatedButton (
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Row (
-                        children: <Widget>[
-                          Expanded(child: Text('Set employee recovery status')),
-                          Icon(Icons.medical_services)
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(AdminSetRecoveredEmployee.routeName);
-                    }
-                ),
-                SizedBox (
-                  height: MediaQuery.of(context).size.height/48,
-                  width: MediaQuery.of(context).size.width,
-                ),
-                ElevatedButton (
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      child: Row (
+                          children: <Widget>[
+                            Expanded(child: Text('Grant permissions')),
+                            Icon(Icons.add_alert)
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                       ),
-                    ),
-                    child: Row (
-                        children: <Widget>[
-                          Expanded(child: Text('Contact trace')),
-                          Icon(Icons.help)
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
-                    }
-                ),
-                SizedBox (
-                  height: MediaQuery.of(context).size.height/48,
-                  width: MediaQuery.of(context).size.width,
-                ),
-              ],
+                      onPressed: () {
+                        healthHelpers.getPermissionRequests().then((result) {
+                          if (result == true) {
+                            Navigator.of(context).pushReplacementNamed(AdminViewAccessRequests.routeName);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("There was an error while retrieving permission requests. Please try again later.")));
+                          }
+                        });
+                      }
+                  ),
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  ElevatedButton (
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Row (
+                          children: <Widget>[
+                            Expanded(child: Text('Set employee recovery status')),
+                            Icon(Icons.medical_services)
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(AdminSetRecoveredEmployee.routeName);
+                      }
+                  ),
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  ElevatedButton (
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Row (
+                          children: <Widget>[
+                            Expanded(child: Text('Contact trace')),
+                            Icon(Icons.help)
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
+                      }
+                  ),
+                  SizedBox (
+                    height: MediaQuery.of(context).size.height/48,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

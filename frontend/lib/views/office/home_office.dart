@@ -51,71 +51,82 @@ class _OfficeState extends State<Office> {
               },
             ),
           ),
-          body: Center(
-              child: Container (
-                  height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
-                  padding: EdgeInsets.all(16),
-                  child: Column (
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+          body: SingleChildScrollView(
+            child: Center(
+                child: Container (
+                    height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                    padding: EdgeInsets.all(16),
+                    child: Column (
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(
+                              Icons.library_books,
+                              color: globals.focusColor,
+                              size: MediaQuery.of(context).size.width/4
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Book office space')),
-                                  Icon(Icons.add_circle_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              floorPlanHelpers.getFloorPlans().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(UserViewOfficeFloorPlans.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Error occurred while retrieving floor plans. Please try again later.')));
-                                }
-                              });
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Book office space')),
+                                    Icon(Icons.add_circle_rounded)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View bookings')),
-                                  Icon(Icons.library_books)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              officeHelpers.getBookings().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Error occurred while retrieving bookings. Please try again later.')));
-                                }
-                              });
-                            }
-                        ),
-                      ]
-                  )
-              )
+                              onPressed: () {
+                                floorPlanHelpers.getFloorPlans().then((result) {
+                                  if (result == true) {
+                                    Navigator.of(context).pushReplacementNamed(UserViewOfficeFloorPlans.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text('Error occurred while retrieving floor plans. Please try again later.')));
+                                  }
+                                });
+                              }
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/48,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('View bookings')),
+                                    Icon(Icons.library_books)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                officeHelpers.getBookings().then((result) {
+                                  if (result == true) {
+                                    Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text('Error occurred while retrieving bookings. Please try again later.')));
+                                  }
+                                });
+                              }
+                          ),
+                        ]
+                    )
+                )
+            ),
           )
       ),
     );
