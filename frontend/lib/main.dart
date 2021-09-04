@@ -78,7 +78,6 @@ import 'package:frontend/views/office/user_view_current_bookings.dart';
 import 'package:frontend/views/notification/admin_home_notifications.dart';
 import 'package:frontend/views/notification/admin_view_notifications.dart';
 import 'package:frontend/views/notification/admin_make_notification.dart';
-import 'package:frontend/views/notification/admin_make_notification_add_employee.dart';
 import 'package:frontend/views/notification/admin_make_notification_assign_employees.dart';
 import 'package:frontend/views/notification/user_view_notifications.dart';
 
@@ -255,7 +254,6 @@ class MyApp extends StatelessWidget{
         AdminViewNotifications.routeName: (ctx)=> AdminViewNotifications(),
         MakeNotification.routeName: (ctx)=> MakeNotification(),
         MakeNotificationAssignEmployees.routeName: (ctx)=> MakeNotificationAssignEmployees(),
-        MakeNotificationAddEmployee.routeName: (ctx)=> MakeNotificationAddEmployee(),
         UserViewNotifications.routeName: (ctx)=> UserViewNotifications(),
 
         ///Reporting
