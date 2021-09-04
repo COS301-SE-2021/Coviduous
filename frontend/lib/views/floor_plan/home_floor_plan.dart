@@ -17,7 +17,6 @@ class FloorPlanScreen extends StatefulWidget {
   _FloorPlanScreenState createState() => _FloorPlanScreenState();
 }
 
-//class admin
 class _FloorPlanScreenState extends State<FloorPlanScreen> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);

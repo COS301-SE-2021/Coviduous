@@ -190,8 +190,8 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
           ),
           body: Stack(
               children: <Widget>[
-                SingleChildScrollView(
-                  child: Center(
+                Center(
+                  child: SingleChildScrollView(
                     child: getList(),
                   ),
                 ),
