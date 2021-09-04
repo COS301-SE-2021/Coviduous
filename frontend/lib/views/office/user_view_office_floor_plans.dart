@@ -40,38 +40,49 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
 
     Widget getList() {
       int numOfFloorPlans = globals.currentFloorPlans.length;
-
       print(numOfFloorPlans);
-
-      if (numOfFloorPlans == 0) { //If the number of floor plans = 0, don't display a list
+      if (numOfFloorPlans == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    (5 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No floor plans found', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('No floor plans have been registered for your company.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
+                      color: globals.firstColor,
+                      child: Text('No floors found',
+                          style: TextStyle(color: Colors.white,
+                              fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                          )
+                      ),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height / (12 * globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('No floors have been registered for this floor plan.',
+                            style: TextStyle(
+                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                            )
+                        )
+                    ),
+                  ],
+                ),
               )
-            ]
-        );
+            ]);
       }
       else
-      { //Else create and return a list
+      {
+        //Else create and return a gridview
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Column(
@@ -108,7 +119,7 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
                                 color: globals.firstColor,
                                 padding: EdgeInsets.all(10),
                                 width: MediaQuery.of(context).size.width,
-                                child: Text('Floor' + (index+1).toString(),
+                                child: Text('Floor plan ' + (index+1).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -122,7 +133,7 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
                                       children: [
                                         Container(
                                           alignment: Alignment.center,
-                                          child: (globals.currentFloorPlans[index].getImageBytes() != "")
+                                          child: (globals.currentFloorPlans[index].getImageBytes() != "" && globals.currentFloorPlans[index].getImageBytes() != null)
                                               ? Image(
                                               image: MemoryImage(base64Decode(globals.currentFloorPlans[index].getImageBytes()))
                                           )
@@ -139,7 +150,7 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
                                   fixedSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height/16),
                                   primary: globals.firstColor,
                                 ),
-                                child: Text(globals.currentFloorPlans[index].getNumFloors().toString() + ' Rooms',
+                                child: Text(globals.currentFloorPlans[index].getNumFloors().toString() + ' floors',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
