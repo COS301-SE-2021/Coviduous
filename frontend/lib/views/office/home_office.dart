@@ -53,11 +53,12 @@ class _OfficeState extends State<Office> {
           ),
           body: SingleChildScrollView(
             child: Center(
-                child: Container (
-                    height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                child: SingleChildScrollView (
+                   ///height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                    ///width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
                     padding: EdgeInsets.all(16),
-                    child: Column (
+
+                     child: Column (
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Icon(
