@@ -49,7 +49,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
             print(tempFileName);
             tempFileName = fileName;
             fileBytes = file.readAsBytesSync();
-            globals.floorPlanImageExists = true;
           }
         } else { //Else, PC browser
           FilePickerResult result = results.first;
@@ -59,7 +58,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
             print(tempFileName);
             fileName = tempFileName;
             fileBytes = result.files.first.bytes;
-            globals.floorPlanImageExists = true;
           }
         }
       } else { //Else, mobile app
@@ -71,7 +69,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
           print(tempFileName);
           fileName = tempFileName;
           fileBytes = file.readAsBytesSync();
-          globals.floorPlanImageExists = true;
         }
       }
       setState(() {});
@@ -81,7 +78,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<bool> _onWillPop() async {
-    globals.floorPlanImageExists = false;
     Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
     return (await true);
   }
@@ -110,7 +106,6 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
           leading: BackButton(
             //Specify back button
             onPressed: () {
-              globals.floorPlanImageExists = false;
               Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
             },
           ),
@@ -133,7 +128,7 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                         Container(
                           alignment: Alignment.center,
                           margin: EdgeInsets.all(20.0),
-                          child: (globals.floorPlanImageExists) ? Image(
+                          child: (fileBytes != null) ? Image(
                             alignment: Alignment.center,
                             image: MemoryImage(fileBytes),
                             width: double.maxFinite,
@@ -200,7 +195,12 @@ class _AddFloorPlanState extends State<AddFloorPlan> {
                               }
                               _formKey.currentState.save();
 
-                              floorPlanHelpers.createFloorPlan(num.parse(_numFloor), base64Encode(fileBytes)).then((result) {
+                              String encodedBytes = "";
+                              if (fileBytes != null) {
+                                encodedBytes = base64Encode(fileBytes);
+                              }
+
+                              floorPlanHelpers.createFloorPlan(num.parse(_numFloor), encodedBytes).then((result) {
                                 if (result == true) {
                                   floorPlanHelpers.getFloorPlans().then((result) {
                                     if (result == true) {

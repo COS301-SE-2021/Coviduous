@@ -112,7 +112,7 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height/6,
-                          child: (globals.currentRooms[index].getImageBytes() != "")
+                          child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
                               ? Image(
                               image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
                           )

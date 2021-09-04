@@ -164,7 +164,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                       Container(
                                         alignment: Alignment.center,
                                         margin: EdgeInsets.all(20.0),
-                                        child: (!true) ? Image(
+                                        child: (fileBytes != null) ? Image(
                                           alignment: Alignment.center,
                                           image: MemoryImage(fileBytes),
                                           width: double.maxFinite,
@@ -307,8 +307,14 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                             } else {
                                               _tempName = _roomName.text;
                                             }
+
+                                            String encodedBytes = "";
+                                            if (fileBytes != null) {
+                                              encodedBytes = base64Encode(fileBytes);
+                                            }
+
                                             floorPlanHelpers.updateRoom(_tempName, num.parse(_roomArea.text), num.parse(_deskArea.text),
-                                                num.parse(_numOfDesks.text), room.getCapacityPercentage(), base64Encode(fileBytes)).then((result) {
+                                                num.parse(_numOfDesks.text), room.getCapacityPercentage(), encodedBytes).then((result) {
                                                   if (result == true) {
                                                     ScaffoldMessenger.of(context).showSnackBar(
                                                         SnackBar(content: Text("Room information updated")));

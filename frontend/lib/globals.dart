@@ -311,5 +311,7 @@ Map<String, String> requestHeaders = {
   'Access-Control-Allow-Origin': '*', // Required for CORS support to work
   'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
   'Accept': '*/*',
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Connection': 'Keep-Alive',
+  'Keep-Alive': 'timeout=5, max=1000'
 };

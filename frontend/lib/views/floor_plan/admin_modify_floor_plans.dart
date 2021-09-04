@@ -139,7 +139,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                     children: [
                                       Container(
                                         alignment: Alignment.center,
-                                        child: (globals.currentFloorPlans[index].getImageBytes() != "")
+                                        child: (globals.currentFloorPlans[index].getImageBytes() != "" && globals.currentFloorPlans[index].getImageBytes() != null)
                                             ? Image(
                                           image: MemoryImage(base64Decode(globals.currentFloorPlans[index].getImageBytes()))
                                         )
