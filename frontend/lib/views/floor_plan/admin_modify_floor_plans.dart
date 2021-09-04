@@ -46,9 +46,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
 
     Widget getList() {
       int numOfFloorPlans = globals.currentFloorPlans.length;
-
       print(numOfFloorPlans);
-
       if (numOfFloorPlans == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
