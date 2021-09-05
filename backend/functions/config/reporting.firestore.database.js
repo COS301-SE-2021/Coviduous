@@ -24,9 +24,9 @@ exports.addRecoveredEmployee = async (userId,recoveredData) =>{
     }
 };
 
-exports.viewRecoveredEmployee = async () =>{
+exports.viewRecoveredEmployee = async (companyId) =>{
     try{
-        const document = db.collection('recovered-employees');
+        const document = db.collection('recovered-employees').where("companyId", "==", companyId);
         const snapshot = await document.get();
     
         let list =[];
