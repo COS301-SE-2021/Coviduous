@@ -19,7 +19,6 @@ class UserRequestAccess extends StatefulWidget {
   UserRequestAccessState createState() => UserRequestAccessState();
 }
 
-//class make notification
 class UserRequestAccessState extends State<UserRequestAccess> {
   TextEditingController _companyId = TextEditingController();
   TextEditingController _email = TextEditingController();
@@ -89,92 +88,95 @@ class UserRequestAccessState extends State<UserRequestAccess> {
         ),
         body: Center(
           child: SingleChildScrollView(
-            child: new Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-              padding: EdgeInsets.all(16),
-              child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "Company ID",
-                    ),
-                    obscureText: false,
-                    controller: _companyId,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Your company admin's email",
-                      labelText: "Admin email",
-                    ),
-                    obscureText: false,
-                    controller: _email,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    'Date'
-                  ),
-                  Text(
-                    "${_selectedDate.toLocal()}".split(' ')[0],
-                    style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
+                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                padding: EdgeInsets.all(16),
+                child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Company ID",
                       ),
+                      obscureText: false,
+                      controller: _companyId,
                     ),
-                    onPressed: () => _selectDate(context),
-                    child: Text('Select date'),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "The reason you want access",
-                      labelText: "Reason",
+                    SizedBox(
+                      height: 16,
                     ),
-                    obscureText: false,
-                    controller: _reason,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Your company admin's email",
+                        labelText: "Admin email",
                       ),
+                      obscureText: false,
+                      controller: _email,
                     ),
-                    child: Text("Submit"),
-                    onPressed: () {
-                      healthHelpers.createPermissionRequest(_email.text, _reason.text).then((result) {
-                        if (result == true) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Request successfully submitted.")));
-                          Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
-                        }
-                      });
-                    },
-                  )
-                ],
-              ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      'Date'
+                    ),
+                    Text(
+                      "${_selectedDate.toLocal()}".split(' ')[0],
+                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () => _selectDate(context),
+                      child: Text('Select date'),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "The reason you want access",
+                        labelText: "Reason",
+                      ),
+                      obscureText: false,
+                      controller: _reason,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom (
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text("Submit"),
+                      onPressed: () {
+                        healthHelpers.createPermissionRequest(_email.text, _reason.text).then((result) {
+                          if (result == true) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Request successfully submitted.")));
+                            Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
+                          }
+                        });
+                      },
+                    )
+                  ],
+                ),
+                ),
               ),
             ),
           ),
