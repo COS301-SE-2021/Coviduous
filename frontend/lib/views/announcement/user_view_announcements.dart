@@ -187,7 +187,7 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      Expanded(
+                                                                      Flexible(
                                                                         child: SingleChildScrollView(
                                                                           child: Column(
                                                                             children: [
