@@ -200,7 +200,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    Expanded(
+                                                                    Flexible(
                                                                       child: SingleChildScrollView(
                                                                         child: Column(
                                                                           children: [

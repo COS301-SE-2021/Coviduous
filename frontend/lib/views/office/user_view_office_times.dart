@@ -37,9 +37,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
     }
 
     Widget getList() {
-      DateTime today = new DateTime.now();
       int numOfTimeSlots = globals.currentShifts.length;
-
       print(numOfTimeSlots);
 
       if (numOfTimeSlots == 0) { //If the number of time slots = 0, don't display a list
@@ -122,7 +120,6 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                       )
                     ]
                 ),
-                //title: floors[index].floor()
               );
             }
         );

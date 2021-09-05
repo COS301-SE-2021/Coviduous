@@ -90,7 +90,8 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
               )
             ]
         );
-      } else { //Else create and return a list
+      } else {
+        //Else create and return a list
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,

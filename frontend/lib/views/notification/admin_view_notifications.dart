@@ -200,7 +200,7 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    Expanded(
+                                                                    Flexible(
                                                                       child: SingleChildScrollView(
                                                                         child: Column(
                                                                           children: [
