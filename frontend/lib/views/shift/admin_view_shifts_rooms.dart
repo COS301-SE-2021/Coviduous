@@ -184,36 +184,44 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                                                               ),
                                                             ],
                                                           ),
-                                                          Container(
-                                                            alignment: Alignment.center,
-                                                            height: 50,
-                                                            child: (globals.currentRooms[index].getRoomName() != "")
-                                                                ? Text('Room name: ' + globals.currentRooms[index].getRoomName(),
-                                                                style: TextStyle(color: Colors.black))
-                                                                : Text('Unnamed room',
-                                                                style: TextStyle(color: Colors.black)),
-                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                          ),
-                                                          Container(
-                                                            alignment: Alignment.centerLeft,
-                                                            height: 50,
-                                                            child: Text('Room area: ' + globals.currentRooms[index].getRoomArea().toString() + 'm²',
-                                                                style: TextStyle(color: Colors.black)),
-                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                          ),
-                                                          Container(
-                                                            alignment: Alignment.centerLeft,
-                                                            height: 50,
-                                                            child: Text('Desk area:' + globals.currentRooms[index].getDeskArea().toString() + 'm²',
-                                                                style: TextStyle(color: Colors.black)),
-                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                          ),
-                                                          Container(
-                                                            alignment: Alignment.centerLeft,
-                                                            height: 50,
-                                                            child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString() + '%',
-                                                                style: TextStyle(color: Colors.black)),
-                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                          Flexible(
+                                                            child: SingleChildScrollView(
+                                                              child: Column(
+                                                                children: [
+                                                                  Container(
+                                                                    alignment: Alignment.center,
+                                                                    height: 50,
+                                                                    child: (globals.currentRooms[index].getRoomName() != "")
+                                                                        ? Text('Room name: ' + globals.currentRooms[index].getRoomName(),
+                                                                        style: TextStyle(color: Colors.black))
+                                                                        : Text('Unnamed room',
+                                                                        style: TextStyle(color: Colors.black)),
+                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                  ),
+                                                                  Container(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    height: 50,
+                                                                    child: Text('Room area: ' + globals.currentRooms[index].getRoomArea().toString() + 'm²',
+                                                                        style: TextStyle(color: Colors.black)),
+                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                  ),
+                                                                  Container(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    height: 50,
+                                                                    child: Text('Desk area:' + globals.currentRooms[index].getDeskArea().toString() + 'm²',
+                                                                        style: TextStyle(color: Colors.black)),
+                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                  ),
+                                                                  Container(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    height: 50,
+                                                                    child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString() + '%',
+                                                                        style: TextStyle(color: Colors.black)),
+                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),

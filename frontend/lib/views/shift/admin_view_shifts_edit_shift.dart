@@ -116,14 +116,18 @@ class _ViewShiftsEditShiftState extends State<ViewShiftsEditShift> {
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
                       color: Colors.white,
-                      height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
+                      height: (globals.getIfOnPC())
+                          ? MediaQuery.of(context).size.height/(2*globals.getWidgetScaling())
+                          : MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
                       width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                       padding: EdgeInsets.all(10),
                       child: Form(
                         key: _formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: (globals.getIfOnPC())
+                              ? MainAxisAlignment.spaceEvenly
+                              : MainAxisAlignment.center,
                           children: <Widget>[
                             Container(
                               alignment: Alignment.center,
