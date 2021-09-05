@@ -232,7 +232,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      Expanded(
+                                                                      Flexible(
                                                                         child: SingleChildScrollView(
                                                                           child: Column(
                                                                             children: [
