@@ -5,7 +5,7 @@ import 'package:frontend/views/health/user_health_check.dart';
 import 'package:frontend/views/health/user_report_infection.dart';
 import 'package:frontend/views/health/user_view_guidelines.dart';
 import 'package:frontend/views/health/user_view_permissions.dart';
-import 'package:frontend/views/health/user_view_test_results.dart';
+import 'package:frontend/views/health/user_upload_test_results.dart';
 import 'package:frontend/views/health/user_view_vaccine_confirm.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/admin_homepage.dart';
@@ -161,7 +161,7 @@ class _UserHealthState extends State<UserHealth> {
                             onPressed: () {
                               healthHelpers.getTestResults().then((result) {
                                 if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                  Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text('An error occurred while retrieving your test results. Please try again later.')));
