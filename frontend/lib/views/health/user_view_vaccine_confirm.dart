@@ -88,62 +88,65 @@ class _UserViewVaccineConfirmState extends State<UserViewVaccineConfirm> {
             itemCount: numberOfConfirmations,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children:[
-                      Column(
-                        children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height/6,
-                            child: Image(image: AssetImage('assets/images/placeholder-office-room.png')),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:[
-                              Container(
-                                color: Colors.white,
-                                padding: EdgeInsets.all(8),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(globals.currentVaccineConfirmations[index].getTimestamp())
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(8),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                title: Container(
+                  color: Colors.white,
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children:[
+                        Column(
+                          children: [
+                            Container(
+                              height: MediaQuery.of(context).size.height/6,
+                              child: Image(image: AssetImage('assets/images/placeholder-pdf.png')),
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:[
+                                Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.all(8),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
-                                          ElevatedButton(
-                                            child: Text('View'),
-                                            onPressed: () {
-                                              globals.currentVaccineConfirmation = globals.currentVaccineConfirmations[index];
-                                              Navigator.of(context).pushReplacementNamed(UserViewSingleVaccineConfirm.routeName);
-                                            },
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(globals.currentVaccineConfirmations[index].getTimestamp())
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              child: Text('View'),
+                                              onPressed: () {
+                                                globals.currentVaccineConfirmation = globals.currentVaccineConfirmations[index];
+                                                Navigator.of(context).pushReplacementNamed(UserViewSingleVaccineConfirm.routeName);
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ]
+                              ]
+                          ),
                         ),
-                      ),
-                    ]
+                      ]
+                  ),
                 ),
               );
             });

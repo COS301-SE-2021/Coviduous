@@ -276,6 +276,8 @@ Future<bool> addSickEmployee(String userId, String userEmail, String companyId) 
 
 //Add recovered employee
 Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminId, String companyId) async {
+  bool result = false;
+
   String path = "/health/report-recovery";
   String url = server + path;
 
@@ -297,13 +299,41 @@ Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminI
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
 
-      return true;
+      result = true;
     }
   } catch (error) {
-  print(error);
+    print(error);
+    result = false;
   }
 
-  return false;
+  String path2 = "/reporting/health/recovered-employees";
+  String url2 = server + path2;
+
+  var request2;
+
+  try {
+    request2 = http.Request("POST", Uri.parse(url2));
+    request2.body = json.encode({
+      "userId": userId,
+      "userEmail": userEmail,
+      "companyId": companyId,
+    });
+    request2.headers.addAll(globals.requestHeaders);
+
+    var response2 = await request2.send();
+    print(await response2.statusCode);
+
+    if (response2.statusCode == 200) {
+      print(await response2.stream.bytesToString());
+
+      result = true;
+    }
+  } catch (error) {
+    print(error);
+    result = false;
+  }
+
+  return result;
 }
 
 //View sick employees

@@ -67,67 +67,116 @@ class _ReportingViewSickEmployeesState extends State<ReportingViewSickEmployees>
       }
 
       if (numberOfEmployees == 0) { //If the number of bookings = 0, don't display a list
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                  color: Theme.of(context).primaryColor,
-                  child: Text('No employee health status found', style: TextStyle(color: Colors.white,
-                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                    color: Colors.white,
-                    padding: EdgeInsets.all(12),
-                    child: Text('No health statuses available.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                )
-              ]
-          ),
-        );
-      } else { //Else create and return a list
-        return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: numberOfEmployees,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH booking in bookings[]
-              return ListTile(
-                title: Column(
-                    children:[
-                      Container(
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (5 * globals.getWidgetScaling()),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                      color: Theme.of(context).primaryColor,
+                      child: Text('No employee health status found', style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                    ),
+                    Container(
                         alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Employee ' + globals.selectedSickUsers[index].getUserId(), style: TextStyle(color: Colors.white)),
+                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('No health statuses available.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                    ),
+                  ],
+                ),
+              )
+            ]
+        );
+      } else {
+        //Else create and return a list
+        return ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: numberOfEmployees,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height / 6,
+                            child: Image(
+                              image: AssetImage('assets/images/placeholder-profile-image.png'),
+                            ),
+                          ),
+                        ],
                       ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Email: ' + globals.selectedSickUsers[index].getEmail()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Time of diagnosis: ' + globals.selectedSickUsers[index].getTimeOfDiagnosis()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                          ]
-                      )
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('User ' + (index + 1).toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: (MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height * 0.01) * 2.5,
+                                      )
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(globals.selectedSickUsers[index].getTimeOfDiagnosis()),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedSickUsers[index].getEmail())
+                                              ),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedSickUsers[index].getUserId())
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
                     ]
                 ),
               );
-            }
-        );
+            });
       }
     }
 
@@ -198,8 +247,10 @@ class _ReportingViewSickEmployeesState extends State<ReportingViewSickEmployees>
           ),
           body: Stack(
               children: <Widget>[
-                Center(
-                    child: getList()
+                SingleChildScrollView(
+                  child: Center(
+                      child: getList()
+                  ),
                 ),
               ]
           )

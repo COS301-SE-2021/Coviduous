@@ -69,105 +69,148 @@ class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecovered
       }
 
       if (numberOfEmployees == 0) { //If the number of bookings = 0, don't display a list
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                  color: Theme.of(context).primaryColor,
-                  child: Text('No employee health status found', style: TextStyle(color: Colors.white,
-                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+        return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height /
+                    (5 * globals.getWidgetScaling()),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                      color: Theme.of(context).primaryColor,
+                      child: Text('No employee health status found', style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('No health statuses available.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                    ),
+                  ],
                 ),
-                Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                    color: Colors.white,
-                    padding: EdgeInsets.all(12),
-                    child: Text('No health statuses available.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                )
-              ]
-          ),
+              )
+            ]
         );
-      } else { //Else create and return a list
+      } else {
+        //Else create and return a list
         return ListView.builder(
-            padding: const EdgeInsets.all(16),
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             itemCount: numberOfEmployees,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH booking in bookings[]
+            itemBuilder: (context, index) {
               return ListTile(
                 title: Column(
-                    children:[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Employee ' + globals.selectedRecoveredUsers[index].getUserId(), style: TextStyle(color: Colors.white)),
-                      ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Email: ' + globals.selectedRecoveredUsers[index].getEmail()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Recovered time: ' + globals.selectedRecoveredUsers[index].getRecoveredTime()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      child: Text('View test results'),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(ReportingViewTestResults.routeName);
-                                      }),
-                                ],
+                  children: [
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                height: MediaQuery.of(context).size.height / 6,
+                                child: Image(
+                                  image: AssetImage('assets/images/placeholder-profile-image.png'),
+                                ),
                               ),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            ],
+                          ),
+                          Expanded(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 10,
                                       ),
-                                      child: Text('View vaccine confirmation'),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(ReportingViewVaccineConfirmation.routeName);
-                                      }),
-                                ],
-                              ),
+                                      Text('User ' + (index + 1).toString(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: (MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height * 0.01) * 2.5,
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    padding: EdgeInsets.all(8),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(globals.selectedRecoveredUsers[index].getRecoveredTime()),
+                                                  SingleChildScrollView(
+                                                      scrollDirection: Axis.horizontal,
+                                                      child: Text(globals.selectedRecoveredUsers[index].getEmail())
+                                                  ),
+                                                  SingleChildScrollView(
+                                                      scrollDirection: Axis.horizontal,
+                                                      child: Text(globals.selectedRecoveredUsers[index].getUserId())
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ]
                             ),
+                          ),
+                        ]
+                    ),
+                    Container(
+                      color: Colors.white,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children:[
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Text('View test results'),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(ReportingViewTestResults.routeName);
+                                }),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Text('View vaccine confirmation'),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(ReportingViewVaccineConfirmation.routeName);
+                                }),
                           ]
-                      )
-                    ]
+                      ),
+                    ),
+                  ],
                 ),
               );
-            }
-        );
+            });
       }
     }
 
@@ -238,8 +281,10 @@ class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecovered
           ),
           body: Stack(
               children: <Widget>[
-                Center(
-                   child: getList()
+                SingleChildScrollView(
+                  child: Center(
+                    child: getList(),
+                  ),
                 ),
               ]
           )

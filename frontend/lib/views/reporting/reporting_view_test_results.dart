@@ -36,7 +36,6 @@ class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
     }
     Widget getList() {
       int numberOfResults = globals.currentTestResults.length;
-
       print(numberOfResults);
 
       if (numberOfResults == 0) {
@@ -45,73 +44,109 @@ class _ReportingViewTestResultsState extends State<ReportingViewTestResults> {
             height: MediaQuery.of(context).size.height /
                 (5 * globals.getWidgetScaling()),
           ),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width /
-                (2 * globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height /
-                (24 * globals.getWidgetScaling()),
-            color: Theme.of(context).primaryColor,
-            child: Text('No test results found',
-                style: TextStyle(color: Colors.white,
-                    fontSize:
-                    (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-          ),
-          Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width /
-                  (2 * globals.getWidgetScaling()),
-              height: MediaQuery.of(context).size.height /
-                  (12 * globals.getWidgetScaling()),
-              color: Colors.white,
-              padding: EdgeInsets.all(12),
-              child: Text('No tests have been uploaded by this user.',
-                  style: TextStyle(
-                      fontSize:
-                      (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width /
+                      (2 * globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height /
+                      (24 * globals.getWidgetScaling()),
+                  color: Theme.of(context).primaryColor,
+                  child: Text('No test results found',
+                      style: TextStyle(color: Colors.white,
+                          fontSize:
+                          (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width /
+                        (2 * globals.getWidgetScaling()),
+                    height: MediaQuery.of(context).size.height /
+                        (12 * globals.getWidgetScaling()),
+                    color: Colors.white,
+                    padding: EdgeInsets.all(12),
+                    child: Text('No tests have been uploaded by this user.',
+                        style: TextStyle(
+                            fontSize:
+                            (MediaQuery.of(context).size.height * 0.01) * 2.5
+                        )
+                    )
+                ),
+              ],
+            ),
+          )
         ]);
       } else {
         //Else create and return a list
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: EdgeInsets.all(16),
             itemCount: numberOfResults,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Column(children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).primaryColor,
-                    child: Text('Employee ' + globals.currentTestResults[index].getUserId()),
-                  ),
-                  ListView(
-                      shrinkWrap: true,
-                      physics:
-                      NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                      children: <Widget>[
-                        Container(
-                          color: Colors.white,
-                          child: Text('Date: ' + globals.currentTestResults[index].getTimestamp()),
+                title: Container(
+                  color: Colors.white,
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children:[
+                        Column(
+                          children: [
+                            Container(
+                              height: MediaQuery.of(context).size.height/6,
+                              child: Image(image: AssetImage('assets/images/placeholder-pdf.png')),
+                            ),
+                          ],
                         ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                  child: Text('View'),
-                                  onPressed: () {
-                                    globals.currentTestResult = globals.currentTestResults[index];
-                                    Navigator.of(context).pushReplacementNamed(ReportingViewSingleTestResult.routeName);
-                                  }),
-                            ],
+                        Expanded(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:[
+                                Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.all(8),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(globals.currentTestResults[index].getTimestamp())
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                              child: Text('View'),
+                                              onPressed: () {
+                                                globals.currentTestResult = globals.currentTestResults[index];
+                                                Navigator.of(context).pushReplacementNamed(ReportingViewSingleTestResult.routeName);
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ]
                           ),
                         ),
-                      ])
-                ]),
+                      ]
+                  ),
+                ),
               );
             });
       }
