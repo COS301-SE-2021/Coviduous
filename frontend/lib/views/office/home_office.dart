@@ -53,18 +53,18 @@ class _OfficeState extends State<Office> {
           ),
           body: SingleChildScrollView(
             child: Center(
-                child: SingleChildScrollView (
-                   ///height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                    ///width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                child: Container (
+                    width: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
                     padding: EdgeInsets.all(16),
-
                      child: Column (
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Icon(
                               Icons.library_books,
                               color: globals.focusColor,
-                              size: MediaQuery.of(context).size.width/4
+                              size: (globals.getIfOnPC())
+                                  ? MediaQuery.of(context).size.width/8
+                                  : MediaQuery.of(context).size.width/4
                           ),
                           SizedBox (
                             height: MediaQuery.of(context).size.height/48,

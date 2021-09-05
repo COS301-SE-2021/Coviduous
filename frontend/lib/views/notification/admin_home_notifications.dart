@@ -61,7 +61,9 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                           Icon(
                               Icons.notifications_active,
                               color: globals.focusColor,
-                              size: MediaQuery.of(context).size.width/4
+                              size: (globals.getIfOnPC())
+                                  ? MediaQuery.of(context).size.width/8
+                                  : MediaQuery.of(context).size.width/4
                           ),
                           SizedBox (
                             height: MediaQuery.of(context).size.height/48,

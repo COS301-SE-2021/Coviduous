@@ -6,7 +6,7 @@ import 'package:frontend/views/health/user_report_infection.dart';
 import 'package:frontend/views/health/user_view_guidelines.dart';
 import 'package:frontend/views/health/user_view_permissions.dart';
 import 'package:frontend/views/health/user_upload_test_results.dart';
-import 'package:frontend/views/health/user_view_vaccine_confirm.dart';
+import 'package:frontend/views/health/user_upload_vaccine_confirm.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
@@ -65,7 +65,9 @@ class _UserHealthState extends State<UserHealth> {
                         Icon(
                             Icons.medical_services,
                             color: globals.focusColor,
-                            size: MediaQuery.of(context).size.width/4
+                            size: (globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.width/8
+                                : MediaQuery.of(context).size.width/4
                         ),
                         SizedBox (
                           height: MediaQuery.of(context).size.height/48,
@@ -159,14 +161,7 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              healthHelpers.getTestResults().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('An error occurred while retrieving your test results. Please try again later.')));
-                                }
-                              });
+                              Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
                             }
                         ),
                         SizedBox (
@@ -188,14 +183,7 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              healthHelpers.getVaccineConfirmations().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('An error occurred while retrieving your vaccine confirmations. Please try again later.')));
-                                }
-                              });
+                              Navigator.of(context).pushReplacementNamed(UserUploadVaccineConfirm.routeName);
                             }
                         ),
                         SizedBox (
