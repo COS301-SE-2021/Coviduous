@@ -175,6 +175,17 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
                                     height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
                                   ),
                                   Container(
+                                    alignment: Alignment.center,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Text(
+                                      'Drop your file here',
+                                      style: TextStyle(color: Colors.white, fontSize:18),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
+                                  ),
+                                  Container(
                                     width: MediaQuery.of(context).size.width,
                                     child: Text(
                                       'Selected file: ' + pickerFileName,
