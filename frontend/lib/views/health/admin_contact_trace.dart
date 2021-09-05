@@ -99,13 +99,16 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
     );
 
     Widget getList() {
+      employeeList.clear();
       employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email', 'Date']);
       for (int i = 0; i < globals.selectedUsers.length; i++) {
-        List<String> employeeInfo = <String>[
-          globals.selectedUsers[i].getUserId(), globals.selectedUsers[i].getFirstName(),
-          globals.selectedUsers[i].getLastName(), globals.selectedUsers[i].getEmail(), globals.currentShift.getDate()
-        ];
-        employeeList.add(employeeInfo);
+        if (globals.selectedUsers[i].getUserId() != globals.selectedUser.getUserId()) {
+          List<String> employeeInfo = <String>[
+            globals.selectedUsers[i].getUserId(), globals.selectedUsers[i].getFirstName(),
+            globals.selectedUsers[i].getLastName(), globals.selectedUsers[i].getEmail(), globals.currentShift.getDate()
+          ];
+          employeeList.add(employeeInfo);
+        }
       }
 
       if (numberOfEmployees == 0) {
@@ -116,64 +119,108 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No employees found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('Employee has not been in contact with anyone within the company recently.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
+                      color: Theme.of(context).primaryColor,
+                      child: Text('No employees found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
+                        color: Colors.white,
+                        padding: EdgeInsets.all(12),
+                        child: Text('Employee has not been in contact with anyone within the company recently.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
+                    ),
+                  ],
+                ),
               )
             ]
         );
-      } else { //Else create and return a list
+      } else {
+        //Else create and return a list
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
             itemCount: numberOfEmployees,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
+            itemBuilder: (context, index) {
               return ListTile(
-                title: Column(
-                    children:[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Employee ID: ' + globals.selectedUsers[index].getUserId()),
+                title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height / 6,
+                            child: Image(
+                              image: AssetImage('assets/images/placeholder-profile-image.png'),
+                            ),
+                          ),
+                        ],
                       ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Employee name: ' + globals.selectedUsers[index].getFirstName() + ' ' + globals.selectedUsers[index].getLastName()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Date: ' + globals.currentShift.getDate()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                          ]
-                      )
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('User ' + (index + 1).toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: (MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height * 0.01) * 2.5,
+                                      )
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(globals.currentShift.getDate().substring(0, 11) + ' @ ' + globals.currentShift.getDate().substring(11, 19)),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getFirstName() + ' ' + globals.selectedUsers[index].getLastName())
+                                              ),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getUserId())
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
                     ]
                 ),
-                //title: floors[index].floor()
               );
-            }
-        );
+            });
       }
     }
 
@@ -325,10 +372,19 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    child: Text(globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' (ID ' + globals.selectedUser.getUserId() + ') has come into contact with the following employees over the past month:', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      color: globals.firstColor,
+                      child: Text(
+                          globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' (ID ' + globals.selectedUser.getUserId() + ') has come into contact with the following employees over the past month:',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                          )
+                      ),
+                      padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                    ),
                   ),
                   getList(),
                 ],
