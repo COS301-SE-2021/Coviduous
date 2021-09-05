@@ -48,7 +48,6 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
             print(tempFileName);
             tempFileName = fileName;
             fileBytes = file.readAsBytesSync();
-            globals.testResultsExist = true;
           }
         } else { //Else, PC browser
           FilePickerResult result = results.first;
@@ -58,7 +57,6 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
             print(tempFileName);
             fileName = tempFileName;
             fileBytes = result.files.first.bytes;
-            globals.testResultsExist = true;
           }
         }
       } else { //Else, mobile app
@@ -70,7 +68,6 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
           print(tempFileName);
           fileName = tempFileName;
           fileBytes = file.readAsBytesSync();
-          globals.testResultsExist = true;
         }
       }
       setState(() {});
@@ -123,6 +120,33 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
               },
             ),
           ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: Text(
+                      'View uploaded files'
+                  ),
+                  onPressed: () {
+                    healthHelpers.getTestResults().then((result) {
+                      if (result == true) {
+                        Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('An error occurred while retrieving your test results. Please try again later.')));
+                      }
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           body: Stack(
               children: <Widget>[
                 Center(
@@ -131,111 +155,79 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                       /* Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                          height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                          color: Theme.of(context).primaryColor,
-                          child: Text(
-                              'Upload your COVID-19 test results',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
-                              )
-                          ),
-                        ), */
-                        Container(
-                          color: Colors.green,
-                          width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                          height: 300,
-                          ///MediaQuery.of(context).size.height / (4 * globals.getWidgetScaling()),
-                          padding: EdgeInsets.all(20),
-                          child: SingleChildScrollView(
-                            child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.cloud_upload,
-                                        size: 100,
-                                        color: Colors.white),
-                                    Text(
-                                      'Drop Files here',
-                                      style: TextStyle(color: Colors.white, fontSize:18),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: globals.focusColor,
+                            width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                            padding: EdgeInsets.all(20),
+                            child: SingleChildScrollView(
+                              child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: Icon(Icons.cloud_upload,
+                                      size: 100,
+                                      color: Colors.white
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Text(
+                                    'Selected file: ' + pickerFileName,
+                                    style: TextStyle(color: Colors.white, fontSize:18),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
+                                  children: <Widget>[
+                                    ElevatedButton(
+                                      child: Text(
+                                          'Select a file'
+                                      ),
+                                      onPressed: () {
+                                        getPdf();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      child: Text(
+                                          'Submit'
+                                      ),
+                                      onPressed: () {
+                                        if (fileBytes != null && fileBytes != "") {
+                                          savePdf(fileBytes, fileName).then((result) {
+                                            healthHelpers.getTestResults().then((result) {
+                                              Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                            });
+                                          });
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Please upload a PDF.")));
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: Text(
-                                  'Selected file: ' + pickerFileName
-                                ),
-                              ),
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
-                                children: <Widget>[
-                                  ElevatedButton(
-                                    child: Text(
-                                        'Select a file'
-                                    ),
-                                    onPressed: () {
-                                      getPdf();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    child: Text(
-                                        'Submit'
-                                    ),
-                                    onPressed: () {
-                                      if (globals.testResultsExist) {
-                                        savePdf(fileBytes, fileName).then((result) {
-                                          healthHelpers.getTestResults().then((result) {
-                                            Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                          });
-                                        });
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("Please upload a PDF.")));
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    child: Text(
-                                        'View uploaded files'
-                                    ),
-                                    onPressed: () {
-                                      if (globals.testResultsExist) {
-                                            Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                           ),
+                              ],
+                             ),
+                            ),
                           ),
                         ),
                       ],
