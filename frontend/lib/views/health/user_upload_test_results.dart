@@ -131,7 +131,7 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
+                       /* Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
                           height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
@@ -143,21 +143,32 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                                 fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
                               )
                           ),
-                        ),
+                        ), */
                         Container(
-                          color: Colors.white,
+                          color: Colors.green,
                           width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                          height: MediaQuery.of(context).size.height / (4 * globals.getWidgetScaling()),
-                          padding: EdgeInsets.all(16),
-                          child: Column(
+                          height: 300,
+                          ///MediaQuery.of(context).size.height / (4 * globals.getWidgetScaling()),
+                          padding: EdgeInsets.all(20),
+                          child: SingleChildScrollView(
+                            child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                  'Please note that all documents must be uploaded in a PDF format.'
+                              Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.cloud_upload,
+                                        size: 100,
+                                        color: Colors.white),
+                                    Text(
+                                      'Drop Files here',
+                                      style: TextStyle(color: Colors.white, fontSize:18),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
-                              ),
+
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 child: Text(
@@ -205,10 +216,26 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
+                                  ),
+                                  ElevatedButton(
+                                    child: Text(
+                                        'View uploaded files'
+                                    ),
+                                    onPressed: () {
+                                      if (globals.testResultsExist) {
+                                            Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
                             ],
+                           ),
                           ),
                         ),
                       ],
