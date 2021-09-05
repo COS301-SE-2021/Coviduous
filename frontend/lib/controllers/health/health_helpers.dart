@@ -202,10 +202,7 @@ Future<bool> getVaccineConfirmations() async {
   ]).then((results) {
     if (results.first != null) {
       globals.currentVaccineConfirmations = results.first;
-      globals.vaccineConfirmExists = true;
       result = true;
-    } else {
-      globals.vaccineConfirmExists = false;
     }
   });
   return result;
@@ -218,10 +215,7 @@ Future<bool> getTestResults() async {
   ]).then((results) {
     if (results.first != null) {
       globals.currentTestResults = results.first;
-      globals.testResultsExist = true;
       result = true;
-    } else {
-      globals.testResultsExist = false;
     }
   });
   return result;

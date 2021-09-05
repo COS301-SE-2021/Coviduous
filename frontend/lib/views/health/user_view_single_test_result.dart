@@ -44,7 +44,7 @@ class _UserViewSingleTestResultState extends State<UserViewSingleTestResult> {
     }
 
     Widget getList() {
-      if (!globals.testResultsExist) { //If COVID test results have not been uploaded yet
+      if (globals.currentTestResult == null) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

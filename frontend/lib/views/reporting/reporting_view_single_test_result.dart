@@ -44,7 +44,7 @@ class _ReportingViewSingleTestResultState extends State<ReportingViewSingleTestR
     }
 
     Widget getList() {
-      if (globals.currentTestResult == null) { //If the test result document does not exist
+      if (globals.currentTestResult == null) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

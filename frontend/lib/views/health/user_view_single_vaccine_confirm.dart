@@ -44,7 +44,7 @@ class _UserViewSingleVaccineConfirmState extends State<UserViewSingleVaccineConf
     }
 
     Widget getList() {
-      if (!globals.testResultsExist) { //If vaccine confirmation documents have not been uploaded yet
+      if (globals.currentVaccineConfirmation == null) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -66,7 +66,8 @@ class _UserViewSingleVaccineConfirmState extends State<UserViewSingleVaccineConf
               )
             ]
         );
-      } else { //Else, return a container showing the confirmation document
+      } else {
+        //Else, return a container showing the confirmation document
         return Container(
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width/(1.5*globals.getWidgetScaling()),

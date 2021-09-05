@@ -177,12 +177,6 @@ bool floorPlanImageExists = false;
 //Check if company guidelines have been uploaded
 bool companyGuidelinesExist = true;
 
-//Check if COVID-19 test results have been uploaded
-bool testResultsExist = false;
-
-//Check if vaccine confirmation has been uploaded
-bool vaccineConfirmExists = false;
-
 //Current user completed health check
 HealthCheck currentHealthCheck;
 

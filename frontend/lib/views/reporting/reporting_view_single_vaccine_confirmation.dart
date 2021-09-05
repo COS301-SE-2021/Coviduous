@@ -44,7 +44,7 @@ class _ReportingViewSingleVaccineConfirmationState extends State<ReportingViewSi
     }
 
     Widget getList() {
-      if (globals.currentTestResult == null) { //If the test result document does not exist
+      if (globals.currentVaccineConfirmation == null) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
