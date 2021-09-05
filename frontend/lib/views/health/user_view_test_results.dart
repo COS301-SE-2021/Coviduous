@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/health/user_upload_test_results.dart';
 import 'package:frontend/views/health/user_view_single_test_result.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
-
 import 'package:frontend/globals.dart' as globals;
-
 class UserViewTestResults extends StatefulWidget {
   static const routeName = "/user_view_test_results";
-
   @override
   _UserViewTestResultsState createState() => _UserViewTestResultsState();
 }
-
 class _UserViewTestResultsState extends State<UserViewTestResults> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
@@ -37,9 +32,7 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
     }
     Widget getList() {
       int numberOfResults = globals.currentTestResults.length;
-
       print(numberOfResults);
-
       if (numberOfResults == 0) {
         return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
