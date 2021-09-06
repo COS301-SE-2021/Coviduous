@@ -247,5 +247,106 @@ try {
 });
  ////////////////////////////////////////////////////////////////// Announcements //////////////////////////////////////////////////////
 
+///// Office /////
+/**
+ * This function creates a specified booking via an HTTP CREATE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  bookingNumber: string
+ *   deskNumber: string
+ *   floorPlanNumber: string
+ *   floorNumber: string
+ *   roomNumber: string
+ *   timestamp: string
+ *   userId: string
+ *   companyId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+ app.post('/api/office', authMiddleware, async (req, res) => {
+    let fieldErrors = [];
 
- exports.coviduous = functions.https.onRequest(app);
+    if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (reqJson.deskNumber == null || reqJson.deskNumber === '') {
+        fieldErrors.push({field: 'deskNumber', message: 'Desk number may not be empty'});
+    }
+
+    if (reqJson.floorPlanNumber == null || reqJson.floorPlanNumber === '') {
+        fieldErrors.push({field: 'floorPlanNumber', message: 'Floor plan number may not be empty'});
+    }
+
+    if (reqJson.floorNumber == null || reqJson.floorNumber === '') {
+        fieldErrors.push({field: 'floorNumber', message: 'Floor number may not be empty'});
+    }
+
+    if (reqJson.roomNumber == null || reqJson.roomNumber === '') {
+        fieldErrors.push({field: 'roomNumber', message: 'Room number may not be empty'});
+    }
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let bookingNumber = "BKN-" + uuid.v4();
+    let summary = "SUM-"+uuid.v4();
+    let timestamp = "Booking Placed On The : " + new Date().today() + " @ " + new Date().timeNow();
+    let bookingData = { bookingNumber: bookingNumber, deskNumber: reqJson.deskNumber,
+        floorPlanNumber: reqJson.floorPlanNumber, floorNumber: reqJson.floorNumber,
+        roomNumber: reqJson.roomNumber, timestamp: timestamp, userId: reqJson.userId, companyId: reqJson.companyId
+    }
+
+    let time = new Date();
+    let year = time.getFullYear();
+    let month = time.getMonth()+1;
+
+    let dta ={
+        summaryBookingId: summary,
+        companyId: reqJson.companyId,
+        numBookings: 1,
+        month: month,
+        year: year
+    }
+
+    try {
+        await database.collection('bookings').doc(bookingNumber)
+            .create(bookingData);
+
+        return res.status(200).send({
+            message: 'Office booking successfully created',
+            data: bookingData
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
+ exports.app = functions.https.onRequest(app);
