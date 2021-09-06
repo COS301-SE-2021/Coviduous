@@ -1,0 +1,55 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "test": "mocha './tests/*/*.test.js'",
+    "testUser": "mocha './tests/user/*.test.js' --timeout 5000",
+    "testUserWithExit": "mocha './tests/user/*.test.js' --timeout 5000 --exit",
+    "testAnnouncement": "mocha './tests/announcement/*.test.js' --timeout 30000",
+    "testNotification": "mocha './tests/notification/*.test.js' --timeout 10000",
+    "testOffice": "mocha './tests/office/*.test.js' --timeout 30000",
+    "testShift": "mocha './tests/shift/*.test.js' --timeout 30000",
+    "testFloorPlan": "mocha './tests/floorplan/*.test.js' --timeout 30000",
+    "testReporting": "mocha './tests/reporting/*.test.js' --timeout 30000",
+    "testHealth": "mocha './tests/health/*.test.js' --timeout 30000"
+  },
+  "engines": {
+    "node": "14"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "firebase": "^8.9.0",
+    "firebase-admin": "^9.11.0",
+    "firebase-functions": "^3.14.1",
+    "firebase-tools": "^9.16.0",
+    "jwks-rsa": "^2.0.4",
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.6.3",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "firebase-functions-test": "^0.2.3",
+    "firebase-mock": "^2.3.2",
+    "mocha": "^9.0.3"
+  },
+  "private": true,
+  "version": "1.0.0",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
