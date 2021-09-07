@@ -110,7 +110,6 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
             shrinkWrap: true,
             itemCount: numOfUsers,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH user in users[]
               return ListTile(
                 title: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -295,8 +294,9 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                                         if (value.isEmpty) {
                                           return 'Please enter an email';
                                         } else {
-                                          //If email doesn't exist in the database
-                                          //return 'Invalid email';
+                                          if (!globals.currentEmails.contains(value)) {
+                                            return 'Invalid email';
+                                          }
                                         }
                                         return null;
                                       },
