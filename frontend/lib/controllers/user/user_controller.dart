@@ -1,4 +1,3 @@
-// Shift controller
 library controllers;
 
 import 'package:http/http.dart' as http;
@@ -11,10 +10,17 @@ import 'package:frontend/globals.dart' as globals;
 
 /**
  * List<User> userDatabaseTable acts like a database table that holds users, this is to mock out functionality for testing
- * numUsers keeps track of number of announcements in the mock announcement database table
+ * numUsers keeps track of number of user in the mock user database table
  */
 List<User> userDatabaseTable = [];
 int numUsers = 0;
+
+/**
+ * List<String> emails stores emails retrieved from the database
+ * numEmails keeps track of the number of emails
+ */
+List<String> emails = [];
+int numEmails = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
@@ -248,6 +254,46 @@ Future<User> getUserDetailsByEmail(String email) async {
       }
 
       return userDatabaseTable.first;
+    }
+  } catch (error) {
+    print(error);
+  }
+
+  return null;
+}
+
+/**
+ * getEmailsByCompany() : Gets all user emails for a specified company.
+ */
+Future<List<String>> getEmailsByCompany(String companyId) async {
+  String path = '/group/company-id';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "companyId": companyId,
+    });
+    request.headers.addAll(globals.requestHeaders);
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      emails.clear();
+      numEmails = 0;
+
+      for (var data in jsonMap["data"]) {
+        var userData = User.fromJson(data);
+        emails.add(userData.getEmail());
+        numEmails++;
+      }
+
+      return emails;
     }
   } catch (error) {
     print(error);
