@@ -282,10 +282,7 @@ List<Group> currentGroups = [];
 String currentGroupDescription = '';
 
 //Current emails registered to a company, used for autocompletion provided by flutter_typeahead
-List<String> currentEmails = [
-  'email1@email1.com',
-  'email2@email2.com',
-];
+List<String> currentEmails = [];
 
 class CurrentEmails {
   static List<String> getSuggestions(String query) {
