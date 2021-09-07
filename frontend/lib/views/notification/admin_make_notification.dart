@@ -6,6 +6,7 @@ import 'package:frontend/views/notification/admin_make_notification_assign_emplo
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class MakeNotification extends StatefulWidget {
@@ -139,7 +140,14 @@ class MakeNotificationState extends State<MakeNotification> {
                               globals.currentSubjectField = _subject.text;
                               globals.currentMessageField = _message.text;
                               globals.tempUsers.clear();
-                              Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
+                              userHelpers.getEmailsForCompany().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("An error occurred while retrieving employees. Please try again later.")));
+                                }
+                              });
                             },
                           ),
                         ],
