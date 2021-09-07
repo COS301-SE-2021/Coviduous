@@ -459,6 +459,47 @@ exports.getRoomShift = async (req, res) => {
       return res.status(500).send({message: "Some error occurred while fetching shifts."});
     }
 };
+exports.getEmailAssigned = async (req, res) => {
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let getEmailAssign = await db.getEmailAssigned(reqJson.companyId);
+      
+    if (getEmailAssign != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved emails',
+        data: getEmailAssign
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching emails."});
+    }
+};
 
 
 
