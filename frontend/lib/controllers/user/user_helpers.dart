@@ -127,3 +127,17 @@ Future<bool> getUsersForGroup(Group group) async {
   }
   return result;
 }
+
+Future<bool> getEmailsForCompany() async {
+  bool result = false;
+  globals.currentEmails.clear();
+  await Future.wait([
+    userController.getEmailsByCompany(globals.loggedInCompanyId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentEmails = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
