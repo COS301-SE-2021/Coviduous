@@ -83,7 +83,7 @@ exports.getGroupForShift = async (shiftNumber) =>{
         const document = db.collection('groups').where("shiftNumber","==",shiftNumber);
         const snapshot = await document.get();
  
-        let list =[];
+       let list =[];
  
          snapshot.forEach(doc => {
              let data = doc.data();
@@ -100,6 +100,25 @@ exports.getGroupForShift = async (shiftNumber) =>{
 exports.getRoomShift = async (roomNumber) =>{
     try{
         const document = db.collection('shifts').where("roomNumber","==",roomNumber);
+        const snapshot = await document.get();
+ 
+        let list =[];
+ 
+         snapshot.forEach(doc => {
+             let data = doc.data();
+             list.push(data);
+         });
+
+         return list;
+    }
+    catch(error){
+        console.log(error);
+        return false;
+    }
+};
+exports.getEmailAssigned = async (companyId) =>{
+    try{
+        const document = db.collection('users').where("companyId","==",companyId);
         const snapshot = await document.get();
  
         let list =[];
