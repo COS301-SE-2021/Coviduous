@@ -47,7 +47,8 @@ class _UserJitsiMeetingState extends State<UserJitsiMeeting> {
         }
       }
 
-      var options = JitsiMeetingOptions(room: globals.currentBooking.getRoomNumber().substring(4,12) + '_' + globals.currentBooking.getTimestamp().substring(24,34).replaceAll('/', '-'))
+      var options = JitsiMeetingOptions(room: globals.loggedInCompanyId + '_' + globals.currentBooking.getRoomNumber().substring(4,12) +
+          '_' + globals.currentBooking.getTimestamp().substring(24,34).replaceAll('/', '-'))
         ..serverURL = "https://meet.jit.si"
         ..subject = "Virtual meeting for room " + globals.currentBooking.getRoomNumber()
         ..userDisplayName = globals.loggedInUser.getFirstName() + ' ' + globals.loggedInUser.getLastName()
