@@ -159,6 +159,7 @@ Future loadPDFFonts() async {
 //Used in booking subsystem
 //===========================
 List<Booking> currentBookings;
+Booking currentBooking;
 
 //============================
 //Used in floor plan subsystem

@@ -67,6 +67,7 @@ import 'package:frontend/views/shift/admin_view_shifts_rooms.dart';
 
 //Office
 import 'package:frontend/views/office/home_office.dart';
+import 'package:frontend/views/office/jitsi_meeting.dart';
 import 'package:frontend/views/office/user_view_office_floor_plans.dart';
 import 'package:frontend/views/office/user_view_office_floors.dart';
 import 'package:frontend/views/office/user_view_office_rooms.dart';
@@ -241,6 +242,7 @@ class MyApp extends StatelessWidget{
         ViewShiftsEditShift.routeName: (ctx)=> ViewShiftsEditShift(),
 
         ///Office
+        UserJitsiMeeting.routeName: (ctx)=> UserJitsiMeeting(),
         Office.routeName: (ctx)=> Office(),
         UserViewOfficeFloorPlans.routeName: (ctx)=> UserViewOfficeFloorPlans(),
         UserViewOfficeFloors.routeName: (ctx)=> UserViewOfficeFloors(),
