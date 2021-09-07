@@ -193,6 +193,107 @@ let uuid = require("uuid");
     }
 });
 
+/**
+ * This function deletes a specified booking via an HTTP DELETE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  bookingNumber: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+ officeApp.delete('/api/office', async (req, res) => {
+    let fieldErrors = [];
+
+    if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (reqJson.bookingNumber == null || reqJson.bookingNumber === '') {
+        fieldErrors.push({field: 'bookingNumber', message: 'Booking number may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    try {
+        //summary
+        const documents = database.collection('bookings').where("bookingNumber","==",reqJson.bookingNumber);
+        const snapshot = await documents.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(data)
+            list.push(data);
+        });
+
+        let companyId;
+
+        for (const element of list) {
+         companyId = element.companyId;
+         //console.log(companyId)
+        }
+
+         const doc =   database.collection('summary-bookings').where("companyId","==",companyId); 
+         const snap = await doc.get(); 
+         
+        let lists = [];
+
+        snap.forEach(docs => {
+            let dat = docs.data();
+            console.log(dat)
+            lists.push(dat);
+        });
+
+        //console.log(lists)
+      
+        let numBooking;
+        let summaryId;
+        for (const element of lists) {
+            summaryId = element.summaryBookingId,
+            numBooking = element.numBookings;
+           }
+        
+        console.log(numBooking);   
+        let numBookings = parseInt(numBooking)-1;
+        numBookings = numBookings.toString();   
+        
+        const documented = database.collection('summary-bookings').doc(summaryId);
+        await documented.update({ 
+            numBookings:numBookings
+        }); 
+
+        const document = database.collection('bookings').doc(reqJson.bookingNumber);
+        await document.delete();
+
+        return res.status(200).send({
+            message: 'Office booking successfully deleted',
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
 officeApp.post('/api/office/view', async (req, res) => {
     let fieldErrors = [];
 
