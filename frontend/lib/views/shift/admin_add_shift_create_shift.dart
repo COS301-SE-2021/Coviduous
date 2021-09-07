@@ -7,6 +7,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/models/shift/group.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class AddShiftCreateShift extends StatefulWidget {
@@ -277,8 +278,16 @@ class _AddShiftCreateShiftState extends State<AddShiftCreateShift> {
                                           globals.selectedShiftEndTime = _selectedEndTime.toString();
                                           globals.currentGroupDescription = _groupName.text;
                                           globals.tempGroup = new Group(groupNumber: "", groupName: globals.currentGroupDescription,
-                                              userEmails: [], shiftNumber: "", adminId: globals.loggedInUserId);
-                                          Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+                                              userEmails: [], shiftNumber: "", adminId: globals.loggedInUserId
+                                          );
+                                          userHelpers.getEmailsForCompany().then((result) {
+                                            if (result == true) {
+                                              Navigator.of(context).pushReplacementNamed(AddShiftAssignEmployees.routeName);
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("An error occurred while retrieving employees. Please try again later.")));
+                                            }
+                                          });
                                         } else {
                                           showDialog(
                                               context: context,
