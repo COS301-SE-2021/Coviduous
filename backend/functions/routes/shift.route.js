@@ -31,6 +31,7 @@ router.put('/shift',Shift.updateShift);
 router.get('/group',Shift.getGroup);
 router.post('/group/shift-id',Shift.getGroupForShift);
 router.post('/group',Shift.createGroup);
+router.post('/group/compnay-id',Shift.getEmailAssigned);
 
 /**
  * shift mock routes 
