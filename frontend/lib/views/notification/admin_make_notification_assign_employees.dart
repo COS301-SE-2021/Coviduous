@@ -290,8 +290,9 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                                       if (value.isEmpty) {
                                         return 'Please enter an email';
                                       } else {
-                                        //If email doesn't exist in the database
-                                        //return 'Invalid email';
+                                        if (!globals.currentEmails.contains(value)) {
+                                          return 'Invalid email';
+                                        }
                                       }
                                       return null;
                                     },
