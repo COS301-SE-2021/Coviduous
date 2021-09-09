@@ -240,24 +240,26 @@ class _UserJitsiMeetingState extends State<UserJitsiMeeting> {
                     width: MediaQuery.of(context).size.width * 0.3,
                     child: meetConfig(),
                   ),
-                  Container(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                            color: Colors.white54,
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.6 * 0.7,
-                              height: MediaQuery.of(context).size.width * 0.6 * 0.7,
-                              child: JitsiMeetConferencing(
-                                extraJS: [
-                                  // extraJs setup example
-                                  '<script>function echo(){console.log("echo!!!")};</script>',
-                                  '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
-                                ],
-                              ),
-                            )),
-                      ))
+                  Expanded(
+                    child: Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              color: Colors.white54,
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.6 * 0.7,
+                                height: MediaQuery.of(context).size.width * 0.6 * 0.7,
+                                child: JitsiMeetConferencing(
+                                  extraJS: [
+                                    // extraJs setup example
+                                    '<script>function echo(){console.log("echo!!!")};</script>',
+                                    '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
+                                  ],
+                                ),
+                              )),
+                        )),
+                  )
                 ],
               ) : meetConfig(),
             ),
