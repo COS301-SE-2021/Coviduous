@@ -17,7 +17,7 @@ class VisitorViewGuidelines extends StatefulWidget {
 
 class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
   final pdfController = PdfController(
-     document: PdfDocument.openAsset('assets/sample.pdf'),
+     document: PdfDocument.openAsset('assets/za-covid-guidelines.pdf'),
    );
 
   Future<bool> _onWillPop() async {
@@ -80,13 +80,32 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
 
       return WillPopScope(
         onWillPop: _onWillPop,
-        child: new Scaffold(
+        child: Scaffold(
             appBar: AppBar(
               title: Text('Company guidelines'),
               leading: BackButton( //Specify back button
                 onPressed: (){
                   Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
                 },
+              ),
+            ),
+            bottomNavigationBar: BottomAppBar(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      pdfController.previousPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_forward_ios),
+                    onPressed: () {
+                      pdfController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                    },
+                  ),
+                ]
               ),
             ),
             body: Stack (
