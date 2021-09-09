@@ -1,4 +1,6 @@
-# importing Flask and other modules 
+# importing Flask and other modules
+import numpy
+import sklearn.metrics
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS, cross_origin
 import numpy as np
@@ -59,6 +61,12 @@ def DecisionTree(psymptoms):
         if(predicted == a):
             h='yes' 
             break
+
+    # calculate confusion matrix and write to file
+    dt_confusion_matrix = sklearn.metrics.confusion_matrix(y_test, y_pred)
+    file1 = open("dt_confusion_matrix.txt", "w")
+    file1.write(str(dt_confusion_matrix))
+    file1.close()
         
     if (h=='yes'):
         return(disease[a], accuracy_score(y_test, y_pred,normalize=True)) 
@@ -90,6 +98,12 @@ def NaiveBayes(psymptoms):
         if(predicted == a):
             h='yes'
             break
+
+    # calculate confusion matrix and write to file
+    nb_confusion_matrix = sklearn.metrics.confusion_matrix(y_test, y_pred)
+    file2 = open("nb_confusion_matrix.txt", "w")
+    file2.write(str(nb_confusion_matrix))
+    file2.close()
 
     if (h=='yes'):
         return(disease[a], accuracy_score(y_test, y_pred,normalize=True)) 
