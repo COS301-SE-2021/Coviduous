@@ -91,10 +91,10 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                       : globals.firstColor,
                   child: Container(
                     color: Colors.white,
-                    height: MediaQuery.of(context).size.height/6,
+                    height: MediaQuery.of(context).size.height/5,
                     margin: EdgeInsets.all(5),
                     child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children:[
                           Container(
                             height: MediaQuery.of(context).size.height/6,
@@ -118,6 +118,12 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                                       child: Column(
                                         children: [
                                           Text(globals.currentAnnouncements[index].getTimestamp()),
+                                          Divider(
+                                            color: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
+                                                ? globals.sixthColor
+                                                : globals.firstColor,
+                                            thickness: 2,
+                                          ),
                                           Row(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             mainAxisAlignment: MainAxisAlignment.spaceAround,

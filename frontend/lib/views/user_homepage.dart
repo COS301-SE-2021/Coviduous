@@ -132,6 +132,7 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                     Divider(
                       color: globals.lineColor,
+                      thickness: 2,
                     ),
                     TextButton (
                         style: ElevatedButton.styleFrom (
@@ -160,6 +161,7 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                     Divider(
                       color: globals.lineColor,
+                      thickness: 2,
                     ),
                     TextButton(
                       style: ElevatedButton.styleFrom (
@@ -181,6 +183,7 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                     Divider(
                       color: globals.lineColor,
+                      thickness: 2,
                     ),
                     TextButton(
                       style: ElevatedButton.styleFrom (
@@ -222,6 +225,7 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                     Divider(
                       color: globals.lineColor,
+                      thickness: 2,
                     ),
                   ]
               ),

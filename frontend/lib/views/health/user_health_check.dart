@@ -315,7 +315,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
             child: TextFormField(
               textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
               decoration: InputDecoration(
-                labelText: 'Measured temperature (in degrees Celsius)',
+                labelText: 'Temperature (°C)',
               ),
               keyboardType: TextInputType.text,
               controller: _temperature,

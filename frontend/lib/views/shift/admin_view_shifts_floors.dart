@@ -92,7 +92,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
                   height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                  color: globals.firstColor,
+                  color: globals.appBarColor,
                   child: Text('Choose a floor',
                       style: TextStyle(color: Colors.white,
                           fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
@@ -116,7 +116,7 @@ class _ViewShiftsFloorsState extends State<ViewShiftsFloors> {
                           return Column(
                             children: [
                               Container(
-                                color: globals.firstColor,
+                                color: globals.appBarColor,
                                 padding: EdgeInsets.all(10),
                                 width: MediaQuery.of(context).size.width,
                                 child: Text('Floor ' + (index+1).toString(),

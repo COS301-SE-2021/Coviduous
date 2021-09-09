@@ -93,13 +93,13 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                       : globals.firstColor,
                   child: Container(
                     color: Colors.white,
-                    height: MediaQuery.of(context).size.height/5.5,
+                    height: MediaQuery.of(context).size.height/5,
                     margin: EdgeInsets.all(5),
                     child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children:[
                           Container(
-                            height: MediaQuery.of(context).size.height/5.5,
+                            height: MediaQuery.of(context).size.height/6,
                             child: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
                                 ? Image(
                                 image: AssetImage('assets/images/warning-icon.png')
@@ -162,6 +162,12 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                                                 ),
                                               ),
                                             ],
+                                          ),
+                                          Divider(
+                                            color: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
+                                                ? globals.sixthColor
+                                                : globals.firstColor,
+                                            thickness: 2,
                                           ),
                                           Row(
                                             crossAxisAlignment: CrossAxisAlignment.start,

@@ -96,7 +96,7 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width / (1.8 * globals.getWidgetScaling()),
                   height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                  color: globals.firstColor,
+                  color: globals.appBarColor,
                   child: Text('Choose a floor plan',
                       style: TextStyle(color: Colors.white,
                           fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
@@ -120,16 +120,19 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                           return Column(
                             children: [
                               Container(
-                                color: globals.firstColor,
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(horizontal: 5),
                                 width: MediaQuery.of(context).size.width,
                                 child: Text('Floor plan ' + (index+1).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: globals.secondColor,
                                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.4
                                   ),
                                 ),
+                              ),
+                              Divider(
+                                color: globals.appBarColor,
+                                thickness: 2,
                               ),
                               Expanded(
                                 child: Container(

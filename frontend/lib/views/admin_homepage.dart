@@ -132,6 +132,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton (
                       style: ElevatedButton.styleFrom (
@@ -153,6 +154,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton(
                     style: ElevatedButton.styleFrom (
@@ -174,6 +176,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton(
                     style: ElevatedButton.styleFrom (
@@ -215,6 +218,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                 ]
               ),
