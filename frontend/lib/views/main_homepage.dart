@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage>{
                         child: Column(
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height/20,
+                              height: MediaQuery.of(context).size.height/16,
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom (
@@ -73,11 +73,11 @@ class _HomePageState extends State<HomePage>{
                               ),
                             ),
                             SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
+                              height: MediaQuery.of(context).size.height/30,
                               width: MediaQuery.of(context).size.width,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height/20,
+                              height: MediaQuery.of(context).size.height/16,
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom (

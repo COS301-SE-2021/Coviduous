@@ -320,45 +320,53 @@ class _UserHomePageState extends State<UserHomePage> {
                         //=============================
                       ) : Column (
                           children: <Widget>[
-                            ElevatedButton (
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/16,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton (
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
                                   ),
-                                ),
-                                child: Row (
-                                    children: <Widget>[
-                                      Expanded(child: Text('Bookings')),
-                                      Icon(Icons.library_books)
-                                    ],
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(Office.routeName);
-                                }
+                                  child: Row (
+                                      children: <Widget>[
+                                        Expanded(child: Text('Bookings')),
+                                        Icon(Icons.library_books)
+                                      ],
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                  }
+                              ),
                             ),
                             SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
+                              height: MediaQuery.of(context).size.height/30,
                               width: MediaQuery.of(context).size.width,
                             ),
-                            ElevatedButton (
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/16,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton (
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
                                   ),
-                                ),
-                                child: Row (
-                                    children: <Widget>[
-                                      Expanded(child: Text('Health')),
-                                      Icon(Icons.medical_services)
-                                    ],
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                                }
+                                  child: Row (
+                                      children: <Widget>[
+                                        Expanded(child: Text('Health')),
+                                        Icon(Icons.medical_services)
+                                      ],
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                  }
+                              ),
                             ),
                           ]
                       )

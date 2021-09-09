@@ -79,7 +79,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                           ),
                         ),
                         SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
+                          height: MediaQuery.of(context).size.height/30,
                           width: MediaQuery.of(context).size.width,
                         ),
                         Container(
@@ -87,112 +87,133 @@ class _VisitorHealthState extends State<VisitorHealth> {
                           padding: EdgeInsets.all(16),
                           child: Column(
                             children: [
-                              ElevatedButton (
-                                  style: ElevatedButton.styleFrom (
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/16,
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton (
+                                    style: ElevatedButton.styleFrom (
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
-                                  ),
-                                  child: Row (
-                                      children: <Widget>[
-                                        Expanded(child: Text('Complete health check')),
-                                        Icon(Icons.check_circle)
-                                      ],
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacementNamed(VisitorHealthCheck.routeName);
-                                  }
+                                    child: Row (
+                                        children: <Widget>[
+                                          Expanded(child: Text('Complete health check')),
+                                          Icon(
+                                            Icons.check,
+                                            size: MediaQuery.of(context).size.width*0.01*6,
+                                          )
+                                        ],
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pushReplacementNamed(VisitorHealthCheck.routeName);
+                                    }
+                                ),
                               ),
                               SizedBox (
-                                height: MediaQuery.of(context).size.height/48,
+                                height: MediaQuery.of(context).size.height/30,
                                 width: MediaQuery.of(context).size.width,
                               ),
-                              ElevatedButton (
-                                  style: ElevatedButton.styleFrom (
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/16,
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton (
+                                    style: ElevatedButton.styleFrom (
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
-                                  ),
-                                  child: Row (
-                                      children: <Widget>[
-                                        Expanded(child: Text('View permissions')),
-                                        Icon(Icons.zoom_in)
-                                      ],
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                  ),
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                              title: Text('Enter your email'),
-                                              content: Form(
-                                                key: _formKey,
-                                                child: TextFormField(
-                                                  controller: _email,
-                                                  decoration: InputDecoration(hintText: 'Enter your email address', filled: true, fillColor: Colors.white),
-                                                  validator: (value) {
-                                                    if (value.isEmpty) {
-                                                      return 'please enter your email address';
-                                                    } else if (value.isNotEmpty) {
-                                                      if (!value.contains('@')) {
-                                                        return 'invalid email';
+                                    child: Row (
+                                        children: <Widget>[
+                                          Expanded(child: Text('View permissions')),
+                                          Icon(
+                                            Icons.zoom_in,
+                                            size: MediaQuery.of(context).size.width*0.01*6,
+                                          )
+                                        ],
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                                title: Text('Enter your email'),
+                                                content: Form(
+                                                  key: _formKey,
+                                                  child: TextFormField(
+                                                    controller: _email,
+                                                    decoration: InputDecoration(hintText: 'Enter your email address', filled: true, fillColor: Colors.white),
+                                                    validator: (value) {
+                                                      if (value.isEmpty) {
+                                                        return 'please enter your email address';
+                                                      } else if (value.isNotEmpty) {
+                                                        if (!value.contains('@')) {
+                                                          return 'invalid email';
+                                                        }
                                                       }
-                                                    }
-                                                    return null;
-                                                  },
-                                                  onSaved: (String value) {
-                                                    _email.text = value;
-                                                  },
+                                                      return null;
+                                                    },
+                                                    onSaved: (String value) {
+                                                      _email.text = value;
+                                                    },
+                                                  ),
                                                 ),
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  child: Text('Submit'),
-                                                  onPressed: () {
-                                                    FormState form = _formKey.currentState;
-                                                    if (form.validate()) {
-                                                      healthHelpers.getPermissionsVisitor(_email.text).then((result) {
-                                                        _email.clear();
-                                                        Navigator.of(context).pushReplacementNamed(VisitorViewPermissions.routeName);
-                                                      });
-                                                    } else {
-                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid email')));
-                                                    }
-                                                  },
-                                                ),
-                                                TextButton(
-                                                  child: Text('Cancel'),
-                                                  onPressed: () => Navigator.pop(context),
-                                                ),
-                                              ]);
-                                        });
-                                  }
+                                                actions: [
+                                                  TextButton(
+                                                    child: Text('Submit'),
+                                                    onPressed: () {
+                                                      FormState form = _formKey.currentState;
+                                                      if (form.validate()) {
+                                                        healthHelpers.getPermissionsVisitor(_email.text).then((result) {
+                                                          _email.clear();
+                                                          Navigator.of(context).pushReplacementNamed(VisitorViewPermissions.routeName);
+                                                        });
+                                                      } else {
+                                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid email')));
+                                                      }
+                                                    },
+                                                  ),
+                                                  TextButton(
+                                                    child: Text('Cancel'),
+                                                    onPressed: () => Navigator.pop(context),
+                                                  ),
+                                                ]);
+                                          });
+                                    }
+                                ),
                               ),
                               SizedBox (
-                                height: MediaQuery.of(context).size.height/48,
+                                height: MediaQuery.of(context).size.height/30,
                                 width: MediaQuery.of(context).size.width,
                               ),
-                              ElevatedButton (
-                                  style: ElevatedButton.styleFrom (
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/16,
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton (
+                                    style: ElevatedButton.styleFrom (
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
-                                  ),
-                                  child: Row (
-                                      children: <Widget>[
-                                        Expanded(child: Text('View company guidelines')),
-                                        Icon(Icons.zoom_in)
-                                      ],
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacementNamed(VisitorViewGuidelines.routeName);
-                                  }
+                                    child: Row (
+                                        children: <Widget>[
+                                          Expanded(child: Text('View company guidelines')),
+                                          Icon(
+                                            Icons.zoom_in,
+                                            size: MediaQuery.of(context).size.width*0.01*6,
+                                          )
+                                        ],
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pushReplacementNamed(VisitorViewGuidelines.routeName);
+                                    }
+                                ),
                               ),
                             ],
                           ),

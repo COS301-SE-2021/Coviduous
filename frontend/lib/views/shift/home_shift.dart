@@ -67,90 +67,98 @@ class _ShiftScreenState extends State<ShiftScreen> {
                                   : MediaQuery.of(context).size.width/4
                           ),
                           SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
+                            height: MediaQuery.of(context).size.height/30,
                             width: MediaQuery.of(context).size.width,
                           ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/16,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Add shift')),
-                                    Icon(Icons.add_circle_rounded)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                floorPlanHelpers.getFloorPlans().then((result) {
-                                  //Only allow shifts to be created if floor plans exist
-                                  if (result == true && globals.currentFloorPlans.isNotEmpty) {
-                                    Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('No floor plans found'),
-                                          content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
-                                  }
-                                });
-                              }
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Add shift')),
+                                      Icon(Icons.add_circle_rounded)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  floorPlanHelpers.getFloorPlans().then((result) {
+                                    //Only allow shifts to be created if floor plans exist
+                                    if (result == true && globals.currentFloorPlans.isNotEmpty) {
+                                      Navigator.of(context).pushReplacementNamed(AddShiftFloorPlans.routeName);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (ctx) => AlertDialog(
+                                            title: Text('No floor plans found'),
+                                            content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text('Okay'),
+                                                onPressed: (){
+                                                  Navigator.of(ctx).pop();
+                                                },
+                                              )
+                                            ],
+                                          )
+                                      );
+                                    }
+                                  });
+                                }
+                            ),
                           ),
                           SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
+                            height: MediaQuery.of(context).size.height/30,
                             width: MediaQuery.of(context).size.width,
                           ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/16,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('View shifts')),
-                                    Icon(Icons.update_rounded)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                floorPlanHelpers.getFloorPlans().then((result) {
-                                  //Only allow shifts to be created if floor plans exist
-                                  if (result == true && globals.currentFloorPlans.isNotEmpty) {
-                                    Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('No floor plans found'),
-                                          content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: Text('Okay'),
-                                              onPressed: (){
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        )
-                                    );
-                                  }
-                                });
-                              }
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('View shifts')),
+                                      Icon(Icons.update_rounded)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  floorPlanHelpers.getFloorPlans().then((result) {
+                                    //Only allow shifts to be created if floor plans exist
+                                    if (result == true && globals.currentFloorPlans.isNotEmpty) {
+                                      Navigator.of(context).pushReplacementNamed(ViewShiftsFloorPlans.routeName);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (ctx) => AlertDialog(
+                                            title: Text('No floor plans found'),
+                                            content: Text('Shifts cannot be assigned at this time. Please add floor plans for your company first.'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text('Okay'),
+                                                onPressed: (){
+                                                  Navigator.of(ctx).pop();
+                                                },
+                                              )
+                                            ],
+                                          )
+                                      );
+                                    }
+                                  });
+                                }
+                            ),
                           ),
                         ]
                     )
