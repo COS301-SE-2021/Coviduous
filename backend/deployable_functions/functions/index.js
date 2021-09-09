@@ -251,7 +251,117 @@ try {
 
 
 });
- ////////////////////////////////////////////////////////////////// Announcements //////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////// Announcements //////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////Notification//////////////////////////////////////////////////////////
+/**
+ * This function creates a new notification via an HTTP POST request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  userId: string
+ *  userEmail: string
+ *  subject: string
+ *  timestamp: string
+ *  message: string
+ *  adminId: string
+ *  companyId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res An HTTP status indicating whether the request was successful or not.
+ */
+ app.post('/api/notifications', authMiddleware,async (req, res) =>  {
+ // try {
+        // data validation
+        let fieldErrors = [];
+        
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+
+
+        if(req.body == null) {
+            fieldErrors.push({field: null, message: 'Request object may not be null'});
+        }
+
+        if (reqJson.userId == null || reqJson.userId === '') {
+            fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+        }
+
+        if (reqJson.userEmail == null || reqJson.userEmail === "") {
+            fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
+        }
+
+        if (reqJson.subject == null || reqJson.subject === "") {
+            fieldErrors.push({field: 'subject', message: 'Subject may not be empty'});
+        }
+
+        if (reqJson.message == null || reqJson.message === "") {
+            fieldErrors.push({field: 'message', message: 'Message may not be empty'});
+        }
+
+        if (reqJson.adminId == null || reqJson.adminId === "") {
+            fieldErrors.push({field: 'adminId', message: 'Admin ID may not be empty'});
+        }
+
+        if (reqJson.companyId == null || reqJson.companyId === "") {
+            fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+        }
+
+        if (fieldErrors.length > 0) {
+            return res.status(400).send({
+                message: '400 Bad Request: Incorrect fields',
+                errors: fieldErrors
+            });
+        }
+
+        let notificationId = "NTFN-" + uuid.v4();
+        let timestamp = new Date().toISOString();
+    
+        let notificationObj = new Notification(notificationId, reqJson.userId, reqJson.userEmail,
+            reqJson.subject, reqJson.message, timestamp, reqJson.adminId, reqJson.companyId);
+    
+        let notificationData = {
+          notificationId: notificationId,
+          userId: reqJson.userId,
+          userEmail: reqJson.userEmail,
+          subject: reqJson.subject,
+          message: reqJson.message,
+          timestamp: timestamp,
+          adminId: reqJson.adminId,
+          companyId: reqJson.companyId
+        }
+   
+        try {
+            await database.collection('notifications').doc(notificationId)
+              .create(notificationData);
+              return res.status(200).send({
+                message: 'Notifications successfully created',
+                data: notificationData
+             });
+        } catch (error) {
+          console.log(error);
+            return res.status(500).send({
+                message: '500 Server Error: DB error',
+                error: error
+            });
+        }
+          
+
+
+
+
+
+   
+});
+
+
+
+
+
 
 
 //  exports.app = functions.https.onRequest(app);
