@@ -139,14 +139,20 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                         alignment: Alignment.center,
                         height: 50,
                         width: MediaQuery.of(context).size.width,
-                        color: Colors.green,
-                        child: Text('Access granted', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                        color: globals.firstColor,
+                        child: Text('Access granted', style: TextStyle(
+                            color: Colors.white,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)
+                        ),
                       ) : Container(
                         alignment: Alignment.center,
                         height: 50,
                         width: MediaQuery.of(context).size.width,
-                        color: Colors.redAccent,
-                        child: Text('Access denied', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                        color: globals.sixthColor,
+                        child: Text('Access denied', style: TextStyle(
+                            color: Colors.white,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)
+                        ),
                       ),
                       ListView(
                           shrinkWrap: true,
@@ -160,12 +166,12 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                   children: [
                                     Icon(
                                       Icons.check_circle_rounded,
-                                      color: Colors.greenAccent,
+                                      color: globals.focusColor,
                                       size: 100.0,
                                     ),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom (
-                                        primary: Colors.green,
+                                        primary: globals.firstColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10),
                                         ),
@@ -180,7 +186,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                     ),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom (
-                                        primary: Colors.green,
+                                        primary: globals.firstColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10),
                                         ),
@@ -199,8 +205,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                                   children: [
                                                     Icon(
                                                       Icons.check_circle_rounded,
-                                                      color: Colors.greenAccent,
-                                                      size: 100.0,
+                                                      color: globals.focusColor,
+                                                      size: 100,
                                                     ),
                                                     Container(
                                                       alignment: Alignment.center,
@@ -247,8 +253,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                 children: [
                                   Icon(
                                     Icons.no_accounts_outlined,
-                                    color: Colors.redAccent,
-                                    size: 100.0,
+                                    color: globals.focusColor2,
+                                    size: 100,
                                   ),
                                   Container(
                                     height: 50,
@@ -259,7 +265,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                   ),
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom (
-                                        primary: Colors.redAccent,
+                                        primary: globals.sixthColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(10),
                                         ),

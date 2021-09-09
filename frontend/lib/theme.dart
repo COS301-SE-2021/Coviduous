@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 Color appBarColor = Color(0xff3B324E);
 Color focusColor = Color(0xff0D9999);
+Color focusColor2 = Color(0xffCC262F);
 Color lineColor = Color(0xffBBACE5);
 
 Color firstColor = Color(0xff006266);

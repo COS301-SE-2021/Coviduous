@@ -126,6 +126,7 @@ String token = '';
 
 Color appBarColor = theme.appBarColor;
 Color focusColor = theme.focusColor;
+Color focusColor2 = theme.focusColor2;
 Color lineColor = theme.lineColor;
 
 Color firstColor = theme.firstColor;
