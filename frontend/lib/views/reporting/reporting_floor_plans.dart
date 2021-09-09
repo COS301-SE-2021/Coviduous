@@ -130,9 +130,12 @@ class _ReportingFloorPlansState extends State<ReportingFloorPlans> {
                                   ),
                                 ),
                               ),
-                              Divider(
-                                color: globals.appBarColor,
-                                thickness: 2,
+                              Container(
+                                width: MediaQuery.of(context).size.width/5,
+                                child: Divider(
+                                  color: globals.appBarColor,
+                                  thickness: 2,
+                                ),
                               ),
                               Expanded(
                                 child: Container(
