@@ -60,7 +60,8 @@ class _UserJitsiMeetingState extends State<UserJitsiMeeting> {
         ..videoMuted = isVideoMuted
         ..featureFlags.addAll(featureFlags)
         ..webOptions = {
-          "roomName": globals.currentBooking.getRoomNumber().substring(4,8) + globals.currentBooking.getTimestamp().substring(25).replaceAll('/', '-'),
+          "roomName": globals.loggedInCompanyId + '_' + globals.currentBooking.getRoomNumber().substring(4,12) +
+              '_' + globals.currentBooking.getTimestamp().substring(24,34).replaceAll('/', '-'),
           "width": "100%",
           "height": "100%",
           "enableWelcomePage": false,
