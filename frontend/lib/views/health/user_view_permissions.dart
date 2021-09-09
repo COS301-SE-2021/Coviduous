@@ -179,7 +179,39 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       child: Text('Generate QR'),
                                       onPressed: () async {
                                         ByteData byteData = await QrPainter(data: "123456789", version: QrVersions.auto).toImageData(200.0);
-                                        saveQRCode(globals.currentPermissions[index].getPermissionId(), byteData.buffer.asUint8List());
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: Text('QR access code'),
+                                              content: Container(
+                                                color: Colors.white,
+                                                height: 300,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    Image.memory(byteData.buffer.asUint8List()),
+                                                    IconButton(
+                                                      color: globals.firstColor,
+                                                      icon: Icon(Icons.save_alt),
+                                                      iconSize: 40,
+                                                      onPressed: () {
+                                                        saveQRCode(globals.currentPermissions[index].getPermissionId(), byteData.buffer.asUint8List());
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: Text('Okay'),
+                                                  onPressed: (){
+                                                    Navigator.of(ctx).pop();
+                                                  },
+                                                )
+                                              ],
+                                            )
+                                        );
                                       }),
                                     SizedBox(
                                       height: MediaQuery.of(context).size.height/70,
