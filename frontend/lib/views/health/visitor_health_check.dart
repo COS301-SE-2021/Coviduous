@@ -497,24 +497,24 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
               },
             ),
           ),
-          body: SingleChildScrollView(
-            child: Stack(
-                children: <Widget>[
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back_ios),
-                          onPressed: () {
-                            if (currentQuestionNumber > 1) {
-                              setState(() {
-                                currentQuestionNumber--;
-                              });
-                            }
-                          },
-                        ),
-                        Column(
+          body: Stack(
+              children: <Widget>[
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () {
+                          if (currentQuestionNumber > 1) {
+                            setState(() {
+                              currentQuestionNumber--;
+                            });
+                          }
+                        },
+                      ),
+                      SingleChildScrollView(
+                        child: Column(
                           children: [
                             SizedBox(
                                 height: MediaQuery.of(context).size.height/20
@@ -643,24 +643,24 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                             getAnswerFormat(),
                           ],
                         ),
-                        IconButton(
-                          icon: Icon(Icons.arrow_forward_ios),
-                          onPressed: () {
-                            if (currentQuestionNumber < 13) {
-                              setState(() {
-                                currentQuestionNumber++;
-                              });
-                            } else if (currentQuestionNumber == 13) {
-                              setState(() {});
-                              showConfirmation();
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.arrow_forward_ios),
+                        onPressed: () {
+                          if (currentQuestionNumber < 13) {
+                            setState(() {
+                              currentQuestionNumber++;
+                            });
+                          } else if (currentQuestionNumber == 13) {
+                            setState(() {});
+                            showConfirmation();
+                          }
+                        },
+                      ),
+                    ],
                   ),
-                ]
-            ),
+                ),
+              ]
           )
       ),
     );
