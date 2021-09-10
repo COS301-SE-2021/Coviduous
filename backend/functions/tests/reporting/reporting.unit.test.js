@@ -1,83 +1,83 @@
-var chai = require("chai");
-var chaiHttp = require("chai-http");
-var expect = chai.expect;
-var should = chai.should();
-const uuid = require("uuid");
+// var chai = require("chai");
+// var chaiHttp = require("chai-http");
+// var expect = chai.expect;
+// var should = chai.should();
+// const uuid = require("uuid");
 
-let server = 'http://localhost:5002/coviduous-api/us-central1/app/';
+// let server = 'http://localhost:5002/coviduous-api/us-central1/app/';
 
-chai.use(chaiHttp);
+// chai.use(chaiHttp);
 
-describe('Create sick employee unit tests', function() {
-    it('Return 400 if request is empty', function(done) {
-        chai.request(server)
-            .post('/api/reporting/health/sick-employees')
-            .send(null)
-            .end((err, res) => {
-                should.exist(res);
-                res.should.have.status(400);
-                //console.log(res.body);
-                done();
-            });
-    });
+// describe('Create sick employee unit tests', function() {
+//     it('Return 400 if request is empty', function(done) {
+//         chai.request(server)
+//             .post('/api/reporting/health/sick-employees')
+//             .send(null)
+//             .end((err, res) => {
+//                 should.exist(res);
+//                 res.should.have.status(400);
+//                 //console.log(res.body);
+//                 done();
+//             });
+//     });
  
-    it('Return 400 if empty user ID', function(done) {
-        let req = {
-            userId: "",
-            userEmail: "test-000",
-            timeOfDiagnosis: "test-000",
-            companyId: "test-000"
-        };
+//     it('Return 400 if empty user ID', function(done) {
+//         let req = {
+//             userId: "",
+//             userEmail: "test-000",
+//             timeOfDiagnosis: "test-000",
+//             companyId: "test-000"
+//         };
 
-        chai.request(server)
-            .post('/api/reporting/health/sick-employees')
-            .send(req)
-            .end((err, res) => {
-                should.exist(res);
-                res.should.have.status(400);
-                console.log(res.body);
-                done();
-            });
-    });
+//         chai.request(server)
+//             .post('/api/reporting/health/sick-employees')
+//             .send(req)
+//             .end((err, res) => {
+//                 should.exist(res);
+//                 res.should.have.status(400);
+//                 console.log(res.body);
+//                 done();
+//             });
+//     });
  
-    it('Return 400 if empty user email', function(done) {
-        let req = {
-            userId: "test-000",
-            userEmail: "",
-            timeOfDiagnosis: "test-000",
-            companyId: "test-000"
-        };
+//     it('Return 400 if empty user email', function(done) {
+//         let req = {
+//             userId: "test-000",
+//             userEmail: "",
+//             timeOfDiagnosis: "test-000",
+//             companyId: "test-000"
+//         };
 
-        chai.request(server)
-            .post('/api/reporting/health/sick-employees')
-            .send(req)
-            .end((err, res) => {
-                should.exist(res);
-                res.should.have.status(400);
-                console.log(res.body);
-                done();
-            });
-    });
+//         chai.request(server)
+//             .post('/api/reporting/health/sick-employees')
+//             .send(req)
+//             .end((err, res) => {
+//                 should.exist(res);
+//                 res.should.have.status(400);
+//                 console.log(res.body);
+//                 done();
+//             });
+//     });
  
-    it('Return 400 if empty company ID', function(done) {
-        let req = {
-            userId: "test-000",
-            userEmail: "test-000",
-            timeOfDiagnosis: "test-000",
-            companyId: ""
-        };
+//     it('Return 400 if empty company ID', function(done) {
+//         let req = {
+//             userId: "test-000",
+//             userEmail: "test-000",
+//             timeOfDiagnosis: "test-000",
+//             companyId: ""
+//         };
 
-        chai.request(server)
-            .post('/api/reporting/health/sick-employees')
-            .send(req)
-            .end((err, res) => {
-                should.exist(res);
-                res.should.have.status(400);
-                console.log(res.body);
-                done();
-            });
-    });
- });
+//         chai.request(server)
+//             .post('/api/reporting/health/sick-employees')
+//             .send(req)
+//             .end((err, res) => {
+//                 should.exist(res);
+//                 res.should.have.status(400);
+//                 console.log(res.body);
+//                 done();
+//             });
+//     });
+//  });
  
 //  describe('Delete sick employee unit tests', function() {
 //     it('Return 400 if request is empty', function(done) {
@@ -93,12 +93,14 @@ describe('Create sick employee unit tests', function() {
 //     });
  
 //     it('Return 200 if deletion is successful', function() {
-        // let req = {
-        //     userId: "test-000",
-        //     userEmail: "test-000",
-        //     timeOfDiagnosis: "test-000",
-        //     companyId: "test-000"
-        // };
+//         let userId = "test-" + uuid.v4();
+
+//         let req = {
+//             userId: userId,
+//             userEmail: "test-000",
+//             timeOfDiagnosis: "test-000",
+//             companyId: "test-000"
+//         };
  
 //         chai.request(server)
 //             .post('/api/reporting/health/sick-employees')
@@ -111,7 +113,7 @@ describe('Create sick employee unit tests', function() {
 //                 //console.log(req2);
  
 //                 chai.request(server)
-//                     .delete('/api/users')
+//                     .delete('/api/reporting/health/sick-employees')
 //                     .send(req2).end((err, res) => {
 //                          should.exist(res);
 //                          res.should.have.status(200);
@@ -122,15 +124,34 @@ describe('Create sick employee unit tests', function() {
 //     });
 // });
 
-//  describe('Get sick employees unit tests', function() {
-//     it('Return 200 if retrieval is successful', function() {
+// describe('/GET sick employees', () => {
+//     it('should GET all sick employees', function() {
+//         let userId = "test-" + uuid.v4();
+
+//         let req = {
+//             userId: userId,
+//             userEmail: "test-000",
+//             timeOfDiagnosis: "test-000",
+//             companyId: "test-000"
+//         };
+    
 //         chai.request(server)
-//             .get('/api/reporting/health/sick-employees') // change to post - /view
+//             .post('/api/reporting/health/sick-employees')
+//             .send(req)
 //             .end((err, res) => {
-//                 should.exist(res);
-//                 res.should.have.status(200);
-//                 //console.log(res.body);
-//                 //done();
+//                 console.log(res.body);
+//                 let req2 = {
+//                     companyId: res.body.data.companyId
+//                 };
+    
+//                 chai.request(server)
+//                     .post('/api/reporting/health/sick-employees/view')
+//                     .send(req2).end((err, res) => {
+//                         should.exist(res);
+//                         res.should.have.status(200);
+//                         console.log(res.body);
+//                         //done();
+//                     });
 //             });
 //     });
-// });
+// }); 
