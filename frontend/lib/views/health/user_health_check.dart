@@ -312,13 +312,35 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
             color: Colors.white,
             width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
             padding: EdgeInsets.all(16),
-            child: TextFormField(
-              textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
-              decoration: InputDecoration(
-                labelText: 'Temperature (°C)',
-              ),
-              keyboardType: TextInputType.text,
-              controller: _temperature,
+            child: Column(
+              children: [
+                TextFormField(
+                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                  decoration: InputDecoration(
+                    labelText: 'Temperature (°C)',
+                  ),
+                  keyboardType: TextInputType.text,
+                  controller: _temperature,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height/48,
+                ),
+                ElevatedButton(
+                  child: Text("Proceed"),
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (currentQuestionNumber < 13) {
+                      setState(() {
+                        currentQuestionNumber++;
+                      });
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         );
@@ -445,24 +467,24 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
               },
             ),
           ),
-          body: SingleChildScrollView(
-            child: Stack(
-                children: <Widget>[
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back_ios),
-                          onPressed: () {
-                            if (currentQuestionNumber > 1) {
-                              setState(() {
-                                currentQuestionNumber--;
-                              });
-                            }
-                          },
-                        ),
-                        Column(
+          body: Stack(
+              children: <Widget>[
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () {
+                          if (currentQuestionNumber > 1) {
+                            setState(() {
+                              currentQuestionNumber--;
+                            });
+                          }
+                        },
+                      ),
+                      SingleChildScrollView(
+                        child: Column(
                           children: [
                             SizedBox(
                               height: MediaQuery.of(context).size.height/20
@@ -522,24 +544,24 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                             getAnswerFormat(),
                           ],
                         ),
-                        IconButton(
-                          icon: Icon(Icons.arrow_forward_ios),
-                          onPressed: () {
-                            if (currentQuestionNumber < 12) {
-                              setState(() {
-                                currentQuestionNumber++;
-                              });
-                            } else if (currentQuestionNumber == 12) {
-                              setState(() {});
-                              showConfirmation();
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.arrow_forward_ios),
+                        onPressed: () {
+                          if (currentQuestionNumber < 12) {
+                            setState(() {
+                              currentQuestionNumber++;
+                            });
+                          } else if (currentQuestionNumber == 12) {
+                            setState(() {});
+                            showConfirmation();
+                          }
+                        },
+                      ),
+                    ],
                   ),
-                ]
-            ),
+                ),
+              ]
           )
       ),
     );
