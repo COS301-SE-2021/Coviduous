@@ -337,7 +337,14 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(true);
-                  setState(() {});
+                  if (currentQuestionNumber < 12) {
+                    setState(() {
+                      currentQuestionNumber++;
+                    });
+                  } else if (currentQuestionNumber == 12) {
+                    setState(() {});
+                    showConfirmation();
+                  }
                 },
               ),
               SizedBox(
@@ -352,13 +359,62 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(false);
-                  setState(() {});
+                  if (currentQuestionNumber < 12) {
+                    setState(() {
+                      currentQuestionNumber++;
+                    });
+                  } else if (currentQuestionNumber == 12) {
+                    setState(() {});
+                    showConfirmation();
+                  }
                 },
               ),
             ]
         );
       }
       break;
+    }
+  }
+
+  void showConfirmation() {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('Warning'),
+          content: Text("Are you sure you are done with this health check?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Yes'),
+              onPressed: (){
+                completeHealthCheck();
+              },
+            ),
+            TextButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        ));
+  }
+
+  void completeHealthCheck() {
+    if (_temperature.text.isNotEmpty && globals.isNumeric(_temperature.text)) {
+      healthHelpers.createHealthCheckUser(_temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
+          _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
+        if (result == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
+          Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
+        }
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Please complete the questionnaire")));
     }
   }
 
@@ -474,22 +530,8 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                 currentQuestionNumber++;
                               });
                             } else if (currentQuestionNumber == 12) {
-                              if (_temperature.text.isNotEmpty && globals.isNumeric(_temperature.text)) {
-                                healthHelpers.createHealthCheckUser(_temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
-                                    _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
-                                  if (result == true) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
-                                    Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
-                                  }
-                                });
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Please complete the questionnaire")));
-                              }
+                              setState(() {});
+                              showConfirmation();
                             }
                           },
                         ),
