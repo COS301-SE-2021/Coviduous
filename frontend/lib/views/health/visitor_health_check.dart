@@ -369,13 +369,14 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(true);
-                  setState(() {
-                    if (currentQuestionNumber < 13) {
-                      setState(() {
-                        currentQuestionNumber++;
-                      });
-                    }
-                  });
+                  if (currentQuestionNumber < 13) {
+                    setState(() {
+                      currentQuestionNumber++;
+                    });
+                  } else if (currentQuestionNumber == 13) {
+                    setState(() {});
+                    showConfirmation();
+                  }
                 },
               ),
               SizedBox(
@@ -390,13 +391,14 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(false);
-                  setState(() {
-                    if (currentQuestionNumber < 13) {
-                      setState(() {
-                        currentQuestionNumber++;
-                      });
-                    }
-                  });
+                  if (currentQuestionNumber < 13) {
+                    setState(() {
+                      currentQuestionNumber++;
+                    });
+                  } else if (currentQuestionNumber == 13) {
+                    setState(() {});
+                    showConfirmation();
+                  }
                 },
               ),
             ]
@@ -424,6 +426,49 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
       result = false;
     }
     return result;
+  }
+
+  void showConfirmation() {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('Warning'),
+          content: Text("Are you sure you are done with this health check?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Yes'),
+              onPressed: (){
+                completeHealthCheck();
+              },
+            ),
+            TextButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        ));
+  }
+
+  void completeHealthCheck() {
+    if (validateForm()) {
+      healthHelpers.createHealthCheckVisitor(_companyId.text, _name.text, _surname.text, _email.text, _phoneNumber.text,
+          _temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
+          _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
+        if (result == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
+          Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
+        }
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Please complete the questionnaire")));
+    }
   }
 
   @override
@@ -606,23 +651,8 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                                 currentQuestionNumber++;
                               });
                             } else if (currentQuestionNumber == 13) {
-                              if (validateForm()) {
-                                healthHelpers.createHealthCheckVisitor(_companyId.text, _name.text, _surname.text, _email.text, _phoneNumber.text,
-                                    _temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
-                                    _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
-                                  if (result == true) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
-                                    Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
-                                  }
-                                });
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Please complete the questionnaire")));
-                              }
+                              setState(() {});
+                              showConfirmation();
                             }
                           },
                         ),
