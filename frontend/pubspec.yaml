@@ -92,6 +92,7 @@ flutter:
     - assets/images/sick2.jpg
     - assets/images/sick3.jpg
     - assets/sample.pdf
+    - assets/za-covid-guidelines.pdf
   # PDF fonts
     - assets/fonts/OpenSans-Regular.ttf
     - assets/fonts/OpenSans-Bold.ttf

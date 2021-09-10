@@ -351,92 +351,108 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             //=============================
                             ) : Column (
                                 children: <Widget>[
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Floor plans')),
-                                          Flexible(child: Icon(Icons.add_circle_rounded)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Floor plans')),
+                                            Flexible(child: Icon(Icons.add_circle_rounded)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+                                        }
+                                    ),
                                   ),
                                   SizedBox (
-                                    height: MediaQuery.of(context).size.height/48,
+                                    height: MediaQuery.of(context).size.height/30,
                                     width: MediaQuery.of(context).size.width,
                                   ),
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Shifts')),
-                                          Flexible(child: Icon(Icons.alarm)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Shifts')),
+                                            Flexible(child: Icon(Icons.alarm)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+                                        }
+                                    ),
                                   ),
                                   SizedBox (
-                                    height: MediaQuery.of(context).size.height/48,
+                                    height: MediaQuery.of(context).size.height/30,
                                     width: MediaQuery.of(context).size.width,
                                   ),
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Permissions')),
-                                          Flexible(child: Icon(Icons.sensor_door)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Permissions')),
+                                            Flexible(child: Icon(Icons.sensor_door)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+                                        }
+                                    ),
                                   ),
                                   SizedBox (
-                                    height: MediaQuery.of(context).size.height/48,
+                                    height: MediaQuery.of(context).size.height/30,
                                     width: MediaQuery.of(context).size.width,
                                   ),
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
                                         ),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Reports')),
-                                          Flexible(child: Icon(Icons.library_books)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(Reporting.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Reports')),
+                                            Flexible(child: Icon(Icons.library_books)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(Reporting.routeName);
+                                        }
+                                    ),
                                   ),
                                 ]
                               )

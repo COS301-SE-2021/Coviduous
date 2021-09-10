@@ -68,62 +68,70 @@ class _OfficeState extends State<Office> {
                                   : MediaQuery.of(context).size.width/4
                           ),
                           SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
+                            height: MediaQuery.of(context).size.height/30,
                             width: MediaQuery.of(context).size.width,
                           ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/16,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Book office space')),
-                                    Icon(Icons.add_circle_rounded)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                floorPlanHelpers.getFloorPlans().then((result) {
-                                  if (result == true) {
-                                    Navigator.of(context).pushReplacementNamed(UserViewOfficeFloorPlans.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text('Error occurred while retrieving floor plans. Please try again later.')));
-                                  }
-                                });
-                              }
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Book office space')),
+                                      Icon(Icons.add_circle_rounded)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  floorPlanHelpers.getFloorPlans().then((result) {
+                                    if (result == true) {
+                                      Navigator.of(context).pushReplacementNamed(UserViewOfficeFloorPlans.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Error occurred while retrieving floor plans. Please try again later.')));
+                                    }
+                                  });
+                                }
+                            ),
                           ),
                           SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
+                            height: MediaQuery.of(context).size.height/30,
                             width: MediaQuery.of(context).size.width,
                           ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/16,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('View bookings')),
-                                    Icon(Icons.library_books)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                officeHelpers.getBookings().then((result) {
-                                  if (result == true) {
-                                    Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text('Error occurred while retrieving bookings. Please try again later.')));
-                                  }
-                                });
-                              }
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('View bookings')),
+                                      Icon(Icons.library_books)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  officeHelpers.getBookings().then((result) {
+                                    if (result == true) {
+                                      Navigator.of(context).pushReplacementNamed(UserViewCurrentBookings.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Error occurred while retrieving bookings. Please try again later.')));
+                                    }
+                                  });
+                                }
+                            ),
                           ),
                         ]
                     )

@@ -115,15 +115,21 @@ class _AddShiftFloorsState extends State<AddShiftFloors> {
                           return Column(
                             children: [
                               Container(
-                                color: globals.appBarColor,
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(horizontal: 5),
                                 width: MediaQuery.of(context).size.width,
                                 child: Text('Floor ' + (index+1).toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: globals.secondColor,
                                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.4
                                   ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width/5,
+                                child: Divider(
+                                  color: globals.appBarColor,
+                                  thickness: 2,
                                 ),
                               ),
                               Expanded(

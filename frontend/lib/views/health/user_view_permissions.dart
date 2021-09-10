@@ -140,7 +140,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         color: globals.firstColor,
-                        child: Text('Access granted', style: TextStyle(
+                        child: Text('Office access granted', style: TextStyle(
                             color: Colors.white,
                             fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)
                         ),
@@ -149,7 +149,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         color: globals.sixthColor,
-                        child: Text('Access denied', style: TextStyle(
+                        child: Text('Office access denied', style: TextStyle(
                             color: Colors.white,
                             fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)
                         ),
@@ -166,7 +166,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                   children: [
                                     Icon(
                                       Icons.check_circle_rounded,
-                                      color: globals.focusColor,
+                                      color: globals.firstColor,
                                       size: 100.0,
                                     ),
                                     ElevatedButton(
@@ -179,7 +179,39 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                       child: Text('Generate QR'),
                                       onPressed: () async {
                                         ByteData byteData = await QrPainter(data: "123456789", version: QrVersions.auto).toImageData(200.0);
-                                        saveQRCode(globals.currentPermissions[index].getPermissionId(), byteData.buffer.asUint8List());
+                                        showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: Text('QR access code'),
+                                              content: Container(
+                                                color: Colors.white,
+                                                height: 300,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    Image.memory(byteData.buffer.asUint8List()),
+                                                    IconButton(
+                                                      color: globals.firstColor,
+                                                      icon: Icon(Icons.save_alt),
+                                                      iconSize: 40,
+                                                      onPressed: () {
+                                                        saveQRCode(globals.currentPermissions[index].getPermissionId(), byteData.buffer.asUint8List());
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: Text('Okay'),
+                                                  onPressed: (){
+                                                    Navigator.of(ctx).pop();
+                                                  },
+                                                )
+                                              ],
+                                            )
+                                        );
                                       }),
                                     SizedBox(
                                       height: MediaQuery.of(context).size.height/70,
@@ -205,7 +237,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                                   children: [
                                                     Icon(
                                                       Icons.check_circle_rounded,
-                                                      color: globals.focusColor,
+                                                      color: globals.firstColor,
                                                       size: 100,
                                                     ),
                                                     Container(
@@ -253,7 +285,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                 children: [
                                   Icon(
                                     Icons.no_accounts_outlined,
-                                    color: globals.focusColor2,
+                                    color: globals.sixthColor,
                                     size: 100,
                                   ),
                                   Container(
@@ -290,7 +322,6 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                       )
                     ]
                 ),
-                //title: floors[index].floor()
               );
             }
         );
