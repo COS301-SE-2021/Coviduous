@@ -15,10 +15,10 @@ admin.initializeApp();
 let database = admin.firestore();
 let uuid = require("uuid");
 
-module.exports = {
+/*module.exports = {
     ...require("./controllers/office.controller.js"),
     ...require("./controllers/shift.controller.js"),
-}
+}*/
 
  //////////////////////////////////////////////////////////////////General Functions ///////////////////////////////////////////////////
  /**
@@ -269,7 +269,7 @@ try {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res An HTTP status indicating whether the request was successful or not.
  */
- app.post('/api/notifications', authMiddleware,async (req, res) =>  {
+ app.post('/api/notifications', async (req, res) =>  {
  // try {
         // data validation
         let fieldErrors = [];
@@ -357,11 +357,69 @@ try {
 
    
 });
+/**
+ * This function deletes a specified notification via an HTTP DELETE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  notificationId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+ app.delete('/notifications', async (req, res) =>  {
+    // try {0
+        // data validation
+        let fieldErrors = [];
+
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+
+        if(req.body == null) {
+            fieldErrors.push({field: null, message: 'Request object may not be null'});
+        }
+
+        if (reqJson.notificationId == null || reqJson.notificationId === '') {
+            fieldErrors.push({field: 'notificationId', message: 'Notification ID may not be empty'});
+        }
+
+        if (fieldErrors.length > 0) {
+            return res.status(400).send({
+                message: '400 Bad Request: Incorrect fields',
+                errors: fieldErrors
+            });
+        }
+
+        try {
+              const document = db.collection('notifications').doc(notificationId); // delete document based on notificationId
+              await document.delete();
+              return res.status(200).send({
+                message: 'Notifications successfully created'
+             });
+        } catch (error) {
+          console.log(error);
+            return res.status(500).send({
+                message: '500 Server Error: DB error',
+                error: error
+            });
+        }
+       
 
 
 
 
+    // } catch (error) {
+    //     console.log(error);
+    //     return res.status(500).send(error);
+    // }
+});
 
 
+app.get('/api', (req, res) => {
+    return res.status(200).send('Connected to the coviduous api');
+   });
 
-//  exports.app = functions.https.onRequest(app);
+ exports.app = functions.https.onRequest(app);
