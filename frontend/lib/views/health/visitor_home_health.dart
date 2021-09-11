@@ -7,6 +7,7 @@ import 'package:frontend/views/health/visitor_health_check.dart';
 import 'package:frontend/views/health/visitor_view_guidelines.dart';
 import 'package:frontend/views/health/visitor_view_permissions.dart';
 import 'package:frontend/views/main_homepage.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -220,6 +221,25 @@ class _VisitorHealthState extends State<VisitorHealth> {
                         ),
                       ]
                   )
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Stack(
+                  alignment: Alignment.topLeft,
+                  children: <Widget>[
+                    TextField(),
+                    IconButton(
+                      icon: Icon(
+                        Icons.chat,
+                        color: Colors.greenAccent,
+                        size: 50,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           )
