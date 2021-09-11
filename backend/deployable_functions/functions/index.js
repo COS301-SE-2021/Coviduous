@@ -462,6 +462,43 @@ try {
             return error;
         }    
 });
+/**
+ * This function retrieves all notifications via an HTTP GET request.
+ * @param req The request object may be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
+ app.post('/notifications', async (req, res) =>  {
+
+    try {
+        const document = db.collection('notifications');
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved notifications',
+            data: list
+        });
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while fetching notifications."}); 
+    }
+
+
+
+
+        
+    
+});
+
+
 
 
 
