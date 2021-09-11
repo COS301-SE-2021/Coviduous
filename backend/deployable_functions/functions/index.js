@@ -768,7 +768,10 @@ app.delete('/reporting/health/sick-employees', async (req, res) =>  {
 
 });
 
-/*exports.addCompanyData = async (req, res) => {
+
+
+
+app.post('/reporting/company/company-data', async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
             message: '400 Bad Request: Null request object',
@@ -807,8 +810,10 @@ app.delete('/reporting/health/sick-employees', async (req, res) =>  {
         numberOfRooms: "0"
     }
 
-    let result2 = await database.getCompanyData(reqJson.companyId);
-
+    let response = database.collection('company-data').doc(reqJson.companyId);
+        let doc = await response.get();
+        let result2 = doc.data()
+    
     if (result2 != null) // check if entry exists in database
     {
         return res.status(200).send({
@@ -817,20 +822,23 @@ app.delete('/reporting/health/sick-employees', async (req, res) =>  {
     }
     else
     {
-        let result = await database.addCompanyData(companyData.companyId, companyData);
-        
-        if (!result) {
+        try {
+            await database.collection('company-data').doc(companyData.companyId)
+              .create(companyData);
+              return res.status(200).send({
+                message: 'Company Data successfully created',
+                data: companyData
+             });
+        } catch (error) {
+          console.log(error);
             return res.status(500).send({
                 message: '500 Server Error: DB error',
+                error: error
             });
         }
-    
-        return res.status(200).send({
-           message: 'Company data successfully created',
-           data: companyData
-        });
+              
     }
-};*/
+});
 
 app.post('/reporting/company/company-data/view', async (req, res) =>  {
     let fieldErrors = [];
