@@ -22,8 +22,43 @@ announcementController.setDatabase(devDatabase);
 
 // Announcement routes
 // N.B. paths for a subsystem can all be the same
+
+/**
+ * @swagger
+ * /announcements:
+ *   get:
+ *     description: Get all announcements
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.get('/announcements', announcementController.viewAnnouncements);
+/**
+ * @swagger
+ * /announcements:
+ *   post:
+ *     description: create an announcements
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/announcements', announcementController.createAnnouncement);
+/**
+ * @swagger
+ * /announcements:
+ *   delete:
+ *     description: delete an announcement
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.delete('/announcements', announcementController.deleteAnnouncement);
 
 //Announcement routes mock
