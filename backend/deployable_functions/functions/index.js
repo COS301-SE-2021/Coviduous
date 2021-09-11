@@ -321,9 +321,7 @@ try {
         let notificationId = "NTFN-" + uuid.v4();
         let timestamp = new Date().toISOString();
     
-        let notificationObj = new Notification(notificationId, reqJson.userId, reqJson.userEmail,
-            reqJson.subject, reqJson.message, timestamp, reqJson.adminId, reqJson.companyId);
-    
+        
         let notificationData = {
           notificationId: notificationId,
           userId: reqJson.userId,
@@ -394,7 +392,7 @@ try {
         }
 
         try {
-              const document = db.collection('notifications').doc(notificationId); // delete document based on notificationId
+              const document = database.collection('notifications').doc(reqJson.notificationId); // delete document based on notificationId
               await document.delete();
               return res.status(200).send({
                 message: 'Notifications successfully created'
@@ -443,7 +441,7 @@ try {
         }
 
         try {
-            const document = db.collection('notifications').where("userEmail", "==", userEmail);
+            const document = database.collection('notifications').where("userEmail", "==", reqJson.userEmail);
             const snapshot = await document.get();
     
             let list = [];
@@ -471,7 +469,7 @@ try {
  app.post('/api/notifications', async (req, res) =>  {
 
     try {
-        const document = db.collection('notifications');
+        const document = database.collection('notifications');
         const snapshot = await document.get();
 
         let list = [];
@@ -609,7 +607,7 @@ let reqJson;
     }
 
     try {
-        await database.collection('recovered-employees').doc(userId)
+        await database.collection('recovered-employees').doc(recoveredData.userId)
           .create(recoveredData);
           return res.status(200).send({
             message: 'Recovered Employee successfully created',
@@ -656,7 +654,7 @@ app.post('/api/reporting/health/recovered-employees/view', async (req, res) =>  
 
     
     try{
-        const document = db.collection('recovered-employees').where("companyId", "==", companyId);
+        const document = database.collection('recovered-employees').where("companyId", "==", reqJson.companyId);
         const snapshot = await document.get();
     
         let list =[];
@@ -706,7 +704,7 @@ app.post('/api/reporting/health/sick-employees/view', async (req, res) =>  {
 
 
     try{
-        const document = db.collection('sick-employees').where("companyId", "==", companyId);
+        const document = database.collection('sick-employees').where("companyId", "==", reqJson.companyId);
         const snapshot = await document.get();
     
         let list =[];
@@ -752,7 +750,7 @@ app.delete('/reporting/health/sick-employees', async (req, res) =>  {
     }
 
     try {
-        const document = db.collection('sick-employees').doc(userId);
+        const document = database.collection('sick-employees').doc(reqJson.userId);
         await document.delete();
 
         return res.status(200).send({
@@ -768,23 +766,295 @@ app.delete('/reporting/health/sick-employees', async (req, res) =>  {
 
     }
 
+});
 
+/*exports.addCompanyData = async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
 
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
 
+    let fieldErrors = [];
 
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
 
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
 
+    let companyData = {
+        companyId: reqJson.companyId,
+        numberOfRegisteredUsers: "0",
+        numberOfRegisteredAdmins: "0",
+        numberOfFloorplans: "0",
+        numberOfFloors: "0",
+        numberOfRooms: "0"
+    }
+
+    let result2 = await database.getCompanyData(reqJson.companyId);
+
+    if (result2 != null) // check if entry exists in database
+    {
+        return res.status(200).send({
+            message: 'Database entry already exists for companyId:' + reqJson.companyId,
+        });
+    }
+    else
+    {
+        let result = await database.addCompanyData(companyData.companyId, companyData);
+        
+        if (!result) {
+            return res.status(500).send({
+                message: '500 Server Error: DB error',
+            });
+        }
+    
+        return res.status(200).send({
+           message: 'Company data successfully created',
+           data: companyData
+        });
+    }
+};*/
+
+app.post('/reporting/company/company-data/view', async (req, res) =>  {
+    let fieldErrors = [];
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+      
+    let response = database.collection('company-data').doc(reqJson.companyId);
+        let doc = await response.get();
+        let companyData = doc.data()
+    
+    if (companyData != null)
+    {
+        return res.status(200).send({
+            message: 'Successfully retrieved company data',
+            data: companyData
+        });      
+    }
+    else
+    {
+        return res.status(500).send({message: "Some error occurred while fetching company data."});
+    }
 });
 
 
 
 
+/*
+
+exports.updateNumberOfRegisteredUsers = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if(reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === ''){
+        fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+  
+   
+};
+
+exports.updateNumberOfRegisteredAdmins = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if(reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === ''){
+        fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered users may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+  
+};
+
+exports.addNumberOfRegisteredUsersCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let companyData = await database.getCompanyData(reqJson.companyId);
+
+};
+
+exports.decreaseNumberOfRegisteredUsersCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let companyData = await database.getCompanyData(reqJson.companyId);
+
+    
+};
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 app.get('/api', (req, res) => {
     return res.status(200).send('Connected to the coviduous api');
    });
