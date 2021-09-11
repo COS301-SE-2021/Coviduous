@@ -36,6 +36,36 @@ let uuid = require("uuid");
 
 ///////////////// functions /////////////////
 
+///// shifts //////
+shiftApp.get('/api/shift', async (req, res) => {
+    try {
+        const document = database.collection('shifts');
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(data)
+            list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved shifts',
+            data: list
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
+
+
+///// shift groups /////
 shiftApp.post('/api/group/company-id', async (req, res) => {
 
     // data validation
@@ -89,7 +119,6 @@ shiftApp.post('/api/group/company-id', async (req, res) => {
         });
     }
 });
-
 
 
 
