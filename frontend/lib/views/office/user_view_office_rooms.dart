@@ -164,7 +164,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               ElevatedButton(
-                                              child: Text('Info'),
+                                              child: Text('Details'),
                                               onPressed: () {
                                                 showDialog(
                                                     context: context,
