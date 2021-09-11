@@ -61,7 +61,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                         children: <Widget>[
                           Icon(
                               Icons.add_circle_rounded,
-                              color: globals.focusColor,
+                              color: Colors.white,
                               size: (globals.getIfOnPC())
                                   ? MediaQuery.of(context).size.width/8
                                   : MediaQuery.of(context).size.width/4
@@ -71,7 +71,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height/16,
+                            height: MediaQuery.of(context).size.height/14,
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton (
                                 style: ElevatedButton.styleFrom (
@@ -97,7 +97,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height/16,
+                            height: MediaQuery.of(context).size.height/14,
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton (
                                 style: ElevatedButton.styleFrom (

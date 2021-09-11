@@ -130,12 +130,12 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 ElevatedButton(
-                                                  child: Text('Info'),
+                                                  child: Text('Details'),
                                                   onPressed: () {
                                                     showDialog(
                                                         context: context,
                                                         builder: (ctx) => AlertDialog(
-                                                          title: Text('Room details'),
+                                                          title: Text('Booking details'),
                                                           content: Container(
                                                             color: Colors.white,
                                                             height: 350,

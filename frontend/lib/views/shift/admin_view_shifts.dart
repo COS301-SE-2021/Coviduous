@@ -217,11 +217,11 @@ class _ViewShiftsState extends State<ViewShifts> {
                                                               Expanded(
                                                                 child: Container(
                                                                   alignment: Alignment.center,
-                                                                  color: Color(0xff9B7EE5),
+                                                                  color: globals.firstColor,
                                                                   height: MediaQuery.of(context).size.height/5,
                                                                   child: Text('  Shift ' + (index+1).toString() + '  ',
                                                                     style: TextStyle(
-                                                                      color: globals.secondColor,
+                                                                      color: Colors.white,
                                                                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
                                                                     ),
                                                                   ),
@@ -243,8 +243,9 @@ class _ViewShiftsState extends State<ViewShifts> {
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
-                                                                  SizedBox(
-                                                                    height: 10,
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
                                                                   ),
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
@@ -253,8 +254,9 @@ class _ViewShiftsState extends State<ViewShifts> {
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
-                                                                  SizedBox(
-                                                                    height: 10,
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
                                                                   ),
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,

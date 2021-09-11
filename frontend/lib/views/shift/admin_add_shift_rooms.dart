@@ -121,19 +121,33 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: [
                                         Expanded(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              SingleChildScrollView(
-                                                scrollDirection: Axis.horizontal,
-                                                child: Container(
-                                                  child: (globals.currentRooms[index].getRoomName() != "")
-                                                      ? Text(globals.currentRooms[index].getRoomName())
-                                                      : Text('Unnamed'),
-                                                ),
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  SingleChildScrollView(
+                                                    scrollDirection: Axis.horizontal,
+                                                    child: Container(
+                                                      child: (globals.currentRooms[index].getRoomName() != "")
+                                                          ? Text(globals.currentRooms[index].getRoomName())
+                                                          : Text('Unnamed'),
+                                                    ),
+                                                  ),
+                                                  Text(globals.currentRooms[index].getNumberOfDesks().toString() + ' desks'),
+                                                  Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().toString())
+                                                ],
                                               ),
-                                              Text(globals.currentRooms[index].getNumberOfDesks().toString() + ' desks'),
-                                              Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().toString())
+                                              Column(
+                                                children: [
+                                                  Icon(
+                                                    Icons.person,
+                                                    color: Colors.black,
+                                                  ),
+                                                  Text(globals.currentRooms[index].getCurrentCapacity().toString()),
+                                                ],
+                                              )
                                             ],
                                           ),
                                         ),
@@ -156,7 +170,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                                     title: Text('Room details'),
                                                     content: Container(
                                                       color: Colors.white,
-                                                      height: 350,
+                                                      height: 330,
                                                       child: Column(
                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                         children: [
@@ -172,11 +186,11 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                                               Expanded(
                                                                 child: Container(
                                                                   alignment: Alignment.center,
-                                                                  color: Color(0xff9B7EE5),
+                                                                  color: globals.firstColor,
                                                                   height: MediaQuery.of(context).size.height/5,
                                                                   child: Text('  Room ' + (index+1).toString() + '  ',
                                                                     style: TextStyle(
-                                                                      color: globals.secondColor,
+                                                                      color: Colors.white,
                                                                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
                                                                     ),
                                                                   ),
@@ -190,7 +204,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                                                 children: [
                                                                   Container(
                                                                     alignment: Alignment.center,
-                                                                    height: 50,
+                                                                    height: 30,
                                                                     child: (globals.currentRooms[index].getRoomName() != "")
                                                                         ? Text('Room name: ' + globals.currentRooms[index].getRoomName(),
                                                                         style: TextStyle(color: Colors.black))
@@ -198,23 +212,35 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
+                                                                  ),
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
-                                                                    height: 50,
+                                                                    height: 30,
                                                                     child: Text('Room area: ' + globals.currentRooms[index].getRoomArea().toString() + 'm²',
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
+                                                                  ),
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
-                                                                    height: 50,
+                                                                    height: 30,
                                                                     child: Text('Desk area:' + globals.currentRooms[index].getDeskArea().toString() + 'm²',
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
+                                                                  ),
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
-                                                                    height: 50,
+                                                                    height: 30,
                                                                     child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString() + '%',
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),

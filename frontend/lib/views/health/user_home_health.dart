@@ -64,7 +64,7 @@ class _UserHealthState extends State<UserHealth> {
                       children: <Widget>[
                         Icon(
                             Icons.medical_services,
-                            color: globals.focusColor,
+                            color: Colors.white,
                             size: (globals.getIfOnPC())
                                 ? MediaQuery.of(context).size.width/8
                                 : MediaQuery.of(context).size.width/4

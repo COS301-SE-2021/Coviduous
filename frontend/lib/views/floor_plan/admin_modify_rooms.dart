@@ -230,7 +230,7 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                 title: Text('Room details'),
                                                 content: Container(
                                                   color: Colors.white,
-                                                  height: 350,
+                                                  height: 330,
                                                   child: Column(
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     children: [
@@ -245,15 +245,15 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                           ),
                                                           Expanded(
                                                             child: Container(
-                                                                alignment: Alignment.center,
-                                                                color: Color(0xff9B7EE5),
-                                                                height: MediaQuery.of(context).size.height/5,
-                                                                child: Text('  Room ' + (index+1).toString() + '  ',
-                                                                  style: TextStyle(
-                                                                    color: globals.secondColor,
-                                                                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
-                                                                  ),
+                                                              alignment: Alignment.center,
+                                                              color: globals.firstColor,
+                                                              height: MediaQuery.of(context).size.height/5,
+                                                              child: Text('  Room ' + (index+1).toString() + '  ',
+                                                                style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
                                                                 ),
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -264,7 +264,7 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                             children: [
                                                               Container(
                                                                 alignment: Alignment.center,
-                                                                height: 50,
+                                                                height: 30,
                                                                 child: (globals.currentRooms[index].getRoomName() != "")
                                                                     ? Text('Room name: ' + globals.currentRooms[index].getRoomName(),
                                                                     style: TextStyle(color: Colors.black))
@@ -272,23 +272,35 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                                     style: TextStyle(color: Colors.black)),
                                                                 padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                               ),
+                                                              Divider(
+                                                                color: globals.lineColor,
+                                                                thickness: 2,
+                                                              ),
                                                               Container(
                                                                 alignment: Alignment.centerLeft,
-                                                                height: 50,
+                                                                height: 30,
                                                                 child: Text('Room area: ' + globals.currentRooms[index].getRoomArea().toString() + 'm²',
                                                                     style: TextStyle(color: Colors.black)),
                                                                 padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                               ),
+                                                              Divider(
+                                                                color: globals.lineColor,
+                                                                thickness: 2,
+                                                              ),
                                                               Container(
                                                                 alignment: Alignment.centerLeft,
-                                                                height: 50,
+                                                                height: 30,
                                                                 child: Text('Desk area:' + globals.currentRooms[index].getDeskArea().toString() + 'm²',
                                                                     style: TextStyle(color: Colors.black)),
                                                                 padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                               ),
+                                                              Divider(
+                                                                color: globals.lineColor,
+                                                                thickness: 2,
+                                                              ),
                                                               Container(
                                                                 alignment: Alignment.centerLeft,
-                                                                height: 50,
+                                                                height: 30,
                                                                 child: Text('Occupied desk percentage: ' + globals.currentRooms[index].getOccupiedDesks().toString() + '%',
                                                                     style: TextStyle(color: Colors.black)),
                                                                 padding: EdgeInsets.fromLTRB(16, 0, 16, 0),

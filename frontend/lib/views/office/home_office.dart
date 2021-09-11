@@ -62,7 +62,7 @@ class _OfficeState extends State<Office> {
                         children: <Widget>[
                           Icon(
                               Icons.library_books,
-                              color: globals.focusColor,
+                              color: Colors.white,
                               size: (globals.getIfOnPC())
                                   ? MediaQuery.of(context).size.width/8
                                   : MediaQuery.of(context).size.width/4
@@ -72,7 +72,7 @@ class _OfficeState extends State<Office> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height/16,
+                            height: MediaQuery.of(context).size.height/14,
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton (
                                 style: ElevatedButton.styleFrom (
@@ -105,7 +105,7 @@ class _OfficeState extends State<Office> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height/16,
+                            height: MediaQuery.of(context).size.height/14,
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton (
                                 style: ElevatedButton.styleFrom (

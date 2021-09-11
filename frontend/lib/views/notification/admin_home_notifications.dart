@@ -60,7 +60,7 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                         children: <Widget>[
                           Icon(
                               Icons.notifications_active,
-                              color: globals.focusColor,
+                              color: Colors.white,
                               size: (globals.getIfOnPC())
                                   ? MediaQuery.of(context).size.width/8
                                   : MediaQuery.of(context).size.width/4
@@ -70,7 +70,7 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height/16,
+                            height: MediaQuery.of(context).size.height/14,
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton (
                                 style: ElevatedButton.styleFrom (
@@ -96,7 +96,7 @@ class _AdminNotificationsState extends State<AdminNotifications> {
                             width: MediaQuery.of(context).size.width,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height/16,
+                            height: MediaQuery.of(context).size.height/14,
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton (
                                 style: ElevatedButton.styleFrom (

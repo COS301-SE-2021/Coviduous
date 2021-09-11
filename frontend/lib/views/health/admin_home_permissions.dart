@@ -60,7 +60,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                 children: <Widget>[
                   Icon(
                       Icons.sensor_door,
-                      color: globals.focusColor,
+                      color: Colors.white,
                       size: (globals.getIfOnPC())
                           ? MediaQuery.of(context).size.width/8
                           : MediaQuery.of(context).size.width/4

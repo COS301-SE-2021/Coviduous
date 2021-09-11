@@ -85,7 +85,7 @@ class _RegisterState extends State<Register>{
                           Column(
                             children: [
                               SizedBox(
-                                height: MediaQuery.of(context).size.height/16,
+                                height: MediaQuery.of(context).size.height/14,
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom (
@@ -107,7 +107,7 @@ class _RegisterState extends State<Register>{
                                 width: MediaQuery.of(context).size.width,
                               ),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height/16,
+                                height: MediaQuery.of(context).size.height/14,
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom (
