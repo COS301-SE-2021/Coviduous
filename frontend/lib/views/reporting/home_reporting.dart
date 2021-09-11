@@ -68,7 +68,7 @@ class _ReportingState extends State<Reporting> {
                         children: <Widget>[
                           Icon(
                               Icons.library_books,
-                              color: globals.focusColor,
+                              color: Colors.white,
                               size: (globals.getIfOnPC())
                                   ? MediaQuery.of(context).size.width/8
                                   : MediaQuery.of(context).size.width/4
