@@ -17,6 +17,7 @@ import 'package:frontend/views/signup/home_signup_screen.dart';
 import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/forgot_password_screen.dart';
 import 'package:frontend/views/main_homepage.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: MediaQuery.of(context).size.width,
                       ),
                       Container(
-                        color: Colors.white,
+                        color: Colors.white70,
                         width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
                         padding: EdgeInsets.all(16),
                         child: Form(
@@ -265,7 +266,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-              )
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Stack(
+                  alignment: Alignment.topLeft,
+                  children: <Widget>[
+                    TextField(),
+                    IconButton(
+                      icon: Icon(
+                        Icons.chat,
+                        color: Colors.greenAccent,
+                        size: 50,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+
             ],
           ),
         ) : Center( child: CircularProgressIndicator() )
