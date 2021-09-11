@@ -113,7 +113,7 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                                                     SingleChildScrollView(
                                                       scrollDirection: Axis.horizontal,
                                                       child: Container(
-                                                        child: Text(globals.currentBookings[index].getTimestamp().substring(25)),
+                                                        child: Text(globals.currentBookings[index].getTimestamp().substring(24)),
                                                       ),
                                                     ),
                                                   ],
@@ -154,11 +154,11 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                                                                     Expanded(
                                                                       child: Container(
                                                                         alignment: Alignment.center,
-                                                                        color: Color(0xff9B7EE5),
+                                                                        color: globals.firstColor,
                                                                         height: MediaQuery.of(context).size.height/5,
                                                                         child: Text('Booking ' + (index+1).toString(),
                                                                           style: TextStyle(
-                                                                            color: globals.secondColor,
+                                                                            color: Colors.white,
                                                                             fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
                                                                           ),
                                                                         ),
@@ -168,32 +168,44 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                                                                 ),
                                                                 Container(
                                                                   alignment: Alignment.centerLeft,
-                                                                  height: 50,
+                                                                  height: 40,
                                                                   child: Text('Floor plan: ' + globals.currentBookings[index].getFloorPlanNumber(),
                                                                       style: TextStyle(color: Colors.black)
                                                                   ),
                                                                   padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                 ),
+                                                                Divider(
+                                                                  color: globals.lineColor,
+                                                                  thickness: 2,
+                                                                ),
                                                                 Container(
                                                                   alignment: Alignment.centerLeft,
-                                                                  height: 50,
+                                                                  height: 40,
                                                                   child: Text('Floor: ' + globals.currentBookings[index].getFloorNumber(),
                                                                       style: TextStyle(color: Colors.black)
                                                                   ),
                                                                   padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                 ),
+                                                                Divider(
+                                                                  color: globals.lineColor,
+                                                                  thickness: 2,
+                                                                ),
                                                                 Container(
                                                                   alignment: Alignment.centerLeft,
-                                                                  height: 50,
+                                                                  height: 40,
                                                                   child: Text('Room: ' + globals.currentBookings[index].getRoomNumber(),
                                                                       style: TextStyle(color: Colors.black)
                                                                   ),
                                                                   padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                 ),
+                                                                Divider(
+                                                                  color: globals.lineColor,
+                                                                  thickness: 2,
+                                                                ),
                                                                 Container(
                                                                   alignment: Alignment.centerLeft,
-                                                                  height: 50,
-                                                                  child: Text('Date: ' + globals.currentBookings[index].getTimestamp().substring(25),
+                                                                  height: 40,
+                                                                  child: Text('Date: ' + globals.currentBookings[index].getTimestamp().substring(24),
                                                                       style: TextStyle(color: Colors.black)
                                                                   ),
                                                                   padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
