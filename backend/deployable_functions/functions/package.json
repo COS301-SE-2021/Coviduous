@@ -35,6 +35,8 @@
     "jwks-rsa": "^2.0.4",
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.6.3",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

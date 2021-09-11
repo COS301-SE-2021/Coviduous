@@ -8,6 +8,9 @@ const cors = require('cors');
 const app = express();
 var serviceAccount = require("./permissions.json");
 
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
 app.use(cors({ origin: true }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,8 +19,23 @@ admin.initializeApp({
   databaseURL: process.env.FirebaseDatabaseURL //Requires .env file to be in backend/functions
 }); 
 
+//Swagger Configuration
+const swaggerOptions = {
+  swaggerDefinition: {
+      info: {
+          title:'Coviduous API',
+          version:'1.0.0'
+      }
+  },
+  apis:['./routes/*.js'],
+  servers: ['http://localhost:5002/coviduous-api/us-central1/app']
+}
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
 app.get('/api', (req, res) => {
- return res.status(200).send('Connected to the coviduous api');
+  return res.status(200).send('Connected to the coviduous api');
 });
 
 // STRUCTURE: Each subsystem has it's own route.js file, respective routes are defined there
