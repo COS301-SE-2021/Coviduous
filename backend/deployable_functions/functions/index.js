@@ -406,16 +406,80 @@ try {
                 error: error
             });
         }
-       
 
-
-
-
-    // } catch (error) {
-    //     console.log(error);
-    //     return res.status(500).send(error);
-    // }
 });
+
+/**
+ * This function retrieves all notifications via an HTTP GET request.
+ * @param req The request object may be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
+ app.post('/notifications/user-email', async (req, res) =>  {
+    // try {
+        let fieldErrors = [];
+
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+
+        if(req.body == null) {
+            fieldErrors.push({field: null, message: 'Request object may not be null'});
+        }
+
+        if (reqJson.userEmail == null || reqJson.userEmail === '') {
+            fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'});
+        }
+
+        if (fieldErrors.length > 0) {
+            return res.status(400).send({
+                message: '400 Bad Request: Incorrect fields',
+                errors: fieldErrors
+            });
+        }
+
+        try {
+            const document = db.collection('notifications').where("userEmail", "==", userEmail);
+            const snapshot = await document.get();
+    
+            let list = [];
+    
+            snapshot.forEach(doc => {
+                let data = doc.data();
+                list.push(data);
+            });
+            return res.status(200).send({
+                message: '',
+                data: list
+            });
+
+        } catch (error) {
+            console.log(error);
+            return error;
+        }    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.get('/api', (req, res) => {
