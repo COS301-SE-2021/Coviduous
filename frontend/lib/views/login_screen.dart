@@ -49,14 +49,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return (await true);
   }
 
-  /*
-    Function name: build
-    Purpose: Visually displays the login screen.
-    Parameters:
-      - BuildContext context
-    Output:
-      - The app's screen is displayed as a Widget.
-   */
 @override
   Widget build(BuildContext context) {
     return WillPopScope(
