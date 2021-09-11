@@ -365,7 +365,7 @@ try {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
- app.delete('/notifications', async (req, res) =>  {
+ app.delete('/api/notifications', async (req, res) =>  {
     // try {0
         // data validation
         let fieldErrors = [];
@@ -415,7 +415,7 @@ try {
  * @param res The response object is sent back to the requester, containing the status code and retrieved data.
  * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
- app.post('/notifications/user-email', async (req, res) =>  {
+ app.post('/api/notifications/user-email', async (req, res) =>  {
     // try {
         let fieldErrors = [];
 
@@ -468,7 +468,7 @@ try {
  * @param res The response object is sent back to the requester, containing the status code and retrieved data.
  * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
  */
- app.post('/notifications', async (req, res) =>  {
+ app.post('/api/notifications', async (req, res) =>  {
 
     try {
         const document = db.collection('notifications');
