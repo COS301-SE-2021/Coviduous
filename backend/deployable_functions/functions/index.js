@@ -500,6 +500,123 @@ try {
 
 
 
+exports.addSickEmployee = async (req, res) => {
+   
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === "") {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'})
+    }
+
+    if (reqJson.userEmail == null || reqJson.userEmail === "") {
+        fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'})
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    //let sickEmployeeId = "SCK-" + uuid.v4();
+    let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+    let sickEmployeeData = {
+        //sickEmployeeId: sickEmployeeId,
+        userId: reqJson.userId,
+        userEmail: reqJson.userEmail,
+        timeOfDiagnosis: timestamp,
+        companyId: reqJson.companyId
+    }
+
+};
+exports.addRecoveredEmployee= async (req,res) =>{
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+   
+    let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === "") {
+        fieldErrors.push({field: 'userId', message: 'UserID may not be empty'})
+    }
+
+    if (reqJson.userEmail == null || reqJson.userEmail === "") {
+        fieldErrors.push({field: 'userEmail', message: 'User email may not be empty'})
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+    let recoveredData = {
+        
+        userId: reqJson.userId,
+        userEmail: reqJson.userEmail,
+        recoveredTime: timestamp,
+        companyId: reqJson.companyId
+    }
+
+    
+};
+exports.viewRecoveredEmployee = async (req, res) => {
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let viewRecovered = await database.viewRecoveredEmployee(reqJson.companyId);
+      
+    };
+
 
 
 
