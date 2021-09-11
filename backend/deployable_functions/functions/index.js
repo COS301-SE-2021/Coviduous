@@ -500,7 +500,7 @@ try {
 
 
 
-exports.addSickEmployee = async (req, res) => {
+app.post('/api/reporting/health/sick-employees', async (req, res) =>  {
    
     //Look into express.js middleware so that these lines are not necessary
     let reqJson;
@@ -533,20 +533,43 @@ exports.addSickEmployee = async (req, res) => {
         });
     }
 
-    //let sickEmployeeId = "SCK-" + uuid.v4();
+    let sickEmployeeId = "SCK-" + uuid.v4();
     let timestamp = new Date().today() + " @ " + new Date().timeNow();
 
     let sickEmployeeData = {
-        //sickEmployeeId: sickEmployeeId,
+        sickEmployeeId: sickEmployeeId,
         userId: reqJson.userId,
         userEmail: reqJson.userEmail,
         timeOfDiagnosis: timestamp,
         companyId: reqJson.companyId
     }
 
-};
-exports.addRecoveredEmployee= async (req,res) =>{
-    let reqJson;
+    try {
+        await database.collection('sick-employees').doc(sickEmployeeId)
+          .create(sickEmployeeData);
+          return res.status(200).send({
+            message: 'Sick Employee successfully created',
+            data: sickEmployeeData
+         });
+    } catch (error) {
+      console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+    
+
+
+
+
+
+});
+
+
+app.post('/api/reporting/health/recovered-employees', async (req, res) =>  {
+ 
+let reqJson;
     try {
         reqJson = JSON.parse(req.body);
     } catch (e) {
@@ -585,8 +608,26 @@ exports.addRecoveredEmployee= async (req,res) =>{
         companyId: reqJson.companyId
     }
 
+    try {
+        await database.collection('recovered-employees').doc(userId)
+          .create(recoveredData);
+          return res.status(200).send({
+            message: 'Recovered Employee successfully created',
+            data: recoveredData
+         });
+    } catch (error) {
+      console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
     
-};
+
+
+
+    
+});
 exports.viewRecoveredEmployee = async (req, res) => {
 
     // data validation
@@ -613,9 +654,29 @@ exports.viewRecoveredEmployee = async (req, res) => {
         });
     }
 
-    let viewRecovered = await database.viewRecoveredEmployee(reqJson.companyId);
-      
-    };
+    
+    try{
+        const document = db.collection('recovered-employees').where("companyId", "==", companyId);
+        const snapshot = await document.get();
+    
+        let list =[];
+       snapshot.forEach(doc => {
+          let data = doc.data();
+            list.push(data);
+        });
+        return res.status(200).send({
+            message: 'Successfully retrieved recovered-employees',
+            data: list
+        });
+    
+    }catch(error){
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while fetching recovered-employees."}); 
+
+    }    
+
+
+};
 
 
 
