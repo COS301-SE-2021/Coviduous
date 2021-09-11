@@ -11,6 +11,7 @@ import 'package:frontend/views/floor_plan/home_floor_plan.dart';
 import 'package:frontend/views/announcement/admin_view_announcements.dart';
 import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/user_homepage.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -467,6 +468,25 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   //============
                 ),
               ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Stack(
+                    alignment: Alignment.topLeft,
+                    children: <Widget>[
+                      TextField(),
+                      IconButton(
+                        icon: Icon(
+                          Icons.chat,
+                          color: Colors.greenAccent,
+                          size: 50,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
             ]
         )
       ),
