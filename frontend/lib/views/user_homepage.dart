@@ -9,6 +9,7 @@ import 'package:frontend/views/user/user_manage_account.dart';
 import 'package:frontend/views/announcement/user_view_announcements.dart';
 import 'package:frontend/views/notification/user_view_notifications.dart';
 import 'package:frontend/auth/auth_provider.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
 import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
@@ -579,6 +580,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                 ),
                               ),
                             ),
+
                           ]
                       )
                       //============
@@ -587,6 +589,25 @@ class _UserHomePageState extends State<UserHomePage> {
                     ),
                   ],
                 )
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Stack(
+                alignment: Alignment.topLeft,
+                children: <Widget>[
+                  TextField(),
+                  IconButton(
+                    icon: Icon(
+                        Icons.chat,
+                        color: Colors.greenAccent,
+                        size: 50,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                    },
+                  ),
+                ],
               ),
             ),
           ]
