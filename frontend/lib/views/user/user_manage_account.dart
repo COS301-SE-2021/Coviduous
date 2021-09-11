@@ -59,7 +59,7 @@ class _UserManageAccountState extends State<UserManageAccount> {
                       children: <Widget>[
                         Icon(
                             Icons.person,
-                            color: globals.focusColor,
+                            color: Colors.white,
                             size: (globals.getIfOnPC())
                                 ? MediaQuery.of(context).size.width/8
                                 : MediaQuery.of(context).size.width/4
