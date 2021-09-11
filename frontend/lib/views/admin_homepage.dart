@@ -82,19 +82,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 children: [
                   DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: globals.firstColor,
-                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
-                          width: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/placeholder-profile-image.png"),
-                              fit: BoxFit.cover,
+                        ClipOval(
+                          child: Container(
+                            height: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                            width: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/placeholder-profile-image.png"),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -104,6 +103,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                       ],
                     ),
+                  ),
+                  Divider(
+                    color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton (
                       style: ElevatedButton.styleFrom (
