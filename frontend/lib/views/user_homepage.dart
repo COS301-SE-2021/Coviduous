@@ -82,19 +82,18 @@ class _UserHomePageState extends State<UserHomePage> {
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   children: [
                     DrawerHeader(
-                      decoration: BoxDecoration(
-                        color: globals.firstColor,
-                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            height: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
-                            width: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("assets/images/placeholder-profile-image.png"),
-                                fit: BoxFit.cover,
+                          ClipOval(
+                            child: Container(
+                              height: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                              width: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/placeholder-profile-image.png"),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -104,6 +103,10 @@ class _UserHomePageState extends State<UserHomePage> {
                           ),
                         ],
                       ),
+                    ),
+                    Divider(
+                      color: globals.lineColor,
+                      thickness: 2,
                     ),
                     TextButton (
                         style: ElevatedButton.styleFrom (
@@ -271,48 +274,156 @@ class _UserHomePageState extends State<UserHomePage> {
                       // IF ON MOBILE, SHOW GRIDVIEW
                       //==============================
                       child: globals.getIfOnPC() == false ? GridView.count(
-                          childAspectRatio: 4/3,
-                          crossAxisCount: 2,
+                          childAspectRatio: 3,
+                          crossAxisCount: 1,
                           crossAxisSpacing: 32,
                           mainAxisSpacing: 32,
                           children: <Widget>[
-                            ElevatedButton (
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                child: Column (
-                                  children: <Widget>[
-                                    Flexible(child: Icon(Icons.library_books, size: 42)),
-                                    SizedBox(height: 8),
-                                    Flexible(child: Text('Bookings')),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                color: globals.firstColor,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width/(6*globals.getWidgetScaling()),
+                                      child: ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Column (
+                                            children: <Widget>[
+                                              Flexible(child: Icon(Icons.library_books, size: 42)),
+                                              SizedBox(height: 8),
+                                              Flexible(child: Text('Bookings')),
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                          }
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.center,
+                                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Text(
+                                                'Upcoming booking',
+                                                style: TextStyle(
+                                                  color: globals.secondColor,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: MediaQuery.of(context).size.width/3,
+                                              child: Divider(
+                                                color: globals.appBarColor,
+                                                thickness: 2,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                child: Text('Date goes here'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
                                 ),
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(Office.routeName);
-                                }
+                              ),
                             ),
-                            ElevatedButton (
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                child: Column (
-                                  children: <Widget>[
-                                    Flexible(child: Icon(Icons.medical_services, size: 42)),
-                                    SizedBox(height: 8),
-                                    Flexible(child: Text('Health')),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                color: globals.firstColor,
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width/(6*globals.getWidgetScaling()),
+                                      child: ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Column (
+                                            children: <Widget>[
+                                              Flexible(child: Icon(Icons.medical_services, size: 42)),
+                                              SizedBox(height: 8),
+                                              Flexible(child: Text('Health')),
+                                            ],
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                          }
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.center,
+                                              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                              width: MediaQuery.of(context).size.width,
+                                              child: Text(
+                                                'Latest permission',
+                                                style: TextStyle(
+                                                  color: globals.secondColor,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: MediaQuery.of(context).size.width/3,
+                                              child: Divider(
+                                                color: globals.appBarColor,
+                                                thickness: 2,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    (true) //Check latest permission
+                                                        ? Text('Office access granted  ')
+                                                        : Text('Office access denied  '),
+                                                    (true) //Check latest permission
+                                                        ? Icon(
+                                                      Icons.check_circle_outline,
+                                                      color: globals.firstColor,
+                                                    )
+                                                        : Icon(
+                                                      Icons.no_accounts_outlined,
+                                                      color: globals.sixthColor,
+                                                    )
+                                                  ]
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
                                 ),
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                                }
+                              ),
                             ),
                           ]
                         //=============================
@@ -320,52 +431,152 @@ class _UserHomePageState extends State<UserHomePage> {
                         //=============================
                       ) : Column (
                           children: <Widget>[
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height/16,
-                              width: MediaQuery.of(context).size.width,
-                              child: ElevatedButton (
-                                  style: ElevatedButton.styleFrom (
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                color: globals.firstColor,
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height/16,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Row (
+                                              children: <Widget>[
+                                                Expanded(child: Text('Bookings')),
+                                                Icon(Icons.library_books)
+                                              ],
+                                              mainAxisAlignment: MainAxisAlignment.center, //Align text and icon on opposite sides
+                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                          }
+                                      ),
                                     ),
-                                  ),
-                                  child: Row (
-                                      children: <Widget>[
-                                        Expanded(child: Text('Bookings')),
-                                        Icon(Icons.library_books)
-                                      ],
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacementNamed(Office.routeName);
-                                  }
+                                    Container(
+                                      color: Colors.white,
+                                      height: MediaQuery.of(context).size.height/(9*globals.getWidgetScaling()),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Text(
+                                              'Upcoming booking',
+                                              style: TextStyle(
+                                                color: globals.secondColor,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context).size.width/5,
+                                            child: Divider(
+                                              color: globals.appBarColor,
+                                              thickness: 2,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Text('Date goes here'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             SizedBox (
                               height: MediaQuery.of(context).size.height/30,
                               width: MediaQuery.of(context).size.width,
                             ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height/16,
-                              width: MediaQuery.of(context).size.width,
-                              child: ElevatedButton (
-                                  style: ElevatedButton.styleFrom (
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                color: globals.firstColor,
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: MediaQuery.of(context).size.height/16,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: ElevatedButton (
+                                          style: ElevatedButton.styleFrom (
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Row (
+                                              children: <Widget>[
+                                                Expanded(child: Text('Health')),
+                                                Icon(Icons.medical_services)
+                                              ],
+                                              mainAxisAlignment: MainAxisAlignment.center, //Align text and icon on opposite sides
+                                              crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                          }
+                                      ),
                                     ),
-                                  ),
-                                  child: Row (
-                                      children: <Widget>[
-                                        Expanded(child: Text('Health')),
-                                        Icon(Icons.medical_services)
-                                      ],
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                      crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                                  }
+                                    Container(
+                                      color: Colors.white,
+                                      height: MediaQuery.of(context).size.height/(9*globals.getWidgetScaling()),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Text(
+                                              'Latest permission',
+                                              style: TextStyle(
+                                                color: globals.secondColor,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context).size.width/5,
+                                            child: Divider(
+                                              color: globals.appBarColor,
+                                              thickness: 2,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    (true) //Check latest permission
+                                                        ? Text('Office access granted  ')
+                                                        : Text('Office access denied  '),
+                                                    (true) //Check latest permission
+                                                        ? Icon(
+                                                      Icons.check_circle_outline,
+                                                      color: globals.firstColor,
+                                                    )
+                                                        : Icon(
+                                                      Icons.no_accounts_outlined,
+                                                      color: globals.sixthColor,
+                                                    )
+                                                  ]
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ]
