@@ -105,6 +105,7 @@ import 'package:frontend/views/user/admin_update_account.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/user/user_manage_account.dart';
 import 'package:frontend/views/user/user_update_account.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 //Reset password screens
 import 'package:frontend/views/forgot_password_screen.dart';
@@ -283,6 +284,8 @@ class MyApp extends StatelessWidget{
         UserManageAccount.routeName: (ctx)=> UserManageAccount(),
         UserUpdateAccount.routeName: (ctx)=> UserUpdateAccount(),
         UserDeleteAccount.routeName: (ctx)=> UserDeleteAccount(),
+        ChatMessages.routeName: (ctx)=> ChatMessages(),
+
 
         ///Signup screens
         Register.routeName: (ctx)=> Register(),
