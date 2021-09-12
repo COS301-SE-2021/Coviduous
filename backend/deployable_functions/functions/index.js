@@ -15,10 +15,11 @@ admin.initializeApp();
 let database = admin.firestore();
 let uuid = require("uuid");
 
-/*module.exports = {
+module.exports = {
     ...require("./controllers/office.controller.js"),
+    ...require("./controllers/user.controller.js"),
     ...require("./controllers/shift.controller.js"),
-}*/
+}
 
  //////////////////////////////////////////////////////////////////General Functions ///////////////////////////////////////////////////
  /**
