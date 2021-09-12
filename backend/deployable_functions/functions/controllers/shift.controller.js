@@ -37,6 +37,74 @@ let uuid = require("uuid");
 ///////////////// functions /////////////////
 
 ///// shifts //////
+
+
+
+/**
+ * This function updates a specified shift via an HTTP UPDATE request.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *  shiftId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+ shiftApp.put('/api/shift', async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.shiftId == null || reqJson.shiftId === '') {
+        fieldErrors.push({field: 'shiftId', message: 'Shift ID may not be empty'});
+    }
+    if(reqJson.endTime == null || reqJson.endTime === ''){
+        fieldErrors.push({field: 'endTime', message: 'End time may not be empty'});
+    }
+    if(reqJson.startTime == null || reqJson.startTime === ''){
+        fieldErrors.push({field: 'startTime', message: 'Start time may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+  
+    try {
+        const document = database.collection('shifts').doc(reqJson.shiftId);
+        await document.update({
+            startTime:reqJson.startTime,
+            endTime:reqJson.endTime
+        });
+
+        return res.status(200).send({
+            message: "Successfully updated shift",
+            data: req.body
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
 shiftApp.get('/api/shift', async (req, res) => {
     try {
         const document = database.collection('shifts');
