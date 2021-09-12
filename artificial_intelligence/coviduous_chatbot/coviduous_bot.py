@@ -14,7 +14,7 @@ class Bot:
 
     def answer_question(self,answer,question):
         if answer['score'] > self.settings['min_score']:
-            print(answer['score'])
+            #print(answer['score'])
             return answer['answer']
         else:
             googleQuery="+".join(question.split(" "))
