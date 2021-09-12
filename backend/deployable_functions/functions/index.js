@@ -1254,15 +1254,33 @@ exports.addNumberOfFloorplansCompanyData = async (req, res) => {
         });
     }
     
-    let companyData = await database.getCompanyData(reqJson.companyId);
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorplansInCompanyData =companyData.numberOfFloorplans;
 
-    if (await database.addNumberOfFloorplansCompanyData(reqJson.companyId, companyData.numberOfFloorplans) == true) {
-        return res.status(200).send({
-            message: "Successfully added number of floorplans",
-            //data: req.body
-        });
-    } else {
+
+
+    try {
+        if (parseInt(currentNumFloorplansInCompanyData) >= 0)
+        {
+            let newNumFloorplans = parseInt(currentNumFloorplansInCompanyData) + 1;
+            newNumFloorplans = newNumFloorplans.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloorplans: newNumFloorplans
+            });
+            return res.status(200).send({
+                message: "Successfully added number of floorplans",
+                //data: req.body
+            });
+    
+        }
+    } catch (error) {
+        console.log(error);
         return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
+        
     }
 };
 
@@ -1296,14 +1314,27 @@ exports.decreaseNumberOfFloorplansCompanyData = async (req, res) => {
         });
     }
     
-    let companyData = await database.getCompanyData(reqJson.companyId);
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorplansInCompanyData = companyData.numberOfFloorplans;
 
-    if (await database.decreaseNumberOfFloorplansCompanyData(reqJson.companyId, companyData.numberOfFloorplans) == true) {
-        return res.status(200).send({
-            message: "Successfully decreased number of floorplans",
-            //data: req.body
-        });
-    } else {
+    try {
+        if (parseInt(currentNumFloorplansInCompanyData) > 0)
+        {
+            let newNumFloorplans = parseInt(currentNumFloorplansInCompanyData) - 1;
+            newNumFloorplans = newNumFloorplans.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloorplans: newNumFloorplans
+            });
+            return res.status(200).send({
+                message: "Successfully decreased number of floorplans",
+                //data: req.body
+            });    
+        }
+    } catch (error) {
+        console.log(error);
         return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
     }
 };
@@ -1337,18 +1368,34 @@ exports.addNumberOfFloorsCompanyData = async (req, res) => {
             errors: fieldErrors
         });
     }
-    
-    let companyData = await database.getCompanyData(reqJson.companyId);
 
-    if (await database.addNumberOfFloorsCompanyData(reqJson.companyId, companyData.numberOfFloors) == true) {
-        return res.status(200).send({
-            message: "Successfully added number of floors",
-            //data: req.body
-        });
-    } else {
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorsInCompanyData = companyData.numberOfFloorplans;
+
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) >= 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) + 1;
+            newNumFloors = newNumFloors.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloors: newNumFloors
+            });
+            return res.status(200).send({
+                message: "Successfully added number of floors",
+                //data: req.body
+            });
+            
+        }
+    } catch (error) {
+        console.log(error);
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
-};
+    
+    };
 
 exports.decreaseNumberOfFloorsCompanyData = async (req, res) => {
     // data validation
@@ -1380,14 +1427,28 @@ exports.decreaseNumberOfFloorsCompanyData = async (req, res) => {
         });
     }
     
-    let companyData = await database.getCompanyData(reqJson.companyId);
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorsInCompanyData = companyData.numberOfFloorplans;
 
-    if (await database.decreaseNumberOfFloorsCompanyData(reqJson.companyId, companyData.numberOfFloors) == true) {
-        return res.status(200).send({
-            message: "Successfully decreased number of floors",
-            //data: req.body
-        });
-    } else {
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) >= 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) - 1;
+            newNumFloors = newNumFloors.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloors: newNumFloors
+            });
+            return res.status(200).send({
+                message: "Successfully deleted number of floors",
+                //data: req.body
+            });
+            
+        }
+    } catch (error) {
+        console.log(error);
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
 };
