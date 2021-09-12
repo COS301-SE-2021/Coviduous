@@ -4,6 +4,7 @@ import 'package:frontend/views/signup/admin_signup_screen.dart';
 import 'package:frontend/views/signup/user_signup_screen.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/main_homepage.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/globals.dart' as globals;
 
@@ -130,6 +131,25 @@ class _RegisterState extends State<Register>{
                       ),
                     ),
                   ]
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Stack(
+                alignment: Alignment.topLeft,
+                children: <Widget>[
+                  TextField(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.chat,
+                      color: Colors.greenAccent,
+                      size: 50,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                    },
+                  ),
+                ],
               ),
             ),
           ],
