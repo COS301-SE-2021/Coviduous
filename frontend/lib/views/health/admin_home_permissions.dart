@@ -52,7 +52,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
           ),
         ),
         body: Stack(
-            children: [
+          children: [
         SingleChildScrollView(
           child: Center(
             child: Container(

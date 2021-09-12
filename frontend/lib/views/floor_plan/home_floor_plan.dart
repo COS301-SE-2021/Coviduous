@@ -6,6 +6,7 @@ import 'package:frontend/views/floor_plan/admin_add_floor_plan.dart';
 import 'package:frontend/views/floor_plan/admin_modify_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -50,7 +51,9 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
               },
             ),
           ),
-          body: SingleChildScrollView(
+          body: Stack(
+              children: [
+          SingleChildScrollView(
             child: Center(
                 child: Container (
                     height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
@@ -143,6 +146,27 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                     )
                 )
             ),
+          ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Stack(
+                    alignment: Alignment.topLeft,
+                    children: <Widget>[
+                      TextField(),
+                      IconButton(
+                        icon: Icon(
+                          Icons.chat,
+                          color: Colors.greenAccent,
+                          size: 50,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+        ],
           )
       ),
     );
