@@ -6,6 +6,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/office/jitsi_meeting.dart';
 
+import 'package:frontend/controllers/floor_plan/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
 import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
@@ -99,109 +100,116 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                                           ElevatedButton(
                                             child: Text('Details'),
                                             onPressed: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (ctx) => AlertDialog(
-                                                    title: Text('Booking details'),
-                                                    content: Container(
-                                                      color: Colors.white,
-                                                      height: 350,
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        children: [
-                                                          Row(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                              floorPlanController.getRooms(globals.currentBookings[index].getFloorNumber()).then((result) {
+                                                if (result != null) {
+                                                  globals.currentRoom = result.where((element) => element.getRoomNumber() == globals.currentBookings[index].getRoomNumber()).first;
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (ctx) => AlertDialog(
+                                                        title: Text('Booking details'),
+                                                        content: Container(
+                                                          color: Colors.white,
+                                                          height: 350,
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.start,
                                                             children: [
-                                                              Container(
-                                                                height: (!globals.getIfOnPC())
-                                                                    ? MediaQuery.of(context).size.height/5
-                                                                    : MediaQuery.of(context).size.height/8,
-                                                                child: Image(
-                                                                  image: AssetImage('assets/images/placeholder-office-room.png'),
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                child: Container(
-                                                                  alignment: Alignment.center,
-                                                                  color: globals.firstColor,
-                                                                  height: (!globals.getIfOnPC())
-                                                                      ? MediaQuery.of(context).size.height/5
-                                                                      : MediaQuery.of(context).size.height/8,
-                                                                  child: Text('Booking ' + (index+1).toString(),
-                                                                    style: TextStyle(
-                                                                      color: Colors.white,
-                                                                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                                                              Row(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  Container(
+                                                                    height: (!globals.getIfOnPC())
+                                                                        ? MediaQuery.of(context).size.height/5
+                                                                        : MediaQuery.of(context).size.height/8,
+                                                                    child: Image(
+                                                                      image: AssetImage('assets/images/placeholder-office-room.png'),
                                                                     ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Container(
+                                                                      alignment: Alignment.center,
+                                                                      color: globals.firstColor,
+                                                                      height: (!globals.getIfOnPC())
+                                                                          ? MediaQuery.of(context).size.height/5
+                                                                          : MediaQuery.of(context).size.height/8,
+                                                                      child: Text('  Booking ' + (index+1).toString() + '  ',
+                                                                        style: TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Flexible(
+                                                                child: SingleChildScrollView(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: (globals.currentRoom.getRoomName() != "")
+                                                                            ? Text('Room name: ' + globals.currentRoom.getRoomName(),
+                                                                            style: TextStyle(color: Colors.black))
+                                                                            : Text('Unnamed room',
+                                                                            style: TextStyle(color: Colors.black)),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                      Divider(
+                                                                        color: globals.lineColor,
+                                                                        thickness: 2,
+                                                                      ),
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: Text('Number of bookings: ' + globals.currentRoom.getCurrentCapacity().toString(),
+                                                                            style: TextStyle(color: Colors.black)
+                                                                        ),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                      Divider(
+                                                                        color: globals.lineColor,
+                                                                        thickness: 2,
+                                                                      ),
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: Text('Maximum capacity: ' + globals.currentRoom.getCapacityForSixFtGrid().toString(),
+                                                                            style: TextStyle(color: Colors.black)
+                                                                        ),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                      Divider(
+                                                                        color: globals.lineColor,
+                                                                        thickness: 2,
+                                                                      ),
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: Text('Date: ' + globals.currentBookings[index].getTimestamp().substring(24),
+                                                                            style: TextStyle(color: Colors.black)
+                                                                        ),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ),
                                                               ),
                                                             ],
                                                           ),
-                                                          Flexible(
-                                                            child: SingleChildScrollView(
-                                                              child: Column(
-                                                                children: [
-                                                                  Container(
-                                                                    alignment: Alignment.centerLeft,
-                                                                    height: 40,
-                                                                    child: Text('Floor plan: ' + globals.currentBookings[index].getFloorPlanNumber(),
-                                                                        style: TextStyle(color: Colors.black)
-                                                                    ),
-                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                                  ),
-                                                                  Divider(
-                                                                    color: globals.lineColor,
-                                                                    thickness: 2,
-                                                                  ),
-                                                                  Container(
-                                                                    alignment: Alignment.centerLeft,
-                                                                    height: 40,
-                                                                    child: Text('Floor: ' + globals.currentBookings[index].getFloorNumber(),
-                                                                        style: TextStyle(color: Colors.black)
-                                                                    ),
-                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                                  ),
-                                                                  Divider(
-                                                                    color: globals.lineColor,
-                                                                    thickness: 2,
-                                                                  ),
-                                                                  Container(
-                                                                    alignment: Alignment.centerLeft,
-                                                                    height: 40,
-                                                                    child: Text('Room: ' + globals.currentBookings[index].getRoomNumber(),
-                                                                        style: TextStyle(color: Colors.black)
-                                                                    ),
-                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                                  ),
-                                                                  Divider(
-                                                                    color: globals.lineColor,
-                                                                    thickness: 2,
-                                                                  ),
-                                                                  Container(
-                                                                    alignment: Alignment.centerLeft,
-                                                                    height: 40,
-                                                                    child: Text('Date: ' + globals.currentBookings[index].getTimestamp().substring(24),
-                                                                        style: TextStyle(color: Colors.black)
-                                                                    ),
-                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: Text('Okay'),
+                                                            onPressed: (){
+                                                              Navigator.of(ctx).pop();
+                                                            },
+                                                          )
                                                         ],
-                                                      ),
-                                                    ),
-                                                    actions: <Widget>[
-                                                      TextButton(
-                                                        child: Text('Okay'),
-                                                        onPressed: (){
-                                                          Navigator.of(ctx).pop();
-                                                        },
                                                       )
-                                                    ],
-                                                  )
-                                              );
+                                                  );
+                                                }
+                                              });
                                             },
                                           ),
                                           SizedBox(
