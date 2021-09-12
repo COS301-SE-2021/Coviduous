@@ -47,6 +47,46 @@ COVID19_QUES = [
         "Question": "What is the risk of my child becoming sick with COVID-19?",
         "Answer": "Children can be infected with the virus that causes COVID-19 and can get sick with COVID-19. Most children with COVID-19 have mild symptoms or they may have no symptoms at all (“asymptomatic”). Fewer children have been sick with COVID-19 compared to adults."
     },
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected. Each health department determines community spread differently based on local conditions."
+    },
+    {
+        "Question": "What is multisystem inflammatory syndrome in children (MIS-C)? ",
+        "Answer": "Multisystem inflammatory syndrome in children (MIS-C) is a serious condition associated with COVID-19 where different body parts can become inflamed, including the heart, lungs, kidneys, brain, skin, eyes, or gastrointestinal organs."
+    },
+    {
+        "Question": "Can someone test negative and later test positive on a viral test for COVID-19?",
+        "Answer": "Yes, it is possible. You may test negative if the sample was collected early in your infection and test positive later during this illness. You could also be exposed to COVID-19 after the test and get infected then. Even if you test negative, you still should take steps to protect yourself and others. "
+    },
+    {
+        "Question": "If I have COVID-19, how do I tell people that I was around them?",
+        "Answer": "If you have COVID-19, tell your close contacts you have COVID-19 so that they can quarantine at home and get tested. By letting your close contacts know they may have been exposed to COVID-19, you are helping to protect them and others within your community."
+    },
+    {
+        "Question": "Does mask use help determine if someone is considered a close contact?",
+        "Answer": "A person is still considered a close contact even if one or both people wore a mask when they were together."
+    },
+    {
+        "Question": "Can I get COVID-19 from my pets or other animals? ",
+        "Answer": "Based on the available information to date, the risk of animals spreading COVID-19 to people is considered to be low."
+    },
+    {
+        "Question": "Can animals carry the virus that causes COVID-19 on their skin or fur?",
+        "Answer": "Although we know certain bacteria and fungi can be carried on fur and hair, there is no evidence that viruses, including the virus that causes COVID-19, can spread to people from the skin, fur, or hair of pets."
+    },
+    {
+        "Question": "Can I use hand sanitizer on pets?",
+        "Answer": "Do not wipe or bathe your pet with chemical disinfectants, alcohol, hydrogen peroxide, or other products, such as hand sanitizer, counter-cleaning wipes, or other industrial or surface cleaners. If you have questions about appropriate products for bathing or cleaning your pet, talk to your veterinarian. If your pet gets hand sanitizer on their skin or fur, rinse or wipe down your pet with water immediately."
+    },
+    {
+        "Question": "What should I do if my pet gets sick and I think it's COVID-19?",
+        "Answer": "Most pets that have gotten sick from the virus that causes COVID-19 were infected after close contact with a person with COVID-19. Talk to your veterinarian about any health concerns you have about your pets."
+    },
+    {
+        "Question": "What is community mitigation?",
+        "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
+    }
 ]
 
 
