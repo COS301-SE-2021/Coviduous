@@ -886,7 +886,7 @@ app.post('/reporting/company/company-data/view', async (req, res) =>  {
 
 
 
-/*
+
 
 exports.updateNumberOfRegisteredUsers = async (req, res) => {
     // data validation
@@ -921,8 +921,23 @@ exports.updateNumberOfRegisteredUsers = async (req, res) => {
             errors: fieldErrors
         });
     }
-  
-   
+
+    try {
+        const document = database.collection('company-data').doc(reqJson.companyId);
+
+        await document.update({
+            numberOfRegisteredUsers: reqJson.numberOfRegisteredUsers
+        });
+        return res.status(200).send({
+            message: 'Successfully updated company data',
+        });
+    }catch (error) {
+        console.log(error);
+          return res.status(500).send({
+              message: '500 Server Error: DB error',
+              error: error
+          });
+      }
 };
 
 exports.updateNumberOfRegisteredAdmins = async (req, res) => {
@@ -958,7 +973,23 @@ exports.updateNumberOfRegisteredAdmins = async (req, res) => {
             errors: fieldErrors
         });
     }
-  
+
+    try {
+        const document = database.collection('company-data').doc(reqJson.companyId);
+
+        await document.update({
+            numberOfRegisteredAdmins: reqJson.numberOfRegisteredAdmins
+        });
+        return res.status(200).send({
+            message: 'Successfully updated company data',
+        });
+    }catch (error) {
+        console.log(error);
+          return res.status(500).send({
+              message: '500 Server Error: DB error',
+              error: error
+          });
+      }
 };
 
 exports.addNumberOfRegisteredUsersCompanyData = async (req, res) => {
@@ -990,8 +1021,32 @@ exports.addNumberOfRegisteredUsersCompanyData = async (req, res) => {
             errors: fieldErrors
         });
     }
+   
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumRegisteredUsersInCompanyData = companyData.numberOfRegisteredUsers;
     
-    let companyData = await database.getCompanyData(reqJson.companyId);
+    try{
+        if (parseInt(currentNumRegisteredUsersInCompanyData) >= 0)
+        {
+            let newNumRegisteredUsers = parseInt(currentNumRegisteredUsersInCompanyData) + 1;
+            newNumRegisteredUsers = newNumRegisteredUsers.toString();
+
+            await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfRegisteredUsers: newNumRegisteredUsers
+            });
+            return res.status(200).send({
+                message: "Successfully added number of registered users",
+                //data: req.body
+            });
+        }
+    }catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of registered users."});       
+    }
+    
+
 
 };
 
@@ -1036,33 +1091,6 @@ exports.decreaseNumberOfRegisteredUsersCompanyData = async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
 app.get('/api', (req, res) => {
     return res.status(200).send('Connected to the coviduous api');
    });
