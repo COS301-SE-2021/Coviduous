@@ -66,8 +66,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
 
   //The user list is a list of Map<String, List> instead of Map<String, int> because pie charts also require a color attribute for each category
   List<Map<String, List>> userList = [
-    {"Employees": [globals.currentCompanySummary.getNumberOfRegisteredUsers(), globals.firstColor]},
-    {"Admins": [globals.currentCompanySummary.getNumberOfRegisteredAdmins(), globals.focusColor]}
+    {"Employees": [globals.currentCompanySummary.getNumberOfRegisteredUsers(), Color(0xffFAA61A)]},
+    {"Admins": [globals.currentCompanySummary.getNumberOfRegisteredAdmins(), Color(0xffCC7A00)]}
   ];
 
   //Render booking and shift chart
@@ -386,14 +386,14 @@ class ReportingCompanyState extends State<ReportingCompany> {
                 child: Column(
                   children: [
                     Container(
-                      color: Colors.white,
-                      width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
+                      width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            color: globals.appBarColor,
+                            alignment: Alignment.center,
+                            color: globals.firstColor,
                             width: MediaQuery.of(context).size.width,
                             child: Text(
                               "Company overview",
@@ -416,7 +416,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.firstColor,
+                                    color: globals.thirdColor,
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       "Number of floor plans",
@@ -425,7 +425,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                   ),
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.focusColor,
+                                    color: Color(0xff134D66),
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       globals.currentCompanySummary.getNumberOfFloorPlans().toString(),
@@ -438,7 +438,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.firstColor,
+                                    color: globals.fourthColor,
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       "Number of floors",
@@ -447,7 +447,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                   ),
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.focusColor,
+                                    color: Color(0xff232A4C),
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       globals.currentCompanySummary.getNumberOfFloors().toString(),
@@ -460,7 +460,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.firstColor,
+                                    color: globals.fifthColor,
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       "Number of rooms",
@@ -469,7 +469,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                   ),
                                   Container(
                                     alignment: Alignment.center,
-                                    color: globals.focusColor,
+                                    color: Color(0xff4C234C),
                                     padding: EdgeInsets.all(5),
                                     child: Text(
                                       globals.currentCompanySummary.getNumberOfRooms().toString(),
@@ -485,7 +485,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             thickness: 2,
                           ),
                           Container(
-                            color: globals.appBarColor,
+                            alignment: Alignment.center,
+                            color: globals.thirdColor,
                             width: MediaQuery.of(context).size.width,
                             child: Text(
                               "Bookings and shifts",
@@ -495,10 +496,14 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Number of bookings: " + globals.currentBookingSummary.getNumBookings().toString()),
-                          Text("Number of shifts: " + globals.currentShiftSummary.getNumShifts().toString()),
-                          Text("Average weekly bookings: " + (globals.currentBookingSummary.getNumBookings()/4).toString()),
-                          Text("Average weekly shifts: " + (globals.currentShiftSummary.getNumShifts()/4).toString()),
+                          Text("Number of bookings: " + globals.currentBookingSummary.getNumBookings().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of shifts: " + globals.currentShiftSummary.getNumShifts().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Average weekly bookings: " + (globals.currentBookingSummary.getNumBookings()/4).toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Average weekly shifts: " + (globals.currentShiftSummary.getNumShifts()/4).toString(),
+                              style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
                             thickness: 2,
@@ -507,12 +512,12 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             key: _bookingShiftChartKey,
                             primaryXAxis: CategoryAxis(
                                 labelStyle: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 )
                             ),
                             primaryYAxis: NumericAxis(
                               labelStyle: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                             series: <ChartSeries>[
@@ -525,7 +530,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             ],
                           ),
                           Container(
-                            color: globals.appBarColor,
+                            alignment: Alignment.center,
+                            color: globals.fourthColor,
                             width: MediaQuery.of(context).size.width,
                             child: Text(
                               "Health",
@@ -535,10 +541,14 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Number of reported recoveries: " + globals.currentHealthSummary.getReportedRecoveries().toString()),
-                          Text("Number of reported infections: " + globals.currentHealthSummary.getReportedInfections().toString()),
-                          Text("Number of completed employee health checks: " + globals.currentHealthSummary.getHealthChecksUsers().toString()),
-                          Text("Number of completed visitor health checks: " + globals.currentHealthSummary.getHealthChecksVisitors().toString()),
+                          Text("Number of reported recoveries: " + globals.currentHealthSummary.getReportedRecoveries().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of reported infections: " + globals.currentHealthSummary.getReportedInfections().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of completed employee health checks: " + globals.currentHealthSummary.getHealthChecksUsers().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of completed visitor health checks: " + globals.currentHealthSummary.getHealthChecksVisitors().toString(),
+                              style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
                             thickness: 2,
@@ -548,12 +558,12 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             primaryXAxis: CategoryAxis(
                               labelRotation: -45,
                                 labelStyle: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 )
                             ),
                             primaryYAxis: NumericAxis(
                               labelStyle: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                             series: <ChartSeries>[
@@ -566,7 +576,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             ],
                           ),
                           Container(
-                            color: globals.appBarColor,
+                            alignment: Alignment.center,
+                            color: globals.fifthColor,
                             width: MediaQuery.of(context).size.width,
                             child: Text(
                               "Permissions",
@@ -576,11 +587,16 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Total number of permissions granted or denied this month: " + globals.currentPermissionSummary.getTotalPermissions().toString()),
-                          Text("Number of employee permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedUsers().toString()),
-                          Text("Number of visitor permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedVisitors().toString()),
-                          Text("Number of employee permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedUsers().toString()),
-                          Text("Number of visitor permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedVisitors().toString()),
+                          Text("Total number of permissions granted or denied this month: " + globals.currentPermissionSummary.getTotalPermissions().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of employee permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedUsers().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of visitor permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedVisitors().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of employee permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedUsers().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of visitor permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedVisitors().toString(),
+                              style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
                             thickness: 2,
@@ -590,12 +606,12 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             primaryXAxis: CategoryAxis(
                                 labelRotation: -45,
                                 labelStyle: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 )
                             ),
                             primaryYAxis: NumericAxis(
                               labelStyle: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                             series: <ChartSeries>[
@@ -608,7 +624,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
                             ],
                           ),
                           Container(
-                            color: globals.appBarColor,
+                            alignment: Alignment.center,
+                            color: Color(0xffCC7A00),
                             width: MediaQuery.of(context).size.width,
                             child: Text(
                               "Users",
@@ -618,9 +635,12 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Total number of registered users: " + globals.currentCompanySummary.getTotalNumberOfRegistered().toString()),
-                          Text("Number of registered admins: " + globals.currentCompanySummary.getNumberOfRegisteredAdmins().toString()),
-                          Text("Number of registered employees: " + globals.currentCompanySummary.getNumberOfRegisteredUsers().toString()),
+                          Text("Total number of registered users: " + globals.currentCompanySummary.getTotalNumberOfRegistered().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of registered admins: " + globals.currentCompanySummary.getNumberOfRegisteredAdmins().toString(),
+                              style: TextStyle(color: Colors.white)),
+                          Text("Number of registered employees: " + globals.currentCompanySummary.getNumberOfRegisteredUsers().toString(),
+                              style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
                             thickness: 2,
@@ -634,7 +654,8 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 dataLabelSettings: DataLabelSettings(
                                   isVisible: true,
                                   textStyle: TextStyle(
-                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontSize: 20,
                                   ),
                                 ),
                                 dataSource: userList,

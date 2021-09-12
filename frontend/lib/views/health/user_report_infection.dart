@@ -66,7 +66,6 @@ class _UserReportInfectionState extends State<UserReportInfection>{
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     color: Colors.white,
-                    height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
                     width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                     padding: EdgeInsets.all(16),
                     child: Form(

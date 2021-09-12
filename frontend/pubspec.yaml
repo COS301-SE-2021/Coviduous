@@ -77,9 +77,11 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
+    - assets/images/chatbot-icon.png
     - assets/images/city-silhouette.png
     - assets/images/logo.png
     - assets/images/placeholder-announcement.png
+    - assets/images/placeholder-employee-image.png
     - assets/images/placeholder-notification.png
     - assets/images/placeholder-office-building.png
     - assets/images/placeholder-office-floor.png

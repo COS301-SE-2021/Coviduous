@@ -100,15 +100,53 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(20.0),
+                      child: Image(
+                        alignment: Alignment.center,
+                        image: AssetImage('assets/images/placeholder-shift.png'),
+                        width: double.maxFinite,
+                        height: MediaQuery.of(context).size.height/6,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Date: ' + _selectedDate.toString().substring(0,10),
+                          style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/20,
+                          width: MediaQuery.of(context).size.height/20,
+                          child: ElevatedButton(
+                            child: Icon(Icons.date_range),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                            ),
+                            onPressed: () => _selectDate(context),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "The reason you want access",
+                        labelText: "Reason",
+                      ),
+                      obscureText: false,
+                      controller: _reason,
+                    ),
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Company ID",
                       ),
                       obscureText: false,
                       controller: _companyId,
-                    ),
-                    SizedBox(
-                      height: 16,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
@@ -119,40 +157,7 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                       controller: _email,
                     ),
                     SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      'Date'
-                    ),
-                    Text(
-                      "${_selectedDate.toLocal()}".split(' ')[0],
-                      style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () => _selectDate(context),
-                      child: Text('Select date'),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "The reason you want access",
-                        labelText: "Reason",
-                      ),
-                      obscureText: false,
-                      controller: _reason,
-                    ),
-                    SizedBox(
-                      height: 16,
+                      height: 10,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom (

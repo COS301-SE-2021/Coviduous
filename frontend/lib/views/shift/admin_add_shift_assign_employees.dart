@@ -119,7 +119,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                           Container(
                             height: MediaQuery.of(context).size.height / 6,
                             child: Image(
-                              image: AssetImage('assets/images/placeholder-profile-image.png'),
+                              image: AssetImage('assets/images/placeholder-employee-image.png'),
                             ),
                           ),
                         ],
@@ -237,164 +237,164 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
           ),
           bottomNavigationBar: BottomAppBar(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                    height: MediaQuery.of(context).size.height/20,
-                    width: MediaQuery.of(context).size.height/20,
-                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                Expanded(
+                  child: Container(
+                      margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.zero,
                         ),
-                        padding: EdgeInsets.zero,
-                      ),
-                      child: Text('+',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                        child: Text('+',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                          ),
                         ),
-                      ),
-                      onPressed: () {
-                        _email.clear();
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                  title: Text('Enter employee email'),
-                                  content: Form(
-                                    key: _formKey,
-                                    child: TypeAheadFormField(
-                                      textFieldConfiguration: TextFieldConfiguration(
-                                        controller: _email,
-                                          decoration: InputDecoration(
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              labelText: 'Email',
-                                          )
-                                      ),
-                                      suggestionsCallback: (pattern) {
-                                        return globals.CurrentEmails.getSuggestions(pattern);
-                                      },
-                                      itemBuilder: (context, suggestion) {
-                                        return ListTile(
-                                          tileColor: Colors.white,
-                                          title: Text(suggestion),
-                                        );
-                                      },
-                                      transitionBuilder: (context, suggestionsBox, controller) {
-                                        return suggestionsBox;
-                                      },
-                                      onSuggestionSelected: (suggestion) {
-                                        _email.text = suggestion;
-                                      },
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'Please enter an email';
-                                        } else {
-                                          if (!globals.currentEmails.contains(value)) {
-                                            return 'Invalid email';
-                                          }
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (value) => _email.text = value,
-                                    ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: Text('Submit'),
-                                      onPressed: () {
-                                        if (!_formKey.currentState.validate()) {
-                                          return;
-                                        }
-                                        _formKey.currentState.save();
-                                        print(_email.text);
-
-                                        globals.tempGroup.getUserEmails().add(_email.text);
-                                        setState(() {});
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text('Cancel'),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                  ]);
-                            });
-                      },
-                    )
-                ),
-                Container(
-                    height: 50,
-                    width: 130,
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text('Finish'),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Text('Warning'),
-                              content: Text('Are you sure you are done creating this shift?'),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text('Yes'),
-                                  onPressed: (){
-                                    shiftHelpers.createShift(globals.selectedShiftDate, globals.selectedShiftStartTime,
-                                        globals.selectedShiftEndTime, globals.currentGroupDescription).then((result) {
-                                          if (result == true) {
-                                            shiftHelpers.getShifts().then((result) {
-                                              if (result == true) {
-                                                for (int i = 0; i < globals.currentShifts.length; i ++) {
-                                                  if (globals.currentShifts[i].getFloorPlanNumber() == globals.currentFloorPlanNum &&
-                                                      globals.currentShifts[i].getFloorNumber() == globals.currentFloorNum &&
-                                                      globals.currentShifts[i].getRoomNumber() == globals.currentRoomNum &&
-                                                      globals.currentShifts[i].getDate() == globals.selectedShiftDate &&
-                                                      globals.currentShifts[i].getStartTime() == globals.selectedShiftStartTime &&
-                                                      globals.currentShifts[i].getEndTime() == globals.selectedShiftEndTime) {
-                                                    globals.currentShiftNum = globals.currentShifts[i].getShiftId();
-                                                    shiftHelpers.createGroup(globals.currentGroupDescription, globals.tempGroup.getUserEmails(), globals.currentShiftNum).then((result) {
-                                                      if (result == true) {
-                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                            SnackBar(content: Text('Shift successfully created.')));
-                                                        Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
-                                                      } else {
-                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                            SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
-                                                      }
-                                                    });
-                                                  }
-                                                }
-                                              } else {
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
-                                              }
-                                            });
+                        onPressed: () {
+                          _email.clear();
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                    title: Text('Enter employee email'),
+                                    content: Form(
+                                      key: _formKey,
+                                      child: TypeAheadFormField(
+                                        textFieldConfiguration: TextFieldConfiguration(
+                                          controller: _email,
+                                            decoration: InputDecoration(
+                                                fillColor: Colors.white,
+                                                filled: true,
+                                                labelText: 'Email',
+                                            )
+                                        ),
+                                        suggestionsCallback: (pattern) {
+                                          return globals.CurrentEmails.getSuggestions(pattern);
+                                        },
+                                        itemBuilder: (context, suggestion) {
+                                          return ListTile(
+                                            tileColor: Colors.white,
+                                            title: Text(suggestion),
+                                          );
+                                        },
+                                        transitionBuilder: (context, suggestionsBox, controller) {
+                                          return suggestionsBox;
+                                        },
+                                        onSuggestionSelected: (suggestion) {
+                                          _email.text = suggestion;
+                                        },
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'Please enter an email';
                                           } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                            if (!globals.currentEmails.contains(value)) {
+                                              return 'Invalid email';
+                                            }
                                           }
-                                    });
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text('No'),
-                                  onPressed: (){
-                                    Navigator.of(ctx).pop();
-                                  },
-                                )
-                              ],
-                            ));
-                      },
-                    )
+                                          return null;
+                                        },
+                                        onSaved: (value) => _email.text = value,
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Submit'),
+                                        onPressed: () {
+                                          if (!_formKey.currentState.validate()) {
+                                            return;
+                                          }
+                                          _formKey.currentState.save();
+                                          print(_email.text);
+
+                                          globals.tempGroup.getUserEmails().add(_email.text);
+                                          setState(() {});
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ]);
+                              });
+                        },
+                      )
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text('Finish'),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Warning'),
+                                content: Text('Are you sure you are done creating this shift?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text('Yes'),
+                                    onPressed: (){
+                                      shiftHelpers.createShift(globals.selectedShiftDate, globals.selectedShiftStartTime,
+                                          globals.selectedShiftEndTime, globals.currentGroupDescription).then((result) {
+                                            if (result == true) {
+                                              shiftHelpers.getShifts().then((result) {
+                                                if (result == true) {
+                                                  for (int i = 0; i < globals.currentShifts.length; i ++) {
+                                                    if (globals.currentShifts[i].getFloorPlanNumber() == globals.currentFloorPlanNum &&
+                                                        globals.currentShifts[i].getFloorNumber() == globals.currentFloorNum &&
+                                                        globals.currentShifts[i].getRoomNumber() == globals.currentRoomNum &&
+                                                        globals.currentShifts[i].getDate() == globals.selectedShiftDate &&
+                                                        globals.currentShifts[i].getStartTime() == globals.selectedShiftStartTime &&
+                                                        globals.currentShifts[i].getEndTime() == globals.selectedShiftEndTime) {
+                                                      globals.currentShiftNum = globals.currentShifts[i].getShiftId();
+                                                      shiftHelpers.createGroup(globals.currentGroupDescription, globals.tempGroup.getUserEmails(), globals.currentShiftNum).then((result) {
+                                                        if (result == true) {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                              SnackBar(content: Text('Shift successfully created.')));
+                                                          Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+                                                        } else {
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                              SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                                        }
+                                                      });
+                                                    }
+                                                  }
+                                                } else {
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                                }
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text('Error occurred while creating the shift. Please try again later.')));
+                                            }
+                                      });
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text('No'),
+                                    onPressed: (){
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  )
+                                ],
+                              ));
+                        },
+                      )
+                  ),
                 ),
               ],
             )

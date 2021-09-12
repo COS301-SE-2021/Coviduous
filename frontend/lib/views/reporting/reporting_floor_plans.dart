@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -143,8 +145,12 @@ class _ReportingFloorPlansState extends State<ReportingFloorPlans> {
                                       children: [
                                         Container(
                                           alignment: Alignment.center,
-                                          child: Image(
-                                            image: AssetImage('assets/images/placeholder-office-building.png'),
+                                          child: (globals.currentFloorPlans[index].getImageBytes() != "" && globals.currentFloorPlans[index].getImageBytes() != null)
+                                              ? Image(
+                                              image: MemoryImage(base64Decode(globals.currentFloorPlans[index].getImageBytes()))
+                                          )
+                                              : Image(
+                                              image: AssetImage('assets/images/placeholder-office-building.png')
                                           ),
                                         ),
                                       ]

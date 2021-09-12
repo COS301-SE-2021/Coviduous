@@ -63,7 +63,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Icon(
-                      Icons.sensor_door,
+                      Icons.vpn_key,
                       color: Colors.white,
                       size: (globals.getIfOnPC())
                           ? MediaQuery.of(context).size.width/8
@@ -155,7 +155,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                       child: Row (
                           children: <Widget>[
                             Expanded(child: Text('Contact trace')),
-                            Icon(Icons.help)
+                            Icon(Icons.search)
                           ],
                           mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
                           crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
@@ -189,13 +189,14 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                     repeatPauseDuration: Duration(milliseconds: 100),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(15),
+                        padding: EdgeInsets.zero,
                         shape: CircleBorder(),
                       ),
-                      child: Icon(
-                        Icons.chat,
-                        color: Colors.white,
-                        size: 50,
+                      child: ClipOval(
+                        child: Image(
+                          image: AssetImage('assets/images/chatbot-icon.png'),
+                          width: 70,
+                        ),
                       ),
                       onPressed: () {
                         globals.chatbotPreviousPage = AdminPermissions.routeName;

@@ -127,7 +127,8 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
               ]
           ),
         );
-      } else { //Else create and return a list
+      } else {
+        //Else create and return a list
         return ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: numOfPermissions,
@@ -176,7 +177,7 @@ class _UserViewPermissionsState extends State<UserViewPermissions> {
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                       ),
-                                      child: Text('Generate QR'),
+                                      child: Text('Generate access code'),
                                       onPressed: () async {
                                         ByteData byteData = await QrPainter(data: "123456789", version: QrVersions.auto).toImageData(200.0);
                                         showDialog(

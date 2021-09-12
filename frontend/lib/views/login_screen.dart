@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: MediaQuery.of(context).size.width,
                       ),
                       Container(
-                        color: Colors.white70,
+                        color: Colors.white,
                         width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
                         padding: EdgeInsets.all(16),
                         child: Form(
@@ -284,13 +284,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       repeatPauseDuration: Duration(milliseconds: 100),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.zero,
                           shape: CircleBorder(),
                         ),
-                        child: Icon(
-                          Icons.chat,
-                          color: Colors.white,
-                          size: 50,
+                        child: ClipOval(
+                          child: Image(
+                            image: AssetImage('assets/images/chatbot-icon.png'),
+                            width: 70,
+                          ),
                         ),
                         onPressed: () {
                           globals.chatbotPreviousPage = LoginScreen.routeName;
