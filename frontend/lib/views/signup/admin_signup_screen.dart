@@ -4,6 +4,7 @@ import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/signup/home_signup_screen.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/reporting/reporting_controller.dart' as reportingController;
 import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
@@ -71,7 +72,6 @@ class _AdminRegisterState extends State<AdminRegister>{
                       ),
                       Container(
                         color: Colors.white,
-                        height: MediaQuery.of(context).size.height/(2.8*globals.getWidgetScaling()),
                         width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                         padding: EdgeInsets.all(16),
                         child: Form(
@@ -114,7 +114,7 @@ class _AdminRegisterState extends State<AdminRegister>{
                                     keyboardType: TextInputType.emailAddress,
                                     controller: _email,
                                     validator: (value) {
-                                      if(value.isEmpty || !value.contains('@'))
+                                      if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+$")))
                                       {
                                         return 'invalid email';
                                       }
@@ -218,35 +218,41 @@ class _AdminRegisterState extends State<AdminRegister>{
                                     child: Text(
                                         'Submit'
                                     ),
-                                    onPressed: ()
-                                    {
-                                      FormState form = _formKey.currentState;
-                                      if (form.validate()) {
-                                        setState(() {
-                                          isLoading = true;
-                                        });
-                                        AuthClass().createAccount(email: _email.text.trim(),
-                                            password: _password.text.trim()).then((value) {
-                                          if (value == "Account created") {
+                                    onPressed: () {
+                                      reportingController.getCompanySummary(_companyId.text).then((result) { //Check if company doesn't already exist
+                                        if(result != null) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text("Company IDs must be unique")));
+                                        } else {
+                                          FormState form = _formKey.currentState;
+                                          if (form.validate()) {
                                             setState(() {
-                                              isLoading = false;
+                                              isLoading = true;
                                             });
+                                            AuthClass().createAccount(email: _email.text.trim(),
+                                                password: _password.text.trim()).then((value) {
+                                              if (value == "Account created") {
+                                                setState(() {
+                                                  isLoading = false;
+                                                });
 
-                                            userHelpers.createAdmin(_firstName.text, _lastName.text, _userName.text,
-                                                _companyId.text, _companyName.text, _companyLocation.text);
-                                            Navigator.pushAndRemoveUntil(context,
-                                                MaterialPageRoute(builder: (context) => LoginScreen()), (
-                                                    route) => false);
-                                          }
-                                          else {
-                                            setState(() {
-                                              isLoading = false;
+                                                userHelpers.createAdmin(_firstName.text, _lastName.text, _userName.text,
+                                                    _companyId.text, _companyName.text, _companyLocation.text);
+                                                Navigator.pushAndRemoveUntil(context,
+                                                    MaterialPageRoute(builder: (context) => LoginScreen()), (
+                                                        route) => false);
+                                              }
+                                              else {
+                                                setState(() {
+                                                  isLoading = false;
+                                                });
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                    SnackBar(content: Text("Account not created")));
+                                              }
                                             });
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text(value)));
                                           }
-                                        });
-                                      }
+                                        }
+                                      });
                                     },
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
