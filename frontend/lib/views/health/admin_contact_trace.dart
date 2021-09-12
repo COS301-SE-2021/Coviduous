@@ -13,6 +13,7 @@ import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminContactTrace extends StatefulWidget {
@@ -102,13 +103,11 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
       employeeList.clear();
       employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email', 'Date']);
       for (int i = 0; i < globals.selectedUsers.length; i++) {
-        if (globals.selectedUsers[i].getUserId() != globals.selectedUser.getUserId()) {
-          List<String> employeeInfo = <String>[
-            globals.selectedUsers[i].getUserId(), globals.selectedUsers[i].getFirstName(),
-            globals.selectedUsers[i].getLastName(), globals.selectedUsers[i].getEmail(), globals.currentShift.getDate()
-          ];
-          employeeList.add(employeeInfo);
-        }
+        List<String> employeeInfo = <String>[
+          globals.selectedUsers[i].getUserId(), globals.selectedUsers[i].getFirstName(),
+          globals.selectedUsers[i].getLastName(), globals.selectedUsers[i].getEmail(), globals.currentShift.getDate()
+        ];
+        employeeList.add(employeeInfo);
       }
 
       if (numberOfEmployees == 0) {
@@ -116,31 +115,9 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    (5 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No employees found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('Employee has not been in contact with anyone within the company recently.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No employees found', 'No other employees were in this shift.'),
             ]
         );
       } else {
@@ -372,22 +349,25 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
         body: Stack(
           children: <Widget>[
             SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    color: Color(0xff03305A),
-                    width: MediaQuery.of(context).size.width/(1.55 * globals.getWidgetScaling()),
-                    child: Text(
-                        globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' has come into contact with the following employees over the past month:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
-                        )
+              child: Center(
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      color: Color(0xff03305A),
+                      width: MediaQuery.of(context).size.width/(1.55 * globals.getWidgetScaling()),
+                      child: Text(
+                          globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' has come into contact with the following employees over the past month:',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 2,
+                          )
+                      ),
+                      padding: EdgeInsets.all(16),
                     ),
-                    padding: EdgeInsets.all(16),
-                  ),
-                  getList(),
-                ],
+                    getList(),
+                  ],
+                ),
               ),
             ),
           ],
