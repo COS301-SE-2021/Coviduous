@@ -13,7 +13,9 @@ import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
+import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {
@@ -22,6 +24,9 @@ class UserHomePage extends StatefulWidget {
   @override
   _UserHomePageState createState() => _UserHomePageState();
 }
+
+String upcomingBooking = '';
+bool latestPermission;
 
 class _UserHomePageState extends State<UserHomePage> {
   String email = globals.loggedInUserEmail;
@@ -53,6 +58,13 @@ class _UserHomePageState extends State<UserHomePage> {
   }
 
   @override
+  void initState() {
+    upcomingBooking = '';
+    latestPermission = null;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     //If incorrect type of user, don't allow them to view this page.
     if (globals.loggedInUserType != 'USER') {
@@ -68,7 +80,26 @@ class _UserHomePageState extends State<UserHomePage> {
       return Container();
     }
 
-    return new WillPopScope(
+    if (upcomingBooking == '') {
+      officeHelpers.getBookings().then((result) {
+        if (result == true) {
+          setState(() {
+            upcomingBooking = globals.currentBookings.first.getTimestamp().substring(24);
+          });
+        }
+      });
+    }
+    if (latestPermission == null) {
+      healthHelpers.getPermissionsForEmployee(globals.loggedInUserEmail).then((result) {
+        if (result == true) {
+          setState(() {
+            latestPermission = globals.currentPermissions.last.getOfficeAccess();
+          });
+        }
+      });
+    }
+
+    return WillPopScope(
       onWillPop: _onWillPop, //Pressing the back button prompts you to log out
       child: Scaffold(
         appBar: AppBar(
@@ -335,7 +366,9 @@ class _UserHomePageState extends State<UserHomePage> {
                                             Expanded(
                                               child: Container(
                                                 alignment: Alignment.center,
-                                                child: Text('Date goes here'),
+                                                child: (upcomingBooking == '')
+                                                    ? CircularProgressIndicator()
+                                                    : Text(upcomingBooking),
                                               ),
                                             ),
                                           ],
@@ -400,13 +433,13 @@ class _UserHomePageState extends State<UserHomePage> {
                                             Expanded(
                                               child: Container(
                                                 alignment: Alignment.center,
-                                                child: Row(
+                                                child: (latestPermission != null) ? Row(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    (true) //Check latest permission
+                                                    (latestPermission) //Check latest permission
                                                         ? Text('Office access granted  ')
                                                         : Text('Office access denied  '),
-                                                    (true) //Check latest permission
+                                                    (latestPermission) //Check latest permission
                                                         ? Icon(
                                                       Icons.check_circle_outline,
                                                       color: globals.firstColor,
@@ -416,7 +449,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                                       color: globals.sixthColor,
                                                     )
                                                   ]
-                                                ),
+                                                ) : CircularProgressIndicator(),
                                               ),
                                             ),
                                           ],
