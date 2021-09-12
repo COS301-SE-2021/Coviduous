@@ -9,6 +9,7 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
@@ -268,26 +269,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               Container(
-                alignment: Alignment.bottomLeft,
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.all(10),
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.chat,
-                        color: Colors.greenAccent,
-                        size: 50,
+                alignment: Alignment.bottomRight,
+                child: Align(
+                  heightFactor: 0.8,
+                  widthFactor: 0.8,
+                  child: ClipRect(
+                    child: AvatarGlow(
+                      startDelay: Duration(milliseconds: 1000),
+                      glowColor: Colors.white,
+                      endRadius: 60,
+                      duration: Duration(milliseconds: 2000),
+                      repeat: true,
+                      showTwoGlows: true,
+                      repeatPauseDuration: Duration(milliseconds: 100),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.all(15),
+                          shape: CircleBorder(),
+                        ),
+                        child: Icon(
+                          Icons.chat,
+                          color: Colors.white,
+                          size: 50,
+                        ),
+                        onPressed: () {
+                          globals.chatbotPreviousPage = LoginScreen.routeName;
+                          Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                        },
                       ),
-                      onPressed: () {
-                        globals.chatbotPreviousPage = LoginScreen.routeName;
-                        Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
-                      },
                     ),
-                    Flexible(
-                        child: TextField()
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ],
