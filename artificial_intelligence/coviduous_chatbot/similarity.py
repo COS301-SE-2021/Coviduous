@@ -1,6 +1,7 @@
 import re, math
 from collections import Counter
 from dataset.covid19_faqs.coronavirus_questions import COVID19_QUES
+from dataset.personal_ques.personal_ques import PERSONAL_QUES
 
 WORD = re.compile(r'\w+')
 
@@ -30,6 +31,14 @@ def compare_similarity(word_one, word_two):
 def find_most_similar(word):
     max = {"answer": None, "score": 0, "question": None}
 
+    for each in PERSONAL_QUES:
+        score = compare_similarity(word, each['Question'])
+       # strScore=str(score)
+       # print("word is : " + word +"compared question : "+ each['Question'] + "score is : "+strScore)
+        if score > max['score']:
+            max['score'] = score
+            max['answer'] = each['Answer']
+            max['question'] = each['Question']
     for each in COVID19_QUES:
         score = compare_similarity(word, each['Question'])
        # strScore=str(score)
