@@ -13,9 +13,10 @@ class Bot:
         return self.answer_question(answer,question)
 
     def answer_question(self,answer,question):
-        if answer['score'] > self.settings['min_score']:
+        #if answer['score'] > self.settings['min_score']:
+        if answer['score'] == 0:
             #print(answer['score'])
-            return answer['answer']
-        else:
             googleQuery="+".join(question.split(" "))
             return "Woops! I'm having trouble finding the answer to your question. Please email "+ self.settings['help_email'] +" if I was not able to answer your question. For convenience, a google link has been generated: https://www.google.com/search?q="+ googleQuery
+        else:
+            return answer['answer']
