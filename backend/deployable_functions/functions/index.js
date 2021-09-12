@@ -1107,6 +1107,361 @@ exports.decreaseNumberOfRegisteredUsersCompanyData = async (req, res) => {
         return res.status(500).send({message: "Some error occurred while updating number of registered users."});           
     }
 };
+exports.addNumberOfRegisteredAdminsCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumRegisteredAdminsInCompanyData =companyData.numberOfRegisteredAdmins;
+
+    try {
+        if (parseInt(currentNumRegisteredAdminsInCompanyData) >= 0)
+        {
+            let newNumRegisteredAdmins = parseInt(currentNumRegisteredAdminsInCompanyData) + 1;
+            newNumRegisteredAdmins = newNumRegisteredAdmins.toString();
+
+            response = await db.collection('company-data').doc(companyId).update({
+                numberOfRegisteredAdmins: newNumRegisteredAdmins
+            });
+            return res.status(200).send({
+                message: "Successfully added number of registered admins",
+                //data: req.body
+            });
+      
+            
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of registered admins."});
+   
+    }
+};
+
+exports.decreaseNumberOfRegisteredAdminsCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumRegisteredAdminsInCompanyData =companyData.numberOfRegisteredAdmins;
+
+    try {
+        if (parseInt(currentNumRegisteredAdminsInCompanyData) > 0)
+        {
+            let newNumRegisteredAdmins = parseInt(currentNumRegisteredAdminsInCompanyData) - 1;
+            newNumRegisteredAdmins = newNumRegisteredAdmins.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                "numberOfRegisteredAdmins": newNumRegisteredAdmins
+            });
+            return res.status(200).send({
+                message: "Successfully decreased number of registered admins",
+                //data: req.body
+            });
+       
+
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of registered admins."});
+    }
+
+
+    
+};
+
+exports.addNumberOfFloorplansCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorplansInCompanyData =companyData.numberOfFloorplans;
+
+
+
+    try {
+        if (parseInt(currentNumFloorplansInCompanyData) >= 0)
+        {
+            let newNumFloorplans = parseInt(currentNumFloorplansInCompanyData) + 1;
+            newNumFloorplans = newNumFloorplans.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloorplans: newNumFloorplans
+            });
+            return res.status(200).send({
+                message: "Successfully added number of floorplans",
+                //data: req.body
+            });
+    
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
+        
+    }
+};
+
+exports.decreaseNumberOfFloorplansCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorplansInCompanyData = companyData.numberOfFloorplans;
+
+    try {
+        if (parseInt(currentNumFloorplansInCompanyData) > 0)
+        {
+            let newNumFloorplans = parseInt(currentNumFloorplansInCompanyData) - 1;
+            newNumFloorplans = newNumFloorplans.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloorplans: newNumFloorplans
+            });
+            return res.status(200).send({
+                message: "Successfully decreased number of floorplans",
+                //data: req.body
+            });    
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
+    }
+};
+
+exports.addNumberOfFloorsCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorsInCompanyData = companyData.numberOfFloorplans;
+
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) >= 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) + 1;
+            newNumFloors = newNumFloors.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloors: newNumFloors
+            });
+            return res.status(200).send({
+                message: "Successfully added number of floors",
+                //data: req.body
+            });
+            
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of floors."});
+    }
+    
+    };
+
+exports.decreaseNumberOfFloorsCompanyData = async (req, res) => {
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorsInCompanyData = companyData.numberOfFloorplans;
+
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) >= 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) - 1;
+            newNumFloors = newNumFloors.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                numberOfFloors: newNumFloors
+            });
+            return res.status(200).send({
+                message: "Successfully deleted number of floors",
+                //data: req.body
+            });
+            
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of floors."});
+    }
+};
+
+
+
+
+
+
+
+
+
+
 
 
 
