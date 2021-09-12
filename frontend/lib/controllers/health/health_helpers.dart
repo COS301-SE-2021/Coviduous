@@ -119,6 +119,18 @@ Future<bool> deletePermissionRequest() async {
   return result;
 }
 
+Future<bool> deleteAllPermissionRequests() async {
+  bool result = false;
+  for (int i = 0; i < globals.currentPermissionRequests.length; i++) {
+    await Future.wait([
+      healthController.deletePermissionRequest(globals.currentPermissionRequests[i].getPermissionRequestId())
+    ]).then((results) {
+      result = results.first;
+    });
+  }
+  return result;
+}
+
 Future<bool> grantPermission(String userId) async {
   bool result = false;
   await Future.wait([

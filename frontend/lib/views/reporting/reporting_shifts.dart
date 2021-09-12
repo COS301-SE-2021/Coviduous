@@ -167,11 +167,11 @@ class ReportingShiftsState extends State<ReportingShifts> {
                                                               Expanded(
                                                                 child: Container(
                                                                   alignment: Alignment.center,
-                                                                  color: Color(0xff9B7EE5),
+                                                                  color: globals.firstColor,
                                                                   height: MediaQuery.of(context).size.height/5,
-                                                                  child: Text('Shift ' + (index+1).toString(),
+                                                                  child: Text('  Shift ' + (index+1).toString() + '  ',
                                                                     style: TextStyle(
-                                                                      color: globals.secondColor,
+                                                                      color: Colors.white,
                                                                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
                                                                     ),
                                                                   ),
@@ -179,35 +179,45 @@ class ReportingShiftsState extends State<ReportingShifts> {
                                                               ),
                                                             ],
                                                           ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Container(
-                                                            alignment: Alignment.centerLeft,
-                                                            height: 50,
-                                                            child: Text('Floor plan number: ' + globals.currentShifts[index].getFloorPlanNumber(),
-                                                                style: TextStyle(color: Colors.black)),
-                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Container(
-                                                            alignment: Alignment.centerLeft,
-                                                            height: 50,
-                                                            child: Text('Floor number: ' + globals.currentShifts[index].getFloorNumber(),
-                                                                style: TextStyle(color: Colors.black)),
-                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Container(
-                                                            alignment: Alignment.centerLeft,
-                                                            height: 50,
-                                                            child: Text('Room number: ' + globals.currentShifts[index].getRoomNumber(),
-                                                                style: TextStyle(color: Colors.black)),
-                                                            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                          Flexible(
+                                                            child: SingleChildScrollView(
+                                                              child: Column(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Container(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    height: 50,
+                                                                    child: Text('Floor plan number: ' + globals.currentShifts[index].getFloorPlanNumber(),
+                                                                        style: TextStyle(color: Colors.black)),
+                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                  ),
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
+                                                                  ),
+                                                                  Container(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    height: 50,
+                                                                    child: Text('Floor number: ' + globals.currentShifts[index].getFloorNumber(),
+                                                                        style: TextStyle(color: Colors.black)),
+                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                  ),
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
+                                                                  ),
+                                                                  Container(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    height: 50,
+                                                                    child: Text('Room number: ' + globals.currentShifts[index].getRoomNumber(),
+                                                                        style: TextStyle(color: Colors.black)),
+                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),

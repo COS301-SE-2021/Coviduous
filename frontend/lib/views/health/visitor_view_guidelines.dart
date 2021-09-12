@@ -20,6 +20,8 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
      document: PdfDocument.openAsset('assets/za-covid-guidelines.pdf'),
    );
 
+  int currentPage = 1;
+
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
     return (await true);
@@ -97,12 +99,29 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
                     icon: Icon(Icons.arrow_back_ios),
                     onPressed: () {
                       pdfController.previousPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                      setState(() {
+                        if (currentPage < pdfController.pagesCount) {
+                          currentPage--;
+                        }
+                      });
                     },
+                  ),
+                  Text(
+                    'Page ' + currentPage.toString() + '/' + pdfController.pagesCount.toString(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width * 0.01 * 4
+                    ),
                   ),
                   IconButton(
                     icon: Icon(Icons.arrow_forward_ios),
                     onPressed: () {
                       pdfController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                      setState(() {
+                        if (currentPage < pdfController.pagesCount) {
+                          currentPage++;
+                        }
+                      });
                     },
                   ),
                 ]

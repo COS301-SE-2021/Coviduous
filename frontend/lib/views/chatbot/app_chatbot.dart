@@ -24,11 +24,17 @@ class _ChatMessagesState extends State<ChatMessages>
 
   ///DialogflowApi _dialog;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _initChatbot();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    //_initChatbot();
+    _addMessage(
+       name: "Chat Bot",
+       initials: "CB",
+       bot: true,
+       text: "Hello, I am the Coviduous ChatBot! Do you need any help?\n\nType 'tutorial' for a list of tutorials, 'shortcut' for a list of shortcuts, or ask me a question."
+    );
+  }
 
   //This function ensures that the app doesn't just close when you press a phone's physical back button
   Future<bool> _onWillPop() async {
@@ -252,7 +258,7 @@ class ChatMessageListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(chatMessage.name ?? "Visitor",
-                            style: TextStyle(color: Colors.white)
+                            style: TextStyle(color: globals.lineColor)
                         ),
                         Container(
                             margin: EdgeInsets.only(top: 5),

@@ -64,7 +64,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Icon(
-                              Icons.add_circle_rounded,
+                              Icons.business,
                               color: Colors.white,
                               size: (globals.getIfOnPC())
                                   ? MediaQuery.of(context).size.width/8
@@ -164,13 +164,14 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                         repeatPauseDuration: Duration(milliseconds: 100),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(15),
+                            padding: EdgeInsets.zero,
                             shape: CircleBorder(),
                           ),
-                          child: Icon(
-                            Icons.chat,
-                            color: Colors.white,
-                            size: 50,
+                          child: ClipOval(
+                            child: Image(
+                              image: AssetImage('assets/images/chatbot-icon.png'),
+                              width: 70,
+                            ),
                           ),
                           onPressed: () {
                             globals.chatbotPreviousPage = FloorPlanScreen.routeName;

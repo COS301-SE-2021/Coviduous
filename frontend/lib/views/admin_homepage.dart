@@ -282,7 +282,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       ),
                                       child: Column (
                                         children: <Widget>[
-                                          Flexible(child: Icon(Icons.add_circle_rounded, size: 42)),
+                                          Flexible(child: Icon(Icons.business, size: 42)),
                                           SizedBox(height: 8),
                                           Flexible(child: Text('Floor plans')),
                                         ],
@@ -320,7 +320,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         child: Column (
                                           children: <Widget>[
-                                            Flexible(child: Icon(Icons.sensor_door, size: 42)),
+                                            Flexible(child: Icon(Icons.vpn_key, size: 42)),
                                             SizedBox(height: 8),
                                             Flexible(child: Text('Permissions')),
                                           ],
@@ -369,7 +369,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         child: Row (
                                           children: <Widget>[
                                             Flexible(child: Text('Floor plans')),
-                                            Flexible(child: Icon(Icons.add_circle_rounded)),
+                                            Flexible(child: Icon(Icons.business)),
                                           ],
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -423,7 +423,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         child: Row (
                                           children: <Widget>[
                                             Flexible(child: Text('Permissions')),
-                                            Flexible(child: Icon(Icons.sensor_door)),
+                                            Flexible(child: Icon(Icons.vpn_key)),
                                           ],
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -485,13 +485,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         repeatPauseDuration: Duration(milliseconds: 100),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(15),
+                            padding: EdgeInsets.zero,
                             shape: CircleBorder(),
                           ),
-                          child: Icon(
-                            Icons.chat,
-                            color: Colors.white,
-                            size: 50,
+                          child: ClipOval(
+                            child: Image(
+                              image: AssetImage('assets/images/chatbot-icon.png'),
+                              width: 70,
+                            ),
                           ),
                           onPressed: () {
                             globals.chatbotPreviousPage = AdminHomePage.routeName;

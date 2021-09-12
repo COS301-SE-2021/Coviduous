@@ -38,7 +38,7 @@ let uuid = require("uuid");
 
 ///// shifts //////
 
-
+//create, read (getRoomShift), delete
 
 /**
  * This function updates a specified shift via an HTTP UPDATE request.
@@ -134,6 +134,90 @@ shiftApp.get('/api/shift', async (req, res) => {
 
 
 ///// shift groups /////
+
+//create , read(get + get based on ShiftId)
+
+shiftApp.get('/api/group', async (req, res) => {
+    try {
+        const document = database.collection('groups');
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            console.log(data)
+            list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved shift groups',
+            data: list
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
+shiftApp.post('/api/group/shift-id', async (req, res) => {
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.shiftNumber == null || reqJson.shiftNumber === '') {
+        fieldErrors.push({field: 'shiftNumber', message: 'shiftNumber may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    try {
+        const document = database.collection('groups').where("shiftNumber", "==", reqJson.shiftNumber);
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            console.log(data)
+            list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved shift groups',
+            data: list
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
 shiftApp.post('/api/group/company-id', async (req, res) => {
 
     // data validation

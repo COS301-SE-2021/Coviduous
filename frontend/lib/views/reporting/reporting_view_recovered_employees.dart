@@ -119,7 +119,7 @@ class _ReportingViewRecoveredEmployeesState extends State<ReportingViewRecovered
                               Container(
                                 height: MediaQuery.of(context).size.height / 6,
                                 child: Image(
-                                  image: AssetImage('assets/images/placeholder-profile-image.png'),
+                                  image: AssetImage('assets/images/placeholder-employee-image.png'),
                                 ),
                               ),
                             ],

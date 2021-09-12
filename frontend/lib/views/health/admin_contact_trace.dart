@@ -159,7 +159,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                           Container(
                             height: MediaQuery.of(context).size.height / 6,
                             child: Image(
-                              image: AssetImage('assets/images/placeholder-profile-image.png'),
+                              image: AssetImage('assets/images/placeholder-employee-image.png'),
                             ),
                           ),
                         ],
@@ -226,7 +226,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
+      child: Scaffold(
         appBar: AppBar(
           title: Text('Contact trace'),
           leading: BackButton( //Specify back button
@@ -245,6 +245,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom (
+                      primary: Color(0xff03305A),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -295,6 +296,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom (
+                      primary: Color(0xff03305A),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -372,19 +374,17 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      color: globals.firstColor,
-                      child: Text(
-                          globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' (ID ' + globals.selectedUser.getUserId() + ') has come into contact with the following employees over the past month:',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
-                          )
-                      ),
-                      padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  Container(
+                    color: Color(0xff03305A),
+                    width: MediaQuery.of(context).size.width/(1.55 * globals.getWidgetScaling()),
+                    child: Text(
+                        globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' has come into contact with the following employees over the past month:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                        )
                     ),
+                    padding: EdgeInsets.all(16),
                   ),
                   getList(),
                 ],

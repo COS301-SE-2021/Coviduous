@@ -29,11 +29,8 @@ import 'package:frontend/views/floor_plan/admin_edit_room.dart';
 import 'package:frontend/views/health/admin_employee_permissions.dart';
 import 'package:frontend/views/health/admin_home_permissions.dart';
 import 'package:frontend/views/health/admin_view_access_requests.dart';
-import 'package:frontend/views/health/admin_view_permissions.dart';
 import 'package:frontend/views/health/admin_contact_trace.dart';
-import 'package:frontend/views/health/admin_contact_trace_employee.dart';
 import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
-import 'package:frontend/views/health/admin_set_recovered_employee.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/health/user_health_check.dart';
 import 'package:frontend/views/health/user_view_permissions.dart';
@@ -206,11 +203,8 @@ class MyApp extends StatelessWidget{
         AdminPermissions.routeName: (ctx)=> AdminPermissions(),
         EmployeePermissions.routeName: (ctx)=> EmployeePermissions(),
         AdminViewAccessRequests.routeName: (ctx)=> AdminViewAccessRequests(),
-        AdminViewPermissions.routeName: (ctx)=> AdminViewPermissions(),
         AdminContactTrace.routeName: (ctx)=> AdminContactTrace(),
-        AdminContactTraceEmployee.routeName: (ctx)=> AdminContactTraceEmployee(),
         AdminContactTraceShifts.routeName: (ctx)=> AdminContactTraceShifts(),
-        AdminSetRecoveredEmployee.routeName: (ctx)=> AdminSetRecoveredEmployee(),
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),

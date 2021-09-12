@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:frontend/views/health/admin_home_permissions.dart';
 import 'package:frontend/views/health/admin_contact_trace.dart';
-import 'package:frontend/views/health/admin_contact_trace_employee.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
@@ -18,7 +18,7 @@ class AdminContactTraceShifts extends StatefulWidget {
 }
 class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
+    Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
     return (await true);
   }
 
@@ -166,11 +166,11 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                                                               Expanded(
                                                                 child: Container(
                                                                   alignment: Alignment.center,
-                                                                  color: Color(0xff9B7EE5),
+                                                                  color: globals.firstColor,
                                                                   height: MediaQuery.of(context).size.height/5,
                                                                   child: Text('  Shift ' + (index+1).toString() + '  ',
                                                                     style: TextStyle(
-                                                                      color: globals.secondColor,
+                                                                      color: Colors.white,
                                                                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
                                                                     ),
                                                                   ),
@@ -192,8 +192,9 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
-                                                                  SizedBox(
-                                                                    height: 10,
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
                                                                   ),
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
@@ -202,8 +203,9 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
-                                                                  SizedBox(
-                                                                    height: 10,
+                                                                  Divider(
+                                                                    color: globals.lineColor,
+                                                                    thickness: 2,
                                                                   ),
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
@@ -282,7 +284,7 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
           title: Text('Shifts for employee'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
             },
           ),
         ),

@@ -36,7 +36,39 @@ let uuid = require("uuid");
 
 ///////////////// functions /////////////////
 
+//create, update, delete, get(based on userId + email)
 
+/**
+ * This function retrieves all users via an HTTP GET request.
+ * @param req The request object may be null.
+ * @param res The response object is sent back to the requester, containing the status code and retrieved data.
+ * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ */
+ userApp.get('/api/users', async (req, res) => {
+    try {
+        const document = database.collection('users');
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(data)
+            list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved users',
+            data: list
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
 
 
 exports.user = functions.https.onRequest(userApp);

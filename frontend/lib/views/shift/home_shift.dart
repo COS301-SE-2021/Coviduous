@@ -185,13 +185,14 @@ class _ShiftScreenState extends State<ShiftScreen> {
                         repeatPauseDuration: Duration(milliseconds: 100),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(15),
+                            padding: EdgeInsets.zero,
                             shape: CircleBorder(),
                           ),
-                          child: Icon(
-                            Icons.chat,
-                            color: Colors.white,
-                            size: 50,
+                          child: ClipOval(
+                            child: Image(
+                              image: AssetImage('assets/images/chatbot-icon.png'),
+                              width: 70,
+                            ),
                           ),
                           onPressed: () {
                             globals.chatbotPreviousPage = ShiftScreen.routeName;
