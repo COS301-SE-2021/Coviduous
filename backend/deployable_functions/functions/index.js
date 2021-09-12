@@ -888,9 +888,9 @@ app.post('/reporting/company/company-data/view', async (req, res) =>  {
 
 
 
+app.put('/reporting/company/company-data/registered-users', async (req, res) =>  {
 
-exports.updateNumberOfRegisteredUsers = async (req, res) => {
-    // data validation
+// data validation
     let fieldErrors = [];
 
     //Look into express.js middleware so that these lines are not necessary
@@ -939,9 +939,10 @@ exports.updateNumberOfRegisteredUsers = async (req, res) => {
               error: error
           });
       }
-};
+});
 
-exports.updateNumberOfRegisteredAdmins = async (req, res) => {
+
+app.put('/reporting/company/company-data/registered-admins', async (req, res) =>  {
     // data validation
     let fieldErrors = [];
 
@@ -991,7 +992,8 @@ exports.updateNumberOfRegisteredAdmins = async (req, res) => {
               error: error
           });
       }
-};
+});
+
 
 exports.addNumberOfRegisteredUsersCompanyData = async (req, res) => {
     // data validation
@@ -1225,8 +1227,8 @@ exports.decreaseNumberOfRegisteredAdminsCompanyData = async (req, res) => {
     
 };
 
-exports.addNumberOfFloorplansCompanyData = async (req, res) => {
-    // data validation
+app.put('/reporting/company/company-data/floorplans/inc', async (req, res) =>  {
+   // data validation
     let fieldErrors = [];
 
     //Look into express.js middleware so that these lines are not necessary
@@ -1283,10 +1285,11 @@ exports.addNumberOfFloorplansCompanyData = async (req, res) => {
         return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
         
     }
-};
+});
 
-exports.decreaseNumberOfFloorplansCompanyData = async (req, res) => {
-    // data validation
+
+app.put('/reporting/company/company-data/floorplans/dec', async (req, res) =>  {
+// data validation
     let fieldErrors = [];
 
     //Look into express.js middleware so that these lines are not necessary
@@ -1338,9 +1341,11 @@ exports.decreaseNumberOfFloorplansCompanyData = async (req, res) => {
         console.log(error);
         return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
     }
-};
+});
 
-exports.addNumberOfFloorsCompanyData = async (req, res) => {
+
+app.put('/reporting/company/company-data/floors/inc', async (req, res) =>  {
+
     // data validation
     let fieldErrors = [];
 
@@ -1396,9 +1401,10 @@ exports.addNumberOfFloorsCompanyData = async (req, res) => {
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
     
-    };
+    });
 
-exports.decreaseNumberOfFloorsCompanyData = async (req, res) => {
+ app.put('/reporting/company/company-data/floors/dec', async (req, res) =>  {    
+
     // data validation
     let fieldErrors = [];
 
@@ -1452,7 +1458,7 @@ exports.decreaseNumberOfFloorsCompanyData = async (req, res) => {
         console.log(error);
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
-};
+});
 
 
 
