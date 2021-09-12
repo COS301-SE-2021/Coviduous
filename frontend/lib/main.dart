@@ -69,7 +69,6 @@ import 'package:frontend/views/office/user_view_office_floor_plans.dart';
 import 'package:frontend/views/office/user_view_office_floors.dart';
 import 'package:frontend/views/office/user_view_office_rooms.dart';
 import 'package:frontend/views/office/user_view_office_times.dart';
-import 'package:frontend/views/office/user_view_office_desks.dart';
 import 'package:frontend/views/office/user_view_current_bookings.dart';
 
 //Notification
@@ -243,7 +242,6 @@ class MyApp extends StatelessWidget{
         UserViewOfficeFloors.routeName: (ctx)=> UserViewOfficeFloors(),
         UserViewOfficeRooms.routeName: (ctx)=> UserViewOfficeRooms(),
         UserViewOfficeTimes.routeName: (ctx)=> UserViewOfficeTimes(),
-        UserViewOfficeDesks.routeName: (ctx)=> UserViewOfficeDesks(),
         UserViewCurrentBookings.routeName: (ctx)=> UserViewCurrentBookings(),
 
         ///Notification
