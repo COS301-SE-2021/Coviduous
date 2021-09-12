@@ -1033,7 +1033,7 @@ exports.addNumberOfRegisteredUsersCompanyData = async (req, res) => {
             let newNumRegisteredUsers = parseInt(currentNumRegisteredUsersInCompanyData) + 1;
             newNumRegisteredUsers = newNumRegisteredUsers.toString();
 
-            await database.collection('company-data').doc(reqJson.companyId).update({
+            response =await database.collection('company-data').doc(reqJson.companyId).update({
                 numberOfRegisteredUsers: newNumRegisteredUsers
             });
             return res.status(200).send({
@@ -1080,9 +1080,32 @@ exports.decreaseNumberOfRegisteredUsersCompanyData = async (req, res) => {
         });
     }
     
-    let companyData = await database.getCompanyData(reqJson.companyId);
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumRegisteredUsersInCompanyData =companyData.numberOfRegisteredUsers;
 
-    
+
+    try {
+        if (parseInt(currentNumRegisteredUsersInCompanyData) > 0)
+        {
+            let newNumRegisteredUsers = parseInt(currentNumRegisteredUsersInCompanyData) - 1;
+            newNumRegisteredUsers = newNumRegisteredUsers.toString();
+
+             response = await db.collection('company-data').doc(companyId).update({
+                numberOfRegisteredUsers: newNumRegisteredUsers
+            });
+            return res.status(200).send({
+                message: "Successfully added number of registered users",
+                //data: req.body
+            });
+  
+           
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of registered users."});           
+    }
 };
 
 
