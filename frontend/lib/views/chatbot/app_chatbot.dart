@@ -71,12 +71,13 @@ class _ChatMessagesState extends State<ChatMessages>
             ),
           ),
           body: Container(
-            color: Colors.white,
             child: Column(
               children: <Widget>[
                 _buildList(),
-                Divider(height: 8.0, color: Theme.of(context).accentColor),
-                _buildComposer()
+                Container(
+                  color: Colors.white,
+                  child: _buildComposer(),
+                ),
               ],
             ),
           )),
@@ -112,8 +113,11 @@ class _ChatMessagesState extends State<ChatMessages>
               decoration: InputDecoration.collapsed(hintText: "Ask your question"),
             ),
           ),
-          new IconButton(
-            icon: Icon(Icons.send),
+          IconButton(
+            icon: Icon(
+              Icons.send,
+              color: globals.firstColor,
+            ),
             onPressed:
             _isComposing ? () => _handleSubmit(_controllerText.text) : null,
           ),
@@ -226,29 +230,36 @@ class ChatMessageListItem extends StatelessWidget {
       sizeFactor: CurvedAnimation(
           parent: chatMessage.animationController, curve: Curves.easeOut),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8.0),
+        margin: EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+              padding: EdgeInsets.only(left: 16),
               child: CircleAvatar(
-                child: Text(chatMessage.initials ?? "V"),
+                child: Text(
+                  chatMessage.initials ?? "V",
+                  style: TextStyle(color: Colors.white),
+                ),
                 backgroundColor: chatMessage.bot
-                    ? Theme.of(context).accentColor
-                    : Theme.of(context).highlightColor,
+                    ? globals.focusColor
+                    : globals.firstColor,
               ),
             ),
             Flexible(
                 child: Container(
-                    margin: EdgeInsets.only(left: 16.0),
+                    margin: EdgeInsets.only(left: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(chatMessage.name ?? "Visitor",
-                            style: Theme.of(context).textTheme.subtitle1),
+                            style: TextStyle(color: Colors.white)
+                        ),
                         Container(
-                            margin: const EdgeInsets.only(top: 5.0),
-                            child: Text(chatMessage.text)
+                            margin: EdgeInsets.only(top: 5),
+                            child: Text(
+                              chatMessage.text,
+                              style: TextStyle(color: Colors.white),
+                            )
                         )
                       ],
                     ))
