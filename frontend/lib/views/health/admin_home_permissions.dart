@@ -8,6 +8,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/admin_view_access_requests.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -50,7 +51,9 @@ class _AdminPermissionsState extends State<AdminPermissions> {
             },
           ),
         ),
-        body: SingleChildScrollView(
+        body: Stack(
+            children: [
+        SingleChildScrollView(
           child: Center(
             child: Container(
               width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
@@ -169,6 +172,27 @@ class _AdminPermissionsState extends State<AdminPermissions> {
             ),
           ),
         ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Stack(
+                  alignment: Alignment.topLeft,
+                  children: <Widget>[
+                    TextField(),
+                    IconButton(
+                      icon: Icon(
+                        Icons.chat,
+                        color: Colors.greenAccent,
+                        size: 50,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+        ],
+        )
       ),
     );
   }
