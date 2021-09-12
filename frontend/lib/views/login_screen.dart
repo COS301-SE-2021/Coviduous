@@ -268,11 +268,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               Container(
+                alignment: Alignment.bottomLeft,
+                width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.all(10),
-                child: Stack(
-                  alignment: Alignment.topLeft,
+                child: Row(
                   children: <Widget>[
-                    TextField(),
                     IconButton(
                       icon: Icon(
                         Icons.chat,
@@ -280,13 +280,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         size: 50,
                       ),
                       onPressed: () {
+                        globals.chatbotPreviousPage = LoginScreen.routeName;
                         Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
                       },
+                    ),
+                    Flexible(
+                        child: TextField()
                     ),
                   ],
                 ),
               ),
-
             ],
           ),
         ) : Center( child: CircularProgressIndicator() )

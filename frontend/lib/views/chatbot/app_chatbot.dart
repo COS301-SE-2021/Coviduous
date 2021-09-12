@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/admin_homepage.dart';
+import 'package:frontend/views/login_screen.dart';
+import 'package:frontend/views/user_homepage.dart';
+import 'package:frontend/globals.dart' as globals;
+
 ///commented dialogflow dependencies since we are using AI. It was just for testing.
 ///import 'package:googleapis/dialogflow/v2.dart';
 ///import 'package:googleapis_auth/auth_io.dart';
@@ -12,30 +17,70 @@ class ChatMessages extends StatefulWidget {
 
 class _ChatMessagesState extends State<ChatMessages>
     with TickerProviderStateMixin {
-  List<ChatMessage> _messages = List<ChatMessage>();
+  List<ChatMessage> _messages = [];
   bool _isComposing = false;
 
   TextEditingController _controllerText = new TextEditingController();
 
   ///DialogflowApi _dialog;
 
-  @override
+  // @override
   // void initState() {
   //   super.initState();
   //   _initChatbot();
   // }
 
+  //This function ensures that the app doesn't just close when you press a phone's physical back button
+  Future<bool> _onWillPop() async {
+    if (globals.chatbotPreviousPage != '' && globals.chatbotPreviousPage != null) {
+      Navigator.of(context).pushReplacementNamed(globals.chatbotPreviousPage);
+    } else {
+      if (globals.loggedInUserType == 'ADMIN') {
+        Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+      } else if (globals.loggedInUserType == 'USER') {
+        Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+      } else {
+        Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+      }
+    }
+    return (await true);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: new AppBar(title: new Text("ChatBot")),
-        body: Column(
-          children: <Widget>[
-            _buildList(),
-            Divider(height: 8.0, color: Theme.of(context).accentColor),
-            _buildComposer()
-          ],
-        ));
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text("ChatBot"),
+            elevation: 0,
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                if (globals.chatbotPreviousPage != '' && globals.chatbotPreviousPage != null) {
+                  Navigator.of(context).pushReplacementNamed(globals.chatbotPreviousPage);
+                } else {
+                  if (globals.loggedInUserType == 'ADMIN') {
+                    Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
+                  } else if (globals.loggedInUserType == 'USER') {
+                    Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
+                  } else {
+                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                  }
+                }
+              },
+            ),
+          ),
+          body: Container(
+            color: Colors.white,
+            child: Column(
+              children: <Widget>[
+                _buildList(),
+                Divider(height: 8.0, color: Theme.of(context).accentColor),
+                _buildComposer()
+              ],
+            ),
+          )),
+    );
   }
 
   _buildList() {
@@ -79,11 +124,19 @@ class _ChatMessagesState extends State<ChatMessages>
 
   _handleSubmit(String value) {
     _controllerText.clear();
-    _addMessage(
-      text: value,
-      name: "Clementine Mashile",
-      initials: "CK",
-    );
+    if (globals.loggedInUser != null) {
+      _addMessage(
+        text: value,
+        name: globals.loggedInUser.firstName + ' ' + globals.loggedInUser.lastName,
+        initials: globals.loggedInUser.firstName.substring(0, 1) + globals.loggedInUser.lastName.substring(0, 1),
+      );
+    } else {
+      _addMessage(
+        text: value,
+        name: "Visitor",
+        initials: "V",
+      );
+    }
 
     _requestChatBot(value);
   }
@@ -179,7 +232,7 @@ class ChatMessageListItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: CircleAvatar(
-                child: Text(chatMessage.initials ?? "CK"),
+                child: Text(chatMessage.initials ?? "V"),
                 backgroundColor: chatMessage.bot
                     ? Theme.of(context).accentColor
                     : Theme.of(context).highlightColor,
@@ -188,11 +241,11 @@ class ChatMessageListItem extends StatelessWidget {
             Flexible(
                 child: Container(
                     margin: EdgeInsets.only(left: 16.0),
-                    child: new Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(chatMessage.name ?? "Clementine Mashile",
-                            style: Theme.of(context).textTheme.subhead),
+                        Text(chatMessage.name ?? "Visitor",
+                            style: Theme.of(context).textTheme.subtitle1),
                         Container(
                             margin: const EdgeInsets.only(top: 5.0),
                             child: Text(chatMessage.text)
