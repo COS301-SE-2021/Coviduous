@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/views/office/user_view_office_desks.dart';
+import 'package:frontend/views/office/home_office.dart';
 import 'package:frontend/views/office/user_view_office_rooms.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewOfficeTimes extends StatefulWidget {
@@ -48,81 +50,103 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No time slots found', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('No time slots have been registered for this room.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-              )
+              globalWidgets.notFoundMessage(context, 'No time slots found', 'No shifts have been registered for this room.'),
             ]
         );
-      } else { //Else create and return a list
+      } else {
+        //Else create and return a list
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(16),
-            itemCount: numOfTimeSlots,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH time slot in timeSlots[]
+            itemCount: globals.currentShifts.length,
+            itemBuilder: (context, index) {
+              final timeRegex = RegExp(r'^TimeOfDay\((.*)\)$'); //To extract the time from getStartTime() and getEndTime() strings
+              final startTimeMatch = timeRegex.firstMatch(globals.currentShifts[index].getStartTime());
+              final endTimeMatch = timeRegex.firstMatch(globals.currentShifts[index].getEndTime());
+              String startTimeFormatted = startTimeMatch.group(1);
+              String endTimeFormatted = endTimeMatch.group(1);
+
               return ListTile(
-                title: Column(
+                title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children:[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 24,
-                        color: Theme.of(context).primaryColor,
-                        child: Text(globals.currentShifts[index].getDate()),
+                      Column(
+                        children: [
+                          Text('Shift ' + (index+1).toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
+                              )
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height/6,
+                            child: Image(
+                              image: AssetImage('assets/images/placeholder-shift.png'),
+                            ),
+                          ),
+                        ],
                       ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text(globals.currentShifts[index].getStartTime() + " - " + globals.currentShifts[index].getEndTime()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Current capacity of room: ' + (globals.currentRoom.getCapacityPercentage().toString())),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                      child: Text('View'),
-                                      onPressed: () {
-                                        globals.selectedShiftDate = globals.currentShifts[index].getDate();
-                                        globals.selectedShiftStartTime = globals.currentShifts[index].getStartTime();
-                                        globals.selectedShiftEndTime = globals.currentShifts[index].getEndTime();
-                                        Navigator.of(context).pushReplacementNamed(UserViewOfficeDesks.routeName);
-                                      }),
-                                ],
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:[
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(globals.currentShifts[index].getDate().substring(0, 10)),
+                                              Text(startTimeFormatted + ' - ' + endTimeFormatted)
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      alignment: Alignment.centerRight,
+                                      padding: EdgeInsets.all(8),
+                                      child: ElevatedButton(
+                                        child: Text('Book'),
+                                        onPressed: () {
+                                          globals.selectedShiftDate = globals.currentShifts[index].getDate();
+                                          globals.selectedShiftStartTime = globals.currentShifts[index].getStartTime();
+                                          globals.selectedShiftEndTime = globals.currentShifts[index].getEndTime();
+                                          if (globals.currentRoom.getOccupiedDesks() < globals.currentRoom.getNumberOfDesks()) {
+                                            officeHelpers.createBooking((globals.currentRoom.getOccupiedDesks()+1).toString()).then((result) {
+                                              if (result == true) {
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                    SnackBar(content: Text("Desk successfully booked")));
+                                                Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                              } else {
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                    SnackBar(content: Text('Error occurred while booking the desk. Please try again later.')));
+                                              }
+                                            });
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text('This room is full for this time slot.')));
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ]
-                      )
+                            ]
+                        ),
+                      ),
                     ]
                 ),
               );
-            }
-        );
+            });
       }
     }
 
@@ -141,7 +165,14 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
               children: <Widget>[
                 SingleChildScrollView(
                   child: Center(
-                    child: getList(),
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
                   ),
                 ),
               ]
