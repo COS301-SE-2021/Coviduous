@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'admin_view_permissions.dart';
+import 'package:frontend/views/health/admin_home_permissions.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
@@ -14,7 +14,7 @@ class EmployeePermissions extends StatefulWidget {
 }
 class _EmployeePermissionsState extends State<EmployeePermissions> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
+    Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
     return (await true);
   }
 
@@ -213,7 +213,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
           title: Text('Employee permissions'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminViewPermissions.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
             },
           ),
         ),

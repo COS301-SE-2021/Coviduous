@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:frontend/views/health/admin_home_permissions.dart';
 import 'package:frontend/views/health/admin_contact_trace.dart';
-import 'package:frontend/views/health/admin_contact_trace_employee.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
@@ -18,7 +18,7 @@ class AdminContactTraceShifts extends StatefulWidget {
 }
 class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
+    Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
     return (await true);
   }
 
@@ -284,7 +284,7 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
           title: Text('Shifts for employee'),
           leading: BackButton( //Specify back button
             onPressed: (){
-              Navigator.of(context).pushReplacementNamed(AdminContactTraceEmployee.routeName);
+              Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
             },
           ),
         ),
