@@ -16,7 +16,7 @@ class UserRequestAccessShifts extends StatefulWidget {
   _UserRequestAccessShiftsState createState() => _UserRequestAccessShiftsState();
 }
 class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
-  int numOfGroups = globals.currentGroups.length;
+  int numOfShifts = globals.currentShifts.length;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserViewPermissions.routeName);
@@ -40,7 +40,7 @@ class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
     }
 
     Widget getList() {
-      if (numOfGroups == 0) {
+      if (numOfShifts == 0) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -100,7 +100,7 @@ class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(globals.currentShift.getDate().substring(0, 10)),
+                                              Text(globals.currentShifts[index].getDate().substring(0, 10)),
                                               Text(startTimeFormatted + ' - ' + endTimeFormatted)
                                             ],
                                           ),
@@ -159,7 +159,7 @@ class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
                                                                     height: 50,
-                                                                    child: Text('Floor plan number: ' + globals.currentShift.getFloorPlanNumber(),
+                                                                    child: Text('Floor plan number: ' + globals.currentShifts[index].getFloorPlanNumber(),
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
@@ -170,7 +170,7 @@ class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
                                                                     height: 50,
-                                                                    child: Text('Floor number: ' + globals.currentShift.getFloorNumber(),
+                                                                    child: Text('Floor number: ' + globals.currentShifts[index].getFloorNumber(),
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
@@ -181,7 +181,7 @@ class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
                                                                   Container(
                                                                     alignment: Alignment.centerLeft,
                                                                     height: 50,
-                                                                    child: Text('Room number: ' + globals.currentShift.getRoomNumber(),
+                                                                    child: Text('Room number: ' + globals.currentShifts[index].getRoomNumber(),
                                                                         style: TextStyle(color: Colors.black)),
                                                                     padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                   ),
