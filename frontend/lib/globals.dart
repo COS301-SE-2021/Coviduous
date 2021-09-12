@@ -120,6 +120,9 @@ String loggedInCompanyId = 'CID-1';
 //JWT the user receives after logging in
 String token = '';
 
+//Chatbot previous page
+String chatbotPreviousPage = '';
+
 //==============
 //Theme-related
 //==============
