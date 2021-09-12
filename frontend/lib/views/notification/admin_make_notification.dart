@@ -67,7 +67,9 @@ class MakeNotificationState extends State<MakeNotification> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height/6,
+                          height: (!globals.getIfOnPC())
+                              ? MediaQuery.of(context).size.height/6
+                              : MediaQuery.of(context).size.height/8,
                           child: Image(
                               image: AssetImage('assets/images/placeholder-notification.png'),
                           ),

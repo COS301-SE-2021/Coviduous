@@ -6,6 +6,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/models/notification/notification.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminViewNotifications extends StatefulWidget {
@@ -49,34 +50,9 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    (5 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No notifications found',
-                          style: TextStyle(color: Colors.white,
-                              fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('You have no notifications.',
-                            style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No notifications found', 'You have no notifications.'),
             ]
         );
       } else {
@@ -93,13 +69,17 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                   color: globals.firstColor,
                   child: Container(
                     color: Colors.white,
-                    height: MediaQuery.of(context).size.height/5.5,
+                    height: (!globals.getIfOnPC())
+                        ? MediaQuery.of(context).size.height/5.5
+                        : MediaQuery.of(context).size.height/7,
                     margin: EdgeInsets.all(5),
                     child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children:[
                           Container(
-                            height: MediaQuery.of(context).size.height/5.5,
+                            height: (!globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.height/5.5
+                                : MediaQuery.of(context).size.height/7,
                             child: Image(image: AssetImage('assets/images/placeholder-notification.png')),
                           ),
                           Expanded(
@@ -140,6 +120,10 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                                               ),
                                             ),
                                           ],
+                                        ),
+                                        Divider(
+                                          color: globals.firstColor,
+                                          thickness: 2,
                                         ),
                                         Row(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,14 +166,18 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                                       children: [
                                                                         Container(
-                                                                          height: MediaQuery.of(context).size.height/5,
+                                                                          height: (!globals.getIfOnPC())
+                                                                              ? MediaQuery.of(context).size.height/5
+                                                                              : MediaQuery.of(context).size.height/8,
                                                                           child: Image(image: AssetImage('assets/images/placeholder-notification.png')),
                                                                         ),
                                                                         Expanded(
                                                                           child: Container(
                                                                             alignment: Alignment.center,
                                                                             color: globals.firstColor,
-                                                                            height: MediaQuery.of(context).size.height/5,
+                                                                            height: (!globals.getIfOnPC())
+                                                                                ? MediaQuery.of(context).size.height/5
+                                                                                : MediaQuery.of(context).size.height/8,
                                                                             child: Text('  Notification ' + (index+1).toString() + '  ',
                                                                               style: TextStyle(
                                                                                 color: Colors.white,
@@ -214,6 +202,10 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                                                                                   style: TextStyle(color: Colors.black)),
                                                                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                             ),
+                                                                            Divider(
+                                                                              color: globals.lineColor,
+                                                                              thickness: 2,
+                                                                            ),
                                                                             Container(
                                                                               alignment: Alignment.topLeft,
                                                                               height: 50,
@@ -221,12 +213,20 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                                                                                   style: TextStyle(color: Colors.black)),
                                                                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                             ),
+                                                                            Divider(
+                                                                              color: globals.lineColor,
+                                                                              thickness: 2,
+                                                                            ),
                                                                             Container(
                                                                               alignment: Alignment.topLeft,
                                                                               height: 50,
                                                                               child: Text('Subject: ' + reverseNotifications[index].getSubject(),
                                                                                   style: TextStyle(color: Colors.black)),
                                                                               padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                            ),
+                                                                            Divider(
+                                                                              color: globals.lineColor,
+                                                                              thickness: 2,
                                                                             ),
                                                                             Container(
                                                                               alignment: Alignment.topLeft,
@@ -310,7 +310,14 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
               children: <Widget>[
                 SingleChildScrollView(
                   child: Center(
-                      child: getList()
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
                   ),
                 ),
               ]

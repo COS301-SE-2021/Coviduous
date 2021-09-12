@@ -21,6 +21,7 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
    );
 
   int currentPage = 1;
+  int totalPages = 1;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
@@ -65,20 +66,25 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
                )
              ]
          );
-       } else { //Else, return a container showing the company guidelines
-           return Container(
-             alignment: Alignment.center,
-             width: MediaQuery.of(context).size.width/(1.5*globals.getWidgetScaling()),
-             height: MediaQuery.of(context).size.height/(1.5*globals.getWidgetScaling()),
-             color: Colors.white,
-             child: PdfView(
-               documentLoader: Center(child: CircularProgressIndicator()),
-               pageLoader: Center(child: CircularProgressIndicator()),
-               controller: pdfController,
-             ),
-           );
-         }
+       } else {
+         //Else, return a container showing the company guidelines
+         return Container(
+           alignment: Alignment.center,
+           width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+           color: Colors.white,
+           child: PdfView(
+             documentLoader: Center(child: CircularProgressIndicator()),
+             pageLoader: Center(child: CircularProgressIndicator()),
+             onDocumentLoaded: (PdfDocument doc) {
+               setState(() {
+                 totalPages = doc.pagesCount;
+               });
+               },
+             controller: pdfController,
+           ),
+         );
        }
+    }
 
       return WillPopScope(
         onWillPop: _onWillPop,
@@ -93,38 +99,40 @@ class _VisitorViewGuidelinesState extends State<VisitorViewGuidelines> {
             ),
             bottomNavigationBar: BottomAppBar(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      pdfController.previousPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
-                      setState(() {
-                        if (currentPage < pdfController.pagesCount) {
-                          currentPage--;
-                        }
-                      });
-                    },
-                  ),
-                  Text(
-                    'Page ' + currentPage.toString() + '/' + pdfController.pagesCount.toString(),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width * 0.01 * 4
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        pdfController.previousPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                        setState(() {
+                          if (currentPage < pdfController.pagesCount) {
+                            currentPage--;
+                          }
+                        });
+                        },
                     ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.arrow_forward_ios),
-                    onPressed: () {
-                      pdfController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
-                      setState(() {
-                        if (currentPage < pdfController.pagesCount) {
-                          currentPage++;
-                        }
-                      });
-                    },
-                  ),
-                ]
+                    Text(
+                      'Page ' + currentPage.toString() + '/' + totalPages.toString(),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: (!globals.getIfOnPC())
+                              ? MediaQuery.of(context).size.width * 0.01 * 4
+                              : MediaQuery.of(context).size.width * 0.01
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: () {
+                        pdfController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                        setState(() {
+                          if (currentPage < pdfController.pagesCount) {
+                            currentPage++;
+                          }
+                        });
+                        },
+                    ),
+                  ]
               ),
             ),
             body: Stack (

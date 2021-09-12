@@ -10,6 +10,7 @@ import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/models/user/sick_user.dart';
 
 import 'package:frontend/controllers/pdf_helpers.dart' as pdfHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingViewSickEmployees extends StatefulWidget {
@@ -74,29 +75,7 @@ class _ReportingViewSickEmployeesState extends State<ReportingViewSickEmployees>
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No employee health status found', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No health statuses available.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No employee health status found', 'No health statuses available.')
             ]
         );
       } else {
@@ -249,7 +228,14 @@ class _ReportingViewSickEmployeesState extends State<ReportingViewSickEmployees>
               children: <Widget>[
                 SingleChildScrollView(
                   child: Center(
-                      child: getList()
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
                   ),
                 ),
               ]

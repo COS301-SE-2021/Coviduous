@@ -5,6 +5,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/user_homepage.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewAnnouncements extends StatefulWidget {
@@ -49,32 +50,9 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    (5 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No announcements found', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('You have no announcements.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No announcements found', 'You have no announcements.'),
             ]
         );
       } else {
@@ -91,13 +69,17 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                       : globals.firstColor,
                   child: Container(
                     color: Colors.white,
-                    height: MediaQuery.of(context).size.height/5,
+                    height: (!globals.getIfOnPC())
+                        ? MediaQuery.of(context).size.height/5
+                        : MediaQuery.of(context).size.height/7,
                     margin: EdgeInsets.all(5),
                     child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children:[
                           Container(
-                            height: MediaQuery.of(context).size.height/6,
+                            height: (!globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.height/6
+                                : MediaQuery.of(context).size.height/8,
                             child: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
                                 ? Image(
                                 image: AssetImage('assets/images/warning-icon.png')
@@ -117,7 +99,10 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                                       padding: EdgeInsets.all(12),
                                       child: Column(
                                         children: [
-                                          Text(globals.currentAnnouncements[index].getTimestamp()),
+                                          Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(globals.currentAnnouncements[index].getTimestamp())
+                                          ),
                                           Divider(
                                             color: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
                                                 ? globals.sixthColor
@@ -167,7 +152,9 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                         children: [
                                                                           Container(
-                                                                            height: MediaQuery.of(context).size.height/5,
+                                                                            height: (!globals.getIfOnPC())
+                                                                                ? MediaQuery.of(context).size.height/5
+                                                                                : MediaQuery.of(context).size.height/8,
                                                                             child: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
                                                                                 ? Image(
                                                                                 image: AssetImage('assets/images/warning-icon.png')
@@ -182,7 +169,9 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                                                                               color: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
                                                                                   ? globals.sixthColor
                                                                                   : globals.firstColor,
-                                                                              height: MediaQuery.of(context).size.height/5,
+                                                                              height: (!globals.getIfOnPC())
+                                                                                  ? MediaQuery.of(context).size.height/5
+                                                                                  : MediaQuery.of(context).size.height/8,
                                                                               child: Text('  Announcement ' + (index+1).toString() + '  ',
                                                                                 style: TextStyle(
                                                                                   color: Colors.white,
@@ -207,12 +196,20 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
                                                                                     style: TextStyle(color: Colors.black)),
                                                                                 padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                                               ),
+                                                                              Divider(
+                                                                                color: globals.lineColor,
+                                                                                thickness: 2,
+                                                                              ),
                                                                               Container(
                                                                                 alignment: Alignment.topLeft,
                                                                                 height: 50,
                                                                                 child: Text('Type: ' + globals.currentAnnouncements[index].getType(),
                                                                                     style: TextStyle(color: Colors.black)),
                                                                                 padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                              ),
+                                                                              Divider(
+                                                                                color: globals.lineColor,
+                                                                                thickness: 2,
                                                                               ),
                                                                               Container(
                                                                                 alignment: Alignment.topLeft,
@@ -276,7 +273,14 @@ class _UserViewAnnouncementsState extends State<UserViewAnnouncements> {
               children: <Widget>[
                 SingleChildScrollView(
                   child: Center (
-                      child: getList()
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
                   ),
                 ),
               ]

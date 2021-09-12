@@ -124,23 +124,26 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  child: Text(
-                      'View uploaded files'
-                  ),
-                  onPressed: () {
-                    healthHelpers.getTestResults().then((result) {
-                      if (result == true) {
-                        Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('An error occurred while retrieving your test results. Please try again later.')));
-                      }
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  child: ElevatedButton(
+                    child: Text(
+                        'View uploaded files'
+                    ),
+                    onPressed: () {
+                      healthHelpers.getTestResults().then((result) {
+                        if (result == true) {
+                          Navigator.of(context).pushReplacementNamed(UserViewTestResults.routeName);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('An error occurred while retrieving your test results. Please try again later.')));
+                        }
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
@@ -159,7 +162,9 @@ class _UserUploadTestResultsState extends State<UserUploadTestResults> {
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
                             color: globals.focusColor,
-                            width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                            width: (!globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling())
+                                : 640,
                             padding: EdgeInsets.all(20),
                             child: SingleChildScrollView(
                               child: Column(

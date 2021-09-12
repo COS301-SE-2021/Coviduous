@@ -21,6 +21,7 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
   );
 
   int currentPage = 1;
+  int totalPages = 1;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
@@ -66,15 +67,20 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
               )
             ]
         );
-      } else { //Else, return a container showing the company guidelines
+      } else {
+        //Else, return a container showing the company guidelines
         return Container(
             alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width/(1.5*globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height/(1.5*globals.getWidgetScaling()),
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
             color: Colors.white,
             child: PdfView(
               documentLoader: Center(child: CircularProgressIndicator()),
               pageLoader: Center(child: CircularProgressIndicator()),
+              onDocumentLoaded: (PdfDocument doc) {
+                setState(() {
+                  totalPages = doc.pagesCount;
+                });
+              },
               controller: pdfController,
             ),
         );
@@ -94,7 +100,7 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
           ),
           bottomNavigationBar: BottomAppBar(
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
                     icon: Icon(Icons.arrow_back_ios),
@@ -108,10 +114,12 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
                     },
                   ),
                   Text(
-                    'Page ' + currentPage.toString() + '/' + pdfController.pagesCount.toString(),
+                    'Page ' + currentPage.toString() + '/' + totalPages.toString(),
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width * 0.01 * 4
+                        fontSize: (!globals.getIfOnPC())
+                            ? MediaQuery.of(context).size.width * 0.01 * 4
+                            : MediaQuery.of(context).size.width * 0.01
                     ),
                   ),
                   IconButton(

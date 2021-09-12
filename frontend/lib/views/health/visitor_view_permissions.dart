@@ -12,6 +12,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/health/visitor_home_health.dart';
 
 import 'package:frontend/controllers/pdf_helpers.dart' as pdfHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class VisitorViewPermissions extends StatefulWidget {
@@ -101,30 +102,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
       }
 
        if(numOfPermissions == 0) {
-         return ClipRRect(
-           borderRadius: BorderRadius.circular(20),
-           child: Column(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 Container(
-                   alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                   color: globals.firstColor,
-                   child: Text('No permissions granted', style: TextStyle(color: Colors.white,
-                       fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                 ),
-                 Container(
-                     alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                     color: Colors.white,
-                     padding: EdgeInsets.all(12),
-                     child: Text('No permissions have been granted to you.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                 )
-               ]
-           ),
-         );
+         return globalWidgets.notFoundMessage(context, 'No permissions found', 'No permissions have been assigned to you.');
        } else {
          return ListView.builder(
              padding: const EdgeInsets.all(16),
@@ -324,7 +302,14 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
           body: Stack (
               children: <Widget>[
                 Center (
-                    child: getList()
+                  child: (globals.getIfOnPC())
+                      ? Container(
+                        width: 640,
+                        child: getList(),
+                  )
+                      : Container(
+                        child: getList(),
+                  ),
                 ),
               ]
           )

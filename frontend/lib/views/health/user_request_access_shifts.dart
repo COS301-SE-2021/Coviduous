@@ -6,6 +6,7 @@ import 'package:frontend/views/health/user_view_permissions.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserRequestAccessShifts extends StatefulWidget {
@@ -47,29 +48,7 @@ class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No shifts found', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No shifts have been created for this room.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No shifts found', 'You are not assigned to any shifts.'),
             ]);
       } else {
         //Else create and return a list
@@ -264,7 +243,14 @@ class _UserRequestAccessShiftsState extends State<UserRequestAccessShifts> {
             children: <Widget>[
               SingleChildScrollView(
                 child: Center (
-                    child: getList()
+                  child: (globals.getIfOnPC())
+                      ? Container(
+                        width: 640,
+                        child: getList(),
+                  )
+                      : Container(
+                        child: getList(),
+                  ),
                 ),
               ),
             ]

@@ -8,6 +8,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewOfficeFloorPlans extends StatefulWidget {
@@ -48,36 +49,7 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                      color: globals.firstColor,
-                      child: Text('No floors found',
-                          style: TextStyle(color: Colors.white,
-                              fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
-                          )
-                      ),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height / (12 * globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No floors have been registered for this floor plan.',
-                            style: TextStyle(
-                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
-                            )
-                        )
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No floor plans found', 'No floor plans have been registered for your company.'),
             ]);
       }
       else
@@ -198,7 +170,14 @@ class _UserViewOfficeFloorPlansState extends State<UserViewOfficeFloorPlans> {
               children: <Widget>[
                 Center(
                   child: SingleChildScrollView(
-                    child: getList(),
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
                   ),
                 ),
               ]
