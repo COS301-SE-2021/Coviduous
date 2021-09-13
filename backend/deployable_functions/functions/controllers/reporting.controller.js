@@ -479,7 +479,180 @@ reportingApp.put('/api/reporting/company/company-data/registered-users', async (
           }
     });
        
+reportingApp.put('/api/reporting/company/company-data/floorplans/inc', async (req, res) =>  {
+        // data validation
+         let fieldErrors = [];
+     
+         //Look into express.js middleware so that these lines are not necessary
+         let reqJson;
+         try {
+             reqJson = JSON.parse(req.body);
+         } catch (e) {
+             reqJson = req.body;
+         }
+         console.log(reqJson);
+         //////////////////////////////////////////////////////////////////////
+            
+         if(req.body == null) {
+             fieldErrors.push({field: null, message: 'Request object may not be null'});
+         }
+     
+         if (reqJson.companyId == null || reqJson.companyId === '') {
+             fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+         }
+     
+         if (fieldErrors.length > 0) {
+             console.log(fieldErrors);
+             return res.status(400).send({
+                 message: '400 Bad Request: Incorrect fields',
+                 errors: fieldErrors
+             });
+         }
+         
+         
+         let response = database.collection('company-data').doc(reqJson.companyId);
+         let doc = await response.get();
+         let companyData = doc.data();
+         let currentNumFloorplansInCompanyData =companyData.numberOfFloorplans;
+     
+     
+     
+         try {
+             if (parseInt(currentNumFloorplansInCompanyData) >= 0)
+             {
+                 let newNumFloorplans = parseInt(currentNumFloorplansInCompanyData) + 1;
+                 newNumFloorplans = newNumFloorplans.toString();
+     
+                 response = await database.collection('company-data').doc(reqJson.companyId).update({
+                     "numberOfFloorplans": newNumFloorplans
+                 });
+                 return res.status(200).send({
+                     message: "Successfully added number of floorplans",
+                     //data: req.body
+                 });
+         
+             }
+         } catch (error) {
+             console.log(error);
+             return res.status(500).send({message: "Some error occurred while updating number of floorplans."});
+             
+         }
+});
+reportingApp.put('/api/reporting/company/company-data/floors/inc', async (req, res) =>  {
 
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorsInCompanyData = companyData.numberOfFloorplans;
+
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) >= 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) + 1;
+            newNumFloors = newNumFloors.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                "numberOfFloors": newNumFloors
+            });
+            return res.status(200).send({
+                message: "Successfully added number of floors",
+                //data: req.body
+            });
+            
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of floors."});
+    }    
+});
+reportingApp.put('/api/reporting/company/company-data/floors/dec', async (req, res) =>  {    
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+       
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let response = database.collection('company-data').doc(reqJson.companyId);
+    let doc = await response.get();
+    let companyData = doc.data();
+    let currentNumFloorsInCompanyData = companyData.numberOfFloors;
+
+    try {
+        if (parseInt(currentNumFloorsInCompanyData) >= 0)
+        {
+            let newNumFloors = parseInt(currentNumFloorsInCompanyData) - 1;
+            newNumFloors = newNumFloors.toString();
+
+            response = await database.collection('company-data').doc(reqJson.companyId).update({
+                "numberOfFloors": newNumFloors
+            });
+            return res.status(200).send({
+                message: "Successfully deleted number of floors",
+                //data: req.body
+            });
+            
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while updating number of floors."});
+    }
+});
+
+     
 
 
 
