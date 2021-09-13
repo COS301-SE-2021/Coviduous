@@ -1576,15 +1576,318 @@ app.put('api/reporting/company/company-data/rooms/dec', async (req, res) =>  {
 });
 
 
+exports.setUpHealthSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    
+    // First we get all the health summaries in our database and check if there is an exisiting health summary with
+    // our companyId
+    
+        const document = db.collection('health-summary');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+    
+    let healthSummaries =list;
+
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        return res.status(200).send({
+            message: 'Company Health Summary Already Has An Initial Instance',
+        });
+
+    }
+    else
+    {
+        
+      //company was never registered before so we setup their health summary table
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+
+      let healthSummary = {
+        healthSummaryId: healthSummaryId,
+        month: month,
+        year:year,
+        timestamp: timestamp,
+        companyId: reqJson.companyId,
+        numHealthChecksUsers: 0,
+        numHealthChecksVisitors: 0,
+        numReportedInfections: 0,
+        numReportedRecoveries:0
+          
+        }
+        try{
+            await db.collection('health-summary').doc(healthSummaryId)
+            .create(healthSummary);
+             return res.status(200).send({
+            message: 'Company Health Summary Successfuly Set',
+            data:healthSummary
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while setting up the heatlh check."});
+    }
+ }
+
+}
+exports.setUpPermissionSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    
+    // First we get all the permission summaries in our database and check if there is an exisiting permission summary with
+    // our companyId
+    const document = db.collection('health-summary');
+    const snapshot = await document.get();
+    
+    let list = [];
+    
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        list.push(data);
+    });
+
+    let permissionSummaries =list;
+    
+    let filteredList=[];   
+    permissionSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        return res.status(200).send({
+            message: 'Company Permission Summary Already Has An Initial Instance',
+        });
+
+    }
+    else
+    {
+        
+      //company was never registered before so we setup their permission summary table
+      let permissionSummaryId = "PMSN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+
+      let permissionSummary = {
+        permissionSummaryId: permissionSummaryId,
+        month: month,
+        year:year,
+        timestamp: timestamp,
+        companyId: reqJson.companyId,
+        numPermissionDeniedUsers: 0,
+        numPermissionDeniedVisitors: 0,
+        numPermissionGrantedUsers: 0,
+        numPermissionGrantedVisitors: 0,
+        totalPermissions:0
+          
+        }
+        try{
+        await db.collection('permission-summary').doc(permissionSummaryId)
+          .create(permissionSummary);
+        
+        return res.status(200).send({
+            message: 'Company Permission Summary Successfuly Set',
+            data:permissionSummary
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while setting up the heatlh check."});
+    }
+    
+    }
+};
 
 
+exports.getNumberShifts = async (req, res) => {
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+        const document = db.collection('summary-shifts').where("companyId", "==", companyId);
+        const snapshot = await document.get();
+  
+        let list = [];
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+        
+
+    let getNumberShift = list;
+      
+    if (getNumberShift != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved number of shifts',
+        data: getNumberShift
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching number of shifts."});
+    }
+};
+exports.getNumberBookings = async (req, res) => {
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+        const document = db.collection('summary-bookings').where("companyId", "==", companyId);
+        const snapshot = await document.get();
+  
+        let list = [];
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+           
+    let getNumberBooking = list;
+      
+    if (getNumberBooking != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved number of bookings',
+        data: getNumberBooking
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching number of bookings."});
+    }
+};
+
+exports.getHealthSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+
+      const document = db.collection('health-summary');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+
+    let healthSummaries = list;
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && reqJson.month===obj.month && reqJson.year==obj.year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+    
+        if(filteredList.length>0)
+        {
+            return res.status(200).send({
+                message: 'Successfully retrieved health summary',
+                data: filteredList
+            });
+       
+         }
+        else{
+            return res.status(500).send({
+                message: 'Problem with either the companId,month or year you requesting for',
+            });
+        }
+
+};
 
 
+exports.getPermissionSummary = async (req, res) => {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      
+        const document = db.collection('permission-summary');
+        const snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
 
+    let permissionSummaries = list;
+    
+    let filteredList=[];   
+    permissionSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && reqJson.month===obj.month && reqJson.year==obj.year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+    
+        if(filteredList.length>0)
+        {
+            return res.status(200).send({
+                message: 'Successfully retrieved permission summary',
+                data: filteredList
+            });
+       
+         }
+        else{
+            return res.status(500).send({
+                message: 'Problem with either the companId,month or year you requesting for',
+            });
+        }
 
-
-
-
+};
 
 
 
