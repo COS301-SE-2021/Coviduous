@@ -209,6 +209,7 @@ reportingApp.post('/api/reporting/health/sick-employees/view',authMiddleware, as
           let data = doc.data();
             list.push(data);
         });
+
         return res.status(200).send({
             message: 'Successfully retrieved sick-employees',
             data: list
@@ -264,6 +265,120 @@ reportingApp.delete('/api/reporting/health/sick-employees',authMiddleware,async 
     }
 
 });
+reportingApp.post('/api/reporting/company/company-data',authMiddleware,async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.companyId == null || reqJson.companyId === "") {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'})
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let companyData = {
+        companyId: reqJson.companyId,
+        numberOfRegisteredUsers: "0",
+        numberOfRegisteredAdmins: "0",
+        numberOfFloorplans: "0",
+        numberOfFloors: "0",
+        numberOfRooms: "0"
+    }
+
+    let response = database.collection('company-data').doc(reqJson.companyId);
+        let doc = await response.get();
+        let result2 = doc.data()
+    
+    if (result2 != null) // check if entry exists in database
+    {
+        return res.status(200).send({
+            message: 'Database entry already exists for companyId:' + reqJson.companyId,
+        });
+    }
+    else
+    {
+        try {
+            await database.collection('company-data').doc(companyData.companyId)
+              .create(companyData);
+              return res.status(200).send({
+                message: 'Company Data successfully created',
+                data: companyData
+             });
+        } catch (error) {
+          console.log(error);
+            return res.status(500).send({
+                message: '500 Server Error: DB error',
+                error: error
+            });
+        }
+              
+    }
+});
+reportingApp.post('/api/reporting/company/company-data/view',authMiddleware,async (req, res) =>  {
+    let fieldErrors = [];
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+      
+    let response = database.collection('company-data').doc(reqJson.companyId);
+        let doc = await response.get();
+        let companyData = doc.data()
+    
+    if (companyData != null)
+    {
+        return res.status(200).send({
+            message: 'Successfully retrieved company data',
+            data: companyData
+        });      
+    }
+    else
+    {
+        return res.status(500).send({message: "Some error occurred while fetching company data."});
+    }
+});
+
+
+
+
 
 
 
