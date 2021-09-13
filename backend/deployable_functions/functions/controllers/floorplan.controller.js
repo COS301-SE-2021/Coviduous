@@ -132,7 +132,7 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
     adminId: reqJson.adminId,
     companyId:reqJson.companyId
   }
-  response=await db.collection('floors').doc(floorNumber).create(floorData);
+  await database.collection('floors').doc(floorNumber).create(floorData);
   console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+floorplanNumber);
 
   }
@@ -140,29 +140,27 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
 
   // company-data summary
   // This needs a review
-  let response = db.collection('company-data').doc(reqJson.companyId);
+  let response = database.collection('company-data').doc(reqJson.companyId);
   let doc = await response.get();
-  let companyData = doc.data()
+  let companyData = doc.data();
 
   // Needs review
   
   let newNumFloorplans = parseInt(companyData.numberOfFloorplans) + 1;
   newNumFloorplans = newNumFloorplans.toString();
 
-  response = await db.collection('company-data').doc(reqJson.companyId).update({
+  response = await database.collection('company-data').doc(reqJson.companyId).update({
       "numberOfFloorplans": newNumFloorplans
   });
   
-  for (let i = 0; i < reqJson.numFloors; i++) {
     
-        let newNumFloors = parseInt(companyData.numberOfFloors) + 1;
-        newNumFloors = newNumFloors.toString();
+  let newNumFloors = parseInt(companyData.numberOfFloors) + parseInt(reqJson.numFloors);
+  newNumFloors = newNumFloors.toString();
 
-        response = await db.collection('company-data').doc(reqJson.companyId).update({
-            "numberOfFloors": newNumFloors
-        });
+  response = await database.collection('company-data').doc(reqJson.companyId).update({
+      "numberOfFloors": newNumFloors
+  });
 
-  }
 
   return res.status(200).send({
   message: 'floorplan successfully created',
@@ -211,23 +209,23 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
       let floorplan=doc.data()
       //addFloor
       let numFloors=parseInt(floorplan.numFloors)+1;
-      await database.collection('floorplans').doc(floorplanNumber).update(
+      await database.collection('floorplans').doc(reqJson.floorplanNumber).update(
       {
             "numFloors": numFloors
         });
       //create floor
-      await db.collection('floors').doc(floorNumber).create(floorData);
+      await database.collection('floors').doc(floorNumber).create(floorData);
       console.log("Floor with floorNumber : "+floorNumber+" succesfully created under floorplan : "+reqJson.floorplanNumber);
       
       // company-data summary
       //getCompanyData()
-      let response = database.collection('company-data').doc(reqJson.companyId);
-      let doc = await response.get();
-      let companyData = doc.data();
+      let result = database.collection('company-data').doc(reqJson.companyId);
+      let document = await result.get();
+      let companyData = document.data();
       //addNumberOfFloorsCompanyData()
       let newNumFloors = parseInt(companyData.numberOfFloors) + 1;
       newNumFloors = newNumFloors.toString();
-      response = await db.collection('company-data').doc(reqJson.companyId).update({
+      result = await database.collection('company-data').doc(reqJson.companyId).update({
           "numberOfFloors": newNumFloors
       });
   
@@ -264,7 +262,7 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
     let reqJson = JSON.parse(req.body);
     console.log(reqJson);
     
-    let room = new Room(reqJson.currentNumberRoomInFloor,roomNumber,"",reqJson.floorNumber,
+    let room = new Room(reqJson.currentNumberRoomInFloor,roomNumber,reqJson.roomName,reqJson.floorNumber,
         reqJson.roomArea,reqJson.deskArea, reqJson.numberDesks,reqJson.capacityPercentage);
     let roomData = {
       currentNumberRoomInFloor:room.currentNumberRoomInFloor,
@@ -289,24 +287,24 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
   
     //addRoom()
     let rooms = parseInt(reqJson.currentNumberRoomInFloor)+1;
-    response= await db.collection('floors').doc(reqJson.floorNumber).update(
+    response= await database.collection('floors').doc(reqJson.floorNumber).update(
       {
         "numRooms": rooms
     }
     );
    //createRoom()
-   await db.collection('rooms').doc(roomNumber).create(roomData);
+   await database.collection('rooms').doc(roomNumber).create(roomData);
    console.log("Room with roomNumber : "+roomNumber+" succesfully created under floor : "+reqJson.floorNumber);
   
     // company-data summary
     //getCompanyData()
-    let response = database.collection('company-data').doc(floor.companyId);
-    let doc = await response.get();
-    let companyData = doc.data();
+    let result = database.collection('company-data').doc(floor.companyId);
+    let document = await result.get();
+    let companyData = document.data();
     //addNumberOfRoomsCompanyData()
     let newNumRooms = parseInt(companyData.numberOfRooms) + 1;
     newNumRooms = newNumRooms.toString();
-    response = await db.collection('company-data').doc(floor.companyId).update({
+    await database.collection('company-data').doc(floor.companyId).update({
         "numberOfRooms": newNumRooms
     });
     
@@ -318,7 +316,7 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
         deskArea: reqJson.deskArea
       }
       //create desk
-      await db.collection('desks').doc(deskNumber).create(deskData);
+      await database.collection('desks').doc(deskNumber).create(deskData);
       console.log("Desk with deskNumber : "+deskNumber+" succesfully created under room : "+roomNumber);
       
     }
@@ -326,6 +324,209 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
     return res.status(200).send({
       message: 'room successfully created',
       data: roomData
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+  
+  });
+
+  /**
+ * This function brings a list of floorplans using the companyId.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   companyId: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+  floorPlanApp.post('/api/floorplans/view', async (req, res) => {
+  try {
+        let reqJson = JSON.parse(req.body);
+        console.log(reqJson);
+        let filteredList=[];
+        //getFloorPlans()
+        const document = database.collection('floorplans');
+        const snapshot = await document.get();
+        
+        let floorplans = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            floorplans.push(data);
+        });
+  
+        floorplans.forEach(obj => {
+        if(obj.companyId===reqJson.companyId)
+        {
+          filteredList.push(obj);
+        }
+        else
+        {
+        }
+      });
+  
+      //Without these headers, the connection closes before it can send the whole base64String
+      res.set({
+        'Connection': 'Keep-Alive',
+        'Keep-Alive': 'timeout=10, max=1000'
+      });
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved floorplans based on your company',
+        data: filteredList
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching floorplans."
+      });
+  }
+  });
+
+
+   /**
+ * This function brings a list of floors using the companyId.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   floorplanNumber: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+    floorPlanApp.post('/api/floorplan/floors/view',async (req, res) => {
+    try {
+        let reqJson = JSON.parse(req.body);
+        let filteredList=[];
+        const document = database.collection('floors');
+        const snapshot = await document.get();
+        
+        let floors = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            floors.push(data);
+        });
+        
+        floors.forEach(obj => {
+          if(obj.floorplanNumber===reqJson.floorplanNumber)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+    
+        return res.status(200).send({
+          message: 'Successfully retrieved floors based on your floorplan',
+          data: filteredList
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+          message: err.message || "Some error occurred while fetching floors."
+        });
+    }
+    });
+
+  /**
+ * This function brings a list of rooms using the companyId.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   floorNumber: string
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+
+   floorPlanApp.post('/api/floorplan/rooms/view',async (req, res) => {
+  try {
+      let reqJson = JSON.parse(req.body);
+      let filteredList=[];
+      //getRooms()
+      const document = database.collection('rooms');
+        const snapshot = await document.get();
+        
+        let rooms = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            rooms.push(data);
+        });
+      
+      rooms.forEach(obj => {
+        if(obj.floorNumber===reqJson.floorNumber)
+        {
+          filteredList.push(obj);
+        }
+        else
+        {
+  
+        }
+      });
+  
+      //Without these headers, the connection closes before it can send the whole base64String
+      res.set({
+        'Connection': 'Keep-Alive',
+        'Keep-Alive': 'timeout=5, max=1000'
+      });
+  
+      return res.status(200).send({
+        message: 'Successfully retrieved rooms based on your floor number',
+        data: filteredList
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: err.message || "Some error occurred while fetching rooms."
+      });
+  }
+  });
+
+ /**
+ * This function updates a rooms details.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   roomNumber: string
+ *   roomName: string
+ *   floorNumber: string
+ *   roomArea: num
+ *   deskArea: num
+ *   numberDesks: num
+ *   capacityPercentage: num
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+
+  floorPlanApp.post('/api/floorplan/room/update',async (req, res) => {
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+    
+  try {
+    let room =new Room(0,reqJson.roomNumber, reqJson.roomName, reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,reqJson.numberDesks,reqJson.capacityPercentage);
+    let roomData = {
+      floorNumber:room.floorNumber,
+      roomNumber:room.roomNumber,
+      roomName:room.roomName,
+      roomArea:room.roomArea,
+      capacityPercentage:room.capacityPercentage,
+      numberDesks: room.numberDesks,
+      occupiedDesks:room.occupiedDesks,
+      currentCapacity:room.currentCapacity,
+      deskArea:room.deskArea,
+      capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
+      capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle,
+      base64String: reqJson.base64String,
+    }
+    //editRoom()
+    await database.collection('rooms').doc(roomData.roomNumber).update(
+      roomData
+      );
+    
+    return res.status(200).send({
+      message: 'room successfully updated',
+      data: reqJson
     });
   } catch (error) {
     console.log(error);
