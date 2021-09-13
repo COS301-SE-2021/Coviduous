@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
@@ -48,7 +49,7 @@ class _ChatMessagesState extends State<ChatMessages>
       onWillPop: _onWillPop,
       child: Scaffold(
           appBar: AppBar(
-            title: Text("ChatBot"),
+            title: Text("Chat Bot"),
             elevation: 0,
             leading: BackButton( //Specify back button
               onPressed: (){
@@ -148,7 +149,7 @@ class _ChatMessagesState extends State<ChatMessages>
             name: "Chat Bot",
             initials: "CB",
             bot: true,
-            text: result
+            text: result.getAnswer()
         );
       }
     });
@@ -190,15 +191,19 @@ class ChatMessage {
   final String initials;
   final String text;
   final bool bot;
+  final bool showImage;
 
   AnimationController animationController;
 
   ChatMessage(
-      {this.name,
+      {
+        this.name,
         this.initials,
         this.text,
         this.bot = false,
-        this.animationController});
+        this.showImage = false,
+        this.animationController
+      });
 }
 
 class ChatMessageListItem extends StatelessWidget {
@@ -214,12 +219,13 @@ class ChatMessageListItem extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 8),
         child: IntrinsicHeight(
-          child: Row(
-            mainAxisAlignment: (chatMessage.bot == true)
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.end,
-            children: <Widget>[
-              (chatMessage.bot == true) ? Column(
+          //======================================
+          //          If bot message
+          //======================================
+          child: (chatMessage.bot == true) ? Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
@@ -229,47 +235,55 @@ class ChatMessageListItem extends StatelessWidget {
                         chatMessage.initials ?? "CB",
                         style: TextStyle(color: Colors.white),
                       ),
-                      backgroundColor: chatMessage.bot
-                          ? globals.focusColor
-                          : globals.firstColor,
+                      backgroundColor: globals.focusColor,
                     ),
                   ),
                 ],
-              ) : Container(),
+              ),
               Flexible(
-                  child: (chatMessage.bot == true) ? Container(
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(chatMessage.name ?? "Chat Bot",
-                              style: TextStyle(color: globals.lineColor)
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              color: Colors.white,
-                              padding: EdgeInsets.all(10),
-                              child: (false)
-                                  ? FittedBox( //If showing an image
-                                      child: Image(
-                                        image: AssetImage(
-                                            'assets/images/placeholder-shift.png'
-                                        ),
-                                      ),
-                                      fit: BoxFit.fill,
-                              )
-                                  : Text( //Else, just text
-                                      chatMessage.text,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                              ),
-                            ),
-                          ),
-                        ],
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(chatMessage.name ?? "Chat Bot",
+                          style: TextStyle(color: globals.lineColor)
                       ),
-                  ) : Container(
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          color: Colors.white,
+                          padding: EdgeInsets.all(10),
+                          child: (chatMessage.showImage == true)
+                              ? FittedBox( //If showing an image
+                                  child: Image(
+                                    image: MemoryImage(
+                                      base64Decode(chatMessage.text)
+                                    ),
+                                  ),
+                                  fit: BoxFit.fill,
+                          )
+                              : Text( //Else, just text
+                                  chatMessage.text,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ),
+            ],
+          //======================================
+          //          If user message
+          //======================================
+          ) : Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Flexible(
+                  child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -294,7 +308,7 @@ class ChatMessageListItem extends StatelessWidget {
                     ),
                   ),
               ),
-              (chatMessage.bot == false) ? Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
@@ -304,13 +318,11 @@ class ChatMessageListItem extends StatelessWidget {
                         chatMessage.initials ?? "V",
                         style: TextStyle(color: Colors.white),
                       ),
-                      backgroundColor: chatMessage.bot
-                          ? globals.focusColor
-                          : globals.firstColor,
+                      backgroundColor: globals.firstColor,
                     ),
                   ),
                 ],
-              ) : Container(),
+              )
             ],
           ),
         ),
