@@ -252,7 +252,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                                           Container(
                                             height: MediaQuery.of(context).size.height/5,
                                             child: Image(
-                                              image: AssetImage('assets/images/placeholder-shift.png'),
+                                              image: AssetImage('assets/images/placeholder-request-icon.png'),
                                             ),
                                           ),
                                           Expanded(
