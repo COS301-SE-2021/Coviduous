@@ -58,7 +58,9 @@ class MakeNotificationState extends State<MakeNotification> {
               borderRadius: BorderRadius.circular(20),
               child: Container(
                 color: Colors.white,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                width: (!globals.getIfOnPC())
+                    ? MediaQuery.of(context).size.width/(2 * globals.getWidgetScaling())
+                    : 640,
                 padding: EdgeInsets.zero,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +69,9 @@ class MakeNotificationState extends State<MakeNotification> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height/6,
+                          height: (!globals.getIfOnPC())
+                              ? MediaQuery.of(context).size.height/6
+                              : MediaQuery.of(context).size.height/8,
                           child: Image(
                               image: AssetImage('assets/images/placeholder-notification.png'),
                           ),

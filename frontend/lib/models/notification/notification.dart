@@ -73,7 +73,7 @@ class Notification {
   }
 
   String getTimestamp() {
-    return timestamp.substring(0, 10) + ' @ ' + timestamp.substring(11, 19);
+    return timestamp;
   }
 
   String getAdminId() {

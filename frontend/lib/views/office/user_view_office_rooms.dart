@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:convert';
 import 'package:frontend/views/office/user_view_office_floors.dart';
-import 'package:frontend/views/office/home_office.dart';
+import 'package:frontend/views/office/user_view_office_times.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
-import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewOfficeRooms extends StatefulWidget {
@@ -48,29 +49,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No rooms found', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No rooms have been registered for this floor.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No rooms found', 'No rooms have been registered for this floor.'),
             ]
         );
       }
@@ -270,18 +249,16 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                               width: MediaQuery.of(context).size.width/48,
                                             ),
                                             ElevatedButton(
-                                              child: Text('Book'),
+                                              child: Text('View'),
                                               onPressed: () {
                                                 globals.currentRoomNum = globals.currentRooms[index].getRoomNumber();
                                                 globals.currentRoom = globals.currentRooms[index];
-                                                officeHelpers.createBooking(globals.currentRoomNum).then((result) {
+                                                shiftHelpers.getShifts().then((result) {
                                                   if (result == true) {
-                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                        SnackBar(content: Text("Desk successfully booked")));
-                                                    Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                                    Navigator.of(context).pushReplacementNamed(UserViewOfficeTimes.routeName);
                                                   } else {
                                                     ScaffoldMessenger.of(context).showSnackBar(
-                                                        SnackBar(content: Text('Error occurred while booking the desk. Please try again later.')));
+                                                        SnackBar(content: Text('Error occurred while retrieving room data. Please try again later.')));
                                                   }
                                                 });
                                               },
@@ -318,7 +295,14 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
               children: <Widget>[
                 SingleChildScrollView(
                   child: Center(
-                    child: getList(),
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
                   ),
                 ),
               ]

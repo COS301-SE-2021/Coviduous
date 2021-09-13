@@ -4,6 +4,7 @@ import 'package:frontend/views/health/admin_home_permissions.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class EmployeePermissions extends StatefulWidget {
@@ -43,29 +44,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No permissions granted', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('Employee has no access records.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No permissions found', 'Employee has no assigned permissions.'),
             ]
         );
       } else {
@@ -220,7 +199,14 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
           body: Stack (
               children: <Widget>[
                 Center (
-                    child: getList()
+                  child: (globals.getIfOnPC())
+                      ? Container(
+                        width: 640,
+                        child: getList(),
+                  )
+                      : Container(
+                        child: getList(),
+                  ),
                 ),
               ]
           )

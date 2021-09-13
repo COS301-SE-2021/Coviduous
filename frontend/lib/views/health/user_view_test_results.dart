@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/health/user_upload_test_results.dart';
 import 'package:frontend/views/health/user_view_single_test_result.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
+
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
+
 class UserViewTestResults extends StatefulWidget {
   static const routeName = "/user_view_test_results";
   @override
@@ -37,43 +41,9 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
       if (numberOfResults == 0) {
         return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height /
-                (5 * globals.getWidgetScaling()),
+            height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width /
-                      (2 * globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height /
-                      (24 * globals.getWidgetScaling()),
-                  color: Theme.of(context).primaryColor,
-                  child: Text('No test results found',
-                      style: TextStyle(color: Colors.white,
-                          fontSize:
-                          (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width /
-                        (2 * globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height /
-                        (12 * globals.getWidgetScaling()),
-                    color: Colors.white,
-                    padding: EdgeInsets.all(12),
-                    child: Text('You have not uploaded any test results.',
-                        style: TextStyle(
-                            fontSize:
-                            (MediaQuery.of(context).size.height * 0.01) * 2.5
-                        )
-                    )
-                ),
-              ],
-            ),
-          )
+          globalWidgets.notFoundMessage(context, 'No test results found', 'You have not uploaded any test results.'),
         ]);
       } else {
         //Else create and return a list
@@ -164,16 +134,19 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom (
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
+                  child: Text('Upload new PDF'),
+                  onPressed: (){
+                    Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
+                  },
                 ),
-                child: Text('Upload new PDF'),
-                onPressed: (){
-                  Navigator.of(context).pushReplacementNamed(UserUploadTestResults.routeName);
-                },
               ),
             ],
           ),
@@ -182,7 +155,14 @@ class _UserViewTestResultsState extends State<UserViewTestResults> {
           children: <Widget>[
             SingleChildScrollView(
               child: Center(
-                child: getList(),
+                child: (globals.getIfOnPC())
+                    ? Container(
+                      width: 640,
+                      child: getList(),
+                )
+                    : Container(
+                      child: getList(),
+                ),
               ),
             ),
           ],

@@ -54,8 +54,9 @@ class _UserResetPasswordState extends State<UserResetPassword> {
         body: isLoading == false ? Center(
           child: SingleChildScrollView(
           child: Container(
-            width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height/(5*globals.getWidgetScaling()),
+            width: (!globals.getIfOnPC())
+                ? MediaQuery.of(context).size.width/(2 * globals.getWidgetScaling())
+                : 640,
             color: Colors.white,
             padding: EdgeInsets.all(16),
             child: SingleChildScrollView(

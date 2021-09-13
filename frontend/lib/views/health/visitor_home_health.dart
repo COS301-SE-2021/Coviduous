@@ -103,7 +103,9 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                           Expanded(child: Text('Complete health check')),
                                           Icon(
                                             Icons.check,
-                                            size: MediaQuery.of(context).size.width*0.01*4,
+                                            size: (!globals.getIfOnPC())
+                                                ? MediaQuery.of(context).size.width * 0.01 * 4
+                                                : MediaQuery.of(context).size.width * 0.01 * 2,
                                           )
                                         ],
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -132,7 +134,9 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                           Expanded(child: Text('View permissions')),
                                           Icon(
                                             Icons.zoom_in,
-                                            size: MediaQuery.of(context).size.width*0.01*4,
+                                            size: (!globals.getIfOnPC())
+                                                ? MediaQuery.of(context).size.width * 0.01 * 4
+                                                : MediaQuery.of(context).size.width * 0.01 * 2,
                                           )
                                         ],
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
@@ -206,7 +210,9 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                           Expanded(child: Text('View company guidelines')),
                                           Icon(
                                             Icons.zoom_in,
-                                            size: MediaQuery.of(context).size.width*0.01*4,
+                                            size: (!globals.getIfOnPC())
+                                                ? MediaQuery.of(context).size.width * 0.01 * 4
+                                                : MediaQuery.of(context).size.width * 0.01 * 2,
                                           )
                                         ],
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides

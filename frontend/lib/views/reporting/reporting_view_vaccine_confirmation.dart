@@ -6,6 +6,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_view_recovered_employees.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingViewVaccineConfirmation extends StatefulWidget {
@@ -41,43 +42,9 @@ class _ReportingViewVaccineConfirmationState extends State<ReportingViewVaccineC
       if (numberOfConfirmations == 0) {
         return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height /
-                (5 * globals.getWidgetScaling()),
+            height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width /
-                      (2 * globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height /
-                      (24 * globals.getWidgetScaling()),
-                  color: Theme.of(context).primaryColor,
-                  child: Text('No vaccine confirmations found',
-                      style: TextStyle(color: Colors.white,
-                          fontSize:
-                          (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width /
-                        (2 * globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height /
-                        (12 * globals.getWidgetScaling()),
-                    color: Colors.white,
-                    padding: EdgeInsets.all(12),
-                    child: Text('No confirmations have been uploaded by this user.',
-                        style: TextStyle(
-                            fontSize:
-                            (MediaQuery.of(context).size.height * 0.01) * 2.5
-                        )
-                    )
-                ),
-              ],
-            ),
-          )
+          globalWidgets.notFoundMessage(context, 'No vaccine confirmations found', 'No confirmations have been uploaded by this user.')
         ]);
       } else {
         //Else create and return a list
@@ -168,7 +135,14 @@ class _ReportingViewVaccineConfirmationState extends State<ReportingViewVaccineC
           children: <Widget>[
             SingleChildScrollView(
               child: Center(
-                child: getList(),
+                child: (globals.getIfOnPC())
+                    ? Container(
+                      width: 640,
+                      child: getList(),
+                )
+                    : Container(
+                      child: getList(),
+                ),
               ),
             ),
           ],

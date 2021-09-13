@@ -36,8 +36,6 @@ let uuid = require("uuid");
 
 ///////////////// functions /////////////////
 
-//create, update, delete, get(based on userId + email)
-
 /**
  * This function retrieves all users via an HTTP GET request.
  * @param req The request object may be null.
@@ -59,6 +57,118 @@ let uuid = require("uuid");
 
         return res.status(200).send({
             message: 'Successfully retrieved users',
+            data: list
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
+userApp.post('/api/users/user-id', async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        //console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    try {
+        let document = database.collection('users').where("userId", "==", reqJson.userId);
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            console.log(data)
+            list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved user details',
+            data: list
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
+userApp.post('/api/users/email', async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.email == null || reqJson.email === '') {
+        fieldErrors.push({field: 'email', message: 'User email may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    try {
+        let document = database.collection('users').where("email", "==", reqJson.email);
+        const snapshot = await document.get();
+
+        let list = [];
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            console.log(data)
+            list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved user details',
             data: list
         });
     } catch (error) {

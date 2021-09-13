@@ -8,6 +8,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class ViewShifts extends StatefulWidget {
@@ -47,29 +48,7 @@ class _ViewShiftsState extends State<ViewShifts> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No shifts found', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No shifts have been created for this room.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No shifts found', 'No shifts have been created for this room.'),
             ]);
       } else {
         //Else create and return a list
@@ -323,7 +302,14 @@ class _ViewShiftsState extends State<ViewShifts> {
           children: <Widget>[
             SingleChildScrollView(
               child: Center (
-                  child: getList()
+                child: (globals.getIfOnPC())
+                    ? Container(
+                      width: 640,
+                      child: getList(),
+                )
+                    : Container(
+                      child: getList(),
+                ),
               ),
             ),
           ]

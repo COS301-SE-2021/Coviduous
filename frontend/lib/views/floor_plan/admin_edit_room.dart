@@ -154,7 +154,9 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                         children: [
                           Container(
                             color: Colors.white,
-                            width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                            width: (!globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.width/(2*globals.getWidgetScaling())
+                                : 640,
                             padding: EdgeInsets.all(16),
                             child: Form(
                               key: _formKey,

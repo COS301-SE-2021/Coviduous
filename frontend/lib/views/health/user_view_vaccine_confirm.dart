@@ -7,6 +7,7 @@ import 'package:frontend/views/health/user_upload_vaccine_confirm.dart';
 import 'package:frontend/views/health/user_view_single_vaccine_confirm.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewVaccineConfirm extends StatefulWidget {
@@ -42,43 +43,9 @@ class _UserViewVaccineConfirmState extends State<UserViewVaccineConfirm> {
       if (numberOfConfirmations == 0) {
         return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height /
-                (5 * globals.getWidgetScaling()),
+            height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width /
-                      (2 * globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height /
-                      (24 * globals.getWidgetScaling()),
-                  color: Theme.of(context).primaryColor,
-                  child: Text('No vaccine confirmations found',
-                      style: TextStyle(color: Colors.white,
-                          fontSize:
-                          (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width /
-                        (2 * globals.getWidgetScaling()),
-                    height: MediaQuery.of(context).size.height /
-                        (12 * globals.getWidgetScaling()),
-                    color: Colors.white,
-                    padding: EdgeInsets.all(12),
-                    child: Text('You have not uploaded any confirmation documents.',
-                        style: TextStyle(
-                            fontSize:
-                            (MediaQuery.of(context).size.height * 0.01) * 2.5
-                        )
-                    )
-                ),
-              ],
-            ),
-          )
+          globalWidgets.notFoundMessage(context, 'No vaccine confirmations found', 'You have not uploaded any confirmation documents.'),
         ]);
       } else {
         //Else create and return a list
@@ -169,16 +136,19 @@ class _UserViewVaccineConfirmState extends State<UserViewVaccineConfirm> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom (
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
+                  child: Text('Upload new PDF'),
+                  onPressed: (){
+                    Navigator.of(context).pushReplacementNamed(UserUploadVaccineConfirm.routeName);
+                  },
                 ),
-                child: Text('Upload new PDF'),
-                onPressed: (){
-                  Navigator.of(context).pushReplacementNamed(UserUploadVaccineConfirm.routeName);
-                },
               ),
             ],
           ),
@@ -187,7 +157,14 @@ class _UserViewVaccineConfirmState extends State<UserViewVaccineConfirm> {
           children: <Widget>[
             SingleChildScrollView(
               child: Center(
-                child: getList(),
+                child: (globals.getIfOnPC())
+                    ? Container(
+                      width: 640,
+                      child: getList(),
+                )
+                    : Container(
+                      child: getList(),
+                ),
               ),
             ),
           ],

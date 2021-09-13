@@ -75,257 +75,269 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                           : MediaQuery.of(context).size.width/4
                   ),
                   SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
+                    height: MediaQuery.of(context).size.height/30,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  ElevatedButton (
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/16,
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton (
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      child: Row (
-                          children: <Widget>[
-                            Expanded(child: Text('View permissions')),
-                            Icon(Icons.zoom_in)
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              _email.clear();
-                              return AlertDialog(
-                                  title: Text('Enter employee email'),
-                                  content: Form(
-                                    key: _formKey,
-                                    child: TextFormField(
-                                      controller: _email,
-                                      decoration: InputDecoration(hintText: 'Enter employee email', filled: true, fillColor: Colors.white),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'please enter an email address';
-                                        } else if (value.isNotEmpty) {
-                                          if (!value.contains('@')) {
-                                            return 'invalid email';
+                        child: Row (
+                            children: <Widget>[
+                              Expanded(child: Text('View permissions')),
+                              Icon(Icons.zoom_in)
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                _email.clear();
+                                return AlertDialog(
+                                    title: Text('Enter employee email'),
+                                    content: Form(
+                                      key: _formKey,
+                                      child: TextFormField(
+                                        controller: _email,
+                                        decoration: InputDecoration(hintText: 'Enter employee email', filled: true, fillColor: Colors.white),
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'please enter an email address';
+                                          } else if (value.isNotEmpty) {
+                                            if (!value.contains('@')) {
+                                              return 'invalid email';
+                                            }
                                           }
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (String value) {
-                                        _email.text = value;
-                                      },
+                                          return null;
+                                        },
+                                        onSaved: (String value) {
+                                          _email.text = value;
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: Text('Submit'),
-                                      onPressed: () {
-                                        healthHelpers.getPermissionsForEmployee(_email.text).then((result) {
-                                          if (result == true) {
-                                            userHelpers.getOtherUser(globals.currentPermissions[0].getUserId()).then((result) {
-                                              if (result == true) {
-                                                Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
-                                              } else {
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(content: Text("No permissions found for this user.")));
-                                              }
-                                            });
-                                          } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text("There was an error while retrieving user permissions. Please try again later.")));
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text('Cancel'),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                  ]);
-                            });
-                      }
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Submit'),
+                                        onPressed: () {
+                                          healthHelpers.getPermissionsForEmployee(_email.text).then((result) {
+                                            if (result == true) {
+                                              userHelpers.getOtherUser(globals.currentPermissions[0].getUserId()).then((result) {
+                                                if (result == true) {
+                                                  Navigator.of(context).pushReplacementNamed(EmployeePermissions.routeName);
+                                                } else {
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(content: Text("No permissions found for this user.")));
+                                                }
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("There was an error while retrieving user permissions. Please try again later.")));
+                                            }
+                                          });
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ]);
+                              });
+                        }
+                    ),
                   ),
                   SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
+                    height: MediaQuery.of(context).size.height/30,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  ElevatedButton (
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/16,
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton (
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      child: Row (
-                          children: <Widget>[
-                            Expanded(child: Text('Grant permissions')),
-                            Icon(Icons.add_alert)
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                      ),
-                      onPressed: () {
-                        userController.getUsers().then((result) {
-                          if (result != null) {
-                            globals.selectedUsers = result;
-                            healthHelpers.getPermissionRequests().then((result) {
-                              if (result == true) {
-                                Navigator.of(context).pushReplacementNamed(AdminViewAccessRequests.routeName);
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("There was an error while retrieving permission requests. Please try again later.")));
-                              }
-                            });
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("There was an error while retrieving permission requests. Please try again later.")));
-                          }
-                        });
-                      }
+                        child: Row (
+                            children: <Widget>[
+                              Expanded(child: Text('Grant permissions')),
+                              Icon(Icons.add_alert)
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                        ),
+                        onPressed: () {
+                          userController.getUsers().then((result) {
+                            if (result != null) {
+                              globals.selectedUsers = result;
+                              healthHelpers.getPermissionRequests().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(AdminViewAccessRequests.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("There was an error while retrieving permission requests. Please try again later.")));
+                                }
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("There was an error while retrieving permission requests. Please try again later.")));
+                            }
+                          });
+                        }
+                    ),
                   ),
                   SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
+                    height: MediaQuery.of(context).size.height/30,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  ElevatedButton (
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/16,
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton (
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      child: Row (
-                          children: <Widget>[
-                            Expanded(child: Text('Set employee recovery status')),
-                            Icon(Icons.medical_services)
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              _email.clear();
-                              return AlertDialog(
-                                  title: Text('Enter employee email'),
-                                  content: Form(
-                                    key: _formKey,
-                                    child: TextFormField(
-                                      controller: _email,
-                                      decoration: InputDecoration(hintText: 'Enter employee email', filled: true, fillColor: Colors.white),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'please enter an email address';
-                                        } else if (value.isNotEmpty) {
-                                          if (!value.contains('@')) {
-                                            return 'invalid email';
+                        child: Row (
+                            children: <Widget>[
+                              Expanded(child: Text('Set employee recovery status')),
+                              Icon(Icons.medical_services)
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                _email.clear();
+                                return AlertDialog(
+                                    title: Text('Enter employee email'),
+                                    content: Form(
+                                      key: _formKey,
+                                      child: TextFormField(
+                                        controller: _email,
+                                        decoration: InputDecoration(hintText: 'Enter employee email', filled: true, fillColor: Colors.white),
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'please enter an email address';
+                                          } else if (value.isNotEmpty) {
+                                            if (!value.contains('@')) {
+                                              return 'invalid email';
+                                            }
                                           }
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (String value) {
-                                        _email.text = value;
-                                      },
+                                          return null;
+                                        },
+                                        onSaved: (String value) {
+                                          _email.text = value;
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: Text('Submit'),
-                                      onPressed: () {
-                                        reportingHelpers.addRecoveredEmployee(_email.text).then((result) {
-                                          if (result == true) {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text("Employee's status set to recovered successfully.")));
-                                          } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text("An error occurred while setting employee status. Please try again later.")));
-                                          }
-                                          Navigator.pop(context);
-                                        });
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text('Cancel'),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                  ]);
-                            });
-                      }
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Submit'),
+                                        onPressed: () {
+                                          reportingHelpers.addRecoveredEmployee(_email.text).then((result) {
+                                            if (result == true) {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("Employee's status set to recovered successfully.")));
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("An error occurred while setting employee status. Please try again later.")));
+                                            }
+                                            Navigator.pop(context);
+                                          });
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ]);
+                              });
+                        }
+                    ),
                   ),
                   SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
+                    height: MediaQuery.of(context).size.height/30,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  ElevatedButton (
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/16,
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton (
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      child: Row (
-                          children: <Widget>[
-                            Expanded(child: Text('Contact trace')),
-                            Icon(Icons.search)
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                          crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              _email.clear();
-                              return AlertDialog(
-                                  title: Text('Enter employee email'),
-                                  content: Form(
-                                    key: _formKey,
-                                    child: TextFormField(
-                                      controller: _email,
-                                      decoration: InputDecoration(hintText: 'Enter employee email', filled: true, fillColor: Colors.white),
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          return 'please enter an email address';
-                                        } else if (value.isNotEmpty) {
-                                          if (!value.contains('@')) {
-                                            return 'invalid email';
+                        child: Row (
+                            children: <Widget>[
+                              Expanded(child: Text('Contact trace')),
+                              Icon(Icons.search)
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                            crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                        ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                _email.clear();
+                                return AlertDialog(
+                                    title: Text('Enter employee email'),
+                                    content: Form(
+                                      key: _formKey,
+                                      child: TextFormField(
+                                        controller: _email,
+                                        decoration: InputDecoration(hintText: 'Enter employee email', filled: true, fillColor: Colors.white),
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            return 'please enter an email address';
+                                          } else if (value.isNotEmpty) {
+                                            if (!value.contains('@')) {
+                                              return 'invalid email';
+                                            }
                                           }
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (String value) {
-                                        _email.text = value;
-                                      },
+                                          return null;
+                                        },
+                                        onSaved: (String value) {
+                                          _email.text = value;
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: Text('Submit'),
-                                      onPressed: () {
-                                        healthHelpers.viewShifts(_email.text).then((result) {
-                                          if (result == true) {
-                                            globals.selectedUserEmail = _email.text;
-                                            Navigator.of(context).pushReplacementNamed(AdminContactTraceShifts.routeName);
-                                          } else {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                SnackBar(content: Text("An error occurred while retrieving employee shifts. Please try again later.")));
-                                            Navigator.of(context).pop();
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text('Cancel'),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                  ]);
-                            });
-                      }
-                  ),
-                  SizedBox (
-                    height: MediaQuery.of(context).size.height/48,
-                    width: MediaQuery.of(context).size.width,
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Submit'),
+                                        onPressed: () {
+                                          healthHelpers.viewShifts(_email.text).then((result) {
+                                            if (result == true) {
+                                              globals.selectedUserEmail = _email.text;
+                                              Navigator.of(context).pushReplacementNamed(AdminContactTraceShifts.routeName);
+                                            } else {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(content: Text("An error occurred while retrieving employee shifts. Please try again later.")));
+                                              Navigator.of(context).pop();
+                                            }
+                                          });
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('Cancel'),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ]);
+                              });
+                        }
+                    ),
                   ),
                 ],
               ),

@@ -10,6 +10,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminModifyRooms extends StatefulWidget {
@@ -56,37 +57,9 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    (5 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No rooms found',
-                          style: TextStyle(color: Colors.white,
-                              fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height / (12 * globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No rooms have been registered for this floor.',
-                            style: TextStyle(
-                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
-                            )
-                        )
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No rooms found', 'No rooms have been registered for this floor.'),
         ]);
       } else {
         //Else create and return a list
@@ -238,7 +211,9 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Container(
-                                                            height: MediaQuery.of(context).size.height/5,
+                                                            height: (!globals.getIfOnPC())
+                                                                ? MediaQuery.of(context).size.height/5
+                                                                : MediaQuery.of(context).size.height/8,
                                                             child: Image(
                                                               image: AssetImage('assets/images/placeholder-office-room.png'),
                                                             ),
@@ -247,7 +222,9 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                             child: Container(
                                                               alignment: Alignment.center,
                                                               color: globals.firstColor,
-                                                              height: MediaQuery.of(context).size.height/5,
+                                                              height: (!globals.getIfOnPC())
+                                                                  ? MediaQuery.of(context).size.height/5
+                                                                  : MediaQuery.of(context).size.height/8,
                                                               child: Text('  Room ' + (index+1).toString() + '  ',
                                                                 style: TextStyle(
                                                                   color: Colors.white,
@@ -406,7 +383,14 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
           children: <Widget>[
             SingleChildScrollView(
               child: Center(
-                child: getList(),
+                child: (globals.getIfOnPC())
+                    ? Container(
+                      width: 640,
+                      child: getList(),
+                )
+                    : Container(
+                      child: getList(),
+                ),
               ),
             ),
           ],

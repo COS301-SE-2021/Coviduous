@@ -66,77 +66,89 @@ class _AdminManageAccountState extends State<AdminManageAccount> {
                                 : MediaQuery.of(context).size.width/4
                         ),
                         SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
+                          height: MediaQuery.of(context).size.height/30,
                           width: MediaQuery.of(context).size.width,
                         ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/16,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Update account information')),
-                                  Icon(Icons.person)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              userHelpers.getUserDetails().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(AdminUpdateAccount.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Error occurred while retrieving user details. Please try again later.')));
-                                }
-                              });
-                            }
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Update account information')),
+                                    Icon(Icons.person)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                userHelpers.getUserDetails().then((result) {
+                                  if (result == true) {
+                                    Navigator.of(context).pushReplacementNamed(AdminUpdateAccount.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text('Error occurred while retrieving user details. Please try again later.')));
+                                  }
+                                });
+                              }
+                          ),
                         ),
                         SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
+                          height: MediaQuery.of(context).size.height/30,
                           width: MediaQuery.of(context).size.width,
                         ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/16,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Reset password')),
-                                  Icon(Icons.update_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(AdminResetPassword.routeName);
-                            }
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Reset password')),
+                                    Icon(Icons.update_rounded)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(AdminResetPassword.routeName);
+                              }
+                          ),
                         ),
                         SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
+                          height: MediaQuery.of(context).size.height/30,
                           width: MediaQuery.of(context).size.width,
                         ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/16,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Delete account')),
-                                  Icon(Icons.delete_forever_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(AdminDeleteAccount.routeName);
-                            }
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Delete account')),
+                                    Icon(Icons.delete_forever_rounded)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(AdminDeleteAccount.routeName);
+                              }
+                          ),
                         ),
                       ]
                   )

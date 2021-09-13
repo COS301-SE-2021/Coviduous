@@ -124,23 +124,26 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  child: Text(
-                      'View uploaded files'
-                  ),
-                  onPressed: () {
-                    healthHelpers.getVaccineConfirmations().then((result) {
-                      if (result == true) {
-                        Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('An error occurred while retrieving your confirmation documents. Please try again later.')));
-                      }
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  child: ElevatedButton(
+                    child: Text(
+                        'View uploaded files'
+                    ),
+                    onPressed: () {
+                      healthHelpers.getVaccineConfirmations().then((result) {
+                        if (result == true) {
+                          Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('An error occurred while retrieving your confirmation documents. Please try again later.')));
+                        }
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
@@ -159,7 +162,9 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
                             color: globals.focusColor,
-                            width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
+                            width: (!globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling())
+                                : 640,
                             padding: EdgeInsets.all(20),
                             child: SingleChildScrollView(
                               child: Column(

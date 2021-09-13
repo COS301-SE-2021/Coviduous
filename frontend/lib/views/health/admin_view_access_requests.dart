@@ -7,6 +7,7 @@ import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/admin_home_permissions.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminViewAccessRequests extends StatefulWidget {
@@ -50,29 +51,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('No requests available', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No access requests have currently been made.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'No requests found', 'No access requests have currently been made.'),
             ]
         );
       } else {
@@ -80,7 +59,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: globals.currentShifts.length,
+            itemCount: globals.currentPermissionRequests.length,
             itemBuilder: (context, index) {
               User tempUser = globals.selectedUsers.where((element) => element.userId == globals.currentPermissionRequests[index].getUserId()).first;
               return ListTile(
@@ -96,7 +75,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                                 Container(
                                   height: MediaQuery.of(context).size.height/6,
                                   child: Image(
-                                    image: AssetImage('assets/images/placeholder-shift.png'),
+                                    image: AssetImage('assets/images/placeholder-request-icon.png'),
                                   ),
                                 ),
                                 Expanded(
