@@ -1,3 +1,4 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -226,22 +227,37 @@ class _ReportingState extends State<Reporting> {
             ),
           ),
               Container(
-                margin: EdgeInsets.all(10),
-                child: Stack(
-                  alignment: Alignment.topLeft,
-                  children: <Widget>[
-                    TextField(),
-                    IconButton(
-                      icon: Icon(
-                        Icons.chat,
-                        color: Colors.greenAccent,
-                        size: 50,
+                alignment: Alignment.bottomRight,
+                child: Align(
+                  heightFactor: 0.8,
+                  widthFactor: 0.8,
+                  child: ClipRect(
+                    child: AvatarGlow(
+                      startDelay: Duration(milliseconds: 1000),
+                      glowColor: Colors.white,
+                      endRadius: 60,
+                      duration: Duration(milliseconds: 2000),
+                      repeat: true,
+                      showTwoGlows: true,
+                      repeatPauseDuration: Duration(milliseconds: 100),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          shape: CircleBorder(),
+                        ),
+                        child: ClipOval(
+                          child: Image(
+                            image: AssetImage('assets/images/chatbot-icon.png'),
+                            width: 70,
+                          ),
+                        ),
+                        onPressed: () {
+                          globals.chatbotPreviousPage = Reporting.routeName;
+                          Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                        },
                       ),
-                      onPressed: () {
-                        Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
-                      },
                     ),
-                  ],
+                  ),
                 ),
               ),
           ],

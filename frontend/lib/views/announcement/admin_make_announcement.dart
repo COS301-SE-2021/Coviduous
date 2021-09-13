@@ -127,12 +127,21 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
                                 SizedBox(
                                   height: 20.0,
                                 ),
-                                Theme(
-                                  data: ThemeData.light(),
-                                  child: DropdownButton(
-                                    value: _selectedType,
-                                    items: _dropdownMenuItems,
-                                    onChanged: onChangeDropdownItem,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    color: (_selectedType == "Emergency")
+                                        ? globals.sixthColor
+                                        : globals.firstColor,
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    child: Theme(
+                                      data: ThemeData.dark(),
+                                      child: DropdownButton(
+                                        value: _selectedType,
+                                        items: _dropdownMenuItems,
+                                        onChanged: onChangeDropdownItem,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
