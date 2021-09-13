@@ -354,6 +354,8 @@ exports.addCompanyData = async (req, res) => {
     }
 };
 
+
+
 exports.viewCompanyData = async (req, res) => {
     let fieldErrors = [];
 
