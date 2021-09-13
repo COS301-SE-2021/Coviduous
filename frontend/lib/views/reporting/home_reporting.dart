@@ -7,6 +7,7 @@ import 'package:frontend/views/reporting/reporting_floor_plans.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/reporting/reporting_health.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/floor_plan/floor_plan_helpers.dart' as floorPlanHelpers;
 import 'package:frontend/controllers/reporting/reporting_helpers.dart' as reportingHelpers;
@@ -57,7 +58,9 @@ class _ReportingState extends State<Reporting> {
               },
             ),
           ),
-          body: SingleChildScrollView(
+          body: Stack(
+            children: [
+          SingleChildScrollView(
             child: Center(
                 child: Container (
                     height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
@@ -221,7 +224,28 @@ class _ReportingState extends State<Reporting> {
                     )
                 )
             ),
-          )
+          ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Stack(
+                  alignment: Alignment.topLeft,
+                  children: <Widget>[
+                    TextField(),
+                    IconButton(
+                      icon: Icon(
+                        Icons.chat,
+                        color: Colors.greenAccent,
+                        size: 50,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+          ],
+      )
       ),
     );
   }
