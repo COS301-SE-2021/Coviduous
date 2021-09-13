@@ -31,7 +31,7 @@ Future<String> sendAndReceive(String message) async {
 
       print(jsonMap);
 
-      return jsonMap["data"];
+      return jsonMap["answer"];
     }
   } catch(error) {
     print(error);
