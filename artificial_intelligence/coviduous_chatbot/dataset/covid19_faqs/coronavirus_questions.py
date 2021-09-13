@@ -140,7 +140,7 @@ COVID19_QUES = [
                     "buy diapers.",
                     "How should I behave if I am pregnant",
                     "i've got a baby on the way, what to do",
-                    "What do I do if Iâ€™m pregnant? Is corona virus dangerous for me?",
+                    "What do I do if I am pregnant? Is corona virus dangerous for me?",
                     "Should I be isolating if I am pregnant?",
                     "what do i do if being pregnant?",
                     "What should I do if I am pregnant?",
@@ -152,7 +152,32 @@ COVID19_QUES = [
                     "I am pregnant, what shall I do to protect myself from the virus?",
                     "I'm pregnant, what are my precautions?"
       "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+     },
+     {
+        "Question":   "Can an employee refuse to travel due to Coronavirus?",
+                      "Does en employee have a right to refuse to travel for work?",
+                      "Can you make employees travel for work during corona virus?",
+                      "Can anyone in my team refuse to travel during the pandemia?",
+                      "Can my employee say no to travel due to coronavirus?",
+                      "Can Employees Refuse To Travel Out Of Fear Of Contracting coronavirus?",
+                      "Are my employees allowed to deny business related travels due to the outbreak?",
+                      "Can an employee say that they dont want to travel because of coronavirus?",
+                      "Can an employee say no to travelling for work because of the corona?",
+                      "Can my employee refuse to travel because of coronavirus?",
+                      "one of my guys refuses to go abroad, can he refuse to do that?",
+                      "can my employee refuse to travel?",
+                      "Rules for work travel during corona",
+                      "can an employee be forced to travel for work during coronavirus",
+                      "Can any of my workers refuse to travel during the pandemic?",
+                      "can an eomployee fefuse to travel because of coronavirus",
+                      "they can refuse unless they want to keep their job.",
+                      "are my employees allowed to refuse travelling because of corona?",
+                      "we have a business trip to florida but an employee is scared to come",
+                      "Is ok for an employee to refuse to travel",
+                      "can employees refuse to travel in this period? Can we force them to do so?"
+        "Answer": "Please refer to your company guidelines. "
      }
+
 ]
 
 
