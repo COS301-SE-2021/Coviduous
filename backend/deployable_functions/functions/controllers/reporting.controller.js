@@ -172,11 +172,102 @@ reportingApp.post('/api/reporting/health/recovered-employees/view',authMiddlewar
     }catch(error){
         console.log(error);
         return res.status(500).send({message: "Some error occurred while fetching recovered-employees."}); 
+    }    
+});
+reportingApp.post('/api/reporting/health/sick-employees/view',authMiddleware, async (req, res) =>  {
+    let fieldErrors = [];
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+
+    if(req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+
+    try{
+        const document = database.collection('sick-employees').where("companyId", "==", reqJson.companyId);
+        const snapshot = await document.get();
+    
+        let list =[];
+       snapshot.forEach(doc => {
+          let data = doc.data();
+            list.push(data);
+        });
+        return res.status(200).send({
+            message: 'Successfully retrieved sick-employees',
+            data: list
+        });
+    
+    }catch(error){
+        console.log(error);
+        return res.status(500).send({message: "Some error occurred while fetching sick-employees."}); 
 
     }    
+});
 
+reportingApp.delete('/api/reporting/health/sick-employees',authMiddleware,async (req, res) =>  {
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {    
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    try {
+        const document = database.collection('sick-employees').doc(reqJson.userId);
+        await document.delete();
+
+        return res.status(200).send({
+          message: 'Sick-employees successfully created'
+       });
+  } catch (error) {
+    console.log(error);
+      return res.status(500).send({
+          message: '500 Server Error: DB error',
+          error: error
+      });        
+
+
+    }
 
 });
+
+
+
 
     
 
