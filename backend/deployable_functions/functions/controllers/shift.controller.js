@@ -189,7 +189,70 @@ shiftApp.post('/api/shift/getRoomShift', async (req, res) => {
 
 ///// shift groups /////
 
-//create
+shiftApp.post('/api/group', async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.groupName == null || reqJson.groupName === '') {
+        fieldErrors.push({field: 'groupName', message: 'Group name may not be empty'});
+    }
+
+    if (reqJson.userEmails == null || reqJson.userEmails === '') {
+        fieldErrors.push({field: 'userEmails', message: 'There must be at least one user email'});
+    }
+
+    if (reqJson.shiftNumber == null || reqJson.shiftNumber === '') {
+        fieldErrors.push({field: 'shiftNumber', message: 'Shift number may not be empty'});
+    }
+
+    if (reqJson.adminId == null || reqJson.adminId === '') {
+        fieldErrors.push({field: 'adminId', message: 'Admin ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+    
+    let groupId = "GRP-" + uuid.v4();
+    let groupData = { groupId: groupId, groupName: reqJson.groupName,
+        userEmails: reqJson.userEmails, shiftNumber: reqJson.shiftNumber, adminId: reqJson.adminId };
+
+        
+    try {
+        await database.collection('groups').doc(groupId)
+            .create(groupData);
+
+        return res.status(200).send({
+            message: 'Shift group successfully created',
+            data: groupData
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
 
 shiftApp.get('/api/group', async (req, res) => {
     try {
