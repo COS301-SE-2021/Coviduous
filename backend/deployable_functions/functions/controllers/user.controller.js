@@ -36,6 +36,157 @@ let uuid = require("uuid");
 
 ///////////////// functions /////////////////
 
+userApp.post('/api/users', async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.userId == null || reqJson.userId === '') {
+        fieldErrors.push({field: 'userId', message: 'User ID may not be empty'});
+    }
+
+    if (reqJson.type == null || reqJson.type === '') {
+        fieldErrors.push({field: 'type', message: 'Type may not be empty'});
+    }
+
+    if (reqJson.type !== 'ADMIN' && reqJson.type !== 'USER') {
+        fieldErrors.push({field: 'type', message: 'Type must be either ADMIN or USER'});
+    }
+
+    if (reqJson.type === 'ADMIN') {
+        if (reqJson.companyName == null || reqJson.companyName === '') {
+            fieldErrors.push({field: 'companyName', message: 'Company name may not be empty for admins'});
+        }
+
+        if (reqJson.companyAddress == null || reqJson.companyAddress === '') {
+            fieldErrors.push({field: 'companyAddress', message: 'Company address may not be empty for admins'});
+        }
+    }
+
+    if (reqJson.firstName == null || reqJson.firstName === '') {
+        fieldErrors.push({field: 'firstName', message: 'First name may not be empty'});
+    }
+
+    if (reqJson.lastName == null || reqJson.lastName === '') {
+        fieldErrors.push({field: 'lastName', message: 'Last name may not be empty'});
+    }
+
+    if (reqJson.email == null || reqJson.email === '') {
+        fieldErrors.push({field: 'email', message: 'Email may not be empty'});
+    }
+
+    if (reqJson.userName == null || reqJson.userName === '') {
+        fieldErrors.push({field: 'userName', message: 'Username may not be empty'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let userData;
+
+    if (reqJson.type === 'ADMIN') {
+        userData = {
+            userId: reqJson.userId,
+            type: reqJson.type,
+            firstName: reqJson.firstName,
+            lastName: reqJson.lastName,
+            email: reqJson.email,
+            userName: reqJson.userName,
+            companyId: reqJson.companyId,
+            companyName: reqJson.companyName,
+            companyAddress: reqJson.companyAddress,
+        };
+    }
+
+    if (reqJson.type === 'USER') {
+        userData = {
+            userId: reqJson.userId,
+            type: reqJson.type,
+            firstName: reqJson.firstName,
+            lastName: reqJson.lastName,
+            email: reqJson.email,
+            userName: reqJson.userName,
+            companyId: reqJson.companyId,
+        };
+    }
+
+    try {
+        await database.collection('users').doc(reqJson.userId)
+            .create(userData);
+
+        // company-data summary
+        if (reqJson.type === 'USER')
+        {
+            //let companyData = await reportingDatabase.getCompanyData(reqJson.companyId);
+            let response = database.collection('company-data').doc(reqJson.companyId);
+            let doc = await response.get();
+            let res = doc.data()
+
+            //await reportingDatabase.addNumberOfRegisteredUsersCompanyData(reqJson.companyId, companyData.numberOfRegisteredUsers);
+            if (parseInt(res.numberOfRegisteredUsers) >= 0)
+            {
+                let newNumRegisteredUsers = parseInt(res.numberOfRegisteredUsers) + 1;
+                newNumRegisteredUsers = newNumRegisteredUsers.toString();
+
+                response = await database.collection('company-data').doc(reqJson.companyId).update({
+                    "numberOfRegisteredUsers": newNumRegisteredUsers
+                });
+            }
+        }
+        else if (reqJson.type === 'ADMIN')
+        {
+            //let companyData = await reportingDatabase.getCompanyData(reqJson.companyId);
+            let response = database.collection('company-data').doc(reqJson.companyId);
+            let doc = await response.get();
+            let res = doc.data()
+
+            //await reportingDatabase.addNumberOfRegisteredAdminsCompanyData(reqJson.companyId, companyData.numberOfRegisteredAdmins);
+            if (parseInt(res.numberOfRegisteredAdmins) >= 0)
+            {
+                let newNumRegisteredAdmins = parseInt(res.numberOfRegisteredAdmins) + 1;
+                newNumRegisteredAdmins = newNumRegisteredAdmins.toString();
+
+                response = await database.collection('company-data').doc(reqJson.companyId).update({
+                    "numberOfRegisteredAdmins": newNumRegisteredAdmins
+                });
+            }
+        }
+
+        return res.status(200).send({
+            message: 'User successfully created',
+            data: userData
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
+
 /**
  * This function retrieves all users via an HTTP GET request.
  * @param req The request object may be null.
