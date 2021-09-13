@@ -3,13 +3,13 @@ let admin = require('firebase-admin');
 let express = require('express');
 let cors = require('cors');
 let officeApp = express();
-//var serviceAccount = require("./permissions.json");
 const authMiddleware = require('../authMiddleWare.js');
 
 officeApp.use(cors({ origin: true }));
 officeApp.use(express.urlencoded({ extended: true }));
 officeApp.use(express.json());
-//admin.initializeApp(); 
+
+// officeApp.use(authMiddleware);
 
 
 let database = admin.firestore();
