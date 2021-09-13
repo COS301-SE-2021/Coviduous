@@ -86,7 +86,73 @@ COVID19_QUES = [
     {
         "Question": "What is community mitigation?",
         "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
-    }
+    },
+    {
+            "Question": "what are the recommendations by the authorities",
+                         "what do the health authorities command",
+                         "what does the government recommend to do?",
+                         "What are the health recommendations for coronavirus?",
+                         "What are the recommendations of Health Authority?",
+                         "What are the recommendations of our health authorities?",
+                          "_",
+                          "What Health authorities recommends?",
+                          "what does the health authority reccomend",
+                          "What are the recommendations?",
+                           "What should I do?",
+                           "What is the recommendations of the Board of Health?",
+                           "What does the health authority recommend?",
+                           "what is the government recommending?",
+                           "what are the heath authorities recommendations in denmark?",
+                           "What isPublic Health Service recommendation",
+            "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+     },
+     {
+           "Question":  "What precautions should I take if I am part of a risk group?",
+                        "What should I do if i'm a person who is more vulnerable than others",
+                        "What can I do if I am a part of an at risk group?",
+                        "I'm 85 old. What should I do?",
+                        "what do I do if I am in the the riskgroup",
+                        "what should i do if i'm part of an at risk group",
+                        "How to stay safe from corona virus if I am in a risk group?",
+                        "What do I do if I am at risk",
+                        "I've seen I'm in a risk group. what should I do?",
+                        "im at risk.. what do i do",
+                        "What should I do if I'm in an at risk group?",
+                        "What to do if i am a part of the risk group?",
+                        "send thoughts and prayers",
+                        "i'm 28 am i gonna catch it",
+                        "I have a lung disease. What should I do?",
+                        "What is the guidance for people in risk group?",
+                        "How should I react if I'm part of the risk groups?",
+                        "What to do if I'm one of the people with a risk profile?",
+                        "If I am in the risk group, what I shall do to protect myself?",
+                        "who should I avoid to not get corona?",
+           "Answer": "Get vaccinated and follow covid-19 restrictions."
+     },
+     {
+      "Question":  "i'm having a baby, should I be worried?",
+                    "What to do as a pregnant woman?",
+                    "am I at risk if I am preganant and get corona?",
+                    "What to do if i am pregnant?",
+                    "I am with child and don't know what to do",
+                    "what do i do if im pregnant",
+                    "What can I do if I am pregnant?",
+                    "buy diapers.",
+                    "How should I behave if I am pregnant",
+                    "i've got a baby on the way, what to do",
+                    "What do I do if Iâ€™m pregnant? Is corona virus dangerous for me?",
+                    "Should I be isolating if I am pregnant?",
+                    "what do i do if being pregnant?",
+                    "What should I do if I am pregnant?",
+                    "What should a pregnant woman do to stay safe from the Coronavirus?",
+                    "I'm expecting a baby. what can I do?",
+                    "I am pregnant what to do to protect myself",
+                    "should i take extra precautions if im pregnant",
+                    "I'm 36 weeks pregnant. Is there anything I need to do?",
+                    "I am pregnant, what shall I do to protect myself from the virus?",
+                    "I'm pregnant, what are my precautions?"
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+     }
 ]
 
 
