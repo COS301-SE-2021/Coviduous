@@ -218,7 +218,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                       TextFormField(
                                         textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                         decoration: InputDecoration(
-                                          labelText: 'Room area (in meters squared)',
+                                          labelText: 'Room area (m²)',
                                           hintText: room.getRoomArea().toString(),
                                         ),
                                         keyboardType: TextInputType.text,
@@ -244,7 +244,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                       TextFormField(
                                         textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                         decoration: InputDecoration(
-                                          labelText: 'Desk area (in meters squared)',
+                                          labelText: 'Desk area (m²)',
                                           hintText: room.getDeskArea().toString(),
                                         ),
                                         keyboardType: TextInputType.text,
