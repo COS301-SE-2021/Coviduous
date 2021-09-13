@@ -49,11 +49,10 @@ reportingApp.post('/api/reporting/health/sick-employees',authMiddleware,async (r
         });
     }
 
-    let sickEmployeeId = "SCK-" + uuid.v4();
+    
     let timestamp = new Date().today() + " @ " + new Date().timeNow();
 
     let sickEmployeeData = {
-        sickEmployeeId: sickEmployeeId,
         userId: reqJson.userId,
         userEmail: reqJson.userEmail,
         timeOfDiagnosis: timestamp,
@@ -61,7 +60,7 @@ reportingApp.post('/api/reporting/health/sick-employees',authMiddleware,async (r
     }
 
     try {
-        await database.collection('sick-employees').doc(sickEmployeeId)
+        await database.collection('sick-employees').doc(sickEmployeeData.userId)
           .create(sickEmployeeData);
           return res.status(200).send({
             message: 'Sick Employee successfully created',
@@ -252,7 +251,7 @@ reportingApp.delete('/api/reporting/health/sick-employees',authMiddleware,async 
         await document.delete();
 
         return res.status(200).send({
-          message: 'Sick-employees successfully created'
+          message: 'Sick-employees successfully deleted'
        });
   } catch (error) {
     console.log(error);
