@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/user_homepage.dart';
-import 'package:frontend/globals.dart' as globals;
 
-///commented dialogflow dependencies since we are using AI. It was just for testing.
-///import 'package:googleapis/dialogflow/v2.dart';
-///import 'package:googleapis_auth/auth_io.dart';
-///import 'package:flutter/services.dart';
+import 'package:frontend/controllers/chatbot/chatbot_controller.dart' as chatbotController;
+import 'package:frontend/globals.dart' as globals;
 
 class ChatMessages extends StatefulWidget {
   static const routeName = "/chat_bot";
@@ -22,18 +20,10 @@ class _ChatMessagesState extends State<ChatMessages>
 
   TextEditingController _controllerText = new TextEditingController();
 
-  ///DialogflowApi _dialog;
-
   @override
   void initState() {
     super.initState();
-    //_initChatbot();
-    _addMessage(
-       name: "Chat Bot",
-       initials: "CB",
-       bot: true,
-       text: "Hello, I am the Coviduous ChatBot! Do you need any help?\n\nType 'tutorial' for a list of tutorials, 'shortcut' for a list of shortcuts, or ask me a question."
-    );
+    _initChatbot();
   }
 
   //This function ensures that the app doesn't just close when you press a phone's physical back button
@@ -151,41 +141,27 @@ class _ChatMessagesState extends State<ChatMessages>
     _requestChatBot(value);
   }
 
-  _requestChatBot(String text) async {
-   /// var dialogSessionId = "projects/chatbot-gdg/agent/sessions/ChatbotGDG";
-   //
-   //  Map data = {
-   //    "queryInput": {
-   //      "text": {
-   //        "text": text,
-   //        "languageCode": "fr",
-   //      }
-   //    }
-   //  };
-
-    ///var request = GoogleCloudDialogflowV2DetectIntentRequest.fromJson(data);
-
-    // var resp = await _dialog.projects.agent.sessions
-    //     .detectIntent(request, dialogSessionId);
-    // var result = resp.queryResult;
-    // _addMessage(
-    //     name: "Chat Bot",
-    //     initials: "CB",
-    //     bot: true,
-    //     text: result.fulfillmentText);
+  _requestChatBot(String message) async {
+    chatbotController.sendAndReceive(message).then((result) {
+      if (result != null) {
+        _addMessage(
+            name: "Chat Bot",
+            initials: "CB",
+            bot: true,
+            text: result
+        );
+      }
+    });
   }
 
-  // void _initChatbot() async {
-  //   String configString = await rootBundle.loadString('config/dialogflow.json');
-  //   String _dialogFlowConfig = configString;
-  //
-  //   var credentials = new ServiceAccountCredentials.fromJson(_dialogFlowConfig);
-  //
-  //   const _SCOPES = const [DialogflowApi.CloudPlatformScope];
-  //
-  //   var httpClient = await clientViaServiceAccount(credentials, _SCOPES);
-  //   _dialog = new DialogflowApi(httpClient);
-  // }
+  void _initChatbot() async {
+    _addMessage(
+        name: "Chat Bot",
+        initials: "CB",
+        bot: true,
+        text: "Hello, I am the Coviduous ChatBot! Do you need any help? 🤖\n\nType 'tutorial' for a list of tutorials, 'shortcut' for a list of shortcuts, or ask me a question."
+    );
+  }
 
   void _addMessage(
       {String name, String initials, bool bot = false, String text}) {
@@ -237,40 +213,106 @@ class ChatMessageListItem extends StatelessWidget {
           parent: chatMessage.animationController, curve: Curves.easeOut),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 16),
-              child: CircleAvatar(
-                child: Text(
-                  chatMessage.initials ?? "V",
-                  style: TextStyle(color: Colors.white),
-                ),
-                backgroundColor: chatMessage.bot
-                    ? globals.focusColor
-                    : globals.firstColor,
-              ),
-            ),
-            Flexible(
-                child: Container(
-                    margin: EdgeInsets.only(left: 16),
+        child: IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: (chatMessage.bot == true)
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.end,
+            children: <Widget>[
+              (chatMessage.bot == true) ? Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: CircleAvatar(
+                      child: Text(
+                        chatMessage.initials ?? "CB",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: chatMessage.bot
+                          ? globals.focusColor
+                          : globals.firstColor,
+                    ),
+                  ),
+                ],
+              ) : Container(),
+              Flexible(
+                  child: (chatMessage.bot == true) ? Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(chatMessage.name ?? "Chat Bot",
+                              style: TextStyle(color: globals.lineColor)
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              color: Colors.white,
+                              padding: EdgeInsets.all(10),
+                              child: (false)
+                                  ? FittedBox( //If showing an image
+                                      child: Image(
+                                        image: AssetImage(
+                                            'assets/images/placeholder-shift.png'
+                                        ),
+                                      ),
+                                      fit: BoxFit.fill,
+                              )
+                                  : Text( //Else, just text
+                                      chatMessage.text,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                  ) : Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Text(chatMessage.name ?? "Visitor",
                             style: TextStyle(color: globals.lineColor)
                         ),
-                        Container(
-                            margin: EdgeInsets.only(top: 5),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            color: Color(0xffB2FDFF),
+                            padding: EdgeInsets.all(10),
                             child: Text(
                               chatMessage.text,
-                              style: TextStyle(color: Colors.white),
-                            )
-                        )
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
-                    ))
-            )
-          ],
+                    ),
+                  ),
+              ),
+              (chatMessage.bot == false) ? Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 16),
+                    child: CircleAvatar(
+                      child: Text(
+                        chatMessage.initials ?? "V",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: chatMessage.bot
+                          ? globals.focusColor
+                          : globals.firstColor,
+                    ),
+                  ),
+                ],
+              ) : Container(),
+            ],
+          ),
         ),
       ),
     );
