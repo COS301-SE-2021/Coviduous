@@ -375,6 +375,111 @@ reportingApp.post('/api/reporting/company/company-data/view',authMiddleware,asyn
         return res.status(500).send({message: "Some error occurred while fetching company data."});
     }
 });
+reportingApp.put('/api/reporting/company/company-data/registered-users', async (req, res) =>  {
+
+    // data validation
+        let fieldErrors = [];
+    
+        //Look into express.js middleware so that these lines are not necessary
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+        //////////////////////////////////////////////////////////////////////
+           
+        if(req.body == null) {
+            fieldErrors.push({field: null, message: 'Request object may not be null'});
+        }
+    
+        if (reqJson.companyId == null || reqJson.companyId === '') {
+            fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+        }
+    
+        if(reqJson.numberOfRegisteredUsers == null || reqJson.numberOfRegisteredUsers === ''){
+            fieldErrors.push({field: 'numberOfRegisteredUsers', message: 'Number of registered users may not be empty'});
+        }
+    
+        if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+                message: '400 Bad Request: Incorrect fields',
+                errors: fieldErrors
+            });
+        }
+    
+        try {
+            const document = database.collection('company-data').doc(reqJson.companyId);
+    
+            await document.update({
+                numberOfRegisteredUsers: reqJson.numberOfRegisteredUsers
+            });
+            return res.status(200).send({
+                message: 'Successfully updated company data',
+            });
+        }catch (error) {
+            console.log(error);
+              return res.status(500).send({
+                  message: '500 Server Error: DB error',
+                  error: error
+              });
+          }
+    });
+    reportingApp.put('/api/reporting/company/company-data/registered-admins', async (req, res) =>  {
+        // data validation
+        let fieldErrors = [];
+    
+        //Look into express.js middleware so that these lines are not necessary
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+        //////////////////////////////////////////////////////////////////////
+           
+        if(req.body == null) {
+            fieldErrors.push({field: null, message: 'Request object may not be null'});
+        }
+    
+        if (reqJson.companyId == null || reqJson.companyId === '') {
+            fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
+        }
+    
+        if(reqJson.numberOfRegisteredAdmins == null || reqJson.numberOfRegisteredAdmins === ''){
+            fieldErrors.push({field: 'numberOfRegisteredAdmins', message: 'Number of registered users may not be empty'});
+        }
+    
+        if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+                message: '400 Bad Request: Incorrect fields',
+                errors: fieldErrors
+            });
+        }
+    
+        try {
+            const document = database.collection('company-data').doc(reqJson.companyId);
+    
+            await document.update({
+                numberOfRegisteredAdmins: reqJson.numberOfRegisteredAdmins
+            });
+            return res.status(200).send({
+                message: 'Successfully updated company data',
+            });
+        }catch (error) {
+            console.log(error);
+              return res.status(500).send({
+                  message: '500 Server Error: DB error',
+                  error: error
+              });
+          }
+    });
+       
+
 
 
 
