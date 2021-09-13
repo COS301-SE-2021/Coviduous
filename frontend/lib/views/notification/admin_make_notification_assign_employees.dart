@@ -351,46 +351,46 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
           ),
           bottomNavigationBar: BottomAppBar(
             child: (!globals.getIfOnPC()) ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                  height: MediaQuery.of(context).size.height/20,
-                  width: MediaQuery.of(context).size.height/20,
-                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+              Expanded(
+                child: Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: EdgeInsets.zero,
                       ),
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: Text('+',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                      child: Text('+',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      addEmployee();
-                    },
-                  )
+                      onPressed: () {
+                        addEmployee();
+                      },
+                    )
+                ),
               ),
-              Container(
-                  height: 50,
-                  width: 130,
-                  padding: EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+              Expanded(
+                child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: Text('Finish'),
-                    onPressed: () {
-                      sendNotification(numOfUsers);
-                    },
-                  )
+                      child: Text('Finish'),
+                      onPressed: () {
+                        sendNotification(numOfUsers);
+                      },
+                    )
+                ),
               ),
             ],
           ) : Row(
