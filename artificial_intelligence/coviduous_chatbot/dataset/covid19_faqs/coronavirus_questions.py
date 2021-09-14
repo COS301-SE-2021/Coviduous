@@ -126,6 +126,90 @@ COVID19_QUES = [
     {
         "Question": "Do I need to retest before returning to work?",
         "Answer": "At present, re-testing people who have experienced mild illness, and have recovered from COVID-19 is not recommended. A person is considered safe to return to the workplace and discontinue self-isolation if they are no longer infectious. This means they developed their first symptoms more than 10 days prior and have not experienced any symptoms for at least 3 days (72 hours)."
+    },
+    {
+        "Question": "Is it a fact that after 10 days you can't transfer the virus anymore?",
+        "Answer": "The most infectious period is thought to be 1 to 3 days before symptoms start, and in the first 7 days after symptoms begin. But some people may remain infectious for longer and this is because typically with viruses, the higher the viral load (the more virus circulating in the body), the higher the risk of transmission through known transmission pathways. So the more severe the illness and the higher the viral load, the longer you continue to shed the virus and are infectious."
+    },
+    {
+        "Question": "Should’nt I be tested negative first before returning to work?",
+        "Answer": "People who have been self-quarantining, because they had contact with a confirmed case of COVID-19 and have completed their 10-day quarantine period without developing symptoms, can return to work on day 11. There is no requirement to be tested prior to returning to the work. It is, however, recommended they continue to practice social distancing and good hygiene as a precaution and wear a surgical mask."
+    },
+    {
+        "Question": "My colleague tested positive for COVID-19, what must I do?",
+        "Answer": "If you work closely in the same environment as a person with COVID-19, you will need to self-quarantine for 10 days because you have had high-risk exposure. High-risk exposure means you have had direct, close contact for more than 15 minutes with someone who tested positive for COVID-19, and you did not wear protective cloth face masks or you had physical contact or took other risks that could have exposed you to the COVID-19 virus."
+    },
+    {
+        "Question": "What must I do if I have tested negative but the symptoms are still there?",
+        "Answer": "A patient can have a false negative if they have very little virus up there or perhaps the specimen was taken inappropriately. It didn’t get up high enough to actually get to the place where the virus was located. If a patient presents with symptoms of COVID-19 — cough, fever, shortness of breath — but they test negative, they should consult their health practitioner for further assessment."
+    },
+    {
+        "Question": "What role do masks play in the prevention of COVID-19?",
+        "Answer": "Masks may help prevent the transmission of COVID-19 by stopping the spread of respiratory droplets when people talk, sneeze or cough."
+    },
+    {
+        "Question": "Does a mask replace other prevention methods, like washing hands?",
+        "Answer": "No, the 5 golden rules should be always be followed: wash your hands for at least 20 seconds with soap and water; do not touch your face with unwashed hands; cough or sneeze into your elbow or a tissue; keep 1,5 metres apart from other people (social distancing); stay at home if you are unwell."
+    },
+    {
+        "Question": "When should I use a cloth mask?",
+        "Answer": "Cloth masks can be used when you are out in public. Like when you are travelling to work on public transport or doing shopping."
+    },
+    {
+        "Question": "How do I put the mask on and take it off?",
+        "Answer": "Before putting on the mask: wash or sanitize your hands, place the mask against your face making sure it covers your nose and mouth. When wearing the mask: do not touch your face, do not fiddle with the mask, do not touch the mask with your hands,  remove the mask if it is damp or wet. When removing the mask: only touch the straps to remove the mask away from your face, put the mask in a container until you wash it or wash it immediately, wash or sanitize your hands after removing the mask. "
+    },
+    {
+        "Question": "Can I wear the same mask all day every day?",
+        "Answer": "No, you will need 2 masks so that you can wash one and wear one. Wash your mask daily with soap and hot water. The mask is best dried in the sun and ironed. Do not share your mask with anyone."
+    },
+    {
+        "Question": "Do I have to wear a mask when I travel?",
+        "Answer": "Wearing a mask over your nose and mouth is required on planes, buses, trains, and other forms of public transportation traveling into, within, or out of a country."
+    },
+    {
+        "Question": "How can I protect myself from COVID-19 when using different types of transportation?",
+        "Answer": "Maintaining physical distance to prevent COVID-19 is often difficult on public transportation conveyances. People may not be able to distance themselves by the recommended minimum of 6 feet from other people seated nearby or those standing in or passing through the aisles on airplanes, trains, or buses."
+    }, 
+    {
+        "Question": "Can travelling to visit family and friends increase my chances of getting and spreading COVID-19?",
+        "Answer": "Yes. CDC recommends delaying travel until you are fully vaccinated, because travel increases your chance of getting and spreading COVID-19."
+    },
+    {
+        "Question": "How long does it take to develop symptoms?",
+        "Answer": "The time from exposure to COVID-19 to the moment when symptoms begin is, on average, 5-6 days and can range from 1-14 days. This is why people who have been exposed to the virus are advised to remain at home and stay away from others, for 14 days, in order to prevent the spread of the virus, especially where testing is not easily available."
+    },
+    {
+        "Question": "Is there a vaccine for COVID-19?",
+        "Answer": "Yes. The first mass vaccination programme started in early December 2020 and the number of vaccination doses administered is updated on a daily basis. At least 13 different vaccines (across 4 platforms) have been administered. Campaigns have started in 206 economies."
+    },
+    {
+        "Question": "What should I do if I have COVID-19 symptoms?",
+        "Answer": "If you have any symptoms suggestive of COVID-19, call your health care provider or COVID-19 hotline for instructions and find out when and where to get a test, stay at home for 14 days away from others and monitor your health."
+    },
+    {
+        "Question": "Are there treatments for COVID-19?",
+        "Answer": "Scientists around the world are working to find and develop treatments for COVID-19. Optimal supportive care includes oxygen for severely ill patients and those who are at risk for severe disease and more advanced respiratory support such as ventilation for patients who are critically ill."
+    },
+    {
+        "Question": "Are antibiotics effective in preventing or treating COVID-19?",
+        "Answer": "Antibiotics do not work against viruses; they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics do not work. Antibiotics should not be used as a means of prevention or treatment of COVID-19."
+    },
+    {
+        "Question": "Can adolescents catch COVID-19?",
+        "Answer": "Yes. All age groups can catch COVID-19. While we are still learning about how COVID-19 affects people, so far, data suggests that children under the age of 18 years have few deaths compared to other age groups and usually mild disease. However, cases of critical illness have been reported."
+    },
+    {
+        "Question": "Can adolescents spread COVID-19 to other people even if they have mild or no symptoms?",
+        "Answer": "Yes. Infected people in all age groups – including adolescents - can transmit the virus to other people, even if they have mild symptoms or do not feel ill. The virus is spread from person to person through liquid particles such as aerosols (smaller) and droplets (larger) from the nose or mouth which are spread when a person with COVID-19 coughs, sneezes or speaks."
+    },
+    {
+        "Question": "What should I do if someone in my family gets really ill with COVID-19?",
+        "Answer": "Immediately seek medical care if a member of your family gets seriously ill, for example develops difficulty breathing or feels pain or pressure in the chest. If possible, either you or an adult should contact your health care provider or COVID-19 hotline for instructions and find out where and how you could get care."
+    },
+    {
+        "Question": "What should I do if some of my friends are not sticking to the rules about physical distancing?",
+        "Answer": "Explain to your friends why it is important to protect themselves and others by washing their hands, avoiding touching their face, always coughing or sneezing into their elbow, sleeve, or a tissue, and cooperating with physical distancing measures and movement restrictions when called on to do so. Maybe you can share ideas for fun virtual activities that your friends can participate in, and you can encourage them to do them together with you or with other friends."
     }
 ]
 
