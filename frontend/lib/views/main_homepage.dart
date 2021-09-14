@@ -163,24 +163,31 @@ class _HomePageState extends State<HomePage>{
                                                   Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     children: [
-                                                      ElevatedButton(
-                                                        child: Text('Save'),
-                                                        onPressed: (){
-                                                          imageHelpers.saveImage('assets/images/Coviduous tutorials general - using the app.png',
-                                                              "Coviduous tutorial - using the app", "png").then((result) {
-                                                            if (result != null) {
-                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                  SnackBar(content: Text("Image saved to downloads folder")));
-                                                            }
-                                                            Navigator.of(ctx).pop();
-                                                          });
-                                                        },
+                                                      Expanded(
+                                                        child: ElevatedButton(
+                                                          child: Text('Save'),
+                                                          onPressed: (){
+                                                            imageHelpers.saveImage('assets/images/Coviduous tutorials general - using the app.png',
+                                                                "Coviduous tutorial - using the app", "png").then((result) {
+                                                              if (result != null) {
+                                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                                    SnackBar(content: Text("Image saved to downloads folder")));
+                                                              }
+                                                              Navigator.of(ctx).pop();
+                                                            });
+                                                          },
+                                                        ),
                                                       ),
-                                                      ElevatedButton(
-                                                        child: Text('Go back'),
-                                                        onPressed: (){
-                                                          Navigator.of(ctx).pop();
-                                                        },
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Expanded(
+                                                        child: ElevatedButton(
+                                                          child: Text('Go back'),
+                                                          onPressed: (){
+                                                            Navigator.of(ctx).pop();
+                                                          },
+                                                        ),
                                                       ),
                                                     ],
                                                   )
