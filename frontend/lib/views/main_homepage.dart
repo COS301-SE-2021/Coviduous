@@ -137,12 +137,16 @@ class _HomePageState extends State<HomePage>{
                                           return Center(
                                             child: Container(
                                               height: MediaQuery.of(ctx).size.height - 80,
-                                              width: MediaQuery.of(ctx).size.width,
+                                              width: (!globals.getIfOnPC())
+                                                  ? MediaQuery.of(ctx).size.width
+                                                  : 640,
                                               child: Column(
                                                 children: [
                                                   Container(
                                                     height: MediaQuery.of(ctx).size.height - 128,
-                                                    width: MediaQuery.of(ctx).size.width,
+                                                    width: (!globals.getIfOnPC())
+                                                        ? MediaQuery.of(ctx).size.width
+                                                        : 640,
                                                     child: GestureDetector(
                                                       onDoubleTapDown: _handleDoubleTapDown,
                                                       onDoubleTap: _handleDoubleTap,
@@ -153,8 +157,11 @@ class _HomePageState extends State<HomePage>{
                                                         child: Container(
                                                           color: Colors.white,
                                                           child: Image.asset(
-                                                            'assets/images/Coviduous tutorials general - using the app.png',
-                                                            width: MediaQuery.of(context).size.width,
+                                                            'assets/images/Coviduous_tutorials_using_the_app.png',
+                                                            width: (!globals.getIfOnPC())
+                                                                ? MediaQuery.of(ctx).size.width
+                                                                : 640,
+                                                            fit: BoxFit.fitWidth,
                                                           ),
                                                         ),
                                                       ),
@@ -167,7 +174,7 @@ class _HomePageState extends State<HomePage>{
                                                         child: ElevatedButton(
                                                           child: Text('Save'),
                                                           onPressed: (){
-                                                            imageHelpers.saveImage('assets/images/Coviduous tutorials general - using the app.png',
+                                                            imageHelpers.saveImage('assets/images/Coviduous_tutorials_using_the_app.png',
                                                                 "Coviduous tutorial - using the app", "png").then((result) {
                                                               if (result != null) {
                                                                 ScaffoldMessenger.of(context).showSnackBar(
