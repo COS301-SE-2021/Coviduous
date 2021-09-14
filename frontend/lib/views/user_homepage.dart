@@ -520,7 +520,9 @@ class _UserHomePageState extends State<UserHomePage> {
                                           Expanded(
                                             child: Container(
                                               alignment: Alignment.center,
-                                              child: Text('Date goes here'),
+                                              child: (upcomingBooking == '')
+                                                  ? CircularProgressIndicator()
+                                                  : Text(upcomingBooking),
                                             ),
                                           ),
                                         ],
@@ -588,13 +590,13 @@ class _UserHomePageState extends State<UserHomePage> {
                                           Expanded(
                                             child: Container(
                                               alignment: Alignment.center,
-                                              child: Row(
+                                              child: (latestPermission != null) ? Row(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    (true) //Check latest permission
+                                                    (latestPermission) //Check latest permission
                                                         ? Text('Office access granted  ')
                                                         : Text('Office access denied  '),
-                                                    (true) //Check latest permission
+                                                    (latestPermission) //Check latest permission
                                                         ? Icon(
                                                       Icons.check_circle_outline,
                                                       color: globals.firstColor,
@@ -604,7 +606,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                                       color: globals.sixthColor,
                                                     )
                                                   ]
-                                              ),
+                                              ) : CircularProgressIndicator(),
                                             ),
                                           ),
                                         ],
