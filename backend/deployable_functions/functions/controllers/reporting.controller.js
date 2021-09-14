@@ -375,7 +375,7 @@ reportingApp.post('/api/reporting/company/company-data/view',authMiddleware,asyn
         return res.status(500).send({message: "Some error occurred while fetching company data."});
     }
 });
-reportingApp.put('/api/reporting/company/company-data/registered-users', async (req, res) =>  {
+reportingApp.put('/api/reporting/company/company-data/registered-users',authMiddleware,async (req, res) =>  {
 
     // data validation
         let fieldErrors = [];
@@ -427,7 +427,7 @@ reportingApp.put('/api/reporting/company/company-data/registered-users', async (
               });
           }
     });
-    reportingApp.put('/api/reporting/company/company-data/registered-admins', async (req, res) =>  {
+    reportingApp.put('/api/reporting/company/company-data/registered-admins',authMiddleware, async (req, res) =>  {
         // data validation
         let fieldErrors = [];
     
@@ -479,7 +479,7 @@ reportingApp.put('/api/reporting/company/company-data/registered-users', async (
           }
     });
        
-reportingApp.put('/api/reporting/company/company-data/floorplans/inc', async (req, res) =>  {
+reportingApp.put('/api/reporting/company/company-data/floorplans/inc',authMiddleware, async (req, res) =>  {
         // data validation
          let fieldErrors = [];
      
@@ -538,7 +538,7 @@ reportingApp.put('/api/reporting/company/company-data/floorplans/inc', async (re
              
          }
 });
-reportingApp.put('/api/reporting/company/company-data/floors/inc', async (req, res) =>  {
+reportingApp.put('/api/reporting/company/company-data/floors/inc',authMiddleware, async (req, res) =>  {
 
     // data validation
     let fieldErrors = [];
@@ -595,7 +595,7 @@ reportingApp.put('/api/reporting/company/company-data/floors/inc', async (req, r
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }    
 });
-reportingApp.put('/api/reporting/company/company-data/floors/dec', async (req, res) =>  {    
+reportingApp.put('/api/reporting/company/company-data/floors/dec',authMiddleware,async (req, res) =>  {    
 
     // data validation
     let fieldErrors = [];
@@ -651,7 +651,7 @@ reportingApp.put('/api/reporting/company/company-data/floors/dec', async (req, r
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
 });
-reportingApp.put('/api/reporting/company/company-data/rooms/inc', async (req, res) =>  {    
+reportingApp.put('/api/reporting/company/company-data/rooms/inc',authMiddleware, async (req, res) =>  {    
     // data validation
     let fieldErrors = [];
 
@@ -707,7 +707,7 @@ reportingApp.put('/api/reporting/company/company-data/rooms/inc', async (req, re
     }    
 });
 
-reportingApp.put('/api/reporting/company/company-data/rooms/dec', async (req, res) =>  {    
+reportingApp.put('/api/reporting/company/company-data/rooms/dec',authMiddleware, async (req, res) =>  {    
     
     // data validation
     let fieldErrors = [];
@@ -765,7 +765,7 @@ reportingApp.put('/api/reporting/company/company-data/rooms/dec', async (req, re
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
 });
-reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {    
+reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (req, res) =>  {    
     
     let reqJson;
           try {
@@ -847,7 +847,7 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
         }
      }
        });
-       reportingApp.post('/api/reporting/permission-summary/setup', async (req, res) =>  {    
+       reportingApp.post('/api/reporting/permission-summary/setup',authMiddleware, async (req, res) =>  {    
         let reqJson;
           try {
               reqJson = JSON.parse(req.body);
@@ -927,7 +927,7 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
         }
     });
 
-    reportingApp.post('/api/reporting/summary-shifts', async (req, res) =>  {    
+    reportingApp.post('/api/reporting/summary-shifts',authMiddleware, async (req, res) =>  {    
         let reqJson;
         try {
             reqJson = JSON.parse(req.body);
@@ -955,7 +955,7 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
           return res.status(500).send({message: "Some error occurred while fetching number of shifts."});
         }
     });
-    reportingApp.post('/api/reporting/summary-bookings', async (req, res) =>  {    
+    reportingApp.post('/api/reporting/summary-bookings',authMiddleware, async (req, res) =>  {    
 
         let reqJson;
         try {
@@ -983,7 +983,7 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
           return res.status(500).send({message: "Some error occurred while fetching number of bookings."});
         }
     });
-    reportingApp.post('/api/reporting/summary-summary', async (req, res) =>  {    
+    reportingApp.post('/api/reporting/summary-summary',authMiddleware ,async (req, res) =>  {    
         let reqJson;
           try {
               reqJson = JSON.parse(req.body);
@@ -1031,7 +1031,7 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
             }
     
     });
-    reportingApp.post('/api/reporting/permission-summary', async (req, res) =>  {    
+    reportingApp.post('/api/reporting/permission-summary',authMiddleware ,async (req, res) =>  {    
 
         let reqJson;
           try {
@@ -1079,7 +1079,10 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
             }
     
     });
-    exports.generateUsersData = async (req, res) => {
+
+   
+    reportingApp.post('/api/reporting/company/users-data',authMiddleware ,async (req, res) =>  {    
+
         // get total users
         const document = database.collection('users');
         const snapshot = await document.get();
@@ -1200,12 +1203,12 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
                   });
               }
         }   
-};
+});
     
 
     
     
-    reportingApp.post('/reporting/company/users-data/view', async (req, res) =>  {    
+    reportingApp.post('/reporting/company/users-data/view',authMiddleware ,async (req, res) =>  {    
        
             const document = database.collection('users-data');
             const snapshot = await document.get();
