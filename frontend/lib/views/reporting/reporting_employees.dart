@@ -68,8 +68,6 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
           ];
           employeeList.add(employeeInfo);
         }
-      } else {
-        numOfUsers = 0;
       }
 
       print(numOfUsers);
@@ -117,35 +115,77 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
             itemCount: numOfUsers,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH user in users[]
               return ListTile(
-                title: Column(children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).primaryColor,
-                    child: Text('User ' + users[index].getUserId()),
-                  ),
-                  ListView(
-                      shrinkWrap: true,
-                      physics:
-                      NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                      children: <Widget>[
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Name: ' + users[index].getFirstName() + ' ' + users[index].getLastName()),
+                title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height / 6,
+                            child: Image(
+                              image: AssetImage('assets/images/placeholder-employee-image.png'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('User ' + (index + 1).toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: (MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height * 0.01) * 2.5,
+                                      )
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(globals.currentShift.getDate().substring(0, 11) + ' @ ' + globals.currentShift.getDate().substring(11, 19)),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getFirstName() + ' ' + globals.selectedUsers[index].getLastName())
+                                              ),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getUserId())
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]
                         ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Email: ' + users[index].getEmail()),
-                        ),
-                      ])
-                ]),
+                      ),
+                    ]
+                ),
               );
             });
       }

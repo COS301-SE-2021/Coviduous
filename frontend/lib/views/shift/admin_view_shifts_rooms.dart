@@ -246,6 +246,7 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                                             onPressed: () {
                                               if (globals.currentRooms[index].getNumberOfDesks() > 0) {
                                                 globals.currentRoomNum = globals.currentRooms[index].getRoomNumber();
+                                                globals.currentRoom = globals.currentRooms[index];
                                                 shiftHelpers.getShifts().then((result) {
                                                   if (result == true) {
                                                     if (globals.currentShifts.isNotEmpty) {
