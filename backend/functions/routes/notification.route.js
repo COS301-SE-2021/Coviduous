@@ -26,9 +26,55 @@ notificationController.setDatabase(devDatabase);
 //router.delete('/mock/notifications', notificationMockService.deleteNotification);
 
 // Notification routes
+/**
+ * @swagger
+ * /notifications:
+ *   get:
+ *     description: Get all notifications
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.get('/notifications', notificationController.viewNotifications);
+/**
+ * @swagger
+ * /notifications:
+ *   post:
+ *     description: retrieve notifications by user email
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/notifications/user-email', notificationController.viewNotificationsUserEmail);
+/**
+ * @swagger
+ * /notifications:
+ *   post:
+ *     description: create a notification
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/notifications', notificationController.createNotification);
+/**
+ * @swagger
+ * /notifications:
+ *   delete:
+ *     description: delete a notification
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.delete('/notifications', notificationController.deleteNotification);
 
 // Export API routes
