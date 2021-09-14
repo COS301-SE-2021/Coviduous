@@ -21,8 +21,44 @@ officeService.setDatabase(db);
 
 // Office routes
 // N.B. paths for a subsystem can all be the same
+/**
+ * @swagger
+ * /office:
+ *   post:
+ *     description: create a booking
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/office', officeService.createBooking);
+/**
+ * @swagger
+ * /office:
+ *   post:
+ *     description: retrieve all office bookings
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/office/view', officeService.viewBookings);
+/**
+ * @swagger
+ * /office:
+ *   delete:
+ *     description: delete an office booking
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.delete('/office', officeService.deleteBooking);
 
 // Office routes Mock 
