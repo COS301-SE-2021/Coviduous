@@ -212,6 +212,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                                             child: Text('View shifts'),
                                             onPressed: () {
                                               globals.currentRoomNum = globals.currentRooms[index].getRoomNumber();
+                                              globals.currentRoom = globals.currentRooms[index];
                                               shiftHelpers.getShifts().then((result) {
                                                 if (result == true) {
                                                   Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
