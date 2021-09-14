@@ -1079,7 +1079,139 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
             }
     
     });
+    exports.generateUsersData = async (req, res) => {
+        // get total users
+        let totalUsers = await database.getTotalUsers();
+        totalUsers = totalUsers.toString();
     
+        // get total employees
+        let totalEmployees = await database.getTotalEmployees();
+        totalEmployees = totalEmployees.toString();
+    
+        // get total admins
+        let totalAdmins = await database.getTotalAdmins();
+        totalAdmins = totalAdmins.toString();
+    
+        let usersDataId = "UD-" + uuid.v4();
+    
+        let usersData = {
+            usersDataId: usersDataId,
+            totalRegisteredUsers: totalUsers,
+            totalEmployees: totalEmployees,
+            totalAdmins: totalAdmins
+        }
+    
+        let result2 = await database.viewUsersData();
+    
+        if (result2.length > 0) // check if entry already exists in db table
+        {
+            await database.updateTotalRegisteredUsers(result2[0].usersDataId, totalUsers);
+            await database.updateTotalEmployees(result2[0].usersDataId, totalEmployees);
+            await database.updateTotalAdmins(result2[0].usersDataId, totalAdmins);
+    
+            let usersData = {
+                usersDataId: result2[0].usersDataId,
+                totalRegisteredUsers: totalUsers,
+                totalEmployees: totalEmployees,
+                totalAdmins: totalAdmins
+            }
+    
+            return res.status(200).send({
+                message: 'Users data successfully updated',
+                data: usersData
+            });
+        }
+        else
+        {
+            let result = await database.generateUsersData(usersData.usersDataId, usersData);
+            
+            if (!result) {
+                return res.status(500).send({
+                    message: '500 Server Error: DB error',
+                });
+            }
+        
+            return res.status(200).send({
+               message: 'Users data successfully created',
+               data: usersData
+            });
+        }
+    };
+    
+
+    
+    
+    reportingApp.post('/reporting/company/users-data/view', async (req, res) =>  {    
+       
+            const document = db.collection('users-data');
+            const snapshot = await document.get();
+            
+            let list = [];
+            
+            snapshot.forEach(doc => {
+                let data = doc.data();
+                list.push(data);
+            });
+         
+        let result=list;
+
+
+        if (!result) {
+            return res.status(500).send({
+                message: '500 Server Error: DB error',
+            });
+        }
+    
+        return res.status(200).send({
+            message: 'Successfully retrieved users data',
+            data: result
+        });
+    });
+    
+    exports.updateTotalRegisteredUsers = async (req, res) => {
+        // data validation
+        let fieldErrors = [];
+    
+        //Look into express.js middleware so that these lines are not necessary
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        console.log(reqJson);
+        //////////////////////////////////////////////////////////////////////
+           
+        if(req.body == null) {
+            fieldErrors.push({field: null, message: 'Request object may not be null'});
+        }
+    
+        if (reqJson.usersDataId == null || reqJson.usersDataId === '') {
+            fieldErrors.push({field: 'usersDataId', message: 'Users data ID may not be empty'});
+        }
+    
+        if(reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === ''){
+            fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'});
+        }
+    
+        if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+                message: '400 Bad Request: Incorrect fields',
+                errors: fieldErrors
+            });
+        }
+      
+        if (await database.updateTotalRegisteredUsers(reqJson.usersDataId, reqJson.totalRegisteredUsers) == true) {
+          return res.status(200).send({
+            message: "Successfully updated total number of registered users",
+            data: req.body
+          });
+        } else {
+          return res.status(500).send({message: "Some error occurred while updating total number of registered users."});
+        }
+    };
+        
     
     
     
