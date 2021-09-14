@@ -3,14 +3,11 @@ let admin = require('firebase-admin');
 let express = require('express');
 let cors = require('cors');
 let shiftApp = express();
-//var serviceAccount = require("./permissions.json");
 const authMiddleware = require('../authMiddleWare.js');
 
 shiftApp.use(cors({ origin: true }));
 shiftApp.use(express.urlencoded({ extended: true }));
-shiftApp.use(express.json());
-//admin.initializeApp(); 
-
+shiftApp.use(express.json()); 
 
 let database = admin.firestore();
 let uuid = require("uuid");
@@ -38,6 +35,18 @@ let uuid = require("uuid");
 
 ///// shifts //////
 
+/**
+ * @swagger
+ * /shift:
+ *   post:
+ *     description: create a shift
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.post('/api/shift',  async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -193,7 +202,18 @@ shiftApp.post('/api/shift',  async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /shift:
+ *   delete:
+ *     description: delete a shift
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.delete('/api/shift', async (req, res) => {
     // data validation
     let fieldErrors = [];
@@ -302,12 +322,16 @@ shiftApp.delete('/api/shift', async (req, res) => {
 });
 
 /**
- * This function updates a specified shift via an HTTP UPDATE request.
- * @param req The request object must exist and have the correct fields. It will be denied if not.
- * The request object should contain the following:
- *  shiftId: string
- * @param res The response object is sent back to the requester, containing the status code and a message.
- * @returns res - HTTP status indicating whether the request was successful or not.
+ * @swagger
+ * /shift:
+ *   put:
+ *     description: update a shift
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
  */
  shiftApp.put('/api/shift', async (req, res) => {
     // data validation
@@ -366,6 +390,16 @@ shiftApp.delete('/api/shift', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /shift:
+ *   get:
+ *     description: Get all shifts
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.get('/api/shift', async (req, res) => {
     try {
         const document = database.collection('shifts');
@@ -392,6 +426,18 @@ shiftApp.get('/api/shift', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /shift/getRoomShift:
+ *   post:
+ *     description: retrieve shifts by room
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.post('/api/shift/getRoomShift', async (req, res) => {
 
     // data validation
@@ -451,6 +497,18 @@ shiftApp.post('/api/shift/getRoomShift', async (req, res) => {
 
 ///// shift groups /////
 
+/**
+ * @swagger
+ * /group:
+ *   post:
+ *     description: create a shift group
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.post('/api/group', async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -516,6 +574,16 @@ shiftApp.post('/api/group', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /group:
+ *   get:
+ *     description: Get all shift groups
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.get('/api/group', async (req, res) => {
     try {
         const document = database.collection('groups');
@@ -542,6 +610,18 @@ shiftApp.get('/api/group', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /group/shift-id:
+ *   post:
+ *     description: retrieve groups by shift id
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.post('/api/group/shift-id', async (req, res) => {
 
     // data validation
@@ -597,6 +677,18 @@ shiftApp.post('/api/group/shift-id', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /group/company-id:
+ *   post:
+ *     description: retrieve users in group by company id
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 shiftApp.post('/api/group/company-id', async (req, res) => {
 
     // data validation

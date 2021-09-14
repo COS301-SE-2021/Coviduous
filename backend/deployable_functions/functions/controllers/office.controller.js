@@ -37,19 +37,16 @@ let uuid = require("uuid");
 ///////////////// functions /////////////////
 
 /**
- * This function creates a specified booking via an HTTP CREATE request.
- * @param req The request object must exist and have the correct fields. It will be denied if not.
- * The request object should contain the following:
- *  bookingNumber: string
- *   deskNumber: string
- *   floorPlanNumber: string
- *   floorNumber: string
- *   roomNumber: string
- *   timestamp: string
- *   userId: string
- *   companyId: string
- * @param res The response object is sent back to the requester, containing the status code and a message.
- * @returns res - HTTP status indicating whether the request was successful or not.
+ * @swagger
+ * /office:
+ *   post:
+ *     description: create a booking
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
  */
  officeApp.post('/api/office', async (req, res) => {
     let fieldErrors = [];
@@ -193,14 +190,18 @@ let uuid = require("uuid");
     }
 });
 
-// /**
-//  * This function deletes a specified booking via an HTTP DELETE request.
-//  * @param req The request object must exist and have the correct fields. It will be denied if not.
-//  * The request object should contain the following:
-//  *  bookingNumber: string
-//  * @param res The response object is sent back to the requester, containing the status code and a message.
-//  * @returns res - HTTP status indicating whether the request was successful or not.
-//  */
+/**
+ * @swagger
+ * /office:
+ *   delete:
+ *     description: delete an office booking
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
  officeApp.delete('/api/office', async (req, res) => {
     let fieldErrors = [];
 
@@ -294,6 +295,18 @@ let uuid = require("uuid");
     }
 });
 
+/**
+ * @swagger
+ * /office:
+ *   post:
+ *     description: retrieve all office bookings
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 officeApp.post('/api/office/view', async (req, res) => {
     let fieldErrors = [];
 
