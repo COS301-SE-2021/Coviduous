@@ -1081,15 +1081,50 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
     });
     exports.generateUsersData = async (req, res) => {
         // get total users
-        let totalUsers = await database.getTotalUsers();
+        const document = database.collection('users');
+        const snapshot = await document.get();
+        
+        let counter = 0;
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            counter++;
+        });
+   
+        let totalUsers = counter;
         totalUsers = totalUsers.toString();
     
         // get total employees
-        let totalEmployees = await database.getTotalEmployees();
-        totalEmployees = totalEmployees.toString();
+        const documen = database.collection('users').where("type","==", "Admin"); // or "ADMIN"
+        const snapsho = await documen.get();
+        
+        let count = 0;
+        
+        snapsho.forEach(doc => {
+            let data = doc.data();
+            //console.log(counter);
+            count++;
+        });
+        
+
+        
+        let totalemployees = count;
+        totalemployees = totalemployees.toString();
+
     
         // get total admins
-        let totalAdmins = await database.getTotalAdmins();
+        const documents = database.collection('users').where("type","==", "Admin"); // or "ADMIN"
+        const snapshots = await documents.get();
+        
+        let counters = 0;
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(counter);
+            counters++;
+        });
+       
+        let totalAdmins = counters;
         totalAdmins = totalAdmins.toString();
     
         let usersDataId = "UD-" + uuid.v4();
@@ -1097,17 +1132,42 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
         let usersData = {
             usersDataId: usersDataId,
             totalRegisteredUsers: totalUsers,
-            totalEmployees: totalEmployees,
+            totalEmployees: totalemployees,
             totalAdmins: totalAdmins
         }
-    
-        let result2 = await database.viewUsersData();
+
+
+        const documentd = database.collection('users-data');
+        const snapshotd = await documentd.get();
+        
+        let list = [];
+        
+        snapshotd.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+            
+        let result2 = list;
     
         if (result2.length > 0) // check if entry already exists in db table
         {
-            await database.updateTotalRegisteredUsers(result2[0].usersDataId, totalUsers);
-            await database.updateTotalEmployees(result2[0].usersDataId, totalEmployees);
-            await database.updateTotalAdmins(result2[0].usersDataId, totalAdmins);
+            const docume = database.collection('users-data').doc(result2[0].usersDataId); //or db.collection().where()
+
+            await docume.update({
+                totalRegisteredUsers: totalUsers
+            });
+              
+            const docs = database.collection('users-data').doc(result2[0].usersDataId); //or db.collection().where()
+
+            await docs.update({
+            totalAdmins: totalAdmins
+        });
+
+        const d = database.collection('users-data').doc(result2[0].usersDataId); //or db.collection().where()
+
+        await d.update({
+            totalEmployees:totalemployees 
+        });    
     
             let usersData = {
                 usersDataId: result2[0].usersDataId,
@@ -1123,27 +1183,31 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
         }
         else
         {
-            let result = await database.generateUsersData(usersData.usersDataId, usersData);
+
+            try{
             
-            if (!result) {
-                return res.status(500).send({
-                    message: '500 Server Error: DB error',
-                });
-            }
-        
+            await database.collection('users-data').doc(usersData.usersDataId)
+            .create(usersData);
             return res.status(200).send({
-               message: 'Users data successfully created',
-               data: usersData
-            });
-        }
-    };
+                message: 'Users data successfully created',
+                data: usersData
+             });
+            } catch (error) {
+                console.log(error);
+                  return res.status(500).send({
+                      message: '500 Server Error: DB error',
+                      error: error
+                  });
+              }
+        }   
+};
     
 
     
     
     reportingApp.post('/reporting/company/users-data/view', async (req, res) =>  {    
        
-            const document = db.collection('users-data');
+            const document = database.collection('users-data');
             const snapshot = await document.get();
             
             let list = [];
@@ -1168,53 +1232,10 @@ reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {
         });
     });
     
-    exports.updateTotalRegisteredUsers = async (req, res) => {
-        // data validation
-        let fieldErrors = [];
-    
-        //Look into express.js middleware so that these lines are not necessary
-        let reqJson;
-        try {
-            reqJson = JSON.parse(req.body);
-        } catch (e) {
-            reqJson = req.body;
-        }
-        console.log(reqJson);
-        //////////////////////////////////////////////////////////////////////
-           
-        if(req.body == null) {
-            fieldErrors.push({field: null, message: 'Request object may not be null'});
-        }
-    
-        if (reqJson.usersDataId == null || reqJson.usersDataId === '') {
-            fieldErrors.push({field: 'usersDataId', message: 'Users data ID may not be empty'});
-        }
-    
-        if(reqJson.totalRegisteredUsers == null || reqJson.totalRegisteredUsers === ''){
-            fieldErrors.push({field: 'totalRegisteredUsers', message: 'Total number of registered users may not be empty'});
-        }
-    
-        if (fieldErrors.length > 0) {
-            console.log(fieldErrors);
-            return res.status(400).send({
-                message: '400 Bad Request: Incorrect fields',
-                errors: fieldErrors
-            });
-        }
-      
-        if (await database.updateTotalRegisteredUsers(reqJson.usersDataId, reqJson.totalRegisteredUsers) == true) {
-          return res.status(200).send({
-            message: "Successfully updated total number of registered users",
-            data: req.body
-          });
-        } else {
-          return res.status(500).send({message: "Some error occurred while updating total number of registered users."});
-        }
-    };
-        
-    
-    
-    
+
+
+
+
     
     
     
