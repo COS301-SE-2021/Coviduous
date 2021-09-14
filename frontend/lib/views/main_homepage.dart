@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage>{
                                                   Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     children: [
-                                                      TextButton(
+                                                      ElevatedButton(
                                                         child: Text('Save'),
                                                         onPressed: (){
                                                           imageHelpers.saveImage('assets/images/Coviduous tutorials general - using the app.png',
@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage>{
                                                           });
                                                         },
                                                       ),
-                                                      TextButton(
+                                                      ElevatedButton(
                                                         child: Text('Go back'),
                                                         onPressed: (){
                                                           Navigator.of(ctx).pop();
