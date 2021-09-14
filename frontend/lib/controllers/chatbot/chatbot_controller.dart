@@ -5,12 +5,14 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:frontend/models/chatbot/chatbot_response.dart';
+
 import 'package:frontend/globals.dart' as globals;
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
 
 String chatbotServer = serverInfo.getChatbotServer();
 
-Future<String> sendAndReceive(String message) async {
+Future<ChatbotResponse> sendAndReceive(String message) async {
   String url = chatbotServer;
   var request;
 
@@ -31,7 +33,7 @@ Future<String> sendAndReceive(String message) async {
 
       print(jsonMap);
 
-      return jsonMap["data"];
+      return ChatbotResponse.fromJson(jsonMap);
     }
   } catch(error) {
     print(error);
