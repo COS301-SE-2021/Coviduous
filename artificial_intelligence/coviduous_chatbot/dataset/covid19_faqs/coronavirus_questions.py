@@ -86,6 +86,46 @@ COVID19_QUES = [
     {
      "Question": "What is community mitigation?",
      "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
+    },
+    {
+        "Question": "What happens to people who get COVID-19?",
+        "Answer": "Among those who develop symptoms, most (about 80%) recover from the disease without needing hospital treatment. About 15% become seriously ill and require oxygen and 5% become critically ill and need intensive care."
+    },
+    {
+        "Question": "Who is most at risk of severe illness from COVID-19?",
+        "Answer": "People aged 60 years and over, and those with underlying medical problems like high blood pressure, heart and lung problems, diabetes, obesity or cancer, are at higher risk of developing serious illness. However, anyone can get sick with COVID-19 and become seriously ill or die at any age."
+    },
+    {
+        "Question": "Are there long-term effects of COVID-19?",
+        "Answer": "Some people who have had COVID-19, whether they have needed hospitalization or not, continue to experience symptoms, including fatigue, respiratory and neurological symptoms."
+    },
+    {
+        "Question": "How can we protect others and ourselves if we don't know who is infected?",
+        "Answer": "Stay safe by taking some simple precautions, such as physical distancing, wearing a mask, especially when distancing cannot be maintained, keeping rooms well ventilated, avoiding crowds and close contact, regularly cleaning your hands, and coughing into a bent elbow or tissue."
+    },
+    {
+        "Question": "When should I get a test for COVID-19?",
+        "Answer": "Anyone with symptoms should be tested, wherever possible. People who do not have symptoms but have had close contact with someone who is, or may be, infected may also consider testing – contact your local health guidelines and follow their guidance."
+    },
+    {
+        "Question": "What test should I get to see if I have COVID-19?",
+        "Answer": "In most situations, a molecular test is used to detect SARS-CoV-2 and confirm infection. Polymerase chain reaction (PCR) is the most commonly used molecular test. Samples are collected from the nose and/or throat with a swab."
+    },
+    {
+        "Question": "I want to find out if I had COVID-19 in the past, what test could I take?",
+        "Answer": "Antibody tests can tell us whether someone has had an infection in the past, even if they have not had symptoms. Also known as serological tests and usually done on a blood sample, these tests detect antibodies produced in response to an infection."
+    },
+    {
+        "Question": "What is isolation?",
+        "Answer": "Isolation is used for people with COVID-19 symptoms or who have tested positive for the virus. Being in isolation means being separated from other people, ideally in a medically facility where you can receive clinical care.  If isolation in a medical facility is not possible and you are not in a high risk group of developing severe disease, isolation can take place at home."
+    },
+    {
+        "Question": "What is quarantine?",
+        "Answer": "Quarantine is used for anyone who is a contact of someone infected with the SARS-CoV-2 virus, which causes COVID-19, whether the infected person has symptoms or not. Quarantine means that you remain separated from others because you have been exposed to the virus and you may be infected and can take place in a designated facility or at home. For COVID-19, this means staying in the facility or at home for 14 days."
+    },
+    {
+        "Question": "Do I need to retest before returning to work?",
+        "Answer": "At present, re-testing people who have experienced mild illness, and have recovered from COVID-19 is not recommended. A person is considered safe to return to the workplace and discontinue self-isolation if they are no longer infectious. This means they developed their first symptoms more than 10 days prior and have not experienced any symptoms for at least 3 days (72 hours)."
     }
 ]
 
