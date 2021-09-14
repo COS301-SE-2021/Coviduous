@@ -121,8 +121,12 @@ Future<bool> getUsersForGroup(Group group) async {
     await Future.wait([
       userController.getUserDetailsByEmail(group.getUserEmails()[i].toString())
     ]).then((results) {
-      globals.selectedUsers.add(results.first);
-      result = true;
+      if (results.first != null) {
+        globals.selectedUsers.add(results.first);
+        result = true;
+      } else {
+        result = false;
+      }
     });
   }
   return result;
