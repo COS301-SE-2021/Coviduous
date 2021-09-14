@@ -36,48 +36,55 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ),
         ),
         body: isLoading == false ? Center(
-          child: Container(
-            width: (!globals.getIfOnPC())
-                ? MediaQuery.of(context).size.width/(2 * globals.getWidgetScaling())
-                : 640,
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _email,
-                    decoration: InputDecoration(labelText: 'Email'),
-                  ),
-
-                  const SizedBox(height: 30,),
-
-                  ElevatedButton(
-                      onPressed: (){
-                        setState(() {
-                          isLoading = true;
-                        });
-                        AuthClass().resetPassword(email: _email.text.trim()).then((value) {
-                          if (value == "Email sent") {
-                            setState(() {
-                              isLoading = false;
-                            });
-                            Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(builder: (context) => LoginScreen()), (
-                                    route) => false);
-                          }
-                          else {
-                            setState(() {
-                              isLoading = false;
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(value)));
-                          }
-                        });
-                      },
-                      child: Text("Reset password")
-                  ),
-                ],
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              height: MediaQuery.of(context).size.height/(4 * globals.getWidgetScaling()),
+              width: (!globals.getIfOnPC())
+                  ? MediaQuery.of(context).size.width/(2 * globals.getWidgetScaling())
+                  : 640,
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _email,
+                      decoration: InputDecoration(labelText: 'Email'),
+                    ),
+                    SizedBox(height: 30),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: (){
+                          setState(() {
+                            isLoading = true;
+                          });
+                          AuthClass().resetPassword(email: _email.text.trim()).then((value) {
+                            if (value == "Email sent") {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              Navigator.pushAndRemoveUntil(context,
+                                  MaterialPageRoute(builder: (context) => LoginScreen()), (
+                                      route) => false);
+                            }
+                            else {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(value)));
+                            }
+                          });
+                        },
+                        child: Text("Reset password")
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
