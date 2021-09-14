@@ -20,17 +20,122 @@ Shift.setDatabase(db);
 /**
  * Shift Routes
  *  */
+/**
+ * @swagger
+ * /shift:
+ *   post:
+ *     description: create a shift
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/shift',Shift.createShift);
+/**
+ * @swagger
+ * /shift/getRoomShift:
+ *   post:
+ *     description: retrieve shifts by room
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/shift/getRoomShift',Shift.getRoomShift);
+/**
+ * @swagger
+ * /shift:
+ *   delete:
+ *     description: delete a shift
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.delete('/shift',Shift.deleteShift);
+/**
+ * @swagger
+ * /shift:
+ *   get:
+ *     description: Get all shifts
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.get('/shift',Shift.viewShifts);
+/**
+ * @swagger
+ * /shift:
+ *   put:
+ *     description: update a shift
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.put('/shift',Shift.updateShift);
+
 /**
  * Group Routes
  */
+/**
+ * @swagger
+ * /group:
+ *   get:
+ *     description: Get all shift groups
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.get('/group',Shift.getGroup);
+/**
+ * @swagger
+ * /group/shift-id:
+ *   post:
+ *     description: retrieve groups by shift id
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/group/shift-id',Shift.getGroupForShift);
+/**
+ * @swagger
+ * /group:
+ *   post:
+ *     description: create a shift group
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/group',Shift.createGroup);
+/**
+ * @swagger
+ * /group/company-id:
+ *   post:
+ *     description: retrieve users in group by company id
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 router.post('/group/company-id',Shift.getEmailAssigned);
 
 /**

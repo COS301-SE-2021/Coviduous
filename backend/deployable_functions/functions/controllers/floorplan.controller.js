@@ -283,7 +283,7 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
     //getFloor()
     let response = database.collection('floors').doc(reqJson.floorNumber);
     let doc = await response.get();
-    let floor=doc.data()
+    let floor=doc.data();
   
     //addRoom()
     let rooms = parseInt(reqJson.currentNumberRoomInFloor)+1;
@@ -534,6 +534,342 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
   }
   
   });
+
+
+/**
+ * This function deletes a room with all its desks.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   roomNumber:roomNumber
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+
+  floorPlanApp.delete('/api/floorplan/room/delete', async (req, res) => {
+  try {
+        // getDesk()
+        const document = database.collection('desks');
+        const snapshot = await document.get();
+        
+        let desks = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            desks.push(data);
+        });
+
+
+      let reqJson = JSON.parse(req.body);
+      console.log(reqJson);
+
+        desks.forEach(obj4 =>{
+        if(obj4.roomNumber===reqJson.roomNumber)
+        {
+           //deletedesk()
+           database.collection('desks').doc(obj4.deskNumber).delete();
+        }
+        else
+        {
+  
+        }
+
+        });
+    
+    //getFloor()
+    let response = database.collection('floors').doc(reqJson.floorNumber);
+    let doc = await response.get();
+    let floor=doc.data()
+    //removeRoom()
+    let numRooms=parseInt(floor.numRooms)-1;
+    await database.collection('floors').doc(reqJson.floorNumber).update(
+      {
+        "numRooms": numRooms
+    }
+    );
+    //deleteRoom()
+    database.collection('rooms').doc(reqJson.roomNumber).delete();
+
+    // company-data summary
+     //getCompanyData()
+     let result = database.collection('company-data').doc(floor.companyId);
+     doc = await result.get();
+     let companyData = doc.data();
+     //decreaseNumberOfRoomsCompanyData()
+    let newNumRooms = parseInt(companyData.numberOfRooms) - 1;
+    newNumRooms = newNumRooms.toString();
+
+    await database.collection('company-data').doc(floor.companyId).update({
+        "numberOfRooms": newNumRooms
+    });
+
+      return res.status(200).send({
+        message: 'Room successfully deleted',
+      });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
+/**
+ * This function deletes a floor with all its rooms and desks of those rooms.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   floorNumber:floorNumber
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+
+ floorPlanApp.delete('/api/floorplan/floor/delete', async (req, res) => {
+  try {
+    let filteredList=[];
+    //getRooms()
+    let document = database.collection('rooms');
+    let snapshot = await document.get();
+    
+    let rooms = [];
+    
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        rooms.push(data);
+    });
+    let numRoomsToDelete = 0;
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
+    rooms.forEach(obj => {
+      if(obj.floorNumber===reqJson.floorNumber)
+      {
+        filteredList.push(obj);
+        numRoomsToDelete++;
+      }
+      else
+      {
+
+      }
+    });
+
+    //getDesks()
+    document = database.collection('desks');
+    snapshot = await document.get();
+    
+    let desks = [];
+    
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        desks.push(data);
+    });
+
+    filteredList.forEach(obj => {
+      
+        desks.forEach(obj4 =>{
+        if(obj4.roomNumber===obj.roomNumber)
+        {
+          //deleteDesk()
+          const document = database.collection('desks').doc(obj4.deskNumber); 
+          document.delete();
+        }
+        else
+        {
+  
+        }
+
+        });
+    //deleteRoom()
+    let document = database.collection('rooms').doc(obj.roomNumber); 
+    document.delete();
+    });
+    //getFloorPlan()
+    let result = database.collection('floorplans').doc(reqJson.floorplanNumber);
+    let doc = await result.get();
+    let floorplan=doc.data()
+    //removeFloor()
+    let numFloors=parseInt(floorplan.numFloors)-1;
+    await database.collection('floorplans').doc(reqJson.floorplanNumber).update(
+      {
+        "numFloors": numFloors
+    }
+    );
+    //deleteFloor()
+    document = database.collection('floors').doc(reqJson.floorNumber); 
+    await document.delete();
+
+    // company-data summary
+    //getCompanyData()
+    result = database.collection('company-data').doc(floorplan.companyId);
+    document = await result.get();
+    let companyData = document.data();
+
+    //decreaseNumberOfFloorsCompanyData()
+    if (parseInt(companyData.numberOfFloors) > 0)
+    {
+        let newNumFloors = parseInt(companyData.numberOfFloors) - 1;
+        newNumFloors = newNumFloors.toString();
+
+        await database.collection('company-data').doc(floorplan.companyId).update({
+            "numberOfFloors": newNumFloors
+        });
+    
+    }
+   
+    if (parseInt(companyData.numberOfRooms) > 0)
+      {
+          let newNumRooms = parseInt(companyData.numberOfRooms) - numRoomsToDelete;
+          newNumRooms = newNumRooms.toString();
+
+          await database.collection('company-data').doc(floorplan.companyId).update({
+              "numberOfRooms": newNumRooms
+          });
+      
+      }
+
+      return res.status(200).send({
+        message: 'Floor successfully deleted',
+      });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
+
+
+/**
+ * This function deletes a floorplan with all its floors,rooms and desks of those rooms.
+ * @param req The request object must exist and have the correct fields. It will be denied if not.
+ * The request object should contain the following:
+ *   floorplanNumber:floorplanNumber
+ * @param res The response object is sent back to the requester, containing the status code and a message.
+ * @returns res - HTTP status indicating whether the request was successful or not.
+ */
+
+ floorPlanApp.delete('/api/floorplan/delete', async (req, res) => {
+  try {
+    let filteredList=[];
+    //getFloors()
+    let document = database.collection('floors');
+    let snapshot = await document.get();
+    
+    let floors = [];
+    
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        floors.push(data);
+    });
+    let numFloorsToDelete = 0;
+    let numRoomsToDelete = 0;
+
+    let reqJson = JSON.parse(req.body);
+    console.log(reqJson);
+
+    //getFloorPlan()
+    let response = database.collection('floorplans').doc(reqJson.floorplanNumber);
+    let doc = await response.get();
+    let floorplan=doc.data();
+
+    floors.forEach(obj => {
+      if(obj.floorplanNumber===reqJson.floorplanNumber)
+      {
+        filteredList.push(obj);
+        numFloorsToDelete++;
+      }
+      else
+      {
+
+      }
+    });
+
+    //getDesks()
+     document = database.collection('desks');
+    snapshot = await document.get();
+    
+    let desks = [];
+    
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        desks.push(data);
+    });
+    
+    //getRooms()
+    document = database.collection('rooms');
+    snapshot = await document.get();
+    
+    let rooms = [];
+    
+    snapshot.forEach(doc => {
+        let data = doc.data();
+        rooms.push(data);
+    });
+
+    filteredList.forEach(obj => {
+      let filteredList2=[];
+      rooms.forEach(obj2 => {
+        if(obj2.floorNumber===obj.floorNumber)
+        {
+          filteredList2.push(obj2);
+          numRoomsToDelete++;
+        }
+        else
+        {
+  
+        }
+      });
+      
+     
+      filteredList2.forEach(obj3 => {
+        
+        desks.forEach(obj4 =>{
+        if(obj4.roomNumber===obj3.roomNumber)
+        {
+           database.collection('desks').doc(obj4.deskNumber).delete();
+        }
+        else
+        {
+  
+        }
+
+        });
+        database.collection('rooms').doc(obj3.roomNumber).delete();
+        });
+    database.collection('floors').doc(obj.floorNumber).delete();
+    });
+
+    database.collection('floorplans').doc(reqJson.floorplanNumber).delete();
+
+    // company-data summary
+    //getCompanyData();
+    response = database.collection('company-data').doc(floorplan.companyId);
+    doc = await response.get();
+    let companyData = doc.data()
+    //decreaseNumberOfFloorplansCompanyData()
+    let newNumFloorplans = parseInt(companyData.numberOfFloorplans) - 1;
+    newNumFloorplans = newNumFloorplans.toString();
+    await database.collection('company-data').doc(floorplan.companyId).update({
+        "numberOfFloorplans": newNumFloorplans
+    });
+    //decreaseNumberOfFloorsCompanyData()
+   let newNumFloors = parseInt(companyData.numberOfFloors) - numFloorsToDelete;
+  newNumFloors = newNumFloors.toString();
+
+  response = await database.collection('company-data').doc(floorplan.companyId).update({
+      "numberOfFloors": newNumFloors
+  });
+    //decreaseNumberOfRoomsCompanyData()
+    let newNumRooms = parseInt(companyData.numberOfRooms) - numRoomsToDelete;
+    newNumRooms = newNumRooms.toString();
+
+    await database.collection('company-data').doc(floorplan.companyId).update({
+        "numberOfRooms": newNumRooms
+    });
+
+      return res.status(200).send({
+        message: 'Floor Plan successfully deleted',
+      });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
+
 
   exports.floorplan = functions.https.onRequest(floorPlanApp);
   
