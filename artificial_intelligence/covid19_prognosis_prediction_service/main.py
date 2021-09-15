@@ -16,8 +16,8 @@ df=pd.read_csv("dataset/extended_features_test.csv")
 
 df.replace({'prognosis':{'negative':0,'positive':1}},inplace=True)
 
-
 X= df[l1]
+X= pd.DataFrame(X).fillna(1) # To account for any NaNs we may have missed in the dataset
 y = df[["prognosis"]]
 np.ravel(y)
 
@@ -27,6 +27,7 @@ tr=pd.read_csv("dataset/extended_feature_train.csv")
 tr.replace({'prognosis':{'negative':0,'positive':1}},inplace=True)
 
 X_test= tr[l1]
+X_test= pd.DataFrame(X_test).fillna(1) # To account for any NaNs we may have missed in the dataset
 y_test = tr[["prognosis"]]
 np.ravel(y_test)
 # --------------------

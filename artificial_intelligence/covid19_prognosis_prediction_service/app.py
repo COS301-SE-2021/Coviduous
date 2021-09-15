@@ -18,6 +18,7 @@ df.replace({'prognosis':{'negative':0,'positive':1}},inplace=True)
 
 
 X= df[l1]
+X= pd.DataFrame(X).fillna(1) # To account for any NaNs we may have missed in the dataset
 y = df[["prognosis"]]
 np.ravel(y)
 
@@ -27,6 +28,7 @@ tr=pd.read_csv("dataset/train.csv")
 tr.replace({'prognosis':{'negative':0,'positive':1}},inplace=True)
 
 X_test= tr[l1]
+X_test= pd.DataFrame(X_test).fillna(1) # To account for any NaNs we may have missed in the dataset
 y_test = tr[["prognosis"]]
 np.ravel(y_test)
 # --------------------
@@ -64,7 +66,7 @@ def DecisionTree(psymptoms):
 
     # calculate confusion matrix and write to file
     dt_confusion_matrix = sklearn.metrics.confusion_matrix(y_test, y_pred)
-    file1 = open("dt_confusion_matrix.txt", "w")
+    file1 = open("dt_confusion_matrix_ext.txt", "w")
     file1.write(str(dt_confusion_matrix))
     file1.close()
         
@@ -101,7 +103,7 @@ def NaiveBayes(psymptoms):
 
     # calculate confusion matrix and write to file
     nb_confusion_matrix = sklearn.metrics.confusion_matrix(y_test, y_pred)
-    file2 = open("nb_confusion_matrix.txt", "w")
+    file2 = open("nb_confusion_matrix_ext.txt", "w")
     file2.write(str(nb_confusion_matrix))
     file2.close()
 

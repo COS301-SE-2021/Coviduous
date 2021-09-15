@@ -2,20 +2,27 @@
 import pandas as pd
 import numpy as np
 
-dataset = pd.read_csv('train.csv')
+dataset = pd.read_csv('train_small.csv')
+dataset_test = pd.read_csv('test_small.csv')
 
-# Step 2 - Convert prognosis to number
+# Step 2 - Convert prognosis to number (if necessary)
 # dataset.replace({'prognosis': {'negative': 0, 'positive': 1}}, inplace=True)
 
 X = dataset[['cough', 'fever', 'sore_throat', 'shortness_of_breath', 'head_ache']]
 y = dataset[['prognosis']]
 np.ravel(y)
 
+X_test = dataset_test[['cough', 'fever', 'sore_throat', 'shortness_of_breath', 'head_ache']]
+y_test = dataset_test[['prognosis']]
+np.ravel(y_test)
+
 # Step 3 - Feature scaling
 from sklearn.preprocessing import StandardScaler
 
 sc = StandardScaler()
 X = sc.fit_transform(X)
+X = pd.DataFrame(X).fillna(1) # To account for any NaNs we may have missed in the dataset
+y = pd.DataFrame(y).fillna(1) # To account for any NaNs we may have missed in the dataset
 
 # Step 4 - Compare classification algorithms
 from sklearn.model_selection import KFold
@@ -40,6 +47,7 @@ for name, model in classification_models:
 
 # Draw decision tree
 from sklearn import tree
+import sklearn
 import graphviz
 import os
 os.environ["PATH"] += os.pathsep + 'E:/Graphviz/bin/'
@@ -51,3 +59,15 @@ plot_data = tree.export_graphviz(DecisionTreeClassifier(criterion='gini').fit(X=
                                  )
 graph = graphviz.Source(plot_data)
 graph.render("decision-tree")
+
+# calculate decision tree confusion matrix and write to file
+dt_confusion_matrix = sklearn.metrics.confusion_matrix(X, X_test)
+file1 = open("dt_confusion_matrix.txt", "w")
+file1.write(str(dt_confusion_matrix))
+file1.close()
+
+# calculate confusion matrix and write to file
+nb_confusion_matrix = sklearn.metrics.confusion_matrix(X, X_test)
+file2 = open("nb_confusion_matrix.txt", "w")
+file2.write(str(nb_confusion_matrix))
+file2.close()
