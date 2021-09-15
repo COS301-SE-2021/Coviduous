@@ -88,129 +88,261 @@ COVID19_QUES = [
      "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
     },
     {
-        "Question": "What happens to people who get COVID-19?",
-        "Answer": "Among those who develop symptoms, most (about 80%) recover from the disease without needing hospital treatment. About 15% become seriously ill and require oxygen and 5% become critically ill and need intensive care."
-    },
-    {
-        "Question": "Who is most at risk of severe illness from COVID-19?",
-        "Answer": "People aged 60 years and over, and those with underlying medical problems like high blood pressure, heart and lung problems, diabetes, obesity or cancer, are at higher risk of developing serious illness. However, anyone can get sick with COVID-19 and become seriously ill or die at any age."
-    },
-    {
-        "Question": "Are there long-term effects of COVID-19?",
-        "Answer": "Some people who have had COVID-19, whether they have needed hospitalization or not, continue to experience symptoms, including fatigue, respiratory and neurological symptoms."
-    },
-    {
-        "Question": "How can we protect others and ourselves if we don't know who is infected?",
-        "Answer": "Stay safe by taking some simple precautions, such as physical distancing, wearing a mask, especially when distancing cannot be maintained, keeping rooms well ventilated, avoiding crowds and close contact, regularly cleaning your hands, and coughing into a bent elbow or tissue."
-    },
-    {
-        "Question": "When should I get a test for COVID-19?",
-        "Answer": "Anyone with symptoms should be tested, wherever possible. People who do not have symptoms but have had close contact with someone who is, or may be, infected may also consider testing – contact your local health guidelines and follow their guidance."
-    },
-    {
-        "Question": "What test should I get to see if I have COVID-19?",
-        "Answer": "In most situations, a molecular test is used to detect SARS-CoV-2 and confirm infection. Polymerase chain reaction (PCR) is the most commonly used molecular test. Samples are collected from the nose and/or throat with a swab."
-    },
-    {
-        "Question": "I want to find out if I had COVID-19 in the past, what test could I take?",
-        "Answer": "Antibody tests can tell us whether someone has had an infection in the past, even if they have not had symptoms. Also known as serological tests and usually done on a blood sample, these tests detect antibodies produced in response to an infection."
-    },
-    {
-        "Question": "What is isolation?",
-        "Answer": "Isolation is used for people with COVID-19 symptoms or who have tested positive for the virus. Being in isolation means being separated from other people, ideally in a medically facility where you can receive clinical care.  If isolation in a medical facility is not possible and you are not in a high risk group of developing severe disease, isolation can take place at home."
-    },
-    {
-        "Question": "What is quarantine?",
-        "Answer": "Quarantine is used for anyone who is a contact of someone infected with the SARS-CoV-2 virus, which causes COVID-19, whether the infected person has symptoms or not. Quarantine means that you remain separated from others because you have been exposed to the virus and you may be infected and can take place in a designated facility or at home. For COVID-19, this means staying in the facility or at home for 14 days."
-    },
-    {
-        "Question": "Do I need to retest before returning to work?",
-        "Answer": "At present, re-testing people who have experienced mild illness, and have recovered from COVID-19 is not recommended. A person is considered safe to return to the workplace and discontinue self-isolation if they are no longer infectious. This means they developed their first symptoms more than 10 days prior and have not experienced any symptoms for at least 3 days (72 hours)."
-    },
-    {
-        "Question": "Is it a fact that after 10 days you can't transfer the virus anymore?",
-        "Answer": "The most infectious period is thought to be 1 to 3 days before symptoms start, and in the first 7 days after symptoms begin. But some people may remain infectious for longer and this is because typically with viruses, the higher the viral load (the more virus circulating in the body), the higher the risk of transmission through known transmission pathways. So the more severe the illness and the higher the viral load, the longer you continue to shed the virus and are infectious."
-    },
-    {
-        "Question": "Should’nt I be tested negative first before returning to work?",
-        "Answer": "People who have been self-quarantining, because they had contact with a confirmed case of COVID-19 and have completed their 10-day quarantine period without developing symptoms, can return to work on day 11. There is no requirement to be tested prior to returning to the work. It is, however, recommended they continue to practice social distancing and good hygiene as a precaution and wear a surgical mask."
-    },
-    {
-        "Question": "My colleague tested positive for COVID-19, what must I do?",
-        "Answer": "If you work closely in the same environment as a person with COVID-19, you will need to self-quarantine for 10 days because you have had high-risk exposure. High-risk exposure means you have had direct, close contact for more than 15 minutes with someone who tested positive for COVID-19, and you did not wear protective cloth face masks or you had physical contact or took other risks that could have exposed you to the COVID-19 virus."
-    },
-    {
-        "Question": "What must I do if I have tested negative but the symptoms are still there?",
-        "Answer": "A patient can have a false negative if they have very little virus up there or perhaps the specimen was taken inappropriately. It didn’t get up high enough to actually get to the place where the virus was located. If a patient presents with symptoms of COVID-19 — cough, fever, shortness of breath — but they test negative, they should consult their health practitioner for further assessment."
-    },
-    {
-        "Question": "What role do masks play in the prevention of COVID-19?",
-        "Answer": "Masks may help prevent the transmission of COVID-19 by stopping the spread of respiratory droplets when people talk, sneeze or cough."
-    },
-    {
-        "Question": "Does a mask replace other prevention methods, like washing hands?",
-        "Answer": "No, the 5 golden rules should be always be followed: wash your hands for at least 20 seconds with soap and water; do not touch your face with unwashed hands; cough or sneeze into your elbow or a tissue; keep 1,5 metres apart from other people (social distancing); stay at home if you are unwell."
-    },
-    {
-        "Question": "When should I use a cloth mask?",
-        "Answer": "Cloth masks can be used when you are out in public. Like when you are travelling to work on public transport or doing shopping."
-    },
-    {
-        "Question": "How do I put the mask on and take it off?",
-        "Answer": "Before putting on the mask: wash or sanitize your hands, place the mask against your face making sure it covers your nose and mouth. When wearing the mask: do not touch your face, do not fiddle with the mask, do not touch the mask with your hands,  remove the mask if it is damp or wet. When removing the mask: only touch the straps to remove the mask away from your face, put the mask in a container until you wash it or wash it immediately, wash or sanitize your hands after removing the mask. "
-    },
-    {
-        "Question": "Can I wear the same mask all day every day?",
-        "Answer": "No, you will need 2 masks so that you can wash one and wear one. Wash your mask daily with soap and hot water. The mask is best dried in the sun and ironed. Do not share your mask with anyone."
-    },
-    {
-        "Question": "Do I have to wear a mask when I travel?",
-        "Answer": "Wearing a mask over your nose and mouth is required on planes, buses, trains, and other forms of public transportation traveling into, within, or out of a country."
-    },
-    {
-        "Question": "How can I protect myself from COVID-19 when using different types of transportation?",
-        "Answer": "Maintaining physical distance to prevent COVID-19 is often difficult on public transportation conveyances. People may not be able to distance themselves by the recommended minimum of 6 feet from other people seated nearby or those standing in or passing through the aisles on airplanes, trains, or buses."
-    }, 
-    {
-        "Question": "Can travelling to visit family and friends increase my chances of getting and spreading COVID-19?",
-        "Answer": "Yes. CDC recommends delaying travel until you are fully vaccinated, because travel increases your chance of getting and spreading COVID-19."
-    },
-    {
-        "Question": "How long does it take to develop symptoms?",
-        "Answer": "The time from exposure to COVID-19 to the moment when symptoms begin is, on average, 5-6 days and can range from 1-14 days. This is why people who have been exposed to the virus are advised to remain at home and stay away from others, for 14 days, in order to prevent the spread of the virus, especially where testing is not easily available."
-    },
-    {
-        "Question": "Is there a vaccine for COVID-19?",
-        "Answer": "Yes. The first mass vaccination programme started in early December 2020 and the number of vaccination doses administered is updated on a daily basis. At least 13 different vaccines (across 4 platforms) have been administered. Campaigns have started in 206 economies."
-    },
-    {
-        "Question": "What should I do if I have COVID-19 symptoms?",
-        "Answer": "If you have any symptoms suggestive of COVID-19, call your health care provider or COVID-19 hotline for instructions and find out when and where to get a test, stay at home for 14 days away from others and monitor your health."
-    },
-    {
-        "Question": "Are there treatments for COVID-19?",
-        "Answer": "Scientists around the world are working to find and develop treatments for COVID-19. Optimal supportive care includes oxygen for severely ill patients and those who are at risk for severe disease and more advanced respiratory support such as ventilation for patients who are critically ill."
-    },
-    {
-        "Question": "Are antibiotics effective in preventing or treating COVID-19?",
-        "Answer": "Antibiotics do not work against viruses; they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics do not work. Antibiotics should not be used as a means of prevention or treatment of COVID-19."
-    },
-    {
-        "Question": "Can adolescents catch COVID-19?",
-        "Answer": "Yes. All age groups can catch COVID-19. While we are still learning about how COVID-19 affects people, so far, data suggests that children under the age of 18 years have few deaths compared to other age groups and usually mild disease. However, cases of critical illness have been reported."
-    },
-    {
-        "Question": "Can adolescents spread COVID-19 to other people even if they have mild or no symptoms?",
-        "Answer": "Yes. Infected people in all age groups – including adolescents - can transmit the virus to other people, even if they have mild symptoms or do not feel ill. The virus is spread from person to person through liquid particles such as aerosols (smaller) and droplets (larger) from the nose or mouth which are spread when a person with COVID-19 coughs, sneezes or speaks."
-    },
-    {
-        "Question": "What should I do if someone in my family gets really ill with COVID-19?",
-        "Answer": "Immediately seek medical care if a member of your family gets seriously ill, for example develops difficulty breathing or feels pain or pressure in the chest. If possible, either you or an adult should contact your health care provider or COVID-19 hotline for instructions and find out where and how you could get care."
-    },
-    {
-        "Question": "What should I do if some of my friends are not sticking to the rules about physical distancing?",
-        "Answer": "Explain to your friends why it is important to protect themselves and others by washing their hands, avoiding touching their face, always coughing or sneezing into their elbow, sleeve, or a tissue, and cooperating with physical distancing measures and movement restrictions when called on to do so. Maybe you can share ideas for fun virtual activities that your friends can participate in, and you can encourage them to do them together with you or with other friends."
-    }
+     "Question":   "what are the recommendations by the authorities",
+                   "what do the health authorities command",
+                   "what does the government recommend to do?",
+                   "What are the health recommendations for coronavirus?",
+                   "What are the recommendations of Health Authority?",
+                   "What are the recommendations of our health authorities?",
+                   "_",
+                   "What Health authorities recommends?",
+                   "what does the health authority reccomend",
+                   "What are the recommendations?",
+                   "What should I do?",
+                   "What is the recommendations of the Board of Health?",
+                   "What does the health authority recommend?",
+                   "what is the government recommending?",
+                   "what are the heath authorities recommendations in denmark?",
+                   "What isPublic Health Service recommendation",
+     "Answer":     "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+     },
+     {
+      "Question":  "What precautions should I take if I am part of a risk group?",
+                   "What should I do if i'm a person who is more vulnerable than others",
+                   "What can I do if I am a part of an at risk group?",
+                   "I'm 85 old. What should I do?",
+                   "what do I do if I am in the the riskgroup",
+                   "what should i do if i'm part of an at risk group",
+                   "How to stay safe from corona virus if I am in a risk group?",
+                   "What do I do if I am at risk",
+                   "I've seen I'm in a risk group. what should I do?",
+                   "im at risk.. what do i do",
+                   "What should I do if I'm in an at risk group?",
+                   "What to do if i am a part of the risk group?",
+                   "send thoughts and prayers",
+                   "i'm 28 am i gonna catch it",
+                   "I have a lung disease. What should I do?",
+                   "What is the guidance for people in risk group?",
+                   "How should I react if I'm part of the risk groups?",
+                   "What to do if I'm one of the people with a risk profile?",
+                   "If I am in the risk group, what I shall do to protect myself?",
+                   "who should I avoid to not get corona?",
+     "Answer":     "Get vaccinated and follow covid-19 restrictions."
+     },
+     {
+      "Question":  "i'm having a baby, should I be worried?",
+                    "What to do as a pregnant woman?",
+                    "am I at risk if I am preganant and get corona?",
+                    "What to do if i am pregnant?",
+                    "I am with child and don't know what to do",
+                    "what do i do if im pregnant",
+                    "What can I do if I am pregnant?",
+                    "buy diapers.",
+                    "How should I behave if I am pregnant",
+                    "i've got a baby on the way, what to do",
+                    "What do I do if I am pregnant? Is corona virus dangerous for me?",
+                    "Should I be isolating if I am pregnant?",
+                    "what do i do if being pregnant?",
+                    "What should I do if I am pregnant?",
+                    "What should a pregnant woman do to stay safe from the Coronavirus?",
+                    "I'm expecting a baby. what can I do?",
+                    "I am pregnant what to do to protect myself",
+                    "should i take extra precautions if im pregnant",
+                    "I'm 36 weeks pregnant. Is there anything I need to do?",
+                    "I am pregnant, what shall I do to protect myself from the virus?",
+                    "I'm pregnant, what are my precautions?"
+      "Answer":     "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+     },
+     {
+        "Question":   "Can an employee refuse to travel due to Coronavirus?",
+                      "Does en employee have a right to refuse to travel for work?",
+                      "Can you make employees travel for work during corona virus?",
+                      "Can anyone in my team refuse to travel during the pandemia?",
+                      "Can my employee say no to travel due to coronavirus?",
+                      "Can Employees Refuse To Travel Out Of Fear Of Contracting coronavirus?",
+                      "Are my employees allowed to deny business related travels due to the outbreak?",
+                      "Can an employee say that they dont want to travel because of coronavirus?",
+                      "Can an employee say no to travelling for work because of the corona?",
+                      "Can my employee refuse to travel because of coronavirus?",
+                      "one of my guys refuses to go abroad, can he refuse to do that?",
+                      "can my employee refuse to travel?",
+                      "Rules for work travel during corona",
+                      "can an employee be forced to travel for work during coronavirus",
+                      "Can any of my workers refuse to travel during the pandemic?",
+                      "can an eomployee fefuse to travel because of coronavirus",
+                      "they can refuse unless they want to keep their job.",
+                      "are my employees allowed to refuse travelling because of corona?",
+                      "we have a business trip to florida but an employee is scared to come",
+                      "Is ok for an employee to refuse to travel",
+                      "can employees refuse to travel in this period? Can we force them to do so?"
+        "Answer":     "Please refer to your company guidelines. "
+     },
+     {
+        "Question": "Who is eligible for coronavirus test?",
+                     "Who should be tested against coronavirus?",
+                     "does my family need to get tested?",
+                     "can anyone be tested for corona`",
+                     "who should get a test?",
+                     "who should get tested",
+                     "_",
+                     "who is being tested",
+                     "Who has to be tested for Corona",
+                     "should everyone get tested",
+                     "I want to inquire as to who should undergo testing",
+                     "Should I get my grandfather tested?",
+                     "Who gets tested for the coronavirus?",
+                     "What people should be tested?",
+                     "Who should be tested?",
+                     "whomsulbetest"
+        "Answer":    "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+     },
+     {
+        "Question": "Should I be scared?",
+                    "how afraid should i be",
+                    "Should I be afraid of the pandemia?",
+                    "How fearful should I be of Coronavirus?",
+                    "How afraid do I have to be for the Corona virus",
+                    "how scared should i be for coronavirus",
+                    "really much",
+                    "How serious i should be about coronavirus?",
+                    "Is coronavirus so serious? How worried should I be?",
+                    "How afraid should I be of Coronavirus?",
+                    "do I need to be scared? Trump isn't scared, why should I",
+                    "_",
+                    "How scared should I be of corona?",
+                    "Do I need to be afraid of the outbreak?",
+                    "How serious we should be about Coronavirus?",
+                    "Is the coronavirus bad?",
+                    "how dangerous is coronvirus?",
+                    "Will I die?",
+                    "am i likely to end up in the hospital or die?"
+        "Answer":   "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+     },
+     {
+        "Question": "What to do when outside?",
+                    "what are the rules to follow in public?",
+                    "How should I act in public places?",
+                    "How should I behave in the public space?",
+                    "when out there in the street, what are the recommended actions to take?",
+                    "How should I behave in public?",
+                    "i would like to get recommendations on how to behave in the public",
+                    "How should I behave when Iâ€™m with other people in public?",
+                    "i can't stay home all day, what do I do out in public?",
+                    "can I go out?",
+                    "Should I be doing anything in particular when I'm in public spaces?",
+                    "How can I act in public spaces?",
+                    "_",
+                    "What are the recommendations for entering a public space?",
+                    "how should i act in public",
+                    "should i wear mask and gloves",
+                    "What do you recommend when taking public transport",
+                    "Should I avoid people when I am outside?",
+                    "Do I need a mask when I go outside? What are the rules for social distancing?"
+        "Answer":   "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+     },
+     {
+       "Question":  "I have some symptoms, how do I really know if I've got it?",
+                    "What should I do if I feel symptoms?",
+                    "What to do if i got sick?",
+                    "im sick!!! what am a supposed to do?",
+                    "What do I do if I get ill",
+                    "what do i do if i fall sick",
+                    "I'm sick wtf do i do?",
+                    "I'm sick, what do I do?",
+                    "What can I do if I have fallen ill?",
+                    "i have a cough but i don't know if it's corona",
+                    "Steps I should take when I contract the virus",
+                    "What do I do if I am getting ill",
+                    "I'm sick what do i do",
+                    "i dont know what to do now that I am sick",
+                    "_",
+                    "what should I do if I got infected with covid-19?_",
+                    "can I go to the hospital?",
+                    "What shall I do if I get sick?",
+                    "what should I do if I feel sick?"
+       "Answer":    "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+     },
+     {
+      "Question":   "I was close to a person last week who now tells me she is sick woith corona. can I expect to be sick also?",
+                    "my friend just tested positive and we hung out ealier this week. what do i do",
+                    "I have been close to a person with Corona what do I do?",
+                    "my boyfriend is positive what do i do",
+                    "What can I do if I have been in contact with an infected person for COVID-19?",
+                    "What to do if i have been in touch with an infected person?",
+                    "I've shaken hands with someone who is Coronavirus positive, what should I do?",
+                    "I have been close to a human who has been tested corona positive. What to do?",
+                    "What to do if someone Iâ€™ve been in contact with has corona?",
+                    "pray",
+                    "What shall I do if I was in contact with  a sick person?",
+                    "I been with an infected person. Should I do anything?",
+                    "What do I do if my neighboor has been tested positive for COVID?",
+                    "What should I do because I touched someone who are sick with corona",
+                    "my friend was confirmed with coronavirus. what should I do?",
+                    "_",
+                    "What to do if you were potentially exposed to someone with coronavirus?",
+                    "what do i do if a person in my family is tested positive for covid19",
+                    "When I've been in contact with somebody who has the virus what should I do?",
+                    "What are recommendations for people who were in contact with someone infected with Coronavirus?",
+                    "I was in contact with someone infected with coronavirus, what shall I do now?",
+                    "Yes"
+      "Answer":     "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+     },
+     {
+      "Question":   "What are the steps to protect employees during coronavirus?",
+                    "what is the employer supposed to do to protect the employees?",
+                    "If I am an employer how can I protect my employees?",
+                    "What are the office rules for coronavirus?",
+                    "how do I as an employer protect my staff",
+                    "I own a company? How should I protect my people?",
+                    "What can I do to protect my employees?",
+                    "even if people don't have their kids at home from next week, should I tell my employees to stay home?",
+                    "I am an employer. How do I protect my employees?",
+                    "should i close the office",
+                    "What are my responsibilities as an employer when responding to this crisis?",
+                    "How can i protect my employees?",
+                    "How do I do to help my employes with corona?",
+                    "how do i prevent my employees from getting infected",
+                    "What do I do to protect my employees from Corona"
+      "Answer":     "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+     },
+     {
+     "Question":    "I want to be a good citizen, what can I do to limit the spread of the virus",
+                    "how can I as an citizen minimise the spread of the virus",
+                    "can i take an action to minimize the spread of coronavirus?",
+                    "How can I as a citizen do to minimize the spread of corona virus?",
+                    "What can i do to minimise the spread of corona?",
+                    "Is there anything in particular I can do as a citizen to help coronavirus pass faster?",
+                    "what can I do as a citizen to avoid spreading the virus",
+                    "do i need to quarantine",
+                    "How do I minimize the spread of Coronavirus",
+                    "How can I collaborate to reduce the pandemic?",
+                    "what should i do to minimise the spread?",
+                    "what can i do to minimize spreading the virus",
+                    "What can I do to help with coronavirus?",
+                    "How can I minimize the spread of Coronavirus?",
+                    "As a conscious resident of the SA how can I mitigate the spread of the virus?"
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+     },
+     {
+     "Question":    "I'm not part of any known risk groups. What is my actions?",
+                    "is there anything I should do if i am not risky",
+                    "I am not at risk, is there anything I should do?",
+                    "i don't think I'm at risk, do I need to take any precautions?",
+                    "I am not at risk, what do I do to stay so.",
+                    "What can I do if I do not belong to any of risk groups",
+                    "What do I have to do if I don't belong to any of the risk groups?",
+                    "im young and healthy, but should i take any precautions",
+                    "I'm not in any risk group. Should I do anything?",
+                    "_",
+                    "i'm low risk but am i still in danger?",
+                    "what can i do if i am not in the known risk groups",
+                    "Do I have to take some special measure if I don't belong any risk group?",
+                    "I'm young, healthy, and have no known underlying illnesses, is there anything I should be aware of?",
+                    "What to do as a healthy person about the coronavirus pandemic?",
+                    "im not at risk. what do i do"
+     "Answer":      "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+     }
+
 ]
 
 
