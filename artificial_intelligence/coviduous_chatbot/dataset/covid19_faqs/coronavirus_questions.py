@@ -172,6 +172,86 @@ COVID19_QUES = [
         "Answer": "Maintaining physical distance to prevent COVID-19 is often difficult on public transportation conveyances. People may not be able to distance themselves by the recommended minimum of 6 feet from other people seated nearby or those standing in or passing through the aisles on airplanes, trains, or buses."
     },
     {
+        "Question": "Can travelling to visit family and friends increase my chances of getting and spreading COVID-19?",
+        "Answer": "Yes. CDC recommends delaying travel until you are fully vaccinated, because travel increases your chance of getting and spreading COVID-19."
+    },
+    {
+        "Question": "How long does it take to develop symptoms?",
+        "Answer": "The time from exposure to COVID-19 to the moment when symptoms begin is, on average, 5-6 days and can range from 1-14 days. This is why people who have been exposed to the virus are advised to remain at home and stay away from others, for 14 days, in order to prevent the spread of the virus, especially where testing is not easily available."
+    },
+    {
+        "Question": "Is there a vaccine for COVID-19?",
+        "Answer": "Yes. The first mass vaccination programme started in early December 2020 and the number of vaccination doses administered is updated on a daily basis. At least 13 different vaccines (across 4 platforms) have been administered. Campaigns have started in 206 economies."
+    },
+    {
+        "Question": "What should I do if I have COVID-19 symptoms?",
+        "Answer": "If you have any symptoms suggestive of COVID-19, call your health care provider or COVID-19 hotline for instructions and find out when and where to get a test, stay at home for 14 days away from others and monitor your health."
+    },
+    {
+        "Question": "Are there treatments for COVID-19?",
+        "Answer": "Scientists around the world are working to find and develop treatments for COVID-19. Optimal supportive care includes oxygen for severely ill patients and those who are at risk for severe disease and more advanced respiratory support such as ventilation for patients who are critically ill."
+    },
+    {
+        "Question": "Are antibiotics effective in preventing or treating COVID-19?",
+        "Answer": "Antibiotics do not work against viruses; they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics do not work. Antibiotics should not be used as a means of prevention or treatment of COVID-19."
+    },
+    {
+        "Question": "Can adolescents catch COVID-19?",
+        "Answer": "Yes. All age groups can catch COVID-19. While we are still learning about how COVID-19 affects people, so far, data suggests that children under the age of 18 years have few deaths compared to other age groups and usually mild disease. However, cases of critical illness have been reported."
+    },
+    {
+        "Question": "Can adolescents spread COVID-19 to other people even if they have mild or no symptoms?",
+        "Answer": "Yes. Infected people in all age groups – including adolescents - can transmit the virus to other people, even if they have mild symptoms or do not feel ill. The virus is spread from person to person through liquid particles such as aerosols (smaller) and droplets (larger) from the nose or mouth which are spread when a person with COVID-19 coughs, sneezes or speaks."
+    },
+    {
+        "Question": "What should I do if someone in my family gets really ill with COVID-19?",
+        "Answer": "Immediately seek medical care if a member of your family gets seriously ill, for example develops difficulty breathing or feels pain or pressure in the chest. If possible, either you or an adult should contact your health care provider or COVID-19 hotline for instructions and find out where and how you could get care."
+    },
+    {
+        "Question": "What should I do if some of my friends are not sticking to the rules about physical distancing?",
+        "Answer": "Explain to your friends why it is important to protect themselves and others by washing their hands, avoiding touching their face, always coughing or sneezing into their elbow, sleeve, or a tissue, and cooperating with physical distancing measures and movement restrictions when called on to do so. Maybe you can share ideas for fun virtual activities that your friends can participate in, and you can encourage them to do them together with you or with other friends."
+    },
+    {
+        "Question": "I know there is a risk of getting COVID-19, but can I still play sports?",
+        "Answer": "Yes. You can play sports that are in line with the physical distancing measures and movement restrictions that are in place in your country. If you are able to go for a bicycle ride, or if you go to a park or public open space to walk, run or exercise always practice physical distancing and wash your hands with water and soap before you leave, when you get to where you are going, and as soon as you get home.  If water and soap are not immediately available, use alcohol-based hand rub."
+    },
+    {
+        "Question": "Schools are reopening in some areas of my country. Is it safe to  go back to school?",
+        "Answer": "A decision to reopen schools in every country and area is made based on careful assessment of the situation, with consensus among all the key parties involved, including the health and education policy-makers, teachers and other school staff, parents and health and community workers. In addition, reopening of schools is carefully planned and prepared, with all necessary measures in place to protect the safety and health of everyone in the school community."
+    },
+    {
+        "Question": "What should I do if I missed out on my education due to the COVID-19 pandemic?",
+        "Answer": "Your school or place where you are studying are likely to make arrangements for you to catch up on what you have missed when your school was closed. Many schools have put in place accelerated learning modalities to help pupils catch up on learning loss. "
+    },
+    {
+        "Question": "Should I wear a mask at school or when playing sports?",
+        "Answer": "You should not wear a mask when playing sports or doing physical activities, such as running, jumping or playing on the playground, so that it doesn’t compromise your breathing. However, remember to maintain at least a 1-metre distance from others, limit the number of friends playing together, and respect hand hygiene."
+    },
+    {
+        "Question": "When will this pandemic end so things can go back to normal?",
+        "Answer": "We don’t know when the pandemic will end, but we know it depends on every person’s contribution in helping stop the spread of the virus. The sacrifices you have made by not seeing your friends and by not going to school for a while, and other activities, are your contributions to fighting the pandemic. By putting societies and economies on hold, we have reduced the ability of the virus to spread through our communities."
+    },
+    {
+        "Question": "What can we do so that other diseases like COVID-19 do not affect us in future?",
+        "Answer": "To prevent the disastrous effects of emerging infectious diseases, we have to recognize that human health is intimately connected to the health of animals and our shared environment, and take action. Millions of young people have already mobilized to demand action not only on climate and biodiversity - but also for the right to breathe clean air, and for their future on a liveable planet."
+    },
+    {
+        "Question": "What is vaccination?",
+        "Answer": "Vaccination is a safe and simple way to strengthen the immune system to build resistance against disease-causing germs. Once vaccinated, an individual will have a level of protection (or immunity), against that specific harmful disease. Vaccines contain a part of the virus/bacteria in a weakened, live or killed state, which will trigger a response from the immune system. It is important to be aware that vaccines do not cause disease or health complications."
+    },
+    {
+        "Question": "How do vaccines work?",
+        "Answer": "A vaccine trains your immune system to recognise and combat viruses/bacteria. When exposed, antibodies are naturally produced by the immune system to fight the disease. If the bacteria or virus reappears, the immune system will remember how to respond and quickly destroy it."
+    },
+    {
+        "Question": "How are vaccines administered?",
+        "Answer": "Vaccines are mostly given through injection, but some are administered orally (by mouth) or sprayed into the nasal cavities."
+    },
+    {
+        "Question": "Why is vaccination important?",
+        "Answer": "Simply put, vaccination prevents disease and saves lives. It is a safe and effective way to protect oneself and those around you. Some individuals, for instance, those who suffer from a serious illness, are unable to take certain vaccines. These individuals depend on others to get vaccinated to reduce the spread of disease. Regular vaccination is needed to keep children healthy, prevent outbreaks and to eventually eradicate infectious diseases altogether."
+    },
+    {
      "Question": "what are the recommendations by the authorities",
      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
