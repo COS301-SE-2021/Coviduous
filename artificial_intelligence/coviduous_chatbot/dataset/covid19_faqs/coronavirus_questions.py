@@ -812,7 +812,7 @@ COVID19_QUES = [
       "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-      "Question": "What do I do to protect my employees from Corona"
+      "Question": "What do I do to protect my employees from Corona",
       "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
    },
    {
@@ -1082,8 +1082,9 @@ COVID19_QUES = [
    "answer": "You should only wear a face mask if a healthcare professional recommends it. Generally, those who have COVID-19 and are showing symptoms should wear face-masks to prevent others from the risk of getting infected  Please do not stock significantly on face masks as they are also crucial for health workers and those who are taking care of people infected with COVID-19."
    },
    {
-   "question": "If I'm high risk, what should I do?", "answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often. If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs.
-   "},
+   "question": "If I'm high risk, what should I do?", 
+   "answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often. If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."
+   },
    {
    "question": "Why do I have to stay at home?",
    "answer": "Socially distancing is a practice that aims to prevent those who are sick from encountering those who are healthy. As COVID-19 spreads person-to-person in close contact, we want to reduce the chance of infection amongst populations that are vulnerable."
