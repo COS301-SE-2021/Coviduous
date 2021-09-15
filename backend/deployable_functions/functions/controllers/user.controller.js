@@ -36,6 +36,18 @@ let uuid = require("uuid");
 
 ///////////////// functions /////////////////
 
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *     description: create a user
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 userApp.post('/api/users', async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -187,6 +199,18 @@ userApp.post('/api/users', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users:
+ *   delete:
+ *     description: delete a user
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 userApp.delete('/api/users', async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -286,6 +310,18 @@ userApp.delete('/api/users', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users:
+ *   put:
+ *     description: update a user's details
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 userApp.put('/api/users',  async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -374,10 +410,14 @@ userApp.put('/api/users',  async (req, res) => {
 });
 
 /**
- * This function retrieves all users via an HTTP GET request.
- * @param req The request object may be null.
- * @param res The response object is sent back to the requester, containing the status code and retrieved data.
- * @returns res - HTTP status indicating whether the request was successful or not, and data, where applicable.
+ * @swagger
+ * /users:
+ *   get:
+ *     description: Get all users
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
  */
  userApp.get('/api/users', async (req, res) => {
     try {
@@ -405,6 +445,18 @@ userApp.put('/api/users',  async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *     description: retrieve users by user id
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 userApp.post('/api/users/user-id', async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -461,6 +513,18 @@ userApp.post('/api/users/user-id', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *     description: retrieve users by user email
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 userApp.post('/api/users/email', async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
