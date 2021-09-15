@@ -252,6 +252,126 @@ COVID19_QUES = [
         "Answer": "Simply put, vaccination prevents disease and saves lives. It is a safe and effective way to protect oneself and those around you. Some individuals, for instance, those who suffer from a serious illness, are unable to take certain vaccines. These individuals depend on others to get vaccinated to reduce the spread of disease. Regular vaccination is needed to keep children healthy, prevent outbreaks and to eventually eradicate infectious diseases altogether."
     },
     {
+        "Question": "Why should I get vaccinated?",
+        "Answer": "The reason is simple; if you get sick you could spread the disease to friends, family, and those most vulnerable around you."
+    },
+    {
+        "Question": "Is there a vaccine for COVID-19?",
+        "Answer": "Yes, there are multiple COVID-19 vaccines. Certain vaccines from some countries’ regulatory authorities have been approved for use and many more COVID-19 vaccines are currently being developed. Once vaccines are demonstrated to be safe and effective, the World Health Organization (WHO) collaborates with global partners to ensure equal access to COVID-19 vaccines for the billions of people who will need it. Most COVID-19 vaccines being tested or reviewed require two doses."
+    },
+    {
+        "Question": "Should I get tested for COVID-19 before taking the vaccine?",
+        "Answer": "No, you don’t need to test for COVID-19 infection before receiving the vaccine. If a person is feeling sick or have been in close contact with someone who has tested positive for COVID-19, it is better to wait for 30-days after recovery, or after a 10-day quarantine period has been completed."
+    },
+    {
+        "Question": "Can I become resistant to the virus and its effects after having had it once?",
+        "Answer": "Yes, a person can have good protection following a single infection. Immune responses are variable and some people develop better immunity than others. A person’s immunity is boosted every time they are exposed to the virus."
+    },
+    {
+        "Question": "If I had a confirmed COVID-19 infection, should I be vaccinated?",
+        "Answer": "Yes. There is good evidence to show that persons who have antibodies to SARS-CoV-2 after infection will develop stronger immune responses to SARS-CoV-2 after vaccination. Evidence has shown that some people with mild or asymptomatic SARS-CoV-2 do not develop strong antibody responses. Therefore vaccination after COVID-19 infection is a way to strengthen our immune responses and further reduce our chances of getting COVID-19."
+    },
+    {
+        "Question": "I have just recovered from COVID-19, should I be vaccinated?",
+        "Answer": "You should wait a minimum of 30 days after recovery to receive a SARS-CoV-2 vaccine."
+    },
+    {
+        "Question": "Can a SARS-COV-2 vaccine actually give me COVID-19 infection?",
+        "Answer": "No. When a COVID-19 vaccine is injected into the shoulder muscle, the vaccine contains only a small part of the SARS-CoV-2 virus, the ‘spike protein gene’. This piece of the gene cannot replicate (grow) on its own, nor can it cause damage to the lungs that an infection with the SARS-CoV-2 virus causes. It is biologically impossible for a vaccine to give a person COVID-19 infection."
+    },
+    {
+        "Question": "Why should you wait for 30-days post-COVID-19 recovery to be vaccinated?",
+        "Answer": "The natural immune response to COVID-19 will be boosted through vaccination. Having at least 30-days between infection and vaccination would lead to an enhanced boosting of immunity."
+    },
+    {
+        "Question": "Do vaccines work from the first dose or do you need to get both?",
+        "Answer": "The vaccine will start to work about two weeks after the first dose. And a person will get maximum protection following full vaccination, in other words, both doses."
+    },
+    {
+        "Question": "Are COVID-19 vaccines safe?",
+        "Answer": "COVID-19 vaccines are developed following the same legal requirements for quality, safety and efficacy as for all other vaccines. Like all vaccines, the effects of COVID-19 vaccines are tested first in the laboratory, including in animals, and then in human volunteers. The European Medicines Agency (EMA) evaluates COVID-19 vaccines against the same high standards as for all other vaccines before they are released for use."
+    }, 
+    {
+        "Question": "Are COVID-19 vaccines effective?",
+        "Answer": "COVID-19 vaccines are developed and authorised for use following the same legal requirements and high standards for quality, safety and efficacy as for all other vaccines. Prior to marketing authorisation, vaccine efficacy is assessed in clinical trials, establishing how well the vaccine works in preventing COVID-19 disease of any severity. Benefits of a vaccine may include preventing the disease in the first place, a reduction of the number of people infected, the number of severe cases of a disease as well as the number of deaths, and the severity of the disease if contracted."
+    },
+    {
+        "Question": "Do vaccinated individuals still need to follow personal protective measures?",
+        "Answer": "At the early stages of vaccination campaigns it is not fully known to what extent fully vaccinated individuals will be protected from the disease in real-life conditions, how long they will be protected for, and what effect the vaccines will have on transmission. COVID-19 vaccines are proving to be effective at keeping people from becoming sick or seriously ill even if they do get COVID-19 disease. However, research is still ongoing on this topic, and more evidence is also needed about the ability of COVID-19 vaccines to prevent transmission."
+    },
+    {
+        "Question": "Will COVID-19 vaccines stop the pandemic?",
+        "Answer": "Vaccines are a most powerful tool in ensuring public health, and COVID-19 vaccines can be expected to play an important role in contributing to control the pandemic. At this point, the pandemic is far from being over. In the first phases of vaccination campaigns, the main objective is to slow down the pandemic, protect those who are most at risk from severe disease, and reduce the burden on healthcare systems. More time is needed until a significant proportion of the EU population will have been vaccinated."
+    },
+    {
+        "Question": "Is COVID-19 vaccination still necessary, even after getting the disease and recovering?",
+        "Answer": "Re-infection with COVID-19 occurs, although is relatively rare. Studies are ongoing, but at this point we do not know precisely how long people are naturally protected from getting COVID-19 again after clearing an infection. Early evidence suggests that such natural immunity from COVID-19 wanes over time and may not last very long. As a result, COVID-19 vaccination is recommended even for those who have recovered from the disease."
+    },
+    {
+        "Question": "Can COVID-19 be passed through breastfeeding?",
+        "Answer": "Transmission of active COVID-19 (virus that can cause infection) through breast milk and breastfeeding has not been detected to date. There is no reason to avoid or stop breastfeeding."
+    },
+    {
+        "Question": "What is the risk of infection in pregnant women and newborn babies?",
+        "Answer": "Existing data indicate that pregnant women who have contracted SARS-CoV-2 experience similar illness and symptoms to non-pregnant women. Pregnant women who have diabetes and/or are obese may experience more severe disease. A limited number of cases have been reported with good overall outcomes and no severe illness for the newborn. All pregnant women should follow the same general precautions for the prevention of COVID-19, including regular handwashing, avoiding individuals who are sick and self-isolating in the event of symptoms."
+    },
+    {
+        "Question": "Is there any treatment for COVID-19 disease?",
+        "Answer": "The treatment for people who are hospitalised with severe COVID-19 disease is largely supportive (e.g. oxygen therapy, management of fluids), mostly using a symptomatic approach, targeting the symptoms rather than the virus."
+    },
+    {
+        "Question": "How can I avoid infecting others?",
+        "Answer": "If you have any symptoms that are compatible with COVID-19, you should stay home and follow local recommendations on contacting your healthcare provider for advice about testing, isolation from others and medical care. Cough or sneeze into your elbow, or into a tissue. If you use a tissue, dispose of it carefully after a single use. Ensure you regularly clean your hands."
+    },
+    {
+        "Question": "What is physical distancing and why and how should I do it?",
+        "Answer": "The term ‘physical distancing’ means the same as the widely-used term ‘social distancing’, but it more accurately describes what is intended, namely that people should keep a physical distance from one another. The success of physical distancing measures depends on ensuring that people maintain social contact from a distance with friends, family and colleagues. Internet-based communication and the phone are therefore key tools for ensuring a successful physical distancing strategy."
+    },
+    {
+        "Question": "Are face masks effective in protecting against COVID-19?",
+        "Answer": "If you are infected, the use of medical face masks (generally pale blue in colour and available from pharmacies) may reduce the risk of you infecting others. Consider using a face mask when visiting busy, enclosed spaces where it is not possible to maintain sufficient physical distance from others, such as grocery stores and shopping centres, or when using public transport."
+    }, 
+    {
+        "Question": "When and where should I be tested for COVID-19?",
+        "Answer": "Anyone who develops symptoms of COVID-19 should be tested for the virus, wherever possible. Testing is also recommended, if possible, for people who do not have symptoms but who have been in close contact with a case of COVID-19. These tests are called ‘PCR’ (polymerase chain reaction) tests and are molecular tests that can detect the virus. They are usually conducted on samples collected from the throat or nose using a swab."
+    },
+    {
+        "Question": "Should children wear a mask?",
+        "Answer": "Children aged 5 years and under should not be required to wear masks. This is based on the safety and overall interest of the child and the capacity to appropriately use a mask with minimal assistance."
+    },
+    {
+        "Question": "What type of mask should children wear?",
+        "Answer": "Children who are in general good health can wear a non-medical or fabric mask. This provides source control, meaning it keeps the virus from being transmitted to others if they are infected and are not aware that they are infected. The adult who is providing the mask should ensure the fabric mask is the correct size and sufficiently covers the nose, mouth and chin of the child."
+    },
+    {
+        "Question": "How should children wear a mask?",
+        "Answer": "Children should be taught how to wear the mask properly, including not touching the front of the mask and not pulling it under the chin or into their mouth. They should store the mask in a bag or container, and not share the mask with others."
+    },
+    {
+        "Question": "Should a child wear a mask at home?",
+        "Answer": "Any child who has symptoms suggestive of COVID-19 should wear a medical mask, as long as they can tolerate it. The child should be isolated, and medical advice sought as soon as they start to feel unwell, even if symptoms are mild. Family members/caregivers who come within 1 metre of the sick child at home should also wear a mask."
+    },
+    {
+        "Question": "Should teachers or other adults working with children wear a mask?",
+        "Answer": "In areas where there is widespread transmission, all adults under the age of 60 and who are in general good health should wear fabric masks when they cannot guarantee at least a 1-metre distance from others. This is particularly important for adults working with children who may have close contact with children and one another."
+    },
+    {
+        "Question": "Should children wear a mask when playing sports or doing physical activities?",
+        "Answer": "Children should not wear a mask when playing sports or doing physical activities, such as running, jumping or playing on the playground, so that it doesn’t compromise their breathing. When organizing these activities for children, it is important to encourage all other critical public health measures: maintaining at least a 1-metre distance from others, limiting the number of children playing together, providing access to hand hygiene facilities and encouraging their use. "
+    },
+    {
+        "Question": "Are there alternatives to fabric masks such as face shields?",
+        "Answer": "In the context of COVID-19, some children may not be able to wear a mask due to disabilities or specific situations such as speech classes where the teacher needs to see their mouths. In these cases, face shields may be considered an alternative to masks, but they do not provide the equivalent protection in keeping the virus from being transmitted to others."
+    },
+    {
+        "Question": "What are the recommended practices once back home after outdoor activities?",
+        "Answer": "Thorough hand hygiene: washing hands with soap and water or using alcohol-based hand gel, should be performed before touching surfaces, items, pets, and people within the household environment."
+    },
+    {
+        "Question": "How should I clean food items from the grocery store or packaged items?",
+        "Answer": "There is no evidence to date of viruses that cause respiratory illnesses being transmitted via food or food packaging. Coronaviruses cannot multiply in food; they need an animal or human host to multiply. The COVID-19 virus is generally thought to be spread from person to person through respiratory droplets. Currently, there is no evidence to support transmission of the COVID-19 virus associated with food."
+    },
+    {
      "Question": "what are the recommendations by the authorities",
      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
