@@ -228,54 +228,174 @@ COVID19_QUES = [
       "Answer": "Get vaccinated and follow covid-19 restrictions."
     },
     {
-      "Question":  "i'm having a baby, should I be worried?",
-                    "What to do as a pregnant woman?",
-                    "am I at risk if I am preganant and get corona?",
-                    "What to do if i am pregnant?",
-                    "I am with child and don't know what to do",
-                    "what do i do if im pregnant",
-                    "What can I do if I am pregnant?",
-                    "buy diapers.",
-                    "How should I behave if I am pregnant",
-                    "i've got a baby on the way, what to do",
-                    "What do I do if I am pregnant? Is corona virus dangerous for me?",
-                    "Should I be isolating if I am pregnant?",
-                    "what do i do if being pregnant?",
-                    "What should I do if I am pregnant?",
-                    "What should a pregnant woman do to stay safe from the Coronavirus?",
-                    "I'm expecting a baby. what can I do?",
-                    "I am pregnant what to do to protect myself",
-                    "should i take extra precautions if im pregnant",
-                    "I'm 36 weeks pregnant. Is there anything I need to do?",
-                    "I am pregnant, what shall I do to protect myself from the virus?",
-                    "I'm pregnant, what are my precautions?"
-      "Answer":     "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+      "Question": "i'm having a baby, should I be worried?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "What to do as a pregnant woman?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "am I at risk if I am pregnant and get corona?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "What to do if i am pregnant?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "I am with child and don't know what to do",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "what do i do if im pregnant",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "What can I do if I am pregnant?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "buy diapers.",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "How should I behave if I am pregnant",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "i've got a baby on the way, what to do",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "What do I do if I am pregnant? Is corona virus dangerous for me?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "Should I be isolating if I am pregnant?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "what do i do if being pregnant?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "What should I do if I am pregnant?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "What should a pregnant woman do to stay safe from the Coronavirus?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "I'm expecting a baby. what can I do?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "I am pregnant what to do to protect myself",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "should i take extra precautions if im pregnant",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "I'm 36 weeks pregnant. Is there anything I need to do?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "I am pregnant, what shall I do to protect myself from the virus?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
+    },
+    {
+      "Question": "I'm pregnant, what are my precautions?",
+      "Answer": "If you’re pregnant your chance of getting COVID-19 is not higher than anyone else and it’s very unlikely you’ll get seriously ill with it."
      },
      {
-        "Question":   "Can an employee refuse to travel due to Coronavirus?",
-                      "Does en employee have a right to refuse to travel for work?",
-                      "Can you make employees travel for work during corona virus?",
-                      "Can anyone in my team refuse to travel during the pandemia?",
-                      "Can my employee say no to travel due to coronavirus?",
-                      "Can Employees Refuse To Travel Out Of Fear Of Contracting coronavirus?",
-                      "Are my employees allowed to deny business related travels due to the outbreak?",
-                      "Can an employee say that they dont want to travel because of coronavirus?",
-                      "Can an employee say no to travelling for work because of the corona?",
-                      "Can my employee refuse to travel because of coronavirus?",
-                      "one of my guys refuses to go abroad, can he refuse to do that?",
-                      "can my employee refuse to travel?",
-                      "Rules for work travel during corona",
-                      "can an employee be forced to travel for work during coronavirus",
-                      "Can any of my workers refuse to travel during the pandemic?",
-                      "can an eomployee fefuse to travel because of coronavirus",
-                      "they can refuse unless they want to keep their job.",
-                      "are my employees allowed to refuse travelling because of corona?",
-                      "we have a business trip to florida but an employee is scared to come",
-                      "Is ok for an employee to refuse to travel",
-                      "can employees refuse to travel in this period? Can we force them to do so?"
-        "Answer":     "Please refer to your company guidelines. "
-     },
-     {
+      "Question": "Can an employee refuse to travel due to Coronavirus?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Does en employee have a right to refuse to travel for work?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can you make employees travel for work during corona virus?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can anyone in my team refuse to travel during the pandemic?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can my employee say no to travel due to coronavirus?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can Employees Refuse To Travel Out Of Fear Of Contracting coronavirus?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Are my employees allowed to deny business related travels due to the outbreak?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can an employee say that they dont want to travel because of coronavirus?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can an employee say no to travelling for work because of the corona?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can my employee refuse to travel because of coronavirus?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "one of my guys refuses to go abroad, can he refuse to do that?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "can my employee refuse to travel?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Rules for work travel during corona",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "can an employee be forced to travel for work during coronavirus",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Can any of my workers refuse to travel during the pandemic?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "can an employee refuse to travel because of coronavirus",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "they can refuse unless they want to keep their job.",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "are my employees allowed to refuse travelling because of corona?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "we have a business trip to florida but an employee is scared to come",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "Is ok for an employee to refuse to travel",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
+      "Question": "can employees refuse to travel in this period? Can we force them to do so?",
+      "Answer": "Please refer to your company guidelines. "
+    },
+    {
         "Question": "Who is eligible for coronavirus test?",
                      "Who should be tested against coronavirus?",
                      "does my family need to get tested?",
