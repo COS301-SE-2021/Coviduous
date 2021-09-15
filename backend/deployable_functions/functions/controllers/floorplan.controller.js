@@ -71,6 +71,18 @@ let uuid = require("uuid");
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
+/**
+ * @swagger
+ * /floorplan:
+ *   post:
+ *     description: create a floorplan
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 floorPlanApp.post('/api/floorplan',async (req, res) => {
   let fieldErrors = [];
 
@@ -184,7 +196,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /floorplan/floor:
+ *   post:
+ *     description: create a floor in a floorplan
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   //This function adds a single floor to a specific floorplan
   floorPlanApp.post('/api/floorplan/floor', async (req, res) => {
     try {
@@ -253,7 +276,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /floorplan/room:
+ *   post:
+ *     description: create a room in a floor
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   //This function adds a single floor to a specific floorplan
   floorPlanApp.post('/api/floorplan/room',async (req, res) => {
   try {
@@ -340,6 +374,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
+/**
+ * @swagger
+ * /floorplan/view:
+ *   post:
+ *     description: retrieve all floorplans by companyId
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   floorPlanApp.post('/api/floorplans/view', async (req, res) => {
   try {
         let reqJson = JSON.parse(req.body);
@@ -393,6 +439,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
+/**
+ * @swagger
+ * /floorplan/floors:
+ *   post:
+ *     description: retrieve all floors by floorplanNumber
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
     floorPlanApp.post('/api/floorplan/floors/view',async (req, res) => {
     try {
         let reqJson = JSON.parse(req.body);
@@ -438,7 +496,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /floorplan/floors/rooms:
+ *   post:
+ *     description: retrieve all rooms by floorNumber
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
    floorPlanApp.post('/api/floorplan/rooms/view',async (req, res) => {
   try {
       let reqJson = JSON.parse(req.body);
@@ -497,7 +566,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /floorplan/room:
+ *   put:
+ *     description: update a room's details
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   floorPlanApp.post('/api/floorplan/room/update',async (req, res) => {
 
     let reqJson = JSON.parse(req.body);
@@ -544,7 +624,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /floorplan/room:
+ *   delete:
+ *     description: delete a room by roomNumber
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   floorPlanApp.delete('/api/floorplan/room/delete', async (req, res) => {
   try {
         // getDesk()
@@ -618,7 +709,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /floorplan/floor:
+ *   delete:
+ *     description: delete a floor by floorNumber
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
  floorPlanApp.delete('/api/floorplan/floor/delete', async (req, res) => {
   try {
     let filteredList=[];
@@ -741,7 +843,18 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  * @param res The response object is sent back to the requester, containing the status code and a message.
  * @returns res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /floorplan:
+ *   delete:
+ *     description: delete a floorplan by floorplanNumber
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
  floorPlanApp.delete('/api/floorplan/delete', async (req, res) => {
   try {
     let filteredList=[];
