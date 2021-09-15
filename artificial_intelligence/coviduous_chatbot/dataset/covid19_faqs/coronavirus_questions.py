@@ -88,6 +88,90 @@ COVID19_QUES = [
      "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
     },
     {
+        "Question": "What happens to people who get COVID-19?",
+        "Answer": "Among those who develop symptoms, most (about 80%) recover from the disease without needing hospital treatment. About 15% become seriously ill and require oxygen and 5% become critically ill and need intensive care."
+    },
+    {
+        "Question": "Who is most at risk of severe illness from COVID-19?",
+        "Answer": "People aged 60 years and over, and those with underlying medical problems like high blood pressure, heart and lung problems, diabetes, obesity or cancer, are at higher risk of developing serious illness. However, anyone can get sick with COVID-19 and become seriously ill or die at any age."
+    },
+    {
+        "Question": "Are there long-term effects of COVID-19?",
+        "Answer": "Some people who have had COVID-19, whether they have needed hospitalization or not, continue to experience symptoms, including fatigue, respiratory and neurological symptoms."
+    },
+    {
+        "Question": "How can we protect others and ourselves if we don't know who is infected?",
+        "Answer": "Stay safe by taking some simple precautions, such as physical distancing, wearing a mask, especially when distancing cannot be maintained, keeping rooms well ventilated, avoiding crowds and close contact, regularly cleaning your hands, and coughing into a bent elbow or tissue."
+    },
+    {
+        "Question": "When should I get a test for COVID-19?",
+        "Answer": "Anyone with symptoms should be tested, wherever possible. People who do not have symptoms but have had close contact with someone who is, or may be, infected may also consider testing – contact your local health guidelines and follow their guidance."
+    },
+    {
+        "Question": "What test should I get to see if I have COVID-19?",
+        "Answer": "In most situations, a molecular test is used to detect SARS-CoV-2 and confirm infection. Polymerase chain reaction (PCR) is the most commonly used molecular test. Samples are collected from the nose and/or throat with a swab."
+    },
+    {
+        "Question": "I want to find out if I had COVID-19 in the past, what test could I take?",
+        "Answer": "Antibody tests can tell us whether someone has had an infection in the past, even if they have not had symptoms. Also known as serological tests and usually done on a blood sample, these tests detect antibodies produced in response to an infection."
+    },
+    {
+        "Question": "What is isolation?",
+        "Answer": "Isolation is used for people with COVID-19 symptoms or who have tested positive for the virus. Being in isolation means being separated from other people, ideally in a medically facility where you can receive clinical care.  If isolation in a medical facility is not possible and you are not in a high risk group of developing severe disease, isolation can take place at home."
+    },
+    {
+        "Question": "What is quarantine?",
+        "Answer": "Quarantine is used for anyone who is a contact of someone infected with the SARS-CoV-2 virus, which causes COVID-19, whether the infected person has symptoms or not. Quarantine means that you remain separated from others because you have been exposed to the virus and you may be infected and can take place in a designated facility or at home. For COVID-19, this means staying in the facility or at home for 14 days."
+    },
+    {
+        "Question": "Do I need to retest before returning to work?",
+        "Answer": "At present, re-testing people who have experienced mild illness, and have recovered from COVID-19 is not recommended. A person is considered safe to return to the workplace and discontinue self-isolation if they are no longer infectious. This means they developed their first symptoms more than 10 days prior and have not experienced any symptoms for at least 3 days (72 hours)."
+    }, #30
+    {
+        "Question": "Is it a fact that after 10 days you can't transfer the virus anymore?",
+        "Answer": "The most infectious period is thought to be 1 to 3 days before symptoms start, and in the first 7 days after symptoms begin. But some people may remain infectious for longer and this is because typically with viruses, the higher the viral load (the more virus circulating in the body), the higher the risk of transmission through known transmission pathways. So the more severe the illness and the higher the viral load, the longer you continue to shed the virus and are infectious."
+    },
+    {
+        "Question": "Should’nt I be tested negative first before returning to work?",
+        "Answer": "People who have been self-quarantining, because they had contact with a confirmed case of COVID-19 and have completed their 10-day quarantine period without developing symptoms, can return to work on day 11. There is no requirement to be tested prior to returning to the work. It is, however, recommended they continue to practice social distancing and good hygiene as a precaution and wear a surgical mask."
+    },
+    {
+        "Question": "My colleague tested positive for COVID-19, what must I do?",
+        "Answer": "If you work closely in the same environment as a person with COVID-19, you will need to self-quarantine for 10 days because you have had high-risk exposure. High-risk exposure means you have had direct, close contact for more than 15 minutes with someone who tested positive for COVID-19, and you did not wear protective cloth face masks or you had physical contact or took other risks that could have exposed you to the COVID-19 virus."
+    },
+    {
+        "Question": "What must I do if I have tested negative but the symptoms are still there?",
+        "Answer": "A patient can have a false negative if they have very little virus up there or perhaps the specimen was taken inappropriately. It didn’t get up high enough to actually get to the place where the virus was located. If a patient presents with symptoms of COVID-19 — cough, fever, shortness of breath — but they test negative, they should consult their health practitioner for further assessment."
+    },
+    {
+        "Question": "What role do masks play in the prevention of COVID-19?",
+        "Answer": "Masks may help prevent the transmission of COVID-19 by stopping the spread of respiratory droplets when people talk, sneeze or cough."
+    },
+    {
+        "Question": "Does a mask replace other prevention methods, like washing hands?",
+        "Answer": "No, the 5 golden rules should be always be followed: wash your hands for at least 20 seconds with soap and water; do not touch your face with unwashed hands; cough or sneeze into your elbow or a tissue; keep 1,5 metres apart from other people (social distancing); stay at home if you are unwell."
+    },
+    {
+        "Question": "When should I use a cloth mask?",
+        "Answer": "Cloth masks can be used when you are out in public. Like when you are travelling to work on public transport or doing shopping."
+    },
+    {
+        "Question": "How do I put the mask on and take it off?",
+        "Answer": "Before putting on the mask: wash or sanitize your hands, place the mask against your face making sure it covers your nose and mouth. When wearing the mask: do not touch your face, do not fiddle with the mask, do not touch the mask with your hands,  remove the mask if it is damp or wet. When removing the mask: only touch the straps to remove the mask away from your face, put the mask in a container until you wash it or wash it immediately, wash or sanitize your hands after removing the mask. "
+    },
+    {
+        "Question": "Can I wear the same mask all day every day?",
+        "Answer": "No, you will need 2 masks so that you can wash one and wear one. Wash your mask daily with soap and hot water. The mask is best dried in the sun and ironed. Do not share your mask with anyone."
+    },
+    {
+        "Question": "Do I have to wear a mask when I travel?",
+        "Answer": "Wearing a mask over your nose and mouth is required on planes, buses, trains, and other forms of public transportation traveling into, within, or out of a country."
+    },
+    {
+        "Question": "How can I protect myself from COVID-19 when using different types of transportation?",
+        "Answer": "Maintaining physical distance to prevent COVID-19 is often difficult on public transportation conveyances. People may not be able to distance themselves by the recommended minimum of 6 feet from other people seated nearby or those standing in or passing through the aisles on airplanes, trains, or buses."
+    },
+    {
      "Question": "what are the recommendations by the authorities",
      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
