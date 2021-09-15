@@ -492,6 +492,130 @@ COVID19_QUES = [
         "Answer": "Based on the information we have from health centres right now, these variants seem to spread more easily and quickly than previous strains and could increase the overall spread of the virus that causes COVID-19."
     },
     {
+        "Question": "Do these variants cause more severe disease?",
+        "Answer": "Currently, there is no evidence that these variants cause more severe illness or increased risk of death than previous circulating strains.  However, a higher rate of transmission could lead to more cases, which would increase the number of people who need clinical care."
+    },
+    {
+        "Question": "What measures are necessary to prevent the spread of these new variants?",
+        "Answer": "The most effective ways to prevent the spread of this virus, no matter the strain, remain the same as have been previously stressed by public health experts.  That means wearing a mask, staying at least 6 feet apart from others, avoiding crowds, ventilating indoor spaces, and washing hands frequently are the most effective tools to slow the spread of this virus, no matter the strain. "
+    },
+    {
+        "Question": "Are these new variant strains some kind of new supervirus?",
+        "Answer": "No. Viruses constantly change through mutation, and new variants of a virus are expected to occur over time.  Sometimes new variants emerge and disappear quickly.  Other times, new variants emerge and start infecting people.  Multiple variants of the virus that causes COVID-19 have been documented in the United States and globally during this pandemic."
+    },
+    {
+        "Question": "Are COVID-19 vaccines safe for people living with HIV?",
+        "Answer": "Many of the COVID-19 vaccines studies have included a small number of people living with HIV in their trials. Despite limited data, available information suggests current WHO recommended COVID-19 vaccines ( AstraZeneca/Oxford, Johnson and Johnson, Moderna, Pfizer/BionTech, Sinopharm and Sinovac) are safe for people living with HIV. The currently available vaccine products are not live vaccines, they include genetic material from SARS-CoV-2 which cannot replicate."
+    },
+    {
+        "Question": "Do COVID-19 vaccines provide protection for people living with HIV?",
+        "Answer": "It is theoretically possible that people living with HIV with low CD4 cell counts might have a weaker immune response to vaccines. However, in practice this has not been documented for all vaccines and there is no evidence to support a less robust immune response to COVID-19 vaccines among people living with HIV and low CD4 cell counts."
+    },
+    {
+        "Question": "Can I get sick with COVID-19 through contact with urine, faeces or sewage?",
+        "Answer": "While fragments of SARS-CoV-2 genetic material (RNA) have been detected in the urine or faeces of some patients, there have been no reports to date of transmission of COVID-19 through urine or faeces. It remains important to protect yourself with personal protective equipment whenever contact with bodily fluids may occur and to clean your hands frequently."
+    },
+    {
+        "Question": "Can I get sick with COVID-19 from swimming in the sea, rivers, lakes or swimming pools?",
+        "Answer": "Available evidence suggests that SARS-CoV-2 does not spread from water. Natural bodies of water and swimming pools do not appear to pose a risk for COVID-19 transmission even if polluted by faeces or wastewater. Pools are usually treated regularly to prevent contamination with a range of pathogens which could be present."
+    },
+    {
+        "Question": "Can I get sick with COVID-19 from drinking water?",
+        "Answer": "The risk coronaviruses pose to drinking water is considered to be low and SARS-CoV-2 virus has not been detected in drinking water supplies. Drinking water treatment methods neutralize infectious pathogens present in the water. SARS-CoV-2 is an enveloped virus, which means it has a fragile fatty envelope that is easily destroyed by the treatment process. Therefore, treated drinking water does not pose a risk for COVID-19."
+    },
+    {
+        "Question": "How can food businesses remain safe from virus contamination?",
+        "Answer": "The main priority is to keep the virus out of the food environment. Several key measures are required including upgrading of cleaning and sanitation measures, disinfecting surfaces and high-touch points, educating staff on the virus and how to protect themselves and others, reinforcing protocols such as physical distancing, hand washing, and improved security with people staying in their vehicles/sanitizing hands when handing out documents and other material."
+    },
+    {
+        "Question": "Should grocery store workers wear gloves and masks?",
+        "Answer": "Gloves may be used by food workers but must be changed frequently and hands must be washed between glove changes and when gloves are removed. Gloves must be changed after carrying out non-food related activities such as opening/closing doors by hand, and emptying bins. Face Masks do not have to be routinely used by food workers to protect against transmission of COVID-19. However, for some food processing activities, such as working in abattoirs or handling cooked, ready-to-eat foods, wearing face masks is a usual practice."
+    }, 
+    {
+        "Question": "What is the protocol when an employee working in a food business becomes ill with COVID-19?",
+        "Answer": "Staff who are feeling unwell should not report to work and should seek medical advice. However, in the event that a food worker becomes unwell in the workplace with typical symptoms of COVID-19, they should be removed to an area away from other people. If possible, find a room or area where they can be isolated behind a closed door, such as a staff office. If it is possible to open a window, do so for ventilation. Arrangements should be made for the unwell employee to be removed quickly from the food premise."
+    },
+    {
+        "Question": "When can an employee return to work following illness? Are temperature checks appropriate?",
+        "Answer": "A return to work policy for staff who have been infected and recovered from COVID-19 should be in place. WHO recommends that a confirmed patient could be released from isolation once their symptoms resolve and they have two negative PCR tests at least 24 hours apart.  If testing is not possible, WHO recommends that a confirmed patient can be released from isolation 14 days after symptoms resolve. "
+    },
+    {
+        "Question": "What specific precautions do food workers need to take?",
+        "Answer": "Physical distancing, good personal hygiene with frequent hand washing, and application of general food hygiene measures are the most important precautions food workers should adopt. Physical distancing is very important to help slow the spread of coronavirus. This is achieved by minimising contact between potentially infected individuals and healthy individuals. Frequent hand washing with soap and water and use of hand sanitizers are also important in reducing the risk of transmission. "
+    },
+    {
+        "Question": "How should baked goods and fresh produce be displayed in a food market/grocery store?",
+        "Answer": "It is important to maintain good hygiene practices around open food displays, with ready-to-eat food products such as salad bars, fresh produce displays and bakery products. Consumers should always be advised to wash fruits and vegetables with potable water prior to consumption. Both customers and staff should strictly observe good personal hygiene practices at all times around open food areas."
+    },
+    {
+        "Question": "How should shopping trolleys or carts be disinfected?",
+        "Answer": "The handles of shopping trolleys or carts should be frequently cleaned using either alcohol-based sanitizers or chlorine-based disinfectants (sodium hypochlorite). Sanitizers, paper towels and trash bins should be placed outside the retail premises close to the trolley park for customers to use."
+    },
+    {
+        "Question": "What is the most appropriate sanitizer to use on surfaces in a food production environment?",
+        "Answer": "In general, alcohol-based disinfectants (ethanol, propan-2-ol, propan-1-ol) have been shown to significantly reduce infectivity of enveloped viruses like SARS-CoV-2, in concentrations of 70-80% with one-minute exposure time. Chlorine-based disinfectants (sodium hypochlorite) are effective for surface decontamination, as are disinfectants with active ingredients based on quaternary ammonium compounds (QUATS)."
+    },
+    {
+        "Question": "Could the virus be transmitted from humans to food animals or vice versa?",
+        "Answer": "Currently, there is no evidence to suggest that food animals could be a possible route for transmission of COVID-19 to humans or that food animals can become infected by humans. Studies are underway to better understand the susceptibility of different animal species to the COVID-19 virus and to assess infection dynamics in susceptible animal species. Additional information can be found on the website of the World Organisation for Animal Health (OIE). "
+    },
+    {
+        "Question": "What measures should be taken to ensure safe transport of food during this pandemic?",
+        "Answer": "Ensuring that employees delivering foods are free from COVID-19, coughing/sneezing etiquette is practiced by all involved in food transport and that frequent hand washing/sanitizing is practiced and staff practice physical distancing."
+    },
+    {
+        "Question": "How should food premises be cleaned/disinfected during this pandemic?",
+        "Answer": "If a suspected or confirmed case of COVID-19 is identified in a food premises then there is a requirement to completely clean the area with a neutral detergent, followed by decontamination of surfaces using a disinfectant effective against viruses. All surfaces that the infected employee has come into contact with must be cleaned, including all surfaces and objects which are visibly contaminated with body fluids/respiratory secretions, and all potentially contaminated high-contact areas such as toilets, door handles, telephones."
+    },
+    {
+        "Question": "Will I be tested for coronavirus disease as a close contact?",
+        "Answer": "You will only have a laboratory test performed if you develop symptoms within 10 days of your last close contact with a person with COVID-19 who is considered infectious, i.e. able to transmit infection. A person with COVID-19 is considered infectious from 2 days before to 10 days after they became ill. "
+    }, 
+    {
+        "Question": "Will my own close contacts be tested for coronavirus disease?",
+        "Answer": "No, your close contacts will only have laboratory testing if you are first confirmed to have COVID-19 and they develop symptoms. "
+    },
+    {
+        "Question": "Why have I been asked to quarantine at home?",
+        "Answer": "You have been exposed to a person with COVID-19 while they were still able to transmit infection. It is therefore possible that you have been infected with the new coronavirus (SARS-CoV-2). Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community. In particular, staying at home will help prevent possible spread to the most vulnerable people in our communities, who are at risk for severe illness."
+    },
+    {
+        "Question": "What does my home quarantine mean for me?",
+        "Answer": "Stay at home. Do not go to work, school, or any public areas. If necessary, talk to your employer and let them know that you cannot come to work. Do not use any public transport (including buses, minibus taxis and taxi cabs). Do not travel. You should cancel all your routine medical and dental appointments. If possible, you should not even go out to buy food, medicines or other essentials. You should ask friends or relatives to help you to buy groceries and essentials."
+    },
+    {
+        "Question": "What does my home quarantine mean for other people who live in my household?",
+        "Answer": "If you live with other people, as far as possible, you should stay in a separate room and away from other people in your household. If a separate room is not possible, try to keep to one area of your home, at least 2 meters (3 steps) away from other people. Limit contact with any pets and animals. Wash your hands regularly using soap and water for at least 20 seconds or use alcohol-based hand sanitizers (containing at least 60% alcohol)."
+    },
+    {
+        "Question": "How long will I need to quarantine at home?",
+        "Answer": "You can end your home quarantine 10 days after your last contact with a person with COVID-19. No laboratory tests will be done at any time during your home quarantine period, unless you develop symptoms."
+    },
+    {
+        "Question": "Do other members of my household need to stay at home during my quarantine period?",
+        "Answer": "If you live with other people, and you are able to stay physically apart from them, they can continue their usual activities outside the home.  If you are unable to stay apart from members of your household, they should also quarantine for the same period."
+    },
+    {
+        "Question": "What symptoms do I need to monitor for during my home quarantine?",
+        "Answer": "If you develop a fever, cough, shortness of breath, sore throat, muscle aches or other flu-like symptoms from 2 to 10 days after your close contact with a person with COVID-19, you should immediately contact your healthcare provider. If you become ill, you should cover your mouth and nose if you sneeze or cough with disposable face tissue or into your elbow. Dispose of tissues then immediately wash your hands."
+    },
+    {
+        "Question": "When is a pandemic declared?",
+        "Answer": "Generally, the WHO will declare a pandemic when there is sustained community outbreaks on different continents."
+    },
+    {
+        "Question": "What is the difference between an outbreak, epidemic and pandemic?",
+        "Answer": "An outbreak is a sudden rise in cases of a disease in a particular place. An epidemic is a large outbreak. A pandemic means a global epidemic."
+    },
+    {
+        "Question": "Does a pandemic reflect the severity of a disease?",
+        "Answer": "A pandemic has nothing to do with how serious an illness is. It just means a disease is spreading widely and at an alarming rate."
+    },
+    {
+        "Question": "What can I do to minimise the risk of infection?",
+        "Answer": "The virus is very susceptible to common anti-bacterial cleaning agents such as bleach, and alcohol-based cleaners (60% volume). Regularly and thoroughly clean your hands with an alcohol-based hand rub or wash them with soap and water for at least 20 seconds. Maintain at least 1 metre distance between yourself and anyone who is coughing or sneezing. Avoid touching your eyes, nose or mouth with unclean hands."
+    },
+    {
      "Question": "what are the recommendations by the authorities",
      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
