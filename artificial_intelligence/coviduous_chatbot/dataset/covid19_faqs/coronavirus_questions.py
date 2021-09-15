@@ -17,7 +17,7 @@ COVID19_QUES = [
     },
     {
      "Question": "Should I use soap and water or hand sanitizer to protect against COVID-19?",
-     "Answer": "Handwashing is one of the best ways to protect yourself and your family from getting sick. Wash your hands often with soap and water for at least 20 seconds, especially after blowing your nose, coughing, or sneezing; going to the bathroom; and before eating or preparing food. If soap and water are not readily available, use an alcohol-based hand sanitizer with at least 60% alcohol."
+     "Answer": "Hand washing is one of the best ways to protect yourself and your family from getting sick. Wash your hands often with soap and water for at least 20 seconds, especially after blowing your nose, coughing, or sneezing; going to the bathroom; and before eating or preparing food. If soap and water are not readily available, use an alcohol-based hand sanitizer with at least 60% alcohol."
     },
     {
      "Question": "What are the symptoms and complications that COVID-19 can cause?",
@@ -52,8 +52,8 @@ COVID19_QUES = [
      "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected. Each health department determines community spread differently based on local conditions."
     },
     {
-     "Question": "What is multisystem inflammatory syndrome in children (MIS-C)? ",
-     "Answer": "Multisystem inflammatory syndrome in children (MIS-C) is a serious condition associated with COVID-19 where different body parts can become inflamed, including the heart, lungs, kidneys, brain, skin, eyes, or gastrointestinal organs."
+     "Question": "What is multi system inflammatory syndrome in children (MIS-C)? ",
+     "Answer": "Multi system inflammatory syndrome in children (MIS-C) is a serious condition associated with COVID-19 where different body parts can become inflamed, including the heart, lungs, kidneys, brain, skin, eyes, or gastrointestinal organs."
     },
     {
      "Question": "Can someone test negative and later test positive on a viral test for COVID-19?",
@@ -88,48 +88,146 @@ COVID19_QUES = [
      "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
     },
     {
-     "Question":   "what are the recommendations by the authorities",
-                   "what do the health authorities command",
-                   "what does the government recommend to do?",
-                   "What are the health recommendations for coronavirus?",
-                   "What are the recommendations of Health Authority?",
-                   "What are the recommendations of our health authorities?",
-                   "_",
-                   "What Health authorities recommends?",
-                   "what does the health authority reccomend",
-                   "What are the recommendations?",
-                   "What should I do?",
-                   "What is the recommendations of the Board of Health?",
-                   "What does the health authority recommend?",
-                   "what is the government recommending?",
-                   "what are the heath authorities recommendations in denmark?",
-                   "What isPublic Health Service recommendation",
-     "Answer":     "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
-     },
-     {
-      "Question":  "What precautions should I take if I am part of a risk group?",
-                   "What should I do if i'm a person who is more vulnerable than others",
-                   "What can I do if I am a part of an at risk group?",
-                   "I'm 85 old. What should I do?",
-                   "what do I do if I am in the the riskgroup",
-                   "what should i do if i'm part of an at risk group",
-                   "How to stay safe from corona virus if I am in a risk group?",
-                   "What do I do if I am at risk",
-                   "I've seen I'm in a risk group. what should I do?",
-                   "im at risk.. what do i do",
-                   "What should I do if I'm in an at risk group?",
-                   "What to do if i am a part of the risk group?",
-                   "send thoughts and prayers",
-                   "i'm 28 am i gonna catch it",
-                   "I have a lung disease. What should I do?",
-                   "What is the guidance for people in risk group?",
-                   "How should I react if I'm part of the risk groups?",
-                   "What to do if I'm one of the people with a risk profile?",
-                   "If I am in the risk group, what I shall do to protect myself?",
-                   "who should I avoid to not get corona?",
-     "Answer":     "Get vaccinated and follow covid-19 restrictions."
-     },
-     {
+     "Question": "what are the recommendations by the authorities",
+     "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+     "Question": "what do the health authorities command",
+     "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+     "Question": "what does the government recommend to do?",
+     "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What are the health recommendations for coronavirus?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What are the recommendations of Health Authority?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What are the recommendations of our health authorities?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What Health authorities recommends?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "what does the health authority recommend",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What are the recommendations?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What should I do?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What is the recommendations of the Board of Health?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What does the health authority recommend?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "what is the government recommending?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "what are the heath authorities recommendations in denmark?",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What isPublic Health Service recommendation",
+      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
+    },
+    {
+      "Question": "What precautions should I take if I am part of a risk group?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "What should I do if i'm a person who is more vulnerable than others",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "What can I do if I am a part of an at risk group?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "I'm 85 old. What should I do?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "what do I do if I am in the the risk group",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "what should i do if i'm part of an at risk group",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "How to stay safe from corona virus if I am in a risk group?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "What do I do if I am at risk",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "I've seen I'm in a risk group. what should I do?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "im at risk.. what do i do",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "What should I do if I'm in an at risk group?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "What to do if i am a part of the risk group?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "send thoughts and prayers",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "i'm 28 am i gonna catch it",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "I have a lung disease. What should I do?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "What is the guidance for people in risk group?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "How should I react if I'm part of the risk groups?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "What to do if I'm one of the people with a risk profile?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "If I am in the risk group, what I shall do to protect myself?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
+      "Question": "who should I avoid to not get corona?",
+      "Answer": "Get vaccinated and follow covid-19 restrictions."
+    },
+    {
       "Question":  "i'm having a baby, should I be worried?",
                     "What to do as a pregnant woman?",
                     "am I at risk if I am preganant and get corona?",
