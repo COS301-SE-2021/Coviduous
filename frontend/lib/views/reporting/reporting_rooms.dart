@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -76,8 +78,21 @@ class ReportingRoomsState extends State<ReportingRooms> {
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height/6,
-                            child: Image(
-                              image: AssetImage('assets/images/placeholder-office-room.png'),
+                            width: MediaQuery.of(context).size.height/6,
+                            child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
+                                ? ClipRect(
+                              child: OverflowBox(
+                                maxWidth: double.infinity,
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Image(
+                                      image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                                  ),
+                                ),
+                              ),
+                            )
+                                : Image(
+                                image: AssetImage('assets/images/placeholder-office-room.png')
                             ),
                           ),
                         ],
@@ -142,8 +157,23 @@ class ReportingRoomsState extends State<ReportingRooms> {
                                                                 height: (!globals.getIfOnPC())
                                                                     ? MediaQuery.of(context).size.height/5
                                                                     : MediaQuery.of(context).size.height/8,
-                                                                child: Image(
-                                                                  image: AssetImage('assets/images/placeholder-office-room.png'),
+                                                                width: (!globals.getIfOnPC())
+                                                                    ? MediaQuery.of(context).size.height/5
+                                                                    : MediaQuery.of(context).size.height/8,
+                                                                child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
+                                                                    ? ClipRect(
+                                                                  child: OverflowBox(
+                                                                    maxWidth: double.infinity,
+                                                                    child: FittedBox(
+                                                                      fit: BoxFit.cover,
+                                                                      child: Image(
+                                                                          image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                                    : Image(
+                                                                    image: AssetImage('assets/images/placeholder-office-room.png')
                                                                 ),
                                                               ),
                                                               Expanded(
