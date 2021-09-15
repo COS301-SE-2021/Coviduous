@@ -165,17 +165,21 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                     children: <Widget>[
                                       Container(
                                         alignment: Alignment.center,
-                                        margin: EdgeInsets.all(20.0),
-                                        child: (fileBytes != null) ? Image(
-                                          alignment: Alignment.center,
-                                          image: MemoryImage(fileBytes),
-                                          width: double.maxFinite,
-                                          height: MediaQuery.of(context).size.height/6,
+                                        margin: EdgeInsets.all(20),
+                                        height: MediaQuery.of(context).size.height/6,
+                                        width: MediaQuery.of(context).size.height/6,
+                                        child: (fileBytes != null) ? OverflowBox(
+                                          maxWidth: double.infinity,
+                                          child: FittedBox(
+                                            fit: BoxFit.cover,
+                                            child: Image(
+                                              alignment: Alignment.center,
+                                              image: MemoryImage(fileBytes),
+                                            ),
+                                          ),
                                         ) : Image(
                                           alignment: Alignment.center,
                                           image: AssetImage('assets/images/placeholder-office-room.png'),
-                                          width: double.maxFinite,
-                                          height: MediaQuery.of(context).size.height/6,
                                         ),
                                       ),
                                       Text('Selected file: ' + pickerFileName),
