@@ -934,6 +934,187 @@ COVID19_QUES = [
    {
      "Question": "im not at risk. what do i do",
      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "question": "Can I get COVID-19 from animals when travelling to other countries?",
+     "answer": "Although the current spread and growth of the COVID-19 outbreak is primarily associated with spread from person to person, experts agree that the virus likely originated from bats and may have passed through an intermediary animal source (currently unknown) in China before being transmitted to humans.If animals are imported from an affected area: they should be closely monitored for signs of illness, you should contact a veterinarian if they become sick, and call ahead to ensure they are aware of the circumstances"
+   },
+   {
+     "question": "How can I protect myself and others?",
+     "answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."
+   },
+   {
+     "question": "Where did COVID-19 come from?",
+     "answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."
+   },
+   {
+     "question": "Can my pet or other animals get sick from COVID-19?",
+     "answer": "However, livestock producers should follow normal bio-security measures as always.This includes limiting visitors or workers who may have travelled to, or been in contact with, someone from an affected area."
+   },
+   {
+     "question": "How can I protect my child from COVID-19?",
+     "answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."
+   },
+   {
+     "question": "What is COVID-19? ",
+     "answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+   },
+   {
+     "question": "What does shelter-in-place mean? ",
+     "answer": "nan"
+   },
+   {
+     "question": "What does socially distancing even mean?",
+     "answer": "It is avoiding crowds, mass gatherings, and maintaining at least a 6 foot distance fom others.This means no handshakes, hugs, or high-fives."
+   },
+   {
+     "question": "What is social distancing and how does it help to minimize COVID-19?",
+     "answer": "Social distancing is one of the most effective ways to reduce the spread of illness during an outbreak, but it is sometimes hard to understand what this means given the vague language.This does mean making changes to your everyday routine to minimize contacts with others, including:   avoiding non-essential gatherings avoiding common greetings, such as handshakes avoiding crowded places such as concerts, arenas, conferences and festivals limiting contact with people at higher risk like older adults and those in poor health keeping a distance of at least 2 arms-length (approximately 6 feet) from others  For example - if you need to go grocery shopping, limit to once a week."
+   },
+   {
+     "question": "What does it mean to be isolated?",
+     "answer": "If the infected person lives with others, it'll be important that they stay in another room, or be separated from others as much as possible.Avoid sharing household items (like dishes, cups, towels, bedding) with the infected person."
+   },
+   {
+     "question": "What is a coronavirus?",
+     "answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+   },
+   {
+     "question": "Can I get COVID-19 from animals when travelling to other countries?",
+     "answer": "Although the current spread and growth of the COVID-19 outbreak is primarily associated with spread from person to person, experts agree that the virus likely originated from bats and may have passed through an intermediary animal source (currently unknown) in China before being transmitted to humans.If animals are imported from an affected area: they should be closely monitored for signs of illness, you should contact a veterinarian if they become sick, and call ahead to ensure they are aware of the circumstances"
+   },
+   {
+     "question": "Can COVID-19 be transmitted when a person is not showing symptoms?",
+     "answer": "Experts believe that this is possible, though it is considered less common.Canada public health services is currently investigating into this question further."
+   },
+   {
+     "question": "What does socially distancing even mean?",
+     "answer": "It is avoiding crowds, mass gatherings, and maintaining at least a 6 foot distance fom others.This means no handshakes, hugs, or high-fives."
+   },
+   {
+     "question": "What is social distancing and how does it help to minimize COVID-19?",
+     "answer": "Social distancing is one of the most effective ways to reduce the spread of illness during an outbreak, but it is sometimes hard to understand what this means given the vague language.This does mean making changes to your everyday routine to minimize contacts with others, including:   avoiding non-essential gatherings avoiding common greetings, such as handshakes avoiding crowded places such as concerts, arenas, conferences and festivals limiting contact with people at higher risk like older adults and those in poor health keeping a distance of at least 2 arms-length (approximately 6 feet) from others  For example - if you need to go grocery shopping, limit to once a week."
+   },
+   {
+     "question": "We are currently on lockdown... can I go outside? Can I work out outside? Can I go for a run? Can I go for a walk? ",
+     "answer": "nan"
+   },
+   {
+     "question": "Can I take my child to the playground?",
+     "answer": "nan"
+   },
+   {
+     "question": "How can I and my family prepare for COVID-19?",
+     "answer": "nan"
+   },
+   {
+     "question": "What can I do to reduce my and my family's risk of getting COVID-19?",
+     "answer": "Wash your hands with soap and water for at least 20 seconds, especially after blowing your nose, coughing, sneezing, using the restroom, and before eating or preparing food.Please also clean and disinfect frequently touched surfaces (e.g. tables, counter-tops, light switches, door knobs, cabinet handles)."
+   },
+   {
+     "question": "How can I protect my child from COVID-19?",
+     "answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."
+   },
+   {
+     "question": "What should I do if I just returned from a trip?",
+     "answer": "Self-isolate means: stay home and keep your distance from others do not have visitors, especially older adults, or those with medical conditions who are at a higher risk of developing serious illness Monitor your health for fever, cough or difficulty breathing. If you develop a fever, cough or difficulty breathing within 14 days: Continue to isolate yourself from others Immediately call a health care professional or public health authority and: describe your symptoms and travel history follow their instructions carefully"
+   },
+   {
+   "question": "Any advice about how to minimize risk during grocery shopping trips or getting takeout.",
+   "answer": "For that reason, it is critical to wash your hands often, including utensils.The CDC recommends that if you are sick, stay home until you are better and no longer pose a risk of infecting others."
+   },
+   {
+   "question": "Should I go to work if there is an outbreak in my community?", "answer": "nan"
+   },
+   {
+   "question": "Can i go to the funeral of someone who died of COVID-19?", "answer": "Right now, there is currently no known risk with being in the same room at a funeral or visitation service with the body of someone who has died of COVID-19.That being said, currently, we all must avoid large gatherings and stay at home as much as possible."
+   },
+   {
+   "question": "We are currently on lockdown... can I go outside? Can I work out outside? Can I go for a run? Can I go for a walk? ",
+   "answer": "nan"
+   },
+   {
+   "question": "What caused COVID-19? ",
+   "answer": "Their symptoms are severe acute respiratory illness which includes fever, cough, and shortness of breath. The virus does not pass easily person-to-person unless there is close contact, which includes providing unprotected care to a patient."
+   },
+   {
+   "question": "What are the complications of COVID-19? ",
+   "answer": "nan"
+   },
+   {
+   "question": "What is the treatment for COVID-19?",
+   "answer": "Most people with mild coronavirus illness will recover on their own. If you are concerned about your symptoms, you should self-monitor and consult your health care provider."
+   },
+   {
+   "question": "What is COVID-19? ",
+   "answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold. These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+   },
+   {
+   "question": "What are the symptoms of COVID-19?",
+   "answer": "These are the symptoms that can appear 2 to 14 days after exposure: fever, cough, shortness of breath, pneumonia in both lungs. This is not an all-inclusive list - if you are experiencing symptoms that are severe or concerning, talk to your medical provider."
+   },
+   {
+   "question": "What are the complications of COVID-19? ",
+   "answer": "nan"
+   },
+   {
+   "question": "What is the treatment for COVID-19?",
+   "answer": "Most people with mild coronavirus illness will recover on their own. If you are concerned about your symptoms, you should self-monitor and consult your health care provider."
+   },
+   {
+   "question": "What are the symptoms of COVID-19?",
+   "answer": "These are the symptoms that can appear 2 to 14 days after exposure: fever, cough, shortness of breath, pneumonia in both lungs. This is not an all-inclusive list - if you are experiencing symptoms that are severe or concerning, talk to your medical provider."
+   },
+   {
+   "question": "What is COVID-19? ",
+   "answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold. These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+   },
+   {
+   "question": "What caused COVID-19? ",
+   "answer": "Their symptoms are severe acute respiratory illness which includes fever, cough, and shortness of breath. The virus does not pass easily person-to-person unless there is close contact, which includes providing unprotected care to a patient."
+   },
+   {
+   "question": "What should I do if I just returned from a trip?",
+   "answer": "Self-isolate means: stay home and keep your distance from others do not have visitors, especially older adults, or those with medical conditions who are at a higher risk of developing serious illness Monitor your health for fever, cough or difficulty breathing. If you develop a fever, cough or difficulty breathing within 14 days: Continue to isolate yourself from others Immediately call a health care professional or public health authority and: describe your symptoms and travel history follow their instructions carefully"
+   },
+   {
+   "question": "Should I wear a face mask?",
+   "answer": "You should only wear a face mask if a healthcare professional recommends it. Generally, those who have COVID-19 and are showing symptoms should wear face-masks to prevent others from the risk of getting infected  Please do not stock significantly on face masks as they are also crucial for health workers and those who are taking care of people infected with COVID-19."
+   },
+   {
+   "question": "If I'm high risk, what should I do?", "answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often. If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs.
+   "},
+   {
+   "question": "Why do I have to stay at home?",
+   "answer": "Socially distancing is a practice that aims to prevent those who are sick from encountering those who are healthy. As COVID-19 spreads person-to-person in close contact, we want to reduce the chance of infection amongst populations that are vulnerable."
+   },
+   {
+   "question": "Should I be tested for COVID-19?",
+   "answer": "If you have developed symptoms like fever, cough, and/or difficulty breathing, and you have been in close contact with a person known to have COVID-19, or they have recently travelled to an area with ongoing spread of COVID-19, yes. If your symptoms are severe - like you are having persistent pain/pressure in chest, new confusion or inability to arouse, or bluish lips or face, contact healthcare provider or go to the emergency room - it is important to seek care immediately."
+   },
+   {
+   "question": "If I'm high risk, what should I do?",
+   "answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often. If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."
+   },
+   {
+   "question": "Any advice about how to minimize risk during grocery shopping trips or getting takeout.",
+   "answer": "For that reason, it is critical to wash your hands often, including utensils. The CDC recommends that if you are sick, stay home until you are better and no longer pose a risk of infecting others."
+   },
+   {
+   "question": "What can I do to reduce my and my family's risk of getting COVID-19?",
+   "answer": "Wash your hands with soap and water for at least 20 seconds, especially after blowing your nose, coughing, sneezing, using the restroom, and before eating or preparing food. Please also clean and disinfect frequently touched surfaces (e.g. tables, countertops, light switches, door knobs, cabinet handles)."
+   },
+   {
+   "question": "I'm pregnant... am I at risk for COVID-19?",
+   "answer": "It does not look like pregnant women are more at risk of developing severe illness than other healthy adults from coronavirus. Currently, it is expected that most pregnant women will likely experience only mild to moderate cold and flu - like symptoms."
+   },
+   {
+   "question": "Am I at risk for COVID-19 in the South Africa?",
+   "answer": "Currently, all states in the U.S. have reported cases of COVID-19. It is important to limit unnecessary travel and practice hand-washing, and social distancing."
+   },
+   {
+   "question": "Should I be tested for COVID-19?",
+   "answer": "If you have developed symptoms like fever, cough, and/or difficulty breathing, and you have been in close contact with a person known to have COVID-19, or they have recently travelled to an area with ongoing spread of COVID-19, yes. If your symptoms are severe - like you are having persistent pain/pressure in chest, new confusion or inability to arouse, or bluish lips or face, contact healthcare provider or go to the emergency room - it is important to seek care immediately."
    }
 ]
 
