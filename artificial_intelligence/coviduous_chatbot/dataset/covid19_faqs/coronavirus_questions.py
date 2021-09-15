@@ -672,90 +672,269 @@ COVID19_QUES = [
       "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
     },
     {
-      "Question": "what should I do if I feel sick?"
+      "Question": "what should I do if I feel sick?",
       "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
     },
     {
-      "Question":   "I was close to a person last week who now tells me she is sick woith corona. can I expect to be sick also?",
-                    "my friend just tested positive and we hung out ealier this week. what do i do",
-                    "I have been close to a person with Corona what do I do?",
-                    "my boyfriend is positive what do i do",
-                    "What can I do if I have been in contact with an infected person for COVID-19?",
-                    "What to do if i have been in touch with an infected person?",
-                    "I've shaken hands with someone who is Coronavirus positive, what should I do?",
-                    "I have been close to a human who has been tested corona positive. What to do?",
-                    "What to do if someone Iâ€™ve been in contact with has corona?",
-                    "pray",
-                    "What shall I do if I was in contact with  a sick person?",
-                    "I been with an infected person. Should I do anything?",
-                    "What do I do if my neighboor has been tested positive for COVID?",
-                    "What should I do because I touched someone who are sick with corona",
-                    "my friend was confirmed with coronavirus. what should I do?",
-                    "_",
-                    "What to do if you were potentially exposed to someone with coronavirus?",
-                    "what do i do if a person in my family is tested positive for covid19",
-                    "When I've been in contact with somebody who has the virus what should I do?",
-                    "What are recommendations for people who were in contact with someone infected with Coronavirus?",
-                    "I was in contact with someone infected with coronavirus, what shall I do now?",
-                    "Yes"
-      "Answer":     "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+      "Question": "I was close to a person last week who now tells me she is sick with corona. can I expect to be sick also?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
     },
     {
-      "Question":   "What are the steps to protect employees during coronavirus?",
-                    "what is the employer supposed to do to protect the employees?",
-                    "If I am an employer how can I protect my employees?",
-                    "What are the office rules for coronavirus?",
-                    "how do I as an employer protect my staff",
-                    "I own a company? How should I protect my people?",
-                    "What can I do to protect my employees?",
-                    "even if people don't have their kids at home from next week, should I tell my employees to stay home?",
-                    "I am an employer. How do I protect my employees?",
-                    "should i close the office",
-                    "What are my responsibilities as an employer when responding to this crisis?",
-                    "How can i protect my employees?",
-                    "How do I do to help my employes with corona?",
-                    "how do i prevent my employees from getting infected",
-                    "What do I do to protect my employees from Corona"
-      "Answer":     "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+      "Question": "my friend just tested positive and we hung out earlier this week. what do i do",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "I have been close to a person with Corona what do I do?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "my boyfriend is positive what do i do",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What can I do if I have been in contact with an infected person for COVID-19?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What to do if i have been in touch with an infected person?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "I've shaken hands with someone who is Coronavirus positive, what should I do?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "I have been close to a human who has been tested corona positive. What to do?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What to do if someone I've been in contact with has corona?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "pray",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What shall I do if I was in contact with  a sick person?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "I been with an infected person. Should I do anything?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What do I do if my neighbour has been tested positive for COVID?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What should I do because I touched someone who are sick with corona",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "my friend was confirmed with coronavirus. what should I do?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What to do if you were potentially exposed to someone with coronavirus?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "what do i do if a person in my family is tested positive for covid19",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "When I've been in contact with somebody who has the virus what should I do?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What are recommendations for people who were in contact with someone infected with Coronavirus?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "I was in contact with someone infected with coronavirus, what shall I do now?",
+      "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
+    },
+    {
+      "Question": "What are the steps to protect employees during coronavirus?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "what is the employer supposed to do to protect the employees?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "If I am an employer how can I protect my employees?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "What are the office rules for coronavirus?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "how do I as an employer protect my staff",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "I own a company? How should I protect my people?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "What can I do to protect my employees?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "even if people don't have their kids at home from next week, should I tell my employees to stay home?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "I am an employer. How do I protect my employees?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "should i close the office",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "What are my responsibilities as an employer when responding to this crisis?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "How can i protect my employees?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "How do I do to help my employees with corona?",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "how do i prevent my employees from getting infected",
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
+    },
+    {
+      "Question": "What do I do to protect my employees from Corona"
+      "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
    },
    {
-     "Question":    "I want to be a good citizen, what can I do to limit the spread of the virus",
-                    "how can I as an citizen minimise the spread of the virus",
-                    "can i take an action to minimize the spread of coronavirus?",
-                    "How can I as a citizen do to minimize the spread of corona virus?",
-                    "What can i do to minimise the spread of corona?",
-                    "Is there anything in particular I can do as a citizen to help coronavirus pass faster?",
-                    "what can I do as a citizen to avoid spreading the virus",
-                    "do i need to quarantine",
-                    "How do I minimize the spread of Coronavirus",
-                    "How can I collaborate to reduce the pandemic?",
-                    "what should i do to minimise the spread?",
-                    "what can i do to minimize spreading the virus",
-                    "What can I do to help with coronavirus?",
-                    "How can I minimize the spread of Coronavirus?",
-                    "As a conscious resident of the SA how can I mitigate the spread of the virus?"
+     "Question": "I want to be a good citizen, what can I do to limit the spread of the virus",
      "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
    },
    {
-     "Question":    "I'm not part of any known risk groups. What is my actions?",
-                    "is there anything I should do if i am not risky",
-                    "I am not at risk, is there anything I should do?",
-                    "i don't think I'm at risk, do I need to take any precautions?",
-                    "I am not at risk, what do I do to stay so.",
-                    "What can I do if I do not belong to any of risk groups",
-                    "What do I have to do if I don't belong to any of the risk groups?",
-                    "im young and healthy, but should i take any precautions",
-                    "I'm not in any risk group. Should I do anything?",
-                    "_",
-                    "i'm low risk but am i still in danger?",
-                    "what can i do if i am not in the known risk groups",
-                    "Do I have to take some special measure if I don't belong any risk group?",
-                    "I'm young, healthy, and have no known underlying illnesses, is there anything I should be aware of?",
-                    "What to do as a healthy person about the coronavirus pandemic?",
-                    "im not at risk. what do i do"
-     "Answer":      "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+     "Question": "how can I as an citizen minimise the spread of the virus",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "can i take an action to minimize the spread of coronavirus?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "How can I as a citizen do to minimize the spread of corona virus?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "What can i do to minimise the spread of corona?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "Is there anything in particular I can do as a citizen to help coronavirus pass faster?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "what can I do as a citizen to avoid spreading the virus",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "do i need to quarantine",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "How do I minimize the spread of Coronavirus",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "How can I collaborate to reduce the pandemic?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "what should i do to minimise the spread?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "what can i do to minimize spreading the virus",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "What can I do to help with coronavirus?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "How can I minimize the spread of Coronavirus?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "As a conscious resident of the SA how can I mitigate the spread of the virus?",
+     "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
+   },
+   {
+     "Question": "I'm not part of any known risk groups. What is my actions?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "is there anything I should do if i am not risky",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "I am not at risk, is there anything I should do?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "i don't think I'm at risk, do I need to take any precautions?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "I am not at risk, what do I do to stay so.",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "What can I do if I do not belong to any of risk groups",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "What do I have to do if I don't belong to any of the risk groups?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "im young and healthy, but should i take any precautions",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "I'm not in any risk group. Should I do anything?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "i'm low risk but am i still in danger?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "what can i do if i am not in the known risk groups",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "Do I have to take some special measure if I don't belong any risk group?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "I'm young, healthy, and have no known underlying illnesses, is there anything I should be aware of?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "What to do as a healthy person about the coronavirus pandemic?",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+   },
+   {
+     "Question": "im not at risk. what do i do",
+     "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
    }
-
 ]
 
 
