@@ -15,7 +15,18 @@ reportingApp.use(express.json());
 let database = admin.firestore();
 let uuid = require("uuid");
 
-
+/**
+ * @swagger
+ * /reporting/health/sick-employees:
+ *   post:
+ *     description: add a sick employee
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.post('/api/reporting/health/sick-employees',authMiddleware,async (req, res) =>  {
    
     //Look into express.js middleware so that these lines are not necessary
@@ -74,6 +85,19 @@ reportingApp.post('/api/reporting/health/sick-employees',authMiddleware,async (r
         });
     }
 });
+
+/**
+ * @swagger
+ * /reporting/health/recovered-employees:
+ *   post:
+ *     description: add a recovered employee
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.post('/api/reporting/health/recovered-employees',authMiddleware, async (req, res) =>  {
  
     let reqJson;
@@ -127,6 +151,19 @@ reportingApp.post('/api/reporting/health/recovered-employees',authMiddleware, as
             });
         }
 });
+
+/**
+ * @swagger
+ * /reporting/health/recovered-employees/view:
+ *   post:
+ *     description: retrieve all sick employees
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.post('/api/reporting/health/recovered-employees/view',authMiddleware, async (req, res) =>  {
 
     // data validation
@@ -173,6 +210,19 @@ reportingApp.post('/api/reporting/health/recovered-employees/view',authMiddlewar
         return res.status(500).send({message: "Some error occurred while fetching recovered-employees."}); 
     }    
 });
+
+/**
+ * @swagger
+ * /reporting/health/sick-employees/view:
+ *   post:
+ *     description: retrieve all sick employees
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.post('/api/reporting/health/sick-employees/view',authMiddleware, async (req, res) =>  {
     let fieldErrors = [];
 
@@ -222,6 +272,18 @@ reportingApp.post('/api/reporting/health/sick-employees/view',authMiddleware, as
     }    
 });
 
+/**
+ * @swagger
+ * /reporting/health/sick-employees:
+ *   delete:
+ *     description: delete a sick employee
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.delete('/api/reporting/health/sick-employees',authMiddleware,async (req, res) =>  {
     //Look into express.js middleware so that these lines are not necessary
     let reqJson;
@@ -265,6 +327,19 @@ reportingApp.delete('/api/reporting/health/sick-employees',authMiddleware,async 
     }
 
 });
+
+/**
+ * @swagger
+ * /reporting/company/company-data:
+ *   post:
+ *     description: create company data summary
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.post('/api/reporting/company/company-data',authMiddleware,async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
@@ -333,6 +408,19 @@ reportingApp.post('/api/reporting/company/company-data',authMiddleware,async (re
               
     }
 });
+
+/**
+ * @swagger
+ * /reporting/company/company-data/view:
+ *   post:
+ *     description: retrieve all company data summaries
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.post('/api/reporting/company/company-data/view',authMiddleware,async (req, res) =>  {
     let fieldErrors = [];
 
@@ -765,6 +853,19 @@ reportingApp.put('/api/reporting/company/company-data/rooms/dec',authMiddleware,
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
 });
+
+/**
+ * @swagger
+ * /reporting/health-summary/setup:
+ *   post:
+ *     description: create health summary
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (req, res) =>  {    
     
     let reqJson;
@@ -927,6 +1028,18 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
         }
     });
 
+/**
+ * @swagger
+ * /reporting/summary-shifts:
+ *   post:
+ *     description: retrieve all shift summaries
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */  
     reportingApp.post('/api/reporting/summary-shifts',authMiddleware, async (req, res) =>  {    
         let reqJson;
         try {
@@ -955,6 +1068,19 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
           return res.status(500).send({message: "Some error occurred while fetching number of shifts."});
         }
     });
+
+/**
+ * @swagger
+ * /reporting/summary-bookings:
+ *   post:
+ *     description: retrieve all bookings summaries
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
     reportingApp.post('/api/reporting/summary-bookings',authMiddleware, async (req, res) =>  {    
 
         let reqJson;
@@ -983,7 +1109,20 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
           return res.status(500).send({message: "Some error occurred while fetching number of bookings."});
         }
     });
-    reportingApp.post('/api/reporting/summary-summary',authMiddleware ,async (req, res) =>  {    
+
+/**
+ * @swagger
+ * /reporting/health-summary:
+ *   post:
+ *     description: retrieve all health summaries
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+    reportingApp.post('/api/reporting/health-summary',authMiddleware ,async (req, res) =>  {    
         let reqJson;
           try {
               reqJson = JSON.parse(req.body);
@@ -1031,6 +1170,19 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
             }
     
     });
+
+/**
+ * @swagger
+ * /reporting/permission-summary:
+ *   post:
+ *     description: retrieve all permission summaries
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
     reportingApp.post('/api/reporting/permission-summary',authMiddleware ,async (req, res) =>  {    
 
         let reqJson;
@@ -1080,7 +1232,18 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
     
     });
 
-   
+/**
+ * @swagger
+ * /reporting/company/users-data:
+ *   post:
+ *     description: create user data summary
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
     reportingApp.post('/api/reporting/company/users-data',authMiddleware ,async (req, res) =>  {    
 
         // get total users
@@ -1207,7 +1370,18 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
     
 
     
-    
+/**
+ * @swagger
+ * /reporting/company/user-data/view:
+ *   post:
+ *     description: retrieve all user data summaries
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
     reportingApp.post('/reporting/company/users-data/view',authMiddleware ,async (req, res) =>  {    
        
             const document = database.collection('users-data');
