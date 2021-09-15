@@ -82,10 +82,19 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height/6,
+                          width: MediaQuery.of(context).size.height/6,
                           child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
-                              ? Image(
-                              image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
-                          )
+                              ? ClipRect(
+                                  child: OverflowBox(
+                                    maxWidth: double.infinity,
+                                    child: FittedBox(
+                                        fit: BoxFit.cover,
+                                        child: Image(
+                                        image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                          ),
+                                  ),
+                                ),
+                              )
                               : Image(
                               image: AssetImage('assets/images/placeholder-office-room.png')
                           ),
@@ -214,8 +223,23 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                                             height: (!globals.getIfOnPC())
                                                                 ? MediaQuery.of(context).size.height/5
                                                                 : MediaQuery.of(context).size.height/8,
-                                                            child: Image(
-                                                              image: AssetImage('assets/images/placeholder-office-room.png'),
+                                                            width: (!globals.getIfOnPC())
+                                                                ? MediaQuery.of(context).size.height/5
+                                                                : MediaQuery.of(context).size.height/8,
+                                                            child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
+                                                                ? ClipRect(
+                                                              child: OverflowBox(
+                                                                maxWidth: double.infinity,
+                                                                child: FittedBox(
+                                                                  fit: BoxFit.cover,
+                                                                  child: Image(
+                                                                      image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            )
+                                                                : Image(
+                                                                image: AssetImage('assets/images/placeholder-office-room.png')
                                                             ),
                                                           ),
                                                           Expanded(
