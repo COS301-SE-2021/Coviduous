@@ -372,6 +372,126 @@ COVID19_QUES = [
         "Answer": "There is no evidence to date of viruses that cause respiratory illnesses being transmitted via food or food packaging. Coronaviruses cannot multiply in food; they need an animal or human host to multiply. The COVID-19 virus is generally thought to be spread from person to person through respiratory droplets. Currently, there is no evidence to support transmission of the COVID-19 virus associated with food."
     },
     {
+        "Question": "Can contact tracing help in controlling spread of the virus?",
+        "Answer": "Yes. Contact tracing is an essential public health tool for controlling infectious disease outbreaks, such as those caused bythe COVID-19 virus. Contact tracing can break the chains of transmission through the rapid identification, isolation and clinical care of cases, and providing supported quarantine of contacts, meaning that virus transmission can be stopped."
+    },
+    {
+        "Question": "Does contact tracing still work against new variants of the COVID-19 virus?",
+        "Answer": "Yes, the principles of contact tracing remain the same for newly identified variants of the COVID-19 virus. While some of the variants of the virus are more transmissible, thorough and timely contact tracing and supported quarantine of contacts is even more important to control the spread of the virus. "
+    },
+    {
+        "Question": "How do I manage quarantine and how do I take care of myself during quarantine?",
+        "Answer": "WHO recommends supported quarantine for 14 days from the last contact with a confirmed case to minimize risk of infecting others. You should remain separated from others in the household for the duration of quarantine. If you cannot be in a separate room, stay at least one metre away from others, the farther the better. Make sure you have enough foodand water, and a way to communicate with others."
+    },
+    {
+        "Question": "Can COVID-19 be transmitted at the workplace?",
+        "Answer": "COVID-19 spreads primarily through respiratory droplets or contact with contaminated surfaces. Exposure can occur at the workplace, while travelling to work, during work-related travel to an area with local community transmission, as well as on the way to and from the workplace."
+    },
+    {
+        "Question": "What is the risk of contracting COVID-19 in the workplace?",
+        "Answer": "The risk of exposure to COVID-19 in the workplace depends on the likelihood of coming within 1 metre of others, in having frequent physical contact with people who may be infected with COVID-19, and through contact with contaminated surfaces and objects."
+    },
+    {
+        "Question": "Who should carry out the workplace risk assessment?",
+        "Answer": "Employers and managers, in consultation with workers, should carry out and regularly update the risk assessment for work-related exposure to COVID-19, preferably with the support of occupational health services."
+    },
+    {
+        "Question": "How can workplaces plan for the prevention and mitigation of COVID-19?",
+        "Answer": "Workplaces should develop action plans to prevent and mitigate COVID-19 as part of the business continuity plan and according to the results of the risk assessments and the epidemiological situation. The action plan and preventive measures should be regularly monitored and updated. Workers and their representatives should be consulted and should participate in the development, monitoring and updating of the workplace COVID-19.Workplaces should develop action plans to prevent and mitigate COVID-19 as part of the business continuity plan and according to the results of the risk assessments and the epidemiological situation. The action plan and preventive measures should be regularly monitored and updated. Workers and their representatives should be consulted and should participate in the development, monitoring and updating of the workplace COVID-19."
+    },
+    {
+        "Question": "What are the rights, duties and responsibilities of workers in the workplace during COVID-19?",
+        "Answer": "Workers are responsible to follow the measures for occupational safety and health and infection prevention and control established for their workplace, and to participate in training provided by the employer. Workers should report to their supervisor any situation which may present an imminent and serious danger to their life or health"
+    },
+    {
+        "Question": "What are the rights, duties and responsibilities of employers in the workplace during COVID-19?",
+        "Answer": "Employers, workers, and their organizations should collaborate with health authorities to prevent and control COVID-19. Cooperation between management and workers and their representatives is essential for workplace‐related prevention measures. International labour standards on the rights and responsibilities of workers and employers in occupational safety and health should be fully respected."
+    },
+    {
+        "Question": "Should I travel during the pandemic?",
+        "Answer": "If you are in a high-risk group for severe COVID-19 but have not been fully vaccinated and do not have immunity from a recent previous COVID-19 infection, consider postponing travel to areas where COVID-19 is widespread."
+    },
+    {
+        "Question": "What precautions should I take during travel?",
+        "Answer": "Wherever you are, follow COVID-19 prevention measures, such as wearing a mask, washing hands frequently, maintaining physical distance of at least 1 metre, and avoiding crowded or poorly ventilated places and settings whenever possible. Traveling may place you in areas that are closed, confined, or crowded (the three Cs), which puts you at a higher risk of being exposed to the virus that causes COVID-19. Whenever possible, stay in open, well-ventilated settings."
+    },
+    {
+        "Question": "Who should not travel?",
+        "Answer": "People with symptoms of COVID-19 – including fever, cough, or shortness of breath – should not travel.  If you are showing symptoms of COVID-19, stay home and isolate yourself away from other people. If you have been around someone who has been diagnosed with COVID-19, isolate yourself, follow the guidance of local authorities and watch for symptoms."
+    },
+    {
+        "Question": "What is meant by “essential travel”?",
+        "Answer": "As part of public health efforts to stop the spread of COVID-19, travel may be limited or restricted to travel deemed to be essential. Essential travel is defined differently by national authorities in different countries. It may include travel for emergencies and humanitarian activities (including emergency medical flights and medical evacuation)."
+    },
+    {
+        "Question": "Should I get a vaccine or immunity certificate before travelling?",
+        "Answer": "Before you travel, know the requirements and policies in place where your trip originates and at your destination. Every country has its own rules. Some countries exempt travelers who have been fully vaccinated or have proof of recent SARS-CoV-2 infection from certain requirements, such as testing and/or quarantine."
+    },
+    {
+        "Question": "Should I get a COVID-19 test before departure or upon arrival?",
+        "Answer": "Know before you go. Some venues, destinations and countries require COVID-19 tests prior to departure or upon arrival as part of their strategies to prevent the spread of disease. COVID-19 tests conducted immediately prior to departure or on arrival are used in an effort to determine the health status of travellers."
+    },
+    {
+        "Question": "What happens if I have symptoms while traveling or when I arrive at my destination?",
+        "Answer": "If you have any symptoms of COVID-19 while you travel or when you arrive at your destination, notify health authorities immediately and follow their guidance. You may be required to quarantine or isolate yourself. Your travel companions may also be required to quarantine, since they have been in contact with you."
+    },
+    {
+        "Question": "What should I do if I get sick while traveling?",
+        "Answer": "If you become ill during your travel, inform your travel attendant (plane, ship, train, etc.). You may be moved to a seat farther away from others. Wear a mask continuously while you travel, frequently clean your hands with hand sanitizer, cover a cough or sneeze with a bent elbow or tissue, and maintain at least a 1 metre distance from others wherever possible. You should stop travelling as soon as feasible."
+    },
+    {
+        "Question": "So how do I stay safe while exercising in COVID-19?",
+        "Answer": "Do not exercise if you have a fever, cough and difficulty breathing. Stay home and rest, seek medical attention and call in advance. Follow the directions of your local health authority. If you are able to go for a walk or bicycle ride always practice physical distancing and wash your hands with water and soap before you leave, when you get to where you are going, and as soon as you get home.  If water and soap are not immediately available, use alcohol-based hand rub."
+    },
+    {
+        "Question": "Can contact tracing help in controlling spread of the virus?",
+        "Answer": "Yes. Contact tracing is an essential public health tool for controlling infectious disease outbreaks, such as those caused bythe COVID-19 virus. Contact tracing can break the chains of transmission through the rapid identification, isolation and clinical care of cases, and providing supported quarantine of contacts, meaning that virus transmission can be stopped. "
+    },
+    {
+        "Question": "Does contact tracing still work against new variants of the COVID-19 virus?",
+        "Answer": "Yes, the principles of contact tracing remain the same for newly identified variants of the COVID-19 virus. While some of the variants of the virus are more transmissible, thorough and timely contact tracing and supported quarantine of contacts is even more important to control the spread of the virus. "
+    },
+    {
+        "Question": "How do I know if I’m a contact? What should I do if I am?",
+        "Answer": "If you think you may be a contact of someone who has recently been infected, you should be contacted by health authorities to determine if you meet the contact definition. You may also be informed directly by someone you were in contact with who later tested positive. If you have downloaded a COVID-19 proximity tracing application, you may also get notified through your mobile phone."
+    },
+    {
+        "Question": "What is quarantine? And how is it different from isolation?",
+        "Answer": "Quarantine is the separation of contacts from others after exposure to a probable or confirmed COVID-19 case – you may or may not be infected. Isolation is the separation of people who are known to be infected with the COVID-19 virusfrom other who are not infected. Both quarantine and isolation help to stop the spread of the virus."
+    },
+    {
+        "Question": "How do I manage quarantine and how do I take care of myself during quarantine?",
+        "Answer": "WHO recommends supported quarantine for 14 days from the last contact with a confirmed case to minimize risk of infecting others. You should remain separated from others in the household for the duration of quarantine. If you cannot be in a separate room, stay at least one metre away from others, the farther the better. Make sure you have enough foodand water, and a way to communicate with others. The quarantine space should be well ventilated. You should minimize your contact with others."
+    },
+    {
+        "Question": "What can I do as an individual to support contact tracing measures in my community?",
+        "Answer": "Everyone has a part to play to bring COVID-19 under control, and contact tracing begins with informed, engaged and enabled communities. Understand the local public health and social measures and collaborate with health authorities for case and contact investigation. Agree to monitoring, report signs or symptoms of COVID-19 promptly, and be prepared to quarantine or go into isolation if you become a confirmedcase of COVID-19."
+    },
+    {
+        "Question": "What causes a virus to change to a new variant?",
+        "Answer": "When a virus is widely circulating in a population and causing many infections, the likelihood of the virus mutating increases. The more opportunities a virus has to spread, the more it replicates – and the more opportunities it has to undergo changes."
+    },
+    {
+        "Question": "What impact do the new variants of the COVID-19 virus have on vaccines?",
+        "Answer": "The COVID-19 vaccines that are currently in development or have been approved are expected to provide at least some protection against new virus variants because these vaccines elicit a broad immune response involving a range of antibodies and cells. Therefore, changes or mutations in the virus should not make vaccines completely ineffective."
+    },
+    {
+        "Question": "How can we prevent future new variants of the COVID-19 virus?",
+        "Answer": "Stopping the spread at the source remains key. Current measures to reduce transmission – including frequent hand washing, wearing a mask, physical distancing, good ventilation and avoiding crowded places or closed settings – continue to work against new variants by reducing the amount of viral transmission and therefore also reducing opportunities for the virus to mutate."
+    },
+    {
+        "Question": "Why is it important to get vaccinated even if there are new variants of the virus?",
+        "Answer": "Vaccines are a critical tool in the battle against COVID-19, and there are clear public health and lifesaving benefits to using the tools we already have. We must not put off getting vaccinated because of our concerns about new variants, and we must proceed with vaccination even if the vaccines may be somewhat less effective against some of the COVID-19 virus variants. We need to use the tools we have in hand even while we continue to improve those tools. We are all safe only if everyone is safe."
+    },
+    {
+        "Question": "Is there a new variant of the COVID-19 virus?",
+        "Answer": "A new variant has emerged in the United Kingdom with an unusually large number of mutations. It was first detected in September 2020 and is now highly prevalent in London and southeast England. In South Africa, another variant has emerged independently of the variant detected in the United Kingdom. This variant, originally detected in October, shares some mutations with the variant detected in the United Kingdom. Viruses constantly change through mutation, and new variants of a virus are expected to occur over time. Multiple variants of the virus that causes COVID-19 have been documented globally during this pandemic. Most variants do not change how the virus behaves and many disappear."
+    },
+    {
+        "Question": "Are these variants more contagious?",
+        "Answer": "Based on the information we have from health centres right now, these variants seem to spread more easily and quickly than previous strains and could increase the overall spread of the virus that causes COVID-19."
+    },
+    {
      "Question": "what are the recommendations by the authorities",
      "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
