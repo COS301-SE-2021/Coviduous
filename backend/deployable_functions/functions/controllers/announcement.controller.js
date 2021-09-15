@@ -46,7 +46,18 @@ let uuid = require("uuid");
  * The response object is sent back to the requester, containing the status code and a message.
  * res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /announcements:
+ *   post:
+ *     description: create an announcement
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   announcementApp.post('/api/announcements',authMiddleware, async (req, res) =>  {
   let reqJson;
   try {
@@ -124,6 +135,16 @@ let uuid = require("uuid");
  * The response object is sent back to the requester, containing the status code and a message and data.
  * res - HTTP status indicating whether the request was successful or not.
  */
+/**
+ * @swagger
+ * /announcements:
+ *   get:
+ *     description: Get all announcements
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
  announcementApp.post('/api/announcements/view',authMiddleware, async (req, res) =>  {
 
   let reqJson;
@@ -194,7 +215,18 @@ if (fieldErrors.length > 0) {
  * The response object is sent back to the requester, containing the status code and a message and data.
  * res - HTTP status indicating whether the request was successful or not.
  */
-
+/**
+ * @swagger
+ * /announcements:
+ *   delete:
+ *     description: delete an announcement
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
  announcementApp.post('/api/announcements/delete', authMiddleware,async (req, res) =>  {
 
   if (req == null || req.body == null) {
