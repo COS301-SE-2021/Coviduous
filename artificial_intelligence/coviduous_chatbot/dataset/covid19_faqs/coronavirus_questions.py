@@ -396,91 +396,286 @@ COVID19_QUES = [
       "Answer": "Please refer to your company guidelines. "
     },
     {
-        "Question": "Who is eligible for coronavirus test?",
-                     "Who should be tested against coronavirus?",
-                     "does my family need to get tested?",
-                     "can anyone be tested for corona`",
-                     "who should get a test?",
-                     "who should get tested",
-                     "_",
-                     "who is being tested",
-                     "Who has to be tested for Corona",
-                     "should everyone get tested",
-                     "I want to inquire as to who should undergo testing",
-                     "Should I get my grandfather tested?",
-                     "Who gets tested for the coronavirus?",
-                     "What people should be tested?",
-                     "Who should be tested?",
-                     "whomsulbetest"
-        "Answer":    "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
-     },
-     {
-        "Question": "Should I be scared?",
-                    "how afraid should i be",
-                    "Should I be afraid of the pandemia?",
-                    "How fearful should I be of Coronavirus?",
-                    "How afraid do I have to be for the Corona virus",
-                    "how scared should i be for coronavirus",
-                    "really much",
-                    "How serious i should be about coronavirus?",
-                    "Is coronavirus so serious? How worried should I be?",
-                    "How afraid should I be of Coronavirus?",
-                    "do I need to be scared? Trump isn't scared, why should I",
-                    "_",
-                    "How scared should I be of corona?",
-                    "Do I need to be afraid of the outbreak?",
-                    "How serious we should be about Coronavirus?",
-                    "Is the coronavirus bad?",
-                    "how dangerous is coronvirus?",
-                    "Will I die?",
-                    "am i likely to end up in the hospital or die?"
-        "Answer":   "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
-     },
-     {
-        "Question": "What to do when outside?",
-                    "what are the rules to follow in public?",
-                    "How should I act in public places?",
-                    "How should I behave in the public space?",
-                    "when out there in the street, what are the recommended actions to take?",
-                    "How should I behave in public?",
-                    "i would like to get recommendations on how to behave in the public",
-                    "How should I behave when Iâ€™m with other people in public?",
-                    "i can't stay home all day, what do I do out in public?",
-                    "can I go out?",
-                    "Should I be doing anything in particular when I'm in public spaces?",
-                    "How can I act in public spaces?",
-                    "_",
-                    "What are the recommendations for entering a public space?",
-                    "how should i act in public",
-                    "should i wear mask and gloves",
-                    "What do you recommend when taking public transport",
-                    "Should I avoid people when I am outside?",
-                    "Do I need a mask when I go outside? What are the rules for social distancing?"
-        "Answer":   "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
-     },
-     {
-       "Question":  "I have some symptoms, how do I really know if I've got it?",
-                    "What should I do if I feel symptoms?",
-                    "What to do if i got sick?",
-                    "im sick!!! what am a supposed to do?",
-                    "What do I do if I get ill",
-                    "what do i do if i fall sick",
-                    "I'm sick wtf do i do?",
-                    "I'm sick, what do I do?",
-                    "What can I do if I have fallen ill?",
-                    "i have a cough but i don't know if it's corona",
-                    "Steps I should take when I contract the virus",
-                    "What do I do if I am getting ill",
-                    "I'm sick what do i do",
-                    "i dont know what to do now that I am sick",
-                    "_",
-                    "what should I do if I got infected with covid-19?_",
-                    "can I go to the hospital?",
-                    "What shall I do if I get sick?",
-                    "what should I do if I feel sick?"
-       "Answer":    "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
-     },
-     {
+      "Question": "Who is eligible for coronavirus test?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "Who should be tested against coronavirus?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "does my family need to get tested?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "can anyone be tested for corona",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "who should get a test?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "who should get tested",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "_",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "who is being tested",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "Who has to be tested for Corona",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "should everyone get tested",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "I want to inquire as to who should undergo testing",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "Should I get my grandfather tested?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "Who gets tested for the coronavirus?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "What people should be tested?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "Who should be tested?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "who should test?",
+      "Answer": "People who have symptoms of COVID-19. Most people who have had close contact (within 6 feet for a total of 15 minutes or more over a 24-hour period) with someone with confirmed COVID-19."
+    },
+    {
+      "Question": "Should I be scared?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "how afraid should i be",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "Should I be afraid of the pandemic?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "How fearful should I be of Coronavirus?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "How afraid do I have to be for the Corona virus",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "how scared should i be for coronavirus",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "really much",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "How serious i should be about coronavirus?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "Is coronavirus so serious? How worried should I be?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "How afraid should I be of Coronavirus?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "do I need to be scared? Trump isn't scared, why should I",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "How scared should I be of corona?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "Do I need to be afraid of the outbreak?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "How serious we should be about Coronavirus?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "Is the coronavirus bad?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "how dangerous is coronavirus?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "Will I die?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "am i likely to end up in the hospital or die?",
+      "Answer": "When you feel yourself getting caught up in fear of what might happen, try to shift your focus to things you can control."
+    },
+    {
+      "Question": "What to do when outside?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "what are the rules to follow in public?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "How should I act in public places?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "How should I behave in the public space?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "when out there in the street, what are the recommended actions to take?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "How should I behave in public?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "i would like to get recommendations on how to behave in the public",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "How should I behave when Iâ€™m with other people in public?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "i can't stay home all day, what do I do out in public?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "can I go out?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "Should I be doing anything in particular when I'm in public spaces?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "How can I act in public spaces?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "What are the recommendations for entering a public space?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "how should i act in public",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "should i wear mask and gloves",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "What do you recommend when taking public transport",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "Should I avoid people when I am outside?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "Do I need a mask when I go outside? What are the rules for social distancing?",
+      "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
+    },
+    {
+      "Question": "I have some symptoms, how do I really know if I've got it?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "What should I do if I feel symptoms?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "What to do if i got sick?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "im sick!!! what am a supposed to do?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "What do I do if I get ill",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "what do i do if i fall sick",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "I'm sick wtf do i do?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "I'm sick, what do I do?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "What can I do if I have fallen ill?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "i have a cough but i don't know if it's corona",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "Steps I should take when I contract the virus",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "What do I do if I am getting ill",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "I'm sick what do i do",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "i dont know what to do now that I am sick",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "what should I do if I got infected with covid-19?_",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "can I go to the hospital?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "What shall I do if I get sick?",
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
+      "Question": "what should I do if I feel sick?"
+      "Answer": "Because some of the symptoms of flu and COVID-19 are similar, it may be hard to tell the difference between them based on symptoms alone, and testing may be needed to help confirm a diagnosis."
+    },
+    {
       "Question":   "I was close to a person last week who now tells me she is sick woith corona. can I expect to be sick also?",
                     "my friend just tested positive and we hung out ealier this week. what do i do",
                     "I have been close to a person with Corona what do I do?",
@@ -504,8 +699,8 @@ COVID19_QUES = [
                     "I was in contact with someone infected with coronavirus, what shall I do now?",
                     "Yes"
       "Answer":     "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
-     },
-     {
+    },
+    {
       "Question":   "What are the steps to protect employees during coronavirus?",
                     "what is the employer supposed to do to protect the employees?",
                     "If I am an employer how can I protect my employees?",
@@ -522,8 +717,8 @@ COVID19_QUES = [
                     "how do i prevent my employees from getting infected",
                     "What do I do to protect my employees from Corona"
       "Answer":     "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
-     },
-     {
+   },
+   {
      "Question":    "I want to be a good citizen, what can I do to limit the spread of the virus",
                     "how can I as an citizen minimise the spread of the virus",
                     "can i take an action to minimize the spread of coronavirus?",
@@ -540,8 +735,8 @@ COVID19_QUES = [
                     "How can I minimize the spread of Coronavirus?",
                     "As a conscious resident of the SA how can I mitigate the spread of the virus?"
      "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
-     },
-     {
+   },
+   {
      "Question":    "I'm not part of any known risk groups. What is my actions?",
                     "is there anything I should do if i am not risky",
                     "I am not at risk, is there anything I should do?",
@@ -559,7 +754,7 @@ COVID19_QUES = [
                     "What to do as a healthy person about the coronavirus pandemic?",
                     "im not at risk. what do i do"
      "Answer":      "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
-     }
+   }
 
 ]
 
