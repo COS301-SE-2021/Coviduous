@@ -70,7 +70,7 @@ class _UserViewNotificationsState extends State<UserViewNotifications> {
                   child: Container(
                     color: Colors.white,
                     height: (!globals.getIfOnPC())
-                        ? MediaQuery.of(context).size.height/5.5
+                        ? MediaQuery.of(context).size.height/5
                         : MediaQuery.of(context).size.height/7,
                     margin: EdgeInsets.all(5),
                     child: Row(
