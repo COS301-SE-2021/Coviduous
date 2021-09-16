@@ -1646,6 +1646,10 @@ COVID19_QUES = [
     {
         "Question": "Should I be tested for COVID-19?",
         "Answer": "If you have developed symptoms like fever, cough, and/or difficulty breathing, and you have been in close contact with a person known to have COVID-19, or they have recently travelled to an area with ongoing spread of COVID-19, yes. If your symptoms are severe - like you are having persistent pain/pressure in chest, new confusion or inability to arouse, or bluish lips or face, contact healthcare provider or go to the emergency room - it is important to seek care immediately."
+    },
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
     }
 ]
 
