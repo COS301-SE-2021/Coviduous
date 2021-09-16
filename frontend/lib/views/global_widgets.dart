@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:frontend/controllers/image_helpers.dart' as imageHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 Widget notFoundMessage(BuildContext context, String title, String message) {
@@ -38,4 +40,105 @@ Widget notFoundMessage(BuildContext context, String title, String message) {
       ],
     ),
   );
+}
+
+final _transformationController = TransformationController();
+TapDownDetails _doubleTapDetails;
+
+_handleDoubleTapDown(TapDownDetails details) {
+  _doubleTapDetails = details;
+}
+
+_handleDoubleTap() {
+  if (_transformationController.value != Matrix4.identity()) {
+    _transformationController.value = Matrix4.identity();
+  } else {
+    final position = _doubleTapDetails.localPosition;
+
+    //Zoom 2x
+    _transformationController.value = Matrix4.identity()
+      ..translate(-position.dx, -position.dy)
+      ..scale(2.0);
+  }
+}
+
+showHelpImage(BuildContext context, String asset, String title, String fileType) {
+  return showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel:
+      MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Colors.black45,
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (BuildContext ctx, Animation animation,
+          Animation secondaryAnimation) {
+        return Center(
+          child: Container(
+            height: MediaQuery.of(ctx).size.height - 80,
+            width: (!globals.getIfOnPC())
+                ? MediaQuery.of(ctx).size.width
+                : 640,
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(ctx).size.height - 128,
+                  width: (!globals.getIfOnPC())
+                      ? MediaQuery.of(ctx).size.width
+                      : 640,
+                  child: GestureDetector(
+                    onDoubleTapDown: _handleDoubleTapDown,
+                    onDoubleTap: _handleDoubleTap,
+                    child: InteractiveViewer(
+                      scaleEnabled: true,
+                      constrained: false,
+                      transformationController: _transformationController,
+                      child: Container(
+                        color: Colors.white,
+                        child: Image.asset(
+                          asset,
+                          width: (!globals.getIfOnPC())
+                              ? MediaQuery.of(ctx).size.width
+                              : 640,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        child: Text('Save'),
+                        onPressed: (){
+                          imageHelpers.saveImage(asset,
+                              title, fileType).then((result) {
+                            if (result != null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("Image saved to downloads folder")));
+                            }
+                            Navigator.of(ctx).pop();
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                        child: Text('Go back'),
+                        onPressed: (){
+                          Navigator.of(ctx).pop();
+                        },
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      });
 }

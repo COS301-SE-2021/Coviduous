@@ -27,7 +27,7 @@ let uuid = require("uuid");
  *         description: Success 
  *  
  */
-reportingApp.post('/api/reporting/health/sick-employees',authMiddleware,async (req, res) =>  {
+reportingApp.post('/api/reporting/health/sick-employees',async (req, res) =>  {
    
     //Look into express.js middleware so that these lines are not necessary
     let reqJson;
@@ -98,7 +98,7 @@ reportingApp.post('/api/reporting/health/sick-employees',authMiddleware,async (r
  *         description: Success 
  *  
  */
-reportingApp.post('/api/reporting/health/recovered-employees',authMiddleware, async (req, res) =>  {
+reportingApp.post('/api/reporting/health/recovered-employees', async (req, res) =>  {
  
     let reqJson;
         try {
@@ -164,7 +164,7 @@ reportingApp.post('/api/reporting/health/recovered-employees',authMiddleware, as
  *         description: Success 
  *  
  */
-reportingApp.post('/api/reporting/health/recovered-employees/view',authMiddleware, async (req, res) =>  {
+reportingApp.post('/api/reporting/health/recovered-employees/view',async (req, res) =>  {
 
     // data validation
     let fieldErrors = [];
@@ -223,7 +223,7 @@ reportingApp.post('/api/reporting/health/recovered-employees/view',authMiddlewar
  *         description: Success 
  *  
  */
-reportingApp.post('/api/reporting/health/sick-employees/view',authMiddleware, async (req, res) =>  {
+reportingApp.post('/api/reporting/health/sick-employees/view', async (req, res) =>  {
     let fieldErrors = [];
 
     let reqJson;
@@ -284,7 +284,7 @@ reportingApp.post('/api/reporting/health/sick-employees/view',authMiddleware, as
  *         description: Success 
  *  
  */
-reportingApp.delete('/api/reporting/health/sick-employees',authMiddleware,async (req, res) =>  {
+reportingApp.delete('/api/reporting/health/sick-employees',async (req, res) =>  {
     //Look into express.js middleware so that these lines are not necessary
     let reqJson;
     try {    
@@ -340,7 +340,7 @@ reportingApp.delete('/api/reporting/health/sick-employees',authMiddleware,async 
  *         description: Success 
  *  
  */
-reportingApp.post('/api/reporting/company/company-data',authMiddleware,async (req, res) => {
+reportingApp.post('/api/reporting/company/company-data',async (req, res) => {
     if (req == null || req.body == null) {
         return res.status(400).send({
             message: '400 Bad Request: Null request object',
@@ -421,7 +421,7 @@ reportingApp.post('/api/reporting/company/company-data',authMiddleware,async (re
  *         description: Success 
  *  
  */
-reportingApp.post('/api/reporting/company/company-data/view',authMiddleware,async (req, res) =>  {
+reportingApp.post('/api/reporting/company/company-data/view',async (req, res) =>  {
     let fieldErrors = [];
 
     let reqJson;
@@ -463,7 +463,7 @@ reportingApp.post('/api/reporting/company/company-data/view',authMiddleware,asyn
         return res.status(500).send({message: "Some error occurred while fetching company data."});
     }
 });
-reportingApp.put('/api/reporting/company/company-data/registered-users',authMiddleware,async (req, res) =>  {
+reportingApp.put('/api/reporting/company/company-data/registered-users',async (req, res) =>  {
 
     // data validation
         let fieldErrors = [];
@@ -626,7 +626,7 @@ reportingApp.put('/api/reporting/company/company-data/floorplans/inc',authMiddle
              
          }
 });
-reportingApp.put('/api/reporting/company/company-data/floors/inc',authMiddleware, async (req, res) =>  {
+reportingApp.put('/api/reporting/company/company-data/floors/inc', async (req, res) =>  {
 
     // data validation
     let fieldErrors = [];
@@ -683,7 +683,7 @@ reportingApp.put('/api/reporting/company/company-data/floors/inc',authMiddleware
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }    
 });
-reportingApp.put('/api/reporting/company/company-data/floors/dec',authMiddleware,async (req, res) =>  {    
+reportingApp.put('/api/reporting/company/company-data/floors/dec',async (req, res) =>  {    
 
     // data validation
     let fieldErrors = [];
@@ -739,7 +739,7 @@ reportingApp.put('/api/reporting/company/company-data/floors/dec',authMiddleware
         return res.status(500).send({message: "Some error occurred while updating number of floors."});
     }
 });
-reportingApp.put('/api/reporting/company/company-data/rooms/inc',authMiddleware, async (req, res) =>  {    
+reportingApp.put('/api/reporting/company/company-data/rooms/inc', async (req, res) =>  {    
     // data validation
     let fieldErrors = [];
 
@@ -795,7 +795,7 @@ reportingApp.put('/api/reporting/company/company-data/rooms/inc',authMiddleware,
     }    
 });
 
-reportingApp.put('/api/reporting/company/company-data/rooms/dec',authMiddleware, async (req, res) =>  {    
+reportingApp.put('/api/reporting/company/company-data/rooms/dec', async (req, res) =>  {    
     
     // data validation
     let fieldErrors = [];
@@ -866,7 +866,7 @@ reportingApp.put('/api/reporting/company/company-data/rooms/dec',authMiddleware,
  *         description: Success 
  *  
  */
-reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (req, res) =>  {    
+reportingApp.post('/api/reporting/health-summary/setup', async (req, res) =>  {    
     
     let reqJson;
           try {
@@ -1040,7 +1040,7 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
  *         description: Success 
  *  
  */  
-    reportingApp.post('/api/reporting/summary-shifts',authMiddleware, async (req, res) =>  {    
+    reportingApp.post('/api/reporting/summary-shifts', async (req, res) =>  {    
         let reqJson;
         try {
             reqJson = JSON.parse(req.body);
@@ -1081,7 +1081,7 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
  *         description: Success 
  *  
  */
-    reportingApp.post('/api/reporting/summary-bookings',authMiddleware, async (req, res) =>  {    
+    reportingApp.post('/api/reporting/summary-bookings', async (req, res) =>  {    
 
         let reqJson;
         try {
@@ -1122,7 +1122,7 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
  *         description: Success 
  *  
  */
-    reportingApp.post('/api/reporting/health-summary',authMiddleware ,async (req, res) =>  {    
+    reportingApp.post('/api/reporting/health-summary',async (req, res) =>  {    
         let reqJson;
           try {
               reqJson = JSON.parse(req.body);
@@ -1183,7 +1183,7 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
  *         description: Success 
  *  
  */
-    reportingApp.post('/api/reporting/permission-summary',authMiddleware ,async (req, res) =>  {    
+    reportingApp.post('/api/reporting/permission-summary',async (req, res) =>  {    
 
         let reqJson;
           try {
@@ -1244,7 +1244,7 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
  *         description: Success 
  *  
  */
-    reportingApp.post('/api/reporting/company/users-data',authMiddleware ,async (req, res) =>  {    
+    reportingApp.post('/api/reporting/company/users-data',async (req, res) =>  {    
 
         // get total users
         const document = database.collection('users');
@@ -1382,7 +1382,7 @@ reportingApp.post('/api/reporting/health-summary/setup',authMiddleware, async (r
  *         description: Success 
  *  
  */
-    reportingApp.post('/reporting/company/users-data/view',authMiddleware ,async (req, res) =>  {    
+    reportingApp.post('/reporting/company/users-data/view',async (req, res) =>  {    
        
             const document = database.collection('users-data');
             const snapshot = await document.get();
