@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage>{
                                   ),
                                   child: Text('Help'),
                                   onPressed:() {
-                                    globalWidgets.showHelpImage(context, 'assets/images/Coviduous_tutorials_using_the_app.png', 'Coviduous tutorial - using the app', 'png');
+                                    globalWidgets.showAssetImage(context, 'assets/images/Coviduous_tutorials_using_the_app.png', 'Coviduous tutorial - using the app', 'png');
                                   }
                               ),
                             ),
