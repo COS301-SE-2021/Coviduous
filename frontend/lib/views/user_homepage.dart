@@ -336,7 +336,25 @@ class _UserHomePageState extends State<UserHomePage> {
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                           ),
                                           onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                            if (latestPermission == true) {
+                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                            } else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                    title: Text('You have been denied access'),
+                                                    content: Text('Your latest permission has denied you access to the company. Please request access or complete another health check.'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('Okay'),
+                                                        onPressed: (){
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  )
+                                              );
+                                            }
                                           }
                                       ),
                                     ),
@@ -490,7 +508,25 @@ class _UserHomePageState extends State<UserHomePage> {
                                               crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                                           ),
                                           onPressed: () {
-                                            Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                            if (latestPermission == true) {
+                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                            } else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                    title: Text('You have been denied access'),
+                                                    content: Text('Your latest permission has denied you access to the company. Please request access or complete another health check.'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('Okay'),
+                                                        onPressed: (){
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  )
+                                              );
+                                            }
                                           }
                                       ),
                                     ),
