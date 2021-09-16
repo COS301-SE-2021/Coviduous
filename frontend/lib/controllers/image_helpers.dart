@@ -28,6 +28,25 @@ Future<String> saveImage(String asset, String fileNameWithoutType, String fileTy
   return null;
 }
 
+Future<String> saveMemoryImage(Uint8List bytes, String fileNameWithoutType, String fileType) async {
+  String fileNameWithType = fileNameWithoutType + "." + fileType;
+
+  if (kIsWeb) { //If web browser
+    String platform = globals.getOSWeb();
+    if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+      saveImageMobile(bytes, fileNameWithType);
+      return "Image saved to downloads folder";
+    } else { //Else, PC web browser
+      saveImageWeb(bytes, fileNameWithType, fileType);
+    }
+  } else { //Else, mobile app
+    saveImageMobile(bytes, fileNameWithType);
+    return "Image saved to downloads folder";
+  }
+
+  return null;
+}
+
 Future saveImageMobile(Uint8List bytes, String fileName) async {
   List<Directory> outputs;
 
