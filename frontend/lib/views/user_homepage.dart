@@ -86,6 +86,10 @@ class _UserHomePageState extends State<UserHomePage> {
           setState(() {
             upcomingBooking = globals.currentBookings.first.getTimestamp().substring(24);
           });
+        } else {
+          setState(() {
+            upcomingBooking = 'No bookings found';
+          });
         }
       });
     }
@@ -509,7 +513,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                           ),
                                           onPressed: () {
                                             if (latestPermission == true) {
-                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                              //Navigator.of(context).pushReplacementNamed(Office.routeName);
                                             } else {
                                               showDialog(
                                                   context: context,
@@ -526,6 +530,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                                     ],
                                                   )
                                               );
+                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
                                             }
                                           }
                                       ),
