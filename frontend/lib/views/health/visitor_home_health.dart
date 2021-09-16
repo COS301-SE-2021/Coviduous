@@ -104,7 +104,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                           Icon(
                                             Icons.check,
                                             size: (!globals.getIfOnPC())
-                                                ? MediaQuery.of(context).size.width * 0.01 * 4
+                                                ? MediaQuery.of(context).size.width * 0.01 * 5
                                                 : MediaQuery.of(context).size.width * 0.01 * 2,
                                           )
                                         ],
@@ -135,7 +135,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                           Icon(
                                             Icons.zoom_in,
                                             size: (!globals.getIfOnPC())
-                                                ? MediaQuery.of(context).size.width * 0.01 * 4
+                                                ? MediaQuery.of(context).size.width * 0.01 * 5
                                                 : MediaQuery.of(context).size.width * 0.01 * 2,
                                           )
                                         ],
@@ -211,7 +211,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                                           Icon(
                                             Icons.zoom_in,
                                             size: (!globals.getIfOnPC())
-                                                ? MediaQuery.of(context).size.width * 0.01 * 4
+                                                ? MediaQuery.of(context).size.width * 0.01 * 5
                                                 : MediaQuery.of(context).size.width * 0.01 * 2,
                                           )
                                         ],
