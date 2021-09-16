@@ -303,12 +303,24 @@ class CurrentEmails {
 // Controller request headers
 //============================
 
-Map<String, String> requestHeaders = {
-  'Authorization': 'Bearer $token',
-  'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-  'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
-  'Accept': '*/*',
-  'Content-Type': 'application/json',
-  'Connection': 'Keep-Alive',
-  'Keep-Alive': 'timeout=5, max=1000'
-};
+Map<String, String> getRequestHeaders() {
+  if (kReleaseMode) { //If release version of the app
+    return {
+      'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+    };
+  } else { //Else, testing version of the app
+    return {
+      'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Connection': 'Keep-Alive',
+      'Keep-Alive': 'timeout=5, max=1000'
+    };
+  }
+}

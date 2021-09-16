@@ -46,7 +46,7 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
       "companyName": companyName,
       "companyAddress": companyAddress,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -79,7 +79,7 @@ Future<bool> createCompany(String companyId) async {
     request.body = json.encode({
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -104,7 +104,7 @@ Future<bool> createCompany(String companyId) async {
     request2.body = json.encode({
       "companyId": companyId,
     });
-    request2.headers.addAll(globals.requestHeaders);
+    request2.headers.addAll(globals.getRequestHeaders());
 
     var response2 = await request2.send();
 
@@ -129,7 +129,7 @@ Future<bool> createCompany(String companyId) async {
     request3.body = json.encode({
       "companyId": companyId,
     });
-    request3.headers.addAll(globals.requestHeaders);
+    request3.headers.addAll(globals.getRequestHeaders());
 
     var response3 = await request3.send();
 
@@ -157,7 +157,7 @@ Future<List<User>> getUsers() async {
   var response;
 
   try {
-    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+    response = await http.get(Uri.parse(url), headers: globals.getRequestHeaders());
 
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -195,7 +195,7 @@ Future<User> getUserDetails(String userId) async {
     request.body = json.encode({
       "userId": userId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -235,7 +235,7 @@ Future<User> getUserDetailsByEmail(String email) async {
     request.body = json.encode({
       "email": email,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -275,7 +275,7 @@ Future<List<String>> getEmailsByCompany(String companyId) async {
     request.body = json.encode({
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -323,7 +323,7 @@ Future<bool> updateUser(String type, String firstName, String lastName, String e
       "companyName": companyName,
       "companyAddress": companyAddress,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -352,7 +352,7 @@ Future<bool> deleteUser() async {
     request.body = json.encode({
       "userId": globals.loggedInUserId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 

@@ -44,7 +44,7 @@ Future<bool> createShift(String date, String startTime, String endTime, String d
       "floorNumber": globals.currentFloorNum,
       "roomNumber": globals.currentRoomNum,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -74,7 +74,7 @@ Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, 
       "shiftNumber": shiftNumber,
       "adminId": adminId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -101,7 +101,7 @@ Future<List<Shift>> getShifts(String roomNumber) async {
     request.body = json.encode({
       "roomNumber": roomNumber,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -136,7 +136,7 @@ Future<List<Group>> getGroups() async {
   var response;
 
   try {
-    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+    response = await http.get(Uri.parse(url), headers: globals.getRequestHeaders());
 
     if (response.statusCode == 200) {
       //print(response.body);
@@ -174,7 +174,7 @@ Future<List<Group>> getGroupForShift(String shiftId) async {
     request.body = json.encode({
       "shiftNumber": shiftId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -215,7 +215,7 @@ Future<bool> updateShift(String shiftId, String startTime, String endTime) async
       "startTime": startTime,
       "endTime": endTime,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -238,7 +238,7 @@ Future<bool> deleteShift(String shiftId) async {
 
   var request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"shiftId": shiftId});
-  request.headers.addAll(globals.requestHeaders);
+  request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();
 

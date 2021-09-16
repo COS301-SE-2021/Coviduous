@@ -21,7 +21,7 @@ Future<ChatbotResponse> sendAndReceive(String message) async {
     request.body = json.encode({
       "question": message
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 

@@ -34,7 +34,7 @@ Future<bool> createAnnouncement(String announcementId, String type, String messa
       "adminId": globals.loggedInUserId,
       "companyId": globals.loggedInCompanyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -61,7 +61,7 @@ Future<List<Announcement>> getAnnouncements() async {
   var response;
 
   try {
-    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+    response = await http.get(Uri.parse(url), headers: globals.getRequestHeaders());
 
     if (response.statusCode == 200) {
       //print(response.body);
@@ -94,7 +94,7 @@ Future<bool> deleteAnnouncement(String announcementId) async {
 
   var request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"announcementId": announcementId});
-  request.headers.addAll(globals.requestHeaders);
+  request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();
 

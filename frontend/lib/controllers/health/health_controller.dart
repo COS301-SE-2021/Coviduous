@@ -55,7 +55,7 @@ Future<HealthCheck> createHealthCheck(String companyId, String userId, String na
       "shortness_of_breath": globals.toInt(shortnessOfBreath),
       "head_ache": globals.toInt(headache),
     });
-    request2.headers.addAll(globals.requestHeaders);
+    request2.headers.addAll(globals.getRequestHeaders());
 
     var response2 = await request2.send();
 
@@ -93,7 +93,7 @@ Future<HealthCheck> createHealthCheck(String companyId, String userId, String na
         "naive_prediction": jsonMap2["naive_prediction"],
         "nb_accuracy":jsonMap2["nb_accuracy"],
       });
-      request.headers.addAll(globals.requestHeaders);
+      request.headers.addAll(globals.getRequestHeaders());
 
       var response = await request.send();
 
@@ -136,7 +136,7 @@ Future<List<Permission>> getPermissions(String userEmail) async {
     request.body = json.encode({
       "userEmail": userEmail,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -182,7 +182,7 @@ Future<bool> reportInfection(String userId, String userEmail, String adminId, St
       "companyId": companyId,
       "adminEmail": adminEmail
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -217,7 +217,7 @@ Future<bool> createPermissionRequest(String permissionId, String userId, String 
       "adminId": adminId,
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -244,7 +244,7 @@ Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
       "companyId": companyId,
     });
 
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -284,7 +284,7 @@ Future<bool> deletePermissionRequest(String permissionRequestId) async {
     request.body = json.encode({
       "permissionRequestId": permissionRequestId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -315,7 +315,7 @@ Future<bool> grantPermission(String userId, String userEmail, String adminId, St
       "companyId": companyId,
       "permissionId": globals.currentPermissionId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
     print(request.body);
 
     var response = await request.send();
@@ -345,7 +345,7 @@ Future<Group> viewGroup(String shiftNumber) async {
       "shiftNumber": shiftNumber,
     });
 
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -386,7 +386,7 @@ Future<List<Shift>> viewShifts(String userEmail) async {
       "userEmail": userEmail,
     });
 
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -423,7 +423,7 @@ Future<bool> notifyGroup(String shiftNumber) async {
     request.body = json.encode({
       "shiftNumber": shiftNumber,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -453,7 +453,7 @@ Future<bool> uploadVaccineConfirmation(String userId, String fileName, String by
       "fileName": fileName,
       "base64String": bytes
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -481,7 +481,7 @@ Future<bool> uploadTestResults(String userId, String fileName, String bytes) asy
       "fileName": fileName,
       "base64String": bytes
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -507,7 +507,7 @@ Future<List<VaccineConfirmation>> getVaccineConfirmations(String userId) async {
     request.body = json.encode({
       "userId": userId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -544,7 +544,7 @@ Future<List<TestResults>> getTestResults(String userId) async {
     request.body = json.encode({
       "userId": userId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 

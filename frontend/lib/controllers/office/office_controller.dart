@@ -88,7 +88,7 @@ Future<List<Booking>> viewBookings(String userId) async {
     request.body = json.encode({
       "userId": userId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -126,7 +126,7 @@ Future<List<Booking>> viewAllBookings(String companyId) async {
     request.body = json.encode({
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 

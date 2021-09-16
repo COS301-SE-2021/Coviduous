@@ -54,7 +54,7 @@ Future<List<BookingSummary>> getBookingSummary(String companyId, String year, St
       "year": year,
       "month": month,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -93,7 +93,7 @@ Future<List<CompanySummary>> getCompanySummary(String companyId) async {
     request.body = json.encode({
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -132,7 +132,7 @@ Future<List<HealthSummary>> getHealthSummary(String companyId, String year, Stri
       "year": year,
       "month": month,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -173,7 +173,7 @@ Future<List<PermissionSummary>> getPermissionSummary(String companyId, String ye
       "year": year,
       "month": month,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -214,7 +214,7 @@ Future<List<ShiftSummary>> getShiftSummary(String companyId, String year, String
       "year": year,
       "month": month,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -257,7 +257,7 @@ Future<bool> addSickEmployee(String userId, String userEmail, String companyId) 
       "userEmail": userEmail,
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -291,7 +291,7 @@ Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminI
       "adminId": adminId,
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -318,7 +318,7 @@ Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminI
       "userEmail": userEmail,
       "companyId": companyId,
     });
-    request2.headers.addAll(globals.requestHeaders);
+    request2.headers.addAll(globals.getRequestHeaders());
 
     var response2 = await request2.send();
     print(await response2.statusCode);
@@ -348,7 +348,7 @@ Future<List<SickUser>> viewSickEmployees(String companyId) async {
     request.body = json.encode({
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
@@ -387,7 +387,7 @@ Future<List<RecoveredUser>> viewRecoveredEmployees(String companyId) async {
     request.body = json.encode({
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     print(await response.statusCode);
