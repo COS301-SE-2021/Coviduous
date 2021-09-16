@@ -42,7 +42,7 @@ String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 //Get bookings overview
 Future<List<BookingSummary>> getBookingSummary(String companyId, String year, String month) async {
-  String path = "/reporting/summary-bookings";
+  String path = "/reporting/summary-bookings/";
   String url = server + path;
 
   var request;
@@ -83,7 +83,7 @@ Future<List<BookingSummary>> getBookingSummary(String companyId, String year, St
 
 //Get company overview
 Future<List<CompanySummary>> getCompanySummary(String companyId) async {
-  String path = "/reporting/company/company-data/view";
+  String path = "reporting/api/reporting/company/company-data/view/";
   String url = server + path;
 
   var request;
@@ -120,7 +120,7 @@ Future<List<CompanySummary>> getCompanySummary(String companyId) async {
 
 //Get health overview
 Future<List<HealthSummary>> getHealthSummary(String companyId, String year, String month) async {
-  String path = "/reporting/health-summary";
+  String path = "reporting/api/reporting/health-summary/";
   String url = server + path;
 
   var request;
@@ -161,7 +161,7 @@ Future<List<HealthSummary>> getHealthSummary(String companyId, String year, Stri
 
 //Get permission overview
 Future<List<PermissionSummary>> getPermissionSummary(String companyId, String year, String month) async {
-  String path = "/reporting/permission-summary";
+  String path = "reporting/api/reporting/permission-summary/";
   String url = server + path;
 
   var request;
@@ -202,7 +202,7 @@ Future<List<PermissionSummary>> getPermissionSummary(String companyId, String ye
 
 //Get shift overview
 Future<List<ShiftSummary>> getShiftSummary(String companyId, String year, String month) async {
-  String path = "/reporting/summary-shifts";
+  String path = "reporting/api/reporting/summary-shifts/";
   String url = server + path;
 
   var request;
@@ -245,7 +245,7 @@ Future<List<ShiftSummary>> getShiftSummary(String companyId, String year, String
 
 //Add sick employee
 Future<bool> addSickEmployee(String userId, String userEmail, String companyId) async {
-  String path = "/reporting/health/sick-employees";
+  String path = "reporting/api/reporting/health/sick-employees/";
   String url = server + path;
 
   var request;
@@ -278,7 +278,7 @@ Future<bool> addSickEmployee(String userId, String userEmail, String companyId) 
 Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminId, String companyId) async {
   bool result = false;
 
-  String path = "/health/report-recovery";
+  String path = "health/api/health/report-recovery/";
   String url = server + path;
 
   var request;
@@ -306,7 +306,7 @@ Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminI
     result = false;
   }
 
-  String path2 = "/reporting/health/recovered-employees";
+  String path2 = "reporting/api/reporting/health/recovered-employees/";
   String url2 = server + path2;
 
   var request2;
@@ -338,7 +338,7 @@ Future<bool> addRecoveredEmployee(String userId, String userEmail, String adminI
 
 //View sick employees
 Future<List<SickUser>> viewSickEmployees(String companyId) async {
-  String path = "/reporting/health/sick-employees/view";
+  String path = "reporting/api/reporting/health/sick-employees/view/";
   String url = server + path;
 
   var request;
@@ -377,7 +377,7 @@ Future<List<SickUser>> viewSickEmployees(String companyId) async {
 
 //View recovered employees
 Future<List<RecoveredUser>> viewRecoveredEmployees(String companyId) async {
-  String path = "/reporting/health/recovered-employees/view";
+  String path = "reporting/api/reporting/health/recovered-employees/view/";
   String url = server + path;
 
   var request;

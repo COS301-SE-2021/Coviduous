@@ -22,7 +22,7 @@ int numRooms = 0;
 String server = serverInfo.getServer(); //server needs to be running on firebase
 
 Future<bool> createFloorPlan(num numFloors, String adminId, String companyId, String imageBytes) async {
-  String path = "/floorplan";
+  String path = "floorplan/api/floorplan/";
   String url = server + path;
   var request;
 
@@ -50,7 +50,7 @@ Future<bool> createFloorPlan(num numFloors, String adminId, String companyId, St
 }
 
 Future<bool> createFloor(String floorPlanNumber, String adminId, String companyId) async {
-  String path = "/floorplan/floor";
+  String path = "floorplan/api/floorplan/floor/";
   String url = server + path;
   var request;
 
@@ -77,7 +77,7 @@ Future<bool> createFloor(String floorPlanNumber, String adminId, String companyI
 }
 
 Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber, String imageBytes) async {
-  String path = "/floorplan/room";
+  String path = "floorplan/api/floorplan/room/";
   String url = server + path;
   var request;
 
@@ -114,7 +114,7 @@ Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber, String i
 }
 
 Future<List<FloorPlan>> getFloorPlans(String companyId) async {
-  String path = '/floorplan/view';
+  String path = 'floorplan/api/floorplan/view/';
   String url = server + path;
   var request;
 
@@ -150,7 +150,7 @@ Future<List<FloorPlan>> getFloorPlans(String companyId) async {
 }
 
 Future<List<Floor>> getFloors(String floorPlanNumber) async {
-  String path = '/floorplan/floors';
+  String path = 'floorplan/api/floorplan/floors/';
   String url = server + path;
   var request;
 
@@ -186,7 +186,7 @@ Future<List<Floor>> getFloors(String floorPlanNumber) async {
 }
 
 Future<List<Room>> getRooms(String floorNumber) async {
-  String path = '/floorplan/floors/rooms';
+  String path = 'floorplan/api/floorplan/floors/rooms/';
   String url = server + path;
   var request;
 
@@ -223,7 +223,7 @@ Future<List<Room>> getRooms(String floorNumber) async {
 
 Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName, num roomArea,
     num numberOfDesks, num deskArea, num capacityPercentage, String imageBytes) async {
-  String path = '/floorplan/room';
+  String path = 'floorplan/api/floorplan/room/';
   String url = server + path;
   var request;
 
@@ -255,7 +255,7 @@ Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName, 
 }
 
 Future<bool> deleteFloorPlan(String floorPlanNumber) async {
-  String path = '/floorplan';
+  String path = 'floorplan/api/floorplan/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
@@ -288,7 +288,7 @@ Future<bool> deleteFloorPlan(String floorPlanNumber) async {
 }
 
 Future<bool> deleteFloor(String floorPlanNumber, String floorNumber) async {
-  String path = '/floorplan/floor';
+  String path = 'floorplan/api/floorplan/floor/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
@@ -324,7 +324,7 @@ Future<bool> deleteFloor(String floorPlanNumber, String floorNumber) async {
 }
 
 Future<bool> deleteRoom(String floorNumber, String roomNumber) async {
-  String path = '/floorplan/room';
+  String path = 'floorplan/api/floorplan/room/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
