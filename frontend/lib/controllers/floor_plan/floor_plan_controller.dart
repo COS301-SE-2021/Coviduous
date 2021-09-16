@@ -84,6 +84,7 @@ Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber, String i
   try {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
+      "roomName": "",
       "currentNumberRoomInFloor": currentNumRoomsInFloor,
       "floorNumber": floorNumber,
       "roomArea": 0,
@@ -114,7 +115,7 @@ Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber, String i
 }
 
 Future<List<FloorPlan>> getFloorPlans(String companyId) async {
-  String path = 'floorplan/api/floorplan/view/';
+  String path = 'floorplan/api/floorplans/view/';
   String url = server + path;
   var request;
 
@@ -150,7 +151,7 @@ Future<List<FloorPlan>> getFloorPlans(String companyId) async {
 }
 
 Future<List<Floor>> getFloors(String floorPlanNumber) async {
-  String path = 'floorplan/api/floorplan/floors/';
+  String path = 'floorplan/api/floorplan/floors/view/';
   String url = server + path;
   var request;
 
@@ -186,7 +187,7 @@ Future<List<Floor>> getFloors(String floorPlanNumber) async {
 }
 
 Future<List<Room>> getRooms(String floorNumber) async {
-  String path = 'floorplan/api/floorplan/floors/rooms/';
+  String path = 'floorplan/api/floorplan/rooms/view/';
   String url = server + path;
   var request;
 
@@ -223,12 +224,12 @@ Future<List<Room>> getRooms(String floorNumber) async {
 
 Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName, num roomArea,
     num numberOfDesks, num deskArea, num capacityPercentage, String imageBytes) async {
-  String path = 'floorplan/api/floorplan/room/';
+  String path = 'floorplan/api/floorplan/room/update/';
   String url = server + path;
   var request;
 
   try {
-    request = http.Request('PUT', Uri.parse(url));
+    request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "floorNumber": floorNumber,
       "roomNumber": roomNumber,
@@ -255,7 +256,7 @@ Future<bool> updateRoom(String floorNumber, String roomNumber, String roomName, 
 }
 
 Future<bool> deleteFloorPlan(String floorPlanNumber) async {
-  String path = 'floorplan/api/floorplan/';
+  String path = 'floorplan/api/floorplan/delete/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
@@ -288,7 +289,7 @@ Future<bool> deleteFloorPlan(String floorPlanNumber) async {
 }
 
 Future<bool> deleteFloor(String floorPlanNumber, String floorNumber) async {
-  String path = 'floorplan/api/floorplan/floor/';
+  String path = 'floorplan/api/floorplan/floor/delete/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
@@ -324,7 +325,7 @@ Future<bool> deleteFloor(String floorPlanNumber, String floorNumber) async {
 }
 
 Future<bool> deleteRoom(String floorNumber, String roomNumber) async {
-  String path = 'floorplan/api/floorplan/room/';
+  String path = 'floorplan/api/floorplan/room/delete/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
