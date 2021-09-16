@@ -616,6 +616,126 @@ COVID19_QUES = [
         "Answer": "The virus is very susceptible to common anti-bacterial cleaning agents such as bleach, and alcohol-based cleaners (60% volume). Regularly and thoroughly clean your hands with an alcohol-based hand rub or wash them with soap and water for at least 20 seconds. Maintain at least 1 metre distance between yourself and anyone who is coughing or sneezing. Avoid touching your eyes, nose or mouth with unclean hands."
     },
     {
+        "Question": "I have flu like symptoms, should I get tested?",
+        "Answer": "The symptoms of COVID-19 include cough, sore throat, shortness of breath or fever.  However, these are also symptoms of the flu. The National Institute of Communicable Diseases (NICD) recommends that you should only get tested if you display symptoms plus: Been in contact with a confirmed COVID-19 person; travelled to a high risk country; worked in or been to a healthcare facility treating people with Covid-19; have a severe case of pneumonia with an unknown cause."
+    },
+    {
+        "Question": "Where should I go if I want to test for COVID-19?",
+        "Answer": "If you think you might have contracted the virus, you can call the NICD helpline (0800 029 999) and you will be advised on possible testing facilities. However, testing is not routinely done unless testing is indicated by a health professional therefore one would need to be assessed by your medical practitioner in order to qualify for testing."
+    },
+    {
+        "Question": "What happens if I test positive?",
+        "Answer": "Please keep in contact with your health care provider telephonically to monitor your progress. Your healthcare provider will assess you in terms of your current coronavirus illness and your other risk factors for more severe illness (i.e. older age, serious underlying medical conditions such as diabetes mellitus, heart disease, lung disease and immunosuppression, etc.)."
+    },
+    {
+        "Question": "How is COVID-19 infection treated?",
+        "Answer": "There is no specific treatment available for SARS-CoV-2. Treatment is supportive (e.g. providing oxygen for patients with shortness of breath or managing a fever). Antibiotics do not treat viral infections. However, antibiotics may be required if a secondary bacterial infection develops. Currently there are vaccines being developed."
+    },
+    {
+        "Question": "Can I go to school or work?",
+        "Answer": "Anyone who is sick or displaying symptoms should not go to school or work. If you have been in close contact with a confirmed COVID-19 case, you should self-isolate for 14 days from the date of close contact. If you are concerned, contact your medical practitioner for further advice."
+    },
+    {
+        "Question": "What is the plan of the Department of Basic Education, what should we do as teachers?",
+        "Answer": "Protocols have been developed and distributed to provinces and districts in the country. However, it is especially important to encourage children and staff to take every day preventative actions to prevent the spread of respiratory illnesses. This includes staying at home when sick, washing hands with soap and water or using an alcohol based hand sanitiser with at least 60% alcohol and cleaning frequently touched surfaces. If children do become ill, they should be strictly isolated at home. In situations where the child or staff member becomes sick at school, they should be separated from healthy students and staff until sick students and staff can be sent home."
+    },
+    {
+        "Question": "Can the virus spread through food items?",
+        "Answer": "The Coronaviruses is spread from person-to-person through respiratory droplets. Currently there is no evidence to support transmission of COVID-19 associated with food. Before preparing or eating food it is important to always rinse the food with water and wash your hands with soap and water for 20 seconds for general food safety."
+    },
+    {
+        "Question": "Can I get the virus through handling or receiving packages or products?",
+        "Answer": "It is possible that one may touch the SARS-CoV-2 virus while handling packages contaminated by the virus however, one may only contract the virus or be affected by it when the virus comes into contact with your mucosal membranes (mouth, tongue or nose) thus entering your body. This is not the main means of transmission. Inhaling respiratory droplets is the main way the virus spreads."
+    },
+    {
+        "Question": "Does warm weather kill the virus?",
+        "Answer": "The SARS-CoV-2 virus does not survive well in warmer climates. It is therefore expected to thrive in the colder winter seasons."
+    },
+    {
+        "Question": "What should I do if I am at higher risk of getting the virus?",
+        "Answer": "If you are at higher risk of getting the virus, you should take everyday precautions to keep space between yourself and others. When you go out, try to avoid unnecessary contact, non-essential travel and exposure to others who are sick. Wash your hands often, avoid crowds and if there is an outbreak in your community, consider staying home and limiting contact to essential people."
+    }, 
+    {
+        "Question": "How long does the virus survive on surfaces?",
+        "Answer": "It is not certain how long the virus that causes COVID-19 survives on surfaces, but it seems to behave like other coronaviruses. Studies suggest that coronaviruses (including preliminary information on the COVID-19 virus) may persist on surfaces for a few hours or up to several days. This may vary under different conditions (e.g. type of surface, temperature or humidity of the environment)."
+    },
+    {
+        "Question": "What role can I play in the fight against the virus?",
+        "Answer": "Be aware of fake news reporting, ensuring credible resources from the WHO, CDC or NICD are only shared. Speak out against negative behaviours and negative social media statements stereotyping various individuals. Ensure personal hygiene and good health practices such as cough and sneeze etiquette. Express your appreciation to healthcare workers who are on the frontline taking care of patients and helping make sure this disease does not spread further."
+    },
+    {
+        "Question": "What support is in place for affected families and individuals?",
+        "Answer": "All social service professionals will provide psychosocial care and support services to affected individual and their families. This includes trauma counselling, integration and re-unification of persons who have been isolated/quarantined to mitigate stigmatisation."
+    },
+    {
+        "Question": "How are other social centres/facilities affected?",
+        "Answer": "There is a suspension, until further notice, of all external visits to Child and Youth Care Centres, drug rehabilitation and treatment centres, shelters and old age centres."
+    },
+    {
+        "Question": "What is the role of the non-profit sector in preventing spread of COVID-19?",
+        "Answer": "These are critical stakeholders in the provision of social services. They must continue playing their part by disseminating correct information to members of the public."
+    },
+    {
+        "Question": "Does the long term wearing of masks have any negative impact on one’s health?",
+        "Answer": "Prolonged use of any face mask has not been shown to cause carbon dioxide toxicity or lack of adequate oxygen in healthy people. Healthcare workers routinely wear masks for prolonged periods while performing their duties. Cloth masks provide an additional layer of protection by reducing the number of microorganisms that a person releases into the air. Mass mask wearing will ensure that fewer potential viral droplets are released into the air.Wearing amask reduces the risk that someone will be exposed to the virus."
+    },
+    {
+        "Question": "Why must bodies be wrapped in plastic bags?",
+        "Answer": "The human remains of a person who has died from coronavirus are considered contagious and should be kept only in designated mortuaries. Under no circumstances shall the human remains be directly handled, whether for aesthetic, hygiene preparations, cultural or religious reasons. Human remains shall be placed in transparent leak proof double body bags and sealed."
+    },
+    {
+        "Question": "Can I get COVID-19 from eating fresh foods, like fruits and vegetables?",
+        "Answer": "There is currently no evidence that people can catch COVID-19 from food, including fruits and vegetables. Fresh fruits and vegetables are part of a healthy diet and their consumption should be encouraged."
+    },
+    {
+        "Question": "How should I wash fruits and vegetables in the time of COVID-19?",
+        "Answer": "Wash fruit and vegetables the same way you would in any other circumstance. Before handling them, wash your hands with soap and water. Then wash fruits and vegetables thoroughly with clean water, especially if you eat them raw."
+    },
+    {
+        "Question": "Can the virus that causes COVID-19 live on the surface of food packaging?",
+        "Answer": "Coronaviruses need a live animal or human host to multiply and survive and cannot multiply on the surface of food packages. It is not necessary to disinfect food packaging materials, but hands should be properly washed after handling food packages and before eating."
+    }, 
+    {
+        "Question": "Is it safe to go to grocery stores and other food markets?",
+        "Answer": "Yes, it is generally safe to go grocery shopping and to markets by following the below prevention measures: Clean your hands with sanitizer before entering the store; cover a cough or sneeze in your bent elbow or tissue; maintain at least a 1-metre distance from others, and if you can’t maintain this distance, wear a mask (many stores now require a mask); once home, wash your hands thoroughly and also after handling and storing your purchased products. "
+    },
+    {
+        "Question": "Is it safe to have groceries delivered?",
+        "Answer": "Yes, it is safe to have groceries delivered if the provider follows good personal and food hygiene practices. After accepting food/grocery deliveries, hands should be properly washed."
+    },
+    {
+        "Question": "What is the best household disinfectant for surfaces?",
+        "Answer": "Regular household cleaning and disinfection products will effectively eliminate the virus from household surfaces.  For cleaning and disinfecting households with suspected or confirmed COVID19, surface virucidal disinfectants, such as 0.05 percent sodium hypochlorite (NaClO) and products based on ethanol (at least 70%), should be used."
+    },
+    {
+        "Question": "What foods should be consumed to support the immune system?",
+        "Answer": "The immune system requires the support of many nutrients. It is recommended to consume a variety of foods for a healthy and balanced diet, including whole grains, legumes, vegetables, fruits, nuts and animal source foods. There is no single food that will prevent you from catching COVID-19."
+    },
+    {
+        "Question": "Are vitamin D supplements needed if individuals are not exposed to sunlight due to lockdowns?",
+        "Answer": "Vitamin D can be made in the skin by exposure to sunlight or obtained through the diet from natural sources (e.g. fatty fishes such as salmon, tuna and mackerel, fish liver oils, beef liver, cheese and egg yolks), or from vitamin D-fortified foods or vitamin D-containing supplements. In situations where individuals’ vitamin D status is already marginal or where foods rich in vitamin D (including vitamin D-fortified foods) are not consumed, and exposure to sunlight is limited, a vitamin D supplement in doses of the recommended nutrient intakes (200-600 IU, depending on age) or according to national guidelines may be considered."
+    },
+    {
+        "Question": "Are there any herbal teas or herbal supplements that may help prevent or cure COVID-19?",
+        "Answer": "No. There is currently no evidence to support the use of herbal teas or herbal supplements to prevent or cure COVID-19.  "
+    },
+    {
+        "Question": "Can probiotics help prevent COVID-19?",
+        "Answer": "No. Probiotics are live microorganisms that are generally added to foods or used as a supplement to the diet to confer a health benefit. However, there is currently no evidence to support the use of probiotics to help prevent or cure COVID-19. "
+    },
+    {
+        "Question": "Can eating ginger help prevent COVID-19?",
+        "Answer": "No. There is no evidence that eating ginger has protected people from COVID-19. However, ginger is a food that may have some antimicrobial and anti-inflammatory properties."
+    },
+    {
+        "Question": "Can eating garlic help prevent COVID-19?",
+        "Answer": "No. There is no evidence that eating garlic has protected people from COVID-19. However, garlic is a food that may have some antimicrobial properties. "
+    },
+    {
+        "Question": "Can adding pepper to your soup or other meals help prevent or cure COVID-19?",
+        "Answer": "No. There is no evidence that adding hot peppers to your food can prevent or cure COVID-19."
+    },
+    {
         "Question": "what are the recommendations by the authorities",
         "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
