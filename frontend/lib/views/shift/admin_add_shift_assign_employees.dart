@@ -307,7 +307,7 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
+      child: Scaffold(
           appBar: AppBar(
             title: Text('Assign employees to shift'),
             leading: BackButton( //Specify back button
@@ -395,7 +395,13 @@ class _AddShiftAssignEmployeesState extends State<AddShiftAssignEmployees> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: Text('Finish'),
+                        child: Text('Finish',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                          ),
+                        ),
                         onPressed: () {
                           finishShift();
                         },
