@@ -3,6 +3,7 @@ from collections import Counter
 from dataset.covid19_faqs.coronavirus_questions import COVID19_QUES
 from dataset.personal_ques.personal_ques import PERSONAL_QUES
 from dataset.tutorials.tutorials import TUTORIALS
+from dataset.shortcuts.shortcuts import SHORTCUTS
 
 WORD = re.compile(r'\w+')
 
@@ -49,6 +50,14 @@ def find_most_similar(word):
             max['answer'] = each['Answer']
             max['question'] = each['Question']
     for each in TUTORIALS:
+        score = compare_similarity(word, each['Question'])
+       # strScore=str(score)
+       # print("word is : " + word +"compared question : "+ each['Question'] + "score is : "+strScore)
+        if score > max['score']:
+            max['score'] = score
+            max['answer'] = each['Answer']
+            max['question'] = each['Question']
+    for each in SHORTCUTS:
         score = compare_similarity(word, each['Question'])
        # strScore=str(score)
        # print("word is : " + word +"compared question : "+ each['Question'] + "score is : "+strScore)

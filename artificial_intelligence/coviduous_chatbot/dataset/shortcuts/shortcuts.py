@@ -1,4 +1,3 @@
-#Greetings first
 SHORTCUTS = [
     {
         "Question": "shortcut-view-announcements-admin",
