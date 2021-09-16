@@ -61,13 +61,13 @@ graph = graphviz.Source(plot_data)
 graph.render("decision-tree")
 
 # calculate decision tree confusion matrix and write to file
-dt_confusion_matrix = sklearn.metrics.confusion_matrix(X, X_test)
-file1 = open("dt_confusion_matrix.txt", "w")
-file1.write(str(dt_confusion_matrix))
-file1.close()
+# dt_confusion_matrix = sklearn.metrics.confusion_matrix(X, X_test)
+# file1 = open("dt_confusion_matrix.txt", "w")
+# file1.write(str(dt_confusion_matrix))
+# file1.close()
 
 # calculate confusion matrix and write to file
-nb_confusion_matrix = sklearn.metrics.confusion_matrix(X, X_test)
-file2 = open("nb_confusion_matrix.txt", "w")
-file2.write(str(nb_confusion_matrix))
-file2.close()
+# nb_confusion_matrix = sklearn.metrics.confusion_matrix(X, X_test)
+# file2 = open("nb_confusion_matrix.txt", "w")
+# file2.write(str(nb_confusion_matrix))
+# file2.close()
