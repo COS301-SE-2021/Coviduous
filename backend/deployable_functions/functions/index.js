@@ -9,7 +9,8 @@ module.exports = {
     ...require('./controllers/announcement.controller.js'),
     ...require('./controllers/floorplan.controller.js'),
     ...require('./controllers/notification.controller.js'),
-    ...require('./controllers/reporting.controller.js')
+    ...require('./controllers/reporting.controller.js'),
+    ...require('./controllers/health.controller.js')
 }
 
 
