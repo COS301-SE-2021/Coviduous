@@ -9,6 +9,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class MakeNotificationAssignEmployees extends StatefulWidget {
@@ -183,29 +184,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                 height: MediaQuery.of(context).size.height /
                     (5 * globals.getWidgetScaling()),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                      color: Theme.of(context).primaryColor,
-                      child: Text('Notification is empty', style: TextStyle(color: Colors.white,
-                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                        height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                        color: Colors.white,
-                        padding: EdgeInsets.all(12),
-                        child: Text('No employees have been assigned to this notification yet.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-                    ),
-                  ],
-                ),
-              )
+              globalWidgets.notFoundMessage(context, 'Notification is empty', 'No employees have been assigned to this notification yet.'),
             ]
         );
       } else {
