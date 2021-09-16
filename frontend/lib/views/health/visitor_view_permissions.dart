@@ -102,10 +102,20 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
       }
 
        if(numOfPermissions == 0) {
-         return globalWidgets.notFoundMessage(context, 'No permissions found', 'No permissions have been assigned to you.');
+         return Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               SizedBox(
+                 height: MediaQuery.of(context).size.height /
+                     (5 * globals.getWidgetScaling()),
+               ),
+               globalWidgets.notFoundMessage(context, 'No permissions found', 'No permissions have been assigned to you.')
+             ]
+         );
        } else {
          return ListView.builder(
              padding: const EdgeInsets.all(16),
+             shrinkWrap: true,
              itemCount: numOfPermissions,
              itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
                return ListTile(
@@ -290,7 +300,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
      }
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
+      child: Scaffold(
           appBar: AppBar(
             title: Text('Permissions'),
             leading: BackButton( //Specify back button
@@ -301,14 +311,16 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
           ),
           body: Stack (
               children: <Widget>[
-                Center (
-                  child: (globals.getIfOnPC())
-                      ? Container(
-                        width: 640,
-                        child: getList(),
-                  )
-                      : Container(
-                        child: getList(),
+                SingleChildScrollView(
+                  child: Center (
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
                   ),
                 ),
               ]
