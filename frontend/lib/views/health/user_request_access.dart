@@ -77,9 +77,9 @@ class UserRequestAccessState extends State<UserRequestAccess> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Request access"),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Request access"),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(UserRequestAccessShifts.routeName);
@@ -139,13 +139,6 @@ class UserRequestAccessState extends State<UserRequestAccess> {
                       ),
                       obscureText: false,
                       controller: _reason,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "Company ID",
-                      ),
-                      obscureText: false,
-                      controller: _companyId,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
