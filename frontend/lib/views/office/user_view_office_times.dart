@@ -60,11 +60,18 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
             shrinkWrap: true,
             itemCount: globals.currentShifts.length,
             itemBuilder: (context, index) {
-              final timeRegex = RegExp(r'^TimeOfDay\((.*)\)$'); //To extract the time from getStartTime() and getEndTime() strings
-              final startTimeMatch = timeRegex.firstMatch(globals.currentShifts[index].getStartTime());
-              final endTimeMatch = timeRegex.firstMatch(globals.currentShifts[index].getEndTime());
-              String startTimeFormatted = startTimeMatch.group(1);
-              String endTimeFormatted = endTimeMatch.group(1);
+              String startTimeFormatted;
+              String endTimeFormatted;
+              if (globals.currentShifts[index].getStartTime().contains("TimeOfDay")) {
+                final timeRegex = RegExp(r'^TimeOfDay\((.*)\)$'); //To extract the time from getStartTime() and getEndTime() strings
+                final startTimeMatch = timeRegex.firstMatch(globals.currentShifts[index].getStartTime());
+                final endTimeMatch = timeRegex.firstMatch(globals.currentShifts[index].getEndTime());
+                startTimeFormatted = startTimeMatch.group(1);
+                endTimeFormatted = endTimeMatch.group(1);
+              } else {
+                startTimeFormatted = globals.currentShifts[index].getStartTime().substring(12, 17);
+                endTimeFormatted = globals.currentShifts[index].getEndTime().substring(12, 17);
+              }
 
               return ListTile(
                 title: Row(

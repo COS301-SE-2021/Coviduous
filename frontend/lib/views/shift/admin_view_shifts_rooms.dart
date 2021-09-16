@@ -250,16 +250,18 @@ class _ViewShiftsRoomsState extends State<ViewShiftsRooms> {
                                                 shiftHelpers.getShifts().then((result) {
                                                   if (result == true) {
                                                     if (globals.currentShifts.isNotEmpty) {
-                                                      shiftHelpers.getGroupForShift(globals.currentShifts[index].getShiftId()).then((result) {
-                                                        if (result == true) {
-                                                          globals.currentShift = globals.currentShifts[index];
-                                                          globals.currentShiftNum = globals.currentShift.getShiftId();
-                                                          Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
-                                                        } else {
-                                                          ScaffoldMessenger.of(context).showSnackBar(
-                                                              SnackBar(content: Text('Error occurred while retrieving shift. Please try again later.')));
-                                                        }
-                                                      });
+                                                      globals.currentShift = globals.currentShifts.where((element) => element.roomNumber == globals.currentRooms[index].getRoomNumber()).first;
+                                                      if (globals.currentShift != null) {
+                                                        shiftHelpers.getGroupForShift(globals.currentShift.getShiftId()).then((result) {
+                                                          if (result == true) {
+                                                            globals.currentShiftNum = globals.currentShift.getShiftId();
+                                                            Navigator.of(context).pushReplacementNamed(ViewShifts.routeName);
+                                                          } else {
+                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                SnackBar(content: Text('Error occurred while retrieving shift. Please try again later.')));
+                                                          }
+                                                        });
+                                                      }
                                                     } else {
                                                       showDialog(
                                                           context: context,
