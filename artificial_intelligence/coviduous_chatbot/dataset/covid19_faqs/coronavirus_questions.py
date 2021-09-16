@@ -736,6 +736,86 @@ COVID19_QUES = [
         "Answer": "No. There is no evidence that adding hot peppers to your food can prevent or cure COVID-19."
     },
     {
+        "Question": "Can I get COVID-19 from food?",
+        "Answer": "There is currently no evidence that people can catch COVID-19 from food or food packaging. COVID-19 is a respiratory illness and the transmission route is through person-to-person contact and through direct contact with respiratory droplets generated when an infected person coughs or sneezes."
+    },
+    {
+        "Question": "How long should it take to cook food? To what temperature kill the virus?",
+        "Answer": "This virus is not more resistant to heat than the usual viruses and bacteria found in food. As recommended for good hygiene practice, foods should be thoroughly cooked to at least 70°C."
+    },
+    {
+        "Question": "What precautions should consumers take in grocery stores?",
+        "Answer": "Consumers should maintain a safe physical distance of at least one metre from all other shoppers and staff while queuing before entering the store and while shopping in the store. If a trolley or basket is used while shopping, sanitize the handle before and after use. Hands should be sanitized before entering the store. Practice good coughing/sneezing etiquette while in the store. Avoid touching mouth, nose or eyes during shopping. Minimise direct hand contact with food by using available tongs and serving utensils. Use contactless payment rather than cash/notes (where feasible).  "
+    },
+    {
+        "Question": "Is food/grocery delivery safe?",
+        "Answer": "Yes, if the provider follows good personal and food hygiene practices. After accepting food/grocery deliveries, hands should be washed with soap and water. "
+    },
+    {
+        "Question": "Is it still safe to go to food markets? Animal markets? Wet markets?",
+        "Answer": "It should be safe provided it is possible to maintain a safe physical distance of at least one metre from all other shoppers and staff, it is possible to wash/sanitize hands, and that Good Manufacturing Practices and Good Hygienic Practices (GMP/GHP) standards are maintained in the market."
+    },
+    {
+        "Question": "Can COVID-19 be transmitted at the workplace?",
+        "Answer": "COVID-19 spreads primarily through respiratory droplets or contact with contaminated surfaces. Exposure can occur at the workplace, while travelling to work, during work-related travel to an area with local community transmission, as well as on the way to and from the workplace."
+    },
+    {
+        "Question": "What is the risk of contracting COVID-19 in the workplace?",
+        "Answer": "The risk of exposure to COVID-19 in the workplace depends on the likelihood of coming within 1 metre of others, in having frequent physical contact with people who may be infected with COVID-19, and through contact with contaminated surfaces and objects."
+    },
+    {
+        "Question": "Who should carry out the workplace risk assessment?",
+        "Answer": "Employers and managers, in consultation with workers, should carry out and regularly update the risk assessment for work-related exposure to COVID-19, preferably with the support of occupational health services."
+    },
+    {
+        "Question": "What are the key considerations for the workplace risk assessment?",
+        "Answer": "For each risk assessment, consider the environment, the task, the threat, resources available, such as personal protective equipment, and the feasibility of protective measures. The risk assessment should also extend to collective accommodation provided by the employer for workers, such as dormitories.  Essential public services, such as security and police, food retail, accommodation, public transport, deliveries, water and sanitation, and other frontline workers may be at an increased risk of exposure to occupational hazards for health and safety."
+    },
+    {
+        "Question": "What key measures to protect against COVID-19 should be undertaken in all workplaces?",
+        "Answer": "Measures to prevent transmission of COVID-19 that apply to all workplaces and all people at the workplace include frequent hand-washing or disinfection with alcohol based hand sanitizer, respiratory hygiene such as covering coughs, physical distancing of at least 1 metre or more according to the national recommendations, wearing of masks where distancing is not possible, regular environmental cleaning and disinfection, and limiting unnecessary travel. Clear policies and messages, training, and education for staff and managers to increase awareness of COVID-19 are essential."
+    }, 
+    {
+        "Question": "What additional measures should be taken at workplaces and for jobs at high risk?",
+        "Answer": "In work areas at high risk, assess the possibility of suspending the activity; enhance regular hand hygiene; provide medical masks, disposable gowns, gloves, and eye protection for workers who must work in the homes of people who are suspected or known to have COVID-19; train workers in infection prevention and control practices and use of personal protective equipment; avoid assigning tasks with high risk to workers who have pre-existing medical conditions, are pregnant, or older than 60 years of age."
+    },
+    {
+        "Question": "What should be taken into consideration when setting a physical distance at the workplace?",
+        "Answer": "WHO recommends keeping a physical distance of at least 1 metre between each person in all settings, including in workplaces. Because transmission can occur in crowded workplaces, WHO recommends providing sufficient space, at least 10 square meters, for every worker. National recommendations for physical distancing may require greater physical distance and should be complied with."
+    },
+    {
+        "Question": "How can workplaces plan for the prevention and mitigation of COVID-19?",
+        "Answer": "Workplaces should develop action plans to prevent and mitigate COVID-19 as part of the business continuity plan and according to the results of the risk assessments and the epidemiological situation. The action plan and preventive measures should be regularly monitored and updated. Workers and their representatives should be consulted and should participate in the development, monitoring and updating of the workplace COVID-19. It is very important to monitor the effectiveness of preventive measures, and the compliance of workers, visitors, customers, clients and sub-contractors with the measures."
+    },
+    {
+        "Question": "Can the return to the workplace be immediate after public measures are lifted?",
+        "Answer": "The return to work premises should be carefully planned ahead, with preventive measures put in place according to the risk assessment of the different jobs and work tasks. All possible risks for safety and health should be assessed, such as risks resulting from reduced maintenance of machines and facilities during the closure period.  If a return to work is rushed and not done in a phased and cautious manner, it puts lives at risk, and threatens to undermine efforts to restore social and economic activity."
+    },
+    {
+        "Question": "What mental health and psychosocial support should be provided to workers during COVID-19?",
+        "Answer": "COVID-19 is associated with a range of concerns, such as fear of falling ill and dying, of being socially excluded, placed in quarantine, or losing a livelihood. Symptoms of anxiety and depression are common reactions for people in the context of COVID-19. Mental health and psychosocial support should be made available to all workers. Comprehensive risk assessments can help identify and mitigate related occupational hazards for mental health."
+    },
+    {
+        "Question": "What do we know about immunity from COVID-19?",
+        "Answer": "Most people who are infected with COVID-19 develop an immune response within the first few weeks after infection. Research is still ongoing into how strong that protection is and how long it lasts. WHO is also looking into whether the strength and length of immune response depends on the type of infection a person has: without symptoms (‘asymptomatic’), mild or severe. Even people without symptoms seem to develop an immune response."
+    },
+    {
+        "Question": "How does COVID-19 spread between people?",
+        "Answer": "We know that the disease is caused by the SARS-CoV-2 virus, which spreads between people in several different ways. The virus can spread from an infected person’s mouth or nose in small liquid particles when they cough, sneeze, speak, sing or breathe. These particles range from larger respiratory droplets to smaller aerosols."
+    },
+    {
+        "Question": "When do infected people transmit the virus?",
+        "Answer": "Whether or not they have symptoms, infected people can be contagious and the virus can spread from them to other people. Laboratory data suggests that infected people appear to be most infectious just before they develop symptoms (namely 2 days before they develop symptoms) and early in their illness. People who develop severe disease can be infectious for longer. While someone who never develops symptoms can pass the virus to others, it is still not clear how frequently this occurs and more research is needed in this area."
+    },
+    {
+        "Question": "What is the difference between people who are asymptomatic or pre-symptomatic?",
+        "Answer": "Both terms refer to people who do not have symptoms. The difference is that ‘asymptomatic’ refers to people who are infected but never develop any symptoms, while ‘pre-symptomatic’ refers to infected people who have not yet developed symptoms but go on to develop symptoms later. "
+    },
+    {
+        "Question": "Are there certain settings where COVID-19 can spread more easily?",
+        "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
+    },
+    {
         "Question": "what are the recommendations by the authorities",
         "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
