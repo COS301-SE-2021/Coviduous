@@ -438,7 +438,10 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
             TextButton(
               child: Text('Yes'),
               onPressed: (){
-                completeHealthCheck();
+                bool result = completeHealthCheck();
+                if (result == false) {
+                  Navigator.of(ctx).pop();
+                }
               },
             ),
             TextButton(
@@ -451,7 +454,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
         ));
   }
 
-  void completeHealthCheck() {
+  bool completeHealthCheck() {
     if (validateForm()) {
       healthHelpers.createHealthCheckVisitor(_companyId.text, _name.text, _surname.text, _email.text, _phoneNumber.text,
           _temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
@@ -460,14 +463,18 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
           Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+          return true;
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
+          return false;
         }
       });
+      return false;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Please complete the questionnaire")));
+      return false;
     }
   }
 
