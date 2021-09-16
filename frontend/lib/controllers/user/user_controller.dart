@@ -266,7 +266,7 @@ Future<User> getUserDetailsByEmail(String email) async {
  * getEmailsByCompany() : Gets all user emails for a specified company.
  */
 Future<List<String>> getEmailsByCompany(String companyId) async {
-  String path = 'user/api/group/company-id/';
+  String path = 'shift/api/group/company-id/';
   String url = server + path;
   var request;
 
