@@ -27,7 +27,7 @@ int numGroups = 0;
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 Future<bool> createShift(String date, String startTime, String endTime, String description) async {
-  String path = '/shift';
+  String path = 'shift/api/shift/';
   String url = server + path;
   var request;
 
@@ -62,7 +62,7 @@ Future<bool> createShift(String date, String startTime, String endTime, String d
 }
 
 Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, String adminId) async {
-  String path = '/group';
+  String path = 'shift/api/group/';
   String url = server + path;
   var request;
 
@@ -92,7 +92,7 @@ Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, 
 }
 
 Future<List<Shift>> getShifts(String roomNumber) async {
-  String path = '/shift/getRoomShift';
+  String path = 'shift/api/shift/getRoomShift/';
   String url = server + path;
   var request;
 
@@ -131,7 +131,7 @@ Future<List<Shift>> getShifts(String roomNumber) async {
 }
 
 Future<List<Group>> getGroups() async {
-  String path = '/group';
+  String path = 'shift/api/group/';
   String url = server + path;
   var response;
 
@@ -164,7 +164,7 @@ Future<List<Group>> getGroups() async {
 }
 
 Future<List<Group>> getGroupForShift(String shiftId) async {
-  String path = '/group/shift-id';
+  String path = 'shift/api/group/shift-id/';
   String url = server + path;
 
   var request;
@@ -204,7 +204,7 @@ Future<List<Group>> getGroupForShift(String shiftId) async {
 }
 
 Future<bool> updateShift(String shiftId, String startTime, String endTime) async {
-  String path = '/shift';
+  String path = 'shift/api/shift/';
   String url = server + path;
   var request;
 
@@ -233,7 +233,7 @@ Future<bool> updateShift(String shiftId, String startTime, String endTime) async
 }
 
 Future<bool> deleteShift(String shiftId) async {
-  String path = '/shift';
+  String path = 'shift/api/shift/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));

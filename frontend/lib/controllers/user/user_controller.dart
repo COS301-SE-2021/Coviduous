@@ -29,7 +29,7 @@ String server = serverInfo.getServer(); //server needs to be running on Firebase
  */
 Future<bool> createUser(String uid, String type, String firstName, String lastName, String email,
     String userName, String companyId, String companyName, String companyAddress) async {
-  String path = 'users';
+  String path = 'user/api/users/';
   String url = server + path;
   var request;
 
@@ -70,7 +70,7 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
 Future<bool> createCompany(String companyId) async {
   bool result = false;
 
-  String path = '/reporting/health-summary/setup';
+  String path = 'reporting/api/reporting/health-summary/setup/';
   String url = server + path;
   var request;
 
@@ -95,7 +95,7 @@ Future<bool> createCompany(String companyId) async {
     result = false;
   }
 
-  String path2 = '/reporting/permission-summary/setup';
+  String path2 = 'reporting/api/reporting/permission-summary/setup/';
   String url2 = server + path2;
   var request2;
 
@@ -120,7 +120,7 @@ Future<bool> createCompany(String companyId) async {
     result = false;
   }
 
-  String path3 = '/reporting/company/company-data';
+  String path3 = 'reporting/api/reporting/company/company-data/';
   String url3 = server + path3;
   var request3;
 
@@ -152,7 +152,7 @@ Future<bool> createCompany(String companyId) async {
  * getUsers() : Returns a list of all users.
  */
 Future<List<User>> getUsers() async {
-  String path = '/users';
+  String path = 'user/api/users/';
   String url = server + path;
   var response;
 
@@ -186,7 +186,7 @@ Future<List<User>> getUsers() async {
  * getUser() : Returns a single user.
  */
 Future<User> getUserDetails(String userId) async {
-  String path = '/users/user-id';
+  String path = 'user/api/users/user-id/';
   String url = server + path;
   var request;
 
@@ -226,7 +226,7 @@ Future<User> getUserDetails(String userId) async {
  * getUserDetailsByEmail() : Returns a single user using their email.
  */
 Future<User> getUserDetailsByEmail(String email) async {
-  String path = '/users/email';
+  String path = 'user/api/users/email/';
   String url = server + path;
   var request;
 
@@ -266,7 +266,7 @@ Future<User> getUserDetailsByEmail(String email) async {
  * getEmailsByCompany() : Gets all user emails for a specified company.
  */
 Future<List<String>> getEmailsByCompany(String companyId) async {
-  String path = '/group/company-id';
+  String path = 'user/api/group/company-id/';
   String url = server + path;
   var request;
 
@@ -307,7 +307,7 @@ Future<List<String>> getEmailsByCompany(String companyId) async {
  */
 Future<bool> updateUser(String type, String firstName, String lastName, String email,
     String userName, String companyName, String companyAddress) async {
-  String path = 'users';
+  String path = 'user/api/users/';
   String url = server + path;
   var request;
 
@@ -343,7 +343,7 @@ Future<bool> updateUser(String type, String firstName, String lastName, String e
  * deleteUser() : Deletes a user based on their user ID.
  */
 Future<bool> deleteUser() async {
-  String path = 'users';
+  String path = 'user/api/users/';
   String url = server + path;
   var request;
 

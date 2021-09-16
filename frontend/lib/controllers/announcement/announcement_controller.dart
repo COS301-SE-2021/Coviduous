@@ -20,7 +20,7 @@ String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 // announcementId and timestamp fields are generated in node backend
 Future<bool> createAnnouncement(String announcementId, String type, String message, String timestamp) async {
-  String path = '/announcements';
+  String path = 'announcement/api/announcements/';
   String url = server + path;
   var request;
 
@@ -56,7 +56,7 @@ Future<bool> createAnnouncement(String announcementId, String type, String messa
    * getAnnouncements : Returns a list of all announcements created
    */
 Future<List<Announcement>> getAnnouncements() async {
-  String path = '/announcements';
+  String path = 'announcement/api/announcements/';
   String url = server + path;
   var response;
 
@@ -89,7 +89,7 @@ Future<List<Announcement>> getAnnouncements() async {
 }
 
 Future<bool> deleteAnnouncement(String announcementId) async {
-  String path = '/announcements';
+  String path = 'announcement/api/announcements/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));

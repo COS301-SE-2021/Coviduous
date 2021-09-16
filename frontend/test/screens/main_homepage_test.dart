@@ -21,6 +21,7 @@ void main() {
 
     //Verify that the correct widgets appear in the correct order
     expect(find.text('Company member'), findsOneWidget); //Find one widget containing 'Company member'
-    expect(find.text('Visitor'), findsOneWidget); //Find one widget containing 'Vistor'
+    expect(find.text('Visitor'), findsOneWidget); //Find one widget containing 'Visitor'
+    expect(find.text('Help'), findsOneWidget); //Find one widget containing 'Help'
   });
 }

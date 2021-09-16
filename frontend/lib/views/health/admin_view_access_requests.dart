@@ -336,7 +336,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
+      child: Scaffold(
           appBar: AppBar(
             title: Text('Employee requests'),
             leading: BackButton( //Specify back button

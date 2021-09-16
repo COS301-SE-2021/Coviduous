@@ -17,7 +17,7 @@ String server = serverInfo.getServer(); //server needs to be running on firebase
 
 Future<bool> createNotification(String notificationId, String userId, String userEmail,
     String subject, String message, String timestamp, String adminId, String companyId) async {
-  String path = '/notifications';
+  String path = 'notification/api/notifications/';
   String url = server + path;
   var request;
 
@@ -49,7 +49,7 @@ Future<bool> createNotification(String notificationId, String userId, String use
 }
 
 Future<List<Notification>> getNotifications() async {
-  String path = '/notifications';
+  String path = 'notification/api/notifications/';
   String url = server + path;
   var response;
 
@@ -82,7 +82,7 @@ Future<List<Notification>> getNotifications() async {
 }
 
 Future<List<Notification>> getNotificationsUserEmail(String email) async {
-  String path = '/notifications/user-email';
+  String path = 'notification/api/notifications/user-email/';
   String url = server + path;
   var request;
 
@@ -118,7 +118,7 @@ Future<List<Notification>> getNotificationsUserEmail(String email) async {
 }
 
 Future<bool> deleteNotifications(String notificationId) async {
-  String path = '/notifications';
+  String path = 'notification/api/notifications/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));

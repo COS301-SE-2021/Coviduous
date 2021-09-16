@@ -40,7 +40,7 @@ String AIserver = serverInfo.getAIserver();
 Future<HealthCheck> createHealthCheck(String companyId, String userId, String name, String surname, String email, String phoneNumber,
     String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
     bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
-  String path = '/health/health-check';
+  String path = 'health/api/health/health-check/';
   String url = server + path;
   var request;
   var request2;
@@ -127,7 +127,7 @@ Future<HealthCheck> createHealthCheck(String companyId, String userId, String na
 
 //Get permissions for an email
 Future<List<Permission>> getPermissions(String userEmail) async {
-  String path = '/health/permissions/view';
+  String path = 'health/api/health/permissions/view/';
   String url = server + path;
   var request;
 
@@ -169,7 +169,7 @@ Future<List<Permission>> getPermissions(String userEmail) async {
 
 //Report your potential infection to your company's admins
 Future<bool> reportInfection(String userId, String userEmail, String adminId, String companyId, String adminEmail) async {
-  String path = '/health/report-infection';
+  String path = 'health/api/health/report-infection/';
   String url = server + path;
   var request;
 
@@ -202,7 +202,7 @@ Future<bool> reportInfection(String userId, String userEmail, String adminId, St
 //Create a new permission request for an employee
 Future<bool> createPermissionRequest(String permissionId, String userId, String userEmail,
     String shiftNumber, String reason, String adminId, String companyId) async {
-  String path = '/health/permissions/permission-request';
+  String path = 'health/api/health/permissions/permission-request/';
   String url = server + path;
   var request;
 
@@ -234,7 +234,7 @@ Future<bool> createPermissionRequest(String permissionId, String userId, String 
 
 //Get permission requests for a company
 Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
-  String path = '/health/permissions/permission-request/view';
+  String path = 'health/api/health/permissions/permission-request/view/';
   String url = server + path;
   var request;
 
@@ -275,7 +275,7 @@ Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
 
 //Delete/decline a permission request
 Future<bool> deletePermissionRequest(String permissionRequestId) async {
-  String path = '/health/permissions';
+  String path = 'health/api/health/permissions/';
   String url = server + path;
   var request;
 
@@ -301,7 +301,7 @@ Future<bool> deletePermissionRequest(String permissionRequestId) async {
 
 //Grant permission to a specified user
 Future<bool> grantPermission(String userId, String userEmail, String adminId, String companyId) async {
-  String path = '/health/permissions/permission-request/grant';
+  String path = 'health/api/health/permissions/permission-request/grant/';
   String url = server + path;
   var request;
 
@@ -335,7 +335,7 @@ Future<bool> grantPermission(String userId, String userEmail, String adminId, St
 
 //View the group assigned to a particular shift
 Future<Group> viewGroup(String shiftNumber) async {
-  String path = '/health/contact-trace/group';
+  String path = 'health/api/health/contact-trace/group/';
   String url = server + path;
   var request;
 
@@ -376,7 +376,7 @@ Future<Group> viewGroup(String shiftNumber) async {
 
 //View all shifts that a user has been in
 Future<List<Shift>> viewShifts(String userEmail) async {
-  String path = '/health/contact-trace/shifts';
+  String path = 'health/api/health/contact-trace/shifts/';
   String url = server + path;
   var request;
 
@@ -414,7 +414,7 @@ Future<List<Shift>> viewShifts(String userEmail) async {
 
 //Notify a group of their potential risk
 Future<bool> notifyGroup(String shiftNumber) async {
-  String path = '/health/contact-trace/notify-group';
+  String path = 'health/api/health/contact-trace/notify-group/';
   String url = server + path;
   var request;
 
@@ -442,7 +442,7 @@ Future<bool> notifyGroup(String shiftNumber) async {
 
 //Upload COVID-19 vaccine confirmation
 Future<bool> uploadVaccineConfirmation(String userId, String fileName, String bytes) async {
-  String path = '/health/Covid19VaccineConfirmation';
+  String path = 'health/api/health/Covid19VaccineConfirmation/';
   String url = server + path;
   var request;
 
@@ -470,7 +470,7 @@ Future<bool> uploadVaccineConfirmation(String userId, String fileName, String by
 
 //Upload COVID-19 test results
 Future<bool> uploadTestResults(String userId, String fileName, String bytes) async {
-  String path = '/health/Covid19TestResults';
+  String path = 'health/api/health/Covid19TestResults/';
   String url = server + path;
   var request;
 
@@ -498,7 +498,7 @@ Future<bool> uploadTestResults(String userId, String fileName, String bytes) asy
 
 //Get vaccine confirmation documents
 Future<List<VaccineConfirmation>> getVaccineConfirmations(String userId) async {
-  String path = '/health/Covid19VaccineConfirmation/view';
+  String path = 'health/api/health/Covid19VaccineConfirmation/view/';
   String url = server + path;
   var request;
 
@@ -535,7 +535,7 @@ Future<List<VaccineConfirmation>> getVaccineConfirmations(String userId) async {
 
 //Get test result documents
 Future<List<TestResults>> getTestResults(String userId) async {
-  String path = '/health/Covid19TestResults/view';
+  String path = 'health/api/health/Covid19TestResults/view/';
   String url = server + path;
   var request;
 

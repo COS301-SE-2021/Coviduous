@@ -52,13 +52,13 @@ const healthRoute = require("./routes/health.route.js");
 const reportingRoute = require("./routes/reporting.route.js");
 
 // app.use('/api', subsystem_nameRoute) - use '/api/' path for each subsystem route
-app.use('/api/', announcementRoute);
-app.use('/api/', notificationRoute);
-app.use('/api/', floorplanRoute);
-app.use('/api/', userRoute);
-app.use('/api/', shiftRoute);
-app.use('/api/', officeRoute);
-app.use('/api/', healthRoute);
-app.use('/api/', reportingRoute);
+app.use('/announcement/api/', announcementRoute);
+app.use('/notification/api/', notificationRoute);
+app.use('/floorplan/api/', floorplanRoute);
+app.use('/user/api/', userRoute);
+app.use('/shift/api/', shiftRoute);
+app.use('/office/api/', officeRoute);
+app.use('/health/api/', healthRoute);
+app.use('/reporting/api/', reportingRoute);
 
 exports.app = functions.https.onRequest(app);
