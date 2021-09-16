@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import 'package:frontend/models/notification/notification.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
+import 'package:frontend/globals.dart' as globals;
 
 List<Notification> notificationDatabaseTable = [];
 int numNotifications = 0;
@@ -33,6 +34,7 @@ Future<bool> createNotification(String notificationId, String userId, String use
       "adminId": adminId,
       "companyId": companyId,
     });
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -91,6 +93,7 @@ Future<List<Notification>> getNotificationsUserEmail(String email) async {
     request.body = json.encode({
       "userEmail": email,
     });
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -123,6 +126,7 @@ Future<bool> deleteNotifications(String notificationId) async {
 
   var request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"notificationId": notificationId});
+  request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();
 
