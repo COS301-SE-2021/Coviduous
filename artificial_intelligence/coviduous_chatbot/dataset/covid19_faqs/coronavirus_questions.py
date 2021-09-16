@@ -5,7 +5,7 @@ COVID19_QUES = [
     },
     {
         "Question": "What are the symptoms of COVID-19?",
-        "Answer": "The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion, runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually. Some people become infected but don’t develop any symptoms and don't feel unwell. Most people (about 80%) recover from the disease without needing special treatment. Around 1 out of every 6 people who gets COVID-19 becomes seriously ill and develops difficulty breathing. Older people, and those with underlying medical problems like high blood pressure, heart problems or diabetes, are more likely to develop serious illness. People with fever, cough and difficulty breathing should seek medical attention."
+        "Answer": "The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion,  runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually. Some people become infected but don’t develop any symptoms and don't feel unwell. Most people (about 80%) recover from the disease without needing special treatment. Around 1 out of every 6 people who gets COVID-19 becomes seriously ill and develops difficulty breathing. Older people, and those with underlying medical problems like high blood pressure, heart problems or diabetes, are more likely to develop serious illness. People with fever, cough and difficulty breathing should seek medical attention."
     },
     {
      "Question": "What is self-isolation?",
@@ -1650,7 +1650,398 @@ COVID19_QUES = [
     {
         "Question": "Can we use fabric masks to prevent the spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
-    }
+    },
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
+    },
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
+    {
+        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+    {
+        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+    {
+        "Question": "Should I use soap and water or a hand sanitizer to protect against COVID-19?",
+        "Answer": "Hand washing with soap and water for at least 20 seconds is the best way to protect yourself and your family from getting sick!This is important to do regularly - everytime you wash your hands - but especially after blowing your nose, coughing, sneezing, going to the restroom, and before eating or preparing food?"},
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+    {
+        "Question": "Can COVID-19 be transmitted through food?",
+        "Answer": "There is currently no evidence to suggest that food is a likely source or route of transmission of the virus.Scientists and food safety authorities across the world are closely monitoring the spread of COVID-19."},
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+    {
+        "Question": "Can COVID-19 be spread through food (including refrigerated or frozen food)?",
+        "Answer": "However, it is important to make sure you wash your hands with soap and water for at least 20 seconds to practice general food safety.Please also continue to wash your hands after blowing your nose, coughing or sneezing, or going to the bathroom."},
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+    {
+        "Question": "I have packages coming from China... am I at risk?",
+        "Answer": "We are basing some of our understanding of how COVID-19 behaves on how previous coronaviruses (e.g. MERS-CoV and SARS-CoV behaves).Because of their poor survivability on surfaces, it is likely very low risk of spread from those products - and there is no evidence to support transmission of COVID-19 through imported goods."},
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+    {
+        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+    {
+        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "How can people help stop stigma related to COVID-19?",
+        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "How can people help stop stigma related to COVID-19?",
+        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {
+        "Question": "How can people help stop stigma related to COVID-19?",
+        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "nan",
+        "Answer": "nan"
+    },
+    {
+        "Question": "What temperature will kill COVID-19? ",
+        "Answer": "nan"
+    },
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {
+        "Question": "If I'm high risk, what should I do?",
+        "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often.If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {
+        "Question": "nan",
+        "Answer": "nan"
+    },
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ",
+        "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {
+        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+    {
+        "Question": "Can we use fabric masks to prevent the spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+    {
+        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
+    {
+        "Question": "nan",
+        "Answer": "nan"
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {"Question": "nan", "Answer": "nan"},
+    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+     "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "What is novel (new) coronavirus?",
+     "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "nan", "Answer": "nan"},
+    {"Question": "What is a coronavirus?",
+     "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+     "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "What is novel (new) coronavirus?",
+     "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "NaN", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"},
+    {"Question": "nan", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"},
+    {"Question": "What is a coronavirus?",
+     "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+     "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "What is novel (new) coronavirus?",
+     "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "What is a coronavirus?",
+     "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "What is novel (new) coronavirus?",
+     "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+     "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "NaN", "Answer": "nan"},
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces     such as door nobs, elevator buttons and     bathroom faucets.Socially distancing is a practice that aims to     prevent those who are sick from coming into contact with those who are healthy."
+    },
+    {
+        "Question": "How long should we self quarantine before moving into our elderly parents house? (Where we will continue to self quarantine)",              "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these    fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "I have packages coming from China... am I at risk?", "Answer": "We are basing some of our understanding of how COVID-19 behaves on how previous coronaviruses (e.g. MERS-CoV and SARS-CoV behaves).Because of their poor survivability on surfaces, it is likely very low risk of spread from those products - and there is no evidence to support transmission of COVID-19 through imported goods."},
+    {"Question": "Where did COVID-19 come from?", "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."},
+    {"Question": "How can I protect my child from COVID-19?", "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."},
+    {"Question": "Who is at a higher risk of serious illness and death from COVID-19?", "Answer": "Older adults (people over the age of 65), those who live in nursing homes or long term care facilities, people who have underlying medical conditions (e.g. chronic lung disease, asthma, diabetes, sickle cell anemia, weakened immune system, chemotherapy, liver cirrhosis, etc), pregnant people, and incarcerated populations."},
+    {"Question": "I have packages coming from China... am I at risk?", "Answer": "We are basing some of our understanding of how COVID-19 behaves on how previous coronaviruses (e.g. MERS-CoV and SARS-CoV behaves).Because of their poor survivability on surfaces, it is likely very low risk of spread from those products - and there is no evidence to support transmission of COVID-19 through imported goods."},
+    {"Question": "Who is at a higher risk of serious illness and death from COVID-19?", "Answer": "Older adults (people over the age of 65), those who live in nursing homes or long term care facilities, people who have underlying medical conditions (e.g. chronic lung disease, asthma, diabetes, sickle cell anemia, weakened immune system, chemotherapy, liver cirrhosis, etc), pregnant people, and incarcerated populations."},
+    {"Question": "How can I protect my child from COVID-19?", "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."},
+    {"Question": "Where did COVID-19 come from?", "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "Won't COVID-19 just go away over time? Why are we freaking out over it? ", "Answer": "nan"},
+    {"Question": "How can I protect my child from COVID-19?", "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."},
+    {"Question": "Where did COVID-19 come from?", "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."},
+    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How can I protect my child from COVID-19?", "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "Where did COVID-19 come from?", "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."},
+    {"Question": "Who is at a higher risk of serious illness and death from COVID-19?", "Answer": "Older adults (people over the age of 65), those who live in nursing homes or long term care facilities, people who have underlying medical conditions (e.g. chronic lung disease, asthma, diabetes, sickle cell anemia, weakened immune system, chemotherapy, liver cirrhosis, etc), pregnant people, and incarcerated populations."},
+    {"Question": "I have packages coming from China... am I at risk?", "Answer": "We are basing some of our understanding of how COVID-19 behaves on how previous coronaviruses (e.g. MERS-CoV and SARS-CoV behaves).Because of their poor survivability on surfaces, it is likely very low risk of spread from those products - and there is no evidence to support transmission of COVID-19 through imported goods."},
+    {"Question": "There have been a lot of mixed messages about kids being 'immune' or 'unlikely' to be affected. Can you provide some clarity around what this looks like for small children?", "Answer": "Some kids and infants have been sick with COVID-19, but it is still adults who make up most of the cases we are seeing today.This includes cleaning hands often with soap water, or an alcohol based hand sanitizer, avoiding people who ar sick, and cleaning/disinfecting high-touch surfaces regularly."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "It only has around a 1% mortality rate - that doesn't seem too bad? ", "Answer": "nan"},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."}, {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "If you have been released from isolation, will you still be able to spread COVID-19 to others?", "Answer": "Once a person has been released from isolation, they are not considered to pose a risk to others."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "Are you at risk for contracting COVID-19 if you receive a package or products shipped from other countries?", "Answer": "Coronaviruses generally do not survive on surfaces after being contaminated.The risk of spread from products shipped over a period of days or weeks at room temperature is very low."},
+    {"Question": "What temperature will kill COVID-19? ", "Answer": "nan"},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+    {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
+    {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
+    {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."}
+
 ]
 
 
