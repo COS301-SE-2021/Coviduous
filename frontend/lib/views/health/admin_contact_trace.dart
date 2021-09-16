@@ -22,6 +22,7 @@ class AdminContactTrace extends StatefulWidget {
   @override
   _AdminContactTraceState createState() => _AdminContactTraceState();
 }
+
 class _AdminContactTraceState extends State<AdminContactTrace> {
   var myTheme;
   var pdf;
@@ -239,7 +240,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                               title: Text('Warning'),
                               content: Text('Are you sure you want to notify ' + numberOfEmployees.toString() + ' employees?'),
                               actions: <Widget>[
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('Yes'),
                                   onPressed: (){
                                     healthHelpers.notifyGroup().then((result) {
@@ -255,7 +256,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                                     });
                                   },
                                 ),
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('No'),
                                   onPressed: (){
                                     Navigator.of(ctx).pop();
