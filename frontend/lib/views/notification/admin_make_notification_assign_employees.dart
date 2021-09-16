@@ -428,7 +428,13 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        child: Text('Finish'),
+                        child: Text('Finish',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                          ),
+                        ),
                         onPressed: () {
                           sendNotification(numOfUsers);
                         },
