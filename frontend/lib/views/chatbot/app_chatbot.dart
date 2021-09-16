@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
@@ -6,6 +7,7 @@ import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/user_homepage.dart';
 
 import 'package:frontend/controllers/chatbot/chatbot_controller.dart' as chatbotController;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class ChatMessages extends StatefulWidget {
@@ -149,6 +151,7 @@ class _ChatMessagesState extends State<ChatMessages>
             name: "Chat Bot",
             initials: "CB",
             bot: true,
+            showImage: (result.getIfTutorial()) ? true : false,
             text: result.getAnswer()
         );
       }
@@ -160,12 +163,12 @@ class _ChatMessagesState extends State<ChatMessages>
         name: "Chat Bot",
         initials: "CB",
         bot: true,
-        text: "Hello, I am the Coviduous ChatBot! Do you need any help? 🤖\n\nType 'tutorial' for a list of tutorials, 'shortcut' for a list of shortcuts, or ask me a question."
+        text: "Hello, I am the Coviduous ChatBot! Do you need any help? 🤖\n\nType 'tutorial' for a list of tutorials; 'shortcut-admin', 'shortcut-user', or 'shortcut-visitor' for a list of shortcuts; or ask me a question."
     );
   }
 
   void _addMessage(
-      {String name, String initials, bool bot = false, String text}) {
+      {String name, String initials, bool bot = false, bool showImage = false, String text}) {
     var animationController = AnimationController(
       duration: new Duration(milliseconds: 700),
       vsync: this,
@@ -176,7 +179,9 @@ class _ChatMessagesState extends State<ChatMessages>
         text: text,
         initials: initials,
         bot: bot,
-        animationController: animationController);
+        animationController: animationController,
+        showImage: showImage
+    );
 
     setState(() {
       _messages.insert(0, message);
@@ -218,29 +223,28 @@ class ChatMessageListItem extends StatelessWidget {
           parent: chatMessage.animationController, curve: Curves.easeOut),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 8),
-        child: IntrinsicHeight(
-          //======================================
-          //          If bot message
-          //======================================
-          child: (chatMessage.bot == true) ? Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 16),
-                    child: CircleAvatar(
-                      child: Text(
-                        chatMessage.initials ?? "CB",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: globals.focusColor,
+        //======================================
+        //          If bot message
+        //======================================
+        child: (chatMessage.bot == true) ? Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: CircleAvatar(
+                    child: Text(
+                      chatMessage.initials ?? "CB",
+                      style: TextStyle(color: Colors.white),
                     ),
+                    backgroundColor: globals.focusColor,
                   ),
-                ],
-              ),
-              Flexible(
+                ),
+              ],
+            ),
+            Flexible(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
@@ -256,75 +260,80 @@ class ChatMessageListItem extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           child: (chatMessage.showImage == true)
                               ? FittedBox( //If showing an image
-                                  child: Image(
-                                    image: MemoryImage(
-                                      base64Decode(chatMessage.text)
-                                    ),
-                                  ),
-                                  fit: BoxFit.fill,
+                            child: GestureDetector(
+                              onTap: () {
+                                var rng = new Random();
+                                globalWidgets.showMemoryImage(context, base64Decode(chatMessage.text), 'Coviduous saved tutorial ' + rng.nextInt(100).toString(), 'png');
+                              },
+                              child: Image(
+                                image: MemoryImage(
+                                    base64Decode(chatMessage.text)
+                                ),
+                              ),
+                            ),
+                            fit: BoxFit.fill,
                           )
                               : Text( //Else, just text
-                                  chatMessage.text,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
+                            chatMessage.text,
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
                 )
-              ),
-            ],
+            ),
+          ],
           //======================================
           //          If user message
           //======================================
-          ) : Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Flexible(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Text(chatMessage.name ?? "Visitor",
-                            style: TextStyle(color: globals.lineColor)
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Container(
-                            color: Color(0xffB2FDFF),
-                            padding: EdgeInsets.all(10),
-                            child: Text(
-                              chatMessage.text,
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
+        ) : Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Flexible(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(chatMessage.name ?? "Visitor",
+                        style: TextStyle(color: globals.lineColor)
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        color: Color(0xffB2FDFF),
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          chatMessage.text,
+                          style: TextStyle(
+                            color: Colors.black,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 16),
-                    child: CircleAvatar(
-                      child: Text(
-                        chatMessage.initials ?? "V",
-                        style: TextStyle(color: Colors.white),
                       ),
-                      backgroundColor: globals.firstColor,
                     ),
+                  ],
+                ),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: CircleAvatar(
+                    child: Text(
+                      chatMessage.initials ?? "V",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: globals.firstColor,
                   ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
