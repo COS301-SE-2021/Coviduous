@@ -1,4 +1,3 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -10,12 +9,12 @@ import 'package:frontend/views/user/user_manage_account.dart';
 import 'package:frontend/views/announcement/user_view_announcements.dart';
 import 'package:frontend/views/notification/user_view_notifications.dart';
 import 'package:frontend/auth/auth_provider.dart';
-import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
 import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserHomePage extends StatefulWidget {
@@ -668,40 +667,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 )
               ),
             ),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: Align(
-                heightFactor: 0.8,
-                widthFactor: 0.8,
-                child: ClipRect(
-                  child: AvatarGlow(
-                    startDelay: Duration(milliseconds: 1000),
-                    glowColor: Colors.white,
-                    endRadius: 60,
-                    duration: Duration(milliseconds: 2000),
-                    repeat: true,
-                    showTwoGlows: true,
-                    repeatPauseDuration: Duration(milliseconds: 100),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        shape: CircleBorder(),
-                      ),
-                      child: ClipOval(
-                        child: Image(
-                          image: AssetImage('assets/images/chatbot-icon.png'),
-                          width: 70,
-                        ),
-                      ),
-                      onPressed: () {
-                        globals.chatbotPreviousPage = UserHomePage.routeName;
-                        Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            globalWidgets.chatBot(context, UserHomePage.routeName, globals.showChatBot)
           ]
         )
       ),

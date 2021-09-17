@@ -9,7 +9,6 @@
     - enum UserType
     - class _LoginScreenState extends State<LoginScreen>
  */
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
@@ -18,9 +17,9 @@ import 'package:frontend/views/signup/home_signup_screen.dart';
 import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/forgot_password_screen.dart';
 import 'package:frontend/views/main_homepage.dart';
-import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 /*
@@ -268,40 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Container(
-                alignment: Alignment.bottomRight,
-                child: Align(
-                  heightFactor: 0.8,
-                  widthFactor: 0.8,
-                  child: ClipRect(
-                    child: AvatarGlow(
-                      startDelay: Duration(milliseconds: 1000),
-                      glowColor: Colors.white,
-                      endRadius: 60,
-                      duration: Duration(milliseconds: 2000),
-                      repeat: true,
-                      showTwoGlows: true,
-                      repeatPauseDuration: Duration(milliseconds: 100),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: CircleBorder(),
-                        ),
-                        child: ClipOval(
-                          child: Image(
-                            image: AssetImage('assets/images/chatbot-icon.png'),
-                            width: 70,
-                          ),
-                        ),
-                        onPressed: () {
-                          globals.chatbotPreviousPage = LoginScreen.routeName;
-                          Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              globalWidgets.chatBot(context, LoginScreen.routeName, globals.showChatBot),
             ],
           ),
         ) : Center( child: CircularProgressIndicator() )
