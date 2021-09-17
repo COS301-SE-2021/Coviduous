@@ -201,7 +201,7 @@ async function sendUserEmail(receiver,subject,message){
 //////////////////////////////////////////////////////////////////GENERAL FUNCTIONS AND OBJECTS/////////////////////////////////////////////////
 ///////////////// HEALTH CHECK /////////////////
 
-healthApp.post('/api/health/health-check', async (req, res) => {
+healthApp.post('/api/health/health-check', authMiddleware,async (req, res) => {
 
     let fieldErrors = [];
   
@@ -792,7 +792,7 @@ healthApp.post('/api/health/health-check', async (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////// PERMISSION /////////////////
 
-healthApp.post('/api/health/permissions/view', async (req, res) => {
+healthApp.post('/api/health/permissions/view', authMiddleware,async (req, res) => {
   try {
     let reqJson;
     try {
@@ -825,7 +825,7 @@ healthApp.post('/api/health/permissions/view', async (req, res) => {
 
 ///////////////// PERMISSION REQUEST /////////////////
 
-healthApp.post('/api/health/permissions/permission-request',async (req, res) => {
+healthApp.post('/api/health/permissions/permission-request',authMiddleware,async (req, res) => {
   try {
     let reqJson;
   try {
@@ -878,7 +878,7 @@ healthApp.post('/api/health/permissions/permission-request',async (req, res) => 
 
 //////////////////////////////
 
-healthApp.post('/api/health/permissions/permission-request/view', async (req, res) => {
+healthApp.post('/api/health/permissions/permission-request/view', authMiddleware,async (req, res) => {
   try {
     let reqJson;
     try {
@@ -909,7 +909,7 @@ healthApp.post('/api/health/permissions/permission-request/view', async (req, re
 });
 
 ///////////////////////////////////
-healthApp.post('/api/health/permissions/permission-request/grant',async (req, res) => {
+healthApp.post('/api/health/permissions/permission-request/grant',authMiddleware,async (req, res) => {
   try {
 
     let reqJson;
@@ -952,7 +952,7 @@ healthApp.post('/api/health/permissions/permission-request/grant',async (req, re
 });
 
 ///////////////////////////////////////
-healthApp.post('/api/health/report-infection',async (req, res) => {
+healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) => {
   try {
 
     let reqJson;
@@ -1069,7 +1069,7 @@ healthApp.post('/api/health/report-infection',async (req, res) => {
 });
 
 //////////////////////////////////////////
-healthApp.post('/api/health/report-recovery',async (req, res) => {
+healthApp.post('/api/health/report-recovery',authMiddleware,async (req, res) => {
   try {
 
     let reqJson;
@@ -1167,7 +1167,7 @@ healthApp.post('/api/health/report-recovery',async (req, res) => {
             numReportedRecoveries:1
               
             }
-            
+
             await database.collection('health-summary').doc(healthSummaryId).create(healthSummary);
           
 
@@ -1186,5 +1186,313 @@ healthApp.post('/api/health/report-recovery',async (req, res) => {
       });
   }
 });
+
+/////////////////////////////////////
+//////////////////////////////////// Contact Tracing ///////////////////////////
+///////////////
+//returns a group of employees who fall under the same shift identified by the shiftId
+healthApp.post('/health/contact-trace/group',authMiddleware,async (req, res) => {
+  try {
+      let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+
+      let document = database.collection('groups');
+      let snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+        
+        let group = [];
+        list.forEach(obj => {
+            if(obj.shiftNumber===reqJson.shiftNumber)
+            {
+                group.push(obj);
+            }
+            else
+            {
+            }
+          });
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved group',
+        data: group
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching group."
+      });
+  }
+});
+////////////////////////////////////
+//returns a shifts an employee was in based on the employee email
+healthApp.post('/health/contact-trace/shifts',authMiddleware,async (req, res) => {
+  try {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      let document = database.collection('groups');
+      let snapshot = await document.get();
+        
+        let list = [];
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            console.log(data);
+            list.push(data);
+        });
+        
+        let group = [];
+        list.forEach(obj => {
+            for (var i = 0; i < obj.userEmails.length; i++) {
+                if (obj.userEmails[i] === userEmail) {
+                    group.push(obj);
+                }
+            }
+        });
+
+        let shifts = await shiftDb.viewShifts();
+        let userShifts=[];
+        group.forEach(obj => {
+            shifts.forEach(obj2 => {
+            if(obj2.shiftID===obj.shiftNumber) {
+                userShifts.push(obj2);
+            }});
+        });
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved shifts',
+        data: userShifts
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching shifts."
+      });
+  }
+});
+////////////////////////////////////
+healthApp.post('/health/contact-trace/notify-group',authMiddleware,async (req, res) => {
+  try {
+      let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+    console.log(reqJson);
+      let document = database.collection('groups');
+      let snapshot = await document.get();
+        
+        let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+        
+        let group = [];
+        list.forEach(obj => {
+            if(obj.shiftNumber===reqJson.shiftNumber)
+            {
+                group.push(obj);
+            }
+            else
+            {
+            }
+          });
+      group.forEach(obj => {
+          for (let i = 0; i < obj.userEmails.length; i++) {
+              let notificationId = "NTFN-" + uuid.v4();
+              let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+              let notificationData = {
+                  notificationId: notificationId,
+                  userId: "",
+                  userEmail:obj.userEmails[i],
+                  subject: "COVID-19 CONTACT RISK",
+                  message: "YOU MAY HAVE BEEN IN CLOSE CONTACT WITH SOMEONE WHO HAS COVID-19, PLEASE CONTACT THE HEALTH SERVICES AND YOUR ADMINISTRATOR",
+                  timestamp: timestamp,
+                  adminId: obj.adminId,
+                  companyId: ""
+          }
+          database.collection('notifications').doc(notificationId).create(notificationData)
+          sendUserEmail(notificationData.userEmail,notificationData.subject,notificationData.message);
+        }
+      });
+      
+      return res.status(200).send({
+        message: 'Successfully notified group members',
+        data: group
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching group."
+      });
+  }
+});
+////////////////////////////////////////////////////////
+healthApp.post('/health/Covid19TestResults',authMiddleware, async (req, res) => {
+  try {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      let documentId = "DOC-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+      let documentData = {
+          documentId: documentId,
+          userId: reqJson.userId,
+          fileName:reqJson.fileName,
+          timestamp: timestamp,
+          base64String: reqJson.base64String,
+          
+        }
+        
+        
+        await database.collection('test-results').doc(documentId).create(documentData);
+      return res.status(200).send({
+        message: 'Successfully stored test results',
+        data: documentData
+      });
+    
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while trying to store results."
+      });
+  }
+});
+///////////////////////////////////////
+healthApp.post('/health/Covid19VaccineConfirmation/view',authMiddleware, async (req, res) => {
+  try {
+      let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+
+      let filteredList=[];
+      let document = database.collection('vaccine-confirmations');
+      let snapshot = await document.get();
+      
+      let results = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          results.push(data);
+      });
+      
+      results.forEach(obj => {
+        if(obj.userId===reqJson.userId)
+        {
+          filteredList.push(obj);
+        }
+        else
+        {
+  
+        }
+      });
+      return res.status(200).send({
+        message: 'Successfully Fetched Documents.',
+        data: filteredList
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching Documents."
+      });
+  }
+  });
+  //////////////////
+  healthApp.post('/health/Covid19TestResults/view', authMiddleware,async (req, res) => {
+    try {
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+
+        let filteredList=[];
+        let document = db.collection('test-results');
+        let snapshot = await document.get();
+        
+        let results = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            results.push(data);
+        });
+        
+        results.forEach(obj => {
+          if(obj.userId===reqJson.userId)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+        return res.status(200).send({
+          message: 'Successfully Fetched Documents.',
+          data: filteredList
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+          message: error.message || "Some error occurred while fetching Documents."
+        });
+    }
+    });
+    //////////////////
+  healthApp.post('/health/Covid19VaccineConfirmation', authMiddleware,async (req, res) => {
+      try {
+        let reqJson;
+          try {
+              reqJson = JSON.parse(req.body);
+          } catch (e) {
+              reqJson = req.body;
+          }
+          let documentId = "DOC-" + uuid.v4();
+          let timestamp = new Date().today() + " @ " + new Date().timeNow();
+    
+          let documentData = {
+              documentId: documentId,
+              userId: reqJson.userId,
+              fileName:reqJson.fileName,
+              timestamp: timestamp,
+              base64String: reqJson.base64String,
+              
+            }
+            await db.collection('vaccine-confirmations').doc(documentId).create(documentData); 
+          return res.status(200).send({
+            message: 'Successfully stored vaccine confirmation document',
+            data: documentData
+          });
+      
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send({
+            message: error.message || "Some error occurred while storing vaccine document."
+          });
+      }
+    });
 
   exports.health = functions.https.onRequest(healthApp);
