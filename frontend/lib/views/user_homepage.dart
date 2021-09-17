@@ -94,7 +94,7 @@ class _UserHomePageState extends State<UserHomePage> {
     }
     if (latestPermission == null) {
       healthHelpers.getPermissionsForEmployee(globals.loggedInUserEmail).then((result) {
-        if (result == true) {
+        if (result == true && globals.currentPermissions != null) {
           setState(() {
             latestPermission = globals.currentPermissions.last.getOfficeAccess();
           });
