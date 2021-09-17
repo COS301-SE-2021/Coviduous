@@ -32,5 +32,117 @@ PERSONAL_QUES = [
         "Question": "Thank you",
         "Answer": "Glad I could help! 👍"
     },
+    {
+        "Question": "How are you?",
+        "Answer": "I'm doing Well. How are you?"
+    },
+    {
+        "Question": "What's Up",
+        "Answer": "Not Much and You?"
+    },
+    {
+        "Question": "Can we be friends?",
+        "Answer": "Yeah sure!"
+    },
+    {
+        "Question": "hey there",
+        "Answer": "hey what's up"
+    },
+    {
+        "Question": "Greetings!",
+        "Answer": "Greetings to you!"
+    },
+    {
+        "Question": "Hi!",
+        "Answer": "Greetings!"
+    },
+    {
+        "Question": "How are you doing?",
+        "Answer": "I'm very well, thanks"
+    },
+    {
+        "Question": "Nice to meet you",
+        "Answer": "Nice to meet you too!"
+    },
+    {
+        "Question": "Hi, nice to meet you",
+        "Answer": "Thank you. You too!"
+    },
+    {
+        "Question": "It is a pleasure to meet you",
+        "Answer": "Thank you. You too!"
+    },
+    {
+        "Question": "How do you do?",
+        "Answer": "I'm doing well. How are you?"
+    },
+    {
+        "Question": "Top of the morning to you!",
+        "Answer": "Thank you kindly."
+    },
+    {
+        "Question": "Top of the morning to you!",
+        "Answer": "And the rest of the day to you."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Not much, what about you?"
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Nothing much."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Nothing."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Nothing is really up."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "The sky's up but I'm fine thanks. What about you?"
+    },
+    {
+        "Question": "Good morning, how are you?",
+        "Answer": "I am doing well, how about you?"
+    },
+    {
+        "Question": "I'm also good.",
+        "Answer": "That's good to hear." 
+    },
+    {
+        "Question": "I have a question.",
+        "Answer": "Yes ask away! What is your question?"
+    },
+    {
+        "Question": "Have you heard the news?",
+        "Answer": "What good news?"
+    },
+    {
+        "Question": "What is your favorite book?",
+        "Answer": "As funny as it may sound, I can't read."
+    },
+    {
+        "Question": "So what's your favorite color?",
+        "Answer": "Blue"
+    },
+    {
+        "Question": "But tell me, do you like music?",
+        "Answer": "Ah yes, music is soothing."
+    },
+    {
+        "Question": "What kind of movies do you like?",
+        "Answer": "Comedy movies to make me laugh."
+    },
+    {
+        "Question": "Tell me about your self.",
+        "Answer": "What do you want to know?"
+    },
+    {
+        "Question": "Are you a robot?",
+        "Answer": "Indeed I am haha."
+    },
 ]
 

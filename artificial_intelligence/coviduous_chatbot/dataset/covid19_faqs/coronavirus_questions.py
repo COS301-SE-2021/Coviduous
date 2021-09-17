@@ -816,6 +816,210 @@ COVID19_QUES = [
         "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
     },
     {
+        "Question": "How can I reduce my risk of getting COVID-19?",
+        "Answer": "Avoid touching surfaces, especially in public settings or health facilities, in case people infected with COVID-19 have touched them. Clean surfaces regularly with standard disinfectants. Frequently clean your hands with soap and water, or an alcohol-based hand rub. If you can, carry alcohol-based rub with you and use it often. Cover your coughs and sneezes with a bent elbow or tissue, throwing used tissues into a closed bin right away. Then wash your hands or use an alcohol-based hand rub. Get vaccinated: When it’s your turn, get vaccinated. Follow local guidance and recommendations about vaccination."
+    },
+    {
+        "Question": "Why should people wear masks?",
+        "Answer": "Masks are a key measure to suppress transmission and save lives. Masks should be used as part of a comprehensive ‘Do it all!’ approach including physical distancing, avoiding crowded, closed and close-contact settings, good ventilation, cleaning hands, covering sneezes and coughs, and more. Depending on the type, masks can be used for either protection of healthy persons or to prevent onward transmission."
+    },
+    {
+        "Question": "When should masks be worn by the general public?",
+        "Answer": "In areas where the virus is circulating, masks should be worn when you’re in crowded settings, where you can’t be at least 1 metre from others, and in rooms with poor or unknown ventilation. It’s not always easy to determine the quality of ventilation, which depends on the rate of air change, recirculation and outdoor fresh air. So if you have any doubts, it’s safer to simply wear a mask."
+    },
+    {
+        "Question": "Should I wear a mask while exercising?",
+        "Answer": "Even when you’re in an area of COVID-19 transmission, masks should not be worn during vigorous physical activity because of the risk of reducing your breathing capacity. No matter how intensely you exercise, keep at least 1 metre away from others, and if you’re indoors, make sure there is adequate ventilation."
+    },
+    {
+        "Question": "How do I choose what fabric mask to buy, or ideal fit and fabrics if I make my own?",
+        "Answer": "Check for filtration, breathability and fit when choosing a fabric mask. It should be held in place comfortably with little adjustment using elastic bands or ties. There are different mask shapes such as flat-fold or duckbill – find the one that fits closely over your nose, cheeks and chin. When the edges of the mask are not close to the face and shift, such as when speaking, air penetrates through the edges of the mask rather than being filtered through the fabric. Masks with vents or exhalation valves are not advised because they allow unfiltered breath to escape the mask."
+    },
+    {
+        "Question": "When should health workers wear masks in the context of COVID-19?",
+        "Answer": "Health workers are the most likely to be exposed to COVID-19 because they are in close contact with patients with suspected, probable or confirmed COVID-19. In areas of community or cluster transmission, health workers, caregivers and visitors should wear a mask at all times when in the health facility, even if physical distancing can be maintained. Masks should be worn throughout their shifts, apart from when eating, drinking or needing to change the mask for specific reasons."
+    },
+    {
+        "Question": "How large does a meeting or event need to be in order to be a “mass gathering”?",
+        "Answer": "High profile international sporting events such as the Olympics or World Cups as well as international religious events such as the Hajj count as mass gatherings. However, lower profile conferences and events can also meet WHO’s definition of a mass gathering. An event counts as a “mass gatherings” if the number of people it brings together is so large that it has the potential to strain the planning and response resources of the health system in the community where it takes place."
+    },
+    {
+        "Question": "Should event organizers provide COVID-19 testing?",
+        "Answer": "No, testing should be conducted in accordance with local health providers and national guidance.  Anyone unwell or symptomatic should not be allowed to participate in the event. Establish close collaboration with local public health authorities well before the event, to facilitate testing for athletes, officials or spectators who meet pre-agreed suspect cases definitions. Consider host-country health service capacity to manage any COVID-19 activity, and other public health issues happening at the event over and above its own national pandemic response."
+    },
+    {
+        "Question": "What are the risks arising from public transport to the venue(s)?",
+        "Answer": "The extra risk from participants and spectators travelling on public transport in a major city may not be significant compared to the ongoing risk to the local population using the transport all the time if physical distancing is not possible on public transport."
+    },
+    {
+        "Question": "Does the presence of antibodies mean that a person is immune?",
+        "Answer": "There are many studies underway to better understand the antibody response following infection to SARS-CoV-2.  Several studies to date show that most people who have been infected with SARS-CoV-2 develop antibodies specific to this virus. However, the levels of these antibodies can vary between those who have severe disease (higher levels of antibodies) and those with milder disease or asymptomatic infection (lower levels of antibodies). Many studies are underway to better understand the levels of antibodies that are needed for protection, and how long these antibodies last."
+    }, 
+    {
+        "Question": "Can people who have had SARS-CoV-2 infection be re-infected?",
+        "Answer": "To date, there are some reports of individuals who have been reinfected with SARS-CoV-2.  There are likely to be more examples of reinfection reported and scientists are working to understand the role of the immune response in the first and second infection. WHO is working with scientists to understand each occurrence of reinfection and the antibody response during the first and subsequent infections."
+    },
+    {
+        "Question": "How are COVID-19 and influenza viruses similar?",
+        "Answer": "Firstly, COVID-19 and influenza viruses have a similar disease presentation. That is, they both cause respiratory disease, which presents as a wide range of illness from asymptomatic or mild through to severe disease and death. Secondly, both viruses are transmitted by contact, droplets and fomites. As a result, the same public health measures, such as hand hygiene and good respiratory etiquette (coughing into your elbow or into a tissue and immediately disposing of the tissue), are important actions all can take to prevent infection. "
+    },
+    {
+        "Question": "How are COVID-19 and influenza viruses different?",
+        "Answer": "The speed of transmission is an important point of difference between the two viruses. Influenza has a shorter median incubation period (the time from infection to appearance of symptoms) and a shorter serial interval (the time between successive cases) than COVID-19 virus. The serial interval for COVID-19 virus is estimated to be 5-6 days, while for influenza virus, the serial interval is 3 days. This means that influenza can spread faster than COVID-19. "
+    },
+    {
+        "Question": "What medical interventions are available for COVID-19 and influenza viruses?",
+        "Answer": "While there are a number of therapeutics currently in clinical trials in China and more than 20 vaccines in development for COVID-19, there are currently no licensed vaccines or therapeutics for COVID-19.  In contrast, antivirals and vaccines available for influenza. While the influenza vaccine is not effective against COVID-19 virus, it is highly recommended to get vaccinated each year to prevent influenza infection. "
+    },
+    {
+        "Question": "So how do I stay safe while exercising in COVID-19?",
+        "Answer": "Do not exercise if you have a fever, cough and difficulty breathing. Stay home and rest, seek medical attention and call in advance. Follow the directions of your local health authority. If you are able to go for a walk or bicycle ride always practice physical distancing and wash your hands with water and soap before you leave, when you get to where you are going, and as soon as you get home.  If water and soap are not immediately available, use alcohol-based hand rub."
+    },
+    {
+        "Question": "How do I stay active in and around the home?",
+        "Answer": "Try and reduce long periods of time spent sitting, whether for work, studying, watching TV, reading, or using social media or playing games using screens. Reduce sitting for long periods by taking short 3-5 minute breaks every 20-30 minutes. Simply stand up and stretch or even better, take a walk around the house, up and down the stairs, or into the garden. By just moving around and stretching you can improve your health and wellbeing."
+    },
+    {
+        "Question": "What precautions should everyone take in a hotel or other accommodation establishment?",
+        "Answer": "Wash all parts of your hands frequently (at least 20 seconds if using an alcohol-based hand rub, and at least 40 seconds with soap and water), including after exchanging objects such as money or credit cards; look for hand sanitizer stations and use them before going into dining halls, restaurants or bars; cover a cough or sneeze with a bent elbow or tissue, and throw away the tissue in a closed bin; maintain at least a 1 metre distance from staff and other guests. This includes avoiding hugging, kissing, or shaking hands. If you can’t guarantee the distance, wear a mask. Be sure to check local and national guidelines on the use of masks."
+    },
+    {
+        "Question": "Are pools and water areas safe to use?",
+        "Answer": "Gym, beach, swimming pool, spa, sauna and steam bath facilities can be used safely with certain restrictions, as determined by national guidelines."
+    },
+    {
+        "Question": "Are there precautions to take while eating in a restaurant?",
+        "Answer": "There is no evidence that the virus that causes COVID-19 is transmitted by food, including fresh fruits and vegetables. The virus can be killed while cooking food at temperatures of at least 70°C. Food buffets are not recommended because of the risk of close physical contact with others, shared serving implements and multiple people touching the surfaces on the buffet."
+    },
+    {
+        "Question": "Can you get the virus from people who were in the room previous to you?",
+        "Answer": "Hotels and other accommodations should have procedures for cleaning, disinfecting and ventilating the room properly between every guest’s stay. These processes allow the accommodations to be used immediately afterward. If these procedures are followed, there is no need to leave the room empty between guests."
+    },
+    {
+        "Question": "What should travellers do if they get sick while at an accommodation facility?",
+        "Answer": "If a guest develops symptoms of COVID-19, such as fever, dry cough or tiredness, they should notify the facility manager and seek medical advice by contacting local health authorities. The guest should isolate from others, including fellow travellers. If the guest cannot be isolated or staff need to enter the room, the ill person should put on a medical mask, and people nearby should also wear a mask.  If the medical mask cannot be tolerated by the ill person, then he or she should cough or sneeze into a bent elbow or use tissues to cover the mouth, and discard the tissue immediately into a closed waste bag."
+    },
+    {
+        "Question": "As safe and effective vaccines for COVID-19 are approved, who should be the first to receive them?",
+        "Answer": "WHO believes that everyone, everywhere who could benefit from safe and effective COVID-19 vaccines should have access as quickly as possible, starting with those at highest risk of serious disease or death."
+    },
+    {
+        "Question": "Who should participate in clinical trials for COVID-19 vaccines?",
+        "Answer": "Small (phase I) safety studies of COVID-19 vaccines should enroll healthy adult volunteers. Larger (phase II and III) Studies should include volunteers that reflect the populations for whom the vaccines are intended. This means enrolling people from diverse geographic areas, racial and ethnic backgrounds, genders, and ages, as well as those with underlying health conditions that put them at higher risk for COVID-19. Including these groups in clinical trials is the only way to make sure that a vaccine will be safe and effective for everyone who needs it. "
+    },
+    {
+        "Question": "How do I volunteer for a COVID-19 vaccine trial?",
+        "Answer": "Opportunities to volunteer for a COVID-19 vaccine trial vary from country to country. If you are interested in volunteering, check with local health officials or research institutions."
+    },
+    {
+        "Question": "Are COVID-19 vaccines safe for people living with HIV?",
+        "Answer": "Many of the most advanced vaccines have included a small number of people living with HIV. Despite limited data, available information suggests COVID-19 vaccines for which WHO has issued recommendations, are safe for people living with HIV. The vaccines often include genetic material from SARS-CoV-2, but do not contain the whole virus, so the virus cannot replicate. As they are not live vaccines, they are not expected to be less safe in people who are immunocompromised."
+    },
+    {
+        "Question": "Do COVID-19 vaccines provide protection for people living with HIV?",
+        "Answer": "It is theoretically possible that people living with HIV with low CD4 cell counts might have a weaker immune response to a vaccine. However, in practice this has not been documented for other vaccines and there is no evidence to support a less robust immune response to COVID-19 vaccines among people with low CD4 cell counts. WHO is reviewing new evidence as it emerges and will provide an update when needed.  It is important to advocate for the inclusion of people living with HIV, including those with more advanced disease, in vaccine trials to provide information to confirm efficacy."
+    },
+    {
+        "Question": "Should people living with HIV get vaccines early in the roll out?",
+        "Answer": "Most countries have made clear plans to support arrangements for those who will receive the vaccine in order of priority based on their age, health, occupation and other factors such people in living in care or residential homes. Some countries are prioritising vaccination for people living with HIV or who are immunocompromised."
+    },
+    {
+        "Question": "What can people living with HIV do today to support their health?",
+        "Answer": "While the world works towards ensuring fair and equitable access to safe and effective COVID-19 vaccines, it is important to continue the essential public health actions to prevent SARS-CoV-2 transmission and to reduce COVID-19 mortality. Alongside the response to the COVID-19 pandemic, it is critical to maintain access to essential health services. This includes supporting people living with HIV to be able to continue anti-retroviral therapy (ART) and adapting services to make this easier and more efficient during the COVID-19 response."
+    },
+    {
+        "Question": "How do we know that COVID-19 vaccines are safe?",
+        "Answer": "There are strict protections in place to help ensure the safety of all COVID-19 vaccines. Before receiving validation from WHO and national regulatory agencies, COVID-19 vaccines must undergo rigorous testing in clinical trials to prove that they meet internationally agreed benchmarks for safety and efficacy."
+    },
+    {
+        "Question": "What are the side effects of COVID-19 vaccines?",
+        "Answer": "Like any vaccine, COVID-19 vaccines can cause mild, short term side effects, such as a low-grade fever or pain or redness at the injection site. Most reactions to vaccines are mild and go away within a few days on their own. More serious or long-lasting side effects to vaccines are possible but extremely rare. Vaccines are continually monitored for as long as they are in use, to detect rare adverse events and implement approaches to limit their occurrence. "
+    }, 
+    {
+        "Question": "What is the link between COVID-19 vaccines and allergic reactions?",
+        "Answer": "Severe allergic reactions have occurred rarely to some of the COVID vaccines. A severe allergic reaction – such as anaphylaxis – is a potential but rare side effect with any vaccine. In persons with a known risk, such as previous experience of an allergic reaction to a previous dose of the vaccine or any of the known components in the vaccine, precautions may need to be taken. WHO recommends that healthcare providers assess the risk for severe allergic reactions prior to giving a COVID-19 vaccine by inquiring about previous reactions or known allergies to any components in the vaccine."
+    },
+    {
+        "Question": "What happens if an adverse event is reported?",
+        "Answer": "As with any vaccine, it is essential to closely monitor the safety and effectiveness of COVID-19 vaccines that are used in immunization programmes. If a health problem is reported following vaccination, a thorough investigation should take place by the public health programme in the country."
+    },
+    {
+        "Question": "Under what circumstances should a COVID-19 vaccine be recalled?",
+        "Answer": "Vaccine recalls or withdrawals due to safety issues are rare. Recalls are usually initiated voluntarily by a vaccine manufacturer before any adverse events are reported. For example, ongoing monitoring of vaccine production may show that an irregularity has caused a batch of vaccines to lose their strength. In this case, people who have received a vaccine from that batch may need to be vaccinated again to ensure they are protected."
+    },
+    {
+        "Question": "Is it possible that someone vaccinated against COVID-19 will still get infected?",
+        "Answer": "While COVID-19 vaccines have high levels of efficacy, especially against hospitalization and severe disease, no vaccine is 100% protective. As a result, there will be some small percentage of vaccinated people who fall ill with COVID-19 in spite of being vaccinated. In addition to a vaccine's specific characteristics, several factors such as a person's age, their underlying health conditions, previous COVID-19 disease, current exposure to SARS-CoV-2, or the circulation of virus variants may have an impact on a vaccine’s effectiveness. We do not yet know how long immunity from different COVID-19 vaccines will last. That is one reason why, even as COVID-19 vaccines are being rolled out, we must continue using all public health measures that work to decrease exposure risk, such as physical distancing, masks, and handwashing."
+    },
+    {
+        "Question": "Who should be excluded from receiving COVID-19 vaccines?",
+        "Answer": "Medical professionals can best advise individuals on whether or not you should receive a COVID-19 vaccine. There are very few conditions that would exclude someone from being vaccinated. Based on available evidence, people with a history of severe allergic reactions to any ingredients of the COVID-19 vaccine should generally be excluded from COVID-19 vaccination in order to avoid possible adverse effects."
+    },
+    {
+        "Question": "How will WHO ensure vaccine safety monitoring and response when COVID-19 vaccines are used?",
+        "Answer": "Vaccine safety monitoring is ensured at the national, regional, and global level. As is standard practice in all national immunization programmes, WHO supports the set up of safety monitoring systems for COVID-19 vaccines in every country. After a COVID-19 vaccine is introduced in a country, WHO works with vaccine manufacturers, health officials and other partners to monitor for any safety concerns on an ongoing basis. Specific safety concerns that may arise are evaluated by WHO and an independent group of experts (the Global Advisory Committee on Vaccine Safety, or GACVS) in conjunction with the relevant national authorities."
+    }, 
+    {
+        "Question": "Can someone who has tested positive for COVID-19 be cared for at home?",
+        "Answer": "People with no symptoms should be able to stay at home, if adequately isolated from others, but this should be confirmed by a doctor. Those with mild or moderate disease can be considered for home care if they are under the age of 60, do not smoke, are not obese, and do not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
+    },
+    {
+        "Question": "What should be done to prevent other people in the house from becoming sick if a person with COVID-19 is being cared for at home?",
+        "Answer": "The ill person should stay in a separate room. If this is not possible, then keep at least a 1-metre distance from them. The sick person and anyone else in the same room should wear a medical mask; rovide good ventilation in the room of the ill person and shared spaces, and open windows if possible and safe to do so; The ill person should wear a medical mask as much as possible, in particular when not alone in the room and when at least a 1-metre distance from others cannot be maintained; Visitors should not be allowed in the home."
+    },
+    {
+        "Question": "How long should people with COVID-19 stay at home and in isolation?",
+        "Answer": "Those with symptoms should stay isolated for a minimum of 10 days after the first day they developed symptoms, plus another 3 days after the end of symptoms – when they are without fever and without respiratory symptoms; People without symptoms should stay isolated for a minimum of 10 days after testing positive."
+    },
+    {
+        "Question": "When should a patient with COVID-19 be cared for at home?",
+        "Answer": "Ideally, all patients with COVID-19 are cared for in a healthcare facility. However, there may be some circumstances where patients may not require hospitalization or inpatient care is unavailable or unsafe, such as when capacity is insufficient to meet the demand for healthcare services. Patients should be assessed on a case-by-case basis by the health worker to determine where their care needs can best be met."
+    },
+    {
+        "Question": "What factors determine whether a COVID-19 patient can be cared for at home?",
+        "Answer": "Patients with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, and if the patient is under the age of 60, does not smoke, is not obese, and does not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
+    },
+    {
+        "Question": "What additional factors should be taken into consideration when assessing the home setting to determine if it is safe for patients and families to remain at home?",
+        "Answer": "There are a number of environmental and social factors to consider for patients to safely remain at home with their families or household members. An overall needs assessment of the patient and family that includes the availability of trained health workers for support should be conducted."
+    },
+    {
+        "Question": "What precautions should health workers take when providing care to patients in home settings?",
+        "Answer": "Perform a risk assessment to select the use of appropriate personal protective equipment (PPE), such as a medical mask, eye protection, gloves and gown when caring for the patient; Provide instructions to caregivers and household members on cleaning and disinfection in the home, and on management of waste, laundry and utensils related to the patient."
+    },
+    {
+        "Question": "Could pregnant women be cared for at home if they have COVID-19?",
+        "Answer": "Pregnant women with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, if they do not smoke, are not obese, and do not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
+    },
+    {
+        "Question": "Can children be cared for at home if they have COVID-19?",
+        "Answer": "Children should be kept together with their parents or caregivers wherever possible. Children with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, if they are not obese, do not smoke, and do not have other conditions such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, or immunosuppression."
+    },
+    {
+        "Question": "How does COVID-19 spread between people?",
+        "Answer": "We know that the disease is caused by the SARS-CoV-2 virus, which spreads between people in several different ways; The virus can spread from an infected person’s mouth or nose in small liquid particles when they cough, sneeze, speak, sing or breathe. These particles range from larger respiratory droplets to smaller aerosols."
+    },
+    {
+        "Question": "When do infected people transmit the virus?",
+        "Answer": "Whether or not they have symptoms, infected people can be contagious and the virus can spread from them to other people; Laboratory data suggests that infected people appear to be most infectious just before they develop symptoms (namely 2 days before they develop symptoms) and early in their illness. People who develop severe disease can be infectious for longer."
+    },
+    {
+        "Question": "What is the difference between people who are asymptomatic or pre-symptomatic? Don’t they both mean someone without symptoms?",
+        "Answer": "Both terms refer to people who do not have symptoms. The difference is that ‘asymptomatic’ refers to people who are infected but never develop any symptoms, while ‘pre-symptomatic’ refers to infected people who have not yet developed symptoms but go on to develop symptoms later. "
+    },
+    {
+        "Question": "Are there certain settings where COVID-19 can spread more easily?",
+        "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
+    },
+    {
+        "Question": "How can I reduce my risk of getting COVID-19?",
+        "Answer": "Follow local guidance: Check to see what national, regional and local authorities are advising so you have the most relevant information for where you are; Keep your distance: Stay at least 1 metre away from others, even if they don’t appear to be sick, since people can have the virus without having symptoms; Wear a mask:  Wear a well-fitting three-layer mask, especially when you can’t physically distance, or if you’re indoors. Clean your hands before putting on and taking off a mask; Avoid crowded places, poorly ventilated, indoor locations and avoid prolonged contact with others. Spend more time outdoors than indoors."
+    },
+    {
+        "Question": "Does WHO recommend the use of gloves in the community to prevent transmission of COVID-19?",
+        "Answer": "No, WHO does not advise using gloves by people in the community. Instead, WHO encourages the installation of public hand hygiene stations at the entrance and exit of public places, such as supermarkets or public/private buildings. This helps reduce germs brought in by people’s hands. By widely improving hand hygiene practices, countries can help prevent the spread of the COVID-19 virus and other infections."
+    },
+    {
         "Question": "what are the recommendations by the authorities",
         "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
