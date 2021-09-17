@@ -1191,7 +1191,7 @@ healthApp.post('/api/health/report-recovery',authMiddleware,async (req, res) => 
 //////////////////////////////////// Contact Tracing ///////////////////////////
 ///////////////
 //returns a group of employees who fall under the same shift identified by the shiftId
-healthApp.post('/health/contact-trace/group',authMiddleware,async (req, res) => {
+healthApp.post('/api/health/contact-trace/group',authMiddleware,async (req, res) => {
   try {
       let reqJson;
       try {
@@ -1234,7 +1234,7 @@ healthApp.post('/health/contact-trace/group',authMiddleware,async (req, res) => 
 });
 ////////////////////////////////////
 //returns a shifts an employee was in based on the employee email
-healthApp.post('/health/contact-trace/shifts',authMiddleware,async (req, res) => {
+healthApp.post('/api/health/contact-trace/shifts',authMiddleware,async (req, res) => {
   try {
     let reqJson;
       try {
@@ -1255,13 +1255,12 @@ healthApp.post('/health/contact-trace/shifts',authMiddleware,async (req, res) =>
         let group = [];
         list.forEach(obj => {
             for (var i = 0; i < obj.userEmails.length; i++) {
-                if (obj.userEmails[i] === userEmail) {
+                if (obj.userEmails[i] === reqJson.userEmail) {
                     group.push(obj);
                 }
             }
         });
 
-        let shifts = await shiftDb.viewShifts();
         let userShifts=[];
         group.forEach(obj => {
             shifts.forEach(obj2 => {
@@ -1281,8 +1280,9 @@ healthApp.post('/health/contact-trace/shifts',authMiddleware,async (req, res) =>
       });
   }
 });
+
 ////////////////////////////////////
-healthApp.post('/health/contact-trace/notify-group',authMiddleware,async (req, res) => {
+healthApp.post('/api/health/contact-trace/notify-group',authMiddleware,async (req, res) => {
   try {
       let reqJson;
       try {
@@ -1343,7 +1343,7 @@ healthApp.post('/health/contact-trace/notify-group',authMiddleware,async (req, r
   }
 });
 ////////////////////////////////////////////////////////
-healthApp.post('/health/Covid19TestResults',authMiddleware, async (req, res) => {
+healthApp.post('/api/health/Covid19TestResults',authMiddleware, async (req, res) => {
   try {
     let reqJson;
       try {
@@ -1378,7 +1378,7 @@ healthApp.post('/health/Covid19TestResults',authMiddleware, async (req, res) => 
   }
 });
 ///////////////////////////////////////
-healthApp.post('/health/Covid19VaccineConfirmation/view',authMiddleware, async (req, res) => {
+healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, async (req, res) => {
   try {
       let reqJson;
       try {
@@ -1420,7 +1420,7 @@ healthApp.post('/health/Covid19VaccineConfirmation/view',authMiddleware, async (
   }
   });
   //////////////////
-  healthApp.post('/health/Covid19TestResults/view', authMiddleware,async (req, res) => {
+  healthApp.post('/api/health/Covid19TestResults/view', authMiddleware,async (req, res) => {
     try {
         let reqJson;
         try {
@@ -1462,7 +1462,7 @@ healthApp.post('/health/Covid19VaccineConfirmation/view',authMiddleware, async (
     }
     });
     //////////////////
-  healthApp.post('/health/Covid19VaccineConfirmation', authMiddleware,async (req, res) => {
+  healthApp.post('/api/health/Covid19VaccineConfirmation', authMiddleware,async (req, res) => {
       try {
         let reqJson;
           try {
