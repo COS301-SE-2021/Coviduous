@@ -896,6 +896,86 @@ COVID19_QUES = [
         "Answer": "Hotels and other accommodations should have procedures for cleaning, disinfecting and ventilating the room properly between every guest’s stay. These processes allow the accommodations to be used immediately afterward. If these procedures are followed, there is no need to leave the room empty between guests."
     },
     {
+        "Question": "What should travellers do if they get sick while at an accommodation facility?",
+        "Answer": "If a guest develops symptoms of COVID-19, such as fever, dry cough or tiredness, they should notify the facility manager and seek medical advice by contacting local health authorities. The guest should isolate from others, including fellow travellers. If the guest cannot be isolated or staff need to enter the room, the ill person should put on a medical mask, and people nearby should also wear a mask.  If the medical mask cannot be tolerated by the ill person, then he or she should cough or sneeze into a bent elbow or use tissues to cover the mouth, and discard the tissue immediately into a closed waste bag."
+    },
+    {
+        "Question": "As safe and effective vaccines for COVID-19 are approved, who should be the first to receive them?",
+        "Answer": "WHO believes that everyone, everywhere who could benefit from safe and effective COVID-19 vaccines should have access as quickly as possible, starting with those at highest risk of serious disease or death."
+    },
+    {
+        "Question": "Who should participate in clinical trials for COVID-19 vaccines?",
+        "Answer": "Small (phase I) safety studies of COVID-19 vaccines should enroll healthy adult volunteers. Larger (phase II and III) Studies should include volunteers that reflect the populations for whom the vaccines are intended. This means enrolling people from diverse geographic areas, racial and ethnic backgrounds, genders, and ages, as well as those with underlying health conditions that put them at higher risk for COVID-19. Including these groups in clinical trials is the only way to make sure that a vaccine will be safe and effective for everyone who needs it. "
+    },
+    {
+        "Question": "How do I volunteer for a COVID-19 vaccine trial?",
+        "Answer": "Opportunities to volunteer for a COVID-19 vaccine trial vary from country to country. If you are interested in volunteering, check with local health officials or research institutions."
+    },
+    {
+        "Question": "Are COVID-19 vaccines safe for people living with HIV?",
+        "Answer": "Many of the most advanced vaccines have included a small number of people living with HIV. Despite limited data, available information suggests COVID-19 vaccines for which WHO has issued recommendations, are safe for people living with HIV. The vaccines often include genetic material from SARS-CoV-2, but do not contain the whole virus, so the virus cannot replicate. As they are not live vaccines, they are not expected to be less safe in people who are immunocompromised."
+    },
+    {
+        "Question": "Do COVID-19 vaccines provide protection for people living with HIV?",
+        "Answer": "It is theoretically possible that people living with HIV with low CD4 cell counts might have a weaker immune response to a vaccine. However, in practice this has not been documented for other vaccines and there is no evidence to support a less robust immune response to COVID-19 vaccines among people with low CD4 cell counts. WHO is reviewing new evidence as it emerges and will provide an update when needed.  It is important to advocate for the inclusion of people living with HIV, including those with more advanced disease, in vaccine trials to provide information to confirm efficacy."
+    },
+    {
+        "Question": "Should people living with HIV get vaccines early in the roll out?",
+        "Answer": "Most countries have made clear plans to support arrangements for those who will receive the vaccine in order of priority based on their age, health, occupation and other factors such people in living in care or residential homes. Some countries are prioritising vaccination for people living with HIV or who are immunocompromised."
+    },
+    {
+        "Question": "What can people living with HIV do today to support their health?",
+        "Answer": "While the world works towards ensuring fair and equitable access to safe and effective COVID-19 vaccines, it is important to continue the essential public health actions to prevent SARS-CoV-2 transmission and to reduce COVID-19 mortality. Alongside the response to the COVID-19 pandemic, it is critical to maintain access to essential health services. This includes supporting people living with HIV to be able to continue anti-retroviral therapy (ART) and adapting services to make this easier and more efficient during the COVID-19 response."
+    },
+    {
+        "Question": "How do we know that COVID-19 vaccines are safe?",
+        "Answer": "There are strict protections in place to help ensure the safety of all COVID-19 vaccines. Before receiving validation from WHO and national regulatory agencies, COVID-19 vaccines must undergo rigorous testing in clinical trials to prove that they meet internationally agreed benchmarks for safety and efficacy."
+    },
+    {
+        "Question": "What are the side effects of COVID-19 vaccines?",
+        "Answer": "Like any vaccine, COVID-19 vaccines can cause mild, short term side effects, such as a low-grade fever or pain or redness at the injection site. Most reactions to vaccines are mild and go away within a few days on their own. More serious or long-lasting side effects to vaccines are possible but extremely rare. Vaccines are continually monitored for as long as they are in use, to detect rare adverse events and implement approaches to limit their occurrence. "
+    }, 
+    {
+        "Question": "What is the link between COVID-19 vaccines and allergic reactions?",
+        "Answer": "Severe allergic reactions have occurred rarely to some of the COVID vaccines. A severe allergic reaction – such as anaphylaxis – is a potential but rare side effect with any vaccine. In persons with a known risk, such as previous experience of an allergic reaction to a previous dose of the vaccine or any of the known components in the vaccine, precautions may need to be taken. WHO recommends that healthcare providers assess the risk for severe allergic reactions prior to giving a COVID-19 vaccine by inquiring about previous reactions or known allergies to any components in the vaccine."
+    },
+    {
+        "Question": "What happens if an adverse event is reported?",
+        "Answer": "As with any vaccine, it is essential to closely monitor the safety and effectiveness of COVID-19 vaccines that are used in immunization programmes. If a health problem is reported following vaccination, a thorough investigation should take place by the public health programme in the country."
+    },
+    {
+        "Question": "Under what circumstances should a COVID-19 vaccine be recalled?",
+        "Answer": "Vaccine recalls or withdrawals due to safety issues are rare. Recalls are usually initiated voluntarily by a vaccine manufacturer before any adverse events are reported. For example, ongoing monitoring of vaccine production may show that an irregularity has caused a batch of vaccines to lose their strength. In this case, people who have received a vaccine from that batch may need to be vaccinated again to ensure they are protected."
+    },
+    {
+        "Question": "Is it possible that someone vaccinated against COVID-19 will still get infected?",
+        "Answer": "While COVID-19 vaccines have high levels of efficacy, especially against hospitalization and severe disease, no vaccine is 100% protective. As a result, there will be some small percentage of vaccinated people who fall ill with COVID-19 in spite of being vaccinated. In addition to a vaccine's specific characteristics, several factors such as a person's age, their underlying health conditions, previous COVID-19 disease, current exposure to SARS-CoV-2, or the circulation of virus variants may have an impact on a vaccine’s effectiveness. We do not yet know how long immunity from different COVID-19 vaccines will last. That is one reason why, even as COVID-19 vaccines are being rolled out, we must continue using all public health measures that work to decrease exposure risk, such as physical distancing, masks, and handwashing."
+    },
+    {
+        "Question": "Who should be excluded from receiving COVID-19 vaccines?",
+        "Answer": "Medical professionals can best advise individuals on whether or not you should receive a COVID-19 vaccine. There are very few conditions that would exclude someone from being vaccinated. Based on available evidence, people with a history of severe allergic reactions to any ingredients of the COVID-19 vaccine should generally be excluded from COVID-19 vaccination in order to avoid possible adverse effects."
+    },
+    {
+        "Question": "How will WHO ensure vaccine safety monitoring and response when COVID-19 vaccines are used?",
+        "Answer": "Vaccine safety monitoring is ensured at the national, regional, and global level. As is standard practice in all national immunization programmes, WHO supports the set up of safety monitoring systems for COVID-19 vaccines in every country. After a COVID-19 vaccine is introduced in a country, WHO works with vaccine manufacturers, health officials and other partners to monitor for any safety concerns on an ongoing basis. Specific safety concerns that may arise are evaluated by WHO and an independent group of experts (the Global Advisory Committee on Vaccine Safety, or GACVS) in conjunction with the relevant national authorities."
+    }, 
+    {
+        "Question": "Can someone who has tested positive for COVID-19 be cared for at home?",
+        "Answer": "People with no symptoms should be able to stay at home, if adequately isolated from others, but this should be confirmed by a doctor. Those with mild or moderate disease can be considered for home care if they are under the age of 60, do not smoke, are not obese, and do not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
+    },
+    {
+        "Question": "What should be done to prevent other people in the house from becoming sick if a person with COVID-19 is being cared for at home?",
+        "Answer": "The ill person should stay in a separate room. If this is not possible, then keep at least a 1-metre distance from them. The sick person and anyone else in the same room should wear a medical mask; rovide good ventilation in the room of the ill person and shared spaces, and open windows if possible and safe to do so; The ill person should wear a medical mask as much as possible, in particular when not alone in the room and when at least a 1-metre distance from others cannot be maintained; Visitors should not be allowed in the home."
+    },
+    {
+        "Question": "How long should people with COVID-19 stay at home and in isolation?",
+        "Answer": "Those with symptoms should stay isolated for a minimum of 10 days after the first day they developed symptoms, plus another 3 days after the end of symptoms – when they are without fever and without respiratory symptoms; People without symptoms should stay isolated for a minimum of 10 days after testing positive."
+    },
+    {
+        "Question": "When should a patient with COVID-19 be cared for at home?",
+        "Answer": "Ideally, all patients with COVID-19 are cared for in a healthcare facility. However, there may be some circumstances where patients may not require hospitalization or inpatient care is unavailable or unsafe, such as when capacity is insufficient to meet the demand for healthcare services. Patients should be assessed on a case-by-case basis by the health worker to determine where their care needs can best be met."
+    },
+    {
         "Question": "what are the recommendations by the authorities",
         "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
