@@ -22,7 +22,7 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X = sc.fit_transform(X)
 X = pd.DataFrame(X).dropna()  # To account for any NaNs we may have missed in the dataset
-y = pd.DataFrame(y).dropna()  # To account for any NaNs we may have missed in the dataset
+y = pd.DataFrame(y).dropna()
 
 # Step 4 - Compare classification algorithms
 from sklearn.model_selection import KFold
