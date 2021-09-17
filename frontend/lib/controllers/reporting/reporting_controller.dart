@@ -42,7 +42,7 @@ String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 //Get bookings overview
 Future<List<BookingSummary>> getBookingSummary(String companyId, String year, String month) async {
-  String path = "/reporting/summary-bookings/";
+  String path = "reporting/api/reporting/summary-bookings/";
   String url = server + path;
 
   var request;
