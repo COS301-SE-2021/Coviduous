@@ -7,6 +7,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/controllers/shift/shift_helpers.dart' as shiftHelpers;
 import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
@@ -126,93 +127,121 @@ class _AdminContactTraceShiftsState extends State<AdminContactTraceShifts> {
                                           ElevatedButton(
                                             child: Text('Details'),
                                             onPressed: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (ctx) => AlertDialog(
-                                                    title: Text('Shift details'),
-                                                    content: Container(
-                                                      color: Colors.white,
-                                                      height: 350,
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                        children: [
-                                                          Row(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Container(
-                                                                height: MediaQuery.of(context).size.height/5,
-                                                                child: Image(
-                                                                  image: AssetImage('assets/images/placeholder-shift.png'),
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                child: Container(
-                                                                  alignment: Alignment.center,
-                                                                  color: globals.firstColor,
+                                              shiftHelpers.getGroupForShift(globals.currentShifts[index].getShiftId()).then((result) {
+                                                String groupName = "Unnamed group";
+                                                if (result == true) {
+                                                  groupName = globals.currentGroup.getGroupName();
+                                                }
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (ctx) => AlertDialog(
+                                                      title: Text('Shift details'),
+                                                      content: Container(
+                                                        color: Colors.white,
+                                                        height: 350,
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          children: [
+                                                            Row(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                Container(
                                                                   height: MediaQuery.of(context).size.height/5,
-                                                                  child: Text('  Shift ' + (index+1).toString() + '  ',
-                                                                    style: TextStyle(
-                                                                      color: Colors.white,
-                                                                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                                                                  child: Image(
+                                                                    image: AssetImage('assets/images/placeholder-shift.png'),
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  child: Container(
+                                                                    alignment: Alignment.center,
+                                                                    color: globals.firstColor,
+                                                                    height: MediaQuery.of(context).size.height/5,
+                                                                    child: Text('  Shift ' + (index+1).toString() + '  ',
+                                                                      style: TextStyle(
+                                                                        color: Colors.white,
+                                                                        fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Flexible(
-                                                            child: SingleChildScrollView(
-                                                              child: Column(
-                                                                children: [
-                                                                  SizedBox(
-                                                                    height: 10,
-                                                                  ),
-                                                                  Container(
-                                                                    alignment: Alignment.centerLeft,
-                                                                    height: 50,
-                                                                    child: Text('Floor plan number: ' + globals.currentShifts[index].getFloorPlanNumber(),
-                                                                        style: TextStyle(color: Colors.black)),
-                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                                  ),
-                                                                  Divider(
-                                                                    color: globals.lineColor,
-                                                                    thickness: 2,
-                                                                  ),
-                                                                  Container(
-                                                                    alignment: Alignment.centerLeft,
-                                                                    height: 50,
-                                                                    child: Text('Floor number: ' + globals.currentShifts[index].getFloorNumber(),
-                                                                        style: TextStyle(color: Colors.black)),
-                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                                  ),
-                                                                  Divider(
-                                                                    color: globals.lineColor,
-                                                                    thickness: 2,
-                                                                  ),
-                                                                  Container(
-                                                                    alignment: Alignment.centerLeft,
-                                                                    height: 50,
-                                                                    child: Text('Room number: ' + globals.currentShifts[index].getRoomNumber(),
-                                                                        style: TextStyle(color: Colors.black)),
-                                                                    padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                                                  ),
-                                                                ],
+                                                              ],
+                                                            ),
+                                                            Flexible(
+                                                              child: SingleChildScrollView(
+                                                                child: Column(
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      height: 10,
+                                                                    ),
+                                                                    Container(
+                                                                      alignment: Alignment.centerLeft,
+                                                                      height: 50,
+                                                                      child: Text('Group name: ' + groupName,
+                                                                          style: TextStyle(color: Colors.black)),
+                                                                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                    ),
+                                                                    Divider(
+                                                                      color: globals.lineColor,
+                                                                      thickness: 2,
+                                                                    ),
+                                                                    Container(
+                                                                      alignment: Alignment.centerLeft,
+                                                                      height: 50,
+                                                                      child: Text('Room name: ' + globals.currentRoom.getRoomName(),
+                                                                          style: TextStyle(color: Colors.black)),
+                                                                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                    ),
+                                                                    Divider(
+                                                                      color: globals.lineColor,
+                                                                      thickness: 2,
+                                                                    ),
+                                                                    Container(
+                                                                      alignment: Alignment.centerLeft,
+                                                                      height: 50,
+                                                                      child: Text('Date: ' + globals.currentShifts[index].getDate().substring(0, 10),
+                                                                          style: TextStyle(color: Colors.black)),
+                                                                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                    ),
+                                                                    Divider(
+                                                                      color: globals.lineColor,
+                                                                      thickness: 2,
+                                                                    ),
+                                                                    Container(
+                                                                      alignment: Alignment.centerLeft,
+                                                                      height: 50,
+                                                                      child: Text('Time: ' + startTimeFormatted + ' - ' + endTimeFormatted,
+                                                                          style: TextStyle(color: Colors.black)),
+                                                                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                    ),
+                                                                    Divider(
+                                                                      color: globals.lineColor,
+                                                                      thickness: 2,
+                                                                    ),
+                                                                    Container(
+                                                                      alignment: Alignment.centerLeft,
+                                                                      height: 50,
+                                                                      child: Text('Maximum capacity: ' + globals.currentRoom.getCapacityForSixFtGrid().toString(),
+                                                                          style: TextStyle(color: Colors.black)),
+                                                                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                    actions: <Widget>[
-                                                      TextButton(
-                                                        child: Text('Okay'),
-                                                        onPressed: (){
-                                                          Navigator.of(ctx).pop();
-                                                        },
-                                                      )
-                                                    ],
-                                                  )
-                                              );
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          child: Text('Okay'),
+                                                          onPressed: (){
+                                                            Navigator.of(ctx).pop();
+                                                          },
+                                                        )
+                                                      ],
+                                                    )
+                                                );
+                                              });
                                             },
                                           ),
                                           SizedBox(
