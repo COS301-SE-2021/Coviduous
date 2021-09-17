@@ -77,148 +77,156 @@ class _ReportingState extends State<Reporting> {
                                   : MediaQuery.of(context).size.width/4
                           ),
                           SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
+                            height: MediaQuery.of(context).size.height/30,
                             width: MediaQuery.of(context).size.width,
                           ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/14,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Company overview')),
-                                    Icon(Icons.business)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                showDialog(context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Enter date to view'),
-                                    content: Form(
-                                      key: _formKey,
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            TextFormField(
-                                              controller: _year,
-                                              decoration: InputDecoration(hintText: 'Enter year', filled: true, fillColor: Colors.white),
-                                              obscureText: false,
-                                              validator: (value) {
-                                                if (value.isEmpty || !globals.isNumeric(value)) {
-                                                  return 'please input a year';
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (String value) {
-                                                _year.text = value;
-                                              },
-                                            ),
-                                            SizedBox(
-                                              height: MediaQuery.of(context).size.height/48,
-                                            ),
-                                            TextFormField(
-                                              controller: _month,
-                                              decoration: InputDecoration(hintText: 'Enter month (as a number)', filled: true, fillColor: Colors.white),
-                                              obscureText: false,
-                                              validator: (value) {
-                                                if (value.isEmpty || !globals.isNumeric(value)) {
-                                                  return 'please input a month as a number';
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (String value) {
-                                                _month.text = value;
-                                              },
-                                            ),
-                                          ],
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Company overview')),
+                                      Icon(Icons.business)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  showDialog(context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Enter date to view'),
+                                      content: Form(
+                                        key: _formKey,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                controller: _year,
+                                                decoration: InputDecoration(hintText: 'Enter year', filled: true, fillColor: Colors.white),
+                                                obscureText: false,
+                                                validator: (value) {
+                                                  if (value.isEmpty || !globals.isNumeric(value)) {
+                                                    return 'please input a year';
+                                                  }
+                                                  return null;
+                                                },
+                                                onSaved: (String value) {
+                                                  _year.text = value;
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: MediaQuery.of(context).size.height/48,
+                                              ),
+                                              TextFormField(
+                                                controller: _month,
+                                                decoration: InputDecoration(hintText: 'Enter month (as a number)', filled: true, fillColor: Colors.white),
+                                                obscureText: false,
+                                                validator: (value) {
+                                                  if (value.isEmpty || !globals.isNumeric(value)) {
+                                                    return 'please input a month as a number';
+                                                  }
+                                                  return null;
+                                                },
+                                                onSaved: (String value) {
+                                                  _month.text = value;
+                                                },
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                        child: Text('Submit'),
-                                        onPressed: () {
-                                          FormState form = _formKey.currentState;
+                                      actions: [
+                                        TextButton(
+                                          child: Text('Submit'),
+                                          onPressed: () {
+                                            FormState form = _formKey.currentState;
+                                            globals.reportingYear = _year.text;
+                                            globals.reportingMonth = _month.text.padLeft(2, "0");
 
-                                          if (form.validate()) {
-                                            //The padLeft(2, "0") after the month is to ensure that if the month is a single digit, it should be preceded by a 0
-                                            //Double digit months will automatically not have any leading 0s
-                                            reportingHelpers.getCompanySummaries(_year.text, _month.text.padLeft(2, "0")).then((result) {
-                                              if (result == true) {
+                                            if (form.validate()) {
+                                              //The padLeft(2, "0") after the month is to ensure that if the month is a single digit, it should be preceded by a 0
+                                              //Double digit months will automatically not have any leading 0s
+                                              reportingHelpers.getCompanySummaries(_year.text, _month.text.padLeft(2, "0")).then((result) {
                                                 Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
-                                              } else {
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(content: Text("No company information found for the selected year and month. Please choose a different date.")));
-                                                Navigator.pop(context);
-                                              }
-                                            });
-                                          }
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: Text('Cancel'),
-                                        onPressed: () => Navigator.pop(context),
-                                      ),
+                                              });
+                                            }
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text('Cancel'),
+                                          onPressed: () => Navigator.pop(context),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                                }
+                            ),
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/30,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/14,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Health reports')),
+                                      Icon(Icons.medical_services)
                                     ],
-                                  );
-                                });
-                              }
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
+                                }
+                            ),
                           ),
                           SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
+                            height: MediaQuery.of(context).size.height/30,
                             width: MediaQuery.of(context).size.width,
                           ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Health reports')),
-                                    Icon(Icons.medical_services)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pushReplacementNamed(ReportingHealth.routeName);
-                              }
-                          ),
-                          SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/14,
                             width: MediaQuery.of(context).size.width,
-                          ),
-                          ElevatedButton (
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Row (
-                                  children: <Widget>[
-                                    Expanded(child: Text('Office reports')),
-                                    Icon(Icons.book)
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                              ),
-                              onPressed: () {
-                                floorPlanHelpers.getFloorPlans().then((result) {
-                                  if (result == true) {
-                                    Navigator.of(context).pushReplacementNamed(ReportingFloorPlans.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("An error occurred while retrieving floor plans. Please try again later.")));
-                                  }
-                                });
-                              }
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Office reports')),
+                                      Icon(Icons.book)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  floorPlanHelpers.getFloorPlans().then((result) {
+                                    if (result == true) {
+                                      Navigator.of(context).pushReplacementNamed(ReportingFloorPlans.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("An error occurred while retrieving floor plans. Please try again later.")));
+                                    }
+                                  });
+                                }
+                            ),
                           ),
                         ]
                     )
