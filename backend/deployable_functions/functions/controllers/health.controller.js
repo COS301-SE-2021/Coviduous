@@ -825,4 +825,55 @@ healthApp.post('/api/health/permissions/view', async (req, res) => {
 
 ///////////////// PERMISSION REQUEST /////////////////
 
+healthApp.post('/api/health/permissions/permission-request',async (req, res) => {
+  try {
+    let reqJson;
+  try {
+      reqJson = JSON.parse(req.body);
+  } catch (e) {
+      reqJson = req.body;
+  }
+    let permissionRequestId = "PR-" + uuid.v4();
+    let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+    let permissionRequestData = {
+      permissionRequestId: permissionRequestId,
+      permissionId:reqJson.permissionId,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
+      shiftNumber: reqJson.shiftNumber,
+      timestamp: timestamp,
+      reason: reqJson.reason,
+      adminId: reqJson.adminId,
+      companyId: reqJson.companyId,
+    }
+
+    await database.collection('permission-requests').doc(permissionRequestId).create(permissionRequestData);
+      let notificationId = "NTFN-" + uuid.v4();
+      timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+      let notificationData = {
+        notificationId: notificationId,
+        userId: reqJson.userId,
+        userEmail:reqJson.userEmail,
+        subject: "PERMISSION REQUEST",
+        message: "EMPLOYEE : "+reqJson.userId+" WITH EMAIL : "+reqJson.userEmail+" REQUESTS OFFICE ACCESS",
+        timestamp: timestamp,
+        adminId: reqJson.adminId,
+        companyId: reqJson.companyId
+      }
+  
+      await database.collection('notifications').doc(notificationId).create(notificationData)
+      await sendUserEmail(reqJson.adminEmail,notificationData.subject,notificationData.message);
+      return res.status(200).send({
+        message: 'Permission request successfully created',
+        data: permissionRequestData
+      });
+
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send(error);
+  }
+});
+
   exports.health = functions.https.onRequest(healthApp);
