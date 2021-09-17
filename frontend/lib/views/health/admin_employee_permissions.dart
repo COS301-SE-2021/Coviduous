@@ -35,6 +35,12 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
     }
     Widget getList() {
       int numberOfPermissions = globals.currentPermissions.length;
+      String employeeFirstName = '';
+      String employeeLastName = '';
+      if (globals.selectedUser != null) {
+        employeeFirstName = globals.selectedUser.getFirstName();
+        employeeLastName = globals.selectedUser.getLastName();
+      }
 
       if (numberOfPermissions == 0) {
         return Column(
@@ -120,7 +126,7 @@ class _EmployeePermissionsState extends State<EmployeePermissions> {
                                                       Container(
                                                         alignment: Alignment.center,
                                                         height: 50,
-                                                        child: Text('Employee name: ' + globals.selectedUser.getFirstName() + " " + globals.selectedUser.getLastName(),
+                                                        child: Text('Employee name: ' + employeeFirstName + " " + employeeLastName,
                                                             style: TextStyle(color: Colors.black)),
                                                         padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                                       ),
