@@ -72,5 +72,45 @@ PERSONAL_QUES = [
         "Question": "It is a pleasure to meet you",
         "Answer": "Thank you. You too!"
     },
+    {
+        "Question": "How do you do?",
+        "Answer": "I'm doing well. How are you?"
+    },
+    {
+        "Question": "Top of the morning to you!",
+        "Answer": "Thank you kindly."
+    },
+    {
+        "Question": "Top of the morning to you!",
+        "Answer": "And the rest of the day to you."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Not much, what about you?"
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Nothing much."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Nothing."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "Nothing is really up."
+    },
+    {
+        "Question": "What's up?",
+        "Answer": "The sky's up but I'm fine thanks. What about you?"
+    },
+    {
+        "Question": "Good morning, how are you?",
+        "Answer": "I am doing well, how about you?"
+    },
+    {
+        "Question": "I'm also good.",
+        "Answer": "That's good to hear." 
+    },
 ]
 
