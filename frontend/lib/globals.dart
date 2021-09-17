@@ -253,6 +253,12 @@ PermissionSummary currentPermissionSummary;
 //Current shift summary
 ShiftSummary currentShiftSummary;
 
+//Current year
+String reportingYear = '';
+
+//Current month
+String reportingMonth = '';
+
 //===========================
 //Used in multiple subsystems
 //===========================
