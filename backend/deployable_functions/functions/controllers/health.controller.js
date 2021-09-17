@@ -202,10 +202,7 @@ async function sendUserEmail(receiver,subject,message){
 ///////////////// HEALTH CHECK /////////////////
 
 healthApp.post('/api/health/health-check', async (req, res) => {
-  res.set({
-    'Connection': 'Keep-Alive',
-    'Keep-Alive': 'timeout=30, max=3000'
-  });
+
     let fieldErrors = [];
   
     if (req == null) {
@@ -792,6 +789,40 @@ healthApp.post('/api/health/health-check', async (req, res) => {
         return res.status(500).send(error);
     }
   });
+////////////////////////////////////////////////////////////////////////////////////////////
+///////////////// PERMISSION /////////////////
 
+healthApp.post('/api/health/permissions/view', async (req, res) => {
+  try {
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let document = database.collection('permissions').where("userEmail", "==", reqJson.userEmail);
+      let snapshot = await document.get();
+        
+      let permissions = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            permissions.push(data);
+        });
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved permissions',
+        data: permissions
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching permissions."
+      });
+  }
+});
+
+
+///////////////// PERMISSION REQUEST /////////////////
 
   exports.health = functions.https.onRequest(healthApp);
