@@ -122,6 +122,7 @@ let uuid = require("uuid");
             .create(bookingData);
 
         //summary
+        let c="";
         const document =  database.collection('summary-bookings').where("month","==",month);//entry should exist in db
         let snapshot = await document.get(); 
 
