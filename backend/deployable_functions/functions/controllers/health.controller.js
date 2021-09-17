@@ -202,6 +202,10 @@ async function sendUserEmail(receiver,subject,message){
 ///////////////// HEALTH CHECK /////////////////
 
 healthApp.post('/api/health/health-check', async (req, res) => {
+  res.set({
+    'Connection': 'Keep-Alive',
+    'Keep-Alive': 'timeout=30, max=3000'
+  });
     let fieldErrors = [];
   
     if (req == null) {
@@ -257,20 +261,20 @@ healthApp.post('/api/health/health-check', async (req, res) => {
         temperature: reqJson.temperature,
         fever: reqJson.fever,
         cough: reqJson.cough,
-        soreThroat: reqJson.soreThroat,
+        sore_throat: reqJson.sore_throat,
         chills: reqJson.chills,
         aches: reqJson.aches,
         nausea: reqJson.nausea,
-        shortnessOfBreath: reqJson.shortnessOfBreath,
-        lossOfTasteSmell: reqJson.lossOfTasteSmell,
-        sixFeetContact: reqJson.sixFeetContact,
-        testedPositive: reqJson.testedPositive,
+        shortness_of_breath: reqJson.shortness_of_breath,
+        loss_of_taste: reqJson.loss_of_taste,
+        six_feet_contact: reqJson.six_feet_contact,
+        tested_positive: reqJson.tested_positive,
         travelled: reqJson.travelled,
         age60_and_above:reqJson.age60_and_above,
         gender:reqJson.gender
       }
       //assess temparature first and if temparature is above covid19 threshold issue a permission not granted
-      let highTemp= await hasHighTemperature(healthCheckObj.temperature);
+      let highTemp= await hasHighTemperature(reqJson.temperature);
       console.log(highTemp);
       // Prediction to external AI service is anonymous, we donot send out personal infromation to the external service
       // personal information eg. name,surname,phone numbers are not sent but only symptoms and and history of contact 
@@ -310,7 +314,7 @@ healthApp.post('/api/health/health-check', async (req, res) => {
         let month= timestamp.charAt(3)+timestamp.charAt(4);
         let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
         //////
-        let document = db.collection('health-summary');
+        let document = database.collection('health-summary');
         let snapshot = await document.get();
         let healthSummaries = [];
         snapshot.forEach(doc => {
@@ -318,7 +322,7 @@ healthApp.post('/api/health/health-check', async (req, res) => {
             healthSummaries.push(data);
         });
         /////
-        document = db.collection('permission-summary');
+        document = database.collection('permission-summary');
         snapshot = await document.get();
         let permissionSummaries = [];
         snapshot.forEach(doc => {
@@ -381,10 +385,8 @@ healthApp.post('/api/health/health-check', async (req, res) => {
                 }
                 );
                 
-                return true;
               } catch (error) {
                 console.log(error);
-                return false;
               }
   
           }
@@ -438,21 +440,24 @@ healthApp.post('/api/health/health-check', async (req, res) => {
       {
           // company was previously initialized no need to re-initilize
           // we can perform an update on the numPermissionDeniedVisitors field
+      
           if(reqJson.userId==="VISITOR")
           {
-            let numPermissionDeniedVisitors=parseInt(filteredList[0].numPermissionDeniedVisitors) + 1;
-            let totalPermissions=parseInt(filteredList[0].totalPermissions) + 1;
+            //console.log("permission denied VISITOR");
+            let numPermissionDeniedVisitors=parseInt(filteredList2[0].numPermissionDeniedVisitors) + 1;
+            let totalPermissions=parseInt(filteredList2[0].totalPermissions) + 1;
 
             try {
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
                   totalPermissions:totalPermissions
                 }
                 );
 
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
-                    numPermissionDeniedVisitors:numPermissionDeniedVisitors
+                    numPermissionDeniedVisitors:numPermissionDeniedVisitors,
+                    numPermissionDeniedUsers:6
                 }
                 );
                 
@@ -462,27 +467,26 @@ healthApp.post('/api/health/health-check', async (req, res) => {
           }
           else
           {
-            
-            let numPermissionDeniedUsers=parseInt(filteredList[0].numPermissionDeniedUsers) + 1;
-            let totalPermissions=parseInt(filteredList[0].totalPermissions) + 1;
+            let numPermissionDeniedUsers=parseInt(filteredList2[0].numPermissionDeniedUsers) + 1;
+            let totalPermissions=parseInt(filteredList2[0].totalPermissions) + 1;
 
             try {
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
                   totalPermissions:totalPermissions
                 }
                 );
 
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
-                    numPermissionDeniedUsers:numPermissionDeniedUsers
+                  numPermissionDeniedUsers:numPermissionDeniedUsers
                 }
                 );
                 
               } catch (error) {
                 console.log(error);
               }
-  
+            
           }
           
       }
@@ -542,7 +546,7 @@ healthApp.post('/api/health/health-check', async (req, res) => {
       {
         //if prediction is negative and temparature is low we can offer a permissions granted badge
         // all healthchecks are saved into the database for reporting
-        await this.permissionAcceptedBadge(reqJson.userId,reqJson.email);
+        await permissionAcceptedBadge(reqJson.userId,reqJson.email);
         try {
             await database.collection('health-check').doc(healthCheckData.healthCheckId).create(healthCheckData);
         } catch (error) {
@@ -558,7 +562,7 @@ healthApp.post('/api/health/health-check', async (req, res) => {
         let month= timestamp.charAt(3)+timestamp.charAt(4);
         let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
         //////
-        let document = db.collection('health-summary');
+        let document = database.collection('health-summary');
         let snapshot = await document.get();
         let healthSummaries = [];
         snapshot.forEach(doc => {
@@ -566,7 +570,7 @@ healthApp.post('/api/health/health-check', async (req, res) => {
             healthSummaries.push(data);
         });
         /////
-        document = db.collection('permission-summary');
+        document = database.collection('permission-summary');
         snapshot = await document.get();
         let permissionSummaries = [];
         snapshot.forEach(doc => {
@@ -685,17 +689,17 @@ healthApp.post('/api/health/health-check', async (req, res) => {
           // we can perform an update on the numPermissionAccepted field
           if(reqJson.userId==="VISITOR")
           {
-            let numPermissionGrantedVisitors=parseInt(filteredList[0].numPermissionGrantedVisitors) + 1;
-            let totalPermissions=parseInt(filteredList[0].totalPermissions) + 1;
+            let numPermissionGrantedVisitors=parseInt(filteredList2[0].numPermissionGrantedVisitors) + 1;
+            let totalPermissions=parseInt(filteredList2[0].totalPermissions) + 1;
 
             try {
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
                   totalPermissions:totalPermissions
                 }
                 );
 
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
                     numPermissionGrantedVisitors:numPermissionGrantedVisitors
                 }
@@ -707,17 +711,17 @@ healthApp.post('/api/health/health-check', async (req, res) => {
           }
           else
           {
-            let numPermissionGrantedUsers=parseInt(filteredList[0].numPermissionGrantedUsers) + 1;
-            let totalPermissions=parseInt(filteredList[0].totalPermissions) + 1;
+            let numPermissionGrantedUsers=parseInt(filteredList2[0].numPermissionGrantedUsers) + 1;
+            let totalPermissions=parseInt(filteredList2[0].totalPermissions) + 1;
 
             try {
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
                   totalPermissions:totalPermissions
                 }
                 );
 
-                await database.collection('permission-summary').doc(filteredList[0].permissionSummaryId).update(
+                await database.collection('permission-summary').doc(filteredList2[0].permissionSummaryId).update(
                 {
                     numPermissionGrantedUsers:numPermissionGrantedUsers
                 }
