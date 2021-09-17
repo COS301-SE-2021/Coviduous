@@ -18,9 +18,9 @@ df = pd.read_csv("dataset/extended_features_test.csv")
 df.replace({'prognosis': {'negative': 0, 'positive': 1}}, inplace=True)
 
 X = df[l1]
-X = pd.DataFrame(X).dropna()  # To account for any NaNs we may have missed in the dataset
+X = pd.DataFrame(X).fillna(1)  # To account for any NaNs we may have missed in the dataset
 y = df[["prognosis"]]
-y = pd.DataFrame(y).dropna()  # To account for any NaNs we may have missed in the dataset
+y = pd.DataFrame(y).fillna(1)  # To account for any NaNs we may have missed in the dataset
 np.ravel(y)
 
 # TRAINING DATA tr
@@ -28,9 +28,9 @@ tr = pd.read_csv("dataset/extended_feature_train.csv")
 tr.replace({'prognosis': {'negative': 0, 'positive': 1}}, inplace=True)
 
 X_test = tr[l1]
-X_test = pd.DataFrame(X_test).dropna()  # To account for any NaNs we may have missed in the dataset
+X_test = pd.DataFrame(X_test).fillna(1)  # To account for any NaNs we may have missed in the dataset
 y_test = tr[["prognosis"]]
-y_test = pd.DataFrame(y_test).dropna()  # To account for any NaNs we may have missed in the dataset
+y_test = pd.DataFrame(y_test).fillna(1)  # To account for any NaNs we may have missed in the dataset
 np.ravel(y_test)
 # --------------------
 
