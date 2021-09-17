@@ -11,7 +11,7 @@ Future<bool> createHealthCheckUser(String temperature, bool fever, bool cough, b
         globals.loggedInUser.getLastName(), globals.loggedInUserEmail, "N/A", temperature, fever, cough, soreThroat, chills,
         aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache, isFemale, is60orOlder)
   ]).then((results) {
-    if (results != null) {
+    if (results != null && results.first != null) {
       globals.currentHealthCheck = results.first;
       result = true;
     }
@@ -27,7 +27,7 @@ Future<bool> createHealthCheckVisitor(String companyId, String firstName, String
     healthController.createHealthCheck(companyId, "VISITOR", firstName, lastName, email, phoneNumber, temperature, fever, cough, soreThroat,
         chills, aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache, isFemale, is60orOlder)
   ]).then((results) {
-    if (results != null) {
+    if (results != null && results.first != null) {
       globals.currentHealthCheck = results.first;
       result = true;
     }
@@ -40,8 +40,10 @@ Future<bool> getPermissionsUser() async {
   await Future.wait([
     healthController.getPermissions(globals.loggedInUserEmail)
   ]).then((results) {
-    if (results != null) {
-      globals.currentPermissions = results.first;
+    if (results != null && results.first != null) {
+      if (results.first.length > 0) {
+        globals.currentPermissions = results.first;
+      }
       result = true;
     }
   });
@@ -53,8 +55,10 @@ Future<bool> getPermissionsVisitor(String email) async {
   await Future.wait([
     healthController.getPermissions(email)
   ]).then((results) {
-    if (results != null) {
-      globals.currentPermissions = results.first;
+    if (results != null && results.first != null) {
+      if (results.first.length > 0) {
+        globals.currentPermissions = results.first;
+      }
       result = true;
     }
   });
@@ -66,8 +70,10 @@ Future<bool> getPermissionsForEmployee(String employeeEmail) async {
   await Future.wait([
     healthController.getPermissions(employeeEmail)
   ]).then((results) {
-    if (results != null) {
-      globals.currentPermissions = results.first;
+    if (results != null && results.first != null) {
+      if (results.first.length > 0) {
+        globals.currentPermissions = results.first;
+      }
       result = true;
     }
   });
@@ -169,8 +175,12 @@ Future<bool> viewShifts(String userEmail) async {
     healthController.viewShifts(userEmail)
   ]).then((results) {
     if (results != null) {
-      globals.currentShifts = results.first;
-      globals.currentShiftNum = results.first[0].getShiftId();
+      if (results.first.length > 0) {
+        globals.currentShifts = results.first;
+        globals.currentShiftNum = results.first[0].getShiftId();
+      } else {
+        globals.currentShiftNum = '';
+      }
       result = true;
     }
   });
