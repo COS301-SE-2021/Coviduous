@@ -1289,7 +1289,29 @@ healthApp.post('/api/health/contact-trace/shifts',authMiddleware,async (req, res
       });
   }
 });
-
+////////////////////////////////////
+healthApp.delete('/health/permissions',authMiddleware, async (req, res)=>{
+  try{
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    
+      let document = database.collection('permission-requests').doc(reqJson.permissionRequestId);
+      await document.delete();
+          return res.status(200).send({
+          message: 'Successfully Deleted permissionRequest',
+        });
+  }catch(error){
+    console.log(error);
+    return res.status(500).send({
+  
+    });
+  }
+  
+  });
 ////////////////////////////////////
 healthApp.post('/api/health/contact-trace/notify-group',authMiddleware,async (req, res) => {
   try {
