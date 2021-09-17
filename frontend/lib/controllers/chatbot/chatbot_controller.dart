@@ -82,6 +82,61 @@ void navigateShortcut(BuildContext context, String shortcutRoute) {
       }
       break;
 
+      case '/admin_contact_trace_shifts': {
+        TextEditingController _email = TextEditingController();
+        final GlobalKey<FormState> _formKey = GlobalKey();
+
+        showDialog(
+            context: context,
+            builder: (context) {
+              _email.clear();
+              return AlertDialog(
+                  title: Text('Enter employee email'),
+                  content: Form(
+                    key: _formKey,
+                    child: TextFormField(
+                      controller: _email,
+                      decoration: InputDecoration(hintText: 'Enter employee email', filled: true, fillColor: Colors.white),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'please enter an email address';
+                        } else if (value.isNotEmpty) {
+                          if (!value.contains('@')) {
+                            return 'invalid email';
+                          }
+                        }
+                        return null;
+                      },
+                      onSaved: (String value) {
+                        _email.text = value;
+                      },
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      child: Text('Submit'),
+                      onPressed: () {
+                        healthHelpers.viewShifts(_email.text).then((result) {
+                          if (result == true) {
+                            globals.selectedUserEmail = _email.text;
+                            Navigator.of(context).pushReplacementNamed(shortcutRoute);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("An error occurred while retrieving employee shifts. Please try again later.")));
+                            Navigator.of(context).pop();
+                          }
+                        });
+                      },
+                    ),
+                    TextButton(
+                      child: Text('Cancel'),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ]);
+            });
+      }
+      break;
+
       default: {
         _showErrorMessage(context, 'You do not have access to this page.');
       }
