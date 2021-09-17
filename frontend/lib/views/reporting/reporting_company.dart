@@ -39,36 +39,59 @@ class ReportingCompanyState extends State<ReportingCompany> {
   final GlobalKey<SfCircularChartState> _userChartKey = GlobalKey();
 
   List<Map<String, int>> companyList = [
-    {"Floor plans": globals.currentCompanySummary.getNumberOfFloorPlans()},
-    {"Floors": globals.currentCompanySummary.getNumberOfFloors()},
-    {"Rooms": globals.currentCompanySummary.getNumberOfRooms()},
+    {"Floor plans": 0},
+    {"Floors": 0},
+    {"Rooms": 0},
   ];
 
   List<Map<String, int>> bookingShiftList = [
-    {"Bookings": globals.currentBookingSummary.getNumBookings()},
-    {"Shifts": globals.currentShiftSummary.getNumShifts()},
+    {"Bookings": 0},
+    {"Shifts": 0},
   ];
 
   List<Map<String, int>> healthList = [
-    {"Recoveries": globals.currentHealthSummary.getReportedRecoveries()},
-    {"Infections": globals.currentHealthSummary.getReportedInfections()},
-    {"Employee checks": globals.currentHealthSummary.getHealthChecksUsers()},
-    {"Visitor checks": globals.currentHealthSummary.getHealthChecksVisitors()},
+    {"Recoveries": 0},
+    {"Infections": 0},
+    {"Employee checks": 0},
+    {"Visitor checks": 0},
   ];
 
   List<Map<String, int>> permissionList = [
-    {"Total permissions": globals.currentPermissionSummary.getTotalPermissions()},
-    {"Denied employees": globals.currentPermissionSummary.getPermissionsDeniedUsers()},
-    {"Denied visitors": globals.currentPermissionSummary.getPermissionsDeniedVisitors()},
-    {"Granted employees": globals.currentPermissionSummary.getPermissionsGrantedUsers()},
-    {"Granted visitors": globals.currentPermissionSummary.getPermissionsGrantedVisitors()},
+    {"Total permissions": 0},
+    {"Denied employees": 0},
+    {"Denied visitors": 0},
+    {"Granted employees": 0},
+    {"Granted visitors": 0},
   ];
 
   //The user list is a list of Map<String, List> instead of Map<String, int> because pie charts also require a color attribute for each category
   List<Map<String, List>> userList = [
-    {"Employees": [globals.currentCompanySummary.getNumberOfRegisteredUsers(), Color(0xffFAA61A)]},
-    {"Admins": [globals.currentCompanySummary.getNumberOfRegisteredAdmins(), Color(0xffCC7A00)]}
+    {"Employees": [0, Color(0xffFAA61A)]},
+    {"Admins": [0, Color(0xffCC7A00)]}
   ];
+
+  int numberOfFloorPlans = 0;
+  int numberOfFloors = 0;
+  int numberOfRooms = 0;
+  int numberOfEmployees = 0;
+  int numberOfAdmins = 0;
+  int numberOfTotalRegistered = 0;
+
+  int numberOfBookings = 0;
+  int numberOfShifts = 0;
+
+  int numberOfRecoveries = 0;
+  int numberOfInfections = 0;
+  int numberOfEmployeeChecks = 0;
+  int numberOfVisitorChecks = 0;
+
+  int numberOfPermissions = 0;
+  int numberOfDeniedEmployees = 0;
+  int numberOfDeniedVisitors = 0;
+  int numberOfGrantedEmployees = 0;
+  int numberOfGrantedVisitors = 0;
+
+  String timestamp = globals.reportingYear + '/' + globals.reportingMonth;
 
   //Render booking and shift chart
   Future<Uint8List> renderBookingChart() async {
@@ -117,6 +140,79 @@ class ReportingCompanyState extends State<ReportingCompany> {
         });
       }
       return Container();
+    }
+
+    //Checking in case some of these summaries have not been created
+    if (globals.currentCompanySummary != null) {
+      companyList = [
+        {"Floor plans": globals.currentCompanySummary.getNumberOfFloorPlans()},
+        {"Floors": globals.currentCompanySummary.getNumberOfFloors()},
+        {"Rooms": globals.currentCompanySummary.getNumberOfRooms()},
+      ];
+      userList = [
+        {"Employees": [globals.currentCompanySummary.getNumberOfRegisteredUsers(), Color(0xffFAA61A)]},
+        {"Admins": [globals.currentCompanySummary.getNumberOfRegisteredAdmins(), Color(0xffCC7A00)]}
+      ];
+      numberOfFloorPlans = globals.currentCompanySummary.getNumberOfFloorPlans();
+      numberOfFloors = globals.currentCompanySummary.getNumberOfFloors();
+      numberOfRooms = globals.currentCompanySummary.getNumberOfRooms();
+      numberOfAdmins = globals.currentCompanySummary.getNumberOfRegisteredAdmins();
+      numberOfEmployees = globals.currentCompanySummary.getNumberOfRegisteredUsers();
+      numberOfTotalRegistered = globals.currentCompanySummary.getTotalNumberOfRegistered();
+    }
+
+    if (globals.currentBookingSummary != null && globals.currentShiftSummary != null) {
+      bookingShiftList = [
+        {"Bookings": globals.currentBookingSummary.getNumBookings()},
+        {"Shifts": globals.currentShiftSummary.getNumShifts()},
+      ];
+      numberOfBookings = globals.currentBookingSummary.getNumBookings();
+      numberOfShifts = globals.currentShiftSummary.getNumShifts();
+    } else if (globals.currentBookingSummary == null && globals.currentShiftSummary == null) {
+      bookingShiftList = [
+        {"Bookings": 0},
+        {"Shifts": 0},
+      ];
+    } else if (globals.currentBookingSummary == null) {
+      bookingShiftList = [
+        {"Bookings": 0},
+        {"Shifts": globals.currentShiftSummary.getNumShifts()},
+      ];
+      numberOfShifts = globals.currentShiftSummary.getNumShifts();
+    } else if (globals.currentShiftSummary == null) {
+      bookingShiftList = [
+        {"Bookings": globals.currentBookingSummary.getNumBookings()},
+        {"Shifts": 0},
+      ];
+      numberOfBookings = globals.currentBookingSummary.getNumBookings();
+    }
+
+    if (globals.currentHealthSummary != null) {
+      healthList = [
+        {"Recoveries": globals.currentHealthSummary.getReportedRecoveries()},
+        {"Infections": globals.currentHealthSummary.getReportedInfections()},
+        {"Employee checks": globals.currentHealthSummary.getHealthChecksUsers()},
+        {"Visitor checks": globals.currentHealthSummary.getHealthChecksVisitors()},
+      ];
+      numberOfRecoveries = globals.currentHealthSummary.getReportedRecoveries();
+      numberOfInfections = globals.currentHealthSummary.getReportedInfections();
+      numberOfEmployeeChecks = globals.currentHealthSummary.getHealthChecksUsers();
+      numberOfVisitorChecks = globals.currentHealthSummary.getHealthChecksVisitors();
+    }
+
+    if (globals.currentPermissionSummary != null) {
+      permissionList = [
+        {"Total permissions": globals.currentPermissionSummary.getTotalPermissions()},
+        {"Denied employees": globals.currentPermissionSummary.getPermissionsDeniedUsers()},
+        {"Denied visitors": globals.currentPermissionSummary.getPermissionsDeniedVisitors()},
+        {"Granted employees": globals.currentPermissionSummary.getPermissionsGrantedUsers()},
+        {"Granted visitors": globals.currentPermissionSummary.getPermissionsGrantedVisitors()},
+      ];
+      numberOfPermissions = globals.currentPermissionSummary.getTotalPermissions();
+      numberOfDeniedEmployees = globals.currentPermissionSummary.getPermissionsDeniedVisitors();
+      numberOfDeniedVisitors = globals.currentPermissionSummary.getPermissionsDeniedUsers();
+      numberOfGrantedEmployees = globals.currentPermissionSummary.getPermissionsGrantedUsers();
+      numberOfGrantedVisitors = globals.currentPermissionSummary.getPermissionsGrantedVisitors();
     }
 
     //Load fonts from assets and initialize PDF
@@ -200,24 +296,14 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                   child: Text('Submit'),
                                   onPressed: () {
                                     FormState form = _formKey.currentState;
+                                    globals.reportingYear = _year.text;
+                                    globals.reportingMonth = _month.text.padLeft(2, "0");
 
                                     if (form.validate()) {
                                       //The padLeft(2, "0") after the month is to ensure that if the month is a single digit, it should be preceded by a 0
                                       //Double digit months will automatically not have any leading 0s
                                       reportingHelpers.getCompanySummaries(_year.text, _month.text.padLeft(2, "0")).then((result) {
-                                        if (result == true) {
-                                          print("Booking summary ID: " + globals.currentBookingSummary.getBookingSummaryID());
-                                          print("Company summary ID: " + globals.currentCompanySummary.getCompanyId());
-                                          print("Health summary ID: " + globals.currentHealthSummary.getHealthSummaryID());
-                                          print("Shift summary ID: " + globals.currentShiftSummary.getShiftSummaryID());
-                                          print("Permission summary ID: " + globals.currentPermissionSummary.getPermissionSummaryID());
-                                          Navigator.pop(context);
-                                          setState(() {});
-                                        } else {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("No company information found for the selected year and month. Please choose a different date.")));
-                                          Navigator.pop(context);
-                                        }
+                                        Navigator.of(context).pushReplacementNamed(ReportingCompany.routeName);
                                       });
                                     }
                                   },
@@ -254,7 +340,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 text: 'Company ID: ' + globals.loggedInCompanyId,
                               ),
                               pw.Bullet(
-                                text: 'Date: ' + globals.currentHealthSummary.getTimestamp().substring(0, 10),
+                                text: 'Date: ' + timestamp,
                               ),
                               pw.SizedBox(
                                 width: 500,
@@ -266,13 +352,13 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 child: pw.Text('Company overview', textScaleFactor: 1.5),
                               ),
                               pw.Bullet(
-                                text: 'Number of floor plans: ' + globals.currentCompanySummary.getNumberOfFloorPlans().toString(),
+                                text: 'Number of floor plans: ' + numberOfFloors.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of floors: ' + globals.currentCompanySummary.getNumberOfFloors().toString(),
+                                text: 'Number of floors: ' + numberOfFloors.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of rooms: ' + globals.currentCompanySummary.getNumberOfRooms().toString(),
+                                text: 'Number of rooms: ' + numberOfRooms.toString(),
                               ),
                               pw.SizedBox(
                                 width: 500,
@@ -284,16 +370,16 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 child: pw.Text('Booking and shift statistics', textScaleFactor: 1.5),
                               ),
                               pw.Bullet(
-                                  text: 'Number of bookings for this month: ' + globals.currentBookingSummary.getNumBookings().toString(),
+                                  text: 'Number of bookings for this month: ' + numberOfBookings.toString(),
                               ),
                               pw.Bullet(
-                                  text: 'Number of shifts for this month: ' + globals.currentShiftSummary.getNumShifts().toString(),
+                                  text: 'Number of shifts for this month: ' + numberOfShifts.toString(),
                               ),
                               pw.Bullet(
-                                  text: 'Average weekly bookings for this month: ' + (globals.currentBookingSummary.getNumBookings()/4).toString(),
+                                  text: 'Average weekly bookings for this month: ' + (numberOfBookings/4).toString(),
                               ),
                               pw.Bullet(
-                                  text: 'Average weekly shifts for this month: ' + (globals.currentShiftSummary.getNumShifts()/4).toString(),
+                                  text: 'Average weekly shifts for this month: ' + (numberOfShifts/4).toString(),
                               ),
                               pw.Image(
                                 bookingChart,
@@ -306,16 +392,16 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 child: pw.Text('Health statistics', textScaleFactor: 1.5),
                               ),
                               pw.Bullet(
-                                text: 'Number of reported recoveries this month: ' + globals.currentHealthSummary.getReportedRecoveries().toString(),
+                                text: 'Number of reported recoveries this month: ' + numberOfRecoveries.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of reported infections this month: ' + globals.currentHealthSummary.getReportedInfections().toString(),
+                                text: 'Number of reported infections this month: ' + numberOfInfections.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of completed employee health checks this month: ' + globals.currentHealthSummary.getHealthChecksUsers().toString(),
+                                text: 'Number of completed employee health checks this month: ' + numberOfEmployeeChecks.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of completed visitor health checks this month: ' + globals.currentHealthSummary.getHealthChecksVisitors().toString(),
+                                text: 'Number of completed visitor health checks this month: ' + numberOfVisitorChecks.toString(),
                               ),
                               pw.Image(
                                 healthChart,
@@ -324,19 +410,19 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 child: pw.Text('Permission statistics', textScaleFactor: 1.5),
                               ),
                               pw.Bullet(
-                                text: 'Total number of permissions granted or denied this month: ' + globals.currentPermissionSummary.getTotalPermissions().toString(),
+                                text: 'Total number of permissions granted or denied this month: ' + numberOfPermissions.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of employee permissions denied: ' + globals.currentPermissionSummary.getPermissionsDeniedUsers().toString(),
+                                text: 'Number of employee permissions denied: ' + numberOfDeniedEmployees.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of visitor permissions denied: ' + globals.currentPermissionSummary.getPermissionsDeniedVisitors().toString(),
+                                text: 'Number of visitor permissions denied: ' + numberOfDeniedVisitors.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of employee permissions granted: ' + globals.currentPermissionSummary.getPermissionsGrantedUsers().toString(),
+                                text: 'Number of employee permissions granted: ' + numberOfGrantedEmployees.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of visitor permissions granted: ' + globals.currentPermissionSummary.getPermissionsGrantedVisitors().toString(),
+                                text: 'Number of visitor permissions granted: ' + numberOfGrantedVisitors.toString(),
                               ),
                               pw.Image(
                                 permissionChart,
@@ -345,13 +431,13 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                 child: pw.Text('User statistics', textScaleFactor: 1.5),
                               ),
                               pw.Bullet(
-                                text: 'Total number of registered users: ' + globals.currentCompanySummary.getTotalNumberOfRegistered().toString(),
+                                text: 'Total number of registered users: ' + numberOfTotalRegistered.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of admins: ' + globals.currentCompanySummary.getNumberOfRegisteredAdmins().toString(),
+                                text: 'Number of admins: ' + numberOfAdmins.toString(),
                               ),
                               pw.Bullet(
-                                text: 'Number of employees: ' + globals.currentCompanySummary.getNumberOfRegisteredUsers().toString(),
+                                text: 'Number of employees: ' + numberOfEmployees.toString(),
                               ),
                               pw.Image(
                                 userChart,
@@ -428,7 +514,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                     color: Color(0xff134D66),
                                     padding: EdgeInsets.all(5),
                                     child: Text(
-                                      globals.currentCompanySummary.getNumberOfFloorPlans().toString(),
+                                      numberOfFloorPlans.toString(),
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   )
@@ -450,7 +536,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                     color: Color(0xff232A4C),
                                     padding: EdgeInsets.all(5),
                                     child: Text(
-                                      globals.currentCompanySummary.getNumberOfFloors().toString(),
+                                      numberOfFloors.toString(),
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   )
@@ -472,7 +558,7 @@ class ReportingCompanyState extends State<ReportingCompany> {
                                     color: Color(0xff4C234C),
                                     padding: EdgeInsets.all(5),
                                     child: Text(
-                                      globals.currentCompanySummary.getNumberOfRooms().toString(),
+                                      numberOfRooms.toString(),
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   )
@@ -496,13 +582,13 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Number of bookings: " + globals.currentBookingSummary.getNumBookings().toString(),
+                          Text("Number of bookings: " + numberOfBookings.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of shifts: " + globals.currentShiftSummary.getNumShifts().toString(),
+                          Text("Number of shifts: " + numberOfShifts.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Average weekly bookings: " + (globals.currentBookingSummary.getNumBookings()/4).toString(),
+                          Text("Average weekly bookings: " + (numberOfBookings/4).toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Average weekly shifts: " + (globals.currentShiftSummary.getNumShifts()/4).toString(),
+                          Text("Average weekly shifts: " + (numberOfShifts/4).toString(),
                               style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
@@ -541,13 +627,13 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Number of reported recoveries: " + globals.currentHealthSummary.getReportedRecoveries().toString(),
+                          Text("Number of reported recoveries: " + numberOfRecoveries.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of reported infections: " + globals.currentHealthSummary.getReportedInfections().toString(),
+                          Text("Number of reported infections: " + numberOfInfections.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of completed employee health checks: " + globals.currentHealthSummary.getHealthChecksUsers().toString(),
+                          Text("Number of completed employee health checks: " + numberOfEmployeeChecks.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of completed visitor health checks: " + globals.currentHealthSummary.getHealthChecksVisitors().toString(),
+                          Text("Number of completed visitor health checks: " + numberOfVisitorChecks.toString(),
                               style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
@@ -587,15 +673,15 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Total number of permissions granted or denied this month: " + globals.currentPermissionSummary.getTotalPermissions().toString(),
+                          Text("Total number of permissions granted or denied this month: " + numberOfPermissions.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of employee permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedUsers().toString(),
+                          Text("Number of employee permissions denied: " + numberOfDeniedEmployees.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of visitor permissions denied: " + globals.currentPermissionSummary.getPermissionsDeniedVisitors().toString(),
+                          Text("Number of visitor permissions denied: " + numberOfDeniedVisitors.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of employee permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedUsers().toString(),
+                          Text("Number of employee permissions granted: " + numberOfGrantedEmployees.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of visitor permissions granted: " + globals.currentPermissionSummary.getPermissionsGrantedVisitors().toString(),
+                          Text("Number of visitor permissions granted: " + numberOfGrantedVisitors.toString(),
                               style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
@@ -635,11 +721,11 @@ class ReportingCompanyState extends State<ReportingCompany> {
                               ),
                             ),
                           ),
-                          Text("Total number of registered users: " + globals.currentCompanySummary.getTotalNumberOfRegistered().toString(),
+                          Text("Total number of registered users: " + numberOfTotalRegistered.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of registered admins: " + globals.currentCompanySummary.getNumberOfRegisteredAdmins().toString(),
+                          Text("Number of registered admins: " + numberOfAdmins.toString(),
                               style: TextStyle(color: Colors.white)),
-                          Text("Number of registered employees: " + globals.currentCompanySummary.getNumberOfRegisteredUsers().toString(),
+                          Text("Number of registered employees: " + numberOfEmployees.toString(),
                               style: TextStyle(color: Colors.white)),
                           Divider(
                             color: globals.lineColor,
