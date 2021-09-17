@@ -976,6 +976,50 @@ COVID19_QUES = [
         "Answer": "Ideally, all patients with COVID-19 are cared for in a healthcare facility. However, there may be some circumstances where patients may not require hospitalization or inpatient care is unavailable or unsafe, such as when capacity is insufficient to meet the demand for healthcare services. Patients should be assessed on a case-by-case basis by the health worker to determine where their care needs can best be met."
     },
     {
+        "Question": "What factors determine whether a COVID-19 patient can be cared for at home?",
+        "Answer": "Patients with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, and if the patient is under the age of 60, does not smoke, is not obese, and does not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
+    },
+    {
+        "Question": "What additional factors should be taken into consideration when assessing the home setting to determine if it is safe for patients and families to remain at home?",
+        "Answer": "There are a number of environmental and social factors to consider for patients to safely remain at home with their families or household members. An overall needs assessment of the patient and family that includes the availability of trained health workers for support should be conducted."
+    },
+    {
+        "Question": "What precautions should health workers take when providing care to patients in home settings?",
+        "Answer": "Perform a risk assessment to select the use of appropriate personal protective equipment (PPE), such as a medical mask, eye protection, gloves and gown when caring for the patient; Provide instructions to caregivers and household members on cleaning and disinfection in the home, and on management of waste, laundry and utensils related to the patient."
+    },
+    {
+        "Question": "Could pregnant women be cared for at home if they have COVID-19?",
+        "Answer": "Pregnant women with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, if they do not smoke, are not obese, and do not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
+    },
+    {
+        "Question": "Can children be cared for at home if they have COVID-19?",
+        "Answer": "Children should be kept together with their parents or caregivers wherever possible. Children with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, if they are not obese, do not smoke, and do not have other conditions such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, or immunosuppression."
+    },
+    {
+        "Question": "How does COVID-19 spread between people?",
+        "Answer": "We know that the disease is caused by the SARS-CoV-2 virus, which spreads between people in several different ways; The virus can spread from an infected person’s mouth or nose in small liquid particles when they cough, sneeze, speak, sing or breathe. These particles range from larger respiratory droplets to smaller aerosols."
+    },
+    {
+        "Question": "When do infected people transmit the virus?",
+        "Answer": "Whether or not they have symptoms, infected people can be contagious and the virus can spread from them to other people; Laboratory data suggests that infected people appear to be most infectious just before they develop symptoms (namely 2 days before they develop symptoms) and early in their illness. People who develop severe disease can be infectious for longer."
+    },
+    {
+        "Question": "What is the difference between people who are asymptomatic or pre-symptomatic? Don’t they both mean someone without symptoms?",
+        "Answer": "Both terms refer to people who do not have symptoms. The difference is that ‘asymptomatic’ refers to people who are infected but never develop any symptoms, while ‘pre-symptomatic’ refers to infected people who have not yet developed symptoms but go on to develop symptoms later. "
+    },
+    {
+        "Question": "Are there certain settings where COVID-19 can spread more easily?",
+        "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
+    },
+    {
+        "Question": "How can I reduce my risk of getting COVID-19?",
+        "Answer": "Follow local guidance: Check to see what national, regional and local authorities are advising so you have the most relevant information for where you are; Keep your distance: Stay at least 1 metre away from others, even if they don’t appear to be sick, since people can have the virus without having symptoms; Wear a mask:  Wear a well-fitting three-layer mask, especially when you can’t physically distance, or if you’re indoors. Clean your hands before putting on and taking off a mask; Avoid crowded places, poorly ventilated, indoor locations and avoid prolonged contact with others. Spend more time outdoors than indoors."
+    },
+    {
+        "Question": "Does WHO recommend the use of gloves in the community to prevent transmission of COVID-19?",
+        "Answer": "No, WHO does not advise using gloves by people in the community. Instead, WHO encourages the installation of public hand hygiene stations at the entrance and exit of public places, such as supermarkets or public/private buildings. This helps reduce germs brought in by people’s hands. By widely improving hand hygiene practices, countries can help prevent the spread of the COVID-19 virus and other infections."
+    },
+    {
         "Question": "what are the recommendations by the authorities",
         "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
