@@ -57,59 +57,67 @@ class _ReportingHealthState extends State<ReportingHealth> {
                   child: Column (
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/14,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View sick employees')),
-                                  Icon(Icons.sick)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              reportingHelpers.viewSickEmployees().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(ReportingViewSickEmployees.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("An error occurred while retrieving sick employees. Please try again later.")));
-                                }
-                              });
-                            }
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('View sick employees')),
+                                    Icon(Icons.sick)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                reportingHelpers.viewSickEmployees().then((result) {
+                                  if (result == true) {
+                                    Navigator.of(context).pushReplacementNamed(ReportingViewSickEmployees.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("An error occurred while retrieving sick employees. Please try again later.")));
+                                  }
+                                });
+                              }
+                          ),
                         ),
                         SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
+                          height: MediaQuery.of(context).size.height/30,
                           width: MediaQuery.of(context).size.width,
                         ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/14,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View recovered employees')),
-                                  Icon(Icons.medical_services)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              reportingHelpers.viewRecoveredEmployees().then((result) {
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("An error occurred while retrieving recovered employees. Please try again later.")));
-                                }
-                              });
-                            }
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('View recovered employees')),
+                                    Icon(Icons.medical_services)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                reportingHelpers.viewRecoveredEmployees().then((result) {
+                                  if (result == true) {
+                                    Navigator.of(context).pushReplacementNamed(ReportingViewRecoveredEmployees.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("An error occurred while retrieving recovered employees. Please try again later.")));
+                                  }
+                                });
+                              }
+                          ),
                         ),
                       ]
                   )
