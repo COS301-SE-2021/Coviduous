@@ -98,6 +98,10 @@ class _UserHomePageState extends State<UserHomePage> {
           setState(() {
             latestPermission = globals.currentPermissions.last.getOfficeAccess();
           });
+        } else {
+          setState(() {
+            upcomingBooking = 'No permissions found';
+          });
         }
       });
     }
