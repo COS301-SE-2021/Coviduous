@@ -863,7 +863,7 @@ healthApp.post('/api/health/permissions/permission-request',async (req, res) => 
         companyId: reqJson.companyId
       }
   
-      await database.collection('notifications').doc(notificationId).create(notificationData)
+      await database.collection('notifications').doc(notificationId).create(notificationData);
       await sendUserEmail(reqJson.adminEmail,notificationData.subject,notificationData.message);
       return res.status(200).send({
         message: 'Permission request successfully created',
@@ -873,6 +873,81 @@ healthApp.post('/api/health/permissions/permission-request',async (req, res) => 
   } catch (error) {
       console.log(error);
       return res.status(500).send(error);
+  }
+});
+
+//////////////////////////////
+
+healthApp.post('/api/health/permissions/permission-request/view', async (req, res) => {
+  try {
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let document = database.collection('permission-requests').where("companyId", "==", reqJson.companyId);
+      let snapshot = await document.get();
+        
+        let permissionRequests = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            permissionRequests.push(data);
+        });
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved permission requests',
+        data: permissionRequests
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching permission requests."
+      });
+  }
+});
+
+///////////////////////////////////
+healthApp.post('/api/health/permissions/permission-request/grant',async (req, res) => {
+  try {
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let notificationId = "NTFN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+      await database.collection('permissions').doc(reqJson.permissionId).update(
+        {
+            grantedBy:"ADMIN",
+            officeAccess:true
+        }
+        );
+      let notificationData = {
+        notificationId: notificationId,
+        userId: reqJson.userId,
+        userEmail:reqJson.userEmail,
+        subject: "ACCESS PERMISSION",
+        message: "OFFICE ACCESS PERMISSION UPDATED, PERMISSION GRANTED",
+        timestamp: timestamp,
+        adminId: reqJson.adminId,
+        companyId: reqJson.companyId
+      }
+  
+      await database.collection('notifications').doc(notificationId).create(notificationData);
+      await sendUserEmail(notificationData.userEmail,notificationData.subject,notificationData.message);
+      return res.status(200).send({
+        message: 'Successfully updated the permission requests',
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching permission requests."
+      });
   }
 });
 
