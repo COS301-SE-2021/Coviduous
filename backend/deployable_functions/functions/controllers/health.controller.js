@@ -951,4 +951,240 @@ healthApp.post('/api/health/permissions/permission-request/grant',async (req, re
   }
 });
 
+///////////////////////////////////////
+healthApp.post('/api/health/report-infection',async (req, res) => {
+  try {
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let infectionId = "INF-" + uuid.v4();
+      let notificationId = "NTFN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+    let reportedInfectionData = {
+      infectionId: infectionId,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
+      timestamp: timestamp,
+      adminId:reqJson.adminId,
+      companyId: reqJson.companyId
+    }
+
+    let notificationData = {
+      notificationId: notificationId,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
+      subject: "COVID-19 INFECTION",
+      message: "EMPLOYEE  ID :"+reqJson.userId+" EMAIL: "+reqJson.userEmail+" REPORTED A POSITIVE COVID-19 CASE",
+      timestamp: timestamp,
+      adminId: reqJson.adminId,
+      companyId: reqJson.companyId
+    }
+
+    await database.collection('notifications').doc(notificationData.notificationId).create(notificationData);
+    await database.collection('reported-infections').doc(infectionId).create(reportedInfectionData);
+    await sendUserEmail(reqJson.adminEmail,notificationData.subject,notificationData.message);
+
+     ////////////////////////////////////////////////////////////////////////////////////////
+      // update the health check summary collection
+      // first check if the current month and year you are currently in is registered
+
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let document = database.collection('health-summary');
+      let snapshot = await document.get();
+      
+      let healthSummaries = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          healthSummaries.push(data);
+      });
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+          let numReportedInfections=filteredList[0].numReportedInfections;
+          numReportedInfections++;
+
+          await database.collection('health-summary').doc(filteredList[0].healthSummaryId).update(
+            {
+              numReportedInfections:numReportedInfections
+            }
+            );
+
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 1,
+            numReportedRecoveries:0
+              
+            }
+            await database.collection('health-summary').doc(healthSummaryId).create(healthSummary);
+          
+
+        
+    }
+    /////////////////////////////////////////////////////////////////////////////
+      
+      return res.status(200).send({
+        message: 'Successfully reported infection',
+        data: true
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while reporting infection."
+      });
+  }
+});
+
+//////////////////////////////////////////
+healthApp.post('/api/health/report-recovery',async (req, res) => {
+  try {
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let recoveryId = "RECV-" + uuid.v4();
+      let notificationId = "NTFN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+    let reportedRecoveryData = {
+      recoveryId: recoveryId,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
+      timestamp: timestamp,
+      adminId:reqJson.adminId,
+      companyId: reqJson.companyId
+    }
+
+    let notificationData = {
+      notificationId: notificationId,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
+      subject: "COVID-19 RECOVERY STATUS UPDATED",
+      message: "EMPLOYEE  ID :"+reqJson.userId+" COVID-19 RECOVERY STATUS HAS BEEN UPDATED PLEASE PERFROM A NEW HEALTH ASSESSMENT",
+      timestamp: timestamp,
+      adminId: reqJson.adminId,
+      companyId: reqJson.companyId
+    }
+
+    await database.collection('notifications').doc(notificationId).create(notificationData)
+    
+    await database.collection('reported-recoveries').doc(recoveryId).create(reportedRecoveryData);
+    await sendUserEmail(reqJson.userEmail,notificationData.subject,notificationData.message);
+
+     ////////////////////////////////////////////////////////////////////////////////////////
+      // update the health check summary collection
+      // first check if the current month and year you are currently in is registered
+
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let document = database.collection('health-summary');
+      let snapshot = await document.get();
+      
+      let healthSummaries = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          healthSummaries.push(data);
+      });
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+          let numReportedRecoveries=filteredList[0].numReportedRecoveries;
+          numReportedRecoveries++;
+
+          await database.collection('health-summary').doc(filteredList[0].healthSummaryId).update(
+            {
+              numReportedRecoveries:numReportedRecoveries
+            }
+            );
+
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 0,
+            numReportedRecoveries:1
+              
+            }
+            
+            await database.collection('health-summary').doc(healthSummaryId).create(healthSummary);
+          
+
+        
+    }
+    /////////////////////////////////////////////////////////////////////////////
+      
+      return res.status(200).send({
+        message: 'Successfully reported recovery',
+        data: true
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while reporting recovery."
+      });
+  }
+});
+
   exports.health = functions.https.onRequest(healthApp);
