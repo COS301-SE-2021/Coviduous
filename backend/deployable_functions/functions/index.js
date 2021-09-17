@@ -2,7 +2,7 @@ let admin = require('firebase-admin');
 admin.initializeApp(); 
 
 module.exports = {
-    //...require("./swagger.js"),
+    ...require("./swagger.js"),
     ...require('./controllers/health.controller.js'),
     ...require("./controllers/office.controller.js"),
     ...require("./controllers/user.controller.js"),

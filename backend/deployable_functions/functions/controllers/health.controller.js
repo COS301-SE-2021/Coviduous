@@ -1260,6 +1260,15 @@ healthApp.post('/api/health/contact-trace/shifts',authMiddleware,async (req, res
                 }
             }
         });
+        
+        document = database.collection('shifts');
+        snapshot = await document.get();
+  
+        let shifts = [];
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            shifts.push(data);
+        });
 
         let userShifts=[];
         group.forEach(obj => {
@@ -1430,7 +1439,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
         }
 
         let filteredList=[];
-        let document = db.collection('test-results');
+        let document = database.collection('test-results');
         let snapshot = await document.get();
         
         let results = [];
@@ -1481,7 +1490,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
               base64String: reqJson.base64String,
               
             }
-            await db.collection('vaccine-confirmations').doc(documentId).create(documentData); 
+            await database.collection('vaccine-confirmations').doc(documentId).create(documentData); 
           return res.status(200).send({
             message: 'Successfully stored vaccine confirmation document',
             data: documentData
