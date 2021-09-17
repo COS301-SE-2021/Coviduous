@@ -35,6 +35,9 @@ class HealthCheck {
   bool nausea;
   bool shortnessOfBreath;
   bool lossOfTasteSmell;
+  bool hasComeInContact;
+  bool isFemale;
+  bool is60orOlder;
 
   // constructor
   HealthCheck({
@@ -53,6 +56,9 @@ class HealthCheck {
     this.nausea,
     this.shortnessOfBreath,
     this.lossOfTasteSmell,
+    this.hasComeInContact,
+    this.isFemale,
+    this.is60orOlder,
   });
 
   factory HealthCheck.fromJson(Map<String, dynamic> json) => HealthCheck(
@@ -71,6 +77,9 @@ class HealthCheck {
         nausea: json["nausea"],
         shortnessOfBreath: json["shortnessOfBreath"],
         lossOfTasteSmell: json["lossOfTasteSmell"],
+        hasComeInContact: json["contact_with_infected"],
+        isFemale: json["gender"],
+        is60orOlder: json["age60_and_above"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -89,6 +98,9 @@ class HealthCheck {
         "nausea": nausea,
         "shortnessOfBreath": shortnessOfBreath,
         "lossOfTasteSmell": lossOfTasteSmell,
+        "contact_with_infected": hasComeInContact,
+        "gender": isFemale,
+        "age60_and_above": is60orOlder,
       };
 
   String getHealthCheckID() {
@@ -149,5 +161,17 @@ class HealthCheck {
 
   bool getLossOfTasteSmell() {
     return lossOfTasteSmell;
+  }
+
+  bool getIfComeInContact() {
+    return hasComeInContact;
+  }
+
+  bool getIfFemale() {
+    return isFemale;
+  }
+
+  bool getIf60orOlder() {
+    return is60orOlder;
   }
 }

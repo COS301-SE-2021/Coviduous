@@ -7,28 +7,30 @@ import numpy as np
 import pandas as pd
 
 # list of attributes
-l1=['cough','fever','sore_throat','shortness_of_breath','head_ache','age60_and_above','gender','contact_with_infected']
+l1 = ['cough', 'fever', 'sore_throat', 'shortness_of_breath', 'head_ache', 'age60_and_above', 'gender',
+      'contact_with_infected']
 
 # classes
-disease=['negative','positive']
+disease = ['negative', 'positive']
 # TESTING DATA df 
-df=pd.read_csv("dataset/extended_features_test.csv")
+df = pd.read_csv("dataset/extended_features_test.csv")
 
-df.replace({'prognosis':{'negative':0,'positive':1}},inplace=True)
+df.replace({'prognosis': {'negative': 0, 'positive': 1}}, inplace=True)
 
-X= df[l1]
-X= pd.DataFrame(X).fillna(1) # To account for any NaNs we may have missed in the dataset
+X = df[l1]
+X = pd.DataFrame(X).fillna(1)  # To account for any NaNs we may have missed in the dataset
 y = df[["prognosis"]]
+y = pd.DataFrame(y).fillna(1)  # To account for any NaNs we may have missed in the dataset
 np.ravel(y)
 
+# TRAINING DATA tr
+tr = pd.read_csv("dataset/extended_feature_train.csv")
+tr.replace({'prognosis': {'negative': 0, 'positive': 1}}, inplace=True)
 
-# TRAINING DATA tr 
-tr=pd.read_csv("dataset/extended_feature_train.csv")
-tr.replace({'prognosis':{'negative':0,'positive':1}},inplace=True)
-
-X_test= tr[l1]
-X_test= pd.DataFrame(X_test).fillna(1) # To account for any NaNs we may have missed in the dataset
+X_test = tr[l1]
+X_test = pd.DataFrame(X_test).fillna(1)  # To account for any NaNs we may have missed in the dataset
 y_test = tr[["prognosis"]]
+y_test = pd.DataFrame(y_test).fillna(1)  # To account for any NaNs we may have missed in the dataset
 np.ravel(y_test)
 # --------------------
 
@@ -37,30 +39,31 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/api/prognosis": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-#Decision Tree Algorithm
+
+# Decision Tree Algorithm
 def DecisionTree(psymptoms):
-    #import tree 
+    # import tree
     from sklearn import tree
 
     # empty model of the decision tree
-    clf3 = tree.DecisionTreeClassifier()  
-    clf3 = clf3.fit(X,y)
+    clf3 = tree.DecisionTreeClassifier()
+    clf3 = clf3.fit(X, y)
 
     # calculating accuracy-----------------------
     from sklearn.metrics import accuracy_score
-    y_pred=clf3.predict(X_test)
+    y_pred = clf3.predict(X_test)
     # --------------------------------------------
 
     # Prediction
     inputtest = [psymptoms]
     predict = clf3.predict(inputtest)
-    predicted=predict[0]
+    predicted = predict[0]
 
     # check if prediction is done successfully 
-    h='no'
-    for a in range(0,len(disease)):
-        if(predicted == a):
-            h='yes' 
+    h = 'no'
+    for a in range(0, len(disease)):
+        if (predicted == a):
+            h = 'yes'
             break
 
     # calculate confusion matrix and write to file
@@ -68,36 +71,37 @@ def DecisionTree(psymptoms):
     file1 = open("dt_confusion_matrix.txt", "w")
     file1.write(str(dt_confusion_matrix))
     file1.close()
-        
-    if (h=='yes'):
-        return(disease[a], accuracy_score(y_test, y_pred,normalize=True)) 
-    else:
-        return("Not Found", "Not Found")
 
-#Naive Bayes Algorithm
+    if (h == 'yes'):
+        return (disease[a], accuracy_score(y_test, y_pred, normalize=True))
+    else:
+        return ("Not Found", "Not Found")
+
+
+# Naive Bayes Algorithm
 def NaiveBayes(psymptoms):
     # import gaussian
     from sklearn.naive_bayes import GaussianNB
 
     # empty model of naive gaussian
     gnb = GaussianNB()
-    gnb=gnb.fit(X,np.ravel(y))
+    gnb = gnb.fit(X, np.ravel(y))
 
     # calculating accuracy--------------------------
     from sklearn.metrics import accuracy_score
-    y_pred=gnb.predict(X_test)
+    y_pred = gnb.predict(X_test)
     # ----------------------------------------------
 
     # Prediction
     inputtest = [psymptoms]
     predict = gnb.predict(inputtest)
-    predicted=predict[0]
+    predicted = predict[0]
 
     # check if prediction is done successfully 
-    h='no'
-    for a in range(0,len(disease)):
-        if(predicted == a):
-            h='yes'
+    h = 'no'
+    for a in range(0, len(disease)):
+        if (predicted == a):
+            h = 'yes'
             break
 
     # calculate confusion matrix and write to file
@@ -106,18 +110,19 @@ def NaiveBayes(psymptoms):
     file2.write(str(nb_confusion_matrix))
     file2.close()
 
-    if (h=='yes'):
-        return(disease[a], accuracy_score(y_test, y_pred,normalize=True)) 
+    if (h == 'yes'):
+        return (disease[a], accuracy_score(y_test, y_pred, normalize=True))
     else:
-        return("Not Found", "Not Found")
+        return ("Not Found", "Not Found")
 
 
 @app.route('/')
 def home():
     return render_template('index_extended.html')
 
+
 @app.route('/api/prognosis', methods=['POST'])
-@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
 def prognosis():
     data = request.get_json()
     cough = data.get('cough', '')
@@ -128,15 +133,17 @@ def prognosis():
     age60_and_above = data.get('age60_and_above', '')
     gender = data.get('gender', '')
     contact_with_infected = data.get('contact_with_infected', '')
-    psymptoms = [cough, fever, sore_throat, shortness_of_breath, head_ache,age60_and_above,gender,contact_with_infected]
-    naive_prediction , nb_accuracy = NaiveBayes(psymptoms)
+    psymptoms = [cough, fever, sore_throat, shortness_of_breath, head_ache, age60_and_above, gender,
+                 contact_with_infected]
+    naive_prediction, nb_accuracy = NaiveBayes(psymptoms)
     d_t_prediction, dt_accuracy = DecisionTree(psymptoms)
-    responseData={"naive_prediction":naive_prediction,
-    "nb_accuracy":nb_accuracy,
-    "d_t_prediction":d_t_prediction,
-    "dt_accuracy":dt_accuracy
-    }
+    responseData = {"naive_prediction": naive_prediction,
+                    "nb_accuracy": nb_accuracy,
+                    "d_t_prediction": d_t_prediction,
+                    "dt_accuracy": dt_accuracy
+                    }
     return jsonify(responseData)
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -151,12 +158,10 @@ def predict():
         age60_and_above = int(request.form.get("age60_and_above"))
         gender = int(request.form.get("gender"))
         contact_with_infected = int(request.form.get("contact_with_infected"))
-        psymptoms = [cough, fever, sore_throat, shortness_of_breath, head_ache,age60_and_above,gender,contact_with_infected]
-        naive_prediction , nb_accuracy = NaiveBayes(psymptoms)
+        psymptoms = [cough, fever, sore_throat, shortness_of_breath, head_ache, age60_and_above, gender,
+                     contact_with_infected]
+        naive_prediction, nb_accuracy = NaiveBayes(psymptoms)
         d_t_prediction, dt_accuracy = DecisionTree(psymptoms)
-        
-    return render_template("index_extended.html", name = name, prediction_nb = naive_prediction,accuracy_nb = nb_accuracy , prediction_dt = d_t_prediction, accuracy_dt = dt_accuracy)
-	
- 
-if __name__=='__main__':  
-    app.run(debug=True) 
+
+    return render_template("index_extended.html", name=name, prediction_nb=naive_prediction, accuracy_nb=nb_accuracy,
+                           prediction_dt=d_t_prediction, accuracy_dt=dt_accuracy)

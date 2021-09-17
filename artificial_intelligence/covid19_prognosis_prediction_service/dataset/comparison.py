@@ -21,8 +21,8 @@ from sklearn.preprocessing import StandardScaler
 
 sc = StandardScaler()
 X = sc.fit_transform(X)
-X = pd.DataFrame(X).fillna(1) # To account for any NaNs we may have missed in the dataset
-y = pd.DataFrame(y).fillna(1) # To account for any NaNs we may have missed in the dataset
+X = pd.DataFrame(X).fillna(1)  # To account for any NaNs we may have missed in the dataset
+y = pd.DataFrame(y).fillna(1)
 
 # Step 4 - Compare classification algorithms
 from sklearn.model_selection import KFold
@@ -50,6 +50,7 @@ from sklearn import tree
 import sklearn
 import graphviz
 import os
+
 os.environ["PATH"] += os.pathsep + 'E:/Graphviz/bin/'
 
 plot_data = tree.export_graphviz(DecisionTreeClassifier(criterion='gini').fit(X=X, y=y),
