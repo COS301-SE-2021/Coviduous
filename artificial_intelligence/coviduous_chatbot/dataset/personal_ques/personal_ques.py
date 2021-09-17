@@ -32,5 +32,45 @@ PERSONAL_QUES = [
         "Question": "Thank you",
         "Answer": "Glad I could help! 👍"
     },
+    {
+        "Question": "How are you?",
+        "Answer": "I'm doing Well. How are you?"
+    },
+    {
+        "Question": "What's Up",
+        "Answer": "Not Much and You?"
+    },
+    {
+        "Question": "Can we be friends?",
+        "Answer": "Yeah sure!"
+    },
+    {
+        "Question": "hey there",
+        "Answer": "hey what's up"
+    },
+    {
+        "Question": "Greetings!",
+        "Answer": "Greetings to you!"
+    },
+    {
+        "Question": "Hi!",
+        "Answer": "Greetings!"
+    },
+    {
+        "Question": "How are you doing?",
+        "Answer": "I'm very well, thanks"
+    },
+    {
+        "Question": "Nice to meet you",
+        "Answer": "Nice to meet you too!"
+    },
+    {
+        "Question": "Hi, nice to meet you",
+        "Answer": "Thank you. You too!"
+    },
+    {
+        "Question": "It is a pleasure to meet you",
+        "Answer": "Thank you. You too!"
+    },
 ]
 
