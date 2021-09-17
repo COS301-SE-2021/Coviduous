@@ -816,6 +816,86 @@ COVID19_QUES = [
         "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
     },
     {
+        "Question": "How can I reduce my risk of getting COVID-19?",
+        "Answer": "Avoid touching surfaces, especially in public settings or health facilities, in case people infected with COVID-19 have touched them. Clean surfaces regularly with standard disinfectants. Frequently clean your hands with soap and water, or an alcohol-based hand rub. If you can, carry alcohol-based rub with you and use it often. Cover your coughs and sneezes with a bent elbow or tissue, throwing used tissues into a closed bin right away. Then wash your hands or use an alcohol-based hand rub. Get vaccinated: When it’s your turn, get vaccinated. Follow local guidance and recommendations about vaccination."
+    },
+    {
+        "Question": "Why should people wear masks?",
+        "Answer": "Masks are a key measure to suppress transmission and save lives. Masks should be used as part of a comprehensive ‘Do it all!’ approach including physical distancing, avoiding crowded, closed and close-contact settings, good ventilation, cleaning hands, covering sneezes and coughs, and more. Depending on the type, masks can be used for either protection of healthy persons or to prevent onward transmission."
+    },
+    {
+        "Question": "When should masks be worn by the general public?",
+        "Answer": "In areas where the virus is circulating, masks should be worn when you’re in crowded settings, where you can’t be at least 1 metre from others, and in rooms with poor or unknown ventilation. It’s not always easy to determine the quality of ventilation, which depends on the rate of air change, recirculation and outdoor fresh air. So if you have any doubts, it’s safer to simply wear a mask."
+    },
+    {
+        "Question": "Should I wear a mask while exercising?",
+        "Answer": "Even when you’re in an area of COVID-19 transmission, masks should not be worn during vigorous physical activity because of the risk of reducing your breathing capacity. No matter how intensely you exercise, keep at least 1 metre away from others, and if you’re indoors, make sure there is adequate ventilation."
+    },
+    {
+        "Question": "How do I choose what fabric mask to buy, or ideal fit and fabrics if I make my own?",
+        "Answer": "Check for filtration, breathability and fit when choosing a fabric mask. It should be held in place comfortably with little adjustment using elastic bands or ties. There are different mask shapes such as flat-fold or duckbill – find the one that fits closely over your nose, cheeks and chin. When the edges of the mask are not close to the face and shift, such as when speaking, air penetrates through the edges of the mask rather than being filtered through the fabric. Masks with vents or exhalation valves are not advised because they allow unfiltered breath to escape the mask."
+    },
+    {
+        "Question": "When should health workers wear masks in the context of COVID-19?",
+        "Answer": "Health workers are the most likely to be exposed to COVID-19 because they are in close contact with patients with suspected, probable or confirmed COVID-19. In areas of community or cluster transmission, health workers, caregivers and visitors should wear a mask at all times when in the health facility, even if physical distancing can be maintained. Masks should be worn throughout their shifts, apart from when eating, drinking or needing to change the mask for specific reasons."
+    },
+    {
+        "Question": "How large does a meeting or event need to be in order to be a “mass gathering”?",
+        "Answer": "High profile international sporting events such as the Olympics or World Cups as well as international religious events such as the Hajj count as mass gatherings. However, lower profile conferences and events can also meet WHO’s definition of a mass gathering. An event counts as a “mass gatherings” if the number of people it brings together is so large that it has the potential to strain the planning and response resources of the health system in the community where it takes place."
+    },
+    {
+        "Question": "Should event organizers provide COVID-19 testing?",
+        "Answer": "No, testing should be conducted in accordance with local health providers and national guidance.  Anyone unwell or symptomatic should not be allowed to participate in the event. Establish close collaboration with local public health authorities well before the event, to facilitate testing for athletes, officials or spectators who meet pre-agreed suspect cases definitions. Consider host-country health service capacity to manage any COVID-19 activity, and other public health issues happening at the event over and above its own national pandemic response."
+    },
+    {
+        "Question": "What are the risks arising from public transport to the venue(s)?",
+        "Answer": "The extra risk from participants and spectators travelling on public transport in a major city may not be significant compared to the ongoing risk to the local population using the transport all the time if physical distancing is not possible on public transport."
+    },
+    {
+        "Question": "Does the presence of antibodies mean that a person is immune?",
+        "Answer": "There are many studies underway to better understand the antibody response following infection to SARS-CoV-2.  Several studies to date show that most people who have been infected with SARS-CoV-2 develop antibodies specific to this virus. However, the levels of these antibodies can vary between those who have severe disease (higher levels of antibodies) and those with milder disease or asymptomatic infection (lower levels of antibodies). Many studies are underway to better understand the levels of antibodies that are needed for protection, and how long these antibodies last."
+    }, 
+    {
+        "Question": "Can people who have had SARS-CoV-2 infection be re-infected?",
+        "Answer": "To date, there are some reports of individuals who have been reinfected with SARS-CoV-2.  There are likely to be more examples of reinfection reported and scientists are working to understand the role of the immune response in the first and second infection. WHO is working with scientists to understand each occurrence of reinfection and the antibody response during the first and subsequent infections."
+    },
+    {
+        "Question": "How are COVID-19 and influenza viruses similar?",
+        "Answer": "Firstly, COVID-19 and influenza viruses have a similar disease presentation. That is, they both cause respiratory disease, which presents as a wide range of illness from asymptomatic or mild through to severe disease and death. Secondly, both viruses are transmitted by contact, droplets and fomites. As a result, the same public health measures, such as hand hygiene and good respiratory etiquette (coughing into your elbow or into a tissue and immediately disposing of the tissue), are important actions all can take to prevent infection. "
+    },
+    {
+        "Question": "How are COVID-19 and influenza viruses different?",
+        "Answer": "The speed of transmission is an important point of difference between the two viruses. Influenza has a shorter median incubation period (the time from infection to appearance of symptoms) and a shorter serial interval (the time between successive cases) than COVID-19 virus. The serial interval for COVID-19 virus is estimated to be 5-6 days, while for influenza virus, the serial interval is 3 days. This means that influenza can spread faster than COVID-19. "
+    },
+    {
+        "Question": "What medical interventions are available for COVID-19 and influenza viruses?",
+        "Answer": "While there are a number of therapeutics currently in clinical trials in China and more than 20 vaccines in development for COVID-19, there are currently no licensed vaccines or therapeutics for COVID-19.  In contrast, antivirals and vaccines available for influenza. While the influenza vaccine is not effective against COVID-19 virus, it is highly recommended to get vaccinated each year to prevent influenza infection. "
+    },
+    {
+        "Question": "So how do I stay safe while exercising in COVID-19?",
+        "Answer": "Do not exercise if you have a fever, cough and difficulty breathing. Stay home and rest, seek medical attention and call in advance. Follow the directions of your local health authority. If you are able to go for a walk or bicycle ride always practice physical distancing and wash your hands with water and soap before you leave, when you get to where you are going, and as soon as you get home.  If water and soap are not immediately available, use alcohol-based hand rub."
+    },
+    {
+        "Question": "How do I stay active in and around the home?",
+        "Answer": "Try and reduce long periods of time spent sitting, whether for work, studying, watching TV, reading, or using social media or playing games using screens. Reduce sitting for long periods by taking short 3-5 minute breaks every 20-30 minutes. Simply stand up and stretch or even better, take a walk around the house, up and down the stairs, or into the garden. By just moving around and stretching you can improve your health and wellbeing."
+    },
+    {
+        "Question": "What precautions should everyone take in a hotel or other accommodation establishment?",
+        "Answer": "Wash all parts of your hands frequently (at least 20 seconds if using an alcohol-based hand rub, and at least 40 seconds with soap and water), including after exchanging objects such as money or credit cards; look for hand sanitizer stations and use them before going into dining halls, restaurants or bars; cover a cough or sneeze with a bent elbow or tissue, and throw away the tissue in a closed bin; maintain at least a 1 metre distance from staff and other guests. This includes avoiding hugging, kissing, or shaking hands. If you can’t guarantee the distance, wear a mask. Be sure to check local and national guidelines on the use of masks."
+    },
+    {
+        "Question": "Are pools and water areas safe to use?",
+        "Answer": "Gym, beach, swimming pool, spa, sauna and steam bath facilities can be used safely with certain restrictions, as determined by national guidelines."
+    },
+    {
+        "Question": "Are there precautions to take while eating in a restaurant?",
+        "Answer": "There is no evidence that the virus that causes COVID-19 is transmitted by food, including fresh fruits and vegetables. The virus can be killed while cooking food at temperatures of at least 70°C. Food buffets are not recommended because of the risk of close physical contact with others, shared serving implements and multiple people touching the surfaces on the buffet."
+    },
+    {
+        "Question": "Can you get the virus from people who were in the room previous to you?",
+        "Answer": "Hotels and other accommodations should have procedures for cleaning, disinfecting and ventilating the room properly between every guest’s stay. These processes allow the accommodations to be used immediately afterward. If these procedures are followed, there is no need to leave the room empty between guests."
+    },
+    {
         "Question": "what are the recommendations by the authorities",
         "Answer": "Protect yourself and others from infection by staying at least 1 metre apart from others, wearing a properly fitted mask, and washing your hands or using an alcohol-based rub frequently."
     },
