@@ -39,7 +39,7 @@ String AIserver = serverInfo.getAIserver();
 //Complete a health check
 Future<HealthCheck> createHealthCheck(String companyId, String userId, String name, String surname, String email, String phoneNumber,
     String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
-    bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
+    bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache, bool isFemale, bool is60orOlder) async {
   String path = 'health/api/health/health-check/';
   String url = server + path;
   var request;
@@ -54,6 +54,9 @@ Future<HealthCheck> createHealthCheck(String companyId, String userId, String na
       "sore_throat": globals.toInt(soreThroat),
       "shortness_of_breath": globals.toInt(shortnessOfBreath),
       "head_ache": globals.toInt(headache),
+      "contact_with_infected": globals.toInt(sixFeetContact),
+      "gender": globals.toInt(isFemale),
+      "age60_and_above": globals.toInt(is60orOlder),
     });
     request2.headers.addAll(globals.getRequestHeaders());
 

@@ -34,6 +34,8 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
   bool _hasComeIntoContact = false;
   bool _hasTestedPositive = false;
   bool _hasTraveled = false;
+  bool _isFemale = false;
+  bool _is60orOlder = false;
 
   int currentQuestionNumber = 1;
 
@@ -101,6 +103,16 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
 
       case 13: {
         return "assets/images/sick3.jpg";
+      }
+      break;
+
+      case 14: {
+        return "assets/images/sick1.jpg";
+      }
+      break;
+
+      case 15: {
+        return "assets/images/sick2.jpg";
       }
       break;
 
@@ -173,6 +185,16 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
       }
       break;
 
+      case 14: {
+        return "Are you female?";
+      }
+      break;
+
+      case 15: {
+        return "Are you 60 years old or older?";
+      }
+      break;
+
       default: {
         return "";
       }
@@ -234,6 +256,16 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
 
       case 13: {
         _hasTraveled = answer;
+      }
+      break;
+
+      case 14: {
+        _isFemale = answer;
+      }
+      break;
+
+      case 15: {
+        _is60orOlder = answer;
       }
       break;
 
@@ -301,6 +333,16 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
       }
       break;
 
+      case 14: {
+        return _isFemale;
+      }
+      break;
+
+      case 15: {
+        return _is60orOlder;
+      }
+      break;
+
       default: {
         return false;
       }
@@ -343,7 +385,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                     ),
                   ),
                   onPressed: () {
-                    if (currentQuestionNumber < 13) {
+                    if (currentQuestionNumber < 15) {
                       setState(() {
                         currentQuestionNumber++;
                       });
@@ -369,11 +411,11 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(true);
-                  if (currentQuestionNumber < 13) {
+                  if (currentQuestionNumber < 15) {
                     setState(() {
                       currentQuestionNumber++;
                     });
-                  } else if (currentQuestionNumber == 13) {
+                  } else if (currentQuestionNumber == 15) {
                     setState(() {});
                     showConfirmation();
                   }
@@ -391,11 +433,11 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(false);
-                  if (currentQuestionNumber < 13) {
+                  if (currentQuestionNumber < 15) {
                     setState(() {
                       currentQuestionNumber++;
                     });
-                  } else if (currentQuestionNumber == 13) {
+                  } else if (currentQuestionNumber == 15) {
                     setState(() {});
                     showConfirmation();
                   }
@@ -458,7 +500,8 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
     if (validateForm()) {
       healthHelpers.createHealthCheckVisitor(_companyId.text, _name.text, _surname.text, _email.text, _phoneNumber.text,
           _temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
-          _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
+          _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain,
+          _isFemale, _is60orOlder).then((result) {
         if (result == true) {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
@@ -535,14 +578,14 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                                     width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
                                     child: Column(
                                       children: [
-                                        Text("Question " + currentQuestionNumber.toString() + " of 13",
+                                        Text("Question " + currentQuestionNumber.toString() + " of 15",
                                             style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                             textAlign: TextAlign.center),
                                         LinearProgressIndicator(
                                           backgroundColor: globals.firstColor,
                                           color: Color(0xffFFBF13),
                                           minHeight: 10,
-                                          value: currentQuestionNumber/13,
+                                          value: currentQuestionNumber/15,
                                         ),
                                       ],
                                     ),
@@ -631,7 +674,7 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                                             ),
                                           ),
                                           onPressed: () {
-                                            if (currentQuestionNumber < 13) {
+                                            if (currentQuestionNumber < 15) {
                                               setState(() {
                                                 currentQuestionNumber++;
                                               });
@@ -654,11 +697,11 @@ class _VisitorHealthCheckState extends State<VisitorHealthCheck> {
                       IconButton(
                         icon: Icon(Icons.arrow_forward_ios),
                         onPressed: () {
-                          if (currentQuestionNumber < 13) {
+                          if (currentQuestionNumber < 15) {
                             setState(() {
                               currentQuestionNumber++;
                             });
-                          } else if (currentQuestionNumber == 13) {
+                          } else if (currentQuestionNumber == 15) {
                             setState(() {});
                             showConfirmation();
                           }

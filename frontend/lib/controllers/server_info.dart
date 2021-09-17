@@ -15,7 +15,7 @@ String getServer() {
 
 String getAIserver() {
   if (kReleaseMode) { //If release version of the app
-    return '';
+    return 'https://coviduous.herokuapp.com/api/prognosis';
   } else { //Else, testing version of the app
     if (globals.getIfOnPC()) { //If on PC
       return 'http://localhost:5000/api/prognosis';

@@ -29,6 +29,8 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
   bool _hasComeIntoContact = false;
   bool _hasTestedPositive = false;
   bool _hasTraveled = false;
+  bool _isFemale = false;
+  bool _is60orOlder = false;
 
   int currentQuestionNumber = 1;
 
@@ -96,6 +98,16 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
 
       case 12: {
         return "assets/images/sick3.jpg";
+      }
+      break;
+
+      case 13: {
+        return "assets/images/sick1.jpg";
+      }
+      break;
+
+      case 14: {
+        return "assets/images/sick2.jpg";
       }
       break;
 
@@ -168,6 +180,16 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
       }
       break;
 
+      case 13: {
+        return "Are you female?";
+      }
+      break;
+
+      case 14: {
+        return "Are you 60 years old or older?";
+      }
+      break;
+
       default: {
         return "";
       }
@@ -229,6 +251,16 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
 
       case 12: {
         _hasTraveled = answer;
+      }
+      break;
+
+      case 13: {
+        _isFemale = answer;
+      }
+      break;
+
+      case 14: {
+        _is60orOlder = answer;
       }
       break;
 
@@ -296,6 +328,16 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
       }
       break;
 
+      case 13: {
+        return _isFemale;
+      }
+      break;
+
+      case 14: {
+        return _is60orOlder;
+      }
+      break;
+
       default: {
         return false;
       }
@@ -333,7 +375,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                     ),
                   ),
                   onPressed: () {
-                    if (currentQuestionNumber < 13) {
+                    if (currentQuestionNumber < 14) {
                       setState(() {
                         currentQuestionNumber++;
                       });
@@ -359,11 +401,11 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(true);
-                  if (currentQuestionNumber < 12) {
+                  if (currentQuestionNumber < 14) {
                     setState(() {
                       currentQuestionNumber++;
                     });
-                  } else if (currentQuestionNumber == 12) {
+                  } else if (currentQuestionNumber == 14) {
                     setState(() {});
                     showConfirmation();
                   }
@@ -381,11 +423,11 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                 ),
                 onPressed: () {
                   setAnswer(false);
-                  if (currentQuestionNumber < 12) {
+                  if (currentQuestionNumber < 14) {
                     setState(() {
                       currentQuestionNumber++;
                     });
-                  } else if (currentQuestionNumber == 12) {
+                  } else if (currentQuestionNumber == 14) {
                     setState(() {});
                     showConfirmation();
                   }
@@ -426,8 +468,9 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
 
   bool completeHealthCheck() {
     if (_temperature.text.isNotEmpty && globals.isNumeric(_temperature.text)) {
-      healthHelpers.createHealthCheckUser(_temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
-          _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
+      healthHelpers.createHealthCheckUser(_temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain,
+          _hasNauseaDiarrheaVomiting, _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled,
+          _hasHeadMusclePain, _isFemale, _is60orOlder).then((result) {
         if (result == true) {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
@@ -505,14 +548,14 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                                     width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
                                     child: Column(
                                       children: [
-                                        Text("Question " + currentQuestionNumber.toString() + " of 12",
+                                        Text("Question " + currentQuestionNumber.toString() + " of 14",
                                             style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
                                             textAlign: TextAlign.center),
                                         LinearProgressIndicator(
                                           backgroundColor: globals.firstColor,
                                           color: Color(0xffFFBF13),
                                           minHeight: 10,
-                                          value: currentQuestionNumber/12,
+                                          value: currentQuestionNumber/14,
                                         ),
                                       ],
                                     ),
@@ -555,11 +598,11 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
                       IconButton(
                         icon: Icon(Icons.arrow_forward_ios),
                         onPressed: () {
-                          if (currentQuestionNumber < 12) {
+                          if (currentQuestionNumber < 14) {
                             setState(() {
                               currentQuestionNumber++;
                             });
-                          } else if (currentQuestionNumber == 12) {
+                          } else if (currentQuestionNumber == 14) {
                             setState(() {});
                             showConfirmation();
                           }
