@@ -278,7 +278,7 @@ Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
 
 //Delete/decline a permission request
 Future<bool> deletePermissionRequest(String permissionRequestId) async {
-  String path = 'health/api/health/permissions/';
+  String path = 'health/health/permissions/';
   String url = server + path;
   var request;
 
