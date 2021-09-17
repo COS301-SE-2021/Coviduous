@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/views/chatbot/app_chatbot.dart';
 
 import 'package:frontend/controllers/image_helpers.dart' as imageHelpers;
 import 'package:frontend/globals.dart' as globals;
@@ -42,6 +44,46 @@ Widget notFoundMessage(BuildContext context, String title, String message) {
       ],
     ),
   );
+}
+
+Widget chatBot(BuildContext context, String returnRouteName, bool show) {
+  if (show == true) {
+    return Container(
+      alignment: Alignment.bottomRight,
+      child: Align(
+        heightFactor: 0.8,
+        widthFactor: 0.8,
+        child: ClipRect(
+          child: AvatarGlow(
+            startDelay: Duration(milliseconds: 1000),
+            glowColor: Colors.white,
+            endRadius: 60,
+            duration: Duration(milliseconds: 2000),
+            repeat: true,
+            showTwoGlows: true,
+            repeatPauseDuration: Duration(milliseconds: 100),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: CircleBorder(),
+              ),
+              child: ClipOval(
+                child: Image(
+                  image: AssetImage('assets/images/chatbot-icon.png'),
+                  width: 70,
+                ),
+              ),
+              onPressed: () {
+                globals.chatbotPreviousPage = returnRouteName;
+                Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  return Container();
 }
 
 final _transformationController = TransformationController();

@@ -123,6 +123,9 @@ String token = '';
 //Chatbot previous page
 String chatbotPreviousPage = '';
 
+//Show chatbot
+bool showChatBot = true;
+
 //==============
 //Theme-related
 //==============
