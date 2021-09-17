@@ -152,6 +152,7 @@ class _ChatMessagesState extends State<ChatMessages>
             initials: "CB",
             bot: true,
             showImage: (result.getIfTutorial()) ? true : false,
+            isShortcut: (result.getIfShortcut()) ? true : false,
             text: result.getAnswer()
         );
       }
@@ -163,12 +164,12 @@ class _ChatMessagesState extends State<ChatMessages>
         name: "Chat Bot",
         initials: "CB",
         bot: true,
-        text: "Hello, I am the Coviduous ChatBot! Do you need any help? 🤖\n\nType 'tutorial' for a list of tutorials; 'shortcut-admin', 'shortcut-user', or 'shortcut-visitor' for a list of shortcuts; or ask me a question."
+        text: "Hello, I am the Coviduous Chat Bot! Do you need any help? 🤖\n\nType 'tutorial' for a list of tutorials; 'shortcut-admin', 'shortcut-user', or 'shortcut-visitor' for a list of shortcuts; or ask me a question."
     );
   }
 
   void _addMessage(
-      {String name, String initials, bool bot = false, bool showImage = false, String text}) {
+      {String name, String initials, bool bot = false, bool showImage = false, bool isShortcut = false, String text}) {
     var animationController = AnimationController(
       duration: new Duration(milliseconds: 700),
       vsync: this,
@@ -180,7 +181,8 @@ class _ChatMessagesState extends State<ChatMessages>
         initials: initials,
         bot: bot,
         animationController: animationController,
-        showImage: showImage
+        showImage: showImage,
+        isShortcut: isShortcut
     );
 
     setState(() {
@@ -197,6 +199,7 @@ class ChatMessage {
   final String text;
   final bool bot;
   final bool showImage;
+  final bool isShortcut;
 
   AnimationController animationController;
 
@@ -207,6 +210,7 @@ class ChatMessage {
         this.text,
         this.bot = false,
         this.showImage = false,
+        this.isShortcut = false,
         this.animationController
       });
 }
@@ -215,6 +219,38 @@ class ChatMessageListItem extends StatelessWidget {
   final ChatMessage chatMessage;
 
   ChatMessageListItem(this.chatMessage);
+
+  Widget _showMessage(BuildContext context) {
+    if (chatMessage.showImage && !chatMessage.text.contains('Type any of these tutorials you would like to see.')) { //If showing an image
+      return ElevatedButton(
+        child: Text(
+            'View tutorial'
+        ),
+        onPressed: () {
+          var rng = new Random();
+          globalWidgets.showMemoryImage(context, base64Decode(chatMessage.text), 'Coviduous saved tutorial ' + rng.nextInt(100).toString(), 'png');
+        },
+      );
+    } else {
+      if (chatMessage.isShortcut && chatMessage.text.substring(0, 1) == '/') { //If a shortcut is sent back
+        return ElevatedButton(
+          child: Text(
+            'Access your shortcut here'
+          ),
+          onPressed: () {
+            chatbotController.navigateShortcut(context, chatMessage.text);
+          },
+        );
+      } else { //Else, just text
+        return Text(
+            chatMessage.text,
+            style: TextStyle(
+              color: Colors.black,
+            )
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -258,27 +294,7 @@ class ChatMessageListItem extends StatelessWidget {
                         child: Container(
                           color: Colors.white,
                           padding: EdgeInsets.all(10),
-                          child: (chatMessage.showImage == true)
-                              ? FittedBox( //If showing an image
-                            child: GestureDetector(
-                              onTap: () {
-                                var rng = new Random();
-                                globalWidgets.showMemoryImage(context, base64Decode(chatMessage.text), 'Coviduous saved tutorial ' + rng.nextInt(100).toString(), 'png');
-                              },
-                              child: Image(
-                                image: MemoryImage(
-                                    base64Decode(chatMessage.text)
-                                ),
-                              ),
-                            ),
-                            fit: BoxFit.fill,
-                          )
-                              : Text( //Else, just text
-                            chatMessage.text,
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
+                          child: _showMessage(context),
                         ),
                       ),
                     ],
