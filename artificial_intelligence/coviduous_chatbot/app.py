@@ -58,7 +58,3 @@ def prognosis():
             "answer": reply
         }
         return jsonify(responseData)
-
-
-if __name__ == "__main__":
-    app.run()
