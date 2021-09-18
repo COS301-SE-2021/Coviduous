@@ -57,57 +57,57 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
       break;
 
       case 4: {
-        return "assets/images/sick1.jpg";
+        return "assets/images/sick4.jpg";
       }
       break;
 
       case 5: {
-        return "assets/images/sick2.jpg";
+        return "assets/images/sick5.jpg";
       }
       break;
 
       case 6: {
-        return "assets/images/sick3.jpg";
+        return "assets/images/sick6.jpg";
       }
       break;
 
       case 7: {
-        return "assets/images/sick1.jpg";
+        return "assets/images/sick7.jpg";
       }
       break;
 
       case 8: {
-        return "assets/images/sick2.jpg";
+        return "assets/images/sick8.jpg";
       }
       break;
 
       case 9: {
-        return "assets/images/sick3.jpg";
+        return "assets/images/sick9.jpg";
       }
       break;
 
       case 10: {
-        return "assets/images/sick1.jpg";
+        return "assets/images/sick10.jpg";
       }
       break;
 
       case 11: {
-        return "assets/images/sick2.jpg";
+        return "assets/images/sick11.jpg";
       }
       break;
 
       case 12: {
-        return "assets/images/sick3.jpg";
+        return "assets/images/sick12.jpg";
       }
       break;
 
       case 13: {
-        return "assets/images/sick1.jpg";
+        return "assets/images/sick13.jpg";
       }
       break;
 
       case 14: {
-        return "assets/images/sick2.jpg";
+        return "assets/images/sick14.jpg";
       }
       break;
 
@@ -141,7 +141,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
       break;
 
       case 5: {
-        return "Have you has a sore throat in the past 14 days?";
+        return "Have you had a sore throat in the past 14 days?";
       }
       break;
 
