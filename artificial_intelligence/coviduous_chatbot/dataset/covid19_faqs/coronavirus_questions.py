@@ -2682,7 +2682,155 @@ COVID19_QUES = [
     {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {"Question": "What is a coronavirus?", "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."}
+    {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {
+        "Question": "What are the symptoms of COVID-19?",
+        "Answer": "The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion, runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually. Some people become infected but don’t develop any symptoms and don't feel unwell. Most people (about 80%) recover from the disease without needing special treatment. Around 1 out of every 6 people who gets COVID-19 becomes seriously ill and develops difficulty breathing. Older people, and those with underlying medical problems like high blood pressure, heart problems or diabetes, are more likely to develop serious illness. People with fever, cough and difficulty breathing should seek medical attention."
+    },
+    {
+        "Question": "What can I do to minimise the risk of infection?",
+        "Answer": "The virus is very susceptible to common anti-bacterial cleaning agents such as bleach, and alcohol-based cleaners (60% volume). Regularly and thoroughly clean your hands with an alcohol-based hand rub or wash them with soap and water for at least 20 seconds. Maintain at least 1 metre distance between yourself and anyone who is coughing or sneezing. Avoid touching your eyes, nose or mouth with unclean hands."
+    },
+    {
+        "Question": "What is self-isolation?",
+        "Answer": "Self-isolation is a way to keep yourself from possibly infecting others if you think you might be infected. It involves limiting contact with public places, relatives, friends, colleagues, and public transport."
+    },
+    {
+        "Question": "I have flu like symptoms, should I get tested?",
+        "Answer": "The symptoms of COVID-19 include cough, sore throat, shortness of breath or fever.  However, these are also symptoms of the flu. The National Institute of Communicable Diseases (NICD) recommends that you should only get tested if you display symptoms plus: Been in contact with a confirmed COVID-19 person Travelled to a high risk country Worked in or been to a healthcare facility treating people with Covid-19,Have a severe case of pneumonia with an unknown cause. However, one should consult your medical practitioner immediately if you display symptoms."
+    },
+    {
+        "Question": "Where should I go if I want to test for COVID-19?",
+        "Answer": "If you think you might have contracted the virus, you can call the NICD helpline (0800 029 999) and you will be advised on possible testing facilities. However, testing is not routinely done unless testing is indicated by a health professional therefore one would need to be assessed by your medical practitioner in order to qualify for testing."
+    },
+    {
+        "Question": "What happens if I test positive?",
+        "Answer": "Please keep in contact with your health care provider telephonically to monitor your progress. Your healthcare provider will assess you in terms of your current coronavirus illness and your other risk factors for more severe illness (i.e. older age, serious underlying medical conditions such as diabetes mellitus, heart disease, lung disease and immunosuppression, etc.).If you were asked to isolate at home, your healthcare provider has assessed that you have a mild illness that can be managed at home, you have no/few risk factors for severe illness and your home environment is suitable for isolation. However, some people with coronavirus disease may worsen at home and need admission to hospital. It is very important that you carefully monitor your symptoms throughout your illness and look out for emergency warning signs.Emergency warning signs include: trouble breathing, chest pain or pressure in your chest that does not go away, coughing up blood, becoming confused, severe sleepiness, blue lips or face.  If you have any warning signs, you or a member of your household should call your nearest hospital or emergency services immediately and notify them that you have confirmed coronavirus disease."
+    },
+    {
+        "Question": "How much does the test cost?",
+        "Answer": "Public sector testing is free of charge. Private laboratories such as Lancet, Ampath and Pathcare can also test for SARS-CoV-2. Enquiry should be with the respective laboratory for their costing of the test. If going via a private lab, it is advisable to check with your medical aid to ascertain if they will cover the costs for the test."
+    },
+    {
+        "Question": "How is COVID-19 infection treated?",
+        "Answer": "There is no specific treatment available for SARS-CoV-2. Treatment is supportive (e.g. providing oxygen for patients with shortness of breath or managing a fever). Antibiotics do not treat viral infections. However, antibiotics may be required if a secondary bacterial infection develops. Currently there is a vaccine being developed."
+    },
+    {
+        "Question": "Which hospitals will treat COVID-19 infected patients?",
+        "Answer": "The following hospitals have also been identified as centres for isolation and treatment of people infected with Coronavirus: Polokwane Hospital in Limpopo Rob Ferreira Hospital in Mpumalanga,Charlotte Maxeke Hospital, Steve Biko Hospital and Tembisa Hospitals in Gauteng Grace Hospital in KwaZulu-Natal,Klerksdorp Hospital in the North West Kimberly Hospital in the Northern Cape , Pelonomi Hospital in the Free State Livingstone Hospital in the Eastern Cape and Tygerberg Hospital in the Western Cape."
+    },
+    {
+        "Question": "Can I go to school or work?",
+        "Answer": "Anyone who is sick or displaying symptoms should not go to school or work. If you have been in close contact with a confirmed COVID-19 case, you should self-isolate for 14 days from the date of close contact. If you are concerned, contact your medical practitioner for further advice."
+    },
+    {
+        "Question": "What is the plan of the Department of Basic Education, what should we do as teachers?",
+        "Answer": "Protocols have been developed and distributed to provinces and districts in the country. However, it is especially important to encourage children and staff to take every day preventative actions to prevent the spread of respiratory illnesses. This includes staying at home when sick, washing hands with soap and water or using an alcohol based hand sanitiser with at least 60% alcohol and cleaning frequently touched surfaces. If children do become ill, they should be strictly isolated at home. In situations where the child or staff member becomes sick at school, they should be separated from healthy students and staff until sick students and staff can be sent home."
+    },
+    {
+        "Question": "Can my body not fight the disease on its own, without suffering the side effects of the vaccine?",
+        "Answer": "Evidence shows that your body’s response when you are sick from COVID-19 is much weaker and shorter than the response to the vaccine. Getting the vaccine will give you a much stronger and longer-lasting immune response. The side effects of the vaccine are mild and do not last more than a day or two, while getting sick from COVID-19 can cause hospitalisation or death."
+    },
+    {
+        "Question": "Why was the time between the two doses of Pfizer extended?",
+        "Answer": "The time between the Pfizer doses was extended because there is now evidence that if you get the second dose 42 days after the first dose, your body’s response is much stronger and lasts longer than when the time is shorter."
+    },
+    {
+        "Question": "I have COVID-19 symptoms – is it safe to get vaccinated?",
+        "Answer": "You should not get the vaccine if you have symptoms of COVID-19 and should rather be tested. If you have COVID-19, you should wait at least 30 days after you have recovered from COVID-19 before you get your vaccine."
+    },
+    {
+        "Question": "Can people with chronic diseases, such as high blood pressure, get the vaccine?",
+        "Answer": "People with chronic diseases such as high blood pressure, heart disease and diabetes are at higher risk of getting severe COVID-19. Therefore, they will benefit the most from getting the vaccine. They should also make sure that their condition is controlled, go for regular check-ups with their healthcare practitioner and take their chronic medication. If you are unsure about your condition, consult with your healthcare practitioner."
+    },
+    {
+        "Question": "How dangerous is an allergic reaction to the vaccine?",
+        "Answer": "Severe allergic reactions to the vaccine are very rare. An allergic reaction usually happens within seconds or minutes after getting the vaccine. This is why ALL people must wait in the observation area for 15 minutes after getting the vaccine to make sure they do not have a major allergic reaction."
+    },
+    {
+        "Question": "For people with allergies, who should NOT get the vaccine?",
+        "Answer": "Anyone with a history of severe allergic reaction to any ingredient in the vaccine.Anyone who is allergic to polyethene glycol (PEG) should not get the Pfizer vaccine, as it is one of the components.Anyone who had a severe allergic reaction after the first dose should not get the second dose of that vaccine.If you previously had an allergic reaction to a medication or vaccine, but are unsure what specific ingredient caused it, please speak to your healthcare practitioner before getting the vaccine. "
+    },
+    {
+        "Question": "Why do some people still get COVID-19 within two weeks after getting the vaccine?",
+        "Answer": "It takes at least two weeks for the body to develop immunity after getting the vaccine. You are only 'fully vaccinated' 30 days after getting the J&J vaccine or two weeks after the second dose of the Pfizer vaccine. If you are exposed to the virus before you are 'fully vaccinated', you may get the disease.Also, if you get COVID-19 within a few days after being vaccinated, it means you were already infected before getting the vaccine.The vaccine also does not completely prevent COVID-19 infection, even after you are 'fully vaccinated' but reduces the risk of severe COVID-19 infection, hospitalisation or death from COVID-19."
+    },
+    {
+        "Question": "Can the vaccine cause COVID-19 disease?",
+        "Answer": "None of the vaccines used in South Africa contains the live virus that causes COVID-19. The vaccine can therefore not make you sick with COVID-19."
+    },
+    {
+        "Question": "Can the Pfizer vaccine cause heart inflammation? Is it safe to give the vaccine to elderly people?",
+        "Answer": "In a very few cases, doctors found heart inflammation in young men who got the Pfizer vaccine. This is a very rare side effect, usually seen within two weeks after the second dose of the vaccine. Common symptoms are chest pain, shortness of breath and an abnormal heartbeat (fast, pounding or fluttering). These symptoms are mostly mild and can be treated, followed by recovery shortly thereafter. People should therefore be aware of the symptoms and immediately seek medical help."
+    },
+    {
+        "Question": "How will the vaccines be allocated to different countries?",
+        "Answer": "Once any of the COVAX vaccines have successfully undergone clinical trials and are proved to be both safe and effective, and have received regulatory approval, available doses will be allocated to all participating countries at the same rate, proportional to their total population size.No country will receive enough doses to vaccinate more than 20 per cent of its population until all countries in the COVAX group have been offered this amount."
+    },
+    {
+        "Question": "Will South Africa receive some of the COVAX vaccines?",
+        "Answer": "Yes. In his address to the nation on Monday, 14 December 2020, President Cyril Ramaphosa announced that South Africa is set to receive initial vaccines from the COVAX facility to cover 10 per cent of our population in the early part of 2021."
+    },
+    {
+        "Question": "What financing options were available to South Africa for the COVAX Facility?",
+        "Answer": "The COVAX Facility offered self-financing countries two different options to participate in. In the “committed purchase” option, participating countries make a lower upfront payment, but need to make firm guarantees to procure doses from the facility without the option to opt-out of specific candidates. In the “optional purchase” option, participating countries make a larger upfront payment, but can opt-out of vaccine allocations while they still reserve the option for later vaccines.In order to gain access to vaccines rapidly, South Africa agreed to participate in the “committed purchase” option of the COVAX Facility to vaccinate at least 10 per cent of South Africa’s population."
+    },
+    {
+        "Question": "What else is South Africa doing to get vaccines?",
+        "Answer": "In addition to the COVAX vaccine, South Africa is also part of the African Vaccine Acquisition Task Team that is looking at alternative financing mechanisms to secure additional vaccines for African countries beyond COVAX.Health Minister, Dr Zweli Mkhize, is part of this task team and is also looking at innovative partnerships with the private sector to ensure that South Africans have access to an effective vaccine that is suitable to local conditions."
+    },
+    {
+        "Question": "How much vaccine is South Africa purchasing initially and why?",
+        "Answer": "The Ministerial Advisory Committee on Vaccines (MAC) recommended that the commitment made by South Africa should be to purchase sufficient vaccines for 10 per cent of its population through the COVAX Facility. It also recommended continuing with the current ongoing bilateral discussions with vaccine manufacturers.Vaccination, even with the limited initial allocation, could be used to immunise front-line healthcare workers who are of critical importance to both manage COVID-19 patients and to sustain all aspects of health service delivery.Partial coverage of the population with a vaccine combined with non-pharmaceutical interventions, would significantly contribute to achieving a herd immunity threshold, thus protecting the population against forthcoming future waves of COVID."
+    },
+    {
+        "Question": "Why did South Africa not procure vaccines directly from manufacturers?",
+        "Answer": "South Africa was approached directly by vaccine manufacturers to consider bilateral purchasing agreements. However, the risk with these arrangements was that price negotiations were confidential; up-front payments could have been lost should the vaccine not have proved safe and efficacious; and South Africa would have been limited to only a few vaccines through this mechanism and could have run the risk of not having a vaccine if these candidates were not successfully licensed."
+    },
+    {
+        "Question": "How will South Africa make sure that the vaccines we use are safe?",
+        "Answer": "The Department of Health will work with the South African Health Products Regulatory Authority (SAHPRA) to ensure that whichever vaccine being recommended or made available through the COVAX Facility has met all the regulatory requires of safety, efficacy, and quality."
+    },
+    {
+        "Question": "Will these vaccines have to be approved before it can be used in South Africa?",
+        "Answer": "Yes. Before a vaccine can be rolled out the South African Health Products Regulatory Authority (SAHPRA) must assess the safety, efficacy and quality of the vaccine. SAHPRA has committed to ensuring the expeditious evaluation of these vaccines once they have been received, through various mechanisms that will shorten the timeframe it usually takes to approve a product."
+    },
+    {
+        "Question": "Does the long term wearing of masks have any negative impact on one’s health?",
+        "Answer": "Prolonged use of any face mask has not been shown to cause carbon dioxide toxicity or lack of adequate oxygen in healthy people. Healthcare workers routinely wear masks for prolonged periods while performing their duties.Cloth masks provide an additional layer of protection by reducing the number of microorganisms that a person releases into the air. Mass mask wearing will ensure that fewer potential viral droplets are released into the air.Wearing amask reduces the risk that someone will be exposed to the virus."
+    },
+    {
+        "Question": "Vaccines are unsafe and normal safety protocols have been circumvented to fast track their authorisation for use?",
+        "Answer": "The fast development and approval of vaccines is a great human feat worthy of celebration. It this has been possible because we have learnt over many decades how to make and test vaccines and we were able to take those lessons and challenge ourselves to produce a vaccine much quicker.No step in the development, testing or ratification of the COVID-19 vaccines has been skipped. The world was able to develop vaccines fast because scientists and governments around the world collaborated in a manner that has never been achieved before and pooled resources and information to ensure that everyone can contribute to the knowledge. This allowed us to move much quicker than we have done before. The socio-economic devastation the virus is causing is what has motivated developers to move with urgency without compromising on quality standards."
+    },
+    {
+        "Question": "Vaccines can alter the recipient’s DNA.",
+        "Answer": "Vaccines work by stimulating the body the same way the virus would if someone were infected.That means when you receive the vaccine the body then recognises that it looks like the coronavirus and then it releases certain chemicals that start a chain reaction to make immune cells that can fight the real virus.The vaccine does not work on the DNA of the body.Some people think that because some of the vaccines are made using RNA technology that means the RNA will interact with the DNA - that is not how it works. The technology is simply the way the vaccine is made - not what it will do to the body."
+    },
+    {
+        "Question": "Vaccines contain a form of microchip that will be used to track and control an individual.",
+        "Answer": "There is no vaccine microchip and there is no evidence to support claims that such a move is planned. Receiving a vaccine will not allow people to be tracked and personal information would not be entered into a database."
+    },
+    {
+        "Question": "Big business is pushing vaccines to improve profits.",
+        "Answer": "The COVID-19 crisis has caused massive upheaval across the globe and no nation has been spared. A vaccine represents the best hope to save lives and to restore our way of life; many governments have therefore entered into direct talks with vaccine makers to ensure a timeous supply of vaccines."
+    },
+    {
+        "Question": "5G networks cause the coronavirus through radiation emissions.",
+        "Answer": "The World Health Organisation has made it clear that viruses cannot travel on radio waves/mobile networks. It is also a fact that COVID-19 is spreading in many countries that do not have 5G mobile networks.COVID-19 is spread through respiratory droplets when an infected person coughs, sneezes or speaks. People can also be infected by touching a contaminated surface and then their eyes, mouth or nose."
+    },
+    {
+        "Question": "The Vaccines have the mark of the Beast – 666. Vaccines are from the devil and are satanic",
+        "Answer": "Vaccines are made to save lives and are made by technology. They have no connection with any religious organisations and cannot be infused with spirits, demons or other abstract ingredients. There is no conspiracy to possess, bewitch or control anybody."
+    },
+    {
+        "Question": "Bill Gates is pushing vaccines to control the world.",
+        "Answer": "Bill Gates, through his foundation with his wife The Bill and Melinda Gates Foundation have joined thousands of other organisations worldwide to help combat COVID-19. As government we are always careful to work together with organisations and people that share our ideals and aspirations for South African people. Our sovereignty and our people will never be compromised even as we work together with various entities all over the world."
+    },
+    {
+        "Question": "Vaccines are a way for our former oppressors to oppress us again.",
+        "Answer": "The devastation of colonialisation and apartheid is still very much alive in the consciousness of our leaders and our people - government would never allow a situation where any country or nation would be allowed to oppress our people through any means.Scientists and governments all over the world, including our own, have contributed to the knowledge that has led to the development of the vaccines. It has not just been the work of Western and rich countries but a global collaboration.Vaccines are a way of liberating all of us from the socioeconomic devastation of COVID-19, which we have all suffered globally."
+    }
 ]
 
 
