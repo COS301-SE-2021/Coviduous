@@ -3,13 +3,13 @@ let admin = require('firebase-admin');
 let express = require('express');
 let cors = require('cors');
 let reportingApp = express();
-//var serviceAccount = require("./permissions.json");
 const authMiddleware = require('../authMiddleWare.js');
 
 reportingApp.use(cors({ origin: true }));
 reportingApp.use(express.urlencoded({ extended: true }));
 reportingApp.use(express.json());
-//admin.initializeApp(); 
+
+reportingApp.use(authMiddleware);
 
 
 let database = admin.firestore();
@@ -515,7 +515,7 @@ reportingApp.put('/api/reporting/company/company-data/registered-users',async (r
               });
           }
     });
-    reportingApp.put('/api/reporting/company/company-data/registered-admins',authMiddleware, async (req, res) =>  {
+    reportingApp.put('/api/reporting/company/company-data/registered-admins', async (req, res) =>  {
         // data validation
         let fieldErrors = [];
     
@@ -566,8 +566,7 @@ reportingApp.put('/api/reporting/company/company-data/registered-users',async (r
               });
           }
     });
-       
-reportingApp.put('/api/reporting/company/company-data/floorplans/inc',authMiddleware, async (req, res) =>  {
+reportingApp.put('/api/reporting/company/company-data/floorplans/inc', async (req, res) =>  {
         // data validation
          let fieldErrors = [];
      
