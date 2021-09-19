@@ -1,4 +1,4 @@
-package com.frontend
+package com.coviduous
 
 import io.flutter.embedding.android.FlutterActivity
 

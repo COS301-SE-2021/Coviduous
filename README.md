@@ -48,6 +48,11 @@ The .github directory contains our repository's workflows for continuous integra
 
 ---
 
+## Mobile app
+- :iphone: [Download APK here](<https://drive.google.com/file/d/1tmaNVK3jBV_WABt4gf3zx4ef4fCxGHke/view?usp=sharing>)
+
+---
+
 ## Documentation
 
 ### Demo 1
