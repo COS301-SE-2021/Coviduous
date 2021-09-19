@@ -29,6 +29,7 @@ Future<bool> createBooking(String deskNumber, String floorPlanNumber,
       "userId": userId,
       "companyId": companyId
     });
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -51,6 +52,7 @@ Future<bool> deleteBooking(String bookingNumber) async {
 
   request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"bookingNumber": bookingNumber});
+  request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();
 
