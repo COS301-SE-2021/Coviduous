@@ -127,7 +127,7 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                             ),
                                           ),
                                           Text(globals.currentRooms[index].getNumberOfDesks().toString() + ' desks'),
-                                          Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().toString())
+                                          Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().floor().toString())
                                         ],
                                       ),
                                     ),

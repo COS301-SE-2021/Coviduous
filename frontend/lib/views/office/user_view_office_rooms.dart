@@ -125,7 +125,7 @@ class _UserViewOfficeRoomsState extends State<UserViewOfficeRooms> {
                                                       ),
                                                     ),
                                                     Text(globals.currentRooms[index].getNumberOfDesks().toString() + ' desks'),
-                                                    Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().toString())
+                                                    Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().floor().toString())
                                                   ],
                                                 ),
                                                 Column(

@@ -123,7 +123,7 @@ class ReportingRoomsState extends State<ReportingRooms> {
                                                 ),
                                               ),
                                               Text(globals.currentRooms[index].getNumberOfDesks().toString() + ' desks'),
-                                              Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().toString())
+                                              Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().floor().toString())
                                             ],
                                           ),
                                         ),

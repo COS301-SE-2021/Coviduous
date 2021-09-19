@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -74,8 +76,21 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height/6,
-                            child: Image(
-                              image: AssetImage('assets/images/placeholder-office-room.png'),
+                            width: MediaQuery.of(context).size.height/6,
+                            child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
+                                ? ClipRect(
+                                    child: OverflowBox(
+                                      maxWidth: double.infinity,
+                                      child: FittedBox(
+                                        fit: BoxFit.cover,
+                                        child: Image(
+                                            image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                                        ),
+                                      ),
+                                    ),
+                            )
+                                : Image(
+                                image: AssetImage('assets/images/placeholder-office-room.png')
                             ),
                           ),
                         ],
@@ -109,7 +124,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                                     ),
                                                   ),
                                                   Text(globals.currentRooms[index].getNumberOfDesks().toString() + ' desks'),
-                                                  Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().toString())
+                                                  Text('Max capacity: ' + globals.currentRooms[index].getCapacityForSixFtGrid().floor().toString())
                                                 ],
                                               ),
                                               Column(
@@ -151,9 +166,26 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               Container(
-                                                                height: MediaQuery.of(context).size.height/5,
-                                                                child: Image(
-                                                                  image: AssetImage('assets/images/placeholder-office-room.png'),
+                                                                height: (!globals.getIfOnPC())
+                                                                    ? MediaQuery.of(context).size.height/5
+                                                                    : MediaQuery.of(context).size.height/8,
+                                                                width: (!globals.getIfOnPC())
+                                                                    ? MediaQuery.of(context).size.height/5
+                                                                    : MediaQuery.of(context).size.height/8,
+                                                                child: (globals.currentRooms[index].getImageBytes() != "" && globals.currentRooms[index].getImageBytes() != null)
+                                                                    ? ClipRect(
+                                                                  child: OverflowBox(
+                                                                    maxWidth: double.infinity,
+                                                                    child: FittedBox(
+                                                                      fit: BoxFit.cover,
+                                                                      child: Image(
+                                                                          image: MemoryImage(base64Decode(globals.currentRooms[index].getImageBytes()))
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                                    : Image(
+                                                                    image: AssetImage('assets/images/placeholder-office-room.png')
                                                                 ),
                                                               ),
                                                               Expanded(
