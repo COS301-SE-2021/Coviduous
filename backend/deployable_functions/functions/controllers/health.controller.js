@@ -858,6 +858,7 @@ healthApp.post('/api/health/permissions/view', authMiddleware,async (req, res) =
  *         description: Success 
  *  
  */
+
 healthApp.post('/api/health/permissions/permission-request',authMiddleware,async (req, res) => {
   try {
     let reqJson;
@@ -1019,7 +1020,52 @@ healthApp.post('/api/health/permissions/permission-request/grant',authMiddleware
  *       200:
  *         description: Success 
  *  
- */
+*/
+healthApp.post('/api/health/report-admins',authMiddleware,async (req,res)=>{
+  let reqJson;
+  try {
+      reqJson = JSON.parse(req.body);
+  } catch (e) {
+      reqJson = req.body;
+  }
+  console.log(reqJson);
+
+  if (reqJson.companyId == null || reqJson.companyId === '') {
+    fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
+}
+  
+  const documents = database.collection('users').where("companyId","==",reqJson.companyId);
+  const snapshots = await documents.get();
+
+  let list =[];
+  let listd=[];
+   snapshots.forEach(doc => {
+       let data = doc.data();
+       listd.push(data);
+   });
+
+   for (const element of listd) {
+     if(element.type==="ADMIN")
+      {
+        list.push(element);
+      }
+  }
+  
+  if(list==null){
+    return res.status(200).send({//////////
+      message: 'Admin email does not exits'
+    });
+  }
+else{
+  return res.status(200).send({
+    message: 'Successfully retrieved admins',
+    data: list
+  });
+}
+
+});
+
+///////////////////////////////////////
 healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) => {
   try {
 
@@ -1029,30 +1075,7 @@ healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) =>
     } catch (e) {
         reqJson = req.body;
     }
-    console.log(reqJson);
     
-    const documents = database.collection('users').where("companyId","==",reqJson.companyId);
-    const snapshots = await documents.get();
-
-    let list =[];
-    let listd=[];
-     snapshots.forEach(doc => {
-         let data = doc.data();
-         listd.push(data);
-     });
-
-     for (const element of listd) {
-       if(element.type==="ADMIN")
-        {
-          list.push(element);
-        }
-    }
-    
-    if(list==null){
-      return res.status(200).send({//////////
-        message: 'Admin email does not exits'
-      });
-    }
       let infectionId = "INF-" + uuid.v4();
       let notificationId = "NTFN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
@@ -1064,8 +1087,7 @@ healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) =>
       adminId:reqJson.adminId,
       companyId: reqJson.companyId
     }
-
-    let notificationData = {
+        let notificationData = {
       notificationId: notificationId,
       userId: reqJson.userId,
       userEmail:reqJson.userEmail,
@@ -1173,7 +1195,7 @@ healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) =>
  *         description: Success 
  *  
  */
-healthApp.post('/api/health/report-recovery',authMiddleware,async (req, res) => {
+ healthApp.post('/api/health/report-recovery',authMiddleware,async (req, res) => {
   try {
 
     let reqJson;
@@ -1362,7 +1384,7 @@ healthApp.post('/api/health/contact-trace/group',authMiddleware,async (req, res)
  *         description: Success 
  *  
  */
-healthApp.post('/api/health/contact-trace/shifts',authMiddleware,async (req, res) => {
+ healthApp.post('/api/health/contact-trace/shifts',authMiddleware,async (req, res) => {
   try {
     let reqJson;
       try {
@@ -1538,6 +1560,7 @@ healthApp.post('/api/health/contact-trace/notify-group',authMiddleware,async (re
  *         description: Success 
  *  
  */
+
 healthApp.post('/api/health/Covid19TestResults',authMiddleware, async (req, res) => {
   try {
     let reqJson;
@@ -1585,6 +1608,7 @@ healthApp.post('/api/health/Covid19TestResults',authMiddleware, async (req, res)
  *         description: Success 
  *  
  */
+
 healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, async (req, res) => {
   try {
       let reqJson;
@@ -1627,7 +1651,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
   }
   });
   //////////////////
-/**
+  /**
  * @swagger
  * /health/Covid19TestResults/view:
  *   post:
@@ -1681,7 +1705,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
     }
     });
     //////////////////
-/**
+    /**
  * @swagger
  * /health/Covid19VaccineConfirmation:
  *   post:
