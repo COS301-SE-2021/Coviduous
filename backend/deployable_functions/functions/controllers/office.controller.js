@@ -9,7 +9,7 @@ officeApp.use(cors({ origin: true }));
 officeApp.use(express.urlencoded({ extended: true }));
 officeApp.use(express.json());
 
-// officeApp.use(authMiddleware);
+officeApp.use(authMiddleware);
 
 
 let database = admin.firestore();

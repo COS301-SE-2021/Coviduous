@@ -200,7 +200,18 @@ async function sendUserEmail(receiver,subject,message){
 
 //////////////////////////////////////////////////////////////////GENERAL FUNCTIONS AND OBJECTS/////////////////////////////////////////////////
 ///////////////// HEALTH CHECK /////////////////
-
+/**
+ * @swagger
+ * /health/health-check:
+ *   post:
+ *     description: create a health check
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/health-check', authMiddleware,async (req, res) => {
 
     let fieldErrors = [];
@@ -791,7 +802,18 @@ healthApp.post('/api/health/health-check', authMiddleware,async (req, res) => {
   });
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////// PERMISSION /////////////////
-
+/**
+ * @swagger
+ * /health/permissions/view:
+ *   post:
+ *     description: retrieve all office access permissions by user email
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/permissions/view', authMiddleware,async (req, res) => {
   try {
     let reqJson;
@@ -824,7 +846,18 @@ healthApp.post('/api/health/permissions/view', authMiddleware,async (req, res) =
 
 
 ///////////////// PERMISSION REQUEST /////////////////
-
+/**
+ * @swagger
+ * /health/permissions/permission-request:
+ *   post:
+ *     description: create a permission request
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/permissions/permission-request',authMiddleware,async (req, res) => {
   try {
     let reqJson;
@@ -877,7 +910,18 @@ healthApp.post('/api/health/permissions/permission-request',authMiddleware,async
 });
 
 //////////////////////////////
-
+/**
+ * @swagger
+ * /health/permissions/permission-request/view:
+ *   post:
+ *     description: retrieve all permission requests by companyId
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/permissions/permission-request/view', authMiddleware,async (req, res) => {
   try {
     let reqJson;
@@ -909,6 +953,18 @@ healthApp.post('/api/health/permissions/permission-request/view', authMiddleware
 });
 
 ///////////////////////////////////
+/**
+ * @swagger
+ * /health/permissions/permission-request/grant:
+ *   post:
+ *     description: grant a permission request
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/permissions/permission-request/grant',authMiddleware,async (req, res) => {
   try {
 
@@ -952,6 +1008,18 @@ healthApp.post('/api/health/permissions/permission-request/grant',authMiddleware
 });
 
 ///////////////////////////////////////
+/**
+ * @swagger
+ * /health/report-infection:
+ *   post:
+ *     description: create a reported infection
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) => {
   try {
 
@@ -961,10 +1029,34 @@ healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) =>
     } catch (e) {
         reqJson = req.body;
     }
+    console.log(reqJson);
+    
+    const documents = database.collection('users').where("companyId","==",reqJson.companyId);
+    const snapshots = await documents.get();
+
+    let list =[];
+    let listd=[];
+     snapshots.forEach(doc => {
+         let data = doc.data();
+         listd.push(data);
+     });
+
+     for (const element of listd) {
+       if(element.type==="ADMIN")
+        {
+          list.push(element);
+        }
+    }
+    
+    if(list==null){
+      return res.status(200).send({//////////
+        message: 'Admin email does not exits'
+      });
+    }
       let infectionId = "INF-" + uuid.v4();
       let notificationId = "NTFN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
-    let reportedInfectionData = {
+      let reportedInfectionData = {
       infectionId: infectionId,
       userId: reqJson.userId,
       userEmail:reqJson.userEmail,
@@ -1069,6 +1161,18 @@ healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) =>
 });
 
 //////////////////////////////////////////
+/**
+ * @swagger
+ * /health/report-recovery:
+ *   post:
+ *     description: create a reported recovery
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/report-recovery',authMiddleware,async (req, res) => {
   try {
 
@@ -1191,6 +1295,18 @@ healthApp.post('/api/health/report-recovery',authMiddleware,async (req, res) => 
 //////////////////////////////////// Contact Tracing ///////////////////////////
 ///////////////
 //returns a group of employees who fall under the same shift identified by the shiftId
+/**
+ * @swagger
+ * /health/contact-trace/group:
+ *   post:
+ *     description: retrieve all contact trace groups by shiftId
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/contact-trace/group',authMiddleware,async (req, res) => {
   try {
       let reqJson;
@@ -1234,6 +1350,18 @@ healthApp.post('/api/health/contact-trace/group',authMiddleware,async (req, res)
 });
 ////////////////////////////////////
 //returns a shifts an employee was in based on the employee email
+/**
+ * @swagger
+ * /health/contact-trace/shifts:
+ *   post:
+ *     description: retrieve all contact trace shifts by user email
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/contact-trace/shifts',authMiddleware,async (req, res) => {
   try {
     let reqJson;
@@ -1290,6 +1418,18 @@ healthApp.post('/api/health/contact-trace/shifts',authMiddleware,async (req, res
   }
 });
 ////////////////////////////////////
+/**
+ * @swagger
+ * /health/permissions:
+ *   delete:
+ *     description: delete a permission request
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.delete('/health/permissions',authMiddleware, async (req, res)=>{
   try{
     let reqJson;
@@ -1313,6 +1453,18 @@ healthApp.delete('/health/permissions',authMiddleware, async (req, res)=>{
   
   });
 ////////////////////////////////////
+/**
+ * @swagger
+ * /health/contact-trace/notify-group:
+ *   post:
+ *     description: send notification email to a shift group by shiftId
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/contact-trace/notify-group',authMiddleware,async (req, res) => {
   try {
       let reqJson;
@@ -1374,6 +1526,18 @@ healthApp.post('/api/health/contact-trace/notify-group',authMiddleware,async (re
   }
 });
 ////////////////////////////////////////////////////////
+/**
+ * @swagger
+ * /health/Covid19TestResults:
+ *   post:
+ *     description: upload COVID-19 test results document
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/Covid19TestResults',authMiddleware, async (req, res) => {
   try {
     let reqJson;
@@ -1409,6 +1573,18 @@ healthApp.post('/api/health/Covid19TestResults',authMiddleware, async (req, res)
   }
 });
 ///////////////////////////////////////
+/**
+ * @swagger
+ * /health/Covid19VaccineConfirmation/view:
+ *   post:
+ *     description: retrieve all COVID-19 vaccine documents
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
 healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, async (req, res) => {
   try {
       let reqJson;
@@ -1451,6 +1627,18 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
   }
   });
   //////////////////
+/**
+ * @swagger
+ * /health/Covid19TestResults/view:
+ *   post:
+ *     description: retrieve all COVID-19 test results documents
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   healthApp.post('/api/health/Covid19TestResults/view', authMiddleware,async (req, res) => {
     try {
         let reqJson;
@@ -1493,6 +1681,18 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
     }
     });
     //////////////////
+/**
+ * @swagger
+ * /health/Covid19VaccineConfirmation:
+ *   post:
+ *     description: upload COVID-19 vaccine document
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
   healthApp.post('/api/health/Covid19VaccineConfirmation', authMiddleware,async (req, res) => {
       try {
         let reqJson;

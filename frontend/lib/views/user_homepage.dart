@@ -516,7 +516,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                           ),
                                           onPressed: () {
                                             if (latestPermission == true) {
-                                              //Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
                                             } else {
                                               showDialog(
                                                   context: context,
@@ -533,7 +533,6 @@ class _UserHomePageState extends State<UserHomePage> {
                                                     ],
                                                   )
                                               );
-                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
                                             }
                                           }
                                       ),
