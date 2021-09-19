@@ -9,6 +9,8 @@ shiftApp.use(cors({ origin: true }));
 shiftApp.use(express.urlencoded({ extended: true }));
 shiftApp.use(express.json()); 
 
+shiftApp.use(authMiddleware); 
+
 let database = admin.firestore();
 let uuid = require("uuid");
 

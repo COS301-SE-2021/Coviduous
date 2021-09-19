@@ -9,6 +9,8 @@ notificationApp.use(cors({ origin: true }));
 notificationApp.use(express.urlencoded({ extended: true }));
 notificationApp.use(express.json());
 
+notificationApp.use(authMiddleware);
+
 let database = admin.firestore();
 let uuid = require("uuid");
  //////////////////////////////////////////////////////////////////General Functions ///////////////////////////////////////////////////
