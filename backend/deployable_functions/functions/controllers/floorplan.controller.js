@@ -585,7 +585,26 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
     
   try {
     let room =new Room(0,reqJson.roomNumber, reqJson.roomName, reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,reqJson.numberDesks,reqJson.capacityPercentage);
-    let roomData = {
+    let roomData;
+    if(reqJson.base64String==="" || reqJson.base64String === null)
+    {
+      roomData = {
+        floorNumber:room.floorNumber,
+        roomNumber:room.roomNumber,
+        roomName:room.roomName,
+        roomArea:room.roomArea,
+        capacityPercentage:room.capacityPercentage,
+        numberDesks: room.numberDesks,
+        occupiedDesks:room.occupiedDesks,
+        currentCapacity:room.currentCapacity,
+        deskArea:room.deskArea,
+        capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
+        capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle
+      }
+    }
+    else
+    {
+    roomData = {
       floorNumber:room.floorNumber,
       roomNumber:room.roomNumber,
       roomName:room.roomName,
@@ -597,8 +616,9 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
       deskArea:room.deskArea,
       capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
       capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle,
-      base64String: reqJson.base64String,
+      base64String: reqJson.base64String
     }
+  }
     //editRoom()
     await database.collection('rooms').doc(roomData.roomNumber).update(
       roomData
