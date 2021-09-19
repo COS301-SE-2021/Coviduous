@@ -961,31 +961,34 @@ healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) =>
     } catch (e) {
         reqJson = req.body;
     }
+    console.log(reqJson);
     
-    const document = database.collection('users').where("companyId","==",reqJson.companyId);
-    const snapshot = await document.get();
+    const documents = database.collection('users').where("companyId","==",reqJson.companyId);
+    const snapshots = await documents.get();
 
     let list =[];
-    let lists=[];
-     snapshot.forEach(doc => {
+    let listd=[];
+     snapshots.forEach(doc => {
          let data = doc.data();
-         list.push(data);
+         listd.push(data);
      });
 
-
-     for (const element of list) {
+     for (const element of listd) {
        if(element.type==="ADMIN")
         {
-          lists.push(element);
+          list.push(element);
         }
     }
     
-    console.log(lists);
-      
+    if(list==null){
+      return res.status(200).send({//////////
+        message: 'Admin email does not exits'
+      });
+    }
       let infectionId = "INF-" + uuid.v4();
       let notificationId = "NTFN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
-    let reportedInfectionData = {
+      let reportedInfectionData = {
       infectionId: infectionId,
       userId: reqJson.userId,
       userEmail:reqJson.userEmail,
