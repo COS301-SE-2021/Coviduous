@@ -961,6 +961,27 @@ healthApp.post('/api/health/report-infection',authMiddleware,async (req, res) =>
     } catch (e) {
         reqJson = req.body;
     }
+    
+    const document = database.collection('users').where("companyId","==",reqJson.companyId);
+    const snapshot = await document.get();
+
+    let list =[];
+    let lists=[];
+     snapshot.forEach(doc => {
+         let data = doc.data();
+         list.push(data);
+     });
+
+
+     for (const element of list) {
+       if(element.type==="ADMIN")
+        {
+          lists.push(element);
+        }
+    }
+    
+    console.log(lists);
+      
       let infectionId = "INF-" + uuid.v4();
       let notificationId = "NTFN-" + uuid.v4();
       let timestamp = new Date().today() + " @ " + new Date().timeNow();
