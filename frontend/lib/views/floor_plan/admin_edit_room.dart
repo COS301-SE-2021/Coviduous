@@ -28,6 +28,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
   TextEditingController _roomArea = TextEditingController();
   TextEditingController _deskArea = TextEditingController();
   TextEditingController _numOfDesks = TextEditingController();
+  TextEditingController _capacityPercentage = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   String fileName = "";
@@ -126,6 +127,8 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
       _deskArea.text = room.getDeskArea().toString();
     if (_numOfDesks.text.isEmpty)
       _numOfDesks.text = room.getNumberOfDesks().toString();
+    if (_capacityPercentage.text.isEmpty)
+      _capacityPercentage.text = room.getCurrentCapacity().toString();
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -272,7 +275,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                       ),
                                       //Desk area of all desks in the room
                                       TextFormField(
-                                        textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
                                         decoration: InputDecoration(
                                           labelText: 'Number of desks',
                                           hintText: room.getNumberOfDesks().toString(),
@@ -291,6 +294,31 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                           } else {
                                             if (room.getNumberOfDesks() == 0) {
                                               return "Number of desks must be greater than zero";
+                                            }
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                        decoration: InputDecoration(
+                                          labelText: 'Capacity percentage',
+                                          hintText: room.getNumberOfDesks().toString(),
+                                        ),
+                                        keyboardType: TextInputType.text,
+                                        controller: _capacityPercentage,
+                                        validator: (value) {
+                                          if (value.isNotEmpty) {
+                                            if (!globals.isNumeric(value)) {
+                                              return "Percentage must be a number";
+                                            } else if (int.parse(value) > 100 || int.parse(value) < 1) {
+                                              return "Percentage must be between 1 and 100";
+                                            } else {
+                                              return null;
+                                            }
+                                          } else {
+                                            if (room.getNumberOfDesks() == 0) {
+                                              return "Percentage must be greater than zero";
                                             }
                                           }
                                           return null;
@@ -320,7 +348,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
                                             }
 
                                             floorPlanHelpers.updateRoom(_tempName, num.parse(_roomArea.text), num.parse(_deskArea.text),
-                                                num.parse(_numOfDesks.text), room.getCapacityPercentage(), encodedBytes).then((result) {
+                                                num.parse(_numOfDesks.text), num.parse(_capacityPercentage.text), encodedBytes).then((result) {
                                                   if (result == true) {
                                                     ScaffoldMessenger.of(context).showSnackBar(
                                                         SnackBar(content: Text("Room information updated")));

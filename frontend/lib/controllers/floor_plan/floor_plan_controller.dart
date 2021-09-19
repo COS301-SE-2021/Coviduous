@@ -88,7 +88,7 @@ Future<bool> createRoom(num currentNumRoomsInFloor, String floorNumber, String i
       "currentNumberRoomInFloor": currentNumRoomsInFloor,
       "floorNumber": floorNumber,
       "roomArea": 0,
-      "capacityPercentage": 0,
+      "capacityPercentage": 100,
       "numberDesks": 0,
       "occupiedDesks": 0,
       "currentCapacity": 0,
