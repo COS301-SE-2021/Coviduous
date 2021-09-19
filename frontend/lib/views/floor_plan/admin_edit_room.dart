@@ -128,7 +128,7 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
     if (_numOfDesks.text.isEmpty)
       _numOfDesks.text = room.getNumberOfDesks().toString();
     if (_capacityPercentage.text.isEmpty)
-      _capacityPercentage.text = room.getCurrentCapacity().toString();
+      _capacityPercentage.text = room.getCapacityPercentage().toString();
 
     return WillPopScope(
       onWillPop: _onWillPop,
