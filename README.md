@@ -1,6 +1,7 @@
 # CAPSlock - Coviduous - Project Description
 
 ![Flutter App CI](https://github.com/COS301-SE-2021/Coviduous/actions/workflows/flutter.yml/badge.svg)
+![Firebase Functions CD](https://github.com/COS301-SE-2021/Coviduous/actions/workflows/firebase-functions.yml/badge.svg)
 <br/>
 ![GitHub Issues](https://img.shields.io/github/issues/COS301-SE-2021/Coviduous)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Coviduous)
