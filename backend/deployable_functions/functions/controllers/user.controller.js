@@ -3,13 +3,13 @@ let admin = require('firebase-admin');
 let express = require('express');
 let cors = require('cors');
 let userApp = express();
-//var serviceAccount = require("./permissions.json");
 const authMiddleware = require('../authMiddleWare.js');
 
 userApp.use(cors({ origin: true }));
 userApp.use(express.urlencoded({ extended: true }));
 userApp.use(express.json());
-//admin.initializeApp(); 
+
+userApp.use(authMiddleware);
 
 
 let database = admin.firestore();
@@ -40,7 +40,7 @@ let uuid = require("uuid");
  * @swagger
  * /users:
  *   post:
- *     description: create a user
+ *     description: create user
  *     requestBody:
  *       required: true
  *     responses: 
@@ -203,7 +203,7 @@ userApp.post('/api/users', async (req, res) => {
  * @swagger
  * /users:
  *   delete:
- *     description: delete a user
+ *     description: delete user by userId
  *     requestBody:
  *       required: true
  *     responses: 
@@ -314,7 +314,7 @@ userApp.delete('/api/users', async (req, res) => {
  * @swagger
  * /users:
  *   put:
- *     description: update a user's details
+ *     description: update user details by userId
  *     requestBody:
  *       required: true
  *     responses: 

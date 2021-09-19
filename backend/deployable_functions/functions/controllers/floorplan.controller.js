@@ -11,6 +11,8 @@ floorPlanApp.use(cors({ origin: true }));
 floorPlanApp.use(express.urlencoded({ extended: true }));
 floorPlanApp.use(express.json());
 
+// floorPlanApp.use(authMiddleware);
+
 let database = admin.firestore();
 let uuid = require("uuid");
 
