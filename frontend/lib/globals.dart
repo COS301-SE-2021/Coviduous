@@ -5,19 +5,43 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
 import 'package:universal_html/html.dart' as html;
 
+//Announcement subsystem
 import 'package:frontend/models/announcement/announcement.dart';
+
+//Floor plan subsystem
 import 'package:frontend/models/floor_plan/floor.dart';
 import 'package:frontend/models/floor_plan/floor_plan.dart';
 import 'package:frontend/models/floor_plan/room.dart';
+
+//Health subsystem
 import 'package:frontend/models/health/health_check.dart';
 import 'package:frontend/models/health/permission.dart';
 import 'package:frontend/models/health/permission_request.dart';
+import 'package:frontend/models/health/test_results.dart';
+import 'package:frontend/models/health/vaccine_confirmation.dart';
+
+//Notification subsystem
 import 'package:frontend/models/notification/notification.dart';
+import 'package:frontend/models/notification/temp_notification.dart';
+
+//Office subsystem
 import 'package:frontend/models/office/booking.dart';
+
+//Reporting subsystem
+import 'package:frontend/models/reporting/booking_summary.dart';
+import 'package:frontend/models/reporting/company_summary.dart';
+import 'package:frontend/models/reporting/health_summary.dart';
+import 'package:frontend/models/reporting/permission_summary.dart';
+import 'package:frontend/models/reporting/shift_summary.dart';
+
+//Shift subsystem
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
-import 'package:frontend/models/notification/temp_notification.dart';
+
+//User subsystem
 import 'package:frontend/models/user/user.dart';
+import 'package:frontend/models/user/recovered_user.dart';
+import 'package:frontend/models/user/sick_user.dart';
 
 import 'package:frontend/theme.dart' as theme;
 
@@ -96,15 +120,27 @@ String loggedInCompanyId = 'CID-1';
 //JWT the user receives after logging in
 String token = '';
 
+//Chatbot previous page
+String chatbotPreviousPage = '';
+
+//Show chatbot
+bool showChatBot = true;
+
 //==============
 //Theme-related
 //==============
 
 Color appBarColor = theme.appBarColor;
-Color primaryColor = theme.primaryColor;
-Color secondaryColor = theme.secondaryColor;
-Color lineColor = theme.lineColor;
 Color focusColor = theme.focusColor;
+Color focusColor2 = theme.focusColor2;
+Color lineColor = theme.lineColor;
+
+Color firstColor = theme.firstColor;
+Color secondColor = theme.secondColor;
+Color thirdColor = theme.thirdColor;
+Color fourthColor = theme.fourthColor;
+Color fifthColor = theme.fifthColor;
+Color sixthColor = theme.sixthColor;
 
 //Needed to change the color of a TextField when it's selected.
 MaterialColor textFieldSelectedColor = theme.textFieldSelectedColor;
@@ -130,6 +166,7 @@ Future loadPDFFonts() async {
 //Used in booking subsystem
 //===========================
 List<Booking> currentBookings;
+Booking currentBooking;
 
 //============================
 //Used in floor plan subsystem
@@ -138,18 +175,15 @@ List<Booking> currentBookings;
 //Floor plan ID
 String floorPlanId = '';
 
+//Check if floor plan image has been uploaded
+bool floorPlanImageExists = false;
+
 //=========================
 //Used in health subsystem
 //=========================
 
 //Check if company guidelines have been uploaded
 bool companyGuidelinesExist = true;
-
-//Check if COVID-19 test results have been uploaded
-bool testResultsExist = false;
-
-//Check if vaccine confirmation has been uploaded
-bool vaccineConfirmExists = false;
 
 //Current user completed health check
 HealthCheck currentHealthCheck;
@@ -165,7 +199,17 @@ List<PermissionRequest> currentPermissionRequests;
 //Current user
 User selectedUser;
 List<User> selectedUsers = [];
+List<SickUser> selectedSickUsers = [];
+List<RecoveredUser> selectedRecoveredUsers = [];
 String selectedUserEmail = '';
+
+//Current vaccine confirmation documents
+List<VaccineConfirmation> currentVaccineConfirmations = [];
+VaccineConfirmation currentVaccineConfirmation;
+
+//Current test result documents
+List<TestResults> currentTestResults = [];
+TestResults currentTestResult;
 
 //===============================
 //Used in announcement subsystem
@@ -182,13 +226,38 @@ List<Announcement> currentAnnouncements = [];
 String currentSubjectField = '';
 
 //Current description field
-String currentDescriptionField = '';
+String currentMessageField = '';
 
 //Global list of notifications
 List<Notification> currentNotifications = [];
 
 //List of users to send notifications to
 List<TempNotification> tempUsers = [];
+
+//============================
+//Used in reporting subsystem
+//============================
+
+//Current booking summary
+BookingSummary currentBookingSummary;
+
+//Current company summary
+CompanySummary currentCompanySummary;
+
+//Current health summary
+HealthSummary currentHealthSummary;
+
+//Current permission summary
+PermissionSummary currentPermissionSummary;
+
+//Current shift summary
+ShiftSummary currentShiftSummary;
+
+//Current year
+String reportingYear = '';
+
+//Current month
+String reportingMonth = '';
 
 //===========================
 //Used in multiple subsystems
@@ -206,6 +275,7 @@ List<Floor> currentFloors = [];
 String currentRoomNum = '';
 List<Room> currentRooms = [];
 Room currentRoom;
+int currentRoomIndex = 0;
 
 //Current shift/shifts you're working with
 String currentShiftNum = '';
@@ -225,14 +295,41 @@ List<Group> currentGroups = [];
 //Current group description you're working with
 String currentGroupDescription = '';
 
+//Current emails registered to a company, used for autocompletion provided by flutter_typeahead
+List<String> currentEmails = [];
+
+class CurrentEmails {
+  static List<String> getSuggestions(String query) {
+    List<String> matches = [];
+    matches.addAll(currentEmails);
+
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+}
+
 //============================
 // Controller request headers
 //============================
 
-Map<String, String> requestHeaders = {
-  'Authorization': 'Bearer $token',
-  'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-  'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
-  'Accept': '*/*',
-  'Content-Type': 'application/json'
-};
+Map<String, String> getRequestHeaders() {
+  if (kReleaseMode) { //If release version of the app
+    return {
+      'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+    };
+  } else { //Else, testing version of the app
+    return {
+      'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Connection': 'Keep-Alive',
+      'Keep-Alive': 'timeout=5, max=1000'
+    };
+  }
+}

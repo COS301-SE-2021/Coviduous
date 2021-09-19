@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'health/visitor_home_health.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage>{
                         child: Column(
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height/20,
+                              height: MediaQuery.of(context).size.height/16,
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom (
@@ -64,20 +65,18 @@ class _HomePageState extends State<HomePage>{
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                   ),
-                                  child:(
-                                      Text('Company member')
-                                  ),
+                                  child: Text('Company member'),
                                   onPressed:() {
                                     Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                                   }
                               ),
                             ),
                             SizedBox (
-                              height: MediaQuery.of(context).size.height/48,
+                              height: MediaQuery.of(context).size.height/30,
                               width: MediaQuery.of(context).size.width,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height/20,
+                              height: MediaQuery.of(context).size.height/16,
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom (
@@ -85,11 +84,28 @@ class _HomePageState extends State<HomePage>{
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                   ),
-                                  child:(
-                                      Text('Visitor')
-                                  ),
+                                  child: Text('Visitor'),
                                   onPressed:() {
                                     Navigator.of(context).pushReplacementNamed(VisitorHealth.routeName);
+                                  }
+                              ),
+                            ),
+                            SizedBox (
+                              height: MediaQuery.of(context).size.height/30,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/16,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  child: Text('Help'),
+                                  onPressed:() {
+                                    globalWidgets.showAssetImage(context, 'assets/images/Coviduous_tutorials_using_the_app.png', 'Coviduous tutorial - using the app', 'png');
                                   }
                               ),
                             ),

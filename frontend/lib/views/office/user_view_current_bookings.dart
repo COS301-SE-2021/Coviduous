@@ -4,8 +4,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:frontend/views/office/home_office.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
+import 'package:frontend/views/office/jitsi_meeting.dart';
 
+import 'package:frontend/controllers/floor_plan/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/controllers/office/office_helpers.dart' as officeHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewCurrentBookings extends StatefulWidget {
@@ -15,8 +18,6 @@ class UserViewCurrentBookings extends StatefulWidget {
 }
 
 class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
-  int numberOfBookings = globals.currentBookings.length; //Number of bookings
-
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(Office.routeName);
     return (await true);
@@ -39,132 +40,252 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
     }
 
     Widget getList() {
-      if (numberOfBookings == 0) { //If the number of bookings = 0, don't display a list
+      if (globals.currentBookings.length == 0) { //If the number of bookings = 0, don't display a list
         return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No bookings found', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-            ),
-            Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                color: Colors.white,
-                padding: EdgeInsets.all(12),
-                child: Text('You have no active bookings.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-            )
-          ]
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
+              ),
+              globalWidgets.notFoundMessage(context, 'No bookings found', 'You have no active bookings.'),
+            ]
         );
-      } else { //Else create and return a list
+      } else {
+        //Else create and return a list
         return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: numberOfBookings,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH booking in bookings[]
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: globals.currentBookings.length,
+            itemBuilder: (context, index) {
               return ListTile(
                 title: Column(
-                    children:[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Booking ' + globals.currentBookings[index].getBookingNumber()),
-                      ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('User: ' + globals.currentBookings[index].getUserId()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children:[
+                            Column(
+                              children: [
+                                Container(
+                                  height: MediaQuery.of(context).size.height/6,
+                                  child: Image(image: AssetImage('assets/images/placeholder-office-room.png')),
+                                ),
+                              ],
                             ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Date: ' + globals.currentBookings[index].getTimestamp()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Floor: ' + globals.currentBookings[index].getFloorNumber()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Room: ' + globals.currentBookings[index].getRoomNumber()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Container(
+                                              child: Text(globals.currentBookings[index].getTimestamp().substring(24)),
+                                            ),
+                                          ),
                                         ),
+                                      ],
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(8),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          ElevatedButton(
+                                            child: Text('Details'),
+                                            onPressed: () {
+                                              floorPlanController.getRooms(globals.currentBookings[index].getFloorNumber()).then((result) {
+                                                if (result != null) {
+                                                  globals.currentRoom = result.where((element) => element.getRoomNumber() == globals.currentBookings[index].getRoomNumber()).first;
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (ctx) => AlertDialog(
+                                                        title: Text('Booking details'),
+                                                        content: Container(
+                                                          color: Colors.white,
+                                                          height: 350,
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            children: [
+                                                              Row(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  Container(
+                                                                    height: (!globals.getIfOnPC())
+                                                                        ? MediaQuery.of(context).size.height/5
+                                                                        : MediaQuery.of(context).size.height/8,
+                                                                    child: Image(
+                                                                      image: AssetImage('assets/images/placeholder-office-room.png'),
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Container(
+                                                                      alignment: Alignment.center,
+                                                                      color: globals.firstColor,
+                                                                      height: (!globals.getIfOnPC())
+                                                                          ? MediaQuery.of(context).size.height/5
+                                                                          : MediaQuery.of(context).size.height/8,
+                                                                      child: Text('  Booking ' + (index+1).toString() + '  ',
+                                                                        style: TextStyle(
+                                                                          color: Colors.white,
+                                                                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 3,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Flexible(
+                                                                child: SingleChildScrollView(
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: (globals.currentRoom.getRoomName() != "")
+                                                                            ? Text('Room name: ' + globals.currentRoom.getRoomName(),
+                                                                            style: TextStyle(color: Colors.black))
+                                                                            : Text('Unnamed room',
+                                                                            style: TextStyle(color: Colors.black)),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                      Divider(
+                                                                        color: globals.lineColor,
+                                                                        thickness: 2,
+                                                                      ),
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: Text('Number of bookings: ' + globals.currentRoom.getCurrentCapacity().toString(),
+                                                                            style: TextStyle(color: Colors.black)
+                                                                        ),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                      Divider(
+                                                                        color: globals.lineColor,
+                                                                        thickness: 2,
+                                                                      ),
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: Text('Maximum capacity: ' + globals.currentRoom.getCapacityForSixFtGrid().toString(),
+                                                                            style: TextStyle(color: Colors.black)
+                                                                        ),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                      Divider(
+                                                                        color: globals.lineColor,
+                                                                        thickness: 2,
+                                                                      ),
+                                                                      Container(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        height: 40,
+                                                                        child: Text('Date: ' + globals.currentBookings[index].getTimestamp().substring(24),
+                                                                            style: TextStyle(color: Colors.black)
+                                                                        ),
+                                                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: Text('Okay'),
+                                                            onPressed: (){
+                                                              Navigator.of(ctx).pop();
+                                                            },
+                                                          )
+                                                        ],
+                                                      )
+                                                  );
+                                                }
+                                              });
+                                            },
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context).size.width/48,
+                                          ),
+                                          ElevatedButton(
+                                            child: Text('Cancel'),
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                    title: Text('Warning'),
+                                                    content: Text('Are you sure you want to cancel this booking?'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: Text('Yes'),
+                                                        onPressed: (){
+                                                          officeHelpers.cancelBooking(globals.currentBookings[index].getBookingNumber()).then((result) {
+                                                            if (result == true) {
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(content: Text("Booking successfully cancelled.")));
+                                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                                            } else {
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                  SnackBar(content: Text('Error occurred while cancelling booking. Please try again later.')));
+                                                            }
+                                                          });
+                                                        },
+                                                      ),
+                                                      TextButton(
+                                                        child: Text('No'),
+                                                        onPressed: (){
+                                                          Navigator.of(ctx).pop();
+                                                        },
+                                                      )
+                                                    ],
+                                                  ));
+                                              setState(() {});
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                      child: Text('Cancel'),
-                                      onPressed: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                              title: Text('Warning'),
-                                              content: Text('Are you sure you want to cancel this booking?'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: Text('Yes'),
-                                                  onPressed: (){
-                                                    officeHelpers.cancelBooking(globals.currentBookings[index].getBookingNumber()).then((result) {
-                                                      if (result == true) {
-                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                            SnackBar(content: Text("Booking successfully cancelled.")));
-                                                        Navigator.of(context).pushReplacementNamed(Office.routeName);
-                                                      } else {
-                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                            SnackBar(content: Text('Error occurred while cancelling booking. Please try again later.')));
-                                                      }
-                                                    });
-                                                  },
-                                                ),
-                                                TextButton(
-                                                  child: Text('No'),
-                                                  onPressed: (){
-                                                    Navigator.of(ctx).pop();
-                                                  },
-                                                )
-                                              ],
-                                            ));
-                                        setState(() {});
-                                      }),
-                                ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ]
-                      )
-                    ]
+                      ),
+                    ),
+                    Container(
+                      color: globals.firstColor,
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        child: Text('Join virtual meeting'),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          padding: EdgeInsets.zero,
+                          shadowColor: Colors.transparent,
+                        ),
+                        onPressed: () {
+                          globals.currentBooking = globals.currentBookings[index];
+                          Navigator.of(context).pushReplacementNamed(UserJitsiMeeting.routeName);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                //title: floors[index].floor()
               );
-            }
-        );
+            });
       }
     }
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
+      child: Scaffold(
           appBar: AppBar(
             title: Text('View current bookings'),
             leading: BackButton( //Specify back button
@@ -175,8 +296,17 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
           ),
           body: Stack(
               children: <Widget>[
-                Center(
-                    child: getList()
+                SingleChildScrollView(
+                  child: Center(
+                    child: (globals.getIfOnPC())
+                        ? Container(
+                          width: 640,
+                          child: getList(),
+                    )
+                        : Container(
+                          child: getList(),
+                    ),
+                  ),
                 ),
               ]
           )

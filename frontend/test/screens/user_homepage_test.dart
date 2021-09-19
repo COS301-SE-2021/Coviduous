@@ -18,6 +18,7 @@ void main() {
     }
 
     globals.loggedInUserType = "USER";
+    globals.showChatBot = false;
 
     //Build user homepage screen
     await tester.pumpWidget(createWidgetForTesting(child: new UserHomePage()));

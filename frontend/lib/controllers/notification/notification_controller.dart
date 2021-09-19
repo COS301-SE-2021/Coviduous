@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import 'package:frontend/models/notification/notification.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
+import 'package:frontend/globals.dart' as globals;
 
 List<Notification> notificationDatabaseTable = [];
 int numNotifications = 0;
@@ -17,7 +18,7 @@ String server = serverInfo.getServer(); //server needs to be running on firebase
 
 Future<bool> createNotification(String notificationId, String userId, String userEmail,
     String subject, String message, String timestamp, String adminId, String companyId) async {
-  String path = '/notifications';
+  String path = 'notification/api/notifications/';
   String url = server + path;
   var request;
 
@@ -33,6 +34,7 @@ Future<bool> createNotification(String notificationId, String userId, String use
       "adminId": adminId,
       "companyId": companyId,
     });
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -49,7 +51,7 @@ Future<bool> createNotification(String notificationId, String userId, String use
 }
 
 Future<List<Notification>> getNotifications() async {
-  String path = '/notifications';
+  String path = 'notification/api/notifications/';
   String url = server + path;
   var response;
 
@@ -82,7 +84,7 @@ Future<List<Notification>> getNotifications() async {
 }
 
 Future<List<Notification>> getNotificationsUserEmail(String email) async {
-  String path = '/notifications/user-email';
+  String path = 'notification/api/notifications/user-email/';
   String url = server + path;
   var request;
 
@@ -91,6 +93,7 @@ Future<List<Notification>> getNotificationsUserEmail(String email) async {
     request.body = json.encode({
       "userEmail": email,
     });
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -118,11 +121,12 @@ Future<List<Notification>> getNotificationsUserEmail(String email) async {
 }
 
 Future<bool> deleteNotifications(String notificationId) async {
-  String path = '/notifications';
+  String path = 'notification/api/notifications/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"notificationId": notificationId});
+  request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();
 

@@ -20,7 +20,7 @@ Future<bool> createNotification(TempNotification tempUser) async {
   bool result = false;
   await Future.wait([
     notificationController.createNotification("", tempUser.getUserId(), tempUser.getUserEmail(), globals.currentSubjectField,
-        globals.currentDescriptionField, "", globals.loggedInUser.getFirstName() + " " + globals.loggedInUser.getLastName(), globals.loggedInCompanyId)
+        globals.currentMessageField, "", globals.loggedInUser.getFirstName() + " " + globals.loggedInUser.getLastName(), globals.loggedInCompanyId)
   ]).then((results) {
     result = results.first;
   });

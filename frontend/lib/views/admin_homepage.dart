@@ -13,6 +13,7 @@ import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/user_homepage.dart';
 
 import 'package:frontend/controllers/announcement/announcement_helpers.dart' as announcementHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminHomePage extends StatefulWidget {
@@ -77,24 +78,23 @@ class _AdminHomePageState extends State<AdminHomePage> {
             // ====================
           drawer: Drawer(
             child: Container(
-              color: globals.secondaryColor,
+              color: globals.secondColor,
               child: ListView(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 children: [
                   DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: globals.primaryColor,
-                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
-                          width: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/placeholder-profile-image.png"),
-                              fit: BoxFit.cover,
+                        ClipOval(
+                          child: Container(
+                            height: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                            width: (MediaQuery.of(context).size.height / (10 * globals.getWidgetScaling())),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/placeholder-profile-image.png"),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -104,6 +104,10 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                       ],
                     ),
+                  ),
+                  Divider(
+                    color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton (
                       style: ElevatedButton.styleFrom (
@@ -132,6 +136,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton (
                       style: ElevatedButton.styleFrom (
@@ -153,6 +158,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton(
                     style: ElevatedButton.styleFrom (
@@ -174,6 +180,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                   TextButton(
                     style: ElevatedButton.styleFrom (
@@ -215,6 +222,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                   Divider(
                     color: globals.lineColor,
+                    thickness: 2,
                   ),
                 ]
               ),
@@ -273,7 +281,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                       ),
                                       child: Column (
                                         children: <Widget>[
-                                          Flexible(child: Icon(Icons.add_circle_rounded, size: 42)),
+                                          Flexible(child: Icon(Icons.business, size: 42)),
                                           SizedBox(height: 8),
                                           Flexible(child: Text('Floor plans')),
                                         ],
@@ -311,7 +319,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         ),
                                         child: Column (
                                           children: <Widget>[
-                                            Flexible(child: Icon(Icons.sensor_door, size: 42)),
+                                            Flexible(child: Icon(Icons.vpn_key, size: 42)),
                                             SizedBox(height: 8),
                                             Flexible(child: Text('Permissions')),
                                           ],
@@ -347,92 +355,108 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             //=============================
                             ) : Column (
                                 children: <Widget>[
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Floor plans')),
-                                          Flexible(child: Icon(Icons.add_circle_rounded)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Floor plans')),
+                                            Flexible(child: Icon(Icons.business)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+                                        }
+                                    ),
                                   ),
                                   SizedBox (
-                                    height: MediaQuery.of(context).size.height/48,
+                                    height: MediaQuery.of(context).size.height/30,
                                     width: MediaQuery.of(context).size.width,
                                   ),
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Shifts')),
-                                          Flexible(child: Icon(Icons.alarm)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Shifts')),
+                                            Flexible(child: Icon(Icons.alarm)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(ShiftScreen.routeName);
+                                        }
+                                    ),
                                   ),
                                   SizedBox (
-                                    height: MediaQuery.of(context).size.height/48,
+                                    height: MediaQuery.of(context).size.height/30,
                                     width: MediaQuery.of(context).size.width,
                                   ),
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Permissions')),
-                                          Flexible(child: Icon(Icons.sensor_door)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Permissions')),
+                                            Flexible(child: Icon(Icons.vpn_key)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(AdminPermissions.routeName);
+                                        }
+                                    ),
                                   ),
                                   SizedBox (
-                                    height: MediaQuery.of(context).size.height/48,
+                                    height: MediaQuery.of(context).size.height/30,
                                     width: MediaQuery.of(context).size.width,
                                   ),
-                                  ElevatedButton (
-                                      style: ElevatedButton.styleFrom (
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height/16,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: ElevatedButton (
+                                        style: ElevatedButton.styleFrom (
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
                                         ),
-                                      ),
-                                      child: Row (
-                                        children: <Widget>[
-                                          Flexible(child: Text('Reports')),
-                                          Flexible(child: Icon(Icons.library_books)),
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pushReplacementNamed(Reporting.routeName);
-                                      }
+                                        child: Row (
+                                          children: <Widget>[
+                                            Flexible(child: Text('Reports')),
+                                            Flexible(child: Icon(Icons.library_books)),
+                                          ],
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacementNamed(Reporting.routeName);
+                                        }
+                                    ),
                                   ),
                                 ]
                               )
@@ -444,6 +468,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   //============
                 ),
               ),
+                globalWidgets.chatBot(context, AdminHomePage.routeName, globals.showChatBot),
             ]
         )
       ),

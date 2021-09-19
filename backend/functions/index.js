@@ -8,6 +8,9 @@ const cors = require('cors');
 const app = express();
 var serviceAccount = require("./permissions.json");
 
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
 app.use(cors({ origin: true }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,8 +19,23 @@ admin.initializeApp({
   databaseURL: process.env.FirebaseDatabaseURL //Requires .env file to be in backend/functions
 }); 
 
+//Swagger Configuration
+const swaggerOptions = {
+  swaggerDefinition: {
+      info: {
+          title:'Coviduous API',
+          version:'1.0.0'
+      }
+  },
+  apis:['./routes/*.js'],
+  servers: ['http://localhost:5002/coviduous-api/us-central1/app']
+}
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
 app.get('/api', (req, res) => {
- return res.status(200).send('Connected to the coviduous api');
+  return res.status(200).send('Connected to the coviduous api');
 });
 
 // STRUCTURE: Each subsystem has it's own route.js file, respective routes are defined there
@@ -31,14 +49,16 @@ const userRoute = require("./routes/user.route.js");
 const shiftRoute = require("./routes/shift.route.js");
 const officeRoute = require("./routes/office.route.js");
 const healthRoute = require("./routes/health.route.js");
+const reportingRoute = require("./routes/reporting.route.js");
 
 // app.use('/api', subsystem_nameRoute) - use '/api/' path for each subsystem route
-app.use('/api/', announcementRoute); // testing http would be '.../api/announcement' - see announcement.route.js file for routes
-app.use('/api/', notificationRoute);
-app.use('/api/', floorplanRoute);
-app.use('/api/', userRoute);
-app.use('/api/', shiftRoute);
-app.use('/api/', officeRoute);
-app.use('/api/', healthRoute);
+app.use('/announcement/api/', announcementRoute);
+app.use('/notification/api/', notificationRoute);
+app.use('/floorplan/api/', floorplanRoute);
+app.use('/user/api/', userRoute);
+app.use('/shift/api/', shiftRoute);
+app.use('/office/api/', officeRoute);
+app.use('/health/api/', healthRoute);
+app.use('/reporting/api/', reportingRoute);
 
 exports.app = functions.https.onRequest(app);

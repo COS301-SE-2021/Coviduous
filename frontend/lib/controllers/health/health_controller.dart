@@ -7,9 +7,11 @@ import 'dart:convert';
 
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
+import 'package:frontend/models/health/health_check.dart';
 import 'package:frontend/models/health/permission.dart';
 import 'package:frontend/models/health/permission_request.dart';
-import 'package:frontend/models/health/health_check.dart';
+import 'package:frontend/models/health/test_results.dart';
+import 'package:frontend/models/health/vaccine_confirmation.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
 import 'package:frontend/globals.dart' as globals;
 
@@ -18,12 +20,16 @@ List<Shift> shiftDatabaseTable = [];
 List<Permission> permissionDatabaseTable = [];
 List<PermissionRequest> permission_requestDatabaseTable = [];
 List<HealthCheck> healthCheckDatabaseTable = [];
+List<TestResults> testResultsDatabaseTable = [];
+List<VaccineConfirmation> vaccineConfirmationDatabaseTable = [];
 
 int numPermission_request = 0;
 int numPermissions = 0;
 int numHealthChecks = 0;
 int numGroups = 0;
 int numShifts = 0;
+int numTestResults = 0;
+int numVaccineConfirmations = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 String AIserver = serverInfo.getAIserver();
@@ -31,10 +37,10 @@ String AIserver = serverInfo.getAIserver();
 //Health check
 
 //Complete a health check
-Future<HealthCheck> createHealthCheck(String userId, String name, String surname, String email, String phoneNumber, String temperature,
-    bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
-    bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
-  String path = '/health/health-check';
+Future<HealthCheck> createHealthCheck(String companyId, String userId, String name, String surname, String email, String phoneNumber,
+    String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
+    bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache, bool isFemale, bool is60orOlder) async {
+  String path = 'health/api/health/health-check/';
   String url = server + path;
   var request;
   var request2;
@@ -48,8 +54,11 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
       "sore_throat": globals.toInt(soreThroat),
       "shortness_of_breath": globals.toInt(shortnessOfBreath),
       "head_ache": globals.toInt(headache),
+      "contact_with_infected": globals.toInt(sixFeetContact),
+      "gender": globals.toInt(isFemale),
+      "age60_and_above": globals.toInt(is60orOlder),
     });
-    request2.headers.addAll(globals.requestHeaders);
+    request2.headers.addAll(globals.getRequestHeaders());
 
     var response2 = await request2.send();
 
@@ -63,6 +72,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
 
       request = http.Request('POST', Uri.parse(url));
       request.body = json.encode({
+        "companyId": companyId,
         "userId": userId,
         "name": name,
         "surname": surname,
@@ -86,7 +96,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
         "naive_prediction": jsonMap2["naive_prediction"],
         "nb_accuracy":jsonMap2["nb_accuracy"],
       });
-      request.headers.addAll(globals.requestHeaders);
+      request.headers.addAll(globals.getRequestHeaders());
 
       var response = await request.send();
 
@@ -109,7 +119,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
         return healthCheckDatabaseTable.first;
       }
     }
-  } catch (error) {
+  } catch(error) {
     print(error);
   }
 
@@ -120,7 +130,7 @@ Future<HealthCheck> createHealthCheck(String userId, String name, String surname
 
 //Get permissions for an email
 Future<List<Permission>> getPermissions(String userEmail) async {
-  String path = '/health/permissions/view';
+  String path = 'health/api/health/permissions/view/';
   String url = server + path;
   var request;
 
@@ -129,7 +139,7 @@ Future<List<Permission>> getPermissions(String userEmail) async {
     request.body = json.encode({
       "userEmail": userEmail,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -161,8 +171,8 @@ Future<List<Permission>> getPermissions(String userEmail) async {
 }
 
 //Report your potential infection to your company's admins
-Future<bool> reportInfection(String userId, String userEmail, String adminId, String companyId) async {
-  String path = '/health/report-infection';
+Future<bool> reportInfection(String userId, String userEmail, String adminId, String companyId, String adminEmail) async {
+  String path = 'health/api/health/report-infection/';
   String url = server + path;
   var request;
 
@@ -173,9 +183,9 @@ Future<bool> reportInfection(String userId, String userEmail, String adminId, St
       "userEmail": userEmail,
       "adminId": adminId,
       "companyId": companyId,
-      "adminEmail": "capslock.cos301@gmail.com"
+      "adminEmail": adminEmail
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -195,7 +205,7 @@ Future<bool> reportInfection(String userId, String userEmail, String adminId, St
 //Create a new permission request for an employee
 Future<bool> createPermissionRequest(String permissionId, String userId, String userEmail,
     String shiftNumber, String reason, String adminId, String companyId) async {
-  String path = '/health/permissions/permission-request';
+  String path = 'health/api/health/permissions/permission-request/';
   String url = server + path;
   var request;
 
@@ -210,7 +220,7 @@ Future<bool> createPermissionRequest(String permissionId, String userId, String 
       "adminId": adminId,
       "companyId": companyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -227,7 +237,7 @@ Future<bool> createPermissionRequest(String permissionId, String userId, String 
 
 //Get permission requests for a company
 Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
-  String path = '/health/permissions/permission-request/view';
+  String path = 'health/api/health/permissions/permission-request/view/';
   String url = server + path;
   var request;
 
@@ -237,7 +247,7 @@ Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
       "companyId": companyId,
     });
 
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -268,7 +278,7 @@ Future<List<PermissionRequest>> getPermissionRequests(String companyId) async {
 
 //Delete/decline a permission request
 Future<bool> deletePermissionRequest(String permissionRequestId) async {
-  String path = '/health/permissions';
+  String path = 'health/health/permissions/';
   String url = server + path;
   var request;
 
@@ -277,7 +287,7 @@ Future<bool> deletePermissionRequest(String permissionRequestId) async {
     request.body = json.encode({
       "permissionRequestId": permissionRequestId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -294,7 +304,7 @@ Future<bool> deletePermissionRequest(String permissionRequestId) async {
 
 //Grant permission to a specified user
 Future<bool> grantPermission(String userId, String userEmail, String adminId, String companyId) async {
-  String path = '/health/permissions/permission-request/grant';
+  String path = 'health/api/health/permissions/permission-request/grant/';
   String url = server + path;
   var request;
 
@@ -308,7 +318,7 @@ Future<bool> grantPermission(String userId, String userEmail, String adminId, St
       "companyId": companyId,
       "permissionId": globals.currentPermissionId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
     print(request.body);
 
     var response = await request.send();
@@ -328,7 +338,7 @@ Future<bool> grantPermission(String userId, String userEmail, String adminId, St
 
 //View the group assigned to a particular shift
 Future<Group> viewGroup(String shiftNumber) async {
-  String path = '/health/contact-trace/group';
+  String path = 'health/api/health/contact-trace/group/';
   String url = server + path;
   var request;
 
@@ -338,7 +348,7 @@ Future<Group> viewGroup(String shiftNumber) async {
       "shiftNumber": shiftNumber,
     });
 
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -369,7 +379,7 @@ Future<Group> viewGroup(String shiftNumber) async {
 
 //View all shifts that a user has been in
 Future<List<Shift>> viewShifts(String userEmail) async {
-  String path = '/health/contact-trace/shifts';
+  String path = 'health/api/health/contact-trace/shifts/';
   String url = server + path;
   var request;
 
@@ -379,7 +389,7 @@ Future<List<Shift>> viewShifts(String userEmail) async {
       "userEmail": userEmail,
     });
 
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -407,7 +417,7 @@ Future<List<Shift>> viewShifts(String userEmail) async {
 
 //Notify a group of their potential risk
 Future<bool> notifyGroup(String shiftNumber) async {
-  String path = '/health/contact-trace/notify-group';
+  String path = 'health/api/health/contact-trace/notify-group/';
   String url = server + path;
   var request;
 
@@ -416,7 +426,7 @@ Future<bool> notifyGroup(String shiftNumber) async {
     request.body = json.encode({
       "shiftNumber": shiftNumber,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
     if (response.statusCode == 200) {
@@ -429,4 +439,137 @@ Future<bool> notifyGroup(String shiftNumber) async {
   }
 
   return false;
+}
+
+//Health documents related
+
+//Upload COVID-19 vaccine confirmation
+Future<bool> uploadVaccineConfirmation(String userId, String fileName, String bytes) async {
+  String path = 'health/api/health/Covid19VaccineConfirmation/';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+      "fileName": fileName,
+      "base64String": bytes
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return false;
+}
+
+//Upload COVID-19 test results
+Future<bool> uploadTestResults(String userId, String fileName, String bytes) async {
+  String path = 'health/api/health/Covid19TestResults/';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+      "fileName": fileName,
+      "base64String": bytes
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+
+      return true;
+    }
+  } catch(error) {
+  print(error);
+  }
+
+  return false;
+}
+
+//Get vaccine confirmation documents
+Future<List<VaccineConfirmation>> getVaccineConfirmations(String userId) async {
+  String path = 'health/api/health/Covid19VaccineConfirmation/view/';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      vaccineConfirmationDatabaseTable.clear();
+      numVaccineConfirmations = 0;
+
+      for (var data in jsonMap["data"]) {
+        var vaccineConfirmation = VaccineConfirmation.fromJson(data);
+        vaccineConfirmationDatabaseTable.add(vaccineConfirmation);
+        numVaccineConfirmations++;
+      }
+
+      return vaccineConfirmationDatabaseTable;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Get test result documents
+Future<List<TestResults>> getTestResults(String userId) async {
+  String path = 'health/api/health/Covid19TestResults/view/';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userId": userId,
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      testResultsDatabaseTable.clear();
+      numTestResults = 0;
+
+      for (var data in jsonMap["data"]) {
+        var testResults = TestResults.fromJson(data);
+        testResultsDatabaseTable.add(testResults);
+        numTestResults++;
+      }
+
+      return testResultsDatabaseTable;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
 }

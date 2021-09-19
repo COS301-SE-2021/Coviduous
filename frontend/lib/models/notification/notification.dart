@@ -1,9 +1,6 @@
 /**
- * This class acts as an announcement entity mimicking the announcement table attribute in the database
+ * This class acts as a notification entity mimicking the notification table attribute in the database
  */
-// To parse this JSON data, do
-//
-//     final notification = notificationFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -42,7 +39,7 @@ class Notification {
         timestamp: json["timestamp"],
         adminId: json["adminId"],
         companyId: json["companyId"],
-      );
+  );
 
   Map<String, dynamic> toJson() => {
         "notificationId": notificationId,
@@ -53,5 +50,37 @@ class Notification {
         "timestamp": timestamp,
         "adminId": adminId,
         "companyId": companyId,
-      };
+  };
+
+  String getNotificationId() {
+    return notificationId;
+  }
+
+  String getUserId() {
+    return userId;
+  }
+
+  String getUserEmail() {
+    return userEmail;
+  }
+
+  String getSubject() {
+    return subject;
+  }
+
+  String getMessage() {
+    return message;
+  }
+
+  String getTimestamp() {
+    return timestamp;
+  }
+
+  String getAdminId() {
+    return adminId;
+  }
+
+  String getCompanyId() {
+    return companyId;
+  }
 }

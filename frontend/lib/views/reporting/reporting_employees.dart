@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:pdf/pdf.dart';
-import 'package:universal_html/html.dart' as html;
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:frontend/views/reporting/reporting_shifts.dart';
@@ -13,6 +9,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/models/user/user.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/pdf_helpers.dart' as pdfHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class ReportingEmployees extends StatefulWidget {
@@ -24,50 +21,10 @@ class ReportingEmployees extends StatefulWidget {
 }
 
 class ReportingEmployeesState extends State<ReportingEmployees> {
-  var myTheme;
+  pw.ThemeData myTheme;
   var pdf;
 
   List<List<String>> employeeList = [];
-
-  Future loadPDFFonts() async {
-    var fontAssets = await globals.loadPDFFonts();
-    myTheme = pw.ThemeData.withFont(
-      base: pw.Font.ttf(fontAssets[0]),
-      bold: pw.Font.ttf(fontAssets[1]),
-      italic: pw.Font.ttf(fontAssets[2]),
-      boldItalic: pw.Font.ttf(fontAssets[3]),
-    );
-  }
-
-  //Save PDF on mobile
-  Future savePDFMobile() async {
-    List<Directory> outputs;
-
-    outputs = await Future.wait([
-      DownloadsPathProvider.downloadsDirectory
-    ]);
-    Directory output = outputs.first;
-    print(output.path);
-
-    File file = File('${output.path}/report_shift_' + globals.currentShiftNum + '.pdf');
-    await file.writeAsBytes(await pdf.save());
-  }
-
-  //Save PDF on web
-  Future savePDFWeb() async {
-    var bytes = await pdf.save();
-    var blob = html.Blob([bytes], 'application/pdf');
-    var url = html.Url.createObjectUrlFromBlob(blob);
-    var anchor =
-    html.document.createElement('a') as html.AnchorElement
-      ..href = url
-      ..style.display = 'none'
-      ..download = 'report_shift_' + globals.currentShiftNum + '.pdf';
-    html.document.body.children.add(anchor);
-    anchor.click();
-    html.document.body.children.remove(anchor);
-    html.Url.revokeObjectUrl(url);
-  }
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(ReportingShifts.routeName);
@@ -91,7 +48,9 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
     }
 
     //Load fonts from assets and initialize PDF
-    loadPDFFonts();
+    pdfHelpers.loadPDFFonts().then((result) {
+      myTheme = result;
+    });
     pdf = pw.Document(
     theme: myTheme,
     );
@@ -100,12 +59,15 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
       List<User> users = globals.selectedUsers;
       int numOfUsers = users.length;
 
-      employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email']);
-      for (int i = 0; i < users.length; i++) {
-        List<String> employeeInfo = <String>[
-          users[i].getUserId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail()
-        ];
-        employeeList.add(employeeInfo);
+      if (employeeList.isNotEmpty) {
+        employeeList.clear();
+        employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email']);
+        for (int i = 0; i < users.length; i++) {
+          List<String> employeeInfo = <String>[
+            users[i].getUserId(), users[i].getFirstName(), users[i].getLastName(), users[i].getEmail()
+          ];
+          employeeList.add(employeeInfo);
+        }
       }
 
       print(numOfUsers);
@@ -116,62 +78,114 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
             height: MediaQuery.of(context).size.height /
                 (5 * globals.getWidgetScaling()),
           ),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width /
-                (2 * globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height /
-                (24 * globals.getWidgetScaling()),
-            color: Theme.of(context).primaryColor,
-            child: Text('No employees found',
-                style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-          ),
-          Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width /
-                  (2 * globals.getWidgetScaling()),
-              height: MediaQuery.of(context).size.height /
-                  (12 * globals.getWidgetScaling()),
-              color: Colors.white,
-              padding: EdgeInsets.all(12),
-              child: Text('No employees have been assigned to this shift.',
-                  style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)))
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width /
+                      (2 * globals.getWidgetScaling()),
+                  height: MediaQuery.of(context).size.height /
+                      (24 * globals.getWidgetScaling()),
+                  color: Theme.of(context).primaryColor,
+                  child: Text('No employees found',
+                      style: TextStyle(color: Colors.white,
+                          fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width /
+                        (2 * globals.getWidgetScaling()),
+                    height: MediaQuery.of(context).size.height /
+                        (12 * globals.getWidgetScaling()),
+                    color: Colors.white,
+                    padding: EdgeInsets.all(12),
+                    child: Text('No employees have been assigned to this shift.',
+                        style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5
+                        )
+                    )
+                ),
+              ],
+            ),
+          )
         ]);
       } else {
         //Else create and return a list
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
             itemCount: numOfUsers,
             itemBuilder: (context, index) {
-              //Display a list tile FOR EACH user in users[]
               return ListTile(
-                title: Column(children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).primaryColor,
-                    child: Text('User ' + users[index].getUserId()),
-                  ),
-                  ListView(
-                      shrinkWrap: true,
-                      physics:
-                      NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                      children: <Widget>[
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Name: ' + users[index].getFirstName() + ' ' + users[index].getLastName()),
+                title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height / 6,
+                            child: Image(
+                              image: AssetImage('assets/images/placeholder-employee-image.png'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('User ' + (index + 1).toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: (MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height * 0.01) * 2.5,
+                                      )
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(globals.currentShift.getDate().substring(0, 11) + ' @ ' + globals.currentShift.getDate().substring(11, 19)),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getFirstName() + ' ' + globals.selectedUsers[index].getLastName())
+                                              ),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getUserId())
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]
                         ),
-                        Container(
-                          height: 50,
-                          color: Colors.white,
-                          child: Text('Email: ' + users[index].getEmail()),
-                        ),
-                      ])
-                ]),
+                      ),
+                    ]
+                ),
               );
             });
       }
@@ -194,10 +208,9 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
           child: Container(
             alignment: Alignment.bottomCenter,
             height: 50,
-            width: 130,
             padding: EdgeInsets.all(10),
             child:  ElevatedButton(
-                child: Text('Create PDF'),
+                child: Text('Generate PDF report'),
                 onPressed: () {
                   //Create PDF
                   pdf.addPage(pw.MultiPage(
@@ -251,14 +264,14 @@ class ReportingEmployeesState extends State<ReportingEmployees> {
                   if (kIsWeb) { //If web browser
                     String platform = globals.getOSWeb();
                     if (platform == "Android" || platform == "iOS") { //Check if mobile browser
-                      savePDFMobile();
+                      pdfHelpers.savePDFMobile(pdf, 'report_shift_' + globals.currentShiftNum + '.pdf');
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("PDF file saved to downloads folder")));
                     } else { //Else, PC web browser
-                      savePDFWeb();
+                      pdfHelpers.savePDFWeb(pdf, 'report_shift_' + globals.currentShiftNum + '.pdf');
                     }
                   } else { //Else, mobile app
-                    savePDFMobile();
+                    pdfHelpers.savePDFMobile(pdf, 'report_shift_' + globals.currentShiftNum + '.pdf');
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("PDF file saved to downloads folder")));
                   }

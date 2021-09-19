@@ -6,22 +6,19 @@ import 'package:frontend/views/notification/admin_make_notification_assign_emplo
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class MakeNotification extends StatefulWidget {
   static const routeName = "/admin_make_notification";
-  MakeNotification() : super();
-
-  final String title = "Make notification";
 
   @override
   MakeNotificationState createState() => MakeNotificationState();
 }
 
-//class make notification
 class MakeNotificationState extends State<MakeNotification> {
   TextEditingController _subject = TextEditingController();
-  TextEditingController _description = TextEditingController();
+  TextEditingController _message = TextEditingController();
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
@@ -48,7 +45,7 @@ class MakeNotificationState extends State<MakeNotification> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: new AppBar(
-          title: new Text("Make notification"),
+          title: new Text("Create notification"),
           leading: BackButton( //Specify back button
             onPressed: (){
               Navigator.of(context).pushReplacementNamed(AdminNotifications.routeName);
@@ -57,54 +54,111 @@ class MakeNotificationState extends State<MakeNotification> {
         ),
         body: Center(
           child: SingleChildScrollView(
-            child: new Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
-              width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-              padding: EdgeInsets.all(16),
-              child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "Subject",
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                color: Colors.white,
+                width: (!globals.getIfOnPC())
+                    ? MediaQuery.of(context).size.width/(2 * globals.getWidgetScaling())
+                    : 640,
+                padding: EdgeInsets.zero,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: (!globals.getIfOnPC())
+                              ? MediaQuery.of(context).size.height/6
+                              : MediaQuery.of(context).size.height/8,
+                          child: Image(
+                              image: AssetImage('assets/images/placeholder-notification.png'),
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                color: globals.firstColor,
+                                padding: EdgeInsets.all(16),
+                                width: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  'Subject',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  hintText: "Write a topic",
+                                ),
+                                obscureText: false,
+                                controller: _subject,
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    obscureText: false,
-                    maxLength: 20,
-                    controller: _subject,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Write your notification",
-                      labelText: "Description",
-                    ),
-                    obscureText: false,
-                    maxLines: 3,
-                    controller: _description,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom (
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    Container(
+                      alignment: Alignment.center,
+                      color: globals.firstColor,
+                      padding: EdgeInsets.all(16),
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                        'Message',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    child: Text("Proceed"),
-                    onPressed: () {
-                      globals.currentSubjectField = _subject.text;
-                      globals.currentDescriptionField = _description.text;
-                      Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
-                    },
-                  )
-                ],
-              ),
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Write your notification",
+                            ),
+                            obscureText: false,
+                            maxLines: 3,
+                            controller: _message,
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: globals.firstColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Text("Proceed"),
+                            onPressed: () {
+                              globals.currentSubjectField = _subject.text;
+                              globals.currentMessageField = _message.text;
+                              globals.tempUsers.clear();
+                              userHelpers.getEmailsForCompany().then((result) {
+                                if (result == true) {
+                                  Navigator.of(context).pushReplacementNamed(MakeNotificationAssignEmployees.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("An error occurred while retrieving employees. Please try again later.")));
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

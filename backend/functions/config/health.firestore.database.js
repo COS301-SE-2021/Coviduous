@@ -30,6 +30,17 @@ exports.reportInfection = async (infectionId, data) => {
     }
 };
 
+exports.reportRecovery = async (recoveryId, data) => {
+    try {
+        await db.collection('reported-recoveries').doc(recoveryId)
+          .create(data); // .add - auto generates document id
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
 exports.viewHealthChecks = async () => {
     try {
         const document = db.collection('health-check');
@@ -296,3 +307,65 @@ exports.viewShifts = async (userEmail) => {
         return error;
     }
 };
+
+exports.saveCovid19VaccineConfirmation = async (documentId, data) => {
+    try {
+        await db.collection('vaccine-confirmations').doc(documentId)
+          .create(data); 
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.saveCovid19TestResults = async (documentId, data) => {
+    try {
+        await db.collection('test-results').doc(documentId)
+          .create(data);
+        return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
+
+exports.getVaccineConfirmations = async () => {
+    try {
+      const document = db.collection('vaccine-confirmations');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };
+
+  exports.getTestResults = async () => {
+    try {
+      const document = db.collection('test-results');
+      const snapshot = await document.get();
+      
+      let list = [];
+      
+      snapshot.forEach(doc => {
+          let data = doc.data();
+          list.push(data);
+      });
+  
+      lastQuerySucceeded=true;
+      return list;
+    } catch (error) {
+      console.log(error);
+      lastQuerySucceeded=false;
+    }
+  };

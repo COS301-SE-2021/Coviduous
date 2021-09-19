@@ -1,10 +1,10 @@
 import 'package:frontend/controllers/floor_plan/floor_plan_controller.dart' as floorPlanController;
 import 'package:frontend/globals.dart' as globals;
 
-Future<bool> createFloorPlan(num numFloors) async {
+Future<bool> createFloorPlan(num numFloors, String imageBytes) async {
   bool result = false;
   await Future.wait([
-    floorPlanController.createFloorPlan(numFloors, globals.loggedInUserId, globals.loggedInCompanyId)
+    floorPlanController.createFloorPlan(numFloors, globals.loggedInUserId, globals.loggedInCompanyId, imageBytes)
   ]).then((results) {
     result = results.first;
   });
@@ -21,10 +21,10 @@ Future<bool> createFloor(String floorPlanNumber) async {
   return result;
 }
 
-Future<bool> createRoom(String floorNumber) async {
+Future<bool> createRoom(String floorNumber, String imageBytes) async {
   bool result = false;
   await Future.wait([
-    floorPlanController.createRoom(globals.currentRooms.length, floorNumber)
+    floorPlanController.createRoom(globals.currentRooms.length, floorNumber, imageBytes)
   ]).then((results) {
     result = results.first;
   });
@@ -72,10 +72,12 @@ Future<bool> getRooms(String floorNumber) async {
   return result;
 }
 
-Future<bool> updateRoom(String roomName, num roomArea, num deskArea, num numberOfDesks, num capacityPercentage) async {
+Future<bool> updateRoom(String roomName, num roomArea, num deskArea,
+    num numberOfDesks, num capacityPercentage, String imageBytes) async {
   bool result = false;
   await Future.wait([
-    floorPlanController.updateRoom(globals.currentFloorNum, globals.currentRoomNum, roomName, roomArea, numberOfDesks, deskArea, capacityPercentage)
+    floorPlanController.updateRoom(globals.currentFloorNum, globals.currentRoomNum,
+        roomName, roomArea, numberOfDesks, deskArea, capacityPercentage, imageBytes)
   ]).then((results) {
     result = results.first;
   });
@@ -92,20 +94,20 @@ Future<bool> deleteFloorPlan(String floorPlanNumber) async {
   return result;
 }
 
-Future<bool> deleteFloor(String floorNumber) async {
+Future<bool> deleteFloor(String floorPlanNumber, String floorNumber) async {
   bool result = false;
   await Future.wait([
-    floorPlanController.deleteFloor(floorNumber)
+    floorPlanController.deleteFloor(floorPlanNumber, floorNumber)
   ]).then((results) {
     result = results.first;
   });
   return result;
 }
 
-Future<bool> deleteRoom(String roomNumber) async {
+Future<bool> deleteRoom(String floorNumber, String roomNumber) async {
   bool result = false;
   await Future.wait([
-    floorPlanController.deleteRoom(roomNumber)
+    floorPlanController.deleteRoom(floorNumber, roomNumber)
   ]).then((results) {
     result = results.first;
   });

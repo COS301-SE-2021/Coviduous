@@ -20,7 +20,7 @@ String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 // announcementId and timestamp fields are generated in node backend
 Future<bool> createAnnouncement(String announcementId, String type, String message, String timestamp) async {
-  String path = '/announcements';
+  String path = 'announcement/api/announcements/';
   String url = server + path;
   var request;
 
@@ -34,7 +34,7 @@ Future<bool> createAnnouncement(String announcementId, String type, String messa
       "adminId": globals.loggedInUserId,
       "companyId": globals.loggedInCompanyId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -56,17 +56,21 @@ Future<bool> createAnnouncement(String announcementId, String type, String messa
    * getAnnouncements : Returns a list of all announcements created
    */
 Future<List<Announcement>> getAnnouncements() async {
-  String path = '/announcements';
+  String path = 'announcement/api/announcements/view/';
   String url = server + path;
-  var response;
+  var request;
 
   try {
-    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "companyId": globals.loggedInCompanyId,
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
 
     if (response.statusCode == 200) {
-      //print(response.body);
-
-      var jsonString = response.body;
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
@@ -89,12 +93,12 @@ Future<List<Announcement>> getAnnouncements() async {
 }
 
 Future<bool> deleteAnnouncement(String announcementId) async {
-  String path = '/announcements';
+  String path = 'announcement/api/announcements/delete/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"announcementId": announcementId});
-  request.headers.addAll(globals.requestHeaders);
+  request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();
 

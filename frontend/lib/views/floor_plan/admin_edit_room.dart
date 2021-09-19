@@ -1,5 +1,11 @@
+import 'dart:io';
+import 'dart:math';
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'package:frontend/views/floor_plan/home_floor_plan.dart';
 import 'package:frontend/views/floor_plan/admin_modify_rooms.dart';
@@ -22,8 +28,63 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
   TextEditingController _roomArea = TextEditingController();
   TextEditingController _deskArea = TextEditingController();
   TextEditingController _numOfDesks = TextEditingController();
-
+  TextEditingController _capacityPercentage = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
+
+  String fileName = "";
+  String pickerFileName = "";
+  List<int> fileBytes;
+
+  Future getImage() async {
+    var rng = new Random();
+    String randomName = "";
+    for (var i = 0; i < 20; i++) {
+      print(rng.nextInt(100));
+      randomName += rng.nextInt(100).toString();
+    }
+    await Future.wait([
+      FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['jpg', 'png'])
+    ]).then((results){
+      if (kIsWeb) { //If web browser
+        String platform = globals.getOSWeb();
+        if (platform == "Android" || platform == "iOS") { //Check if mobile browser
+          FilePickerResult result = results.first;
+          if (result != null) {
+            pickerFileName = results.first.names.first;
+            File file = File(result.files.single.path);
+            String tempFileName = '${randomName}.' + result.files.single.extension;
+            print(tempFileName);
+            tempFileName = fileName;
+            fileBytes = file.readAsBytesSync();
+          }
+        } else { //Else, PC browser
+          FilePickerResult result = results.first;
+          if (result != null) {
+            pickerFileName = results.first.names.first;
+            String tempFileName = '${randomName}.' + result.files.single.extension;
+            print(tempFileName);
+            fileName = tempFileName;
+            fileBytes = result.files.first.bytes;
+          }
+        }
+      } else { //Else, mobile app
+        FilePickerResult result = results.first;
+        if (result != null) {
+          pickerFileName = results.first.names.first;
+          File file = File(result.files.single.path);
+          String tempFileName = '${randomName}.' + result.files.single.extension;
+          print(tempFileName);
+          fileName = tempFileName;
+          fileBytes = file.readAsBytesSync();
+        }
+      }
+      setState(() {});
+    });
+  }
+
+  Future saveImage(List<int> asset, String name) {
+    //Upload the image to Firestore
+  }
 
   Future<bool> _onWillPop() async {
     floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
@@ -53,20 +114,27 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
     }
 
     Room room = globals.currentRoom;
-    if (_roomName.text.isEmpty)
-      _roomName.text = "No name";
+    if (_roomName.text.isEmpty){
+      if (room.getRoomName() == "") {
+        _roomName.text = "No name";
+      } else {
+        _roomName.text = room.getRoomName();
+      }
+    }
     if (_roomArea.text.isEmpty)
       _roomArea.text = room.getRoomArea().toString();
     if (_deskArea.text.isEmpty)
       _deskArea.text = room.getDeskArea().toString();
     if (_numOfDesks.text.isEmpty)
       _numOfDesks.text = room.getNumberOfDesks().toString();
+    if (_capacityPercentage.text.isEmpty)
+      _capacityPercentage.text = room.getCapacityPercentage().toString();
 
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Manage room ' + globals.currentRoomNum),
+            title: Text('Manage room'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
@@ -83,168 +151,230 @@ class _AdminEditRoomModifyState extends State<AdminEditRoomModify> {
               children: <Widget>[
                 Center(
                   child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                          color: Theme.of(context).primaryColor,
-                          child: Text('Room ' + room.getRoomNumber(),
-                              style: TextStyle(fontSize:
-                              (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          height: MediaQuery.of(context).size.height/(2.8*globals.getWidgetScaling()),
-                          width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                          padding: EdgeInsets.all(16),
-                          child: Form(
-                            key: _formKey,
-                            child: SingleChildScrollView(
-                                child: Column(
-                                  children: <Widget>[
-                                    //room number or name (e.g. "Conference room 1" or "R123")
-                                    TextFormField(
-                                      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                      decoration: InputDecoration(
-                                        labelText: 'Room number or name (optional)',
-                                        hintText: room.getRoomName(),
-                                      ),
-                                      keyboardType: TextInputType.text,
-                                      controller: _roomName,
-                                      validator: (value) {
-                                        if (value.isNotEmpty || value != "No name") {
-                                          print(room.getRoomNumber());
-                                          if(!(RegExp(r"^[a-zA-Z0-9 ,.'-]+$")).hasMatch(value)) //Check if valid name format
-                                              {
-                                            return 'Invalid room number or name';
-                                          }
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    //Room area
-                                    TextFormField(
-                                      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                      decoration: InputDecoration(
-                                        labelText: 'Room area (in meters squared)',
-                                        hintText: room.getRoomArea().toString(),
-                                      ),
-                                      keyboardType: TextInputType.text,
-                                      controller: _roomArea,
-                                      validator: (value) {
-                                        if (value.isNotEmpty) {
-                                          if (!globals.isNumeric(value)) {
-                                            return "Room area must be a number";
-                                          } else if (double.parse(value) <= 0) {
-                                            return "Room area must be greater than zero";
-                                          } else {
-                                            return null;
-                                          }
-                                        } else {
-                                          if (room.getRoomArea() == 0.0) {
-                                            return "Room area must be greater than zero";
-                                          }
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    //Desk area of all desks in the room
-                                    TextFormField(
-                                      textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                      decoration: InputDecoration(
-                                        labelText: 'Desk area (in meters squared)',
-                                        hintText: room.getDeskArea().toString(),
-                                      ),
-                                      keyboardType: TextInputType.text,
-                                      controller: _deskArea,
-                                      validator: (value) {
-                                        if (value.isNotEmpty) {
-                                          if (!globals.isNumeric(value)) {
-                                            return "Desk area must be a number";
-                                          } else if (double.parse(value) <= 0) {
-                                            return "Desk area must be greater than zero";
-                                          } else {
-                                            return null;
-                                          }
-                                        } else {
-                                          if (room.getDeskArea() == 0.0) {
-                                            return "Desk area must be greater than zero";
-                                          }
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    //Desk area of all desks in the room
-                                    TextFormField(
-                                      textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
-                                      decoration: InputDecoration(
-                                        labelText: 'Number of desks',
-                                        hintText: room.getNumberOfDesks().toString(),
-                                      ),
-                                      keyboardType: TextInputType.text,
-                                      controller: _numOfDesks,
-                                      validator: (value) {
-                                        if (value.isNotEmpty) {
-                                          if (!globals.isNumeric(value)) {
-                                            return "Number of desks must be a number";
-                                          } else if (int.parse(value) <= 0) {
-                                            return "Number of desks must be greater than zero";
-                                          } else {
-                                            return null;
-                                          }
-                                        } else {
-                                          if (room.getNumberOfDesks() == 0) {
-                                            return "Number of desks must be greater than zero";
-                                          }
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    SizedBox (
-                                      height: MediaQuery.of(context).size.height/48,
-                                      width: MediaQuery.of(context).size.width,
-                                    ),
-                                    ElevatedButton(
-                                      child: Text(
-                                          'Submit'
-                                      ),
-                                      onPressed: () {
-                                        FormState form = _formKey.currentState;
-                                        if (form.validate()) {
-                                          String _tempName;
-                                          if (_roomName.text == "" || _roomName.text == "No name") {
-                                            _tempName = "";
-                                          } else {
-                                            _tempName = _roomName.text;
-                                          }
-                                          floorPlanHelpers.updateRoom(_tempName, num.parse(_roomArea.text), num.parse(_deskArea.text),
-                                              num.parse(_numOfDesks.text), room.getCapacityPercentage()).then((result) {
-                                                if (result == true) {
-                                                  ScaffoldMessenger.of(context).showSnackBar(
-                                                      SnackBar(content: Text("Room information updated")));
-                                                } else {
-                                                  ScaffoldMessenger.of(context).showSnackBar(
-                                                      SnackBar(content: Text("Room update unsuccessful. Please try again later.")));
-                                                }
-                                          });
-                                        } else {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Please enter required fields")));
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Column(
+                        children: [
+                          Container(
+                            color: Colors.white,
+                            width: (!globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.width/(2*globals.getWidgetScaling())
+                                : 640,
+                            padding: EdgeInsets.all(16),
+                            child: Form(
+                              key: _formKey,
+                              child: SingleChildScrollView(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.all(20),
+                                        height: MediaQuery.of(context).size.height/6,
+                                        width: MediaQuery.of(context).size.height/6,
+                                        child: (fileBytes != null) ? OverflowBox(
+                                          maxWidth: double.infinity,
+                                          child: FittedBox(
+                                            fit: BoxFit.cover,
+                                            child: Image(
+                                              alignment: Alignment.center,
+                                              image: MemoryImage(fileBytes),
+                                            ),
+                                          ),
+                                        ) : Image(
+                                          alignment: Alignment.center,
+                                          image: AssetImage('assets/images/placeholder-office-room.png'),
                                         ),
                                       ),
-                                    )
-                                  ],
-                                )
+                                      Text('Selected file: ' + pickerFileName),
+                                      SizedBox(
+                                        height: MediaQuery.of(context).size.height/48,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                      ElevatedButton(
+                                        child: Text('Select an image'),
+                                        onPressed: () {
+                                          getImage();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      ),
+                                      //room number or name (e.g. "Conference room 1" or "R123")
+                                      TextFormField(
+                                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                        decoration: InputDecoration(
+                                          labelText: 'Room number or name (optional)',
+                                          hintText: room.getRoomName(),
+                                        ),
+                                        keyboardType: TextInputType.text,
+                                        controller: _roomName,
+                                        validator: (value) {
+                                          if (value.isNotEmpty || value != "No name") {
+                                            print(room.getRoomNumber());
+                                            if(!(RegExp(r"^[a-zA-Z0-9 ,.'-]+$")).hasMatch(value)) //Check if valid name format
+                                                {
+                                              return 'Invalid room number or name';
+                                            }
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      //Room area
+                                      TextFormField(
+                                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                        decoration: InputDecoration(
+                                          labelText: 'Room area (m²)',
+                                          hintText: room.getRoomArea().toString(),
+                                        ),
+                                        keyboardType: TextInputType.text,
+                                        controller: _roomArea,
+                                        validator: (value) {
+                                          if (value.isNotEmpty) {
+                                            if (!globals.isNumeric(value)) {
+                                              return "Room area must be a number";
+                                            } else if (double.parse(value) <= 0) {
+                                              return "Room area must be greater than zero";
+                                            } else {
+                                              return null;
+                                            }
+                                          } else {
+                                            if (room.getRoomArea() == 0.0) {
+                                              return "Room area must be greater than zero";
+                                            }
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      //Desk area of all desks in the room
+                                      TextFormField(
+                                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                        decoration: InputDecoration(
+                                          labelText: 'Desk area (m²)',
+                                          hintText: room.getDeskArea().toString(),
+                                        ),
+                                        keyboardType: TextInputType.text,
+                                        controller: _deskArea,
+                                        validator: (value) {
+                                          if (value.isNotEmpty) {
+                                            if (!globals.isNumeric(value)) {
+                                              return "Desk area must be a number";
+                                            } else if (double.parse(value) <= 0) {
+                                              return "Desk area must be greater than zero";
+                                            } else {
+                                              return null;
+                                            }
+                                          } else {
+                                            if (room.getDeskArea() == 0.0) {
+                                              return "Desk area must be greater than zero";
+                                            }
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      //Desk area of all desks in the room
+                                      TextFormField(
+                                        textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
+                                        decoration: InputDecoration(
+                                          labelText: 'Number of desks',
+                                          hintText: room.getNumberOfDesks().toString(),
+                                        ),
+                                        keyboardType: TextInputType.text,
+                                        controller: _numOfDesks,
+                                        validator: (value) {
+                                          if (value.isNotEmpty) {
+                                            if (!globals.isNumeric(value)) {
+                                              return "Number of desks must be a number";
+                                            } else if (int.parse(value) <= 0) {
+                                              return "Number of desks must be greater than zero";
+                                            } else {
+                                              return null;
+                                            }
+                                          } else {
+                                            if (room.getNumberOfDesks() == 0) {
+                                              return "Number of desks must be greater than zero";
+                                            }
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                        decoration: InputDecoration(
+                                          labelText: 'Capacity percentage',
+                                          hintText: room.getNumberOfDesks().toString(),
+                                        ),
+                                        keyboardType: TextInputType.text,
+                                        controller: _capacityPercentage,
+                                        validator: (value) {
+                                          if (value.isNotEmpty) {
+                                            if (!globals.isNumeric(value)) {
+                                              return "Percentage must be a number";
+                                            } else if (int.parse(value) > 100 || int.parse(value) < 1) {
+                                              return "Percentage must be between 1 and 100";
+                                            } else {
+                                              return null;
+                                            }
+                                          } else {
+                                            if (room.getNumberOfDesks() == 0) {
+                                              return "Percentage must be greater than zero";
+                                            }
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      SizedBox (
+                                        height: MediaQuery.of(context).size.height/48,
+                                        width: MediaQuery.of(context).size.width,
+                                      ),
+                                      ElevatedButton(
+                                        child: Text(
+                                            'Submit'
+                                        ),
+                                        onPressed: () {
+                                          FormState form = _formKey.currentState;
+                                          if (form.validate()) {
+                                            String _tempName;
+                                            if (_roomName.text == "" || _roomName.text == "No name") {
+                                              _tempName = "";
+                                            } else {
+                                              _tempName = _roomName.text;
+                                            }
+
+                                            String encodedBytes = "";
+                                            if (fileBytes != null) {
+                                              encodedBytes = base64Encode(fileBytes);
+                                            }
+
+                                            floorPlanHelpers.updateRoom(_tempName, num.parse(_roomArea.text), num.parse(_deskArea.text),
+                                                num.parse(_numOfDesks.text), num.parse(_capacityPercentage.text), encodedBytes).then((result) {
+                                                  if (result == true) {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text("Room information updated")));
+                                                  } else {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                        SnackBar(content: Text("Room update unsuccessful. Please try again later.")));
+                                                  }
+                                            });
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text("Please enter required fields")));
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

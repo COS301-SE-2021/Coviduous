@@ -17,6 +17,7 @@ class Room {
   num deskArea;
   num capacityOfPeopleForSixFtGrid;
   num capacityOfPeopleForSixFtCircle;
+  String imageBytes;
 
   Room({
     this.currentNumRoomsInFloor,
@@ -30,7 +31,8 @@ class Room {
     this.currentCapacity,
     this.deskArea,
     this.capacityOfPeopleForSixFtGrid,
-    this.capacityOfPeopleForSixFtCircle
+    this.capacityOfPeopleForSixFtCircle,
+    this.imageBytes = "",
   });
 
   factory Room.fromJson(Map<String, dynamic> json) => Room(
@@ -46,6 +48,7 @@ class Room {
     deskArea: json["deskArea"],
     capacityOfPeopleForSixFtGrid: json["capacityOfPeopleForSixFtGrid"],
     capacityOfPeopleForSixFtCircle: json["capacityOfPeopleForSixFtCircle"],
+    imageBytes: json["base64String"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,6 +64,7 @@ class Room {
     "deskArea": deskArea,
     "capacityOfPeopleForSixFtGrid": capacityOfPeopleForSixFtGrid,
     "capacityOfPeopleForSixFtCircle": capacityOfPeopleForSixFtCircle,
+    "base64String": imageBytes,
   };
 
   num getCurrentNumRooms() {
@@ -109,5 +113,9 @@ class Room {
 
   num getCapacityForSixFtCircle() {
     return capacityOfPeopleForSixFtCircle;
+  }
+
+  String getImageBytes() {
+    return imageBytes;
   }
 }

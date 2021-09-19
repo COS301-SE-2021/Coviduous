@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/views/signup/home_signup_screen.dart';
 
+import 'package:frontend/globals.dart' as globals;
+
 void main() {
   setUpAll(() => HttpOverrides.global = null);
+
+  globals.showChatBot = false;
 
   testWidgets('Correct widgets appear', (WidgetTester tester) async {
     //Create widget for testing

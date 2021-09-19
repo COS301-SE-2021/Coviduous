@@ -11,17 +11,13 @@ import 'package:frontend/globals.dart' as globals;
 
 class MakeAnnouncement extends StatefulWidget {
   static const routeName = "/admin_make_announcement";
-  MakeAnnouncement() : super();
-
-  final String title = "Make announcement";
 
   @override
   MakeAnnouncementState createState() => MakeAnnouncementState();
 }
 
-//class make announcement
 class MakeAnnouncementState extends State<MakeAnnouncement> {
-  TextEditingController _description = TextEditingController();
+  TextEditingController _message = TextEditingController();
 
   List<String> _announceType = ['General', 'Emergency'];
   List<DropdownMenuItem<String>> _dropdownMenuItems;
@@ -85,7 +81,7 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
       onWillPop: _onWillPop,
       child: new Scaffold(
           appBar: new AppBar(
-            title: new Text("Make announcement"),
+            title: new Text("Create announcement"),
             leading: BackButton( //Specify back button
               onPressed: (){
                 announcementHelpers.getAnnouncements().then((result) {
@@ -102,64 +98,111 @@ class MakeAnnouncementState extends State<MakeAnnouncement> {
           ),
           body: Center(
             child: SingleChildScrollView(
-              child: new Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height/(3*globals.getWidgetScaling()),
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                padding: EdgeInsets.all(16),
-                child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Select announcement type"),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Theme(
-                      data: ThemeData.light(),
-                      child: DropdownButton(
-                        value: _selectedType,
-                        items: _dropdownMenuItems,
-                        onChanged: onChangeDropdownItem,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  color: Colors.white,
+                  width: (!globals.getIfOnPC())
+                      ? MediaQuery.of(context).size.width/(2 * globals.getWidgetScaling())
+                      : 640,
+                  padding: EdgeInsets.zero,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height/6,
+                            child: Image(
+                              image: (_selectedType == "Emergency")
+                                  ? AssetImage('assets/images/warning-icon.png')
+                                  : AssetImage('assets/images/placeholder-announcement.png')
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text("Select type"),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    color: (_selectedType == "Emergency")
+                                        ? globals.sixthColor
+                                        : globals.firstColor,
+                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    child: Theme(
+                                      data: ThemeData.dark(),
+                                      child: DropdownButton(
+                                        value: _selectedType,
+                                        items: _dropdownMenuItems,
+                                        onChanged: onChangeDropdownItem,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "Write your announcement",
-                          labelText: "Description",
-                      ),
-                      obscureText: false,
-                      maxLines: 3,
-                      controller: _description,
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                      Container(
+                        alignment: Alignment.center,
+                        color: (_selectedType == "Emergency")
+                            ? globals.sixthColor
+                            : globals.firstColor,
+                        padding: EdgeInsets.all(16),
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          'Message',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      child: Text("Post"),
-                      onPressed: () {
-                        announcementHelpers.createAnnouncement(_selectedType, _description.text).then((result) {
-                          if (result == true) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Announcement successfully created.")));
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Announcement creation unsuccessful.")));
-                          }
-                        });
-                      },
-                    )
-                  ],
-                ),
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  hintText: "Write your announcement",
+                              ),
+                              obscureText: false,
+                              maxLines: 3,
+                              controller: _message,
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: (_selectedType == "Emergency")
+                                    ? globals.sixthColor
+                                    : globals.firstColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Text("Post"),
+                              onPressed: () {
+                                announcementHelpers.createAnnouncement(_selectedType, _message.text).then((result) {
+                                  if (result == true) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("Announcement successfully created.")));
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("Announcement creation unsuccessful.")));
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

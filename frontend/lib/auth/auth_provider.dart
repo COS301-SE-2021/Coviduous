@@ -13,7 +13,9 @@ class AuthClass {
        await auth.createUserWithEmailAndPassword(
            email: email,
            password: password
-       );
+       ).then((userCredential) async {
+         globals.token = await userCredential.user.getIdToken();
+       });
        return "Account created";
      } on FirebaseAuthException catch (e) {
        if (e.code == 'weak-password') {
@@ -37,7 +39,6 @@ class AuthClass {
          globals.loggedInUserId = userCredential.user.uid;
          globals.loggedInUserEmail = userCredential.user.email;
          globals.token = await userCredential.user.getIdToken();
-         //print(globals.token);
        });
        return "welcome";
      } on FirebaseAuthException catch (e) {

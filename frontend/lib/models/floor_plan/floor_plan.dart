@@ -9,12 +9,14 @@ class FloorPlan {
   int numFloors;
   String adminId;
   String companyId;
+  String imageBytes;
 
   FloorPlan({
     this.floorPlanNumber,
     this.numFloors,
     this.adminId,
     this.companyId,
+    this.imageBytes = "",
   });
 
   factory FloorPlan.fromJson(Map<String, dynamic> json) => FloorPlan(
@@ -22,6 +24,7 @@ class FloorPlan {
     numFloors: json["numFloors"],
     adminId: json["adminId"],
     companyId: json["companyId"],
+    imageBytes: json["base64String"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +32,7 @@ class FloorPlan {
     "numFloors": numFloors,
     "adminId" : adminId,
     "companyId": companyId,
+    "base64String": imageBytes,
   };
 
   String getFloorPlanNumber() {
@@ -45,5 +49,9 @@ class FloorPlan {
 
   String getCompanyId() {
     return companyId;
+  }
+
+  String getImageBytes() {
+    return imageBytes;
   }
 }

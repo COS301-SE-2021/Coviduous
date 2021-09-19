@@ -12,9 +12,14 @@ Future<bool> createAdmin(String firstName, String lastName, String userName,
 
   bool result = false;
   await Future.wait([
-    userController.createUser(uid, "ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress)
+    createCompany(companyId)
   ]).then((results) {
     result = results.first;
+    if (result == true) {
+      userController.createUser(uid, "ADMIN", firstName, lastName, email, userName, companyId, companyName, companyAddress).then((result2) {
+        result = result2;
+      });
+    }
   });
   return result;
 }
@@ -26,9 +31,19 @@ Future<bool> createUser(String firstName, String lastName, String userName, Stri
 
   bool result = false;
   await Future.wait([
-  userController.createUser(uid, "USER", firstName, lastName, email, userName, companyId, null, null)
+    userController.createUser(uid, "USER", firstName, lastName, email, userName, companyId, null, null)
   ]).then((results) {
-  result = results.first;
+    result = results.first;
+  });
+  return result;
+}
+
+Future<bool> createCompany(String companyId) async {
+  bool result = false;
+  await Future.wait([
+    userController.createCompany(companyId)
+  ]).then((results) {
+    result = results.first;
   });
   return result;
 }
@@ -106,9 +121,27 @@ Future<bool> getUsersForGroup(Group group) async {
     await Future.wait([
       userController.getUserDetailsByEmail(group.getUserEmails()[i].toString())
     ]).then((results) {
-      globals.selectedUsers.add(results.first);
-      result = true;
+      if (results.first != null) {
+        globals.selectedUsers.add(results.first);
+        result = true;
+      } else {
+        result = false;
+      }
     });
   }
+  return result;
+}
+
+Future<bool> getEmailsForCompany() async {
+  bool result = false;
+  globals.currentEmails.clear();
+  await Future.wait([
+    userController.getEmailsByCompany(globals.loggedInCompanyId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentEmails = results.first;
+      result = true;
+    }
+  });
   return result;
 }

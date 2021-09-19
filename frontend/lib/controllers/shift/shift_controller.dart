@@ -27,7 +27,7 @@ int numGroups = 0;
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 Future<bool> createShift(String date, String startTime, String endTime, String description) async {
-  String path = '/shift';
+  String path = 'shift/api/shift/';
   String url = server + path;
   var request;
 
@@ -44,7 +44,7 @@ Future<bool> createShift(String date, String startTime, String endTime, String d
       "floorNumber": globals.currentFloorNum,
       "roomNumber": globals.currentRoomNum,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -62,7 +62,7 @@ Future<bool> createShift(String date, String startTime, String endTime, String d
 }
 
 Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, String adminId) async {
-  String path = '/group';
+  String path = 'shift/api/group/';
   String url = server + path;
   var request;
 
@@ -74,7 +74,7 @@ Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, 
       "shiftNumber": shiftNumber,
       "adminId": adminId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -91,18 +91,24 @@ Future<bool> createGroup(String groupName, List userEmails, String shiftNumber, 
   return false;
 }
 
-Future<List<Shift>> getShifts() async {
-  String path = '/shift';
+Future<List<Shift>> getShifts(String roomNumber) async {
+  String path = 'shift/api/shift/getRoomShift/';
   String url = server + path;
-  var response;
+  var request;
 
   try {
-    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "roomNumber": roomNumber,
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+
+    print(await response.statusCode);
 
     if (response.statusCode == 200) {
-      //print(response.body);
-
-      var jsonString = response.body;
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
@@ -125,12 +131,12 @@ Future<List<Shift>> getShifts() async {
 }
 
 Future<List<Group>> getGroups() async {
-  String path = '/group';
+  String path = 'shift/api/group/';
   String url = server + path;
   var response;
 
   try {
-    response = await http.get(Uri.parse(url), headers: globals.requestHeaders);
+    response = await http.get(Uri.parse(url), headers: globals.getRequestHeaders());
 
     if (response.statusCode == 200) {
       //print(response.body);
@@ -158,7 +164,7 @@ Future<List<Group>> getGroups() async {
 }
 
 Future<List<Group>> getGroupForShift(String shiftId) async {
-  String path = '/group/shift-id';
+  String path = 'shift/api/group/shift-id/';
   String url = server + path;
 
   var request;
@@ -168,7 +174,7 @@ Future<List<Group>> getGroupForShift(String shiftId) async {
     request.body = json.encode({
       "shiftNumber": shiftId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -198,7 +204,7 @@ Future<List<Group>> getGroupForShift(String shiftId) async {
 }
 
 Future<bool> updateShift(String shiftId, String startTime, String endTime) async {
-  String path = '/shift';
+  String path = 'shift/api/shift/';
   String url = server + path;
   var request;
 
@@ -209,7 +215,7 @@ Future<bool> updateShift(String shiftId, String startTime, String endTime) async
       "startTime": startTime,
       "endTime": endTime,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 
@@ -227,12 +233,12 @@ Future<bool> updateShift(String shiftId, String startTime, String endTime) async
 }
 
 Future<bool> deleteShift(String shiftId) async {
-  String path = '/shift';
+  String path = 'shift/api/shift/';
   String url = server + path;
 
   var request = http.Request('DELETE', Uri.parse(url));
   request.body = json.encode({"shiftId": shiftId});
-  request.headers.addAll(globals.requestHeaders);
+  request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();
 

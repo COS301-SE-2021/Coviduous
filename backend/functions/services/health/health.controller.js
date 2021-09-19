@@ -15,6 +15,7 @@ Date.prototype.timeNow = function () {
 
 let database;
 let notificationDatabase;
+let reportingDatabase;
 
 exports.setDatabase = async (db) => {
   database = db;
@@ -22,6 +23,10 @@ exports.setDatabase = async (db) => {
 
 exports.setNotificationDatabase = async (db) => {
   notificationDatabase = db;
+}
+
+exports.setReportingDatabase = async (db) => {
+  reportingDatabase = db;
 }
 
 exports.hasHighTemperature = async (temparature) => {
@@ -245,6 +250,180 @@ exports.createHealthCheck = async (req, res) => {
       //if prediction is positive issue out a permission denied
       await this.permissionDeniedBadge(reqJson.userId,reqJson.email);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
+      ////////////////////////////////////////////////////////////////////////////////////////
+      // update the health summary collection
+      // first check if the current month and year you are currently in is registered
+
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let permissionSummaryId = "PMSN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let healthSummaries = await reportingDatabase.viewHealthSummary();
+      let permissionSummaries = await reportingDatabase.viewPermissionSummary();
+    
+    let filteredList=[];  
+    let filteredList2=[]; 
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+    permissionSummaries.forEach(obj => {
+      if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+            {
+              filteredList2.push(obj);
+            }
+            else
+            {
+      
+            }
+          });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+        if(reqJson.userId==="VISITOR")
+        {
+          let numHealthChecksVisitors=filteredList[0].numHealthChecksVisitors;
+          numHealthChecksVisitors++;
+
+          await reportingDatabase.updateHealthSummaryVisitor(filteredList[0].healthSummaryId,numHealthChecksVisitors);
+        }
+        else
+        {
+          let numHealthChecksUsers=filteredList[0].numHealthChecksUsers;
+          numHealthChecksUsers++;
+
+          await reportingDatabase.updateHealthSummaryUser(filteredList[0].healthSummaryId,numHealthChecksUsers);
+
+        }
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+      //initialize a new month or year for this company and set its initial values
+
+        if(reqJson.userId==="VISITOR")
+        {
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 1,
+            numReportedInfections: 0,
+            numReportedRecoveries:0
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+        }
+        else
+        {
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 1,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 0,
+            numReportedRecoveries:0
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+
+        }
+    }
+    //////////////////////////////////////////////////////////
+    if(filteredList2.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the numPermissionDeniedVisitors field
+        if(reqJson.userId==="VISITOR")
+        {
+          let numPermissionDeniedVisitors=filteredList[0].numPermissionDeniedVisitors;
+          numPermissionDeniedVisitors++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+
+          await reportingDatabase.updatePermissionDeniedVisitor(filteredList[0].permissionSummaryId,numPermissionDeniedVisitors);
+        }
+        else
+        {
+          let numPermissionDeniedUsers=filteredList[0].numPermissionDeniedUsers;
+          numPermissionDeniedUsers++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+
+          await reportingDatabase.updatePermissionDeniedUser(filteredList[0].permissionSummaryId,numPermissionDeniedUsers);
+
+        }
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+      //initialize a new month or year for this company and set its initial values
+
+        if(reqJson.userId==="VISITOR")
+        {
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 0,
+            numPermissionDeniedVisitors: 1,
+            numPermissionGrantedUsers: 0,
+            numPermissionGrantedVisitors: 0,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+        }
+        else
+        {
+
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 1,
+            numPermissionDeniedVisitors: 0,
+            numPermissionGrantedUsers: 0,
+            numPermissionGrantedVisitors: 0,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+
+        }
+      }
+    /////////
+    /////////////////////////////////////////////////////////////////////////////
       return res.status(200).send({
         message: 'Health Check Successfully Created , But Access Denied Please Consult A Medical Professional You May Be At Risk Of COVID-19',
         data: healthCheckData
@@ -257,6 +436,177 @@ exports.createHealthCheck = async (req, res) => {
       // all healthchecks are saved into the database for reporting
       await this.permissionAcceptedBadge(reqJson.userId,reqJson.email);
       await database.createHealthCheck(healthCheckData.healthCheckId, healthCheckData);
+          ////////////////////////////////////////////////////////////////////////////////////////
+      // update the health check summary collection
+      // first check if the current month and year you are currently in is registered
+
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let permissionSummaryId = "PMSN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let healthSummaries = await reportingDatabase.viewHealthSummary();
+      let permissionSummaries = await reportingDatabase.viewPermissionSummary();
+    
+    let filteredList=[];
+    let filteredList2=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+    permissionSummaries.forEach(obj => {
+      if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+            {
+              filteredList2.push(obj);
+            }
+            else
+            {
+      
+            }
+          });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+        if(reqJson.userId==="VISITOR")
+        {
+          let numHealthChecksVisitors=filteredList[0].numHealthChecksVisitors;
+          numHealthChecksVisitors++;
+
+          await reportingDatabase.updateHealthSummaryVisitor(filteredList[0].healthSummaryId,numHealthChecksVisitors);
+        }
+        else
+        {
+          let numHealthChecksUsers=filteredList[0].numHealthChecksUsers;
+          numHealthChecksUsers++;
+
+          await reportingDatabase.updateHealthSummaryUser(filteredList[0].healthSummaryId,numHealthChecksUsers);
+
+        }
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+
+        if(reqJson.userId==="VISITOR")
+        {
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 1,
+            numReportedInfections: 0,
+            numReportedRecoveries:0
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+        }
+        else
+        {
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 1,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 0,
+            numReportedRecoveries:0
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+
+        }
+    }
+    //////////////////////////////////////////////////////////
+    if(filteredList2.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the numPermissionAccepted field
+        if(reqJson.userId==="VISITOR")
+        {
+          let numPermissionGrantedVisitors=filteredList[0].numPermissionGrantedVisitors;
+          numPermissionGrantedVisitors++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+
+          await reportingDatabase.updatePermissionGrantedVisitor(filteredList[0].permissionSummaryId,numPermissionGrantedVisitors);
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+        }
+        else
+        {
+          let numPermissionGrantedUsers=filteredList[0].numPermissionGrantedUsers;
+          numPermissionGrantedUsers++;
+          let totalPermissions=filteredList[0].totalPermissions;
+          totalPermissions++;
+
+          await reportingDatabase.updatePermissionGrantedUser(filteredList[0].permissionSummaryId,numPermissionGrantedUsers);
+          await reportingDatabase.updateTotalPermissions(filteredList[0].permissionSummaryId,totalPermissions);
+        }
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+      //initialize a new month or year for this company and set its initial values
+
+        if(reqJson.userId==="VISITOR")
+        {
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 0,
+            numPermissionDeniedVisitors: 0,
+            numPermissionGrantedUsers: 0,
+            numPermissionGrantedVisitors: 1,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+        }
+        else
+        {
+
+          let permissionSummary = {
+            permissionSummaryId: permissionSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numPermissionDeniedUsers: 0,
+            numPermissionDeniedVisitors: 0,
+            numPermissionGrantedUsers: 1,
+            numPermissionGrantedVisitors: 0,
+            totalPermissions:1
+              
+            }
+            await reportingDatabase.setPermissionSummary(permissionSummaryId,permissionSummary);
+          
+
+        }
+      }
+    /////////
       return res.status(200).send({
         message: 'Health Check Successfully Created , Access Granted',
         data: healthCheckData
@@ -451,6 +801,62 @@ exports.reportInfection = async (req, res) => {
 
     await database.reportInfection(notificationId,reportedInfectionData);
     await notificationService.sendUserEmail(reqJson.adminEmail,notificationData.subject,notificationData.message);
+
+     ////////////////////////////////////////////////////////////////////////////////////////
+      // update the health check summary collection
+      // first check if the current month and year you are currently in is registered
+
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let healthSummaries = await reportingDatabase.viewHealthSummary();
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+          let numReportedInfections=filteredList[0].numReportedInfections;
+          numReportedInfections++;
+
+          await reportingDatabase.updateHealthSummaryReportedInfections(filteredList[0].healthSummaryId,numReportedInfections);
+
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 1,
+            numReportedRecoveries:0
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+
+        
+    }
+    /////////////////////////////////////////////////////////////////////////////
       
       return res.status(200).send({
         message: 'Successfully reported infection',
@@ -463,6 +869,120 @@ exports.reportInfection = async (req, res) => {
       });
   }
 };
+
+
+
+//////////////////////////////////////////////////////
+exports.reportRecovery = async (req, res) => {
+  try {
+
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+      let recoveryId = "RECV-" + uuid.v4();
+      let notificationId = "NTFN-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+    let reportedRecoveryData = {
+      recoveryId: recoveryId,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
+      timestamp: timestamp,
+      adminId:reqJson.adminId,
+      companyId: reqJson.companyId
+    }
+
+    let notificationData = {
+      notificationId: notificationId,
+      userId: reqJson.userId,
+      userEmail:reqJson.userEmail,
+      subject: "COVID-19 RECOVERY STATUS UPDATED",
+      message: "EMPLOYEE  ID :"+reqJson.userId+" COVID-19 RECOVERY STATUS HAS BEEN UPDATED PLEASE PERFROM A NEW HEALTH ASSESSMENT",
+      timestamp: timestamp,
+      adminId: reqJson.adminId,
+      companyId: reqJson.companyId
+    }
+
+    await notificationDatabase.createNotification(notificationData.notificationId, notificationData);
+    
+
+    await database.reportRecovery(notificationId,reportedRecoveryData);
+    await notificationService.sendUserEmail(reqJson.userEmail,notificationData.subject,notificationData.message);
+
+     ////////////////////////////////////////////////////////////////////////////////////////
+      // update the health check summary collection
+      // first check if the current month and year you are currently in is registered
+
+      let healthSummaryId = "HSID-" + uuid.v4();
+      let month= timestamp.charAt(3)+timestamp.charAt(4);
+      let year= timestamp.charAt(6)+timestamp.charAt(7)+timestamp.charAt(8)+timestamp.charAt(9);
+      let healthSummaries = await reportingDatabase.viewHealthSummary();
+    
+    let filteredList=[];   
+    healthSummaries.forEach(obj => {
+    if(obj.companyId===reqJson.companyId && obj.month===month && obj.year==year)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+
+    if(filteredList.length>0)
+    {
+        // company was previously initialized no need to re-initilize
+        // we can perform an update on the healthcheck field
+          let numReportedRecoveries=filteredList[0].numReportedRecoveries;
+          numReportedRecoveries++;
+
+          await reportingDatabase.updateHealthSummaryReportedRecoveries(filteredList[0].healthSummaryId,numReportedRecoveries);
+
+        
+
+    }
+    else
+    {
+      // The year and the month for this company is not registered
+
+          let healthSummary = {
+            healthSummaryId: healthSummaryId,
+            month: month,
+            year:year,
+            timestamp: timestamp,
+            companyId: reqJson.companyId,
+            numHealthChecksUsers: 0,
+            numHealthChecksVisitors: 0,
+            numReportedInfections: 0,
+            numReportedRecoveries:1
+              
+            }
+            await reportingDatabase.setHealthSummary(healthSummaryId,healthSummary);
+          
+
+        
+    }
+    /////////////////////////////////////////////////////////////////////////////
+      
+      return res.status(200).send({
+        message: 'Successfully reported recovery',
+        data: true
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while reporting recovery."
+      });
+  }
+};
+
+
+
+
+
 
 
 exports.deletePermissionRequest = async (req, res)=>{
@@ -581,3 +1101,142 @@ exports.notifyGroup = async (req, res) => {
       });
   }
 };
+
+//upload documents
+exports.uploadCovid19VaccineConfirmation = async (req, res) => {
+  try {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      let documentId = "DOC-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+      let documentData = {
+          documentId: documentId,
+          userId: reqJson.userId,
+          fileName:reqJson.fileName,
+          timestamp: timestamp,
+          base64String: reqJson.base64String,
+          
+        }
+        if ( await database.saveCovid19VaccineConfirmation(documentId,documentData) == true)
+        {
+      return res.status(200).send({
+        message: 'Successfully stored vaccine confirmation document',
+        data: documentData
+      });
+    }
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while storing vaccine document."
+      });
+  }
+};
+
+exports.uploadCovid19TestResults = async (req, res) => {
+  try {
+    let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+      let documentId = "DOC-" + uuid.v4();
+      let timestamp = new Date().today() + " @ " + new Date().timeNow();
+
+      let documentData = {
+          documentId: documentId,
+          userId: reqJson.userId,
+          fileName:reqJson.fileName,
+          timestamp: timestamp,
+          base64String: reqJson.base64String,
+          
+        }
+        if ( await database.saveCovid19TestResults(documentId,documentData) == true)
+        {
+      
+      return res.status(200).send({
+        message: 'Successfully stored test results',
+        data: documentData
+      });
+    }
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while trying to store results."
+      });
+  }
+};
+
+// get documents 
+exports.viewVaccineConfirmations = async (req, res) => {
+  try {
+      let reqJson;
+      try {
+          reqJson = JSON.parse(req.body);
+      } catch (e) {
+          reqJson = req.body;
+      }
+
+      let filteredList=[];
+      let results = await database.getVaccineConfirmations();
+      
+      results.forEach(obj => {
+        if(obj.userId===reqJson.userId)
+        {
+          filteredList.push(obj);
+        }
+        else
+        {
+  
+        }
+      });
+      return res.status(200).send({
+        message: 'Successfully Fetched Documents.',
+        data: filteredList
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching Documents."
+      });
+  }
+  };
+
+  exports.viewTestResults = async (req, res) => {
+    try {
+        let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+
+        let filteredList=[];
+        let results = await database.getTestResults();
+        
+        results.forEach(obj => {
+          if(obj.userId===reqJson.userId)
+          {
+            filteredList.push(obj);
+          }
+          else
+          {
+    
+          }
+        });
+        return res.status(200).send({
+          message: 'Successfully Fetched Documents.',
+          data: filteredList
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+          message: error.message || "Some error occurred while fetching Documents."
+        });
+    }
+    };

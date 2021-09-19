@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -13,6 +12,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_view_vaccine_confirm.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 class UserUploadVaccineConfirm extends StatefulWidget {
@@ -24,11 +24,14 @@ class UserUploadVaccineConfirm extends StatefulWidget {
 
 //Let user pick PDF from their device
 class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
+  String fileName = "";
+  String pickerFileName = "";
+  List<int> fileBytes;
+
   Future getPdf() async {
     var rng = new Random();
     String randomName = "";
     for (var i = 0; i < 20; i++) {
-      print(rng.nextInt(100));
       randomName += rng.nextInt(100).toString();
     }
     await Future.wait([
@@ -39,42 +42,49 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
         if (platform == "Android" || platform == "iOS") { //Check if mobile browser
           FilePickerResult result = results.first;
           if (result != null) {
+            pickerFileName = results.first.names.first;
             File file = File(result.files.single.path);
-            String fileName = '${randomName}.pdf';
-            print(fileName);
-            print('${file.readAsBytesSync()}');
-            savePdf(file.readAsBytesSync(), fileName);
+            String tempFileName = '${randomName}.pdf';
+            print(tempFileName);
+            fileName = tempFileName;
+            fileBytes = file.readAsBytesSync();
           }
         } else { //Else, PC browser
-          //Not sure what to do here
+          FilePickerResult result = results.first;
+          if (result != null) {
+            pickerFileName = results.first.names.first;
+            String tempFileName = '${randomName}.pdf';
+            print(tempFileName);
+            fileName = tempFileName;
+            fileBytes = result.files.first.bytes;
+          }
         }
       } else { //Else, mobile app
         FilePickerResult result = results.first;
         if (result != null) {
+          pickerFileName = results.first.names.first;
           File file = File(result.files.single.path);
-          String fileName = '${randomName}.pdf';
-          print(fileName);
-          print('${file.readAsBytesSync()}');
-          savePdf(file.readAsBytesSync(), fileName);
+          String tempFileName = '${randomName}.pdf';
+          print(tempFileName);
+          fileName = tempFileName;
+          fileBytes = file.readAsBytesSync();
         }
       }
+      setState(() {});
     });
   }
 
   Future savePdf(List<int> asset, String name) async {
-    //Upload the PDF to Firebase Cloud Storage
-    documentFileUpload("Test URL 2.pdf");
-    return;
-  }
-
-  //Upload URL of the document to Firestore
-  void documentFileUpload(String str) {
-    CollectionReference users = FirebaseFirestore.instance.collection('Test Results');
-    FirebaseAuth auth = FirebaseAuth.instance;
-    String uid = auth.currentUser.uid.toString();
-    users.add({
-      'uid': uid,
-      'Document path': str,
+    //Upload the PDF to Firestore
+    String fileBytes = base64Encode(asset);
+    await healthHelpers.uploadVaccineConfirmation(name, fileBytes).then((result) {
+      if (result == true) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("PDF successfully uploaded.")));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Error occurred while uploading PDF. Please try again later.")));
+      }
     });
   }
 
@@ -110,6 +120,36 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
               },
             ),
           ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  child: ElevatedButton(
+                    child: Text(
+                        'View uploaded files'
+                    ),
+                    onPressed: () {
+                      healthHelpers.getVaccineConfirmations().then((result) {
+                        if (result == true) {
+                          Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('An error occurred while retrieving your confirmation documents. Please try again later.')));
+                        }
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           body: Stack(
               children: <Widget>[
                 Center(
@@ -118,75 +158,92 @@ class _UserUploadVaccineConfirmState extends State<UserUploadVaccineConfirm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                          height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                          color: Theme.of(context).primaryColor,
-                          child: Text(
-                              'Upload your confirmation',
-                              style: TextStyle(
-                                fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5,
-                              )
-                          ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          width: MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling()),
-                          height: MediaQuery.of(context).size.height / (4 * globals.getWidgetScaling()),
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                              ),
-                              Text(
-                                  'Please note that all documents must be uploaded in a PDF format.'
-                              ),
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height / (24 * globals.getWidgetScaling()),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
-                                children: <Widget>[
-                                  ElevatedButton(
-                                    child: Text(
-                                        'Select a file'
-                                    ),
-                                    onPressed: () {
-                                      getPdf();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: globals.focusColor,
+                            width: (!globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.width / (2 * globals.getWidgetScaling())
+                                : 640,
+                            padding: EdgeInsets.all(20),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    child: Icon(Icons.cloud_upload,
+                                        size: 100,
+                                        color: Colors.white
                                     ),
                                   ),
-                                  ElevatedButton(
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: MediaQuery.of(context).size.width,
                                     child: Text(
-                                        'Submit'
+                                      'Drop your file here',
+                                      style: TextStyle(color: Colors.white, fontSize:18),
                                     ),
-                                    onPressed: () {
-                                      globals.vaccineConfirmExists = true;
-                                      if (globals.vaccineConfirmExists) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("PDF successfully uploaded")));
-                                        Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text("Please upload a PDF")));
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Text(
+                                      'Selected file: ' + pickerFileName,
+                                      style: TextStyle(color: Colors.white, fontSize:18),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height / (36 * globals.getWidgetScaling()),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center, //Center row contents vertically
+                                    children: <Widget>[
+                                      ElevatedButton(
+                                        child: Text(
+                                            'Select a file'
+                                        ),
+                                        onPressed: () {
+                                          getPdf();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  )
+                                      ElevatedButton(
+                                        child: Text(
+                                            'Submit'
+                                        ),
+                                        onPressed: () {
+                                          if (fileBytes != null && fileBytes != "") {
+                                            savePdf(fileBytes, fileName).then((result) {
+                                              healthHelpers.getVaccineConfirmations().then((result) {
+                                                Navigator.of(context).pushReplacementNamed(UserViewVaccineConfirm.routeName);
+                                              });
+                                            });
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(content: Text("Please upload a PDF.")));
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ],

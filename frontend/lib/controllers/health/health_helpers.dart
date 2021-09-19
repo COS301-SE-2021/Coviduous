@@ -3,15 +3,15 @@ import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/globals.dart' as globals;
 
 Future<bool> createHealthCheckUser(String temperature, bool fever, bool cough, bool soreThroat,
-    bool chills, bool aches, bool nausea, bool shortnessOfBreath, bool lossOfTasteSmell,
-    bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
+    bool chills, bool aches, bool nausea, bool shortnessOfBreath, bool lossOfTasteSmell, bool sixFeetContact,
+    bool testedPositive, bool travelled, bool headache, bool isFemale, bool is60orOlder) async {
   bool result = false;
   await Future.wait([
-    healthController.createHealthCheck(globals.loggedInUserId, globals.loggedInUser.getFirstName(), globals.loggedInUser.getLastName(),
-        globals.loggedInUserEmail, "N/A", temperature, fever, cough, soreThroat, chills, aches, nausea,
-        shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache)
+    healthController.createHealthCheck(globals.loggedInCompanyId, globals.loggedInUserId, globals.loggedInUser.getFirstName(),
+        globals.loggedInUser.getLastName(), globals.loggedInUserEmail, "N/A", temperature, fever, cough, soreThroat, chills,
+        aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache, isFemale, is60orOlder)
   ]).then((results) {
-    if (results != null) {
+    if (results != null && results.first != null) {
       globals.currentHealthCheck = results.first;
       result = true;
     }
@@ -19,15 +19,15 @@ Future<bool> createHealthCheckUser(String temperature, bool fever, bool cough, b
   return result;
 }
 
-Future<bool> createHealthCheckVisitor(String firstName, String lastName, String email, String phoneNumber,
-    String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea,
-    bool shortnessOfBreath, bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache) async {
+Future<bool> createHealthCheckVisitor(String companyId, String firstName, String lastName, String email, String phoneNumber,
+    String temperature, bool fever, bool cough, bool soreThroat, bool chills, bool aches, bool nausea, bool shortnessOfBreath,
+    bool lossOfTasteSmell, bool sixFeetContact, bool testedPositive, bool travelled, bool headache, bool isFemale, bool is60orOlder) async {
   bool result = false;
   await Future.wait([
-    healthController.createHealthCheck("VISITOR", firstName, lastName, email, phoneNumber, temperature, fever, cough,
-        soreThroat, chills, aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache)
+    healthController.createHealthCheck(companyId, "VISITOR", firstName, lastName, email, phoneNumber, temperature, fever, cough, soreThroat,
+        chills, aches, nausea, shortnessOfBreath, lossOfTasteSmell, sixFeetContact, testedPositive, travelled, headache, isFemale, is60orOlder)
   ]).then((results) {
-    if (results != null) {
+    if (results != null && results.first != null) {
       globals.currentHealthCheck = results.first;
       result = true;
     }
@@ -40,8 +40,10 @@ Future<bool> getPermissionsUser() async {
   await Future.wait([
     healthController.getPermissions(globals.loggedInUserEmail)
   ]).then((results) {
-    if (results != null) {
-      globals.currentPermissions = results.first;
+    if (results != null && results.first != null) {
+      if (results.first.length > 0) {
+        globals.currentPermissions = results.first;
+      }
       result = true;
     }
   });
@@ -53,8 +55,10 @@ Future<bool> getPermissionsVisitor(String email) async {
   await Future.wait([
     healthController.getPermissions(email)
   ]).then((results) {
-    if (results != null) {
-      globals.currentPermissions = results.first;
+    if (results != null && results.first != null) {
+      if (results.first.length > 0) {
+        globals.currentPermissions = results.first;
+      }
       result = true;
     }
   });
@@ -66,8 +70,10 @@ Future<bool> getPermissionsForEmployee(String employeeEmail) async {
   await Future.wait([
     healthController.getPermissions(employeeEmail)
   ]).then((results) {
-    if (results != null) {
-      globals.currentPermissions = results.first;
+    if (results != null && results.first != null) {
+      if (results.first.length > 0) {
+        globals.currentPermissions = results.first;
+      }
       result = true;
     }
   });
@@ -78,7 +84,7 @@ Future<bool> reportInfection(String adminEmail) async {
   bool result = false;
   await Future.wait([
     healthController.reportInfection((globals.loggedInUser.getFirstName() + " " + globals.loggedInUser.getLastName()),
-        adminEmail, "SYSTEM", globals.loggedInCompanyId)
+        globals.loggedInUser.getEmail(), "SYSTEM", globals.loggedInCompanyId, adminEmail)
   ]).then((results) {
     result = results.first;
   });
@@ -116,6 +122,18 @@ Future<bool> deletePermissionRequest() async {
   ]).then((results) {
     result = results.first;
   });
+  return result;
+}
+
+Future<bool> deleteAllPermissionRequests() async {
+  bool result = false;
+  for (int i = 0; i < globals.currentPermissionRequests.length; i++) {
+    await Future.wait([
+      healthController.deletePermissionRequest(globals.currentPermissionRequests[i].getPermissionRequestId())
+    ]).then((results) {
+      result = results.first;
+    });
+  }
   return result;
 }
 
@@ -157,8 +175,12 @@ Future<bool> viewShifts(String userEmail) async {
     healthController.viewShifts(userEmail)
   ]).then((results) {
     if (results != null) {
-      globals.currentShifts = results.first;
-      globals.currentShiftNum = results.first[0].getShiftId();
+      if (results.first.length > 0) {
+        globals.currentShifts = results.first;
+        globals.currentShiftNum = results.first[0].getShiftId();
+      } else {
+        globals.currentShiftNum = '';
+      }
       result = true;
     }
   });
@@ -171,6 +193,52 @@ Future<bool> notifyGroup() async {
     healthController.notifyGroup(globals.currentShiftNum)
   ]).then((results) {
     result = results.first;
+  });
+  return result;
+}
+
+Future<bool> uploadVaccineConfirmation(String fileName, String bytes) async {
+  bool result = false;
+  await Future.wait([
+    healthController.uploadVaccineConfirmation(globals.loggedInUserId, fileName, bytes)
+  ]).then((results) {
+    result = results.first;
+  });
+  return result;
+}
+
+Future<bool> uploadTestResults(String fileName, String bytes) async {
+  bool result = false;
+  await Future.wait([
+    healthController.uploadTestResults(globals.loggedInUserId, fileName, bytes)
+  ]).then((results) {
+    result = results.first;
+  });
+  return result;
+}
+
+Future<bool> getVaccineConfirmations() async {
+  bool result = false;
+  await Future.wait([
+    healthController.getVaccineConfirmations(globals.loggedInUserId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentVaccineConfirmations = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
+Future<bool> getTestResults() async {
+  bool result = false;
+  await Future.wait([
+    healthController.getTestResults(globals.loggedInUserId)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentTestResults = results.first;
+      result = true;
+    }
   });
   return result;
 }

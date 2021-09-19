@@ -19,6 +19,7 @@ import 'package:frontend/views/forgot_password_screen.dart';
 import 'package:frontend/views/main_homepage.dart';
 
 import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 /*
@@ -49,20 +50,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return (await true);
   }
 
-  /*
-    Function name: build
-    Purpose: Visually displays the login screen.
-    Parameters:
-      - BuildContext context
-    Output:
-      - The app's screen is displayed as a Widget.
-   */
 @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Container(
-        color: globals.secondaryColor,
+        color: globals.secondColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
             title: Text('Login'),
@@ -199,10 +192,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                               setState(() {
                                                 isLoading = false;
                                               });
-                                              // print(globals.loggedInUserEmail);
-                                              // print(globals.loggedInCompanyId);
-                                              // print(globals.loggedInUserId);
-                                              // print(globals.loggedInUserType);
 
                                               if (globals.loggedInUserType == 'ADMIN') {
                                                 Navigator.pushReplacementNamed(context, AdminHomePage.routeName);
@@ -277,7 +266,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-              )
+              ),
+              globalWidgets.chatBot(context, LoginScreen.routeName, globals.showChatBot),
             ],
           ),
         ) : Center( child: CircularProgressIndicator() )

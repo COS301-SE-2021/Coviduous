@@ -35,7 +35,7 @@ class _UserRegisterState extends State<UserRegister>{
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Container(
-        color: globals.secondaryColor,
+        color: globals.secondColor,
         child: isLoading == false ? Scaffold(
           appBar: AppBar(
             title: Text('Register user'),
@@ -69,7 +69,6 @@ class _UserRegisterState extends State<UserRegister>{
                       ),
                       Container(
                         color: Colors.white,
-                        height: MediaQuery.of(context).size.height/(2.8*globals.getWidgetScaling()),
                         width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
                         padding: EdgeInsets.all(16),
                         child: Form(
@@ -112,7 +111,7 @@ class _UserRegisterState extends State<UserRegister>{
                                     keyboardType: TextInputType.emailAddress,
                                     controller: _email,
                                     validator: (value) {
-                                      if(value.isEmpty || !value.contains('@'))
+                                      if(value.isEmpty || !value.contains(RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+$")))
                                       {
                                         return 'invalid email';
                                       }

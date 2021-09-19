@@ -20,7 +20,7 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
   bool _hasFever = false;
   bool _hasDryCough = false;
   bool _hasShortnessOfBreath = false;
-  bool _hadSoreThroat = false;
+  bool _hasSoreThroat = false;
   bool _hasChills = false;
   bool _hasTasteSmellLoss = false;
   bool _hasHeadMusclePain = false;
@@ -29,12 +29,465 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
   bool _hasComeIntoContact = false;
   bool _hasTestedPositive = false;
   bool _hasTraveled = false;
+  bool _isFemale = false;
+  bool _is60orOlder = false;
 
-  final GlobalKey<FormState> _formKey = GlobalKey();
+  int currentQuestionNumber = 1;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
     return (await true);
+  }
+
+  String getQuestionImage() {
+    switch(currentQuestionNumber) {
+      case 1: {
+        return "assets/images/sick1.jpg";
+      }
+      break;
+
+      case 2: {
+        return "assets/images/sick2.jpg";
+      }
+      break;
+
+      case 3: {
+        return "assets/images/sick3.jpg";
+      }
+      break;
+
+      case 4: {
+        return "assets/images/sick4.jpg";
+      }
+      break;
+
+      case 5: {
+        return "assets/images/sick5.jpg";
+      }
+      break;
+
+      case 6: {
+        return "assets/images/sick6.jpg";
+      }
+      break;
+
+      case 7: {
+        return "assets/images/sick7.jpg";
+      }
+      break;
+
+      case 8: {
+        return "assets/images/sick8.jpg";
+      }
+      break;
+
+      case 9: {
+        return "assets/images/sick9.jpg";
+      }
+      break;
+
+      case 10: {
+        return "assets/images/sick10.jpg";
+      }
+      break;
+
+      case 11: {
+        return "assets/images/sick11.jpg";
+      }
+      break;
+
+      case 12: {
+        return "assets/images/sick12.jpg";
+      }
+      break;
+
+      case 13: {
+        return "assets/images/sick13.jpg";
+      }
+      break;
+
+      case 14: {
+        return "assets/images/sick14.jpg";
+      }
+      break;
+
+      default: {
+        return "assets/images/sick1.jpg";
+      }
+      break;
+    }
+  }
+
+  String getQuestion() {
+    switch(currentQuestionNumber) {
+      case 1: {
+        return "Please take your temperature and enter the result below.";
+      }
+      break;
+
+      case 2: {
+        return "Have you had a fever in the past 14 days?";
+      }
+      break;
+
+      case 3: {
+        return "Have you had a dry cough in the past 14 days?";
+      }
+      break;
+
+      case 4: {
+        return "Have you had shortness of breath in the past 14 days?";
+      }
+      break;
+
+      case 5: {
+        return "Have you had a sore throat in the past 14 days?";
+      }
+      break;
+
+      case 6: {
+        return "Have you lost your sense of smell or taste in the past 14 days?";
+      }
+      break;
+
+      case 7: {
+        return "Have you had chills in the past 14 days?";
+      }
+      break;
+
+      case 8: {
+        return "Have you had head or muscle aches in the past 14 days?";
+      }
+      break;
+
+      case 9: {
+        return "Have you suffered from nausea, diarrhea or vomiting in the past 14 days?";
+      }
+      break;
+
+      case 10: {
+        return "Have you come closer than 6 feet (1.83 meters) to someone who has displayed symptoms of COVID-19?";
+      }
+      break;
+
+      case 11: {
+        return "Have you tested positive for COVID-19 in the past 14 days?";
+      }
+      break;
+
+      case 12: {
+        return "Have you traveled to another province or country in the past 14 days?";
+      }
+      break;
+
+      case 13: {
+        return "Are you female?";
+      }
+      break;
+
+      case 14: {
+        return "Are you 60 years old or older?";
+      }
+      break;
+
+      default: {
+        return "";
+      }
+      break;
+    }
+  }
+
+  setAnswer(bool answer) {
+    switch(currentQuestionNumber) {
+      case 2: {
+        _hasFever = answer;
+      }
+      break;
+
+      case 3: {
+        _hasDryCough = answer;
+      }
+      break;
+
+      case 4: {
+        _hasShortnessOfBreath = answer;
+      }
+      break;
+
+      case 5: {
+        _hasSoreThroat = answer;
+      }
+      break;
+
+      case 6: {
+        _hasChills = answer;
+      }
+      break;
+
+      case 7: {
+        _hasTasteSmellLoss = answer;
+      }
+      break;
+
+      case 8: {
+        _hasHeadMusclePain = answer;
+      }
+      break;
+
+      case 9: {
+        _hasNauseaDiarrheaVomiting = answer;
+      }
+      break;
+
+      case 10: {
+        _hasComeIntoContact = answer;
+      }
+      break;
+
+      case 11: {
+        _hasTestedPositive = answer;
+      }
+      break;
+
+      case 12: {
+        _hasTraveled = answer;
+      }
+      break;
+
+      case 13: {
+        _isFemale = answer;
+      }
+      break;
+
+      case 14: {
+        _is60orOlder = answer;
+      }
+      break;
+
+      default: {
+
+      }
+      break;
+    }
+  }
+
+  bool getAnswer() {
+    switch(currentQuestionNumber) {
+      case 2: {
+        return _hasFever;
+      }
+      break;
+
+      case 3: {
+        return _hasDryCough;
+      }
+      break;
+
+      case 4: {
+        return _hasShortnessOfBreath;
+      }
+      break;
+
+      case 5: {
+        return _hasSoreThroat;
+      }
+      break;
+
+      case 6: {
+        return _hasChills;
+      }
+      break;
+
+      case 7: {
+        return _hasTasteSmellLoss;
+      }
+      break;
+
+      case 8: {
+        return _hasHeadMusclePain;
+      }
+      break;
+
+      case 9: {
+        return _hasNauseaDiarrheaVomiting;
+      }
+      break;
+
+      case 10: {
+        return _hasComeIntoContact;
+      }
+      break;
+
+      case 11: {
+        return _hasTestedPositive;
+      }
+      break;
+
+      case 12: {
+        return _hasTraveled;
+      }
+      break;
+
+      case 13: {
+        return _isFemale;
+      }
+      break;
+
+      case 14: {
+        return _is60orOlder;
+      }
+      break;
+
+      default: {
+        return false;
+      }
+      break;
+    }
+  }
+
+  Widget getAnswerFormat() {
+    switch(currentQuestionNumber) {
+      case 1: {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            color: Colors.white,
+            width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                TextFormField(
+                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                  decoration: InputDecoration(
+                    labelText: 'Temperature (°C)',
+                  ),
+                  keyboardType: TextInputType.text,
+                  controller: _temperature,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height/48,
+                ),
+                ElevatedButton(
+                  child: Text("Proceed"),
+                  style: ElevatedButton.styleFrom (
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (currentQuestionNumber < 14) {
+                      setState(() {
+                        currentQuestionNumber++;
+                      });
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+      break;
+
+      default: {
+        return Row(
+            children:[
+              ElevatedButton(
+                child: Text("👍", style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 4)),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(24),
+                  primary: (getAnswer()) ? globals.focusColor : globals.firstColor,
+                ),
+                onPressed: () {
+                  setAnswer(true);
+                  if (currentQuestionNumber < 14) {
+                    setState(() {
+                      currentQuestionNumber++;
+                    });
+                  } else if (currentQuestionNumber == 14) {
+                    setState(() {});
+                    showConfirmation();
+                  }
+                },
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width/12,
+              ),
+              ElevatedButton(
+                child: Text("👎", style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 4)),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  padding: EdgeInsets.all(24),
+                  primary: (getAnswer()) ? globals.firstColor : globals.focusColor,
+                ),
+                onPressed: () {
+                  setAnswer(false);
+                  if (currentQuestionNumber < 14) {
+                    setState(() {
+                      currentQuestionNumber++;
+                    });
+                  } else if (currentQuestionNumber == 14) {
+                    setState(() {});
+                    showConfirmation();
+                  }
+                },
+              ),
+            ]
+        );
+      }
+      break;
+    }
+  }
+
+  void showConfirmation() {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('Warning'),
+          content: Text("Are you sure you are done with this health check?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Yes'),
+              onPressed: (){
+                bool result = completeHealthCheck();
+                if (result == false) {
+                  Navigator.of(ctx).pop();
+                }
+              },
+            ),
+            TextButton(
+              child: Text('No'),
+              onPressed: (){
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        ));
+  }
+
+  bool completeHealthCheck() {
+    if (_temperature.text.isNotEmpty && globals.isNumeric(_temperature.text)) {
+      healthHelpers.createHealthCheckUser(_temperature.text, _hasFever, _hasDryCough, _hasSoreThroat, _hasChills, _hasHeadMusclePain,
+          _hasNauseaDiarrheaVomiting, _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled,
+          _hasHeadMusclePain, _isFemale, _is60orOlder).then((result) {
+        if (result == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
+          Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+          return true;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
+          return false;
+        }
+      });
+      return false;
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Please complete the questionnaire")));
+      return false;
+    }
   }
 
   @override
@@ -67,207 +520,95 @@ class _UserHealthCheckState extends State<UserHealthCheck> {
           body: Stack(
               children: <Widget>[
                 Center(
-                  child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-                    child: Container(
-                      color: Colors.white,
-                      height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                      padding: EdgeInsets.all(16),
-                      child: Form(
-                        key: _formKey,
-                        child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                Text('Please take your temperature before completing the health check-up.'),
-                                TextFormField(
-                                  textInputAction: TextInputAction.next, //The "return" button becomes a "next" button when typing
-                                  decoration: InputDecoration(
-                                    labelText: 'Measured temperature (in degrees Celsius)',
-                                    //hintText: '',
-                                  ),
-                                  keyboardType: TextInputType.text,
-                                  controller: _temperature,
-                                  validator: (value) {
-                                    if (value.isNotEmpty) {
-                                      print(_temperature);
-                                      if(!globals.isNumeric(value)) //Check if number
-                                          {
-                                        return 'Temperature must be a number';
-                                      }
-                                    } else {
-                                      return 'Please enter a temperature';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                Text('Have you experienced any of the following symptoms in the past 14 days?'),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('1. Fever'),
-                                  value: this._hasFever,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasFever = value;
-                                    });
-                                  },
-                                ),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('2. Dry cough'),
-                                  value: this._hasDryCough,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasDryCough = value;
-                                    });
-                                  },
-                                ),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('3. Shortness of breath'),
-                                  value: this._hasShortnessOfBreath,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasShortnessOfBreath = value;
-                                    });
-                                  },
-                                ),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('4. Sore throat'),
-                                  value: this._hadSoreThroat,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hadSoreThroat = value;
-                                    });
-                                  },
-                                ),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('5. Loss of smell or taste'),
-                                  value: this._hasTasteSmellLoss,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasTasteSmellLoss = value;
-                                    });
-                                  },
-                                ),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('6. Chills'),
-                                  value: this._hasChills,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasChills = value;
-                                    });
-                                  },
-                                ),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('7. Head or muscle aches'),
-                                  value: this._hasHeadMusclePain,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasHeadMusclePain = value;
-                                    });
-                                  },
-                                ),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  title: const Text('8. Nausea, diarrhea or vomiting'),
-                                  value: this._hasNauseaDiarrheaVomiting,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasNauseaDiarrheaVomiting = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                Text('9. Have you come closer than 6 feet (1.83 meters) to someone who has COVID-19 or has displayed symptoms of COVID-19?'),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  //title: const Text(''),
-                                  value: this._hasComeIntoContact,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasComeIntoContact = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                Text('10. Have you tested positive for COVID-19 in the past 14 days?'),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  //title: const Text(''),
-                                  value: this._hasTestedPositive,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasTestedPositive = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                Text('11. Have you traveled to another province or country the past 14 days?'),
-                                CheckboxListTile(
-                                  //secondary: const Icon(Icons.alarm),
-                                  //title: const Text(''),
-                                  value: this._hasTraveled,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      this._hasTraveled = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                ElevatedButton(
-                                  child: Text(
-                                      'Submit'
-                                  ),
-                                  onPressed: () {
-                                    FormState form = _formKey.currentState;
-                                    if (form.validate()) {
-                                      healthHelpers.createHealthCheckUser(_temperature.text, _hasFever, _hasDryCough, _hadSoreThroat, _hasChills, _hasHeadMusclePain, _hasNauseaDiarrheaVomiting,
-                                          _hasShortnessOfBreath, _hasTasteSmellLoss, _hasComeIntoContact, _hasTestedPositive, _hasTraveled, _hasHeadMusclePain).then((result) {
-                                        if (result == true) {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("Health check successfully completed. You can view your permissions on the view permissions page.")));
-                                          Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                                        } else {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text("There was an error while completing the health check. Please contact the company's admins or try again later.")));
-                                        }
-                                      });
-                                    } else {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text("Please enter required fields")));
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () {
+                          if (currentQuestionNumber > 1) {
+                            setState(() {
+                              currentQuestionNumber--;
+                            });
+                          }
+                        },
+                      ),
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/20
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    color: globals.firstColor,
+                                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                                    child: Column(
+                                      children: [
+                                        Text("Question " + currentQuestionNumber.toString() + " of 14",
+                                            style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                                            textAlign: TextAlign.center),
+                                        LinearProgressIndicator(
+                                          backgroundColor: globals.firstColor,
+                                          color: Color(0xffFFBF13),
+                                          minHeight: 10,
+                                          value: currentQuestionNumber/14,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                )
-                              ],
-                            )
+                                  Container(
+                                    color: Colors.white,
+                                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                                    padding: EdgeInsets.all(16),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Image.asset(
+                                          getQuestionImage(),
+                                          height: 250,
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context).size.height/20
+                                        ),
+                                        Container(
+                                            height: MediaQuery.of(context).size.height/10,
+                                            child: Column(
+                                              children: [
+                                                Expanded(child: Text(getQuestion())),
+                                              ],
+                                            )
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/24
+                            ),
+                            getAnswerFormat(),
+                          ],
                         ),
                       ),
-                    ),
+                      IconButton(
+                        icon: Icon(Icons.arrow_forward_ios),
+                        onPressed: () {
+                          if (currentQuestionNumber < 14) {
+                            setState(() {
+                              currentQuestionNumber++;
+                            });
+                          } else if (currentQuestionNumber == 14) {
+                            setState(() {});
+                            showConfirmation();
+                          }
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ]

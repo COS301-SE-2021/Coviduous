@@ -5,6 +5,7 @@ import 'package:frontend/views/signup/user_signup_screen.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/main_homepage.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class Register extends StatefulWidget {
@@ -60,74 +61,79 @@ class _RegisterState extends State<Register>{
               ),
             ),
             Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
-                child: Column (
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container (
+              child: Column (
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container (
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(20.0),
+                      child: Image(
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(20.0),
-                        child: Image(
-                          alignment: Alignment.center,
-                          image: AssetImage('assets/images/logo.png'),
-                          color: Colors.white,
-                          width: double.maxFinite,
-                          height: MediaQuery.of(context).size.height/8,
-                        ),
+                        image: AssetImage('assets/images/logo.png'),
+                        color: Colors.white,
+                        width: double.maxFinite,
+                        height: MediaQuery.of(context).size.height/8,
                       ),
-                      SizedBox (
-                        height: MediaQuery.of(context).size.height/48,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      Column(
+                    ),
+                    SizedBox (
+                      height: MediaQuery.of(context).size.height/30,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width/(1.8*globals.getWidgetWidthScaling()),
+                      child: Column(
                         children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height/20,
-                            width: MediaQuery.of(context).size.width,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom (
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child:(
-                                Text('Admin signup')
-                              ),
-                              onPressed:() {
-                                Navigator.of(context).pushReplacementNamed(
-                                    AdminRegister.routeName);
-                              }
-                            ),
-                          ),
-                          SizedBox (
-                            height: MediaQuery.of(context).size.height/48,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height/20,
-                            width: MediaQuery.of(context).size.width,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom (
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/14,
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom (
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
                                   ),
+                                  child:(
+                                    Text('Admin signup')
+                                  ),
+                                  onPressed:() {
+                                    Navigator.of(context).pushReplacementNamed(
+                                        AdminRegister.routeName);
+                                  }
                                 ),
-                                child:(
-                                    Text('User signup')
+                              ),
+                              SizedBox (
+                                height: MediaQuery.of(context).size.height/30,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/14,
+                                width: MediaQuery.of(context).size.width,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom (
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    child:(
+                                        Text('User signup')
+                                    ),
+                                    onPressed:() {
+                                      Navigator.of(context).pushReplacementNamed(
+                                          UserRegister.routeName);
+                                    }
                                 ),
-                                onPressed:() {
-                                  Navigator.of(context).pushReplacementNamed(
-                                      UserRegister.routeName);
-                                }
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ]
-                ),
+                    ),
+                  ]
               ),
             ),
+            globalWidgets.chatBot(context, Register.routeName, globals.showChatBot),
           ],
         )
       ),

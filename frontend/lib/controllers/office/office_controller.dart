@@ -15,7 +15,7 @@ String server = serverInfo.getServer();
 
 Future<bool> createBooking(String deskNumber, String floorPlanNumber,
     String floorNumber, String roomNumber, String userId, String companyId) async {
-  String path = '/office';
+  String path = 'office/api/office/';
   String url = server + path;
   var request;
 
@@ -45,7 +45,7 @@ Future<bool> createBooking(String deskNumber, String floorPlanNumber,
 }
 
 Future<bool> deleteBooking(String bookingNumber) async {
-  String path = '/office';
+  String path = 'office/api/office/';
   String url = server + path;
   var request;
 
@@ -79,7 +79,7 @@ Future<bool> deleteBooking(String bookingNumber) async {
 }
 
 Future<List<Booking>> viewBookings(String userId) async {
-  String path = '/office/view';
+  String path = 'office/api/office/view/';
   String url = server + path;
   var request;
 
@@ -88,7 +88,7 @@ Future<List<Booking>> viewBookings(String userId) async {
     request.body = json.encode({
       "userId": userId,
     });
-    request.headers.addAll(globals.requestHeaders);
+    request.headers.addAll(globals.getRequestHeaders());
 
     var response = await request.send();
 

@@ -6,6 +6,7 @@ import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/login_screen.dart';
 
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class UserViewGuidelines extends StatefulWidget {
@@ -17,8 +18,11 @@ class UserViewGuidelines extends StatefulWidget {
 
 class _UserViewGuidelinesState extends State<UserViewGuidelines> {
   final pdfController = PdfController(
-    document: PdfDocument.openAsset('assets/sample.pdf'),
+    document: PdfDocument.openAsset('assets/za-covid-guidelines.pdf'),
   );
+
+  int currentPage = 1;
+  int totalPages = 1;
 
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
@@ -43,36 +47,23 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
 
     Widget getList() {
       if (!globals.companyGuidelinesExist) { //If company guidelines have not been uploaded yet
-        return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No company guidelines found', style: TextStyle(color: Colors.white,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('Your admin has not uploaded company guidelines yet. Please try again later.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-              )
-            ]
-        );
-      } else { //Else, return a container showing the company guidelines
+        return globalWidgets.notFoundMessage(context, 'No company guidelines found', 'Company guidelines have not been uploaded yet. Please try again later.');
+      } else {
+        //Else, return a container showing the company guidelines
         return Container(
             alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width/(1.5*globals.getWidgetScaling()),
-            height: MediaQuery.of(context).size.height/(1.5*globals.getWidgetScaling()),
+            width: (!globals.getIfOnPC())
+                ? MediaQuery.of(context).size.width
+                : MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
             color: Colors.white,
             child: PdfView(
               documentLoader: Center(child: CircularProgressIndicator()),
               pageLoader: Center(child: CircularProgressIndicator()),
+              onDocumentLoaded: (PdfDocument doc) {
+                setState(() {
+                  totalPages = doc.pagesCount;
+                });
+              },
               controller: pdfController,
             ),
         );
@@ -81,13 +72,51 @@ class _UserViewGuidelinesState extends State<UserViewGuidelines> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
+      child: Scaffold(
           appBar: AppBar(
             title: Text('Company guidelines'),
             leading: BackButton( //Specify back button
               onPressed: (){
                 Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
               },
+            ),
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      pdfController.previousPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                      setState(() {
+                        if (currentPage > 1) {
+                          currentPage--;
+                        }
+                      });
+                    },
+                  ),
+                  Text(
+                    'Page ' + currentPage.toString() + '/' + totalPages.toString(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: (!globals.getIfOnPC())
+                            ? MediaQuery.of(context).size.width * 0.01 * 4
+                            : MediaQuery.of(context).size.width * 0.01
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_forward_ios),
+                    onPressed: () {
+                      pdfController.nextPage(duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                      setState(() {
+                        if (currentPage < pdfController.pagesCount) {
+                          currentPage++;
+                        }
+                      });
+                    },
+                  ),
+                ]
             ),
           ),
           body: Stack (

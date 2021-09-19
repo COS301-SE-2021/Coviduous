@@ -50,84 +50,99 @@ class _UserManageAccountState extends State<UserManageAccount> {
               },
             ),
           ),
-          body: Center(
-            child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-              child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container (
-                          height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                          width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
-                          padding: EdgeInsets.all(16),
-                          child: Column (
-                              children: <Widget>[
-                                ElevatedButton (
-                                    style: ElevatedButton.styleFrom (
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    child: Row (
-                                        children: <Widget>[
-                                          Expanded(child: Text('Update account information')),
-                                          Icon(Icons.person)
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(UserUpdateAccount.routeName);
-                                    }
+          body: SingleChildScrollView(
+            child: Center(
+              child: Container (
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                  padding: EdgeInsets.all(16),
+                  child: Column (
+                      children: <Widget>[
+                        Icon(
+                            Icons.person,
+                            color: Colors.white,
+                            size: (globals.getIfOnPC())
+                                ? MediaQuery.of(context).size.width/8
+                                : MediaQuery.of(context).size.width/4
+                        ),
+                        SizedBox (
+                          height: MediaQuery.of(context).size.height/30,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/16,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Update account information')),
+                                    Icon(Icons.person)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserUpdateAccount.routeName);
+                              }
+                          ),
+                        ),
+                        SizedBox (
+                          height: MediaQuery.of(context).size.height/30,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/16,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                ElevatedButton (
-                                    style: ElevatedButton.styleFrom (
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    child: Row (
-                                        children: <Widget>[
-                                          Expanded(child: Text('Reset password')),
-                                          Icon(Icons.update_rounded)
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(UserResetPassword.routeName);
-                                    }
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Reset password')),
+                                    Icon(Icons.update_rounded)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserResetPassword.routeName);
+                              }
+                          ),
+                        ),
+                        SizedBox (
+                          height: MediaQuery.of(context).size.height/30,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height/16,
+                          width: MediaQuery.of(context).size.width,
+                          child: ElevatedButton (
+                              style: ElevatedButton.styleFrom (
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                SizedBox (
-                                  height: MediaQuery.of(context).size.height/48,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
-                                ElevatedButton (
-                                    style: ElevatedButton.styleFrom (
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    child: Row (
-                                        children: <Widget>[
-                                          Expanded(child: Text('Delete account')),
-                                          Icon(Icons.delete_forever_rounded)
-                                        ],
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                        crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed(UserDeleteAccount.routeName);
-                                    }
-                                ),
-                              ]
-                          )
-                      ),
-                    ],
+                              ),
+                              child: Row (
+                                  children: <Widget>[
+                                    Expanded(child: Text('Delete account')),
+                                    Icon(Icons.delete_forever_rounded)
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                  crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(UserDeleteAccount.routeName);
+                              }
+                          ),
+                        ),
+                      ]
                   )
               ),
             ),

@@ -17,7 +17,6 @@ class AdminNotifications extends StatefulWidget {
   _AdminNotificationsState createState() => _AdminNotificationsState();
 }
 
-//class admin
 class _AdminNotificationsState extends State<AdminNotifications> {
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
@@ -51,64 +50,84 @@ class _AdminNotificationsState extends State<AdminNotifications> {
               },
             ),
           ),
-          body: Center(
+          body: SingleChildScrollView(
+            child: Center(
               child: Container (
-                  height: MediaQuery.of(context).size.height/(2*globals.getWidgetScaling()),
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
-                  padding: EdgeInsets.all(16),
-                  child: Column (
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('Create notification')),
-                                  Icon(Icons.add_circle_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
-                            }
-                        ),
-                        SizedBox (
-                          height: MediaQuery.of(context).size.height/48,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        ElevatedButton (
-                            style: ElevatedButton.styleFrom (
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Row (
-                                children: <Widget>[
-                                  Expanded(child: Text('View notifications')),
-                                  Icon(Icons.update_rounded)
-                                ],
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
-                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
-                            ),
-                            onPressed: () {
-                              notificationHelpers.getNotifications().then((result){
-                                if (result == true) {
-                                  Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Error occurred while retrieving notifications. Please try again later.')));
+                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetWidthScaling()),
+                    padding: EdgeInsets.all(16),
+                    child: Column (
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(
+                              Icons.notifications_active,
+                              color: Colors.white,
+                              size: (globals.getIfOnPC())
+                                  ? MediaQuery.of(context).size.width/8
+                                  : MediaQuery.of(context).size.width/4
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/30,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/14,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('Create notification')),
+                                      Icon(Icons.add_circle_rounded)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(MakeNotification.routeName);
                                 }
-                              });
-                            }
-                        ),
-                      ]
-                  )
-              )
+                            ),
+                          ),
+                          SizedBox (
+                            height: MediaQuery.of(context).size.height/30,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/14,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton (
+                                style: ElevatedButton.styleFrom (
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row (
+                                    children: <Widget>[
+                                      Expanded(child: Text('View notifications')),
+                                      Icon(Icons.update_rounded)
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                    crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                                ),
+                                onPressed: () {
+                                  notificationHelpers.getNotifications().then((result){
+                                    if (result == true) {
+                                      Navigator.of(context).pushReplacementNamed(AdminViewNotifications.routeName);
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('Error occurred while retrieving notifications. Please try again later.')));
+                                    }
+                                  });
+                                }
+                            ),
+                          ),
+                        ]
+                    )
+                ),
+            ),
           )
       ),
     );

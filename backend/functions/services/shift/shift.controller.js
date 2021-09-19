@@ -124,13 +124,26 @@ exports.createShift = async (req,res) => {
     }
 
     let shiftID = "SHI-" + uuid.v4();
+    let summary = "SUM-"+uuid.v4();
     let shift = new Shift(shiftID, reqJson.date, reqJson.startTime, reqJson.endTime,
         reqJson.description, reqJson.adminId, reqJson.companyId, reqJson.floorPlanNumber, reqJson.floorNumber, reqJson.roomNumber);
     let shiftData = { shiftID: shift.shiftID,date: shift.date,startTime: shift.startTime, endTime: shift.endTime,
         description: shift.description, adminId: shift.adminId, companyId: shift.companyId, floorPlanNumber: shift.floorPlanNumber,
         floorNumber: shift.floorNumber, roomNumber: shift.roomNumber };
 
-    let result = await db.createShift(shiftID, shiftData);
+        let time = new Date();
+        let year = time.getFullYear();
+        let month = time.getMonth()+1;
+    
+        let dta ={
+            summaryShiftId: summary,
+            companyId: reqJson.companyId,
+            numShifts: 1,
+            month: month,
+            year: year
+        }
+
+    let result = await db.createShift(dta, shiftData);
 
     if (!result) {
         return res.status(500).send({
@@ -260,6 +273,7 @@ exports.deleteShift = async (req, res) => {
     }
 
     let group = await db.getGroupForShift(reqJson.shiftId);
+    console.log(group.groupId);
     await db.deleteGroup(group.groupId);
 
     if (await db.deleteShift(reqJson.shiftId) == true) {
@@ -403,3 +417,89 @@ exports.getGroupForShift = async (req, res) => {
       return res.status(500).send({message: "Some error occurred while fetching shifts."});
     }
 };
+
+exports.getRoomShift = async (req, res) => {
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.roomNumber == null || reqJson.roomNumber === '') {
+        fieldErrors.push({field: 'roomNumber', message: 'roomNumber may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let getRoomShifts = await db.getRoomShift(reqJson.roomNumber);
+      
+    if (getRoomShifts != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved room shift ',
+        data: getRoomShifts
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching shifts."});
+    }
+};
+exports.getEmailAssigned = async (req, res) => {
+
+    // data validation
+    let fieldErrors = [];
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    if (req.body == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+
+    if (reqJson.companyId == null || reqJson.companyId === '') {
+        fieldErrors.push({field: 'companyId', message: 'companyId may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    let getEmailAssign = await db.getEmailAssigned(reqJson.companyId);
+      
+    if (getEmailAssign != null) {
+      return res.status(200).send({
+        message: 'Successfully retrieved emails',
+        data: getEmailAssign
+      });
+    } else {
+      return res.status(500).send({message: "Some error occurred while fetching emails."});
+    }
+};
+
+
+

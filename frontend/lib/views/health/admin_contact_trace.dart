@@ -13,6 +13,7 @@ import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
 
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class AdminContactTrace extends StatefulWidget {
@@ -21,6 +22,7 @@ class AdminContactTrace extends StatefulWidget {
   @override
   _AdminContactTraceState createState() => _AdminContactTraceState();
 }
+
 class _AdminContactTraceState extends State<AdminContactTrace> {
   var myTheme;
   var pdf;
@@ -99,6 +101,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
     );
 
     Widget getList() {
+      employeeList.clear();
       employeeList.add(<String>['Employee ID', 'Name', 'Surname', 'Email', 'Date']);
       for (int i = 0; i < globals.selectedUsers.length; i++) {
         List<String> employeeInfo = <String>[
@@ -113,73 +116,95 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height /
-                    (5 * globals.getWidgetScaling()),
+                height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                height: MediaQuery.of(context).size.height/(24*globals.getWidgetScaling()),
-                color: Theme.of(context).primaryColor,
-                child: Text('No employees found', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                  height: MediaQuery.of(context).size.height/(12*globals.getWidgetScaling()),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(12),
-                  child: Text('Employee has not been in contact with anyone within the company recently.', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5))
-              )
+              globalWidgets.notFoundMessage(context, 'No employees found', 'No other employees were in this shift.'),
             ]
         );
-      } else { //Else create and return a list
+      } else {
+        //Else create and return a list
         return ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.all(8),
             itemCount: numberOfEmployees,
-            itemBuilder: (context, index) { //Display a list tile FOR EACH permission in permissions[]
+            itemBuilder: (context, index) {
               return ListTile(
-                title: Column(
-                    children:[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height/24,
-                        color: Theme.of(context).primaryColor,
-                        child: Text('Employee ID: ' + globals.selectedUsers[index].getUserId()),
+                title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height / 6,
+                            child: Image(
+                              image: AssetImage('assets/images/placeholder-employee-image.png'),
+                            ),
+                          ),
+                        ],
                       ),
-                      ListView(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(), //The lists within the list should not be scrollable
-                          children: <Widget>[
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Employee name: ' + globals.selectedUsers[index].getFirstName() + ' ' + globals.selectedUsers[index].getLastName()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                            Container(
-                              height: 50,
-                              color: Colors.white,
-                              child: Text('Date: ' + globals.currentShift.getDate()),
-                              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                            ),
-                          ]
-                      )
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('User ' + (index + 1).toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: (MediaQuery
+                                            .of(context)
+                                            .size
+                                            .height * 0.01) * 2.5,
+                                      )
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                color: Colors.white,
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(globals.currentShift.getDate().substring(0, 11) + ' @ ' + globals.currentShift.getDate().substring(11, 19)),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getFirstName() + ' ' + globals.selectedUsers[index].getLastName())
+                                              ),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+                                                  child: Text(globals.selectedUsers[index].getUserId())
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
                     ]
                 ),
-                //title: floors[index].floor()
               );
-            }
-        );
+            });
       }
     }
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: new Scaffold(
+      child: Scaffold(
         appBar: AppBar(
           title: Text('Contact trace'),
           leading: BackButton( //Specify back button
@@ -198,6 +223,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom (
+                      primary: Color(0xff03305A),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -214,7 +240,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                               title: Text('Warning'),
                               content: Text('Are you sure you want to notify ' + numberOfEmployees.toString() + ' employees?'),
                               actions: <Widget>[
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('Yes'),
                                   onPressed: (){
                                     healthHelpers.notifyGroup().then((result) {
@@ -230,7 +256,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                                     });
                                   },
                                 ),
-                                ElevatedButton(
+                                TextButton(
                                   child: Text('No'),
                                   onPressed: (){
                                     Navigator.of(ctx).pop();
@@ -248,6 +274,7 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom (
+                      primary: Color(0xff03305A),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -323,15 +350,25 @@ class _AdminContactTraceState extends State<AdminContactTrace> {
         body: Stack(
           children: <Widget>[
             SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.white,
-                    child: Text(globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' (ID ' + globals.selectedUser.getUserId() + ') has come into contact with the following employees over the past month:', style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5)),
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  ),
-                  getList(),
-                ],
+              child: Center(
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      color: Color(0xff03305A),
+                      width: MediaQuery.of(context).size.width/(1.55 * globals.getWidgetScaling()),
+                      child: Text(
+                          globals.selectedUser.getFirstName() + ' ' + globals.selectedUser.getLastName() + ' has come into contact with the following employees over the past month:',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: (MediaQuery.of(context).size.height * 0.01) * 2,
+                          )
+                      ),
+                      padding: EdgeInsets.all(16),
+                    ),
+                    getList(),
+                  ],
+                ),
               ),
             ),
           ],

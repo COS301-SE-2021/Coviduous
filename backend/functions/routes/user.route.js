@@ -12,9 +12,11 @@ router.get('/', function (req, res) {
 const userController = require("../services/user/user.controller");
 // import database
 const devDatabase = require("../config/user.firestore.database.js");
+const devDatabase2 = require("../config/reporting.firestore.database.js");
 
 // Set database
 userController.setDatabase(devDatabase);
+userController.setReportingDatabase(devDatabase2);
 
 // User routes
 router.delete('/users', userController.deleteUser);
