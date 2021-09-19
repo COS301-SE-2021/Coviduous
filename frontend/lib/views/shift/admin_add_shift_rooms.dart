@@ -192,7 +192,9 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
                                                                 child: Container(
                                                                   alignment: Alignment.center,
                                                                   color: globals.firstColor,
-                                                                  height: MediaQuery.of(context).size.height/5,
+                                                                  height: (!globals.getIfOnPC())
+                                                                      ? MediaQuery.of(context).size.height/5
+                                                                      : MediaQuery.of(context).size.height/8,
                                                                   child: Text('  Room ' + (index+1).toString() + '  ',
                                                                     style: TextStyle(
                                                                       color: Colors.white,
