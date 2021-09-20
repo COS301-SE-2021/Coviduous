@@ -138,6 +138,7 @@ class _UserHomePageState extends State<UserHomePage> {
                             ),
                           ),
                           Text(globals.loggedInUserEmail,
+                            overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white),
                           ),
@@ -337,7 +338,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                             children: <Widget>[
                                               Flexible(child: Icon(Icons.library_books, size: 42)),
                                               SizedBox(height: 8),
-                                              Flexible(child: Text('Bookings')),
+                                              Flexible(child: Text('Booking')),
                                             ],
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -462,8 +463,8 @@ class _UserHomePageState extends State<UserHomePage> {
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     (latestPermission) //Check latest permission
-                                                        ? Text('Office access granted  ')
-                                                        : Text('Office access denied  '),
+                                                        ? Text('Access granted  ')
+                                                        : Text('Access denied  '),
                                                     (latestPermission) //Check latest permission
                                                         ? Icon(
                                                       Icons.check_circle_outline,

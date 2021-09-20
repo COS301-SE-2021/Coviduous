@@ -80,14 +80,17 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                         children:[
                           Container(
                             height: (!globals.getIfOnPC())
-                                ? MediaQuery.of(context).size.height/6
-                                : MediaQuery.of(context).size.height/8,
-                            child: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
-                                ? Image(
-                                image: AssetImage('assets/images/warning-icon.png')
-                            )
-                                : Image(
-                                image: AssetImage('assets/images/placeholder-announcement.png')
+                                ? MediaQuery.of(context).size.height/5
+                                : MediaQuery.of(context).size.height/7,
+                            child: Container(
+                              width: 80,
+                              child: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
+                                  ? Image(
+                                  image: AssetImage('assets/images/warning-icon.png')
+                              )
+                                  : Image(
+                                  image: AssetImage('assets/images/placeholder-announcement.png')
+                              ),
                             ),
                           ),
                           Expanded(
@@ -195,7 +198,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                                                                         children: [
                                                                           Container(
                                                                             height: (!globals.getIfOnPC())
-                                                                                ? MediaQuery.of(context).size.height/5
+                                                                                ? MediaQuery.of(context).size.height/8
                                                                                 : MediaQuery.of(context).size.height/8,
                                                                             child: (globals.currentAnnouncements[index].getType() == "EMERGENCY")
                                                                                 ? Image(
@@ -212,7 +215,7 @@ class _AdminViewAnnouncementsState extends State<AdminViewAnnouncements> {
                                                                                   ? globals.sixthColor
                                                                                   : globals.firstColor,
                                                                               height: (!globals.getIfOnPC())
-                                                                                  ? MediaQuery.of(context).size.height/5
+                                                                                  ? MediaQuery.of(context).size.height/8
                                                                                   : MediaQuery.of(context).size.height/8,
                                                                               child: Text('  Announcement ' + (index+1).toString() + '  ',
                                                                                 style: TextStyle(

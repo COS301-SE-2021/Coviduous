@@ -74,13 +74,16 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                         : MediaQuery.of(context).size.height/7,
                     margin: EdgeInsets.all(5),
                     child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children:[
                           Container(
                             height: (!globals.getIfOnPC())
-                                ? MediaQuery.of(context).size.height/5.5
+                                ? MediaQuery.of(context).size.height/5
                                 : MediaQuery.of(context).size.height/7,
-                            child: Image(image: AssetImage('assets/images/placeholder-notification.png')),
+                            child: Container(
+                              width: 80,
+                              child: Image(image: AssetImage('assets/images/placeholder-notification.png')),
+                            ),
                           ),
                           Expanded(
                             child: Column(
@@ -167,7 +170,7 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                                                                       children: [
                                                                         Container(
                                                                           height: (!globals.getIfOnPC())
-                                                                              ? MediaQuery.of(context).size.height/5
+                                                                              ? MediaQuery.of(context).size.height/8
                                                                               : MediaQuery.of(context).size.height/8,
                                                                           child: Image(image: AssetImage('assets/images/placeholder-notification.png')),
                                                                         ),
@@ -176,7 +179,7 @@ class _AdminViewNotificationsState extends State<AdminViewNotifications> {
                                                                             alignment: Alignment.center,
                                                                             color: globals.firstColor,
                                                                             height: (!globals.getIfOnPC())
-                                                                                ? MediaQuery.of(context).size.height/5
+                                                                                ? MediaQuery.of(context).size.height/8
                                                                                 : MediaQuery.of(context).size.height/8,
                                                                             child: Text('  Notification ' + (index+1).toString() + '  ',
                                                                               style: TextStyle(

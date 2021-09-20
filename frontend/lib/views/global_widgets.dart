@@ -21,7 +21,7 @@ Widget notFoundMessage(BuildContext context, String title, String message) {
               style: TextStyle(color: Colors.white,
                   fontSize:
                   (!globals.getIfOnPC())
-                      ? (MediaQuery.of(context).size.height * 0.01) * 2.5
+                      ? (MediaQuery.of(context).size.height * 0.01) * 2
                       : (MediaQuery.of(context).size.height * 0.01) * 2
               )
           ),
@@ -36,7 +36,7 @@ Widget notFoundMessage(BuildContext context, String title, String message) {
                 style: TextStyle(
                     fontSize:
                     (!globals.getIfOnPC())
-                        ? (MediaQuery.of(context).size.height * 0.01) * 2.5
+                        ? (MediaQuery.of(context).size.height * 0.01) * 2
                         : (MediaQuery.of(context).size.height * 0.01) * 2
                 )
             )

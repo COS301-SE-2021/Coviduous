@@ -53,7 +53,7 @@ class _AddShiftRoomsState extends State<AddShiftRooms> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / (5 * globals.getWidgetScaling()),
               ),
-              globalWidgets.notFoundMessage(context, 'No rooms found', 'No floors have been registered for this floor.'),
+              globalWidgets.notFoundMessage(context, 'No rooms found', 'No rooms have been registered for this floor.'),
             ]);
       } else {
         //Else create and return a list

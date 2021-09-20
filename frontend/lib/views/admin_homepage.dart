@@ -99,6 +99,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           ),
                         ),
                         Text(globals.loggedInUserEmail,
+                          overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white),
                         ),
