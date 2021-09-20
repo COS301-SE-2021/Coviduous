@@ -24,7 +24,6 @@ void main() {
     await tester.pumpWidget(createWidgetForTesting(child: new UserHomePage()));
 
     //Verify that the correct widgets appear in the correct order
-    expect(find.text('Bookings'), findsOneWidget); //Find one widget containing 'Bookings'
     expect(find.text('Health'), findsOneWidget); //Find one widget containing 'Health'
   });
 }
