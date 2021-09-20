@@ -125,6 +125,7 @@ class _AdminViewAccessRequestsState extends State<AdminViewAccessRequests> {
                                                                   TextButton(
                                                                       child: Text('Yes'),
                                                                       onPressed: () {
+                                                                        globals.currentPermissionId = globals.currentPermissionRequests[index].getPermissionId();
                                                                         globals.currentPermissionRequestId = globals.currentPermissionRequests[index].getPermissionRequestId();
                                                                         healthHelpers.grantPermission(globals.currentPermissionRequests[index].getUserId()).then((result) {
                                                                           if (result == true) {
