@@ -164,7 +164,7 @@ class _VisitorViewPermissionsState extends State<VisitorViewPermissions> {
                                          ),
                                          child: Text('Generate QR'),
                                          onPressed: () async {
-                                           ByteData byteData = await QrPainter(data: "123456789", version: QrVersions.auto).toImageData(200.0);
+                                           ByteData byteData = await QrPainter(data: globals.currentPermissions[index].getPermissionId(), version: QrVersions.auto).toImageData(200.0);
                                            showDialog(
                                                context: context,
                                                builder: (ctx) => AlertDialog(
