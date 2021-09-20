@@ -48,6 +48,11 @@ The .github directory contains our repository's workflows for continuous integra
 
 ---
 
+## Web app
+- :computer: [Coviduous website](<https://coviduous-api.web.app>)
+- :heavy_check_mark: [Try out the health check](<https://coviduous.herokuapp.com>)
+- :robot: [Try out the chat bot](<https://coviduous-chatbot.herokuapp.com>)
+
 ## Mobile app
 - :iphone: [Download APK here](<https://drive.google.com/drive/folders/1tuXvTeyUXlBvwDIEKptu2c_MlQWfRWQZ?usp=sharing>)
 
