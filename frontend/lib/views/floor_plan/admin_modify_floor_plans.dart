@@ -22,6 +22,8 @@ class AdminModifyFloorPlans extends StatefulWidget {
 }
 
 class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
+  bool isLoading = false;
+
   Future<bool> _onWillPop() async {
     Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
     return (await true);
@@ -174,6 +176,10 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                                                       child: Text('Submit'),
                                                                       onPressed: () {
                                                                         if (_password.text.isNotEmpty) {
+                                                                          Navigator.pop(context);
+                                                                          setState(() {
+                                                                            isLoading = true;
+                                                                          });
                                                                           AuthClass().signIn(email: FirebaseAuth.instance.currentUser.email, password: _password.text).then((value2) {
                                                                             _password.clear();
                                                                             if (value2 == "welcome") {
@@ -182,21 +188,33 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
                                                                                 if (result == true) {
                                                                                   floorPlanHelpers.getFloorPlans().then((result) {
                                                                                     if (result == true) {
+                                                                                      setState(() {
+                                                                                        isLoading = false;
+                                                                                      });
                                                                                       Navigator.pop(context);
                                                                                       setState(() {});
                                                                                     } else {
+                                                                                      setState(() {
+                                                                                        isLoading = false;
+                                                                                      });
                                                                                       ScaffoldMessenger.of(context).showSnackBar(
                                                                                           SnackBar(content: Text("Could not retrieve updated floor plans at this time.")));
                                                                                       Navigator.pop(context);
                                                                                     }
                                                                                   });
                                                                                 } else {
+                                                                                  setState(() {
+                                                                                    isLoading = false;
+                                                                                  });
                                                                                   ScaffoldMessenger.of(context).showSnackBar(
                                                                                       SnackBar(content: Text('Floor plan deletion unsuccessful. Please try again later.')));
                                                                                   Navigator.pop(context);
                                                                                 }
                                                                               });
                                                                             } else {
+                                                                              setState(() {
+                                                                                isLoading = false;
+                                                                              });
                                                                               ScaffoldMessenger.of(context).showSnackBar(
                                                                                   SnackBar(content: Text('Invalid password')));
                                                                               Navigator.pop(context);
@@ -271,32 +289,35 @@ class _AdminModifyFloorPlansState extends State<AdminModifyFloorPlans> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Manage floor plans"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
-            },
+      child: Container(
+        color: globals.secondColor,
+        child: isLoading == false ? Scaffold(
+          appBar: AppBar(
+            title: Text("Manage floor plans"),
+            leading: BackButton(
+              //Specify back button
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            Center(
-              child: SingleChildScrollView(
-                child: (globals.getIfOnPC())
-                    ? Container(
-                      width: 640,
-                      child: getList(),
-                )
-                    : Container(
-                      child: getList(),
+          body: Stack(
+            children: <Widget>[
+              Center(
+                child: SingleChildScrollView(
+                  child: (globals.getIfOnPC())
+                      ? Container(
+                        width: 640,
+                        child: getList(),
+                  )
+                      : Container(
+                        child: getList(),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ) : Center(child: CircularProgressIndicator()),
       ),
     );
   }

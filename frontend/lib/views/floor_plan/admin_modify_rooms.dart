@@ -21,7 +21,12 @@ class AdminModifyRooms extends StatefulWidget {
 }
 
 class _AdminModifyRoomsState extends State<AdminModifyRooms> {
+  bool isLoading = false;
+
   Future<bool> _onWillPop() async {
+    setState(() {
+      isLoading = true;
+    });
     floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
       if (result == true) {
         Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
@@ -156,18 +161,29 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
                                               onPressed: () {
                                                 //Delete room and reload the page
                                                 if (numOfRooms > 1) { //Only allow deletion of rooms if there is more than one room
+                                                  setState(() {
+                                                    isLoading = true;
+                                                  });
                                                   floorPlanHelpers.deleteRoom(globals.currentRooms[index].getFloorNumber(),
                                                       globals.currentRooms[index].getRoomNumber()).then((result) {
                                                     if (result == true) {
                                                       floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
                                                         if (result == true) {
-                                                          setState(() {});
+                                                          setState(() {
+                                                            isLoading = false;
+                                                          });
                                                         } else {
+                                                          setState(() {
+                                                            isLoading = false;
+                                                          });
                                                           ScaffoldMessenger.of(context).showSnackBar(
                                                               SnackBar(content: Text("Could not retrieve updated rooms at this time.")));
                                                         }
                                                       });
                                                     } else {
+                                                      setState(() {
+                                                        isLoading = false;
+                                                      });
                                                       ScaffoldMessenger.of(context).showSnackBar(
                                                           SnackBar(content: Text("Room deletion unsuccessful. Please try again later.")));
                                                     }
@@ -354,71 +370,88 @@ class _AdminModifyRoomsState extends State<AdminModifyRooms> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: Scaffold(
-        appBar: AppBar(
-          title:
-              Text("Manage rooms"),
-          leading: BackButton(
-            //Specify back button
-            onPressed: () {
-              floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
-                if (result == true) {
-                  Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
-                } else { //If there is an error, return to the main floor plan screen to avoid getting stuck
-                  Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
-                }
-              });
-            },
+      child: Container(
+        color: globals.secondColor,
+        child: isLoading == false ? Scaffold(
+          appBar: AppBar(
+            title:
+                Text("Manage rooms"),
+            leading: BackButton(
+              //Specify back button
+              onPressed: () {
+                setState(() {
+                  isLoading = true;
+                });
+                floorPlanHelpers.getFloors(globals.currentFloorPlanNum).then((result) {
+                  if (result == true) {
+                    Navigator.of(context).pushReplacementNamed(AdminModifyFloors.routeName);
+                  } else { //If there is an error, return to the main floor plan screen to avoid getting stuck
+                    Navigator.of(context).pushReplacementNamed(FloorPlanScreen.routeName);
+                  }
+                });
+              },
+            ),
           ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Container(
-              alignment: Alignment.bottomCenter,
-              height: MediaQuery.of(context).size.height/10,
-              child: TextButton(
-                child: Text('+',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: (MediaQuery.of(context).size.height * 0.01) * 5,
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+                alignment: Alignment.bottomCenter,
+                height: MediaQuery.of(context).size.height/10,
+                child: TextButton(
+                  child: Text('+',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: (MediaQuery.of(context).size.height * 0.01) * 5,
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    //Add new room and reload page
+                    floorPlanHelpers.createRoom(globals.currentFloorNum, "").then((result) {
+                      if (result == true) {
+                        floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
+                          if (result == true) {
+                            setState(() {
+                              isLoading = false;
+                            });
+                          } else {
+                            setState(() {
+                              isLoading = false;
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Could not retrieve updated rooms at this time.")));
+                          }
+                        });
+                      } else {
+                        setState(() {
+                          isLoading = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Room creation unsuccessful. Please try again later.")));
+                      }
+                    });
+                  },
+                ))
+          ),
+          body: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Center(
+                  child: (globals.getIfOnPC())
+                      ? Container(
+                        width: 640,
+                        child: getList(),
+                  )
+                      : Container(
+                        child: getList(),
                   ),
                 ),
-                onPressed: () {
-                  //Add new room and reload page
-                  floorPlanHelpers.createRoom(globals.currentFloorNum, "").then((result) {
-                    if (result == true) {
-                      floorPlanHelpers.getRooms(globals.currentFloorNum).then((result) {
-                        if (result == true) {
-                          setState(() {});
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Could not retrieve updated rooms at this time.")));
-                        }
-                      });
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Room creation unsuccessful. Please try again later.")));
-                    }
-                  });
-                },
-              ))
-        ),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Center(
-                child: (globals.getIfOnPC())
-                    ? Container(
-                      width: 640,
-                      child: getList(),
-                )
-                    : Container(
-                      child: getList(),
-                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ) : Center(child: CircularProgressIndicator()),
       ),
     );
   }

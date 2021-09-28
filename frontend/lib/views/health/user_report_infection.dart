@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:frontend/auth/auth_provider.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/login_screen.dart';
@@ -46,115 +44,118 @@ class _UserReportInfectionState extends State<UserReportInfection>{
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: isLoading == false ? Scaffold(
-        appBar: AppBar(
-          title: Text('Report infection'),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-            },
+      child: Container(
+        color: globals.secondColor,
+        child: isLoading == false ? Scaffold(
+          appBar: AppBar(
+            title: Text('Report infection'),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+              },
+            ),
           ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            Center(
-              child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    color: Colors.white,
-                    width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                    padding: EdgeInsets.all(16),
-                    child: Form(
-                      key: _formKey,
-                      child: SingleChildScrollView(
-                          child: Column(
-                            children: <Widget>[
-                              //admin email
-                              TextFormField(
-                                textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
-                                decoration: InputDecoration(labelText: 'Your admin\'s email'),
-                                keyboardType: TextInputType.emailAddress,
-                                controller: _adminEmail,
-                                validator: (value) {
-                                  if(value.isEmpty || !value.contains('@')) {
-                                    return 'invalid email';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox (
-                                height: MediaQuery.of(context).size.height/48,
-                                width: MediaQuery.of(context).size.width,
-                              ),
-                              ElevatedButton(
-                                child: Text(
-                                    'Report'
+          body: Stack(
+            children: <Widget>[
+              Center(
+                child: SingleChildScrollView( //So the element doesn't overflow when you open the keyboard
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      color: Colors.white,
+                      width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                      padding: EdgeInsets.all(16),
+                      child: Form(
+                        key: _formKey,
+                        child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                //admin email
+                                TextFormField(
+                                  textInputAction: TextInputAction.done, //The "return" button becomes a "done" button when typing
+                                  decoration: InputDecoration(labelText: 'Your admin\'s email'),
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: _adminEmail,
+                                  validator: (value) {
+                                    if(value.isEmpty || !value.contains('@')) {
+                                      return 'invalid email';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                                onPressed: () {
-                                  FormState form = _formKey.currentState;
-                                  if (form.validate()){
-                                    showDialog(
-                                        context: context,
-                                        builder: (ctx) => AlertDialog(
-                                          title: Text('Warning'),
-                                          content: Text('Are you sure you want to report your infection?'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                                child: Text('Yes'),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    isLoading = true;
-                                                  });
-                                                  healthHelpers.reportInfection(_adminEmail.text).then((result) {
-                                                    if (result == true) {
-                                                      reportingHelpers.addSickEmployee(globals.loggedInUserEmail);
-                                                      setState(() {
-                                                        isLoading = false;
-                                                      });
-                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                          content: Text('Infection successfully reported.')));
-                                                      Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                                                    } else {
-                                                      setState(() {
-                                                        isLoading = false;
-                                                      });
-                                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-                                                          'An error occurred while reporting infection. Please try again later.')));
-                                                    }
-                                                  });
-                                                }
-                                            ),
-                                            TextButton(
-                                              child: Text('No'),
-                                              onPressed: () {
-                                                Navigator.of(ctx).pop();
-                                              },
-                                            )
-                                          ],
-                                        ));
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Please enter required fields")));
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                                SizedBox (
+                                  height: MediaQuery.of(context).size.height/48,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
+                                ElevatedButton(
+                                  child: Text(
+                                      'Report'
                                   ),
-                                ),
-                              )
-                            ],
-                          )
+                                  onPressed: () {
+                                    FormState form = _formKey.currentState;
+                                    if (form.validate()){
+                                      showDialog(
+                                          context: context,
+                                          builder: (ctx) => AlertDialog(
+                                            title: Text('Warning'),
+                                            content: Text('Are you sure you want to report your infection?'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                  child: Text('Yes'),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      isLoading = true;
+                                                    });
+                                                    healthHelpers.reportInfection(_adminEmail.text).then((result) {
+                                                      if (result == true) {
+                                                        reportingHelpers.addSickEmployee(globals.loggedInUserEmail);
+                                                        setState(() {
+                                                          isLoading = false;
+                                                        });
+                                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                            content: Text('Infection successfully reported.')));
+                                                        Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                                                      } else {
+                                                        setState(() {
+                                                          isLoading = false;
+                                                        });
+                                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
+                                                            'An error occurred while reporting infection. Please try again later.')));
+                                                      }
+                                                    });
+                                                  }
+                                              ),
+                                              TextButton(
+                                                child: Text('No'),
+                                                onPressed: () {
+                                                  Navigator.of(ctx).pop();
+                                                },
+                                              )
+                                            ],
+                                          ));
+                                    } else {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Please enter required fields")));
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
-      ) : Center( child: CircularProgressIndicator()),
+              )
+            ],
+          ),
+        ) : Center( child: CircularProgressIndicator()),
+      ),
     );
   }
 }

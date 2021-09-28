@@ -20,9 +20,9 @@ class UserRequestAccess extends StatefulWidget {
 }
 
 class UserRequestAccessState extends State<UserRequestAccess> {
-  TextEditingController _companyId = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _reason = TextEditingController();
+  bool isLoading = false;
 
   DateTime _currentDate = DateTime.now();
   DateTime _tomorrowDate = DateTime.now().add(Duration(days: 1));
@@ -77,107 +77,119 @@ class UserRequestAccessState extends State<UserRequestAccess> {
 
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Request access"),
-          leading: BackButton( //Specify back button
-            onPressed: (){
-              Navigator.of(context).pushReplacementNamed(UserRequestAccessShifts.routeName);
-            },
+      child: Container(
+        color: globals.secondColor,
+        child: isLoading == false ? Scaffold(
+          appBar: AppBar(
+            title: Text("Request access"),
+            leading: BackButton( //Specify back button
+              onPressed: (){
+                Navigator.of(context).pushReplacementNamed(UserRequestAccessShifts.routeName);
+              },
+            ),
           ),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                color: Colors.white,
-                width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
-                padding: EdgeInsets.all(16),
-                child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.all(20.0),
-                      child: Image(
+          body: Center(
+            child: SingleChildScrollView(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  color: Colors.white,
+                  width: MediaQuery.of(context).size.width/(2*globals.getWidgetScaling()),
+                  padding: EdgeInsets.all(16),
+                  child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
                         alignment: Alignment.center,
-                        image: AssetImage('assets/images/placeholder-shift.png'),
-                        width: double.maxFinite,
-                        height: MediaQuery.of(context).size.height/6,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Date: ' + _selectedDate.toString().substring(0,10),
-                          style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                        margin: EdgeInsets.all(20.0),
+                        child: Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/images/placeholder-shift.png'),
+                          width: double.maxFinite,
+                          height: MediaQuery.of(context).size.height/6,
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height/20,
-                          width: MediaQuery.of(context).size.height/20,
-                          child: ElevatedButton(
-                            child: Icon(Icons.date_range),
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.zero,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Date: ' + _selectedDate.toString().substring(0,10),
+                            style: TextStyle(fontSize: (MediaQuery.of(context).size.height * 0.01) * 2.5),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height/20,
+                            width: MediaQuery.of(context).size.height/20,
+                            child: ElevatedButton(
+                              child: Icon(Icons.date_range),
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                              ),
+                              onPressed: () => _selectDate(context),
                             ),
-                            onPressed: () => _selectDate(context),
+                          ),
+                        ],
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "The reason you want access",
+                          labelText: "Reason",
+                        ),
+                        obscureText: false,
+                        controller: _reason,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "Your company admin's email",
+                          labelText: "Admin email",
+                        ),
+                        obscureText: false,
+                        controller: _email,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom (
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ],
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "The reason you want access",
-                        labelText: "Reason",
-                      ),
-                      obscureText: false,
-                      controller: _reason,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "Your company admin's email",
-                        labelText: "Admin email",
-                      ),
-                      obscureText: false,
-                      controller: _email,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom (
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text("Submit"),
-                      onPressed: () {
-                        healthHelpers.createPermissionRequest(_email.text, _reason.text).then((result) {
-                          if (result == true) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Request successfully submitted.")));
-                            Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
-                          }
-                        });
-                      },
-                    )
-                  ],
-                ),
+                        child: Text("Submit"),
+                        onPressed: () {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          healthHelpers.createPermissionRequest(_email.text, _reason.text).then((result) {
+                            if (result == true) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("Request successfully submitted.")));
+                              Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+                            } else {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("An error occurred while submitting the request. Please try again later.")));
+                            }
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+        ) : Center( child: CircularProgressIndicator()),
       ),
     );
   }
