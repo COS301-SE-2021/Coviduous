@@ -3,7 +3,7 @@ var expect = chai.expect;
 //const { expect } = require('chai');
 let chaiHttp = require('chai-http'); // npm install chai-http
 //let server = require('../index.js');
-let server = 'http://localhost:5002/coviduous-api/us-central1/app/'
+let server = 'http://localhost:5002/coviduous-api/us-central1/app/office'
 let should = chai.should();
 
 chai.use(chaiHttp);
