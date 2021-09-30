@@ -822,14 +822,19 @@ healthApp.post('/api/health/permissions/view', authMiddleware,async (req, res) =
     } catch (e) {
         reqJson = req.body;
     }
-      let document = database.collection('permissions').where("userEmail", "==", reqJson.userEmail);
+      let document = database.collection('permissions').orderBy("timestamp");//.where("userEmail", "==", reqJson.userEmail);
       let snapshot = await document.get();
         
       let permissions = [];
         
         snapshot.forEach(doc => {
             let data = doc.data();
-            permissions.push(data);
+            //permissions.push(data);
+
+            if (data.userEmail == reqJson.userEmail)
+            {
+              permissions.push(data);
+            }
         });
       
       return res.status(200).send({
