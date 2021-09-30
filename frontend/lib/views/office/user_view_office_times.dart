@@ -123,15 +123,39 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                       child: ElevatedButton(
                                         child: Text('Book'),
                                         onPressed: () {
-                                          globals.selectedShiftDate = globals.currentShifts[index].getDate();
-                                          globals.selectedShiftStartTime = globals.currentShifts[index].getStartTime();
-                                          globals.selectedShiftEndTime = globals.currentShifts[index].getEndTime();
+                                          globals.selectedShiftDate = globals.currentShifts[index].getDate().substring(0, 10);
+                                          globals.selectedShiftStartTime = startTimeFormatted;
+                                          globals.selectedShiftEndTime = endTimeFormatted;
                                           if (globals.currentRoom.getOccupiedDesks() < globals.currentRoom.getNumberOfDesks()) {
                                             officeHelpers.createBooking((globals.currentRoom.getOccupiedDesks()+1).toString()).then((result) {
                                               if (result == true) {
                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                     SnackBar(content: Text("Desk successfully booked")));
-                                                Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                                if (!globals.getIfOnPC()) { //Google Calendar integration only available on mobile
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (ctx) => AlertDialog(
+                                                        title: Text('Sync to calendar'),
+                                                        content: Text('Would you like to add this booking to your Google Calendar?'),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: Text('Yes'),
+                                                            onPressed: (){
+                                                              officeHelpers.addBookingToCalendar();
+                                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                                            },
+                                                          ),
+                                                          TextButton(
+                                                            child: Text('No'),
+                                                            onPressed: (){
+                                                              Navigator.of(ctx).pop();
+                                                            },
+                                                          )
+                                                        ],
+                                                      ));
+                                                } else {
+                                                  Navigator.of(context).pushReplacementNamed(Office.routeName);
+                                                }
                                               } else {
                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                     SnackBar(content: Text('Error occurred while booking the desk. Please try again later.')));

@@ -12,6 +12,16 @@ Future<bool> createBooking(String deskNumber) async {
   return result;
 }
 
+Future<bool> addBookingToCalendar() async {
+  bool result = false;
+  await Future.wait([
+    officeController.addBookingToCalendar()
+  ]).then((results) {
+    result = results.first;
+  });
+  return result;
+}
+
 Future<bool> getBookings() async {
   bool result = false;
   await Future.wait([

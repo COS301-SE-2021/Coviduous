@@ -195,3 +195,4 @@ backend/functions/ui-debug.log
 
 # sonar-scanner
 .scannerwork/
+frontend/upload-keystore.jks
