@@ -13,7 +13,7 @@ class Room {
   num capacityPercentage;
   num numberOfDesks;
   num occupiedDesks;
-  num currentCapacity;
+  String currentCapacity;
   num deskArea;
   num capacityOfPeopleForSixFtGrid;
   num capacityOfPeopleForSixFtCircle;
@@ -44,7 +44,7 @@ class Room {
     capacityPercentage: json["capacityPercentage"],
     numberOfDesks: json["numberDesks"],
     occupiedDesks: json["occupiedDesks"],
-    currentCapacity: json["currentCapacity"],
+    currentCapacity: json["currentCapacity"].toString(),
     deskArea: json["deskArea"],
     capacityOfPeopleForSixFtGrid: json["capacityOfPeopleForSixFtGrid"],
     capacityOfPeopleForSixFtCircle: json["capacityOfPeopleForSixFtCircle"],
@@ -100,7 +100,7 @@ class Room {
   }
 
   num getCurrentCapacity() {
-    return currentCapacity;
+    return num.parse(currentCapacity);
   }
 
   num getDeskArea() {
