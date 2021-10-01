@@ -3,6 +3,7 @@ library globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
+import 'package:frontend/models/health/bluetooth_emails.dart';
 import 'package:universal_html/html.dart' as html;
 
 //Announcement subsystem
@@ -210,6 +211,9 @@ VaccineConfirmation currentVaccineConfirmation;
 //Current test result documents
 List<TestResults> currentTestResults = [];
 TestResults currentTestResult;
+
+//Current list of connected Bluetooth device emails
+BluetoothEmails currentBluetoothEmails;
 
 //===============================
 //Used in announcement subsystem
