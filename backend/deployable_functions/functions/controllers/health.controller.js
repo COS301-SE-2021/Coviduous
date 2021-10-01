@@ -1755,4 +1755,209 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
       }
     });
 
+
+    //////////////////
+    /**
+ * @swagger
+ * /health/store-emails:
+ *   post:
+ *     description: stores emails fetched from broadcasted bluetooth devices
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+  healthApp.post('/api/health/store-emails', async (req, res) => {
+    try {
+      let fieldErrors = [];
+  
+    if (req == null) {
+      fieldErrors.push({field: null, message: 'Request object may not be null'});
+    }
+      let reqJson;
+        try {
+            reqJson = JSON.parse(req.body);
+        } catch (e) {
+            reqJson = req.body;
+        }
+        if (reqJson.userId == null || reqJson.userId === '') {
+          fieldErrors.push({field: 'user ID ', message: 'user ID may not be empty'});
+        }
+        
+        if (reqJson.email_list == null || reqJson.email_list === '') {
+          fieldErrors.push({field: 'email list', message: 'email list may not be empty'});
+        }
+      
+        if (fieldErrors.length > 0) {
+          console.log(fieldErrors);
+          return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+          });
+        }
+        let timestamp = new Date().today() + " @ " + new Date().timeNow();
+  
+        let contactData = {
+            userId: reqJson.userId,
+            email_list:reqJson.email_list,
+            timestamp: timestamp
+          }
+          await database.collection('physical-contact-with').doc(reqJson.userId).set(contactData); 
+        return res.status(200).send({
+          message: 'Successfully stored list of people who employee was in contact with',
+          data: contactData
+        });
+    
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+          message: error.message || "Some error occurred while storing list."
+        });
+    }
+  });
+
+  //////////////////
+    /**
+ * @swagger
+ * /health/view-stored-emails:
+ *   post:
+ *     description: brings a list of emails fetched from broadcasted bluetooth devices
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+     healthApp.post('/api/health/view-stored-emails',async (req, res) => {
+      try {
+        let fieldErrors = [];
+    
+      if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+      }
+        let reqJson;
+          try {
+              reqJson = JSON.parse(req.body);
+          } catch (e) {
+              reqJson = req.body;
+          }
+          if (reqJson.userId == null || reqJson.userId === '') {
+            fieldErrors.push({field: 'user ID ', message: 'user ID may not be empty'});
+          }
+        
+          if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+              message: '400 Bad Request: Incorrect fields',
+              errors: fieldErrors
+            });
+          }
+    
+            let document = database.collection('physical-contact-with').where("userId", "==", reqJson.userId);
+            let snapshot = await document.get();
+            let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+            let contactData = list;
+          return res.status(200).send({
+            message: 'Successfully Fetched List',
+            data: contactData
+          });
+      
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send({
+            message: error.message || "Some error occurred while fetching list."
+          });
+      }
+    });
+
+
+     //////////////////
+    /**
+ * @swagger
+ * /health/view-stored-emails:
+ *   post:
+ *     description: brings a list of emails fetched from broadcasted bluetooth devices
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+  healthApp.post('/api/health/notify-contacted',async (req, res) => {
+      try {
+        let fieldErrors = [];
+    
+      if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+      }
+        let reqJson;
+          try {
+              reqJson = JSON.parse(req.body);
+          } catch (e) {
+              reqJson = req.body;
+          }
+          if (reqJson.userId == null || reqJson.userId === '') {
+            fieldErrors.push({field: 'user ID ', message: 'user ID may not be empty'});
+          }
+        
+          if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+              message: '400 Bad Request: Incorrect fields',
+              errors: fieldErrors
+            });
+          }
+    
+            let document = database.collection('physical-contact-with').where("userId", "==", reqJson.userId);
+            let snapshot = await document.get();
+            let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            list.push(data);
+        });
+        let notificationData = {
+          subject: "COVID-19 INFECTION",
+          message: "EMPLOYEE  ID :"+reqJson.userId+" REPORTED A POSITIVE COVID-19 CASE AND MAY HAVE BEEN IN CONTACT WITH YOU PLEASE CONSULT YOUR ADMINISTRATOR OR HEALTH SERVICES",
+          
+        }
+
+        if(list.length===0)
+        {
+          return res.status(200).send({
+            message: 'Successfully Fetched List,But no individuals to notify',
+          });
+        }
+        else
+        {
+          let contactData = list[0].email_list;
+          contactData.forEach(doc => {
+            console.log(doc.email);
+            sendUserEmail(doc.email,notificationData.subject,notificationData.message);
+        });
+
+        }
+            
+          return res.status(200).send({
+            message: 'Successfully Notified Individuals',
+            data: list
+          });
+      
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send({
+            message: error.message || "Some error occurred while notifying individuals."
+          });
+      }
+    });
+
   exports.health = functions.https.onRequest(healthApp);
