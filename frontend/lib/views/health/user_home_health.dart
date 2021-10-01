@@ -111,15 +111,15 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              if (!globals.getIfOnPC()) {
+                              if (!globals.getIfOnPC() && globals.getOSWeb() != "Web") {
                                 globals.currentBluetoothEmails = null;
                                 Navigator.of(context).pushReplacementNamed(UserScanBluetooth.routeName);
                               } else {
                                 showDialog(
                                     context: context,
                                     builder: (ctx) => AlertDialog(
-                                      title: Text('Unavailable on PC'),
-                                      content: Text('This functionality is only available on mobile devices.'),
+                                      title: Text('Unavailable on web'),
+                                      content: Text('This functionality is only available on the mobile app.'),
                                       actions: <Widget>[
                                         TextButton(
                                           child: Text('Okay'),
