@@ -48,10 +48,10 @@ Future<bool> getAllBookings() async {
   return result;
 }
 
-Future<bool> cancelBooking(String bookingNumber) async {
+Future<bool> cancelBooking(String bookingNumber, String roomNumber) async {
   bool result = false;
   await Future.wait([
-    officeController.deleteBooking(bookingNumber)
+    officeController.deleteBooking(bookingNumber, roomNumber)
   ]).then((results) {
     result = results.first;
   });
