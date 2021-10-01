@@ -1769,7 +1769,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
  *         description: Success 
  *  
  */
-  healthApp.post('/api/health/store-emails', async (req, res) => {
+  healthApp.post('/api/health/store-emails', authMiddleware, async (req, res) => {
     try {
       let fieldErrors = [];
   
@@ -1831,7 +1831,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
  *         description: Success 
  *  
  */
-     healthApp.post('/api/health/view-stored-emails',async (req, res) => {
+     healthApp.post('/api/health/view-stored-emails',authMiddleware,async (req, res) => {
       try {
         let fieldErrors = [];
     
@@ -1892,7 +1892,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
  *         description: Success 
  *  
  */
-  healthApp.post('/api/health/notify-contacted',async (req, res) => {
+  healthApp.post('/api/health/notify-contacted',authMiddleware, async (req, res) => {
       try {
         let fieldErrors = [];
     
