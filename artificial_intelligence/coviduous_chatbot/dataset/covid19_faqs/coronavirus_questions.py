@@ -1688,7 +1688,7 @@ COVID19_QUES = [
         "Answer": "Staying at home in quarantine will help to control the possible spread of the virus to your friends, relatives and your wider community."
     },
     {
-        "Question": "What are the steps to protect employees during coronavirus?",
+        "Question": "steps measures to protect employees during COVID-19 coronavirus pandemic?",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
@@ -1700,15 +1700,15 @@ COVID19_QUES = [
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "What are the office rules for coronavirus?",
+        "Question": "office rules during COVID-19 coronavirus pandemic?",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "how do I as an employer protect my staff",
+        "Question": "how do I as an employer protect staff from this coronavirus",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "I own a company? How should I protect my people?",
+        "Question": "own a company how protect workers in office?",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
@@ -1720,7 +1720,7 @@ COVID19_QUES = [
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "I am an employer. How do I protect my employees?",
+        "Question": "I am an employer. How do I protect employees from COVID-19 coronavirus?",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
@@ -1728,7 +1728,7 @@ COVID19_QUES = [
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "What are my responsibilities as an employer when responding to this crisis?",
+        "Question": "responsibilities as an employer responding to this COVID-19 coronavirus pandemic crisis?",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
@@ -1736,19 +1736,19 @@ COVID19_QUES = [
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "How do I do to help my employees with corona?",
+        "Question": "How do I do to help employees with COVID-19 coronavirus?",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "how do i prevent my employees from getting infected",
+        "Question": "prevent employees from getting infected",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "What do I do to protect my employees from Corona",
+        "Question": "protect employees from COVID-19 coronavirus",
         "Answer": "Disinfect the workplace, encourage employees to work remotely and have virtual meetings and communicate contingency plans to employees."
     },
     {
-        "Question": "I want to be a good citizen, what can I do to limit the spread of the virus",
+        "Question": "I want to be a good citizen, what can I do limit spread of COVID-19 virus",
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
@@ -1768,7 +1768,7 @@ COVID19_QUES = [
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
-        "Question": "Is there anything in particular I can do as a citizen to help coronavirus pass faster?",
+        "Question": "anything I can do as a citizen to help COVID-19 coronavirus pass faster?",
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
@@ -1776,7 +1776,7 @@ COVID19_QUES = [
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
-        "Question": "do i need to quarantine",
+        "Question": "How do I minimize the spread of Coronavirus",
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
@@ -1784,7 +1784,7 @@ COVID19_QUES = [
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
-        "Question": "How can I collaborate to reduce the pandemic?",
+        "Question": "How can I collaborate to reduce spread of COVID-19 pandemic?",
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
@@ -1800,11 +1800,11 @@ COVID19_QUES = [
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
-        "Question": "How can I minimize the spread of Coronavirus?",
+        "Question": "How can I minimize spread of COVID-19 Coronavirus?",
         "Answer":      "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
-        "Question": "As a conscious resident of the SA how can I mitigate the spread of the virus?",
+        "Question": "conscious resident of South Africa how can I mitigate spread of COVID-19 virus?",
         "Answer": "Help Stop COVID-19 by Getting Vaccinated,Wash Your Hands, Wear a Mask and Avoid Crowds."
     },
     {
@@ -1852,19 +1852,19 @@ COVID19_QUES = [
         "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
     },
     {
-        "Question": "Do I have to take some special measure if I don't belong any risk group?",
+        "Question": "take special measure if don't belong any risk group?",
         "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
     },
     {
-        "Question": "I'm young, healthy, and have no known underlying illnesses, is there anything I should be aware of?",
+        "Question": "young healthy no known underlying illnesses what should i do during pandemic?",
         "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
     },
     {
-        "Question": "What to do as a healthy person about the coronavirus pandemic?",
+        "Question": "healthy person COVID-19 coronavirus pandemic?",
         "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
     },
     {
-        "Question": "im not at risk. what do i do",
+        "Question": "what do I do if I am not at risk?",
         "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
     },
     {
@@ -1876,7 +1876,7 @@ COVID19_QUES = [
         "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."
     },
     {
-        "Question": "Where did COVID-19 come from?",
+        "Question": "Where did COVID-19 coronavirus come from?",
         "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."
     },
     {
@@ -1896,7 +1896,7 @@ COVID19_QUES = [
         "Answer": "nan"
     },
     {
-        "Question": "What does socially distancing even mean?",
+        "Question": "What does socially distancing mean?",
         "Answer": "It is avoiding crowds, mass gatherings, and maintaining at least a 6 foot distance fom others.This means no handshakes, hugs, or high-fives."
     },
     {
@@ -1912,19 +1912,19 @@ COVID19_QUES = [
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "Can I get COVID-19 from animals when travelling to other countries?",
+        "Question": "get COVID-19 coronavirus from animals travelling to other countries?",
         "Answer": "Although the current spread and growth of the COVID-19 outbreak is primarily associated with spread from person to person, experts agree that the virus likely originated from bats and may have passed through an intermediary animal source (currently unknown) in China before being transmitted to humans.If animals are imported from an affected area: they should be closely monitored for signs of illness, you should contact a veterinarian if they become sick, and call ahead to ensure they are aware of the circumstances"
     },
     {
-        "Question": "Can COVID-19 be transmitted when a person is not showing symptoms?",
+        "Question": "COVID-19 coronavirus transmitted person not showing symptoms?",
         "Answer": "Experts believe that this is possible, though it is considered less common.Canada public health services is currently investigating into this question further."
     },
     {
-        "Question": "What does socially distancing even mean?",
+        "Question": "What does socially distancing mean?",
         "Answer": "It is avoiding crowds, mass gatherings, and maintaining at least a 6 foot distance fom others.This means no handshakes, hugs, or high-fives."
     },
     {
-        "Question": "What is social distancing and how does it help to minimize COVID-19?",
+        "Question": "What is social distancing help minimize COVID-19 coronavirus?",
         "Answer": "Social distancing is one of the most effective ways to reduce the spread of illness during an outbreak, but it is sometimes hard to understand what this means given the vague language.This does mean making changes to your everyday routine to minimize contacts with others, including:   avoiding non-essential gatherings avoiding common greetings, such as handshakes avoiding crowded places such as concerts, arenas, conferences and festivals limiting contact with people at higher risk like older adults and those in poor health keeping a distance of at least 2 arms-length (approximately 6 feet) from others  For example - if you need to go grocery shopping, limit to once a week."
     },
     {
@@ -1944,7 +1944,7 @@ COVID19_QUES = [
         "Answer": "Wash your hands with soap and water for at least 20 seconds, especially after blowing your nose, coughing, sneezing, using the restroom, and before eating or preparing food.Please also clean and disinfect frequently touched surfaces (e.g. tables, counter-tops, light switches, door knobs, cabinet handles)."
     },
     {
-        "Question": "How can I protect my child from COVID-19?",
+        "Question": "protect child COVID-19 coronavirus?",
         "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."
     },
     {
@@ -1960,7 +1960,7 @@ COVID19_QUES = [
         "Answer": "nan"
     },
     {
-        "Question": "Can i go to the funeral of someone who died of COVID-19?",
+        "Question": "go attend funeral someone died of COVID-19 coronavirus?",
         "Answer": "Right now, there is currently no known risk with being in the same room at a funeral or visitation service with the body of someone who has died of COVID-19.That being said, currently, we all must avoid large gatherings and stay at home as much as possible."
     },
     {
@@ -2008,7 +2008,7 @@ COVID19_QUES = [
         "Answer": "Their symptoms are severe acute respiratory illness which includes fever, cough, and shortness of breath. The virus does not pass easily person-to-person unless there is close contact, which includes providing unprotected care to a patient."
     },
     {
-        "Question": "What should I do if I just returned from a trip?",
+        "Question": "just returned from trip?",
         "Answer": "Self-isolate means: stay home and keep your distance from others do not have visitors, especially older adults, or those with medical conditions who are at a higher risk of developing serious illness Monitor your health for fever, cough or difficulty breathing. If you develop a fever, cough or difficulty breathing within 14 days: Continue to isolate yourself from others Immediately call a health care professional or public health authority and: describe your symptoms and travel history follow their instructions carefully"
     },
     {
@@ -2032,23 +2032,23 @@ COVID19_QUES = [
         "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often. If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."
     },
     {
-        "Question": "Any advice about how to minimize risk during grocery shopping trips or getting takeout.",
+        "Question": "advice minimize risk during grocery shopping trips getting takeout.",
         "Answer": "For that reason, it is critical to wash your hands often, including utensils. The CDC recommends that if you are sick, stay home until you are better and no longer pose a risk of infecting others."
     },
     {
-        "Question": "What can I do to reduce my and my family's risk of getting COVID-19?",
+        "Question": "reduce family risk getting COVID-19 coronavirus?",
         "Answer": "Wash your hands with soap and water for at least 20 seconds, especially after blowing your nose, coughing, sneezing, using the restroom, and before eating or preparing food. Please also clean and disinfect frequently touched surfaces (e.g. tables, countertops, light switches, door knobs, cabinet handles)."
     },
     {
-        "Question": "I'm pregnant... am I at risk for COVID-19?",
+        "Question": "pregnant risk COVID-19 coronavirus?",
         "Answer": "It does not look like pregnant women are more at risk of developing severe illness than other healthy adults from coronavirus. Currently, it is expected that most pregnant women will likely experience only mild to moderate cold and flu - like symptoms."
     },
     {
-        "Question": "Am I at risk for COVID-19 in the South Africa?",
+        "Question": "risk COVID-19 coronavirus South Africa?",
         "Answer": "Currently, all states in the U.S. have reported cases of COVID-19. It is important to limit unnecessary travel and practice hand-washing, and social distancing."
     },
     {
-        "Question": "Should I be tested for COVID-19?",
+        "Question": "Should I be tested for COVID-19 coronavirus?",
         "Answer": "If you have developed symptoms like fever, cough, and/or difficulty breathing, and you have been in close contact with a person known to have COVID-19, or they have recently travelled to an area with ongoing spread of COVID-19, yes. If your symptoms are severe - like you are having persistent pain/pressure in chest, new confusion or inability to arouse, or bluish lips or face, contact healthcare provider or go to the emergency room - it is important to seek care immediately."
     },
     {
@@ -2110,7 +2110,7 @@ COVID19_QUES = [
         "Question": "Can we use fabric masks to prevent the spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
     {
-        "Question": "How does COVID-19 spread?",
+        "Question": "How does COVID-19 coronavirus spread?",
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {
         "Question": "Can COVID-19 be spread through surface-touching?",
@@ -2122,19 +2122,19 @@ COVID19_QUES = [
         "Question": "What is community spread?",
         "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
     {
-        "Question": "Can COVID-19 be transmitted through food?",
+        "Question": "COVID-19 coronavirus transmitted through food?",
         "Answer": "There is currently no evidence to suggest that food is a likely source or route of transmission of the virus.Scientists and food safety authorities across the world are closely monitoring the spread of COVID-19."},
     {
         "Question": "Can COVID-19 be spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
     {
-        "Question": "Can COVID-19 be spread through food (including refrigerated or frozen food)?",
+        "Question": "COVID-19 coronavirus spread through food including refrigerated frozen food?",
         "Answer": "However, it is important to make sure you wash your hands with soap and water for at least 20 seconds to practice general food safety.Please also continue to wash your hands after blowing your nose, coughing or sneezing, or going to the bathroom."},
     {
         "Question": "What is community spread?",
         "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
     {
-        "Question": "I have packages coming from China... am I at risk?",
+        "Question": "packages arriving from another country am I at risk?",
         "Answer": "We are basing some of our understanding of how COVID-19 behaves on how previous coronaviruses (e.g. MERS-CoV and SARS-CoV behaves).Because of their poor survivability on surfaces, it is likely very low risk of spread from those products - and there is no evidence to support transmission of COVID-19 through imported goods."},
     {
         "Question": "How does COVID-19 spread?",
@@ -2152,7 +2152,7 @@ COVID19_QUES = [
         "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
         "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
     {
-        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
     {
         "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
@@ -2209,7 +2209,7 @@ COVID19_QUES = [
         "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {
-        "Question": "How can people help stop stigma related to COVID-19?",
+        "Question": "help stop COVID-19 coronavirus related stigma?",
         "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
     {
         "Question": "What is a coronavirus?",
@@ -2232,7 +2232,7 @@ COVID19_QUES = [
         "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {
-        "Question": "If I'm high risk, what should I do?",
+        "Question": "I am high risk, what should I do?",
         "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often.If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."},
     {
         "Question": "What is novel (new) coronavirus?",
@@ -2257,7 +2257,7 @@ COVID19_QUES = [
         "Question": "What is novel (new) coronavirus?",
         "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {
-        "Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ",
+        "Question": "How long COVID-19 coronavirus live on surfaces like packages plastic? should we be worried?",
         "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
     {
         "Question": "What is a coronavirus?",
@@ -2269,13 +2269,13 @@ COVID19_QUES = [
         "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {
-        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Question": "Is COVID-19 coronavirus contagious? Can someone spread to others?",
         "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
     {
-        "Question": "Can we use fabric masks to prevent the spread?",
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
     {
-        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
     {
         "Question": "What is community spread?",
@@ -2284,7 +2284,7 @@ COVID19_QUES = [
         "Question": "How does COVID-19 spread?",
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
         "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
     {
         "Question": "nan",
@@ -2297,7 +2297,7 @@ COVID19_QUES = [
         "Question": "What is novel (new) coronavirus?",
         "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+        "Question": "viruses weaker over time? COVID-19 coronavirus weaken over time?",
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
     },
     {
