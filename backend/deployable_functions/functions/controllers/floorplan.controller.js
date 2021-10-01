@@ -588,6 +588,7 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
   try {
     let room =new Room(0,reqJson.roomNumber, reqJson.roomName, reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,reqJson.numberDesks,reqJson.capacityPercentage);
     let roomData;
+    let numBookings;
     if(reqJson.base64String==="" || reqJson.base64String === null)
     {
       roomData = {
@@ -600,6 +601,7 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
         occupiedDesks:room.occupiedDesks,
         currentCapacity:room.currentCapacity,
         deskArea:room.deskArea,
+        numRoomBookings: 0,
         capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
         capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle
       }

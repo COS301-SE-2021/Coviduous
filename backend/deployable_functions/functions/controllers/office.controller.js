@@ -150,7 +150,22 @@ let uuid = require("uuid");
         {
             const documents =  database.collection('summary-bookings').where("month","==",month);
             let s = await documents.get(); 
-    
+            const docs = database.collection('rooms').where("roomNumber","==",reqJson.roomNumber);
+            const snaps = await docs.get(); 
+   
+   
+   
+           let list =[]; 
+           snaps.forEach(docs => {
+               let datas = docs.data();
+               console.log(datas)
+               list.push(datas);
+           });
+   
+         
+
+
+
            let lists = [];
     
             s.forEach(doc => {
@@ -166,11 +181,25 @@ let uuid = require("uuid");
                 count =elements.numBookings;
 
             }
+            
+            let numBookingroom;
+           for(const element of list){
+                 numBookingroom = element.numRoomBookings
+            }   
 
               
             let numBookings = parseInt(count) + 1;
             numBookings = numBookings.toString();
-        
+                    
+            let numBookingroom = parserInt(numBookingroom)+1;
+            numBookingroom = numBookingroom.toString(); 
+            
+            
+            
+            const documen = database.collection('rooms').doc(reqJson.roomNumber);
+            await documen.update({ 
+               numBookingroom:numBookingroom
+             });
             
             const documented = database.collection('summary-bookings').doc(summaryId);
             await documented.update({ 
@@ -255,6 +284,12 @@ let uuid = require("uuid");
          const doc =   database.collection('summary-bookings').where("companyId","==",companyId); 
          const snap = await doc.get(); 
          
+         const docs = database.collection('rooms').where("roomNumber","==",reqJson.roomNumber);
+         const snaps = await docs.get(); 
+
+
+
+        let list =[];
         let lists = [];
 
         snap.forEach(docs => {
@@ -263,6 +298,14 @@ let uuid = require("uuid");
             lists.push(dat);
         });
 
+        snaps.forEach(docs => {
+            let data = docs.data();
+            console.log(data)
+            list.push(dat);
+        });
+
+  
+
         //console.log(lists)
       
         let numBooking;
@@ -270,16 +313,29 @@ let uuid = require("uuid");
         for (const element of lists) {
             summaryId = element.summaryBookingId,
             numBooking = element.numBookings;
-           }
-        
-        console.log(numBooking);   
+        }
+        let numBookingroom;
+        for(const element of list){
+            numBookingroom = element.numRoomBookings
+        }   
         let numBookings = parseInt(numBooking)-1;
         numBookings = numBookings.toString();   
+        
+        let numBookingroom = parserInt(numBookingroom)-1;
+        numBookingroom = numBookingroom.toString(); 
+
+
+
         
         const documented = database.collection('summary-bookings').doc(summaryId);
         await documented.update({ 
             numBookings:numBookings
-        }); 
+        });
+        
+        const documen = database.collection('rooms').doc(reqJson.roomNumber);
+        await documen.update({ 
+            numBookingroom:numBookingroom
+        });
 
         const document = database.collection('bookings').doc(reqJson.bookingNumber);
         await document.delete();
