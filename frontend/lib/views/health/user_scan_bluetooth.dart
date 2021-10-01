@@ -70,6 +70,13 @@ class _UserScanBluetoothState extends State<UserScanBluetooth> {
       return Container();
     }
 
+    //This page only works properly on mobile devices
+    if (globals.getIfOnPC()) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(UserHealth.routeName);
+      });
+    }
+
     if (globals.currentBluetoothEmails != null) {
       numberOfEmployees = globals.currentBluetoothEmails.getEmails().length;
     }
