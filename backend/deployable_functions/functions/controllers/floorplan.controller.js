@@ -582,13 +582,19 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
  */
   floorPlanApp.post('/api/floorplan/room/update',async (req, res) => {
 
-    let reqJson = JSON.parse(req.body);
-    console.log(reqJson);
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req.body);
+    } catch (e) {
+        reqJson = req.body;
+    }
+  
     
   try {
+   
     let room =new Room(0,reqJson.roomNumber, reqJson.roomName, reqJson.floorNumber,reqJson.roomArea,reqJson.deskArea,reqJson.numberDesks,reqJson.capacityPercentage);
+    
     let roomData;
-    let numBookings;
     if(reqJson.base64String==="" || reqJson.base64String === null)
     {
       roomData = {
@@ -601,7 +607,6 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
         occupiedDesks:room.occupiedDesks,
         currentCapacity:room.currentCapacity,
         deskArea:room.deskArea,
-        numRoomBookings: 0,
         capacityOfPeopleForSixFtGrid:room.capacityOfPeopleForSixFtGrid,
         capacityOfPeopleForSixFtCircle:room.capacityOfPeopleForSixFtCircle
       }
@@ -623,10 +628,10 @@ floorPlanApp.post('/api/floorplan',async (req, res) => {
       base64String: reqJson.base64String
     }
   }
+
+//////////////
     //editRoom()
-    await database.collection('rooms').doc(roomData.roomNumber).update(
-      roomData
-      );
+    await database.collection('rooms').doc(roomData.roomNumber).update(roomData);
     
     return res.status(200).send({
       message: 'room successfully updated',
