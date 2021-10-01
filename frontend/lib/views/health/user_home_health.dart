@@ -111,8 +111,26 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              globals.currentBluetoothEmails = null;
-                              Navigator.of(context).pushReplacementNamed(UserScanBluetooth.routeName);
+                              if (!globals.getIfOnPC()) {
+                                globals.currentBluetoothEmails = null;
+                                Navigator.of(context).pushReplacementNamed(UserScanBluetooth.routeName);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Unavailable on PC'),
+                                      content: Text('This functionality is only available on mobile devices.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: (){
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                );
+                              }
                             }
                         ),
                         SizedBox (
