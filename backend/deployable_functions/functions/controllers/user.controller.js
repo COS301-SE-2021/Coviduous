@@ -109,6 +109,10 @@ userApp.post('/api/users', async (req, res) => {
         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
     }
 
+    if (reqJson.tokenId == null || reqJson.tokenId === '') {
+        fieldErrors.push({field: 'tokenId', message: 'Token ID may not be empty'});
+    }
+
     if (fieldErrors.length > 0) {
         return res.status(400).send({
             message: '400 Bad Request: Incorrect fields',
@@ -129,6 +133,7 @@ userApp.post('/api/users', async (req, res) => {
             companyId: reqJson.companyId,
             companyName: reqJson.companyName,
             companyAddress: reqJson.companyAddress,
+            tokenId: reqJson.tokenId,
         };
     }
 
@@ -141,6 +146,7 @@ userApp.post('/api/users', async (req, res) => {
             email: reqJson.email,
             userName: reqJson.userName,
             companyId: reqJson.companyId,
+            tokenId: reqJson.tokenId,
         };
     }
 
