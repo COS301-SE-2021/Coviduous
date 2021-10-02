@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  beacon_broadcast:
+    dependency: "direct main"
+    description:
+      name: beacon_broadcast
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -64,13 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  buffer:
-    dependency: transitive
-    description:
-      name: buffer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.1"
   build:
     dependency: transitive
     description:
@@ -674,13 +674,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
-  postgres:
-    dependency: "direct main"
-    description:
-      name: postgres
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.4.1+2"
   provider:
     dependency: "direct main"
     description:
@@ -723,20 +716,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.1"
-  sasl_scram:
-    dependency: transitive
-    description:
-      name: sasl_scram
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
-  saslprep:
-    dependency: transitive
-    description:
-      name: saslprep
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   shelf:
     dependency: transitive
     description:
@@ -861,13 +840,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
-  unorm_dart:
-    dependency: transitive
-    description:
-      name: unorm_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   url_launcher:
     dependency: "direct main"
     description:
@@ -911,7 +883,7 @@ packages:
     source: hosted
     version: "2.0.2"
   uuid:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: uuid
       url: "https://pub.dartlang.org"
