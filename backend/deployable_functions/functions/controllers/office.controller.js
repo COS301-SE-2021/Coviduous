@@ -150,14 +150,37 @@ let uuid = require("uuid");
         {
             const documents =  database.collection('summary-bookings').where("month","==",month);
             let s = await documents.get(); 
-    
+            
+            const docd = database.collection('rooms').where("roomNumber","==",reqJson.roomNumber);
+            const snaps = await docd.get(); 
+
+
            let lists = [];
     
             s.forEach(doc => {
                 let ds = doc.data();
                 lists.push(ds);
             });
-            
+
+
+
+            let lis =[]; 
+            snaps.forEach(docs => {
+                let datas = docs.data();
+                console.log(datas)
+                lis.push(datas);
+            });
+
+
+            let numBookingroom;
+            for(const element of lis){
+                 numBookingroom = element.currentCapacity;
+            }
+                         
+            let numBookingrooms = parseInt(numBookingroom) + 1;
+            numBookingrooms = numBookingrooms.toString(); 
+         
+
             let summaryId;
             let count;
             for (const elements of lists) {
@@ -167,10 +190,15 @@ let uuid = require("uuid");
 
             }
 
+
               
             let numBookings = parseInt(count) + 1;
             numBookings = numBookings.toString();
-        
+            
+            const documen = database.collection('rooms').doc(reqJson.roomNumber);
+            await documen.update({ 
+                currentCapacity:numBookingrooms
+             });
             
             const documented = database.collection('summary-bookings').doc(summaryId);
             await documented.update({ 
@@ -223,6 +251,11 @@ let uuid = require("uuid");
     if (reqJson.bookingNumber == null || reqJson.bookingNumber === '') {
         fieldErrors.push({field: 'bookingNumber', message: 'Booking number may not be empty'});
     }
+    
+    if (reqJson.roomNumber == null || reqJson.roomNumber === '') {
+        fieldErrors.push({field: 'roomNumber', message: 'Number number may not be empty'});
+    }
+
 
     if (fieldErrors.length > 0) {
         console.log(fieldErrors);
@@ -252,9 +285,30 @@ let uuid = require("uuid");
          //console.log(companyId)
         }
 
-         const doc =   database.collection('summary-bookings').where("companyId","==",companyId); 
-         const snap = await doc.get(); 
-         
+        const doc =   database.collection('summary-bookings').where("companyId","==",companyId); 
+        const snap = await doc.get(); 
+        
+        const docd = database.collection('rooms').where("roomNumber","==",reqJson.roomNumber);
+        const snaps = await docd.get(); 
+
+        let lis =[]; 
+        snaps.forEach(docs => {
+            let datas = docs.data();
+            console.log(datas)
+            lis.push(datas);
+        });
+
+
+        let numBookingroom;
+        for(const element of lis){
+             numBookingroom = element.currentCapacity;
+        }
+                     
+        let numBookingrooms = parseInt(numBookingroom) - 1;
+        numBookingrooms = numBookingrooms.toString(); 
+     
+
+
         let lists = [];
 
         snap.forEach(docs => {
@@ -270,7 +324,7 @@ let uuid = require("uuid");
         for (const element of lists) {
             summaryId = element.summaryBookingId,
             numBooking = element.numBookings;
-           }
+        }
         
         console.log(numBooking);   
         let numBookings = parseInt(numBooking)-1;
@@ -280,6 +334,12 @@ let uuid = require("uuid");
         await documented.update({ 
             numBookings:numBookings
         }); 
+        const documen = database.collection('rooms').doc(reqJson.roomNumber);
+            await documen.update({ 
+                currentCapacity:numBookingrooms
+        });
+            
+          
 
         const document = database.collection('bookings').doc(reqJson.bookingNumber);
         await document.delete();
