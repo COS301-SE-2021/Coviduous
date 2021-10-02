@@ -355,8 +355,6 @@ Future<Group> viewGroup(String shiftNumber) async {
 
     print(await response.statusCode);
     if (response.statusCode == 200) {
-      //print(response.body);
-
       var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
@@ -426,94 +424,6 @@ Future<bool> notifyGroup(String shiftNumber) async {
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "shiftNumber": shiftNumber,
-    });
-    request.headers.addAll(globals.getRequestHeaders());
-
-    var response = await request.send();
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-
-      return true;
-    }
-  } catch (error) {
-    print(error);
-  }
-
-  return false;
-}
-
-//Save Bluetooth scan
-Future<bool> storeBluetoothEmails(List<String> emails) async {
-  String path = 'health/api/health/store-emails/';
-  String url = server + path;
-  var request;
-
-  try {
-    request = http.Request('POST', Uri.parse(url));
-    request.body = json.encode({
-      "userId": globals.loggedInUserId,
-      "email_list": emails,
-    });
-    request.headers.addAll(globals.getRequestHeaders());
-
-    var response = await request.send();
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-
-  return true;
-  }
-  } catch (error) {
-  print(error);
-  }
-
-  return false;
-}
-
-//Return Bluetooth contact trace
-Future<BluetoothEmails> getBluetoothEmails(String userId) async {
-  String path = 'health/api/health/view-stored-emails/';
-  String url = server + path;
-  var request;
-
-  try {
-    request = http.Request('POST', Uri.parse(url));
-    request.body = json.encode({
-      "userId": userId,
-    });
-
-    request.headers.addAll(globals.getRequestHeaders());
-
-    var response = await request.send();
-
-    if (response.statusCode == 200) {
-      var jsonString = (await response.stream.bytesToString());
-      var jsonMap = jsonDecode(jsonString);
-
-      BluetoothEmails bluetoothEmails;
-
-      for (var data in jsonMap["data"]) {
-        print(data);
-        bluetoothEmails = BluetoothEmails.fromJson(data);
-      }
-
-      return bluetoothEmails;
-    }
-  } catch (error) {
-    print(error);
-  }
-  return null;
-}
-
-//Notify Bluetooth group of their potential risk
-Future<bool> notifyBluetoothEmails(String userId) async {
-  String path = 'health/api/health/notify-contacted/';
-  String url = server + path;
-  var request;
-
-  try {
-    request = http.Request('POST', Uri.parse(url));
-    request.body = json.encode({
-      "userId": userId,
     });
     request.headers.addAll(globals.getRequestHeaders());
 

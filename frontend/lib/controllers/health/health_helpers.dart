@@ -197,39 +197,6 @@ Future<bool> notifyGroup() async {
   return result;
 }
 
-Future<bool> storeBluetoothEmails(List<String> emails) async {
-  bool result = false;
-  await Future.wait([
-    healthController.storeBluetoothEmails(emails)
-  ]).then((results) {
-    result = results.first;
-  });
-  return result;
-}
-
-Future<bool> getBluetoothEmails(String userId) async {
-  bool result = false;
-  await Future.wait([
-    healthController.getBluetoothEmails(userId)
-  ]).then((results) {
-    if (results != null && results.first != null) {
-      globals.currentBluetoothEmails = results.first;
-      result = true;
-    }
-  });
-  return result;
-}
-
-Future<bool> notifyBluetoothEmails(String userId) async {
-  bool result = false;
-  await Future.wait([
-    healthController.notifyBluetoothEmails(userId)
-  ]).then((results) {
-    result = results.first;
-  });
-  return result;
-}
-
 Future<bool> uploadVaccineConfirmation(String fileName, String bytes) async {
   bool result = false;
   await Future.wait([

@@ -33,7 +33,6 @@ import 'package:frontend/views/health/admin_contact_trace.dart';
 import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/health/user_health_check.dart';
-import 'package:frontend/views/health/user_scan_bluetooth.dart';
 import 'package:frontend/views/health/user_view_permissions.dart';
 import 'package:frontend/views/health/user_view_guidelines.dart';
 import 'package:frontend/views/health/user_upload_test_results.dart';
@@ -207,7 +206,6 @@ class MyApp extends StatelessWidget{
         AdminContactTraceShifts.routeName: (ctx)=> AdminContactTraceShifts(),
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
-        UserScanBluetooth.routeName: (ctx)=> UserScanBluetooth(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
         UserViewGuidelines.routeName: (ctx)=> UserViewGuidelines(),
         UserUploadTestResults.routeName: (ctx)=> UserUploadTestResults(),
