@@ -57,13 +57,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  beacon_broadcast:
-    dependency: "direct main"
-    description:
-      name: beacon_broadcast
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -583,13 +576,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.0"
-  nearby_connections:
-    dependency: "direct main"
-    description:
-      name: nearby_connections
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.0"
   nested:
     dependency: transitive
     description:
@@ -883,7 +869,7 @@ packages:
     source: hosted
     version: "2.0.2"
   uuid:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: uuid
       url: "https://pub.dartlang.org"
