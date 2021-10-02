@@ -1868,7 +1868,7 @@ COVID19_QUES = [
         "Answer": "Social (physical) distancing involves maintaining at least six feet of distance between people and is an effective way to help reduce the risk of exposure to the coronavirus."
     },
     {
-        "Question": "Can I get COVID-19 from animals when travelling to other countries?",
+        "Question": "get COVID-19 coronavirus from animals when travelling to other countries?",
         "Answer": "Although the current spread and growth of the COVID-19 outbreak is primarily associated with spread from person to person, experts agree that the virus likely originated from bats and may have passed through an intermediary animal source (currently unknown) in China before being transmitted to humans.If animals are imported from an affected area: they should be closely monitored for signs of illness, you should contact a veterinarian if they become sick, and call ahead to ensure they are aware of the circumstances"
     },
     {
@@ -1880,27 +1880,23 @@ COVID19_QUES = [
         "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."
     },
     {
-        "Question": "Can my pet or other animals get sick from COVID-19?",
+        "Question": "pet other animals get sick from COVID-19 coronavirus?",
         "Answer": "However, livestock producers should follow normal bio-security measures as always.This includes limiting visitors or workers who may have travelled to, or been in contact with, someone from an affected area."
     },
     {
-        "Question": "How can I protect my child from COVID-19?",
+        "Question": "how can I protect child COVID-19 coronavirus?",
         "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."
     },
     {
-        "Question": "What is COVID-19? ",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "What does shelter-in-place mean? ",
-        "Answer": "nan"
-    },
-    {
-        "Question": "What does socially distancing mean?",
+        "Question": "What does social distancing mean?",
         "Answer": "It is avoiding crowds, mass gatherings, and maintaining at least a 6 foot distance fom others.This means no handshakes, hugs, or high-fives."
     },
     {
-        "Question": "What is social distancing and how does it help to minimize COVID-19?",
+        "Question": "What is social distancing?",
         "Answer": "Social distancing is one of the most effective ways to reduce the spread of illness during an outbreak, but it is sometimes hard to understand what this means given the vague language.This does mean making changes to your everyday routine to minimize contacts with others, including:   avoiding non-essential gatherings avoiding common greetings, such as handshakes avoiding crowded places such as concerts, arenas, conferences and festivals limiting contact with people at higher risk like older adults and those in poor health keeping a distance of at least 2 arms-length (approximately 6 feet) from others  For example - if you need to go grocery shopping, limit to once a week."
     },
     {
@@ -1908,7 +1904,7 @@ COVID19_QUES = [
         "Answer": "If the infected person lives with others, it'll be important that they stay in another room, or be separated from others as much as possible.Avoid sharing household items (like dishes, cups, towels, bedding) with the infected person."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
@@ -1920,103 +1916,55 @@ COVID19_QUES = [
         "Answer": "Experts believe that this is possible, though it is considered less common.Canada public health services is currently investigating into this question further."
     },
     {
-        "Question": "What does socially distancing mean?",
+        "Question": "What does social distancing mean?",
         "Answer": "It is avoiding crowds, mass gatherings, and maintaining at least a 6 foot distance fom others.This means no handshakes, hugs, or high-fives."
     },
     {
-        "Question": "What is social distancing help minimize COVID-19 coronavirus?",
+        "Question": "What is social distancing?",
         "Answer": "Social distancing is one of the most effective ways to reduce the spread of illness during an outbreak, but it is sometimes hard to understand what this means given the vague language.This does mean making changes to your everyday routine to minimize contacts with others, including:   avoiding non-essential gatherings avoiding common greetings, such as handshakes avoiding crowded places such as concerts, arenas, conferences and festivals limiting contact with people at higher risk like older adults and those in poor health keeping a distance of at least 2 arms-length (approximately 6 feet) from others  For example - if you need to go grocery shopping, limit to once a week."
     },
     {
-        "Question": "We are currently on lockdown... can I go outside? Can I work out outside? Can I go for a run? Can I go for a walk? ",
-        "Answer": "nan"
-    },
-    {
-        "Question": "Can I take my child to the playground?",
-        "Answer": "nan"
-    },
-    {
-        "Question": "How can I and my family prepare for COVID-19?",
-        "Answer": "nan"
-    },
-    {
-        "Question": "What can I do to reduce my and my family's risk of getting COVID-19?",
+        "Question": "What can I do reduce family risk getting COVID-19 coronavirus?",
         "Answer": "Wash your hands with soap and water for at least 20 seconds, especially after blowing your nose, coughing, sneezing, using the restroom, and before eating or preparing food.Please also clean and disinfect frequently touched surfaces (e.g. tables, counter-tops, light switches, door knobs, cabinet handles)."
     },
     {
-        "Question": "protect child COVID-19 coronavirus?",
+        "Question": "how can I protect child COVID-19 coronavirus?",
         "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."
     },
     {
-        "Question": "What should I do if I just returned from a trip?",
+        "Question": "what should I do just returned from trip?",
         "Answer": "Self-isolate means: stay home and keep your distance from others do not have visitors, especially older adults, or those with medical conditions who are at a higher risk of developing serious illness Monitor your health for fever, cough or difficulty breathing. If you develop a fever, cough or difficulty breathing within 14 days: Continue to isolate yourself from others Immediately call a health care professional or public health authority and: describe your symptoms and travel history follow their instructions carefully"
     },
     {
-        "Question": "Any advice about how to minimize risk during grocery shopping trips or getting takeout.",
+        "Question": "advice minimize risk during grocery shopping trips getting takeout",
         "Answer": "For that reason, it is critical to wash your hands often, including utensils.The CDC recommends that if you are sick, stay home until you are better and no longer pose a risk of infecting others."
-    },
-    {
-        "Question": "Should I go to work if there is an outbreak in my community?",
-        "Answer": "nan"
     },
     {
         "Question": "go attend funeral someone died of COVID-19 coronavirus?",
         "Answer": "Right now, there is currently no known risk with being in the same room at a funeral or visitation service with the body of someone who has died of COVID-19.That being said, currently, we all must avoid large gatherings and stay at home as much as possible."
     },
     {
-        "Question": "We are currently on lockdown... can I go outside? Can I work out outside? Can I go for a run? Can I go for a walk? ",
-        "Answer": "nan"
-    },
-    {
-        "Question": "What caused COVID-19? ",
+        "Question": "What causes COVID-19 coronavirus?",
         "Answer": "Their symptoms are severe acute respiratory illness which includes fever, cough, and shortness of breath. The virus does not pass easily person-to-person unless there is close contact, which includes providing unprotected care to a patient."
     },
     {
-        "Question": "What are the complications of COVID-19? ",
-        "Answer": "nan"
-    },
-    {
-        "Question": "What is the treatment for COVID-19?",
+        "Question": "treatment COVID-19 coronavirus?",
         "Answer": "Most people with mild coronavirus illness will recover on their own. If you are concerned about your symptoms, you should self-monitor and consult your health care provider."
     },
     {
-        "Question": "What is COVID-19? ",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold. These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "What are the symptoms of COVID-19?",
+        "Question": "what are symptoms COVID-19 coronavirus?",
         "Answer": "These are the symptoms that can appear 2 to 14 days after exposure: fever, cough, shortness of breath, pneumonia in both lungs. This is not an all-inclusive list - if you are experiencing symptoms that are severe or concerning, talk to your medical provider."
     },
     {
-        "Question": "What are the complications of COVID-19? ",
-        "Answer": "nan"
-    },
-    {
-        "Question": "What is the treatment for COVID-19?",
-        "Answer": "Most people with mild coronavirus illness will recover on their own. If you are concerned about your symptoms, you should self-monitor and consult your health care provider."
-    },
-    {
-        "Question": "What are the symptoms of COVID-19?",
-        "Answer": "These are the symptoms that can appear 2 to 14 days after exposure: fever, cough, shortness of breath, pneumonia in both lungs. This is not an all-inclusive list - if you are experiencing symptoms that are severe or concerning, talk to your medical provider."
-    },
-    {
-        "Question": "What is COVID-19? ",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold. These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
-    },
-    {
-        "Question": "What caused COVID-19? ",
-        "Answer": "Their symptoms are severe acute respiratory illness which includes fever, cough, and shortness of breath. The virus does not pass easily person-to-person unless there is close contact, which includes providing unprotected care to a patient."
-    },
-    {
-        "Question": "just returned from trip?",
-        "Answer": "Self-isolate means: stay home and keep your distance from others do not have visitors, especially older adults, or those with medical conditions who are at a higher risk of developing serious illness Monitor your health for fever, cough or difficulty breathing. If you develop a fever, cough or difficulty breathing within 14 days: Continue to isolate yourself from others Immediately call a health care professional or public health authority and: describe your symptoms and travel history follow their instructions carefully"
-    },
-    {
-        "Question": "Should I wear a face mask?",
+        "Question": "wear face mask?",
         "Answer": "You should only wear a face mask if a healthcare professional recommends it. Generally, those who have COVID-19 and are showing symptoms should wear face-masks to prevent others from the risk of getting infected  Please do not stock significantly on face masks as they are also crucial for health workers and those who are taking care of people infected with COVID-19."
     },
     {
-        "Question": "If I'm high risk, what should I do?",
+        "Question": "high risk what should I do?",
         "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often. If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."
     },
     {
@@ -2028,10 +1976,6 @@ COVID19_QUES = [
         "Answer": "If you have developed symptoms like fever, cough, and/or difficulty breathing, and you have been in close contact with a person known to have COVID-19, or they have recently travelled to an area with ongoing spread of COVID-19, yes. If your symptoms are severe - like you are having persistent pain/pressure in chest, new confusion or inability to arouse, or bluish lips or face, contact healthcare provider or go to the emergency room - it is important to seek care immediately."
     },
     {
-        "Question": "If I'm high risk, what should I do?",
-        "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often. If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."
-    },
-    {
         "Question": "advice minimize risk during grocery shopping trips getting takeout.",
         "Answer": "For that reason, it is critical to wash your hands often, including utensils. The CDC recommends that if you are sick, stay home until you are better and no longer pose a risk of infecting others."
     },
@@ -2040,7 +1984,7 @@ COVID19_QUES = [
         "Answer": "Wash your hands with soap and water for at least 20 seconds, especially after blowing your nose, coughing, sneezing, using the restroom, and before eating or preparing food. Please also clean and disinfect frequently touched surfaces (e.g. tables, countertops, light switches, door knobs, cabinet handles)."
     },
     {
-        "Question": "pregnant risk COVID-19 coronavirus?",
+        "Question": "pregnant risk getting COVID-19 coronavirus?",
         "Answer": "It does not look like pregnant women are more at risk of developing severe illness than other healthy adults from coronavirus. Currently, it is expected that most pregnant women will likely experience only mild to moderate cold and flu - like symptoms."
     },
     {
@@ -2052,15 +1996,15 @@ COVID19_QUES = [
         "Answer": "If you have developed symptoms like fever, cough, and/or difficulty breathing, and you have been in close contact with a person known to have COVID-19, or they have recently travelled to an area with ongoing spread of COVID-19, yes. If your symptoms are severe - like you are having persistent pain/pressure in chest, new confusion or inability to arouse, or bluish lips or face, contact healthcare provider or go to the emergency room - it is important to seek care immediately."
     },
     {
-        "Question": "Can we use fabric masks to prevent the spread?",
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
     },
     {
-        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
     },
     {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
         "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
     },
     {
@@ -2068,7 +2012,31 @@ COVID19_QUES = [
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
     },
     {
-        "Question": "Can we use fabric masks to prevent the spread?",
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
+    { #e
+        "Question": "COVID-19 coronavirus contagious? someone spread to others?",
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
+    },
+    {
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
+    {
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
     },
     {
@@ -2080,43 +2048,15 @@ COVID19_QUES = [
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
     },
     {
-        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
-        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
-    },
-    {
-        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
     },
     {
-        "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
-    },
-    {
-        "Question": "Can we use fabric masks to prevent the spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
-    },
-    {
-        "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
-    },
-    {
-        "Question": "How does COVID-19 spread?",
-        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
-    },
-    {
-        "Question": "Can COVID-19 be spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
-    },
-    {
-        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Question": "COVID-19 coronavirus contagious? someone spread to others?",
         "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
     },
     {
-        "Question": "Can we use fabric masks to prevent the spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
-    },
-    {
-        "Question": "Can we use fabric masks to prevent the spread?",
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
     },
     {
@@ -2124,11 +2064,11 @@ COVID19_QUES = [
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
     },
     {
-        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
     },
     {
-        "Question": "Should I use soap and water or a hand sanitizer to protect against COVID-19?",
+        "Question": "use soap water hand sanitizer protect against COVID-19?",
         "Answer": "Hand washing with soap and water for at least 20 seconds is the best way to protect yourself and your family from getting sick!This is important to do regularly - everytime you wash your hands - but especially after blowing your nose, coughing, sneezing, going to the restroom, and before eating or preparing food?"
     },
     {
@@ -2140,7 +2080,7 @@ COVID19_QUES = [
         "Answer": "There is currently no evidence to suggest that food is a likely source or route of transmission of the virus.Scientists and food safety authorities across the world are closely monitoring the spread of COVID-19."
     },
     {
-        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
     },
     {
@@ -2160,7 +2100,7 @@ COVID19_QUES = [
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
     },
     {
-        "Question": "Can we use fabric masks to prevent the spread?",
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
     },
     {
@@ -2168,11 +2108,11 @@ COVID19_QUES = [
         "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
     },
     {
-        "Question": "Can COVID-19 be spread through surface-touching?",
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
     },
     {
-        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Question": "COVID-19 coronavirus contagious? someone spread to others?",
         "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
     },
     {
@@ -2180,7 +2120,7 @@ COVID19_QUES = [
         "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
     },
     {
-        "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
+        "Question": "COVID-19 coronavirus contagious? someone spread to others?",
         "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
     },
     {
@@ -2192,19 +2132,19 @@ COVID19_QUES = [
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
     },
     {
-        "Question": "Can we use fabric masks to prevent the spread?",
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
         "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "How can people help stop stigma related to COVID-19?",
+        "Question": "How help stop COVID-19 coronavirus related stigma?",
         "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."
     },
     {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
         "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
     },
     {
@@ -2216,7 +2156,7 @@ COVID19_QUES = [
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
     },
     {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
         "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
     },
     {
@@ -2224,11 +2164,11 @@ COVID19_QUES = [
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "How can people help stop stigma related to COVID-19?",
+        "Question": "How help stop COVID-19 coronavirus related stigma?",
         "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."
     },
     {
@@ -2236,11 +2176,11 @@ COVID19_QUES = [
         "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
         "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
@@ -2256,7 +2196,7 @@ COVID19_QUES = [
         "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
@@ -2272,7 +2212,7 @@ COVID19_QUES = [
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
     },
     {
-        "Question": "I am high risk, what should I do?",
+        "Question": "I am high risk what should I do?",
         "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often.If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."
     },
     {
@@ -2280,11 +2220,11 @@ COVID19_QUES = [
         "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
@@ -2292,7 +2232,7 @@ COVID19_QUES = [
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
     },
     {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
         "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
     },
     {
@@ -2304,7 +2244,7 @@ COVID19_QUES = [
         "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
@@ -2340,7 +2280,7 @@ COVID19_QUES = [
         "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {
@@ -2352,7 +2292,7 @@ COVID19_QUES = [
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
     },
     {
-        "Question": "What is a coronavirus?",
+        "Question": "What is COVID-19 coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
     {"Question": "viruses COVID-19 coronavirus weaken over time?",
