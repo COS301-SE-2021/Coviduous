@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:beacon_broadcast/beacon_broadcast.dart';
 import 'package:nearby_connections/nearby_connections.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
@@ -21,6 +23,51 @@ class _UserScanBluetoothState extends State<UserScanBluetooth> {
   int numberOfEmployees = 0;
   bool isLoading = false;
   final Strategy strategy = Strategy.P2P_STAR;
+  BeaconBroadcast beaconBroadcast = BeaconBroadcast();
+
+  advertise() async {
+    beaconBroadcast.stop();
+    BeaconStatus transmissionSupportStatus = await beaconBroadcast.checkTransmissionSupported();
+    switch (transmissionSupportStatus) {
+      case BeaconStatus.supported: {
+        var uuid = Uuid();
+        beaconBroadcast
+            .setUUID(uuid.v4())
+            .setMajorId(1)
+            .setMinorId(100)
+            .start();
+        beaconBroadcast.getAdvertisingStateChange().listen((isAdvertising) {
+          if (isAdvertising) {
+            print("Device is advertising a beacon");
+          } else {
+            print("Device is not advertising a beacon");
+          }
+        });
+      }
+      break;
+
+      case BeaconStatus.notSupportedMinSdk: {
+        print('Android system version is too low (minimum is 21)');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Your Android system version is too low (minimum is 21).')));
+      }
+      break;
+
+      case BeaconStatus.notSupportedBle: {
+        print('Device does not support BLE');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Your device does not support BLE.')));
+      }
+      break;
+
+      case BeaconStatus.notSupportedCannotGetAdvertiser: {
+        print('Device chipset or driver is incompatible');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Your chipset or driver is incompatible.')));
+      }
+      break;
+    }
+  }
 
   Future<bool> discover() async {
     try {
@@ -53,6 +100,15 @@ class _UserScanBluetoothState extends State<UserScanBluetooth> {
   void initState() {
     super.initState();
     getPermissions();
+    healthHelpers.getBluetoothEmails(globals.loggedInUserId);
+  }
+
+  @override
+  void dispose() {
+    beaconBroadcast.stop();
+    Nearby().stopAdvertising();
+    Nearby().stopDiscovery();
+    super.dispose();
   }
 
   @override
@@ -219,17 +275,13 @@ class _UserScanBluetoothState extends State<UserScanBluetooth> {
                               print(e);
                             }
 
+                            advertise();
+
                             discover().then((result) {
-                              if (result == true) {
-                                healthHelpers.getBluetoothEmails(globals.loggedInUserId).then((result) {
-                                  setState(() {
-                                    isLoading = false;
-                                  });
-                                });
-                              } else {
-                                setState(() {
-                                  isLoading = false;
-                                });
+                              setState(() {
+                                isLoading = false;
+                              });
+                              if (result == false) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text('No other nearby devices found.')));
                               }
