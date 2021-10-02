@@ -131,7 +131,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                               if (result == true) {
                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                     SnackBar(content: Text("Desk successfully booked")));
-                                                if (!globals.getIfOnPC() && globals.getOSWeb() != "Web") { //Google Calendar integration only available on mobile app
+                                                if (!globals.getIfOnPC()) { //Google Calendar integration only available on mobile app
                                                   showDialog(
                                                       context: context,
                                                       builder: (ctx) => AlertDialog(
