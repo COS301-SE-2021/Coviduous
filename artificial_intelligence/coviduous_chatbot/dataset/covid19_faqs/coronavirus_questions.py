@@ -2710,8 +2710,8 @@ COVID19_QUES = [
     {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {"Question": "What is a coronavirus?", "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "symptoms COVID-19 coronavirus?",
+    { 
+        "Question": "what are symptoms COVID-19 coronavirus?",
         "Answer": "The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion, runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually. Some people become infected but don’t develop any symptoms and don't feel unwell. Most people (about 80%) recover from the disease without needing special treatment. Around 1 out of every 6 people who gets COVID-19 becomes seriously ill and develops difficulty breathing. Older people, and those with underlying medical problems like high blood pressure, heart problems or diabetes, are more likely to develop serious illness. People with fever, cough and difficulty breathing should seek medical attention."
     }, 
     {
@@ -2727,7 +2727,7 @@ COVID19_QUES = [
         "Answer": "The symptoms of COVID-19 include cough, sore throat, shortness of breath or fever.  However, these are also symptoms of the flu. The National Institute of Communicable Diseases (NICD) recommends that you should only get tested if you display symptoms plus: Been in contact with a confirmed COVID-19 person Travelled to a high risk country Worked in or been to a healthcare facility treating people with Covid-19,Have a severe case of pneumonia with an unknown cause. However, one should consult your medical practitioner immediately if you display symptoms."
     },
     {
-        "Question": "Where should I go if I want to test for COVID-19 coronavirus?",
+        "Question": "Where should I go test for COVID-19 coronavirus?",
         "Answer": "If you think you might have contracted the virus, you can call the NICD helpline (0800 029 999) and you will be advised on possible testing facilities. However, testing is not routinely done unless testing is indicated by a health professional therefore one would need to be assessed by your medical practitioner in order to qualify for testing."
     },
     {
@@ -2735,7 +2735,7 @@ COVID19_QUES = [
         "Answer": "Please keep in contact with your health care provider telephonically to monitor your progress. Your healthcare provider will assess you in terms of your current coronavirus illness and your other risk factors for more severe illness (i.e. older age, serious underlying medical conditions such as diabetes mellitus, heart disease, lung disease and immunosuppression, etc.).If you were asked to isolate at home, your healthcare provider has assessed that you have a mild illness that can be managed at home, you have no/few risk factors for severe illness and your home environment is suitable for isolation. However, some people with coronavirus disease may worsen at home and need admission to hospital. It is very important that you carefully monitor your symptoms throughout your illness and look out for emergency warning signs.Emergency warning signs include: trouble breathing, chest pain or pressure in your chest that does not go away, coughing up blood, becoming confused, severe sleepiness, blue lips or face.  If you have any warning signs, you or a member of your household should call your nearest hospital or emergency services immediately and notify them that you have confirmed coronavirus disease."
     },
     {
-        "Question": "COVID-19 coronavirus test cost?",
+        "Question": "what is how much cost COVID-19 coronavirus test?",
         "Answer": "Public sector testing is free of charge. Private laboratories such as Lancet, Ampath and Pathcare can also test for SARS-CoV-2. Enquiry should be with the respective laboratory for their costing of the test. If going via a private lab, it is advisable to check with your medical aid to ascertain if they will cover the costs for the test."
     },
     {
@@ -2847,7 +2847,7 @@ COVID19_QUES = [
         "Answer": "The World Health Organisation has made it clear that viruses cannot travel on radio waves/mobile networks. It is also a fact that COVID-19 is spreading in many countries that do not have 5G mobile networks.COVID-19 is spread through respiratory droplets when an infected person coughs, sneezes or speaks. People can also be infected by touching a contaminated surface and then their eyes, mouth or nose."
     },
     {
-        "Question": "The Vaccines have the mark of the Beast – 666. Vaccines are from the devil and are satanic",
+        "Question": "COVID-19 coronavirus vaccines mark of Beast 666 from the devil satanic",
         "Answer": "Vaccines are made to save lives and are made by technology. They have no connection with any religious organisations and cannot be infused with spirits, demons or other abstract ingredients. There is no conspiracy to possess, bewitch or control anybody."
     },
     {
