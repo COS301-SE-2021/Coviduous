@@ -583,6 +583,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.0"
+  nearby_connections:
+    dependency: "direct main"
+    description:
+      name: nearby_connections
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   nested:
     dependency: transitive
     description:

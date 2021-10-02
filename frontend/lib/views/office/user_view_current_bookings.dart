@@ -227,7 +227,10 @@ class _UserViewCurrentBookingsState extends State<UserViewCurrentBookings> {
                                                       TextButton(
                                                         child: Text('Yes'),
                                                         onPressed: (){
-                                                          officeHelpers.cancelBooking(globals.currentBookings[index].getBookingNumber()).then((result) {
+                                                          officeHelpers.cancelBooking(
+                                                            globals.currentBookings[index].getBookingNumber(),
+                                                            globals.currentBookings[index].getRoomNumber(),
+                                                          ).then((result) {
                                                             if (result == true) {
                                                               ScaffoldMessenger.of(context).showSnackBar(
                                                                   SnackBar(content: Text("Booking successfully cancelled.")));

@@ -120,13 +120,18 @@ Future<bool> addBookingToCalendar() async {
   }
 }
 
-Future<bool> deleteBooking(String bookingNumber) async {
+Future<bool> deleteBooking(String bookingNumber, String roomNumber) async {
   String path = 'office/api/office/';
   String url = server + path;
   var request;
 
   request = http.Request('DELETE', Uri.parse(url));
-  request.body = json.encode({"bookingNumber": bookingNumber});
+  request.body = json.encode(
+      {
+        "bookingNumber": bookingNumber,
+        "roomNumber": roomNumber,
+      }
+  );
   request.headers.addAll(globals.getRequestHeaders());
 
   var response = await request.send();

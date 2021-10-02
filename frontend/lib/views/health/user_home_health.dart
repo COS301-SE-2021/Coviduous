@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/health/user_health_check.dart';
 import 'package:frontend/views/health/user_report_infection.dart';
+import 'package:frontend/views/health/user_scan_bluetooth.dart';
 import 'package:frontend/views/health/user_view_guidelines.dart';
 import 'package:frontend/views/health/user_view_permissions.dart';
 import 'package:frontend/views/health/user_upload_test_results.dart';
@@ -89,6 +90,47 @@ class _UserHealthState extends State<UserHealth> {
                             ),
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(UserHealthCheck.routeName);
+                            }
+                        ),
+                        SizedBox (
+                          height: MediaQuery.of(context).size.height/48,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        ElevatedButton (
+                            style: ElevatedButton.styleFrom (
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Row (
+                                children: <Widget>[
+                                  Expanded(child: Text('Scan for nearby devices')),
+                                  Icon(Icons.search)
+                                ],
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween, //Align text and icon on opposite sides
+                                crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
+                            ),
+                            onPressed: () {
+                              if (!globals.getIfOnPC() && globals.getOSWeb() != "Web") {
+                                globals.currentBluetoothEmails = null;
+                                Navigator.of(context).pushReplacementNamed(UserScanBluetooth.routeName);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Unavailable on web'),
+                                      content: Text('This functionality is only available on the mobile app.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Okay'),
+                                          onPressed: (){
+                                            Navigator.of(ctx).pop();
+                                          },
+                                        )
+                                      ],
+                                    )
+                                );
+                              }
                             }
                         ),
                         SizedBox (

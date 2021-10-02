@@ -536,7 +536,7 @@ COVID19_QUES = [
         "Answer": "Staff who are feeling unwell should not report to work and should seek medical advice. However, in the event that a food worker becomes unwell in the workplace with typical symptoms of COVID-19, they should be removed to an area away from other people. If possible, find a room or area where they can be isolated behind a closed door, such as a staff office. If it is possible to open a window, do so for ventilation. Arrangements should be made for the unwell employee to be removed quickly from the food premise."
     },
     {
-        "Question": "employee return to work after COVID-19coronavirus illness? temperature checks appropriate?",
+        "Question": "employee return to work after COVID-19 coronavirus illness? temperature checks appropriate?",
         "Answer": "A return to work policy for staff who have been infected and recovered from COVID-19 should be in place. WHO recommends that a confirmed patient could be released from isolation once their symptoms resolve and they have two negative PCR tests at least 24 hours apart.  If testing is not possible, WHO recommends that a confirmed patient can be released from isolation 14 days after symptoms resolve. "
     },
     {
@@ -816,7 +816,7 @@ COVID19_QUES = [
         "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
     },
     {
-        "Question": "How can I reduce my risk of getting COVID-19?",
+        "Question": "reduce risk getting COVID-19 coronavirus?",
         "Answer": "Avoid touching surfaces, especially in public settings or health facilities, in case people infected with COVID-19 have touched them. Clean surfaces regularly with standard disinfectants. Frequently clean your hands with soap and water, or an alcohol-based hand rub. If you can, carry alcohol-based rub with you and use it often. Cover your coughs and sneezes with a bent elbow or tissue, throwing used tissues into a closed bin right away. Then wash your hands or use an alcohol-based hand rub. Get vaccinated: When it’s your turn, get vaccinated. Follow local guidance and recommendations about vaccination."
     },
     {
@@ -824,15 +824,15 @@ COVID19_QUES = [
         "Answer": "Masks are a key measure to suppress transmission and save lives. Masks should be used as part of a comprehensive ‘Do it all!’ approach including physical distancing, avoiding crowded, closed and close-contact settings, good ventilation, cleaning hands, covering sneezes and coughs, and more. Depending on the type, masks can be used for either protection of healthy persons or to prevent onward transmission."
     },
     {
-        "Question": "When should masks be worn by the general public?",
+        "Question": "When should masks be worn by general public?",
         "Answer": "In areas where the virus is circulating, masks should be worn when you’re in crowded settings, where you can’t be at least 1 metre from others, and in rooms with poor or unknown ventilation. It’s not always easy to determine the quality of ventilation, which depends on the rate of air change, recirculation and outdoor fresh air. So if you have any doubts, it’s safer to simply wear a mask."
     },
     {
-        "Question": "Should I wear a mask while exercising?",
+        "Question": "wear mask exercising?",
         "Answer": "Even when you’re in an area of COVID-19 transmission, masks should not be worn during vigorous physical activity because of the risk of reducing your breathing capacity. No matter how intensely you exercise, keep at least 1 metre away from others, and if you’re indoors, make sure there is adequate ventilation."
     },
     {
-        "Question": "How do I choose what fabric mask to buy, or ideal fit and fabrics if I make my own?",
+        "Question": "choose fabric mask to buy ideal fit fabrics if I make my own?",
         "Answer": "Check for filtration, breathability and fit when choosing a fabric mask. It should be held in place comfortably with little adjustment using elastic bands or ties. There are different mask shapes such as flat-fold or duckbill – find the one that fits closely over your nose, cheeks and chin. When the edges of the mask are not close to the face and shift, such as when speaking, air penetrates through the edges of the mask rather than being filtered through the fabric. Masks with vents or exhalation valves are not advised because they allow unfiltered breath to escape the mask."
     },
     {
@@ -2081,262 +2081,307 @@ COVID19_QUES = [
     },
     {
         "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
-        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
+    },
     {
         "Question": "Can COVID-19 be spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
     {
         "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
     {
         "Question": "Can we use fabric masks to prevent the spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
     {
         "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
     {
         "Question": "How does COVID-19 spread?",
-        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
     {
         "Question": "Can COVID-19 be spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
     {
         "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
-        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
+    },
     {
         "Question": "Can we use fabric masks to prevent the spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
     {
         "Question": "Can we use fabric masks to prevent the spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
     {
         "Question": "How does COVID-19 coronavirus spread?",
-        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
     {
         "Question": "Can COVID-19 be spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
     {
         "Question": "Should I use soap and water or a hand sanitizer to protect against COVID-19?",
-        "Answer": "Hand washing with soap and water for at least 20 seconds is the best way to protect yourself and your family from getting sick!This is important to do regularly - everytime you wash your hands - but especially after blowing your nose, coughing, sneezing, going to the restroom, and before eating or preparing food?"},
+        "Answer": "Hand washing with soap and water for at least 20 seconds is the best way to protect yourself and your family from getting sick!This is important to do regularly - everytime you wash your hands - but especially after blowing your nose, coughing, sneezing, going to the restroom, and before eating or preparing food?"
+    },
     {
         "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
     {
         "Question": "COVID-19 coronavirus transmitted through food?",
-        "Answer": "There is currently no evidence to suggest that food is a likely source or route of transmission of the virus.Scientists and food safety authorities across the world are closely monitoring the spread of COVID-19."},
+        "Answer": "There is currently no evidence to suggest that food is a likely source or route of transmission of the virus.Scientists and food safety authorities across the world are closely monitoring the spread of COVID-19."
+    },
     {
         "Question": "Can COVID-19 be spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
     {
         "Question": "COVID-19 coronavirus spread through food including refrigerated frozen food?",
-        "Answer": "However, it is important to make sure you wash your hands with soap and water for at least 20 seconds to practice general food safety.Please also continue to wash your hands after blowing your nose, coughing or sneezing, or going to the bathroom."},
+        "Answer": "However, it is important to make sure you wash your hands with soap and water for at least 20 seconds to practice general food safety.Please also continue to wash your hands after blowing your nose, coughing or sneezing, or going to the bathroom."
+    },
     {
         "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
     {
         "Question": "packages arriving from another country am I at risk?",
-        "Answer": "We are basing some of our understanding of how COVID-19 behaves on how previous coronaviruses (e.g. MERS-CoV and SARS-CoV behaves).Because of their poor survivability on surfaces, it is likely very low risk of spread from those products - and there is no evidence to support transmission of COVID-19 through imported goods."},
+        "Answer": "We are basing some of our understanding of how COVID-19 behaves on how previous coronaviruses (e.g. MERS-CoV and SARS-CoV behaves).Because of their poor survivability on surfaces, it is likely very low risk of spread from those products - and there is no evidence to support transmission of COVID-19 through imported goods."
+    },
     {
         "Question": "How does COVID-19 spread?",
-        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
     {
         "Question": "Can we use fabric masks to prevent the spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
     {
         "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
     {
         "Question": "Can COVID-19 be spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
     {
         "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
-        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
+    },
     {
         "Question": "COVID-19 coronavirus spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
     {
         "Question": "Is COVID-19 contagious? Can someone who has it spread it to others?",
-        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
+    },
     {
         "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
     {
         "Question": "How does COVID-19 spread?",
-        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
     {
         "Question": "Can we use fabric masks to prevent the spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
     {
         "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
     {
         "Question": "How can people help stop stigma related to COVID-19?",
-        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
-    {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
-        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
-    {
-        "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
-        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
-    {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {
-        "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "How can people help stop stigma related to COVID-19?",
-        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
-    {
-        "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
-        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
-    {
-        "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {
-        "Question": "help stop COVID-19 coronavirus related stigma?",
-        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
-    {
-        "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {
-        "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "nan",
-        "Answer": "nan"
-    },
-    {
-        "Question": "What temperature will kill COVID-19? ",
-        "Answer": "nan"
-    },
-    {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {
-        "Question": "I am high risk, what should I do?",
-        "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often.If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."},
-    {
-        "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {
-        "Question": "nan",
-        "Answer": "nan"
+        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."
     },
     {
         "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
-        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
-    {
-        "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "How long COVID-19 coronavirus live on surfaces like packages plastic? should we be worried?",
-        "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
-    {
-        "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
-        "Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {
-        "Question": "Is COVID-19 coronavirus contagious? Can someone spread to others?",
-        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
-    {
-        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
-        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
-    {
-        "Question": "COVID-19 coronavirus spread through surface-touching?",
-        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."},
-    {
-        "Question": "What is community spread?",
-        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."},
-    {
-        "Question": "How does COVID-19 spread?",
-        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
-    {
-        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
-        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
-    {
-        "Question": "nan",
-        "Answer": "nan"
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
     },
     {
-        "Question": "What is a coronavirus?",
-        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {
         "Question": "What is novel (new) coronavirus?",
-        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
     {
-        "Question": "viruses weaker over time? COVID-19 coronavirus weaken over time?",
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
+    },
+    {
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
         "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
     },
     {
         "Question": "What is a coronavirus?",
         "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
     },
-    {"Question": "nan", "Answer": "nan"},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+    {
+        "Question": "How can people help stop stigma related to COVID-19?",
+        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."
+    },
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "help stop COVID-19 coronavirus related stigma?",
+        "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "I am high risk, what should I do?",
+        "Answer": "Stock up on supplies, take everyday precautions to keep space and distance between yourself and others, avoid people who are sick, avoid crowds, and wash your hands often.If there is an outbreak in your community, stay at home as much as possible and watch for symptoms and emergency signs."
+    },
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "Will warm weather / summer / heat stop outbreak of COVID-19?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
+    },
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "How long COVID-19 coronavirus live on surfaces like packages plastic? should we be worried?",
+        "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "Is COVID-19 coronavirus contagious? Can someone spread to others?",
+        "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."
+    },
+    {
+        "Question": "use fabric masks prevent COVID-19 coronavirus spread?",
+        "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."
+    },
+    {
+        "Question": "COVID-19 coronavirus spread through surface-touching?",
+        "Answer": "It can be possible, as people can touch a surface that has the virus on it and then touch their mouth, nose, or eyes... but the current understanding of how COVID-19 spreads is through respiratory droplets."
+    },
+    {
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected."
+    },
+    {
+        "Question": "How does COVID-19 spread?",
+        "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."
+    },
+    {
+        "Question": "warm weather summer heat stop COVID-19 coronavirus outbreak?",
+        "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "What is novel (new) coronavirus?",
+        "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {
+        "Question": "viruses COVID-19 coronavirus weaken over time?",
+        "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."
+    },
+    {
+        "Question": "What is a coronavirus?",
+        "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."
+    },
+    {"Question": "viruses COVID-19 coronavirus weaken over time?",
      "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "What is novel (new) coronavirus?",
      "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "nan", "Answer": "nan"},
     {"Question": "What is a coronavirus?",
      "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
-     "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {"Question": "What is novel (new) coronavirus?",
-     "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "NaN", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"},
-    {"Question": "nan", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"}, {"Question": "nan", "Answer": "nan"},
-    {"Question": "What is a coronavirus?",
-     "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+    {"Question": "viruses COVID-19 coronavirus weaken over time?",
      "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "What is novel (new) coronavirus?",
      "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {"Question": "What is a coronavirus?",
      "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "viruses COVID-19 coronavirus weaken over time?",
+     "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "What is novel (new) coronavirus?",
      "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?",
+    {"Question": "What is a coronavirus?",
+     "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "What is novel (new) coronavirus?",
+     "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
+    {"Question": "viruses COVID-19 coronavirus weaken over time?",
      "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
-    {"Question": "NaN", "Answer": "nan"},
     {
         "Question": "How does COVID-19 spread?",
         "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces     such as door nobs, elevator buttons and     bathroom faucets.Socially distancing is a practice that aims to     prevent those who are sick from coming into contact with those who are healthy."
     },
-    {
-        "Question": "How long should we self quarantine before moving into our elderly parents house? (Where we will continue to self quarantine)",              "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these    fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
+    {"Question": "How long should we self quarantine before moving into our elderly parents house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these    fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
@@ -2351,10 +2396,9 @@ COVID19_QUES = [
     {"Question": "How can I protect my child from COVID-19?", "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."},
     {"Question": "Where did COVID-19 come from?", "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
-    {"Question": "Won't COVID-19 just go away over time? Why are we freaking out over it? ", "Answer": "nan"},
     {"Question": "How can I protect my child from COVID-19?", "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."},
     {"Question": "Where did COVID-19 come from?", "Answer": "It was first found in Wuhan City, Hubei Province, China.The first cases are linked to a live animal market but now COVID-19 is able to spread person-to-person."},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "viruses COVID-19 coronavirus weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How can I protect my child from COVID-19?", "Answer": "Washing hands with soap and water for at least 20 seconds, avoiding people who are sick, cleaning and disinfecting high touch surfaces in household common areas (e.g. tables, chairs, doorknobs, etc.), and laundering items like plush toys."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
@@ -2364,7 +2408,6 @@ COVID19_QUES = [
     {"Question": "There have been a lot of mixed messages about kids being 'immune' or 'unlikely' to be affected. Can you provide some clarity around what this looks like for small children?", "Answer": "Some kids and infants have been sick with COVID-19, but it is still adults who make up most of the cases we are seeing today.This includes cleaning hands often with soap water, or an alcohol based hand sanitizer, avoiding people who ar sick, and cleaning/disinfecting high-touch surfaces regularly."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
-    {"Question": "It only has around a 1% mortality rate - that doesn't seem too bad? ", "Answer": "nan"},
     {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
@@ -2379,7 +2422,6 @@ COVID19_QUES = [
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
     {"Question": "Are you at risk for contracting COVID-19 if you receive a package or products shipped from other countries?", "Answer": "Coronaviruses generally do not survive on surfaces after being contaminated.The risk of spread from products shipped over a period of days or weeks at room temperature is very low."},
-    {"Question": "What temperature will kill COVID-19? ", "Answer": "nan"},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
     {"Question": "How long should we self quarantine before moving into our elderly parents house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
     {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
@@ -2455,12 +2497,10 @@ COVID19_QUES = [
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How do I prepare my child for a COVID-19 outbreak?", "Answer": "It is important to talk with your child about what's going on.Talk to them about the outbreak, stay calm, and reassure them that they are safe."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
-    {"Question": "Should I go to work if there is an outbreak in my community?", "Answer": "nan"},
     {"Question": "Will warm weather / summer / heat stop outbreak of COVID-19?", "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
     {"Question": "What should I do if there is an outbreak in my community?", "Answer": "Please continue to practice handwashing, cover your coughs and sneezes with tissue, and frequently clean high-touch surfaces with regular household detergent and water.If you yourself live alone and have a chronic health condition, please reach out to friends, family, loved ones, and healthcare providers."},
     {"Question": "How do I prepare my child for a COVID-19 outbreak?", "Answer": "It is important to talk with your child about what's going on.Talk to them about the outbreak, stay calm, and reassure them that they are safe."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
-    {"Question": "Should I go to work if there is an outbreak in my community?", "Answer": "nan"},
     {"Question": "How do I prepare my child for a COVID-19 outbreak?", "Answer": "It is important to talk with your child about what's going on.Talk to them about the outbreak, stay calm, and reassure them that they are safe."},
     {"Question": "What should I do if there is an outbreak in my community?", "Answer": "Please continue to practice hand washing, cover your coughs and sneezes with tissue, and frequently clean high-touch surfaces with regular household detergent and water.If you yourself live alone and have a chronic health condition, please reach out to friends, family, loved ones, and healthcare providers."},
     {"Question": "Will warm weather / summer / heat stop outbreak of COVID-19?", "Answer": "Some viruses, like the common cold or flu, spread more during the cold weather months but people still become sick in warmer months with them.There is still a lot to learn about how weather and temperature impact spread of COVID-19."},
@@ -2505,17 +2545,14 @@ COVID19_QUES = [
     {"Question": "How long should we self quarantine before moving into our elderly parents\u2019 house? (Where we will continue to self quarantine)", "Answer": "You should quarantine yourself for at least 14 days, as it takes between 1-14 days for the COVID19 symptoms to develop.Once these fourteen days have passed, you would no longer be considered to be a risk and spread the virus further."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
-    {"Question": "Won't COVID-19 just go away over time? Why are we freaking out over it? ", "Answer": "nan"},
     {"Question": "I have read that CV is able to be contracted through the air, how far can it go in the air?", "Answer": "It isn't airborne in the same way measles is, but it does linger in the air for some amount of time.However, we are still not sure how long it is in the air for, when the virus particles will rest on the ground or surrounding surfaces, and how it helps transmit to other people."},
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "viruses COVID-19 coronavirus weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "Why do I have to stay at home?", "Answer": "Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy.As COVID-19 spreads person-to-person in close contact, we want to reduce the chance of infection amongst populations that are vulnerable."},
-    {"Question": "Won't COVID-19 just go away over time? Why are we freaking out over it? ", "Answer": "nan"},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "viruses COVID-19 coronavirus weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "How long does the virus live on surfaces, like packages, plastic, etc? Should we be worried about that? ", "Answer": "A recent study shows that the virus can live in the air and on surfaces from several hours to several days.However, the amount of virus that remains is quite minimal - so the risk is still relatively low to contract COVID19 from these surfaces."},
     {"Question": "What is social distancing and how does it help to minimize COVID-19?", "Answer": "Social distancing is one of the most effective ways to reduce the spread of illness during an outbreak, but it is sometimes hard to understand what this means given the vague language.This does mean making changes to your everyday routine to minimize contacts with others, including:   avoiding non-essential gatherings avoiding common greetings, such as handshakes avoiding crowded places such as concerts, arenas, conferences and festivals limiting contact with people at higher risk like older adults and those in poor health keeping a distance of at least 2 arms-length (approximately 6 feet) from others  For example - if you need to go grocery shopping, limit to once a week."},
@@ -2567,10 +2604,8 @@ COVID19_QUES = [
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
@@ -2589,10 +2624,8 @@ COVID19_QUES = [
     {"Question": "Why might someone blame or avoid individuals and groups because of COVID-19?", "Answer": "There has been a rise in stigma and hate crimes against Chinese and other Asian Americans, as well as people who were in quarantine.Stigma hurts everyone as it creates more fear and anger towards ordinary people, instead of the disease that is causing the problem, or towards systems that are not supporting people in accessing screening and treatment."},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
     {"Question": "How do I prepare my child for a COVID-19 outbreak?", "Answer": "It is important to talk with your child about what's going on.Talk to them about the outbreak, stay calm, and reassure them that they are safe."},
-    {"Question": "How can I and my family prepare for COVID-19?", "Answer": "nan"},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "Are there any natural health products that can treat or prevent COVID-19?", "Answer": "At this time, there are no natural health products that are authorized to treat or protect against COVID-19."},
@@ -2632,14 +2665,11 @@ COVID19_QUES = [
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "How long do people have to isolate for?", "Answer": "It depends, and is often decided on a case-by-case basis.The CDC guidance currently says it is okay to release someone from isolation if they have met the following requirements:  * The individual has no more fever without use of fever-reducing medications  * The individual no longer showing symptoms like the cough * The individual has tested negative on at least two tests that have been collected at least 24 hours apart"},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
@@ -2653,7 +2683,6 @@ COVID19_QUES = [
     {"Question": "How can I protect myself and others?", "Answer": "The best way to prevent illness from COVID-19 is to avoid being exposed to the virus and use good hand hygiene.Wash your hands often with soap and water for at least 20 seconds, especially after going to the bathroom, before eating and after blowing your nose, coughing or sneezing."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "How many Covid19 cases are there?", "Answer": "This interactive map by the Johns Hopkins University provides updated information by country about the number of confirmed Covid19 cases and deaths: https://coronavirus.jhu.edu/map.html."},
-    {"Question": "How can I prepare for COVID-19 at work?", "Answer": "nan"},
     {"Question": "Is COVID-19 contagious? Can someone who has it spread it to others?", "Answer": "It is actively spreading person to person.The CDC recommends that those who have COVID-19 are isolated either at a hospital or at home, depending on how sick they are, until they are no longer at risk of infecting others."},
     {"Question": "How does COVID-19 spread?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door nobs, elevator buttons and bathroom faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "Can we use fabric masks to prevent the spread?", "Answer": "What masks can be useful in for the general public is reducing the amount of times a person touches their face, which means less opportunity for COVID19 to enter their body.There have also been call to actions for individuals to create fabric face masks, which can be reusable, to donate to local healthcare facilities."},
@@ -2674,12 +2703,10 @@ COVID19_QUES = [
     {"Question": "What is SARS-CoV?", "Answer": "It transmits person-to-person, and has influenza-like symptoms, which include fever, malaise, headaches, diarrhea, and shivering.Unlike SARS, in Covid-19, patients become highly infectious before they become seriously ill, explaining at least in part why Covid-19 acts like a super-SARS."},
     {"Question": "What are respiratory droplets?", "Answer": "Respiratory droplets may also be passed from person-to-person through commonly used surfaces such as door knobs, elevator buttons and faucets.Socially distancing is a practice that aims to prevent those who are sick from coming into contact with those who are healthy."},
     {"Question": "What is a coronavirus?", "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "viruses COVID-19 coronavirus weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "What is a coronavirus?", "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
-    {"Question": "NaN", "Answer": "nan"},
-    {"Question": "NaN", "Answer": "nan"},
-    {"Question": "Do viruses get weaker over time? Will coronavirus / COVID19 weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
+    {"Question": "viruses COVID-19 coronavirus weaken over time?", "Answer": "They can, but it is not guaranteed; it depends on how the virus mutates over time."},
     {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {"Question": "What is a coronavirus?", "Answer": "Coronavirus are a type of virus - there are many kinds, and some of them can cause disease.Examples of coronaviruses include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrome (MERS-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
     {"Question": "What is novel (new) coronavirus?", "Answer": "COVID-19 is a new coronavirus that we have not seen previously; it is not the same as the flu or common cold.These include the common cold, flu, to more severe diseases like Middle East Respiratory Syndrom (MERs-CoV) and Severe Acute Respiratory Syndrome (SARS-CoV)."},
