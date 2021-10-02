@@ -111,7 +111,7 @@ class _UserHealthState extends State<UserHealth> {
                                 crossAxisAlignment: CrossAxisAlignment.center //Center row contents vertically
                             ),
                             onPressed: () {
-                              if (!globals.getIfOnPC() && globals.getOSWeb() != "Web") {
+                              if (!globals.getIfOnPC()) {
                                 globals.currentBluetoothEmails = null;
                                 Navigator.of(context).pushReplacementNamed(UserScanBluetooth.routeName);
                               } else {
