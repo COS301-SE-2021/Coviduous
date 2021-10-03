@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/views/admin_homepage.dart';
 import 'package:frontend/views/health/covid_statistics.dart';
 import 'package:frontend/views/health/covid_testing_facilities.dart';
+import 'package:frontend/views/health/covid_vaccine_facilities.dart';
 import 'package:frontend/views/login_screen.dart';
 import 'package:frontend/views/user_homepage.dart';
 
@@ -306,6 +307,7 @@ class _CovidInformationCenterState extends State<CovidInformationCenter> {
                                           globals.selectedCenterType = _selectedCenterType;
                                           globals.selectedLat = globals.getLat(_selectedProvince);
                                           globals.selectedLong = globals.getLong(_selectedProvince);
+                                          Navigator.of(context).pushReplacementNamed(CovidVaccineFacilities.routeName);
                                         },
                                       ),
                                       TextButton(

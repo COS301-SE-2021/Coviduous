@@ -35,6 +35,7 @@ import 'package:frontend/views/health/admin_contact_trace_shifts.dart';
 import 'package:frontend/views/health/covid_info_center.dart';
 import 'package:frontend/views/health/covid_statistics.dart';
 import 'package:frontend/views/health/covid_testing_facilities.dart';
+import 'package:frontend/views/health/covid_vaccine_facilities.dart';
 import 'package:frontend/views/health/user_home_health.dart';
 import 'package:frontend/views/health/user_health_check.dart';
 import 'package:frontend/views/health/user_view_permissions.dart';
@@ -211,6 +212,7 @@ class MyApp extends StatelessWidget{
         CovidInformationCenter.routeName: (ctx)=> CovidInformationCenter(),
         CovidStatistics.routeName: (ctx)=> CovidStatistics(),
         CovidTestingFacilities.routeName: (ctx)=> CovidTestingFacilities(),
+        CovidVaccineFacilities.routeName: (ctx)=> CovidVaccineFacilities(),
         UserHealth.routeName: (ctx)=> UserHealth(),
         UserHealthCheck.routeName: (ctx)=> UserHealthCheck(),
         UserViewPermissions.routeName: (ctx)=> UserViewPermissions(),
