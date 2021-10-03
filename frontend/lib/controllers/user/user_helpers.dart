@@ -145,3 +145,17 @@ Future<bool> getEmailsForCompany() async {
   });
   return result;
 }
+
+Future<bool> getTokenIds(List<Map<String, String>> emails) async {
+  bool result = false;
+  await Future.wait([
+    userController.getTokenIds(emails)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.selectedTokenIds = results.first;
+      result = true;
+    }
+  });
+  print(globals.selectedTokenIds.length);
+  return result;
+}
