@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import 'package:frontend/views/admin_homepage.dart';
-import 'package:frontend/views/login_screen.dart';
-import 'package:frontend/views/user_homepage.dart';
-import 'package:frontend/views/health/covid_info_center.dart';
-
 import 'package:frontend/models/health/covid_cases_data.dart';
+import 'package:frontend/views/health/covid_info_center.dart';
 import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
 import 'package:frontend/globals.dart' as globals;
 
@@ -93,6 +89,7 @@ class CovidStatisticsState extends State<CovidStatistics> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom (
+                        primary: Color(0xff03305A),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -127,7 +124,7 @@ class CovidStatisticsState extends State<CovidStatistics> {
                           children: [
                             Container(
                               alignment: Alignment.center,
-                              color: globals.firstColor,
+                              color: Color(0xff03305A),
                               width: MediaQuery.of(context).size.width,
                               child: Text(
                                 "Confirmed cases, recovered cases, and deaths since 22 January 2020",
@@ -140,18 +137,6 @@ class CovidStatisticsState extends State<CovidStatistics> {
                             ),
                             SizedBox(
                               height: 5,
-                            ),
-                            Text("Number of current cases: " + numberOfConfirmed.toString(),
-                                style: TextStyle(color: Colors.white)),
-                            Text("Number of recoveries: " + numberOfRecovered.toString(),
-                                style: TextStyle(color: Colors.white)),
-                            Text("Number of deaths: " + numberOfDeaths.toString(),
-                                style: TextStyle(color: Colors.white)),
-                            Text("Total confirmed cases: " + total.toString(),
-                                style: TextStyle(color: Colors.white)),
-                            Divider(
-                              color: globals.lineColor,
-                              thickness: 2,
                             ),
                             SfCartesianChart(
                               key: _covidStatsChartKey,
@@ -167,12 +152,132 @@ class CovidStatisticsState extends State<CovidStatistics> {
                               ),
                               series: <ChartSeries>[
                                 ColumnSeries<Map<String, num>, String>(
-                                  color: globals.thirdColor,
+                                  color: globals.firstColor,
                                   dataSource: covidStatsList,
                                   xValueMapper: (Map<String, num> data, _) => data.keys.first,
                                   yValueMapper: (Map<String, num> data, _) => data.values.first,
                                 ),
                               ],
+                            ),
+                            Divider(
+                              color: globals.lineColor,
+                              thickness: 2,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.fromLTRB(8, 25, 8, 25),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Number of current cases: " + numberOfConfirmed.toString(),
+                                          style: TextStyle(
+                                              color: Color(0xff03305A),
+                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
+                                          )
+                                      ),
+                                      Icon(
+                                        Icons.local_hospital,
+                                        color: Color(0xff03305A),
+                                        size: 35,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.fromLTRB(8, 25, 8, 25),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Number of recoveries: " + numberOfRecovered.toString(),
+                                          style: TextStyle(
+                                              color: Color(0xffCC7A00),
+                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
+                                          )
+                                      ),
+                                      Icon(
+                                        Icons.thumb_up,
+                                        color: Color(0xffCC7A00),
+                                        size: 35,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.fromLTRB(8, 25, 8, 25),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Number of deaths: " + numberOfDeaths.toString(),
+                                          style: TextStyle(
+                                              color: globals.sixthColor,
+                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
+                                          )
+                                      ),
+                                      Icon(
+                                        Icons.sick,
+                                        color: globals.sixthColor,
+                                        size: 35,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Container(
+                                  color: Colors.white,
+                                  padding: EdgeInsets.fromLTRB(8, 25, 8, 25),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Total confirmed cases: " + total.toString(),
+                                          style: TextStyle(
+                                              color: globals.firstColor,
+                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
+                                          )
+                                      ),
+                                      Icon(
+                                        Icons.thermostat_outlined,
+                                        color: globals.firstColor,
+                                        size: 35,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
