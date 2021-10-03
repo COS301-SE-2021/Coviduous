@@ -1960,4 +1960,65 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
       }
     });
 
+
+    //////////////////
+    /**
+ * @swagger
+ * /health/setlist:
+ *   post:
+ *     description: sets list of health facilities of freestate
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+     healthApp.post('/api/health/setlist', async (req, res) => {
+      try {
+        let fieldErrors = [];
+    
+      if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+      }
+        let reqJson;
+          try {
+              reqJson = JSON.parse(req.body);
+          } catch (e) {
+              reqJson = req.body;
+          }
+          if (reqJson.province == null || reqJson.province === '') {
+            fieldErrors.push({field: 'province ', message: 'province may not be empty'});
+          }
+          if (reqJson.vaccine_sites == null || reqJson.vaccine_sites === '') {
+            fieldErrors.push({field: 'vaccine_sites ', message: 'vaccine_sites may not be empty'});
+          }
+        
+          if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+              message: '400 Bad Request: Incorrect fields',
+              errors: fieldErrors
+            });
+          }
+
+          let provinceData = {
+            vaccine_sites:reqJson.vaccine_sites
+          }
+          await database.collection('vaccine-sites').doc(reqJson.province).set(provinceData); 
+        return res.status(200).send({
+          message: 'Successfully stored list',
+          data: provinceData
+        });
+      }
+      catch (error) {
+        console.log(error);
+        return res.status(500).send({
+          message: error.message || "Some error occurred"
+        });
+    }
+  });
+
+  
+
   exports.health = functions.https.onRequest(healthApp);
