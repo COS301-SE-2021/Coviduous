@@ -149,6 +149,7 @@ class _UserViewOfficeTimesState extends State<UserViewOfficeTimes> {
                                                             child: Text('No'),
                                                             onPressed: (){
                                                               Navigator.of(ctx).pop();
+                                                              Navigator.of(context).pushReplacementNamed(Office.routeName);
                                                             },
                                                           )
                                                         ],
