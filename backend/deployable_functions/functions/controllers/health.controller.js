@@ -1966,7 +1966,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
  * @swagger
  * /health/setlist:
  *   post:
- *     description: sets list of health facilities of freestate
+ *     description: sets list of health facilities of a province
  *     requestBody:
  *       required: true
  *     responses: 
