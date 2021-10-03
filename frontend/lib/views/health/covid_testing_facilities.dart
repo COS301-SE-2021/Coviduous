@@ -25,6 +25,23 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
   StreamSubscription<LocationManager.LocationData> locationSubscription;
   bool isLoading = false;
 
+  List<String> _provinces = ['Eastern Cape', 'Free State', 'Gauteng', 'KwaZulu-Natal', 'Limpopo', 'Mpumalanga', 'Northern Cape', 'North West', 'Western Cape'];
+  List<DropdownMenuItem<String>> _dropdownMenuItems;
+  String _selectedProvince;
+
+  List<DropdownMenuItem<String>> buildDropdownMenuItems(List provinces) {
+    List<DropdownMenuItem<String>> items = [];
+    for (String province in provinces) {
+      items.add(
+        DropdownMenuItem(
+          value: province,
+          child: Text(province),
+        ),
+      );
+    }
+    return items;
+  }
+
   setUpMap() {
     map = GoogleMap(
       onMapCreated: _onMapCreated,
@@ -34,10 +51,9 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
           zoom: 8,
       ),
     );
-    refresh();
   }
 
-  void _onMapCreated(GoogleMapController controller) async {
+  _onMapCreated(GoogleMapController controller) async {
     mapController = controller;
   }
 
@@ -136,6 +152,11 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
   @override
   initState() {
     setUpMap();
+    refresh();
+    _dropdownMenuItems = buildDropdownMenuItems(_provinces);
+    if (_selectedProvince == null) {
+      _selectedProvince = _dropdownMenuItems[0].value;
+    }
     super.initState();
   }
 
@@ -154,14 +175,64 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
                   Navigator.of(context).pushReplacementNamed(CovidInformationCenter.routeName);
                 },
               ),
-              actions: [
-                IconButton(
-                  icon: Icon(Icons.refresh),
-                  onPressed: () {
-                    refresh();
-                  },
-                ),
-              ],
+            ),
+            bottomNavigationBar: BottomAppBar(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                  title: Text('Select province'),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      StatefulBuilder(
+                                        builder: (BuildContext context, StateSetter setState) {
+                                          return Theme(
+                                            data: ThemeData.dark(),
+                                            child: DropdownButton(
+                                              isExpanded: true,
+                                              value: _selectedProvince,
+                                              items: _dropdownMenuItems,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  _selectedProvince = value;
+                                                });
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text('Submit'),
+                                      onPressed: () {
+                                        globals.selectedProvince = _selectedProvince;
+                                        globals.selectedLat = globals.getLat(_selectedProvince);
+                                        globals.selectedLong = globals.getLong(_selectedProvince);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                        setUpMap();
+                                        refresh();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text('Cancel'),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                  ]);
+                            });
+                      },
+                      child: Text('Choose different location')
+                  )
+                ],
+              ),
             ),
             body: Center(
               child: (isLoading == false) ? Container(
