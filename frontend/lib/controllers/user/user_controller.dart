@@ -23,6 +23,13 @@ int numUsers = 0;
 List<String> emails = [];
 int numEmails = 0;
 
+/**
+ * List<String> tokenIds stores tokenIds that are used to send push notifications
+ * numTokenIds keeps track of the number of tokenIds
+ */
+List<String> tokenIds = [];
+int numTokenIds = 0;
+
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 
 /**
@@ -371,4 +378,42 @@ Future<bool> deleteUser() async {
   }
 
   return false;
+}
+
+/**
+ * getTokenIds() : returns a list of tokenIds that will be used to send push notifications
+ */
+Future<List<String>> getTokenIds(List<Map<String, String>> emails) async {
+  String path = 'user/api/users/fetch-token-ids';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "userEmails": emails, //NB check with the other guys what the body is supposed to include
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      tokenIds.clear();
+      numTokenIds = 0;
+
+      for (var data in jsonMap["data"]) {
+        tokenIds.add(data);
+        numTokenIds++;
+      }
+
+      return tokenIds;
+    }
+  } catch(error) {
+    print(error);
+  }
+  return null;
 }
