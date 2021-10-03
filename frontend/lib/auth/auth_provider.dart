@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:frontend/globals.dart' as globals;
 
 class AuthClass {
