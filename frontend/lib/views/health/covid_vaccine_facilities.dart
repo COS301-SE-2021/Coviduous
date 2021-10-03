@@ -6,6 +6,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as LocationManager;
 
 import 'package:frontend/views/health/covid_info_center.dart';
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class CovidVaccineFacilities extends StatefulWidget {
@@ -13,9 +15,6 @@ class CovidVaccineFacilities extends StatefulWidget {
   @override
   _CovidVaccineFacilitiesState createState() => _CovidVaccineFacilitiesState();
 }
-
-const googleApiKey = "AIzaSyDRvPZC7hHO7KZN4L6_K0siuDxsjlPqARs";
-GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: googleApiKey);
 
 class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
   GoogleMapController mapController;
@@ -29,10 +28,6 @@ class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
   List<DropdownMenuItem<String>> _dropdownMenuItems;
   String _selectedProvince;
 
-  List<String> _centerTypes = ['Private', 'Public'];
-  List<DropdownMenuItem<String>> _dropdownMenuItems2;
-  String _selectedCenterType;
-
   List<DropdownMenuItem<String>> buildDropdownMenuItems(List provinces) {
     List<DropdownMenuItem<String>> items = [];
     for (String province in provinces) {
@@ -40,19 +35,6 @@ class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
         DropdownMenuItem(
           value: province,
           child: Text(province),
-        ),
-      );
-    }
-    return items;
-  }
-
-  List<DropdownMenuItem<String>> buildDropdownMenuItems2(List centerTypes) {
-    List<DropdownMenuItem<String>> items = [];
-    for (String centerType in centerTypes) {
-      items.add(
-        DropdownMenuItem(
-          value: centerType,
-          child: Text(centerType),
         ),
       );
     }
@@ -74,91 +56,73 @@ class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
     mapController = controller;
   }
 
-  refresh() async {
-    final center = LatLng(globals.selectedLat, globals.selectedLong);
-    getNearbyPlaces(center);
-  }
-
-  getNearbyPlaces(LatLng center) async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final location = Location(lat: center.latitude, lng: center.longitude);
-    final result = await _places.searchNearbyWithRadius(location, 2500);
-    setState(() {
-      isLoading = false;
-      if (result.status == "OK") {
-        this.places = result.results;
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("No nearby places found. Please try again later.")));
-      }
-    });
-  }
-
   Widget getList() {
-    final placesWidget = places.map((f) {
-      List<Widget> list = [
-        Padding(
-          padding: EdgeInsets.only(bottom: 4.0),
-          child: Text(
-            f.name,
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
-        )
-      ];
-      if (f.formattedAddress != null) {
-        list.add(Padding(
-          padding: EdgeInsets.only(bottom: 2.0),
-          child: Text(
-            f.formattedAddress,
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
-        ));
-      }
-
-      if (f.vicinity != null) {
-        list.add(Padding(
-          padding: EdgeInsets.only(bottom: 2.0),
-          child: Text(
-            f.vicinity,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        ));
-      }
-
-      if (f.types?.first != null) {
-        list.add(Padding(
-          padding: EdgeInsets.only(bottom: 2.0),
-          child: Text(
-            f.types.first,
-            style: Theme.of(context).textTheme.caption,
-          ),
-        ));
-      }
-
-      return Padding(
-        padding: EdgeInsets.only(top: 4.0, bottom: 4.0, left: 8.0, right: 8.0),
-        child: Card(
-          color: Colors.white,
-          child: InkWell(
-            highlightColor: globals.firstColor,
-            splashColor: globals.textFieldSelectedColor,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: list,
+    if (globals.vaccineFacilities.isEmpty) {
+      return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        globalWidgets.notFoundMessage(context, 'No vaccine facilities found', 'There are no vaccine facilities nearby.'),
+      ]);
+    } else {
+      return ListView.builder(
+        shrinkWrap: true,
+        itemCount: globals.vaccineFacilities.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(top: 4.0, bottom: 4.0, left: 8.0, right: 8.0),
+            child: Card(
+              color: Colors.white,
+              child: InkWell(
+                highlightColor: globals.firstColor,
+                splashColor: globals.textFieldSelectedColor,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          globals.vaccineFacilities[index].getAddress(),
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.vaccineFacilities[index].getCity(),
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.vaccineFacilities[index].getDaysOpen(),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.vaccineFacilities[index].getPublicPrivate(),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.vaccineFacilities[index].getCoordinates(),
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       );
-    }).toList();
-
-    return ListView(shrinkWrap: true, children: placesWidget);
+    }
   }
 
   Future<bool> _onWillPop() async {
@@ -169,14 +133,9 @@ class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
   @override
   initState() {
     setUpMap();
-    refresh();
     _dropdownMenuItems = buildDropdownMenuItems(_provinces);
-    _dropdownMenuItems2 = buildDropdownMenuItems2(_centerTypes);
     if (_selectedProvince == null) {
       _selectedProvince = _dropdownMenuItems[0].value;
-    }
-    if (_selectedCenterType == null) {
-      _selectedCenterType = _dropdownMenuItems2[0].value;
     }
     super.initState();
   }
@@ -207,19 +166,10 @@ class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                  title: Text('Select province and center type'),
+                                  title: Text('Select province'),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Container(
-                                        color: globals.appBarColor,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width,
-                                        child: Text(
-                                          'Province',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
                                       StatefulBuilder(
                                         builder: (BuildContext context, StateSetter setState) {
                                           return Theme(
@@ -237,32 +187,6 @@ class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
                                           );
                                         },
                                       ),
-                                      Container(
-                                        color: globals.appBarColor,
-                                        padding: EdgeInsets.all(10),
-                                        width: MediaQuery.of(context).size.width,
-                                        child: Text(
-                                          'Center type',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      StatefulBuilder(
-                                        builder: (BuildContext context, StateSetter setState) {
-                                          return Theme(
-                                            data: ThemeData.dark(),
-                                            child: DropdownButton(
-                                              isExpanded: true,
-                                              value: _selectedCenterType,
-                                              items: _dropdownMenuItems2,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  _selectedCenterType = value;
-                                                });
-                                              },
-                                            ),
-                                          );
-                                        },
-                                      ),
                                     ],
                                   ),
                                   actions: [
@@ -270,13 +194,14 @@ class _CovidVaccineFacilitiesState extends State<CovidVaccineFacilities> {
                                       child: Text('Submit'),
                                       onPressed: () {
                                         globals.selectedProvince = _selectedProvince;
-                                        globals.selectedCenterType = _selectedCenterType;
                                         globals.selectedLat = globals.getLat(_selectedProvince);
                                         globals.selectedLong = globals.getLong(_selectedProvince);
+                                        String province = globals.getProvinceCode(_selectedProvince);
                                         Navigator.pop(context);
-                                        setState(() {});
-                                        setUpMap();
-                                        refresh();
+                                        healthHelpers.getVaccineFacilities(province).then((result) {
+                                          setState(() {});
+                                          setUpMap();
+                                        });
                                       },
                                     ),
                                     TextButton(

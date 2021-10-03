@@ -6,6 +6,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as LocationManager;
 
 import 'package:frontend/views/health/covid_info_center.dart';
+import 'package:frontend/controllers/health/health_helpers.dart' as healthHelpers;
+import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
 class CovidTestingFacilities extends StatefulWidget {
@@ -13,9 +15,6 @@ class CovidTestingFacilities extends StatefulWidget {
   @override
   _CovidTestingFacilitiesState createState() => _CovidTestingFacilitiesState();
 }
-
-const googleApiKey = "AIzaSyDRvPZC7hHO7KZN4L6_K0siuDxsjlPqARs";
-GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: googleApiKey);
 
 class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
   GoogleMapController mapController;
@@ -57,91 +56,73 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
     mapController = controller;
   }
 
-  refresh() async {
-    final center = LatLng(globals.selectedLat, globals.selectedLong);
-    getNearbyPlaces(center);
-  }
-
-  getNearbyPlaces(LatLng center) async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final location = Location(lat: center.latitude, lng: center.longitude);
-    final result = await _places.searchNearbyWithRadius(location, 2500);
-    setState(() {
-      isLoading = false;
-      if (result.status == "OK") {
-        this.places = result.results;
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("No nearby places found. Please try again later.")));
-      }
-    });
-  }
-
   Widget getList() {
-    final placesWidget = places.map((f) {
-      List<Widget> list = [
-        Padding(
-          padding: EdgeInsets.only(bottom: 4.0),
-          child: Text(
-            f.name,
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
-        )
-      ];
-      if (f.formattedAddress != null) {
-        list.add(Padding(
-          padding: EdgeInsets.only(bottom: 2.0),
-          child: Text(
-            f.formattedAddress,
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
-        ));
-      }
-
-      if (f.vicinity != null) {
-        list.add(Padding(
-          padding: EdgeInsets.only(bottom: 2.0),
-          child: Text(
-            f.vicinity,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        ));
-      }
-
-      if (f.types?.first != null) {
-        list.add(Padding(
-          padding: EdgeInsets.only(bottom: 2.0),
-          child: Text(
-            f.types.first,
-            style: Theme.of(context).textTheme.caption,
-          ),
-        ));
-      }
-
-      return Padding(
-        padding: EdgeInsets.only(top: 4.0, bottom: 4.0, left: 8.0, right: 8.0),
-        child: Card(
-          color: Colors.white,
-          child: InkWell(
-            highlightColor: globals.firstColor,
-            splashColor: globals.textFieldSelectedColor,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: list,
+    if (globals.testingFacilities.isEmpty) {
+      return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        globalWidgets.notFoundMessage(context, 'No test facilities found', 'There are no test facilities nearby.'),
+      ]);
+    } else {
+      return ListView.builder(
+        shrinkWrap: true,
+        itemCount: globals.testingFacilities.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(top: 4.0, bottom: 4.0, left: 8.0, right: 8.0),
+            child: Card(
+              color: Colors.white,
+              child: InkWell(
+                highlightColor: globals.firstColor,
+                splashColor: globals.textFieldSelectedColor,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          globals.testingFacilities[index].getAddress(),
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.testingFacilities[index].getCity(),
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.testingFacilities[index].getPhoneNumber(),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.testingFacilities[index].getDaysOpen(),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          globals.testingFacilities[index].getCoordinates(),
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       );
-    }).toList();
-
-    return ListView(shrinkWrap: true, children: placesWidget);
+    }
   }
 
   Future<bool> _onWillPop() async {
@@ -152,7 +133,6 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
   @override
   initState() {
     setUpMap();
-    refresh();
     _dropdownMenuItems = buildDropdownMenuItems(_provinces);
     if (_selectedProvince == null) {
       _selectedProvince = _dropdownMenuItems[0].value;
@@ -216,10 +196,12 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
                                         globals.selectedProvince = _selectedProvince;
                                         globals.selectedLat = globals.getLat(_selectedProvince);
                                         globals.selectedLong = globals.getLong(_selectedProvince);
+                                        String province = globals.getProvinceCode(_selectedProvince);
                                         Navigator.pop(context);
-                                        setState(() {});
-                                        setUpMap();
-                                        refresh();
+                                        healthHelpers.getTestingFacilities(province).then((result) {
+                                          setState(() {});
+                                          setUpMap();
+                                        });
                                       },
                                     ),
                                     TextButton(

@@ -2,13 +2,14 @@
 library controllers;
 
 import 'dart:io';
-
-import 'package:frontend/models/health/covid_cases_data.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
+
+import 'package:frontend/models/health/covid_cases_data.dart';
+import 'package:frontend/models/health/health_facility.dart';
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
 import 'package:frontend/models/health/health_check.dart';
@@ -29,6 +30,8 @@ List<VaccineConfirmation> vaccineConfirmationDatabaseTable = [];
 List<CovidCasesData> confirmedData = [];
 List<CovidCasesData> recoveredData = [];
 List<CovidCasesData> deathsData = [];
+List<HealthFacility> testingFacilities = [];
+List<HealthFacility> vaccineFacilities = [];
 
 int numPermission_request = 0;
 int numPermissions = 0;
@@ -40,6 +43,8 @@ int numVaccineConfirmations = 0;
 int numConfirmedData = 0;
 int numRecoveredData = 0;
 int numDeathsData = 0;
+int numTestingFacilities = 0;
+int numVaccineFacilities = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 String AIserver = serverInfo.getAIserver();
@@ -693,6 +698,88 @@ Future<List<CovidCasesData>> getDeathsData() async {
       }
 
       return deathsData;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Get testing facilities
+Future<List<HealthFacility>> getTestingFacilities(String province) async {
+  String path = 'health/api/health/testing-sites/view/';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "province": province,
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+      print(jsonMap);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      testingFacilities.clear();
+      numTestingFacilities = 0;
+
+      for (var data in jsonMap["data"]) {
+        for (var data2 in data["testing_sites"]) {
+          var testingSite = HealthFacility.fromJson(data2);
+          testingFacilities.add(testingSite);
+          numTestingFacilities++;
+        }
+      }
+
+      return testingFacilities;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Get vaccine facilities
+Future<List<HealthFacility>> getVaccineFacilities(String province) async {
+  String path = 'health/api/health/vaccine-sites/view/';
+  String url = server + path;
+  var request;
+
+  try {
+    request = http.Request('POST', Uri.parse(url));
+    request.body = json.encode({
+      "province": province,
+    });
+    request.headers.addAll(globals.getRequestHeaders());
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.stream.bytesToString());
+      var jsonMap = jsonDecode(jsonString);
+      print(jsonMap);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      vaccineFacilities.clear();
+      numVaccineFacilities = 0;
+
+      for (var data in jsonMap["data"]) {
+        for (var data2 in data["vaccine_sites"]) {
+          var vaccineSite = HealthFacility.fromJson(data2);
+          vaccineFacilities.add(vaccineSite);
+          numVaccineFacilities++;
+        }
+      }
+
+      return vaccineFacilities;
     }
   } catch(error) {
     print(error);

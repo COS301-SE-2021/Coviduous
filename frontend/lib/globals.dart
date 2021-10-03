@@ -3,7 +3,6 @@ library globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
-import 'package:frontend/models/health/covid_cases_data.dart';
 import 'package:universal_html/html.dart' as html;
 
 //Announcement subsystem
@@ -20,6 +19,8 @@ import 'package:frontend/models/health/permission.dart';
 import 'package:frontend/models/health/permission_request.dart';
 import 'package:frontend/models/health/test_results.dart';
 import 'package:frontend/models/health/vaccine_confirmation.dart';
+import 'package:frontend/models/health/covid_cases_data.dart';
+import 'package:frontend/models/health/health_facility.dart';
 
 //Notification subsystem
 import 'package:frontend/models/notification/notification.dart';
@@ -336,8 +337,68 @@ double getLong(String province){
   }
 }
 
+String getProvinceCode(String province) {
+  switch (province) {
+    case "Eastern Cape": {
+      return "eastern-cape";
+    }
+    break;
+
+    case "Free State": {
+      return "freestate";
+    }
+    break;
+
+    case "Gauteng": {
+      return "gauteng";
+    }
+    break;
+
+    case "KwaZulu-Natal": {
+      return "kwazulu-natal";
+    }
+    break;
+
+    case "Limpopo": {
+      return "limpopo";
+    }
+    break;
+
+    case "Mpumalanga": {
+      return "mpumalanga";
+    }
+    break;
+
+    case "Northern Cape": {
+      return "northern-cape";
+    }
+    break;
+
+    case "North West": {
+      return "north-west";
+    }
+    break;
+
+    case "Western Cape": {
+      return "western-cape";
+    }
+    break;
+
+    default: {
+      return "unknown";
+    }
+    break;
+  }
+}
+
 //Selected whether vaccination facility is private or public
 String selectedCenterType = '';
+
+//Selected testing facilities
+List<HealthFacility> testingFacilities = [];
+
+//Selected vaccination facilities
+List<HealthFacility> vaccineFacilities = [];
 
 //===============================
 //Used in announcement subsystem

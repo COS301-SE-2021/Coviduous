@@ -37,10 +37,6 @@ class _CovidInformationCenterState extends State<CovidInformationCenter> {
   List<DropdownMenuItem<String>> _dropdownMenuItems;
   String _selectedProvince;
 
-  List<String> _centerTypes = ['Private', 'Public'];
-  List<DropdownMenuItem<String>> _dropdownMenuItems2;
-  String _selectedCenterType;
-
   List<DropdownMenuItem<String>> buildDropdownMenuItems(List provinces) {
     List<DropdownMenuItem<String>> items = [];
     for (String province in provinces) {
@@ -70,12 +66,8 @@ class _CovidInformationCenterState extends State<CovidInformationCenter> {
   @override
   void initState() {
     _dropdownMenuItems = buildDropdownMenuItems(_provinces);
-    _dropdownMenuItems2 = buildDropdownMenuItems2(_centerTypes);
     if (_selectedProvince == null) {
       _selectedProvince = _dropdownMenuItems[0].value;
-    }
-    if (_selectedCenterType == null) {
-      _selectedCenterType = _dropdownMenuItems2[0].value;
     }
     super.initState();
   }
@@ -203,7 +195,10 @@ class _CovidInformationCenterState extends State<CovidInformationCenter> {
                                           globals.selectedProvince = _selectedProvince;
                                           globals.selectedLat = globals.getLat(_selectedProvince);
                                           globals.selectedLong = globals.getLong(_selectedProvince);
-                                          Navigator.of(context).pushReplacementNamed(CovidTestingFacilities.routeName);
+                                          String province = globals.getProvinceCode(_selectedProvince);
+                                          healthHelpers.getTestingFacilities(province).then((result) {
+                                            Navigator.of(context).pushReplacementNamed(CovidTestingFacilities.routeName);
+                                          });
                                         },
                                       ),
                                       TextButton(
@@ -241,19 +236,10 @@ class _CovidInformationCenterState extends State<CovidInformationCenter> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                    title: Text('Select province and center type'),
+                                    title: Text('Select province'),
                                     content: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Container(
-                                          color: globals.appBarColor,
-                                          padding: EdgeInsets.all(10),
-                                          width: MediaQuery.of(context).size.width,
-                                          child: Text(
-                                            'Province',
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
                                         StatefulBuilder(
                                           builder: (BuildContext context, StateSetter setState) {
                                             return Theme(
@@ -271,32 +257,6 @@ class _CovidInformationCenterState extends State<CovidInformationCenter> {
                                             );
                                           },
                                         ),
-                                        Container(
-                                          color: globals.appBarColor,
-                                          padding: EdgeInsets.all(10),
-                                          width: MediaQuery.of(context).size.width,
-                                          child: Text(
-                                            'Center type',
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                        StatefulBuilder(
-                                          builder: (BuildContext context, StateSetter setState) {
-                                            return Theme(
-                                              data: ThemeData.dark(),
-                                              child: DropdownButton(
-                                                isExpanded: true,
-                                                value: _selectedCenterType,
-                                                items: _dropdownMenuItems2,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    _selectedCenterType = value;
-                                                  });
-                                                },
-                                              ),
-                                            );
-                                          },
-                                        ),
                                       ],
                                     ),
                                     actions: [
@@ -304,10 +264,12 @@ class _CovidInformationCenterState extends State<CovidInformationCenter> {
                                         child: Text('Submit'),
                                         onPressed: () {
                                           globals.selectedProvince = _selectedProvince;
-                                          globals.selectedCenterType = _selectedCenterType;
                                           globals.selectedLat = globals.getLat(_selectedProvince);
                                           globals.selectedLong = globals.getLong(_selectedProvince);
-                                          Navigator.of(context).pushReplacementNamed(CovidVaccineFacilities.routeName);
+                                          String province = globals.getProvinceCode(_selectedProvince);
+                                          healthHelpers.getVaccineFacilities(province).then((result) {
+                                            Navigator.of(context).pushReplacementNamed(CovidVaccineFacilities.routeName);
+                                          });
                                         },
                                       ),
                                       TextButton(

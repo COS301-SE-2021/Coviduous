@@ -303,3 +303,29 @@ Future<bool> getAllCovidData() async {
   });
   return (result0 && result1 && result2);
 }
+
+Future<bool> getTestingFacilities(String province) async {
+  bool result = false;
+  await Future.wait([
+    healthController.getTestingFacilities(province)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.testingFacilities = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
+Future<bool> getVaccineFacilities(String province) async {
+  bool result = false;
+  await Future.wait([
+    healthController.getVaccineFacilities(province)
+  ]).then((results) {
+    if (results.first != null) {
+      globals.vaccineFacilities = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
