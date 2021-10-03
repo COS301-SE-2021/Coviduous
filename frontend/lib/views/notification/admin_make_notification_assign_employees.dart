@@ -10,6 +10,7 @@ import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/login_screen.dart';
 
 import 'package:frontend/controllers/notification/notification_helpers.dart' as notificationHelpers;
+import 'package:frontend/controllers/user/user_helpers.dart' as userHelpers;
 import 'package:frontend/views/global_widgets.dart' as globalWidgets;
 import 'package:frontend/globals.dart' as globals;
 
@@ -24,8 +25,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final String tokenId = "tokenId";
 
-  Future<Response> push_sendNotification(List<String> tokenIdList, String contents, String heading) async{
-
+  Future<Response> push_sendNotification(List<String> tokenIdList, String contents, String heading) async {
     return await post(
       Uri.parse('https://onesignal.com/api/v1/notifications'),
       headers: <String, String>{
@@ -396,6 +396,11 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                       ),
                       child: Text('Finish'),
                       onPressed: () {
+                        List<Map<String, String>> emails = [];
+                        for (int i = 0; i < globals.tempUsers.length; i++) {
+                          emails.add({"email": globals.tempUsers[i].getUserEmail()});
+                        }
+                        userHelpers.getTokenIds(emails);
                         sendNotification(numOfUsers);
                       },
                     )
