@@ -2003,6 +2003,7 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
           }
 
           let provinceData = {
+            province:reqJson.province,
             vaccine_sites:reqJson.vaccine_sites
           }
           await database.collection('vaccine-sites').doc(reqJson.province).set(provinceData); 
@@ -2063,9 +2064,10 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
           }
 
           let provinceData = {
-            vaccine_sites:reqJson.vaccine_sites
+            province:reqJson.province,
+            testing_sites:reqJson.testing_sites
           }
-          await database.collection('testing_sites').doc(reqJson.province).set(provinceData); 
+          await database.collection('testing-sites').doc(reqJson.province).set(provinceData); 
         return res.status(200).send({
           message: 'Successfully stored list',
           data: provinceData
@@ -2079,7 +2081,123 @@ healthApp.post('/api/health/Covid19VaccineConfirmation/view',authMiddleware, asy
     }
   });
   
-  
+  /**
+ * @swagger
+ * /health/vaccine-sites/view:
+ *   post:
+ *     description: retrieve all vaccine-sites in a province
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+healthApp.post('/api/health/vaccine-sites/view',async (req, res) => {
+  try {
+  let fieldErrors = [];
+    
+      if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+      }
+        let reqJson;
+          try {
+              reqJson = JSON.parse(req.body);
+          } catch (e) {
+              reqJson = req.body;
+          }
+          if (reqJson.province == null || reqJson.province === '') {
+            fieldErrors.push({field: 'province ', message: 'province may not be empty'});
+          }
+        
+          if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+              message: '400 Bad Request: Incorrect fields',
+              errors: fieldErrors
+            });
+          }
+      let document = database.collection('vaccine-sites').where("province", "==", reqJson.province);
+      let snapshot = await document.get();
+        
+      let vaccine_sites = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            vaccine_sites.push(data);
+        });
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved list',
+        data: vaccine_sites
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching list."
+      });
+  }
+});
+
+
+/**
+ * @swagger
+ * /health/testing-sites/view:
+ *   post:
+ *     description: retrieve all testing-sites in a province
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+ healthApp.post('/api/health/testing-sites/view',async (req, res) => {
+  try {
+  let fieldErrors = [];
+    
+      if (req == null) {
+        fieldErrors.push({field: null, message: 'Request object may not be null'});
+      }
+        let reqJson;
+          try {
+              reqJson = JSON.parse(req.body);
+          } catch (e) {
+              reqJson = req.body;
+          }
+          if (reqJson.province == null || reqJson.province === '') {
+            fieldErrors.push({field: 'province ', message: 'province may not be empty'});
+          }
+        
+          if (fieldErrors.length > 0) {
+            console.log(fieldErrors);
+            return res.status(400).send({
+              message: '400 Bad Request: Incorrect fields',
+              errors: fieldErrors
+            });
+          }
+      let document = database.collection('testing-sites').where("province", "==", reqJson.province);
+      let snapshot = await document.get();
+        
+      let list = [];
+        
+        snapshot.forEach(doc => {
+            let data = doc.data();
+
+            list.push(data);
+        });
+      
+      return res.status(200).send({
+        message: 'Successfully retrieved list',
+        data: list
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        message: error.message || "Some error occurred while fetching list."
+      });
+  }
+});
   
   
   exports.health = functions.https.onRequest(healthApp);
