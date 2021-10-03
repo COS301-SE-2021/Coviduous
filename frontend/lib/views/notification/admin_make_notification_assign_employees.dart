@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-
+import 'package:http/http.dart';
+import 'dart:convert';
 import 'package:frontend/models/notification/temp_notification.dart';
 import 'package:frontend/views/notification/admin_home_notifications.dart';
 import 'package:frontend/views/notification/admin_make_notification.dart';
@@ -21,6 +22,35 @@ class MakeNotificationAssignEmployees extends StatefulWidget {
 class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssignEmployees> {
   TextEditingController _email = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final String tokenId = "tokenId";
+
+  Future<Response> push_sendNotification(List<String> tokenIdList, String contents, String heading) async{
+
+    return await post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>
+      {
+        "app_id": "db07da80-4ecf-4f74-9ce8-a8437c6c4c88",// The App Id that one get from the OneSignal When the application is registered.
+
+        "include_player_ids": tokenIdList,//tokenIdList Is the List of All the Token Id to to Whom notification must be sent.
+
+        // android_accent_color represent the color of the heading text in the notification
+        "android_accent_color":"FF9976D2",
+
+        "small_icon":"ic_stat_onesignal_default",
+        //replace with coviduous icon
+        "large_icon":"https://www.filepicker.io/api/file/zPloHSmnQsix82nlj9Aj?filename=name.jpg",
+
+        "headings": {"en": heading},
+
+        "contents": {"en": contents},
+
+      }),
+    );
+  }
 
   Future<bool> _onWillPop() async {
     notificationHelpers.getNotifications().then((result){
@@ -416,6 +446,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                         ),
                         onPressed: () {
                           sendNotification(numOfUsers);
+                          ///push_sendNotification([widget.tokenId],"how are you","Clementine");
                         },
                       )
                   ),
