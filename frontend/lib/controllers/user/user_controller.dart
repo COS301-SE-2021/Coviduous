@@ -53,7 +53,7 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
       "lastName": lastName,
       "email": email,
       "userName": userName,
-      "tokenId":tokenId,
+      "tokenId": tokenId,
       "companyId": companyId,
       "companyName": companyName,
       "companyAddress": companyAddress,
