@@ -4,95 +4,95 @@ COVID19_QUES = [
         "Answer": "COVID-19 is a disease caused by a virus called SARS-CoV-2. Most people with COVID-19 have mild symptoms, but some people can become severely ill. Although most people with COVID-19 get better within weeks of illness, some people experience post-COVID conditions."
     },
     {
-        "Question": "symptoms COVID-19 coronavirus",
+        "Question": "what are symptoms COVID-19 coronavirus",
         "Answer": "The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion,  runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually. Some people become infected but don’t develop any symptoms and don't feel unwell. Most people (about 80%) recover from the disease without needing special treatment. Around 1 out of every 6 people who gets COVID-19 becomes seriously ill and develops difficulty breathing. Older people, and those with underlying medical problems like high blood pressure, heart problems or diabetes, are more likely to develop serious illness. People with fever, cough and difficulty breathing should seek medical attention."
     },
     {
-     "Question": "What is self-isolation?",
-     "Answer": "Self-isolation is a way to keep yourself from possibly infecting others if you think you might be infected. It involves limiting contact with public places, relatives, friends, colleagues, and public transport."
+        "Question": "What is self-isolation?",
+        "Answer": "Self-isolation is a way to keep yourself from possibly infecting others if you think you might be infected. It involves limiting contact with public places, relatives, friends, colleagues, and public transport."
     },
     {
-     "Question": "How does the virus spread?",
-     "Answer": "COVID-19 spreads when an infected person breathes out droplets and very small particles that contain the virus. These droplets and particles can be breathed in by other people or land on their eyes, noses, or mouth. In some circumstances, they may contaminate surfaces they touch. People who are closer than 6 feet from the infected person are most likely to get infected."
+        "Question": "How does the virus spread?",
+        "Answer": "COVID-19 spreads when an infected person breathes out droplets and very small particles that contain the virus. These droplets and particles can be breathed in by other people or land on their eyes, noses, or mouth. In some circumstances, they may contaminate surfaces they touch. People who are closer than 6 feet from the infected person are most likely to get infected."
     },
     {
-     "Question": "soap water hand sanitizer protect against COVID-19?",
-     "Answer": "Hand washing is one of the best ways to protect yourself and your family from getting sick. Wash your hands often with soap and water for at least 20 seconds, especially after blowing your nose, coughing, or sneezing; going to the bathroom; and before eating or preparing food. If soap and water are not readily available, use an alcohol-based hand sanitizer with at least 60% alcohol."
+        "Question": "use soap water hand sanitizer protect against COVID-19?",
+        "Answer": "Hand washing is one of the best ways to protect yourself and your family from getting sick. Wash your hands often with soap and water for at least 20 seconds, especially after blowing your nose, coughing, or sneezing; going to the bathroom; and before eating or preparing food. If soap and water are not readily available, use an alcohol-based hand sanitizer with at least 60% alcohol."
     },
     {
-     "Question": "symptoms complications COVID-19 can cause?",
-     "Answer": "The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion, runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually."
+        "Question": "symptoms complications COVID-19 can cause?",
+        "Answer": "The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion, runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually."
     },
     {
-     "Question": "What is contact tracing?",
-     "Answer": "Contact tracing has been used for decades by state and local health departments to slow or stop the spread of infectious diseases. Contact tracing slows the spread of COVID-19 by letting people know they may have been exposed to COVID-19 and should monitor their health for signs and symptoms of COVID-19."
+        "Question": "What is contact tracing?",
+        "Answer": "Contact tracing has been used for decades by state and local health departments to slow or stop the spread of infectious diseases. Contact tracing slows the spread of COVID-19 by letting people know they may have been exposed to COVID-19 and should monitor their health for signs and symptoms of COVID-19."
     },
     {
-     "Question": "personal information contact tracing?",
-     "Answer": "If you have been diagnosed with COVID-19, your name will not be shared with those you came in contact with. The health department will only notify people you were in close contact with that they might have been exposed to COVID-19."
+        "Question": "personal information contact tracing?",
+        "Answer": "If you have been diagnosed with COVID-19, your name will not be shared with those you came in contact with. The health department will only notify people you were in close contact with that they might have been exposed to COVID-19."
     },
     {
-     "Question": "Who is considered a close contact of someone with COVID-19?",
-     "Answer": "For COVID-19, a close contact is anyone who was within 6 feet of an infected person for a total of 15 minutes or more over a 24-hour period (for example, three individual 5-minute exposures for a total of 15 minutes)."
+        "Question": "Who is considered a close contact of someone with COVID-19?",
+        "Answer": "For COVID-19, a close contact is anyone who was within 6 feet of an infected person for a total of 15 minutes or more over a 24-hour period (for example, three individual 5-minute exposures for a total of 15 minutes)."
     },
     {
-     "Question": "close contact tested for COVID-19 coronavirus?",
-     "Answer": "If you have been in close contact with someone who has COVID-19, you should be tested, even if you do not have symptoms of COVID-19. The health department may be able to provide resources for testing in your area."
+        "Question": "close contact tested for COVID-19 coronavirus?",
+        "Answer": "If you have been in close contact with someone who has COVID-19, you should be tested, even if you do not have symptoms of COVID-19. The health department may be able to provide resources for testing in your area."
     },
     {
-     "Question": "go to work close contact with someone COVID-19 coronavirus?",
-     "Answer": "Anyone who is sick or displaying symptoms should not go to school or work. If you have been in close contact with a confirmed COVID-19 case, you should self-isolate for 14 days from the date of close contact. If you are concerned, contact your medical practitioner for further advice."
+        "Question": "go to work close contact with someone COVID-19 coronavirus?",
+        "Answer": "Anyone who is sick or displaying symptoms should not go to school or work. If you have been in close contact with a confirmed COVID-19 case, you should self-isolate for 14 days from the date of close contact. If you are concerned, contact your medical practitioner for further advice."
     },
     {
-     "Question": "risk child becoming sick with COVID-19 coronavirus?",
-     "Answer": "Children can be infected with the virus that causes COVID-19 and can get sick with COVID-19. Most children with COVID-19 have mild symptoms or they may have no symptoms at all (“asymptomatic”). Fewer children have been sick with COVID-19 compared to adults."
+        "Question": "risk child becoming sick getting COVID-19 coronavirus?",
+        "Answer": "Children can be infected with the virus that causes COVID-19 and can get sick with COVID-19. Most children with COVID-19 have mild symptoms or they may have no symptoms at all (“asymptomatic”). Fewer children have been sick with COVID-19 compared to adults."
     },
     {
-     "Question": "What is community spread?",
-     "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected. Each health department determines community spread differently based on local conditions."
+        "Question": "What is community spread?",
+        "Answer": "Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected. Each health department determines community spread differently based on local conditions."
     },
     {
-     "Question": "What is multi system inflammatory syndrome in children (MIS-C)? ",
-     "Answer": "Multi system inflammatory syndrome in children (MIS-C) is a serious condition associated with COVID-19 where different body parts can become inflamed, including the heart, lungs, kidneys, brain, skin, eyes, or gastrointestinal organs."
+        "Question": "What is multi system inflammatory syndrome in children (MIS-C)? ",
+        "Answer": "Multi system inflammatory syndrome in children (MIS-C) is a serious condition associated with COVID-19 where different body parts can become inflamed, including the heart, lungs, kidneys, brain, skin, eyes, or gastrointestinal organs."
     },
     {
-     "Question": "test negative later test positive viral test COVID-19 coronavirus?",
-     "Answer": "Yes, it is possible. You may test negative if the sample was collected early in your infection and test positive later during this illness. You could also be exposed to COVID-19 after the test and get infected then. Even if you test negative, you still should take steps to protect yourself and others. "
+        "Question": "test negative later test positive viral test COVID-19 coronavirus?",
+        "Answer": "Yes, it is possible. You may test negative if the sample was collected early in your infection and test positive later during this illness. You could also be exposed to COVID-19 after the test and get infected then. Even if you test negative, you still should take steps to protect yourself and others. "
     },
     {
-     "Question": "If I have COVID-19 coronavirus how tell people I was around them?",
-     "Answer": "If you have COVID-19, tell your close contacts you have COVID-19 so that they can quarantine at home and get tested. By letting your close contacts know they may have been exposed to COVID-19, you are helping to protect them and others within your community."
+        "Question": "If I have COVID-19 coronavirus how tell people I was around them?",
+        "Answer": "If you have COVID-19, tell your close contacts you have COVID-19 so that they can quarantine at home and get tested. By letting your close contacts know they may have been exposed to COVID-19, you are helping to protect them and others within your community."
     },
     {
-     "Question": "mask use help determine someone is considered a close contact?",
-     "Answer": "A person is still considered a close contact even if one or both people wore a mask when they were together."
+        "Question": "mask use help determine someone is considered a close contact?",
+        "Answer": "A person is still considered a close contact even if one or both people wore a mask when they were together."
     },
     {
-     "Question": "COVID-19 coronavirus pets other animals?",
-     "Answer": "Based on the available information to date, the risk of animals spreading COVID-19 to people is considered to be low."
+        "Question": "get COVID-19 coronavirus pets other animals?",
+        "Answer": "Based on the available information to date, the risk of animals spreading COVID-19 to people is considered to be low."
     },
     {
-     "Question": "animals carry virus causes COVID-19 coronavirus skin or fur?",
-     "Answer": "Although we know certain bacteria and fungi can be carried on fur and hair, there is no evidence that viruses, including the virus that causes COVID-19, can spread to people from the skin, fur, or hair of pets."
+        "Question": "animals carry virus causes COVID-19 coronavirus skin or fur?",
+        "Answer": "Although we know certain bacteria and fungi can be carried on fur and hair, there is no evidence that viruses, including the virus that causes COVID-19, can spread to people from the skin, fur, or hair of pets."
     },
     {
-     "Question": "hand sanitizer pets?",
-     "Answer": "Do not wipe or bathe your pet with chemical disinfectants, alcohol, hydrogen peroxide, or other products, such as hand sanitizer, counter-cleaning wipes, or other industrial or surface cleaners. If you have questions about appropriate products for bathing or cleaning your pet, talk to your veterinarian. If your pet gets hand sanitizer on their skin or fur, rinse or wipe down your pet with water immediately."
+        "Question": "hand sanitizer pets?",
+        "Answer": "Do not wipe or bathe your pet with chemical disinfectants, alcohol, hydrogen peroxide, or other products, such as hand sanitizer, counter-cleaning wipes, or other industrial or surface cleaners. If you have questions about appropriate products for bathing or cleaning your pet, talk to your veterinarian. If your pet gets hand sanitizer on their skin or fur, rinse or wipe down your pet with water immediately."
     },
     {
-     "Question": "pet sick COVID-19 coronavirus?",
-     "Answer": "Most pets that have gotten sick from the virus that causes COVID-19 were infected after close contact with a person with COVID-19. Talk to your veterinarian about any health concerns you have about your pets."
+        "Question": "pet sick COVID-19 coronavirus?",
+        "Answer": "Most pets that have gotten sick from the virus that causes COVID-19 were infected after close contact with a person with COVID-19. Talk to your veterinarian about any health concerns you have about your pets."
     },
     {
-     "Question": "What is community mitigation?",
-     "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
+        "Question": "What is community mitigation?",
+        "Answer": "Community mitigation is a set of actions that people and communities can take to slow the spread of infectious diseases like COVID-19. The goal of community mitigation in areas with local COVID-19 transmission is to slow its spread and to protect all individuals, especially those at increased risk for severe illness, while minimizing the negative impacts of these strategies."
     },
     {
         "Question": "What happens to people who get COVID-19 coronavirus?",
         "Answer": "Among those who develop symptoms, most (about 80%) recover from the disease without needing hospital treatment. About 15% become seriously ill and require oxygen and 5% become critically ill and need intensive care."
     },
     {
-        "Question": "most at risk severe illness COVID-19 coronavirus?",
+        "Question": "who most at risk severe illness COVID-19 coronavirus?",
         "Answer": "People aged 60 years and over, and those with underlying medical problems like high blood pressure, heart and lung problems, diabetes, obesity or cancer, are at higher risk of developing serious illness. However, anyone can get sick with COVID-19 and become seriously ill or die at any age."
     },
     {
@@ -136,7 +136,7 @@ COVID19_QUES = [
         "Answer": "People who have been self-quarantining, because they had contact with a confirmed case of COVID-19 and have completed their 10-day quarantine period without developing symptoms, can return to work on day 11. There is no requirement to be tested prior to returning to the work. It is, however, recommended they continue to practice social distancing and good hygiene as a precaution and wear a surgical mask."
     },
     {
-        "Question": "what to do colleague tested positive COVID-19 coronavirus?",
+        "Question": "what should I do colleague tested positive COVID-19 coronavirus?",
         "Answer": "If you work closely in the same environment as a person with COVID-19, you will need to self-quarantine for 10 days because you have had high-risk exposure. High-risk exposure means you have had direct, close contact for more than 15 minutes with someone who tested positive for COVID-19, and you did not wear protective cloth face masks or you had physical contact or took other risks that could have exposed you to the COVID-19 virus."
     },
     {
@@ -164,7 +164,7 @@ COVID19_QUES = [
         "Answer": "No, you will need 2 masks so that you can wash one and wear one. Wash your mask daily with soap and hot water. The mask is best dried in the sun and ironed. Do not share your mask with anyone."
     },
     {
-        "Question": "wear mask travel?",
+        "Question": "should I wear mask travelling?",
         "Answer": "Wearing a mask over your nose and mouth is required on planes, buses, trains, and other forms of public transportation traveling into, within, or out of a country."
     },
     {
@@ -188,7 +188,7 @@ COVID19_QUES = [
         "Answer": "If you have any symptoms suggestive of COVID-19, call your health care provider or COVID-19 hotline for instructions and find out when and where to get a test, stay at home for 14 days away from others and monitor your health."
     },
     {
-        "Question": "treatments COVID-19 coronavirus?",
+        "Question": "are there treatments COVID-19 coronavirus?",
         "Answer": "Scientists around the world are working to find and develop treatments for COVID-19. Optimal supportive care includes oxygen for severely ill patients and those who are at risk for severe disease and more advanced respiratory support such as ventilation for patients who are critically ill."
     },
     {
@@ -332,7 +332,7 @@ COVID19_QUES = [
         "Answer": "If you are infected, the use of medical face masks (generally pale blue in colour and available from pharmacies) may reduce the risk of you infecting others. Consider using a face mask when visiting busy, enclosed spaces where it is not possible to maintain sufficient physical distance from others, such as grocery stores and shopping centres, or when using public transport."
     }, 
     {
-        "Question": "When and where should I be tested for COVID-19?",
+        "Question": "When where should I be tested for COVID-19 coronavirus?",
         "Answer": "Anyone who develops symptoms of COVID-19 should be tested for the virus, wherever possible. Testing is also recommended, if possible, for people who do not have symptoms but who have been in close contact with a case of COVID-19. These tests are called ‘PCR’ (polymerase chain reaction) tests and are molecular tests that can detect the virus. They are usually conducted on samples collected from the throat or nose using a swab."
     },
     {
@@ -388,7 +388,7 @@ COVID19_QUES = [
         "Answer": "COVID-19 spreads primarily through respiratory droplets or contact with contaminated surfaces. Exposure can occur at the workplace, while travelling to work, during work-related travel to an area with local community transmission, as well as on the way to and from the workplace."
     },
     {
-        "Question": "risk contracting COVID-19 coronavirus workplace?",
+        "Question": "what is risk contracting COVID-19 coronavirus workplace?",
         "Answer": "The risk of exposure to COVID-19 in the workplace depends on the likelihood of coming within 1 metre of others, in having frequent physical contact with people who may be infected with COVID-19, and through contact with contaminated surfaces and objects."
     },
     {
@@ -432,11 +432,11 @@ COVID19_QUES = [
         "Answer": "Know before you go. Some venues, destinations and countries require COVID-19 tests prior to departure or upon arrival as part of their strategies to prevent the spread of disease. COVID-19 tests conducted immediately prior to departure or on arrival are used in an effort to determine the health status of travellers."
     },
     {
-        "Question": "COVID-19 coronavirus symptoms travelling arrive at destination?",
+        "Question": "what happens get COVID-19 coronavirus symptoms travelling arrive at destination?",
         "Answer": "If you have any symptoms of COVID-19 while you travel or when you arrive at your destination, notify health authorities immediately and follow their guidance. You may be required to quarantine or isolate yourself. Your travel companions may also be required to quarantine, since they have been in contact with you."
     },
     {
-        "Question": "sick travelling?",
+        "Question": "get sick travelling what should I do?",
         "Answer": "If you become ill during your travel, inform your travel attendant (plane, ship, train, etc.). You may be moved to a seat farther away from others. Wear a mask continuously while you travel, frequently clean your hands with hand sanitizer, cover a cough or sneeze with a bent elbow or tissue, and maintain at least a 1 metre distance from others wherever possible. You should stop travelling as soon as feasible."
     },
     {
@@ -504,23 +504,23 @@ COVID19_QUES = [
         "Answer": "No. Viruses constantly change through mutation, and new variants of a virus are expected to occur over time.  Sometimes new variants emerge and disappear quickly.  Other times, new variants emerge and start infecting people.  Multiple variants of the virus that causes COVID-19 have been documented in the United States and globally during this pandemic."
     },
     {
-        "Question": "COVID-19 vaccines safe people with HIV?",
+        "Question": "COVID-19 coronavirus vaccines safe people with HIV?",
         "Answer": "Many of the COVID-19 vaccines studies have included a small number of people living with HIV in their trials. Despite limited data, available information suggests current WHO recommended COVID-19 vaccines ( AstraZeneca/Oxford, Johnson and Johnson, Moderna, Pfizer/BionTech, Sinopharm and Sinovac) are safe for people living with HIV. The currently available vaccine products are not live vaccines, they include genetic material from SARS-CoV-2 which cannot replicate."
     },
     {
-        "Question": "COVID-19 vaccines provide protection people living with HIV?",
+        "Question": "COVID-19 coronavirus vaccines provide protection people living with HIV?",
         "Answer": "It is theoretically possible that people living with HIV with low CD4 cell counts might have a weaker immune response to vaccines. However, in practice this has not been documented for all vaccines and there is no evidence to support a less robust immune response to COVID-19 vaccines among people living with HIV and low CD4 cell counts."
     },
     {
-        "Question": "sick COVID-19 coronavirus contact urine feces sewage?",
+        "Question": "get sick COVID-19 coronavirus contact urine feces sewage?",
         "Answer": "While fragments of SARS-CoV-2 genetic material (RNA) have been detected in the urine or feces of some patients, there have been no reports to date of transmission of COVID-19 through urine or faeces. It remains important to protect yourself with personal protective equipment whenever contact with bodily fluids may occur and to clean your hands frequently."
     },
     {
-        "Question": "sick COVID-19 coronavirus swimming sea rivers lakes swimming pools?",
+        "Question": "get sick COVID-19 coronavirus swimming sea rivers lakes swimming pools?",
         "Answer": "Available evidence suggests that SARS-CoV-2 does not spread from water. Natural bodies of water and swimming pools do not appear to pose a risk for COVID-19 transmission even if polluted by faeces or wastewater. Pools are usually treated regularly to prevent contamination with a range of pathogens which could be present."
     },
     {
-        "Question": "sick COVID-19 coronavirus drinking water?",
+        "Question": "get sick COVID-19 coronavirus drinking water?",
         "Answer": "The risk coronaviruses pose to drinking water is considered to be low and SARS-CoV-2 virus has not been detected in drinking water supplies. Drinking water treatment methods neutralize infectious pathogens present in the water. SARS-CoV-2 is an enveloped virus, which means it has a fragile fatty envelope that is easily destroyed by the treatment process. Therefore, treated drinking water does not pose a risk for COVID-19."
     },
     {
@@ -612,7 +612,7 @@ COVID19_QUES = [
         "Answer": "A pandemic has nothing to do with how serious an illness is. It just means a disease is spreading widely and at an alarming rate."
     },
     {
-        "Question": "minimise risk COVID-19 infection?",
+        "Question": "minimise risk COVID-19 coronavirus infection?",
         "Answer": "The virus is very susceptible to common anti-bacterial cleaning agents such as bleach, and alcohol-based cleaners (60% volume). Regularly and thoroughly clean your hands with an alcohol-based hand rub or wash them with soap and water for at least 20 seconds. Maintain at least 1 metre distance between yourself and anyone who is coughing or sneezing. Avoid touching your eyes, nose or mouth with unclean hands."
     }, #150
     {
@@ -652,7 +652,7 @@ COVID19_QUES = [
         "Answer": "The SARS-CoV-2 virus does not survive well in warmer climates. It is therefore expected to thrive in the colder winter seasons."
     },
     {
-        "Question": "higher risk getting COVID-19 coronavirus?",
+        "Question": "What to do if I am higher risk getting COVID-19 coronavirus?",
         "Answer": "If you are at higher risk of getting the virus, you should take everyday precautions to keep space between yourself and others. When you go out, try to avoid unnecessary contact, non-essential travel and exposure to others who are sick. Wash your hands often, avoid crowds and if there is an outbreak in your community, consider staying home and limiting contact to essential people."
     }, 
     {
@@ -774,7 +774,7 @@ COVID19_QUES = [
     {
         "Question": "key measures protect against COVID-19 coronavirus undertaken in all workplaces?",
         "Answer": "Measures to prevent transmission of COVID-19 that apply to all workplaces and all people at the workplace include frequent hand-washing or disinfection with alcohol based hand sanitizer, respiratory hygiene such as covering coughs, physical distancing of at least 1 metre or more according to the national recommendations, wearing of masks where distancing is not possible, regular environmental cleaning and disinfection, and limiting unnecessary travel. Clear policies and messages, training, and education for staff and managers to increase awareness of COVID-19 are essential."
-    },  #190
+    }, #190
     {
         "Question": "additional measures taken at workplaces jobs high risk?",
         "Answer": "In work areas at high risk, assess the possibility of suspending the activity; enhance regular hand hygiene; provide medical masks, disposable gowns, gloves, and eye protection for workers who must work in the homes of people who are suspected or known to have COVID-19; train workers in infection prevention and control practices and use of personal protective equipment; avoid assigning tasks with high risk to workers who have pre-existing medical conditions, are pregnant, or older than 60 years of age."
@@ -802,7 +802,7 @@ COVID19_QUES = [
     {
         "Question": "How COVID-19 coronavirus spread between people?",
         "Answer": "We know that the disease is caused by the SARS-CoV-2 virus, which spreads between people in several different ways. The virus can spread from an infected person’s mouth or nose in small liquid particles when they cough, sneeze, speak, sing or breathe. These particles range from larger respiratory droplets to smaller aerosols."
-    }, 
+    },
     {
         "Question": "When do infected people transmit COVID-19 coronavirus?",
         "Answer": "Whether or not they have symptoms, infected people can be contagious and the virus can spread from them to other people. Laboratory data suggests that infected people appear to be most infectious just before they develop symptoms (namely 2 days before they develop symptoms) and early in their illness. People who develop severe disease can be infectious for longer. While someone who never develops symptoms can pass the virus to others, it is still not clear how frequently this occurs and more research is needed in this area."
@@ -812,9 +812,9 @@ COVID19_QUES = [
         "Answer": "Both terms refer to people who do not have symptoms. The difference is that ‘asymptomatic’ refers to people who are infected but never develop any symptoms, while ‘pre-symptomatic’ refers to infected people who have not yet developed symptoms but go on to develop symptoms later. "
     },
     {
-        "Question": "certain settings where COVID-19 coronavirus spread more easily?",
+        "Question": "certain areas places settings COVID-19 coronavirus spread faster more easily?",
         "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
-    },
+    }, #200
     {
         "Question": "reduce risk getting COVID-19 coronavirus?",
         "Answer": "Avoid touching surfaces, especially in public settings or health facilities, in case people infected with COVID-19 have touched them. Clean surfaces regularly with standard disinfectants. Frequently clean your hands with soap and water, or an alcohol-based hand rub. If you can, carry alcohol-based rub with you and use it often. Cover your coughs and sneezes with a bent elbow or tissue, throwing used tissues into a closed bin right away. Then wash your hands or use an alcohol-based hand rub. Get vaccinated: When it’s your turn, get vaccinated. Follow local guidance and recommendations about vaccination."
@@ -836,123 +836,123 @@ COVID19_QUES = [
         "Answer": "Check for filtration, breathability and fit when choosing a fabric mask. It should be held in place comfortably with little adjustment using elastic bands or ties. There are different mask shapes such as flat-fold or duckbill – find the one that fits closely over your nose, cheeks and chin. When the edges of the mask are not close to the face and shift, such as when speaking, air penetrates through the edges of the mask rather than being filtered through the fabric. Masks with vents or exhalation valves are not advised because they allow unfiltered breath to escape the mask."
     },
     {
-        "Question": "When should health workers wear masks in the context of COVID-19?",
+        "Question": "health workers wear masks in context of COVID-19 coronavirus pandemic?",
         "Answer": "Health workers are the most likely to be exposed to COVID-19 because they are in close contact with patients with suspected, probable or confirmed COVID-19. In areas of community or cluster transmission, health workers, caregivers and visitors should wear a mask at all times when in the health facility, even if physical distancing can be maintained. Masks should be worn throughout their shifts, apart from when eating, drinking or needing to change the mask for specific reasons."
     },
     {
-        "Question": "How large does a meeting or event need to be in order to be a “mass gathering”?",
+        "Question": "How large meeting event need to be mass gathering?",
         "Answer": "High profile international sporting events such as the Olympics or World Cups as well as international religious events such as the Hajj count as mass gatherings. However, lower profile conferences and events can also meet WHO’s definition of a mass gathering. An event counts as a “mass gatherings” if the number of people it brings together is so large that it has the potential to strain the planning and response resources of the health system in the community where it takes place."
     },
     {
-        "Question": "Should event organizers provide COVID-19 testing?",
+        "Question": "Should event organizers provide COVID-19 coronavirus testing?",
         "Answer": "No, testing should be conducted in accordance with local health providers and national guidance.  Anyone unwell or symptomatic should not be allowed to participate in the event. Establish close collaboration with local public health authorities well before the event, to facilitate testing for athletes, officials or spectators who meet pre-agreed suspect cases definitions. Consider host-country health service capacity to manage any COVID-19 activity, and other public health issues happening at the event over and above its own national pandemic response."
     },
     {
-        "Question": "What are the risks arising from public transport to the venue(s)?",
+        "Question": "risks arising from public transport to venues?",
         "Answer": "The extra risk from participants and spectators travelling on public transport in a major city may not be significant compared to the ongoing risk to the local population using the transport all the time if physical distancing is not possible on public transport."
     },
     {
-        "Question": "Does the presence of antibodies mean that a person is immune?",
+        "Question": "presence of antibodies mean person is immune to COVID-19 coronavirus?",
         "Answer": "There are many studies underway to better understand the antibody response following infection to SARS-CoV-2.  Several studies to date show that most people who have been infected with SARS-CoV-2 develop antibodies specific to this virus. However, the levels of these antibodies can vary between those who have severe disease (higher levels of antibodies) and those with milder disease or asymptomatic infection (lower levels of antibodies). Many studies are underway to better understand the levels of antibodies that are needed for protection, and how long these antibodies last."
-    }, 
+    },
     {
-        "Question": "Can people who have had SARS-CoV-2 infection be re-infected?",
+        "Question": "people had COVID-19 coronavirus infection be re-infected?",
         "Answer": "To date, there are some reports of individuals who have been reinfected with SARS-CoV-2.  There are likely to be more examples of reinfection reported and scientists are working to understand the role of the immune response in the first and second infection. WHO is working with scientists to understand each occurrence of reinfection and the antibody response during the first and subsequent infections."
     },
     {
-        "Question": "How are COVID-19 and influenza viruses similar?",
+        "Question": "How COVID-19 influenza viruses similar?",
         "Answer": "Firstly, COVID-19 and influenza viruses have a similar disease presentation. That is, they both cause respiratory disease, which presents as a wide range of illness from asymptomatic or mild through to severe disease and death. Secondly, both viruses are transmitted by contact, droplets and fomites. As a result, the same public health measures, such as hand hygiene and good respiratory etiquette (coughing into your elbow or into a tissue and immediately disposing of the tissue), are important actions all can take to prevent infection. "
     },
     {
-        "Question": "How are COVID-19 and influenza viruses different?",
+        "Question": "How COVID-19 influenza viruses different?",
         "Answer": "The speed of transmission is an important point of difference between the two viruses. Influenza has a shorter median incubation period (the time from infection to appearance of symptoms) and a shorter serial interval (the time between successive cases) than COVID-19 virus. The serial interval for COVID-19 virus is estimated to be 5-6 days, while for influenza virus, the serial interval is 3 days. This means that influenza can spread faster than COVID-19. "
     },
     {
-        "Question": "What medical interventions are available for COVID-19 and influenza viruses?",
+        "Question": "medical interventions available COVID-19 influenza viruses?",
         "Answer": "While there are a number of therapeutics currently in clinical trials in China and more than 20 vaccines in development for COVID-19, there are currently no licensed vaccines or therapeutics for COVID-19.  In contrast, antivirals and vaccines available for influenza. While the influenza vaccine is not effective against COVID-19 virus, it is highly recommended to get vaccinated each year to prevent influenza infection. "
     },
     {
-        "Question": "So how do I stay safe while exercising in COVID-19?",
+        "Question": "stay safe exercising during COVID-19 coronavirus pandemic?",
         "Answer": "Do not exercise if you have a fever, cough and difficulty breathing. Stay home and rest, seek medical attention and call in advance. Follow the directions of your local health authority. If you are able to go for a walk or bicycle ride always practice physical distancing and wash your hands with water and soap before you leave, when you get to where you are going, and as soon as you get home.  If water and soap are not immediately available, use alcohol-based hand rub."
     },
     {
-        "Question": "How do I stay active in and around the home?",
+        "Question": "stay active around the home?",
         "Answer": "Try and reduce long periods of time spent sitting, whether for work, studying, watching TV, reading, or using social media or playing games using screens. Reduce sitting for long periods by taking short 3-5 minute breaks every 20-30 minutes. Simply stand up and stretch or even better, take a walk around the house, up and down the stairs, or into the garden. By just moving around and stretching you can improve your health and wellbeing."
     },
     {
-        "Question": "What precautions should everyone take in a hotel or other accommodation establishment?",
+        "Question": "precautions need to be taken hotel accommodation establishment?",
         "Answer": "Wash all parts of your hands frequently (at least 20 seconds if using an alcohol-based hand rub, and at least 40 seconds with soap and water), including after exchanging objects such as money or credit cards; look for hand sanitizer stations and use them before going into dining halls, restaurants or bars; cover a cough or sneeze with a bent elbow or tissue, and throw away the tissue in a closed bin; maintain at least a 1 metre distance from staff and other guests. This includes avoiding hugging, kissing, or shaking hands. If you can’t guarantee the distance, wear a mask. Be sure to check local and national guidelines on the use of masks."
     },
     {
-        "Question": "Are pools and water areas safe to use?",
+        "Question": "pools water areas safe to use?",
         "Answer": "Gym, beach, swimming pool, spa, sauna and steam bath facilities can be used safely with certain restrictions, as determined by national guidelines."
     },
     {
-        "Question": "Are there precautions to take while eating in a restaurant?",
+        "Question": "precautions eating in restaurant?",
         "Answer": "There is no evidence that the virus that causes COVID-19 is transmitted by food, including fresh fruits and vegetables. The virus can be killed while cooking food at temperatures of at least 70°C. Food buffets are not recommended because of the risk of close physical contact with others, shared serving implements and multiple people touching the surfaces on the buffet."
     },
     {
-        "Question": "Can you get the virus from people who were in the room previous to you?",
+        "Question": "get COVID-19 coronavirus from people in room previously?",
         "Answer": "Hotels and other accommodations should have procedures for cleaning, disinfecting and ventilating the room properly between every guest’s stay. These processes allow the accommodations to be used immediately afterward. If these procedures are followed, there is no need to leave the room empty between guests."
-    },
+    }, 
     {
-        "Question": "What should travellers do if they get sick while at an accommodation facility?",
+        "Question": "travellers get sick at accommodation facility?",
         "Answer": "If a guest develops symptoms of COVID-19, such as fever, dry cough or tiredness, they should notify the facility manager and seek medical advice by contacting local health authorities. The guest should isolate from others, including fellow travellers. If the guest cannot be isolated or staff need to enter the room, the ill person should put on a medical mask, and people nearby should also wear a mask.  If the medical mask cannot be tolerated by the ill person, then he or she should cough or sneeze into a bent elbow or use tissues to cover the mouth, and discard the tissue immediately into a closed waste bag."
     },
     {
-        "Question": "As safe and effective vaccines for COVID-19 are approved, who should be the first to receive them?",
+        "Question": "safe effective COVID-19 coronavirus vaccines approved, who first to receive them?",
         "Answer": "WHO believes that everyone, everywhere who could benefit from safe and effective COVID-19 vaccines should have access as quickly as possible, starting with those at highest risk of serious disease or death."
     },
     {
-        "Question": "Who should participate in clinical trials for COVID-19 vaccines?",
+        "Question": "Who participate clinical trials COVID-19 coronavirus vaccines?",
         "Answer": "Small (phase I) safety studies of COVID-19 vaccines should enroll healthy adult volunteers. Larger (phase II and III) Studies should include volunteers that reflect the populations for whom the vaccines are intended. This means enrolling people from diverse geographic areas, racial and ethnic backgrounds, genders, and ages, as well as those with underlying health conditions that put them at higher risk for COVID-19. Including these groups in clinical trials is the only way to make sure that a vaccine will be safe and effective for everyone who needs it. "
     },
     {
-        "Question": "How do I volunteer for a COVID-19 vaccine trial?",
+        "Question": "volunteer COVID-19 coronavirus vaccine trial?",
         "Answer": "Opportunities to volunteer for a COVID-19 vaccine trial vary from country to country. If you are interested in volunteering, check with local health officials or research institutions."
     },
     {
-        "Question": "Are COVID-19 vaccines safe for people living with HIV?",
+        "Question": "COVID-19 coronavirus vaccines safe people with HIV?",
         "Answer": "Many of the most advanced vaccines have included a small number of people living with HIV. Despite limited data, available information suggests COVID-19 vaccines for which WHO has issued recommendations, are safe for people living with HIV. The vaccines often include genetic material from SARS-CoV-2, but do not contain the whole virus, so the virus cannot replicate. As they are not live vaccines, they are not expected to be less safe in people who are immunocompromised."
     },
     {
-        "Question": "Do COVID-19 vaccines provide protection for people living with HIV?",
+        "Question": "COVID-19 coronavirus vaccines provide protection people with HIV?",
         "Answer": "It is theoretically possible that people living with HIV with low CD4 cell counts might have a weaker immune response to a vaccine. However, in practice this has not been documented for other vaccines and there is no evidence to support a less robust immune response to COVID-19 vaccines among people with low CD4 cell counts. WHO is reviewing new evidence as it emerges and will provide an update when needed.  It is important to advocate for the inclusion of people living with HIV, including those with more advanced disease, in vaccine trials to provide information to confirm efficacy."
     },
     {
-        "Question": "Should people living with HIV get vaccines early in the roll out?",
+        "Question": "people with HIV get COVID-19 coronavirus vaccines early in roll out?",
         "Answer": "Most countries have made clear plans to support arrangements for those who will receive the vaccine in order of priority based on their age, health, occupation and other factors such people in living in care or residential homes. Some countries are prioritising vaccination for people living with HIV or who are immunocompromised."
     },
     {
-        "Question": "What can people living with HIV do today to support their health?",
+        "Question": "what can people with HIV do to support their health?",
         "Answer": "While the world works towards ensuring fair and equitable access to safe and effective COVID-19 vaccines, it is important to continue the essential public health actions to prevent SARS-CoV-2 transmission and to reduce COVID-19 mortality. Alongside the response to the COVID-19 pandemic, it is critical to maintain access to essential health services. This includes supporting people living with HIV to be able to continue anti-retroviral therapy (ART) and adapting services to make this easier and more efficient during the COVID-19 response."
     },
     {
-        "Question": "How do we know that COVID-19 vaccines are safe?",
+        "Question": "How do we know COVID-19 coronavirus vaccines safe?",
         "Answer": "There are strict protections in place to help ensure the safety of all COVID-19 vaccines. Before receiving validation from WHO and national regulatory agencies, COVID-19 vaccines must undergo rigorous testing in clinical trials to prove that they meet internationally agreed benchmarks for safety and efficacy."
     },
     {
-        "Question": "What are the side effects of COVID-19 vaccines?",
+        "Question": "what are side effects COVID-19 coronavirus vaccines?",
         "Answer": "Like any vaccine, COVID-19 vaccines can cause mild, short term side effects, such as a low-grade fever or pain or redness at the injection site. Most reactions to vaccines are mild and go away within a few days on their own. More serious or long-lasting side effects to vaccines are possible but extremely rare. Vaccines are continually monitored for as long as they are in use, to detect rare adverse events and implement approaches to limit their occurrence. "
     }, 
     {
-        "Question": "What is the link between COVID-19 vaccines and allergic reactions?",
+        "Question": "link between COVID-19 coronavirus vaccines allergic reactions?",
         "Answer": "Severe allergic reactions have occurred rarely to some of the COVID vaccines. A severe allergic reaction – such as anaphylaxis – is a potential but rare side effect with any vaccine. In persons with a known risk, such as previous experience of an allergic reaction to a previous dose of the vaccine or any of the known components in the vaccine, precautions may need to be taken. WHO recommends that healthcare providers assess the risk for severe allergic reactions prior to giving a COVID-19 vaccine by inquiring about previous reactions or known allergies to any components in the vaccine."
     },
     {
-        "Question": "What happens if an adverse event is reported?",
+        "Question": "What happens if adverse event reported?",
         "Answer": "As with any vaccine, it is essential to closely monitor the safety and effectiveness of COVID-19 vaccines that are used in immunization programmes. If a health problem is reported following vaccination, a thorough investigation should take place by the public health programme in the country."
     },
     {
-        "Question": "Under what circumstances should a COVID-19 vaccine be recalled?",
+        "Question": "Under what circumstances COVID-19 coronavirus vaccine be recalled?",
         "Answer": "Vaccine recalls or withdrawals due to safety issues are rare. Recalls are usually initiated voluntarily by a vaccine manufacturer before any adverse events are reported. For example, ongoing monitoring of vaccine production may show that an irregularity has caused a batch of vaccines to lose their strength. In this case, people who have received a vaccine from that batch may need to be vaccinated again to ensure they are protected."
     },
     {
-        "Question": "Is it possible that someone vaccinated against COVID-19 will still get infected?",
+        "Question": "possible someone vaccinated against COVID-19 coronavirus still get infected?",
         "Answer": "While COVID-19 vaccines have high levels of efficacy, especially against hospitalization and severe disease, no vaccine is 100% protective. As a result, there will be some small percentage of vaccinated people who fall ill with COVID-19 in spite of being vaccinated. In addition to a vaccine's specific characteristics, several factors such as a person's age, their underlying health conditions, previous COVID-19 disease, current exposure to SARS-CoV-2, or the circulation of virus variants may have an impact on a vaccine’s effectiveness. We do not yet know how long immunity from different COVID-19 vaccines will last. That is one reason why, even as COVID-19 vaccines are being rolled out, we must continue using all public health measures that work to decrease exposure risk, such as physical distancing, masks, and handwashing."
     },
     {
-        "Question": "Who should be excluded from receiving COVID-19 vaccines?",
+        "Question": "Who excluded from receiving COVID-19 coronavirus vaccines?",
         "Answer": "Medical professionals can best advise individuals on whether or not you should receive a COVID-19 vaccine. There are very few conditions that would exclude someone from being vaccinated. Based on available evidence, people with a history of severe allergic reactions to any ingredients of the COVID-19 vaccine should generally be excluded from COVID-19 vaccination in order to avoid possible adverse effects."
     },
     {
@@ -960,63 +960,63 @@ COVID19_QUES = [
         "Answer": "Vaccine safety monitoring is ensured at the national, regional, and global level. As is standard practice in all national immunization programmes, WHO supports the set up of safety monitoring systems for COVID-19 vaccines in every country. After a COVID-19 vaccine is introduced in a country, WHO works with vaccine manufacturers, health officials and other partners to monitor for any safety concerns on an ongoing basis. Specific safety concerns that may arise are evaluated by WHO and an independent group of experts (the Global Advisory Committee on Vaccine Safety, or GACVS) in conjunction with the relevant national authorities."
     }, 
     {
-        "Question": "Can someone who has tested positive for COVID-19 be cared for at home?",
+        "Question": "someone tested positive for COVID-19 coronavirus cared for at home?",
         "Answer": "People with no symptoms should be able to stay at home, if adequately isolated from others, but this should be confirmed by a doctor. Those with mild or moderate disease can be considered for home care if they are under the age of 60, do not smoke, are not obese, and do not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
     },
     {
-        "Question": "What should be done to prevent other people in the house from becoming sick if a person with COVID-19 is being cared for at home?",
+        "Question": "What should be done prevent other people in house becoming sick if person with COVID-19 coronavirus being cared for at home?",
         "Answer": "The ill person should stay in a separate room. If this is not possible, then keep at least a 1-metre distance from them. The sick person and anyone else in the same room should wear a medical mask; rovide good ventilation in the room of the ill person and shared spaces, and open windows if possible and safe to do so; The ill person should wear a medical mask as much as possible, in particular when not alone in the room and when at least a 1-metre distance from others cannot be maintained; Visitors should not be allowed in the home."
     },
     {
-        "Question": "How long should people with COVID-19 stay at home and in isolation?",
+        "Question": "How long people with COVID-19 coronavirus stay at home in isolation?",
         "Answer": "Those with symptoms should stay isolated for a minimum of 10 days after the first day they developed symptoms, plus another 3 days after the end of symptoms – when they are without fever and without respiratory symptoms; People without symptoms should stay isolated for a minimum of 10 days after testing positive."
     },
     {
-        "Question": "When should a patient with COVID-19 be cared for at home?",
+        "Question": "When should patient with COVID-19 coronavirus cared for at home?",
         "Answer": "Ideally, all patients with COVID-19 are cared for in a healthcare facility. However, there may be some circumstances where patients may not require hospitalization or inpatient care is unavailable or unsafe, such as when capacity is insufficient to meet the demand for healthcare services. Patients should be assessed on a case-by-case basis by the health worker to determine where their care needs can best be met."
-    },
+    }, 
     {
-        "Question": "What factors determine whether a COVID-19 patient can be cared for at home?",
+        "Question": "What factors determine COVID-19 coronavirus patient cared for at home?",
         "Answer": "Patients with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, and if the patient is under the age of 60, does not smoke, is not obese, and does not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
     },
     {
-        "Question": "What additional factors should be taken into consideration when assessing the home setting to determine if it is safe for patients and families to remain at home?",
+        "Question": "additional factors taken into consideration when assessing home setting to determine if safe patients families remain home?",
         "Answer": "There are a number of environmental and social factors to consider for patients to safely remain at home with their families or household members. An overall needs assessment of the patient and family that includes the availability of trained health workers for support should be conducted."
     },
     {
-        "Question": "What precautions should health workers take when providing care to patients in home settings?",
+        "Question": "precautions health workers take providing care patients in home settings?",
         "Answer": "Perform a risk assessment to select the use of appropriate personal protective equipment (PPE), such as a medical mask, eye protection, gloves and gown when caring for the patient; Provide instructions to caregivers and household members on cleaning and disinfection in the home, and on management of waste, laundry and utensils related to the patient."
     },
     {
-        "Question": "Could pregnant women be cared for at home if they have COVID-19?",
+        "Question": "pregnant women cared for at home if have COVID-19 coronavirus?",
         "Answer": "Pregnant women with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, if they do not smoke, are not obese, and do not have other diseases such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, immunosuppression."
     },
     {
-        "Question": "Can children be cared for at home if they have COVID-19?",
+        "Question": "children cared for at home if have COVID-19 coronavirus?",
         "Answer": "Children should be kept together with their parents or caregivers wherever possible. Children with mild or moderate disease can be considered for home care if the home setting is suitable for the isolation and care of a COVID-19 patient, if they are not obese, do not smoke, and do not have other conditions such as cardiovascular disease, diabetes mellitus, chronic lung disease, cancer, chronic kidney disease, or immunosuppression."
     },
     {
-        "Question": "How does COVID-19 spread between people?",
+        "Question": "How COVID-19 coronavirus spread between people?",
         "Answer": "We know that the disease is caused by the SARS-CoV-2 virus, which spreads between people in several different ways; The virus can spread from an infected person’s mouth or nose in small liquid particles when they cough, sneeze, speak, sing or breathe. These particles range from larger respiratory droplets to smaller aerosols."
     },
     {
-        "Question": "When do infected people transmit the virus?",
+        "Question": "When do infected people transmit COVID-19 coronavirus?",
         "Answer": "Whether or not they have symptoms, infected people can be contagious and the virus can spread from them to other people; Laboratory data suggests that infected people appear to be most infectious just before they develop symptoms (namely 2 days before they develop symptoms) and early in their illness. People who develop severe disease can be infectious for longer."
     },
     {
-        "Question": "What is the difference between people who are asymptomatic or pre-symptomatic? Don’t they both mean someone without symptoms?",
+        "Question": "difference between asymptomatic pre-symptomatic?",
         "Answer": "Both terms refer to people who do not have symptoms. The difference is that ‘asymptomatic’ refers to people who are infected but never develop any symptoms, while ‘pre-symptomatic’ refers to infected people who have not yet developed symptoms but go on to develop symptoms later. "
     },
     {
-        "Question": "Are there certain settings where COVID-19 can spread more easily?",
+        "Question": "certain areas places settings COVID-19 coronavirus spread faster more easily?",
         "Answer": "Yes, any situation in which people are in close proximity to one another for long periods of time increases the risk of transmission. Indoor locations, especially settings where there is poor ventilation, are riskier than outdoor locations. Activities where more particles are expelled from the mouth, such as singing or breathing heavily during exercise, also increase the risk of transmission."
     },
     {
-        "Question": "How can I reduce my risk of getting COVID-19?",
+        "Question": "How can I reduce risk getting COVID-19 coronavirus?",
         "Answer": "Follow local guidance: Check to see what national, regional and local authorities are advising so you have the most relevant information for where you are; Keep your distance: Stay at least 1 metre away from others, even if they don’t appear to be sick, since people can have the virus without having symptoms; Wear a mask:  Wear a well-fitting three-layer mask, especially when you can’t physically distance, or if you’re indoors. Clean your hands before putting on and taking off a mask; Avoid crowded places, poorly ventilated, indoor locations and avoid prolonged contact with others. Spend more time outdoors than indoors."
-    },
+    }, #250
     {
-        "Question": "Does WHO recommend the use of gloves in the community to prevent transmission of COVID-19?",
+        "Question": "WHO recommend use of gloves in community prevent COVID-19 coronavirus transmission?",
         "Answer": "No, WHO does not advise using gloves by people in the community. Instead, WHO encourages the installation of public hand hygiene stations at the entrance and exit of public places, such as supermarkets or public/private buildings. This helps reduce germs brought in by people’s hands. By widely improving hand hygiene practices, countries can help prevent the spread of the COVID-19 virus and other infections."
     },
     {
