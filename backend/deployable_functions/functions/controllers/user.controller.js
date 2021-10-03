@@ -109,9 +109,9 @@ userApp.post('/api/users', async (req, res) => {
         fieldErrors.push({field: 'companyId', message: 'Company ID may not be empty'});
     }
 
-    if (reqJson.tokenId == null || reqJson.tokenId === '') {
-        fieldErrors.push({field: 'tokenId', message: 'Token ID may not be empty'});
-    }
+    // if (reqJson.tokenId == null || reqJson.tokenId === '') {
+    //     fieldErrors.push({field: 'tokenId', message: 'Token ID may not be empty'});
+    // }
 
     if (fieldErrors.length > 0) {
         return res.status(400).send({
@@ -587,5 +587,84 @@ userApp.post('/api/users/email', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *     description: retrieve list of tokenIds by user email
+ *     requestBody:
+ *       required: true
+ *     responses: 
+ *       200:
+ *         description: Success 
+ *  
+ */
+ userApp.post('/api/users/fetch-token-ids', async (req, res) => {
+    if (req == null || req.body == null) {
+        return res.status(400).send({
+            message: '400 Bad Request: Null request object',
+        });
+    }
+
+    //Look into express.js middleware so that these lines are not necessary
+    let reqJson;
+    try {
+        reqJson = JSON.parse(req);
+    } catch (e) {
+        reqJson = req.body;
+    }
+    console.log(reqJson);
+    //////////////////////////////////////////////////////////////////////
+
+    let fieldErrors = [];
+
+    if (reqJson.userEmails == null || reqJson.userEmails === '') {
+        fieldErrors.push({field: 'userEmails', message: 'User emails may not be empty'});
+    }
+
+    if (fieldErrors.length > 0) {
+        console.log(fieldErrors);
+        return res.status(400).send({
+            message: '400 Bad Request: Incorrect fields',
+            errors: fieldErrors
+        });
+    }
+
+    try {
+        let document = database.collection('users');//.where("email", "==", reqJson.email);
+        const snapshot = await document.get();
+
+        let list = [];
+        let tokenList = [];
+        let userEmails = reqJson.userEmails;
+
+        snapshot.forEach(doc => {
+            let data = doc.data();
+            //console.log(data)
+
+            userEmails.forEach(doc => {
+                //console.log(doc.email);
+
+                if (doc.email == data.email && (data.tokenId != null))
+                {
+                    tokenList.push(data.tokenId);
+                }
+            });
+
+            //list.push(data);
+        });
+
+        return res.status(200).send({
+            message: 'Successfully retrieved user token ids',
+            data: tokenList
+        });
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).send({
+            message: '500 Server Error: DB error',
+            error: error
+        });
+    }
+});
 
 exports.user = functions.https.onRequest(userApp);
