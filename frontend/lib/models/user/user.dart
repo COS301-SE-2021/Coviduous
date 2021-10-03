@@ -18,6 +18,7 @@ class User {
   String companyId;
   String companyName;
   String companyAddress;
+  String tokenId;
 
 
   User({
@@ -30,6 +31,7 @@ class User {
     this.companyId,
     this.companyName = "N/A",
     this.companyAddress = "N/A",
+    this.tokenId,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -42,6 +44,7 @@ class User {
     companyId: json["companyId"],
     companyName: json["companyName"],
     companyAddress: json["companyAddress"],
+    tokenId: json["tokenId"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -54,6 +57,7 @@ class User {
     "companyId": companyId,
     "companyName": companyName,
     "companyAddress": companyAddress,
+    "tokenId": tokenId,
   };
 
   String getUserId() {
@@ -91,11 +95,14 @@ class User {
   String getCompanyAddress() {
     return companyAddress;
   }
+  String getTokenId() {
+    return tokenId;
+  }
 
   @override
   String toString() {
     return "User ID: " + userId + "\nType: " + type + "\nFirst name: " + firstName +
         "\nLast name: " + lastName + "\nEmail: " + email + "\nUsername: " + userName +
-        "\nCompany ID: " + companyId + "\nCompany name: " + companyName + "\nCompany address: " + companyAddress;
+        "\nCompany ID: " + companyId + "\nCompany name: " + companyName + "\nCompany address: " + companyAddress +"\ntokenId: " + tokenId;
   }
 }
