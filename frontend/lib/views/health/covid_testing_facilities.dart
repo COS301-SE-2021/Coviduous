@@ -67,7 +67,7 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
         itemCount: globals.testingFacilities.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(top: 4.0, bottom: 4.0, left: 8.0, right: 8.0),
+            padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
             child: Card(
               color: Colors.white,
               child: InkWell(
@@ -161,6 +161,9 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                       primary: Color(0xff03305A),
+                    ),
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -199,8 +202,8 @@ class _CovidTestingFacilitiesState extends State<CovidTestingFacilities> {
                                         String province = globals.getProvinceCode(_selectedProvince);
                                         Navigator.pop(context);
                                         healthHelpers.getTestingFacilities(province).then((result) {
-                                          setState(() {});
                                           setUpMap();
+                                          setState(() {});
                                         });
                                       },
                                     ),
