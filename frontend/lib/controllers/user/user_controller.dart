@@ -3,6 +3,7 @@ library controllers;
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'package:frontend/models/user/user.dart';
 import 'package:frontend/controllers/server_info.dart' as serverInfo;
@@ -34,6 +35,9 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
   var request;
 
   try {
+    var status = await OneSignal.shared.getPermissionSubscriptionState();
+    String tokenId = status.subscriptionStatus.userId;
+
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
       "userId": uid,
@@ -42,6 +46,7 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
       "lastName": lastName,
       "email": email,
       "userName": userName,
+      "tokenId":tokenId,
       "companyId": companyId,
       "companyName": companyName,
       "companyAddress": companyAddress,
