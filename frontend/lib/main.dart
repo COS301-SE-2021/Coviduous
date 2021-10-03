@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/auth_provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 //Splash screen, main homepage, and login
 import 'package:frontend/views/splash_screen.dart';
@@ -306,6 +307,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  void initState() {
+    super.initState();
+    configOneSignel();
+  }
+
+  void configOneSignel()
+  {
+    OneSignal.shared.init('db07da80-4ecf-4f74-9ce8-a8437c6c4c88');
+  }
 
   @override
   Widget build(BuildContext context) {
