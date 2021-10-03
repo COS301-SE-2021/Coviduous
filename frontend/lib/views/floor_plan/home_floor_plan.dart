@@ -184,7 +184,7 @@ class _FloorPlanScreenState extends State<FloorPlanScreen> {
                               ),
                             ),
                             onPressed: () {
-                              globals.chatbotPreviousPage = FloorPlanScreen.routeName;
+                              globals.previousPage = FloorPlanScreen.routeName;
                               Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
                             },
                           ),

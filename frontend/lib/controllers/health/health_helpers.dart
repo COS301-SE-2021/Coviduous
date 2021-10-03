@@ -242,3 +242,64 @@ Future<bool> getTestResults() async {
   });
   return result;
 }
+
+Future<bool> getConfirmedData() async {
+  bool result = false;
+  await Future.wait([
+    healthController.getConfirmedData()
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentConfirmedData = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
+Future<bool> getRecoveredData() async {
+  bool result = false;
+  await Future.wait([
+    healthController.getRecoveredData()
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentRecoveredData = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
+Future<bool> getDeathsData() async {
+  bool result = false;
+  await Future.wait([
+    healthController.getDeathsData()
+  ]).then((results) {
+    if (results.first != null) {
+      globals.currentDeathsData = results.first;
+      result = true;
+    }
+  });
+  return result;
+}
+
+Future<bool> getAllCovidData() async {
+  bool result0 = false;
+  bool result1 = false;
+  bool result2 = false;
+  await Future.wait([
+    getConfirmedData(),
+    getRecoveredData(),
+    getDeathsData()
+  ]).then((results) {
+    if (results[0] == true) {
+      result0 = true;
+    }
+    if (results[1] == true) {
+      result1 = true;
+    }
+    if (results[2] == true) {
+      result2 = true;
+    }
+  });
+  return (result0 && result1 && result2);
+}

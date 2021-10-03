@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:frontend/views/health/covid_info_center.dart';
 import 'package:frontend/views/health/user_health_check.dart';
 import 'package:frontend/views/health/user_report_infection.dart';
 import 'package:frontend/views/health/user_view_guidelines.dart';
@@ -53,6 +54,20 @@ class _UserHealthState extends State<UserHealth> {
                 Navigator.of(context).pushReplacementNamed(UserHomePage.routeName);
               },
             ),
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      globals.previousPage = UserHealth.routeName;
+                      Navigator.of(context).pushReplacementNamed(CovidInformationCenter.routeName);
+                    },
+                    child: Text('COVID-19 information')
+                )
+              ]
+            )
           ),
           body: SingleChildScrollView(
             child: Center(

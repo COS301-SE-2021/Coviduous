@@ -57,6 +57,19 @@ class _AdminPermissionsState extends State<AdminPermissions> {
             },
           ),
         ),
+          bottomNavigationBar: BottomAppBar(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          globals.previousPage = AdminPermissions.routeName;
+                        },
+                        child: Text('COVID-19 information')
+                    )
+                  ]
+              )
+          ),
         body: Stack(
           children: [
         SingleChildScrollView(
@@ -370,7 +383,7 @@ class _AdminPermissionsState extends State<AdminPermissions> {
                         ),
                       ),
                       onPressed: () {
-                        globals.chatbotPreviousPage = AdminPermissions.routeName;
+                        globals.previousPage = AdminPermissions.routeName;
                         Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
                       },
                     ),

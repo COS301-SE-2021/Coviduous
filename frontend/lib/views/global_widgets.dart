@@ -74,7 +74,7 @@ Widget chatBot(BuildContext context, String returnRouteName, bool show) {
                 ),
               ),
               onPressed: () {
-                globals.chatbotPreviousPage = returnRouteName;
+                globals.previousPage = returnRouteName;
                 Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
               },
             ),

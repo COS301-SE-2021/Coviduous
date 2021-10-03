@@ -31,8 +31,8 @@ class _ChatMessagesState extends State<ChatMessages>
 
   //This function ensures that the app doesn't just close when you press a phone's physical back button
   Future<bool> _onWillPop() async {
-    if (globals.chatbotPreviousPage != '' && globals.chatbotPreviousPage != null) {
-      Navigator.of(context).pushReplacementNamed(globals.chatbotPreviousPage);
+    if (globals.previousPage != '' && globals.previousPage != null) {
+      Navigator.of(context).pushReplacementNamed(globals.previousPage);
     } else {
       if (globals.loggedInUserType == 'ADMIN') {
         Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);
@@ -55,8 +55,8 @@ class _ChatMessagesState extends State<ChatMessages>
             elevation: 0,
             leading: BackButton( //Specify back button
               onPressed: (){
-                if (globals.chatbotPreviousPage != '' && globals.chatbotPreviousPage != null) {
-                  Navigator.of(context).pushReplacementNamed(globals.chatbotPreviousPage);
+                if (globals.previousPage != '' && globals.previousPage != null) {
+                  Navigator.of(context).pushReplacementNamed(globals.previousPage);
                 } else {
                   if (globals.loggedInUserType == 'ADMIN') {
                     Navigator.of(context).pushReplacementNamed(AdminHomePage.routeName);

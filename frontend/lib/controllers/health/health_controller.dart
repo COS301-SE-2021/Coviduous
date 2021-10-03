@@ -1,13 +1,16 @@
 // Health controller
 library controllers;
 
+import 'dart:io';
+
+import 'package:frontend/models/health/covid_cases_data.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:frontend/models/shift/group.dart';
 import 'package:frontend/models/shift/shift.dart';
-import 'package:frontend/models/health/bluetooth_emails.dart';
 import 'package:frontend/models/health/health_check.dart';
 import 'package:frontend/models/health/permission.dart';
 import 'package:frontend/models/health/permission_request.dart';
@@ -23,6 +26,9 @@ List<PermissionRequest> permission_requestDatabaseTable = [];
 List<HealthCheck> healthCheckDatabaseTable = [];
 List<TestResults> testResultsDatabaseTable = [];
 List<VaccineConfirmation> vaccineConfirmationDatabaseTable = [];
+List<CovidCasesData> confirmedData = [];
+List<CovidCasesData> recoveredData = [];
+List<CovidCasesData> deathsData = [];
 
 int numPermission_request = 0;
 int numPermissions = 0;
@@ -31,6 +37,9 @@ int numGroups = 0;
 int numShifts = 0;
 int numTestResults = 0;
 int numVaccineConfirmations = 0;
+int numConfirmedData = 0;
+int numRecoveredData = 0;
+int numDeathsData = 0;
 
 String server = serverInfo.getServer(); //server needs to be running on Firebase
 String AIserver = serverInfo.getAIserver();
@@ -565,6 +574,125 @@ Future<List<TestResults>> getTestResults(String userId) async {
       }
 
       return testResultsDatabaseTable;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//COVID-19 statistics for South Africa
+
+//Get total confirmed cases over a month
+Future<List<CovidCasesData>> getConfirmedData() async {
+  String url = 'https://api.covid19api.com/country/south-africa/status/confirmed';
+  var request;
+
+  try {
+    HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+    var ioClient = new IOClient(client);
+    request = http.Request('GET', Uri.parse(url));
+    request.headers.addAll(globals.getRequestHeaders());
+
+    http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.body);
+      List jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      confirmedData.clear();
+      numConfirmedData = 0;
+
+      for (int i = 0; i < jsonMap.length; i++) {
+        DateTime timestamp = DateTime.parse(jsonMap[i]["Date"]);
+        num numCases = jsonMap[i]["Cases"];
+        var confirmedDataPoint = CovidCasesData(timestamp: timestamp, numCases: numCases);
+
+        confirmedData.add(confirmedDataPoint);
+        numConfirmedData++;
+      }
+
+      return confirmedData;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Get total recoveries over a month
+Future<List<CovidCasesData>> getRecoveredData() async {
+  String url = 'https://api.covid19api.com/country/south-africa/status/recovered';
+  var request;
+
+  try {
+    HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+    var ioClient = new IOClient(client);
+    request = http.Request('GET', Uri.parse(url));
+    request.headers.addAll(globals.getRequestHeaders());
+
+    http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.body);
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      recoveredData.clear();
+      numRecoveredData = 0;
+
+      for (int i = 0; i < jsonMap.length; i++) {
+        DateTime timestamp = DateTime.parse(jsonMap[i]["Date"]);
+        num numCases = jsonMap[i]["Cases"];
+        var recoveredDataPoint = CovidCasesData(timestamp: timestamp, numCases: numCases);
+
+        recoveredData.add(recoveredDataPoint);
+        numRecoveredData++;
+      }
+
+      return recoveredData;
+    }
+  } catch(error) {
+    print(error);
+  }
+
+  return null;
+}
+
+//Get total deaths over a month
+Future<List<CovidCasesData>> getDeathsData() async {
+  String url = 'https://api.covid19api.com/country/south-africa/status/deaths';
+  var request;
+
+  try {
+    HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+    var ioClient = new IOClient(client);
+    request = http.Request('GET', Uri.parse(url));
+    request.headers.addAll(globals.getRequestHeaders());
+
+    http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
+
+    if (response.statusCode == 200) {
+      var jsonString = (await response.body);
+      var jsonMap = jsonDecode(jsonString);
+
+      //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
+      deathsData.clear();
+      numDeathsData = 0;
+
+      for (int i = 0; i < jsonMap.length; i++) {
+        DateTime timestamp = DateTime.parse(jsonMap[i]["Date"]);
+        num numCases = jsonMap[i]["Cases"];
+        var deathsDataPoint = CovidCasesData(timestamp: timestamp, numCases: numCases);
+
+        deathsData.add(deathsDataPoint);
+        numDeathsData++;
+      }
+
+      return deathsData;
     }
   } catch(error) {
     print(error);

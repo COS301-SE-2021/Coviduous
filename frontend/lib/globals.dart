@@ -3,7 +3,7 @@ library globals;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/services.dart';
-import 'package:frontend/models/health/bluetooth_emails.dart';
+import 'package:frontend/models/health/covid_cases_data.dart';
 import 'package:universal_html/html.dart' as html;
 
 //Announcement subsystem
@@ -121,8 +121,8 @@ String loggedInCompanyId = 'CID-1';
 //JWT the user receives after logging in
 String token = '';
 
-//Chatbot previous page
-String chatbotPreviousPage = '';
+//Previous page route to return to if back button is pressed
+String previousPage = '';
 
 //Show chatbot
 bool showChatBot = true;
@@ -212,8 +212,132 @@ VaccineConfirmation currentVaccineConfirmation;
 List<TestResults> currentTestResults = [];
 TestResults currentTestResult;
 
-//Current list of connected Bluetooth device emails
-BluetoothEmails currentBluetoothEmails;
+//Current COVID-19 confirmed cases data
+List<CovidCasesData> currentConfirmedData = [];
+
+//Current COVID-19 recoveries data
+List<CovidCasesData> currentRecoveredData = [];
+
+//Current COVID-19 deaths data
+List<CovidCasesData> currentDeathsData = [];
+
+//Selected province
+String selectedProvince = '';
+
+//Province latitudes and longitudes
+double selectedLat = -30.559500;
+double selectedLong = 22.937500;
+
+double getLat(String province) {
+  switch (province) {
+    case "Eastern Cape": {
+      return -33.958252;
+    }
+    break;
+
+    case "Free State": {
+      return -29.116667;
+    }
+    break;
+
+    case "Gauteng": {
+      return -26.195246;
+    }
+    break;
+
+    case "KwaZulu-Natal": {
+      return -29.883333;
+    }
+    break;
+
+    case "Limpopo": {
+      return -23.900000;
+    }
+    break;
+
+    case "Mpumalanga": {
+      return -25.465833;
+    }
+    break;
+
+    case "Northern Cape": {
+      return -28.74200;
+    }
+    break;
+
+    case "North West": {
+      return -25.865556;
+    }
+    break;
+
+    case "Western Cape": {
+      return -33.918861;
+    }
+    break;
+
+    default: {
+      return -30.559500;
+    }
+    break;
+  }
+}
+
+double getLong(String province){
+  switch (province) {
+    case "Eastern Cape": {
+      return 25.619022;
+    }
+    break;
+
+    case "Free State": {
+      return 26.216667;
+    }
+    break;
+
+    case "Gauteng": {
+      return 28.034088;
+    }
+    break;
+
+    case "KwaZulu-Natal": {
+      return 31.049999;
+    }
+    break;
+
+    case "Limpopo": {
+      return 29.450000;
+    }
+    break;
+
+    case "Mpumalanga": {
+      return 30.985278;
+    }
+    break;
+
+    case "Northern Cape": {
+      return 24.772000;
+    }
+    break;
+
+    case "North West": {
+      return 25.643611;
+    }
+    break;
+
+    case "Western Cape": {
+      return 18.423300;
+    }
+    break;
+
+    default: {
+      return 22.937500;
+    }
+    break;
+  }
+}
+
+//Selected whether vaccination facility is private or public
+String selectedCenterType = '';
 
 //===============================
 //Used in announcement subsystem
@@ -237,6 +361,9 @@ List<Notification> currentNotifications = [];
 
 //List of users to send notifications to
 List<TempNotification> tempUsers = [];
+
+//List of token IDs to send notifications to
+List<String> selectedTokenIds = [];
 
 //============================
 //Used in reporting subsystem
@@ -328,6 +455,26 @@ Map<String, String> getRequestHeaders() {
   } else { //Else, testing version of the app
     return {
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Connection': 'Keep-Alive',
+      'Keep-Alive': 'timeout=5, max=1000'
+    };
+  }
+}
+
+Map<String, String> getUnauthorizedRequestHeaders() {
+  if (kReleaseMode) { //If release version of the app
+    return {
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+    };
+  } else { //Else, testing version of the app
+    return {
       'Access-Control-Allow-Origin': '*', // Required for CORS support to work
       'Access-Control-Allow-Credentials': 'true', // Required for cookies, authorization headers with HTTPS
       'Accept': '*/*',

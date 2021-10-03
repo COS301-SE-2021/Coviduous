@@ -55,6 +55,19 @@ class _VisitorHealthState extends State<VisitorHealth> {
               },
             ),
           ),
+          bottomNavigationBar: BottomAppBar(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          globals.previousPage = VisitorHealth.routeName;
+                        },
+                        child: Text('COVID-19 information')
+                    )
+                  ]
+              )
+          ),
           body: Stack(
             children: [
               Container(
@@ -255,7 +268,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                           ),
                         ),
                         onPressed: () {
-                          globals.chatbotPreviousPage = VisitorHealth.routeName;
+                          globals.previousPage = VisitorHealth.routeName;
                           Navigator.of(context).pushReplacementNamed(ChatMessages.routeName);
                         },
                       ),
