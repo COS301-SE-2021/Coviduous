@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-CovidCasesData casesFromJson(String str) =>
-    CovidCasesData.fromJson(json.decode(str));
+CovidCasesData casesFromJson(String str) => CovidCasesData.fromJson(json.decode(str));
 
 String casesToJson(CovidCasesData data) => json.encode(data.toJson());
 
