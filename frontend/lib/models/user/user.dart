@@ -19,6 +19,7 @@ class User {
   String companyName;
   String companyAddress;
 
+
   User({
     this.userId,
     this.type,
