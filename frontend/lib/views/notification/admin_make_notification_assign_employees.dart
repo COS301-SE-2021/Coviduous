@@ -401,6 +401,7 @@ class _MakeNotificationAssignEmployeesState extends State<MakeNotificationAssign
                           emails.add({"email": globals.tempUsers[i].getUserEmail()});
                         }
                         userHelpers.getTokenIds(emails);
+                        push_sendNotification(globals.selectedTokenIds, globals.currentMessageField, globals.currentSubjectField);
                         sendNotification(numOfUsers);
                       },
                     )
