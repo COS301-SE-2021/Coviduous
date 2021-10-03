@@ -2797,6 +2797,82 @@ COVID19_QUES = [
     {
         "Question": "Vaccines way for former oppressors oppress us again.",
         "Answer": "The devastation of colonialisation and apartheid is still very much alive in the consciousness of our leaders and our people - government would never allow a situation where any country or nation would be allowed to oppress our people through any means.Scientists and governments all over the world, including our own, have contributed to the knowledge that has led to the development of the vaccines. It has not just been the work of Western and rich countries but a global collaboration.Vaccines are a way of liberating all of us from the socioeconomic devastation of COVID-19, which we have all suffered globally."
+    },
+    {
+        "Question": "ask employee get tested COVID-19 coronavirus before returning to work especially whhen employee showing symptoms?",
+        "Answer": "If the practice is applied consistently, an employer may ask an employee to be tested for the virus that causes a COVID-19 infection before allowing the employee to return to the workplace."
+    },
+    {
+        "Question": "ask employee if they have COVID-19 coronavirus?",
+        "Answer": "According to guidance from the EEOC, “Employers may ask all employees who will be physically entering the workplace if they have COVID-19 or symptoms associated with COVID-19, and ask if they have been tested for COVID-19.”"
+    },
+    {
+        "Question": "tell employees if co-worker has tested positive COVID-19 coronavirus or another communicable disease?",
+        "Answer": "No. Privacy rules restrict employers from sharing personal health information about an employee. Employers should inform employees that possible exposure has occurred in the workplace without disclosing any identifying information about the individual who tested positive."
+    },
+    {
+        "Question": "What to do if employee discloses they have been in close contact with person who tested positive COVID-19 coronavirus?",
+        "Answer": "According to CDC guidance, essential employees who have had close contact with a person diagnosed with COVID-19 may continue to work as long as the employee is asymptomatic and protective measures are taken such as having the employee wear a mask, screening the employee for temperature and other symptoms and regularly disinfecting work areas."
+    },
+    {
+        "Question": "Should employees required wear face mask in workplace?",
+        "Answer": "As of July 27, 2021, CDC guidance recommends that fully vaccinated people wear a mask in public indoor settings in areas of substantial or high transmission. Additionally, many states and localities continue to enforce mask requirements and private businesses and workplaces may set their own policies."
+    },
+    {
+        "Question": "take employees’ temperatures to ensure don’t have fever when reporting to work?",
+        "Answer": "Because the CDC and state/local health authorities have acknowledged community spread of COVID-19, employers may measure employees' body temperature. As with all medical information, employers must maintain the confidentiality of employee temperatures and other symptoms."
+    },
+    {
+        "Question": "Can employee refuse return to work due to fear contracting COVID-19 virus?",
+        "Answer": "Employers must weigh an employee's' health concerns and legal rights under the organization's' business needs."
+    },
+    {
+        "Question": "allow employee continue work from home after reopening workplace?",
+        "Answer": "Some employers have discovered during this crisis that remote work can be a successful arrangement and will consider allowing telework arrangements to continue. However, absent a need to work remotely as a reasonable accommodation under the American’s with Disabilities Act, employers are not obligated to allow telework."
+    },
+    {
+        "Question": "When recalling employees to work, do we need to have the employees complete new hire paperwork?",
+        "Answer": "In most cases, no. If the employees were not separated from payroll, documenting the temporary layoff or furlough dates for the personnel file is sufficient. Significant changes, such as a new job title or pay rate, should be documented as well."
+    }, 
+    {
+        "Question": "conduct antibody testing on employees?",
+        "Answer": "No. According to the CDC, “Antibody test results should not be used to determine if someone can return to work.”"
+    },
+    {
+        "Question": "require employee who is sick to go stay home?",
+        "Answer": "Yes. Employees who show signs of respiratory illness can be asked to leave the workplace and stay at home until they are symptom free."
+    },
+    {
+        "Question": "require doctor’s note before allowing sick employee return to work?",
+        "Answer": "If an employer applies the practice consistently, clearance from a health care provider to return to work can be required. However, guidance from the Centers for Disease Control and Prevention (CDC) suggests employers remove such requirements during a health crisis as access to health care providers may be limited."
+    },
+    {
+        "Question": "Should employees returning from business personal travel required stay away from workplace for period of time?",
+        "Answer": "The Centers for Disease Control and Prevention (CDC) recommends that unvaccinated travelers self-quarantine for seven days after travel with a negative test and for 10 days if they don’t get tested. Fully vaccinated travelers are not required to quarantine or be tested before or after domestic travel unless the travel destination requires it."
+    },
+    {
+        "Question": "pay employees who are sent home miss work because they are sick being vaccinated?",
+        "Answer": "A company’s normal paid-time-off policies for absences due to illness would apply. Nonexempt employees who do not have paid leave available are not required to be paid for such absences, unless there is a collective bargaining agreement indicating otherwise."
+    },
+    {
+        "Question": "allow employees to work from home?",
+        "Answer": "While not required, telecommuting may be a practical measure to reduce exposure of the virus in some work environments. Employees with disabilities that put them at high risk for complications may request telework as a reasonable accommodation to reduce their chances of infection during a pandemic."
+    },
+    {
+        "Question": "I have COVID-19 coronavirus. When can I return to work?",
+        "Answer": "You can go back when your health care provider clears you to return. Confirm your clearance with human resources (HR) and pass the daily health screen before entering the work site."
+    },
+    {
+        "Question": "told that I was in close contact with someone who has or suspected to have COVID-19 coronavirus, what should I do?",
+        "Answer": "If you are at the work site, leave as soon as you can. Tell HR who you were in close contact with at the work site. Stay home for 14 days after the last exposure and practice social distancing. Self-monitor for symptoms."
+    },
+    {
+        "Question": "I have symptoms can’t get COVID-19 coronavirus test, what should I do?",
+        "Answer": "If you were not in close contact with someone with or suspected to have COVID-19, you cannot return to the work site until you can pass the daily health screen. If you were in close contact with someone with or suspected to have COVID-19, you have to remain out of the work site for 14 days."
+    },
+    {
+        "Question": "Will I be told if someone I work with was exposed to someone else with COVID-19 coronavirus at workplace?",
+        "Answer": "If you were in close contact with this person, you should be informed consistent with confidentiality requirements of federal law."
     }
 ]
 
