@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:frontend/views/admin_homepage.dart';
+import 'package:frontend/views/health/covid_info_center.dart';
 import 'package:frontend/views/user_homepage.dart';
 import 'package:frontend/views/health/visitor_health_check.dart';
 import 'package:frontend/views/health/visitor_view_guidelines.dart';
@@ -62,6 +63,7 @@ class _VisitorHealthState extends State<VisitorHealth> {
                     ElevatedButton(
                         onPressed: () {
                           globals.previousPage = VisitorHealth.routeName;
+                          Navigator.of(context).pushReplacementNamed(CovidInformationCenter.routeName);
                         },
                         child: Text('COVID-19 information')
                     )
