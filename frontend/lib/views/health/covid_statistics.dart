@@ -179,7 +179,6 @@ class CovidStatisticsState extends State<CovidStatistics> {
                                       Text("Number of current cases: " + numberOfConfirmed.toString(),
                                           style: TextStyle(
                                               color: Color(0xff03305A),
-                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
                                           )
                                       ),
                                       Icon(
@@ -208,7 +207,6 @@ class CovidStatisticsState extends State<CovidStatistics> {
                                       Text("Number of recoveries: " + numberOfRecovered.toString(),
                                           style: TextStyle(
                                               color: Color(0xffCC7A00),
-                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
                                           )
                                       ),
                                       Icon(
@@ -237,7 +235,6 @@ class CovidStatisticsState extends State<CovidStatistics> {
                                       Text("Number of deaths: " + numberOfDeaths.toString(),
                                           style: TextStyle(
                                               color: globals.sixthColor,
-                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
                                           )
                                       ),
                                       Icon(
@@ -266,7 +263,6 @@ class CovidStatisticsState extends State<CovidStatistics> {
                                       Text("Total confirmed cases: " + total.toString(),
                                           style: TextStyle(
                                               color: globals.firstColor,
-                                              fontSize: MediaQuery.of(context).size.height * 0.01 * 2.5,
                                           )
                                       ),
                                       Icon(
