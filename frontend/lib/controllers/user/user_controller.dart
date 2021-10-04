@@ -42,8 +42,11 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
   var request;
 
   try {
-    var status = await OneSignal.shared.getPermissionSubscriptionState();
-    String tokenId = status.subscriptionStatus.userId;
+    String tokenId;
+    if (!globals.getIfOnPC()) {
+      var status = await OneSignal.shared.getPermissionSubscriptionState();
+      tokenId = status.subscriptionStatus.userId;
+    }
 
     request = http.Request('POST', Uri.parse(url));
     request.body = json.encode({
@@ -53,7 +56,7 @@ Future<bool> createUser(String uid, String type, String firstName, String lastNa
       "lastName": lastName,
       "email": email,
       "userName": userName,
-      "tokenId": tokenId,
+      "tokenId": (tokenId != null) ? tokenId : 'N/A',
       "companyId": companyId,
       "companyName": companyName,
       "companyAddress": companyAddress,
