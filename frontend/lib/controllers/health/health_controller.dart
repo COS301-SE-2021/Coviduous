@@ -1,12 +1,12 @@
 // Health controller
 library controllers;
 
-import 'dart:io';
+//import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
+//import 'package:http/io_client.dart';
 
 import 'package:frontend/models/health/covid_cases_data.dart';
 import 'package:frontend/models/health/health_facility.dart';
@@ -595,15 +595,19 @@ Future<List<CovidCasesData>> getConfirmedData() async {
   var request;
 
   try {
+    /*
     HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
     var ioClient = new IOClient(client);
+    */
     request = http.Request('GET', Uri.parse(url));
-    request.headers.addAll(globals.getRequestHeaders());
+    request.headers.addAll(globals.getUnauthorizedRequestHeaders());
 
-    http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
+    var response = await request.send();
+    //http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
 
     if (response.statusCode == 200) {
-      var jsonString = (await response.body);
+      //var jsonString = (await response.body);
+      var jsonString = (await response.stream.bytesToString());
       List jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
@@ -634,15 +638,19 @@ Future<List<CovidCasesData>> getRecoveredData() async {
   var request;
 
   try {
+    /*
     HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
     var ioClient = new IOClient(client);
+    */
     request = http.Request('GET', Uri.parse(url));
-    request.headers.addAll(globals.getRequestHeaders());
+    request.headers.addAll(globals.getUnauthorizedRequestHeaders());
 
-    http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
+    var response = await request.send();
+    //http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
 
     if (response.statusCode == 200) {
-      var jsonString = (await response.body);
+      //var jsonString = (await response.body);
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
@@ -673,15 +681,19 @@ Future<List<CovidCasesData>> getDeathsData() async {
   var request;
 
   try {
+    /*
     HttpClient client = new HttpClient()..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
     var ioClient = new IOClient(client);
+    */
     request = http.Request('GET', Uri.parse(url));
-    request.headers.addAll(globals.getRequestHeaders());
+    request.headers.addAll(globals.getUnauthorizedRequestHeaders());
 
-    http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
+    var response = await request.send();
+    //http.Response response = await ioClient.get(Uri.parse(url), headers: globals.getUnauthorizedRequestHeaders());
 
     if (response.statusCode == 200) {
-      var jsonString = (await response.body);
+      //var jsonString = (await response.body);
+      var jsonString = (await response.stream.bytesToString());
       var jsonMap = jsonDecode(jsonString);
 
       //Added these lines so that it doesn't just keep adding and adding to the list indefinitely everytime this function is called
