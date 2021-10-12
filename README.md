@@ -58,19 +58,30 @@ The .github directory contains our repository's workflows for continuous integra
 ---
 
 ## Documentation
+### Latest documentation
+- :open_book: [Software Requirements Specification](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 4.pdf>)
+- :open_book: [Architectural design](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Architectural requirements/Coviduous Architectural Requirements Demo 4.pdf>)
+- :open_book: [Coding standards](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Coding standards/Coviduous Coding Standards Demo 4.pdf>)
+- :open_book: [User manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/User manual/Coviduous User Manual Final.pdf>)
+- :open_book: [Installation manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Installation manual/Coviduous Installation Manual Demo 4.pdf>)
+- :open_book: [Testing policy](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Testing policy/Coviduous Testing Policy Demo 4.pdf>)
 
-### Demo 1
+### Past documentation
+<details>
+  <summary>Click here to view</summary>
+
+#### Demo 1
 
 - :open_book: [Software Requirements Specification](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 1.pdf>)
 
-### Demo 2
+#### Demo 2
 
 - :open_book: [Software Requirements Specification](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 2.pdf>)
 - :open_book: [Architectural design](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Architectural requirements/Coviduous Architectural Requirements Demo 2.pdf>)
 - :open_book: [Coding standards](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Coding standards/Coviduous Coding Standards Demo 2.pdf>)
 - :open_book: [User manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/User manual/Coviduous User Manual Demo 2.pdf>)
 
-### Demo 3
+#### Demo 3
 
 - :open_book: [Software Requirements Specification](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 3.pdf>)
 - :open_book: [Architectural design](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Architectural requirements/Coviduous Architectural Requirements Demo 3.pdf>)
@@ -78,7 +89,7 @@ The .github directory contains our repository's workflows for continuous integra
 - :open_book: [User manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/User manual/Coviduous User Manual Demo 3.pdf>)
 - :open_book: [Installation manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Installation manual/Coviduous Installation Manual Demo 3.pdf>)
 
-### Demo 4
+#### Demo 4
 
 - :open_book: [Software Requirements Specification](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/SRS/Coviduous SRS Demo 4.pdf>)
 - :open_book: [Architectural design](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Architectural requirements/Coviduous Architectural Requirements Demo 4.pdf>)
@@ -86,6 +97,7 @@ The .github directory contains our repository's workflows for continuous integra
 - :open_book: [User manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/User manual/Coviduous User Manual Demo 4.pdf>)
 - :open_book: [Installation manual](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Installation manual/Coviduous Installation Manual Demo 4.pdf>)
 - :open_book: [Testing policy](<https://github.com/COS301-SE-2021/Coviduous/blob/master/documentation/Testing policy/Coviduous Testing Policy Demo 4.pdf>)
+</details>
 
 ## Demo Videos
 
