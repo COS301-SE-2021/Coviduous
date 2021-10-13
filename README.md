@@ -105,6 +105,7 @@ The .github directory contains our repository's workflows for continuous integra
 - :tv: [Demo 2](https://drive.google.com/file/d/11yZ_MvnepDA6nE7AoT_r6qu6L0K51FlA/view?usp=sharing)
 - :tv: [Demo 3](https://drive.google.com/file/d/1UReB4UI6FEull2P9Djyk_nIalBDqos5T/view?usp=sharing)
 - :tv: [Demo 4](https://drive.google.com/file/d/1OHWtEBR6RmJogCykS2yYPdPSB1JRw6D5/view?usp=sharing)
+- :tv: [Project Day](https://drive.google.com/file/d/1UK6pOs92CaLNkO1kcCS7jiH6IvvkOweg/view?usp=sharing)
 
 ## Project Management Tools
 
